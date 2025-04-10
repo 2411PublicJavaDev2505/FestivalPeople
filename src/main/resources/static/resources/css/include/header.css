@@ -1,4 +1,5 @@
 /* 초기화 */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,6 +7,7 @@
 }
 
 .main-header {
+
     position: sticky;
     width: 1920px;
     height: 150px;
