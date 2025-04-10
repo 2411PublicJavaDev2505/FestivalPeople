@@ -16,6 +16,10 @@
     align-items: center;
 }
 
+.main-nav {
+	align-items: center;
+}
+
 .logo-container {
     flex-shrink: 0;
     width: 200px;

@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+.course-total-container {
+    position: relative;
+	width : 90%;
+	height : 100%;
+    background-color: rgb(250, 249, 248, 0.5);
+    margin : 40px 50px;
+    }
+    
+.courseText {
+	font-size: 2em;
+}
+
+
+img {
+	width:100%;
+	float:left;
+}
+
+.festival-title {
+	border : 1px solid grey;
+	text-align : center;
+}
+
+.course-recommend-left {
+	width : 60%;
+	height : 100%;
+	overflow-y: scroll;
+}
+
+body{
+ -ms-overflow-style: none;
+ }
+
+ ::-webkit-scrollbar {
+  display: none;
+}
+
+/*특정 부분 스크롤바 없애기*/
+
+.course-recommend-left{
+   -ms-overflow-style: none;
+}
+.course-recommend-left::-webkit-scrollbar{
+  display:none;
+}
+
+.matzip-container {
+	border : 1px solid grey;
+	text-align : center;
+	display : flex;
+}
+
+.matzip-title, .matzip-name {
+	width : 40%;
+	margin : 10px 19px;
+	float: left;
+}
+
+
+
+
