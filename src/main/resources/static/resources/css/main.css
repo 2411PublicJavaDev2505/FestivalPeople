@@ -1,0 +1,122 @@
+/* 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 메인 컨테이너 */
+.main-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* 슬라이드 컨트롤러 */
+.slidecontroller {
+    position: relative;
+    width: 400px;
+    padding: 20px;
+    margin-top: 300px;
+    left: 50px;
+    background-color: rgba(255, 255, 255, 0.8); /* 반투명 배경 */
+    border-radius: 20px; /* 둥근 모서리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+}
+
+/* 텍스트 영역 스타일 */
+.slidecontroller-text {
+    margin-bottom: 20px;
+}
+
+.slidecontroller-text-first h3 {
+    display: inline-block;
+    background-color: #000; /* 검은색 배경 */
+    color: #fff; /* 흰색 텍스트 */
+    padding: 5px 10px;
+    border-radius: 15px; /* 둥근 모서리 */
+    font-size: 14px;
+}
+
+.slidecontroller-text-main h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333; /* 어두운 회색 텍스트 */
+    line-height: 1.5; /* 줄 간격 */
+}
+
+.slidecontroller-text-main h1 span {
+    display: block;
+}
+
+/* "자세히 보기" 링크 스타일 */
+.slidecontroller-detail a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333; /* 어두운 회색 텍스트 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+/* 페이지네이션 스타일 */
+.slidecontroller-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 진행 바 스타일 */
+.progress-bar {
+    position: relative;
+    flex-grow: 1; /* 남은 공간을 채움 */
+    height: 2px;
+    background-color: #ccc; /* 회색 배경 */
+}
+
+.progress-bar .progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%; /* 현재 진행 상태 (예시) */
+    background-color: #000; /* 검은색 진행 바 */
+}
+
+/* 페이지 번호 스타일 */
+.page-number {
+    font-size: 12px;
+}
+
+.page-number .current-page {
+    font-weight: bold; /* 현재 페이지 강조 */
+}
+
+.page-number .total-pages {
+    color: #777; /* 연한 회색 텍스트 */
+}
+
+/* 이전/다음 버튼 스타일 */
+.navigation-buttons button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px; /* 아이콘 크기 */
+    cursor: pointer; /* 클릭 가능한 포인터 표시 */
+}
+
+.navigation-buttons button:hover {
+    color: #000; /* 호버 시 검은색으로 강조 */
+}
+
+.simple-slide-container {
+    position: relative;
+    left: 200px;
+    height: 500px;
+    width: 600px; /* 슬라이드 컨테이너 너비 */
+    margin: -350px auto; /* 화면 중앙 정렬 */
+}
+
+/* 슬라이드 이미지 스타일 */
+.simple-slide img {
+    width: 100%; /* 슬라이드 이미지 너비 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
