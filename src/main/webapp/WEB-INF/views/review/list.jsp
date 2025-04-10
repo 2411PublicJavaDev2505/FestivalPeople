@@ -4,9 +4,73 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+ <title>후기 게시판 List 전체</title>
+    <style>
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        td{
+            border: 1px solid rgb(110, 102, 102);
+        }
+    </style>
 </head>
 <body>
-
+    <h3>여행후기</h3>
+    <div class="search">
+        <select class="" name="">
+            <option value="전체">전체</option>
+            <option value="제목">제목</option>
+            <option value="내용">내용</option>
+        </select>
+        <input class="" type="text" name="searchKeyword" placeholder="검색">
+        <button>검색</button>
+    </div>
+    <div class="Reviewlist">
+        <table class="list">
+            <tr>
+                <td>후기번호</td>
+                <td>작성자</td>
+                <td>제목</td>
+                <td>작성시간</td>
+                <td>조회수</td>
+            </tr>
+            <tr>
+                <td>555</td>
+                <td>user1</td>
+                <td>외로움을 달랠남자구합니다..</td>
+                <td>25/04/07</td>
+                <td>50033</td>
+            </tr>
+            <tr>
+                <td>554</td>
+                <td>user02</td>
+                <td>같이갈래 후기글 남깁니다..</td>
+                <td>25/04/05</td>
+                <td>30003</td>
+            </tr>
+            <tr>
+                <td>553</td>
+                <td>user03</td>
+                <td>벚꽃아 개나리한테 좀 배우...</td>
+                <td>25/04/03</td>
+                <td>555</td>
+            </tr>
+            <tr>
+                <td>552</td>
+                <td>kintex</td>
+                <td>2025서울모빌리티쇼..</td>
+                <td>25/04/03</td>
+                <td>10234</td>
+            </tr>
+            <tr>
+                <td>551</td>
+                <td>strawber</td>
+                <td>논산딸기먹기 헬기타기 사..</td>
+                <td>25/03/24</td>
+                <td>9414</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
