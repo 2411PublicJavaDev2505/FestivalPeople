@@ -6,8 +6,8 @@
 }
 
 .main-header {
-    position: relative;
-    width: 100%;
+    position: sticky;
+    width: 1920px;
     height: 150px;
     background-color: rgba(228, 226, 221, 0.7);
     display: flex;
@@ -26,7 +26,7 @@
 
 .group1 {
     display: flex;
-    left: 300px;
+    left: 400px;
     list-style-type: none;
     position: absolute;
     top: 10px;
@@ -39,7 +39,7 @@
 
 .group2 {
     display: flex;
-    left: 850px;
+    left: 1050px;
     list-style-type: none;
     position: absolute;
     top: -110px;
