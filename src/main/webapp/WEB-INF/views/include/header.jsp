@@ -14,7 +14,7 @@
             <li style="--offset: 3;"><a href="#">같이 갈래?</a></li>
         </ul> 
         <ul  class="group2">
-            <li style="--offset: 4;"><a href="#">여행 후기</a></li>
+            <li style="--offset: 4;"><a href="/review/list">여행 후기</a></li>
             <li style="--offset: 5;"><a href="#">공지사항</a></li>
             <li style="--offset: 6;"><a href="#">로그인</a></li>
             <li style="--offset: 7;"><a href="#">회원가입</a></li>

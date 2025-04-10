@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.reviewinsert-main{
+	margin: 0 auto;
+	margin-top: 150px;
+	width: 500px;
+	padding: 30px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.reviewwinsert-h3 {
+	text-align: center;
+	border-radius: 5px;
+	border:none;
+	background-color: #678E79;
+}
+
+#submitbtn {
+	padding:5px;
+	background-color: #D26F52;
+	cursor:pointer;
+}
+#submitbtn-c{
+	padding:5px;
+	background-color: #F3C11B;
+	cursor:pointer;
+}

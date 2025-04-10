@@ -1,1 +1,9 @@
 @charset "UTF-8";
+/*기본만설정*/
+table{
+	border: 1px solid black;
+    border-collapse: collapse;
+}
+td{
+    border: 1px solid rgb(110, 102, 102);
+}
