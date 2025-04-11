@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 .course-total-container {
-    position: relative;
-	width : 90%;
+    position: relative; 
+	width : 1600px;
 	height : 100%;
     background-color: rgb(250, 249, 248, 0.5);
     margin : 40px 50px;
@@ -49,7 +49,7 @@ body{
 .matzip-container {
 	border : 1px solid grey;
 	text-align : center;
-	display : flex;
+	flex-direction:colimn;
 }
 
 .matzip-title, .matzip-name {
@@ -58,6 +58,21 @@ body{
 	float: left;
 }
 
+.hotel-container {
+	border : 1px solid grey;
+	text-align : center;
+	flex-direction:colimn;
+}
 
+.hotel-title, .hotel-name {
+	width : 40%;
+	margin : 10px 19px;
+	float: left;
+}
+
+.course-total-infomation {
+	
+	
+}
 
 

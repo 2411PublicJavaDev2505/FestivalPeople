@@ -39,6 +39,19 @@
 								<div class="matzip-name">또또식당</div>
 								<img src="../resources/img/course/matzipPicture.jpg" alt="또또식당">
 							</div>
+							<div class="hotel-container">
+								<div class="hotel-title">추천숙소</div>
+								<div class="hotel-name">이비스 앰배서더 부산 시티 센터</div>
+								<img src="../resources/img/course/hotel.jpg" alt="또또식당">
+							</div>
+							<div class="course-total-infomation">
+							<form action="/" method="post">
+								<div>예상 금액 : ??</div>								
+								<div>예상 소요 시간 : ??</div>								
+								<input type="button" value="코스 저장하기">							
+							</form>
+							
+							
 						</div>
 					</div>	
 					
