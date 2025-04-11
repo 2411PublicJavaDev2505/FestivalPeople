@@ -42,7 +42,7 @@ public class MemberController {
 	@PostMapping("/insert")
 	public String insertMember(@ModelAttribute MemberInsertRequest member) {
 		int result = mService.insertMember(member);
-		return "redirect:/member/login";
+		return "member/insertSucess";
 	}
 	
 	@GetMapping("/delete")
