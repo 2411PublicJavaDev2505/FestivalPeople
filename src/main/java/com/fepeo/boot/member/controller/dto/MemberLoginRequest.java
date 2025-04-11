@@ -7,14 +7,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MemberInsertRequest {
+public class MemberLoginRequest {
 
 	private String memberId;
 	private String memberPw;
-	private String memberName;
-	private String nickname;
-	private String email;
-	private String address;
-	private String gender;
 	
 }
