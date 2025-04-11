@@ -47,10 +47,7 @@
     margin-right: 10px;
     
 }
-.festival-card :hover {
-  transition: all 3s;
-  transform: rotate(360deg);
-}
+
 
 .festival-card img {
     width: 100%;

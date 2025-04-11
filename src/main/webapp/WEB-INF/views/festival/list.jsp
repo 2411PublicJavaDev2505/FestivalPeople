@@ -121,7 +121,7 @@
 	            if (currentSlide < 0) currentSlide = 0;
 	            if (currentSlide > maxSlide) currentSlide = maxSlide;
 	
-	            track.style.transform = 'translateX(-${currentSlide * cardWidth}px)';
+	            track.style.transform = 'translateX(-'+currentSlide * cardWidth+'px)';
 	        }	
     	});
         

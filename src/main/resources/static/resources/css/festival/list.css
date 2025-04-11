@@ -74,7 +74,11 @@
 .festival-card img {
     width: 100%;
     border-radius: 20px;
-    
+}
+
+.festival-card :hover {
+  transition: all 1s;
+  transform: translateY(-50px);
 }
 
 .moveSlider-prev-button {
