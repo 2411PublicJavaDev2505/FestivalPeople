@@ -22,10 +22,10 @@
 				<div class="login-main">
 					<form action="/member/login" method="post">
 						<div  class="login-input">
-							<input type="text" placeholder="아이디를 입력하세요" name="">
+							<input type="text" placeholder="아이디를 입력하세요" name="memberId">
 						</div>
 						<div class="login-input">
-							<input type="text" placeholder="비밀번호를 입력하세요" name="" >
+							<input type="text" placeholder="비밀번호를 입력하세요" name="memberPw">
 						</div>
 						<div class="login-btn">
 							<button>로그인</button>
@@ -35,7 +35,7 @@
 				<div class="login-footer">
 					<span><a>아이디 찾기</a></span>
 					<span><a>비밀번호 찾기</a></span>
-					<span><a>회원가입</a></span>
+					<span><a href="/member/insert">회원가입</a></span>
 				</div>
 			</div>
 		</main>
