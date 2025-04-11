@@ -16,4 +16,9 @@ public class FestivalController {
 		return "festival/list";
 	}
 	
+	@GetMapping("/detail")
+	public String showFestivalDetail() {
+		return "festival/festivalDetail";
+	}
+	
 }

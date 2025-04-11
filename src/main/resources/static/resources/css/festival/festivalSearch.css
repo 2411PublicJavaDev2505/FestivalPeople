@@ -5,9 +5,11 @@
     margin: 0 auto;
     text-align: center;
 }
+/* 메인 클래스 */
 .festival-list{
 	padding:80px;
 }
+/* 축제 선택 탭  */
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -24,7 +26,7 @@
     border-radius: 10px;
     cursor: pointer;
 }
-
+/* 검색 버튼  */
 .search-form {
     display: flex;
     align-items: center;
@@ -48,6 +50,24 @@
     cursor: pointer;
 }
 
+/*  축제 대표이미지 */
+.festival-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 270px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.festival-card img {
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+
+/*슬라이드 넘기는 이미지 부분 */
 .moveSlider {
     position: relative;
     overflow: hidden;
@@ -62,20 +82,7 @@
     will-change: transform ;
 }
 
-.festival-card {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 270px;
-    flex-shrink: 0;
-    margin-right: 10px;
-}
 
-.festival-card img {
-    width: 100%;
-    border-radius: 20px;
-    
-}
 
 .moveSlider-prev-button {
     position: absolute;

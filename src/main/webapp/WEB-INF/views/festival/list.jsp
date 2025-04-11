@@ -26,7 +26,7 @@
 	                           <option value="date">날짜</option>
 	                       </select>
 	                       <input type="text" placeholder="검색" id=" ">
-	                       <button class="search-btn">⌕</button>
+	                       <button class="search-btn" onclick="/festival/festivalSearch.jsp">⌕</button>
 	                   </form>
 	               </div>
 	           </div>
@@ -41,7 +41,9 @@
 	               
 	               <div class="moveSlider-track" id="moveSliderTrack">
 	                   <div class="festival-card">
-	                       <img src="../resources/img/festival/태안봄꽃정원.jpg" alt="축제 포스터1">
+	                       <a href ="/festival/detail">
+	                       		<img src="../resources/img/festival/태안봄꽃정원.jpg" alt="축제 포스터1">
+	                       </a>
 	                   </div>
 	                   <div class="festival-card">
 	                       <img src="img2.jpg" alt="축제 포스터2">
@@ -89,28 +91,40 @@
 	                       <img src="img4.jpg" alt="축제 포스터4">
 	                   </div>
 	               </div>
-	
 	           </div>
-	
-	
-	
+			   <div class="pagination">
+					<a href="/recipe/list?page=1"> ◁◁ </a>
+					<c:if test= "${startNavi ne 1 }">
+						<a href="/festivallist?page=${startNavi-1 }" class="prev">◀</a>
+					</c:if>	
+					<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
+						<a href="/festival/list?page=${p }">${p }</a>
+					</c:forEach>					
+					<c:if test="${endNavi ne maxPage }">
+						<a href="/festival/list?page=${endNavi+1 }" class="next">▶</a>
+					</c:if>    
+		           	<a href="/festivallist?page=${maxPage }"> ▷▷ </a>
+	            </div>
 	       </main>
 	   </div>
 
     <script>
-        let currentSlide = 0;
+    	document.addEventListener('DOMContentLoaded', function (){
+	        let currentSlide = 0;
+	        const cardWidth = 270;
+	
+	        window.moveSlide = function (direction) {
+	            const track = document.getElementById("moveSliderTrack");
+	            const maxSlide = track.children.length - 3;
 
-        function moveSlide(direction) {
-            const track = document.getElementById("moveSliderTrack");
-            const cardWidth = 270; // 카드 너비 + 간격
-            currentSlide += direction;
-
-            const maxSlide = track.children.length - 3;
-            if (currentSlide < 0) currentSlide = 0;
-            if (currentSlide > maxSlide) currentSlide = maxSlide;
-
-            track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
-        }
+	            currentSlide += direction;
+	            if (currentSlide < 0) currentSlide = 0;
+	            if (currentSlide > maxSlide) currentSlide = maxSlide;
+	
+	            track.style.transform = 'translateX(-${currentSlide * cardWidth}px)';
+	        }	
+    	});
+        
     </script>
 	</body>
 </html>
