@@ -121,7 +121,30 @@
 	        </section>
 	        <!--우 채팅방 상세 -->
 	        <section class="chat-msg-list">
-      
+      			<header class="chat-header">
+      				<div class = "chat-header-left">
+      					<div class="chat-prev-list"></div>
+      					<div class="chat-header-title"></div>
+      				</div>
+      				<div class ="chat-header-right">
+			            <form class="msg-search" action="#" >
+			                <input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
+			                <button class="chat-search-btn" type="submit">⌕</button>
+			            </form>
+      					<div class="chat-menu"></div>
+      				</div>
+      			</header>
+      			<section class="chat-area">
+      				<div></div>
+      			</section>
+      			<footer class="chat-write">
+      				<label id="fileUploadBtn" class="upload-btn" for="fileUploaderInput"></label>
+      				<form action="#" method="post" enctype="multipart/form-data">
+      					<input id="fileUploaderInput" name="files[]" type="file">
+      				</form>
+      				<div class=""></div>
+      				<div class=""></div>
+      			</footer>
 	        </section>
 	    </section>
     </main>

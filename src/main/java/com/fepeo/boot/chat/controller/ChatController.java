@@ -16,4 +16,8 @@ public class ChatController {
 		return "chat/list";
 	}
 
+	@GetMapping("/detail")
+	public String showChatMsgList() {
+		return "chat/chatDetail";
+	}
 }
