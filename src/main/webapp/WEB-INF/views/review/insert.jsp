@@ -13,20 +13,23 @@
 	<div id="container">
 	<jsp:include page="../include/header.jsp"/>
 		<div class="reviewinsert-main">
-			<div class="reviewwinsert-h3">
+			<div class="reviewinsert-h3">
 				<h3>여행후기 등록</h3>
 			</div>
 			<main>
 		 		<form action="" method="" enctype="multipart/form-data"> 
-					<div class="제목(수정)">
-						제목 <input type="text" name="" size="50"> <br>
+					<div class="review-title">
+						제목 <input type="text" name="" size="80">
 					</div>
-					<div class="내용(수정)">
-						내용 <textarea rows="4" cols="50" name=""></textarea> <br>
+					<div class="review-content">
+						<div><span>내용 </span></div>
+						<textarea rows="5" cols="82" name=""></textarea>
 					</div>
-					사진첨부1 <input type="file" name="images"><br>
-					사진첨부2 <input type="file" name="images"><br>
-					사진첨부3 <input type="file" name="images"><br>
+					<div class="review-attach">
+						<input type="file" name="images"><br>
+						<input type="file" name="images"><br>
+						<input type="file" name="images"><br>
+					</div>
 					<div class="reviewinsert-btn">
 						<button type="submit" id="submitbtn">등록</button>
 						<button type="submit" id="submitbtn-c">작성취소</button> 
