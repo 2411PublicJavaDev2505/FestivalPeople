@@ -137,6 +137,7 @@
 	        <section class="allchat-list-wrap">
 	            <ul class="chat-list">
 	                <li class="chat-list-row">
+	                	<a href="#" class="chat-link">
 	                    <div class="chat-image">그림</div>
 	                    <div class="text-wrap">
 	                        <div class="chat-title">제목</div>
@@ -144,8 +145,10 @@
 	                        <div class="chat-mem-count">정원 4/10</div>
 	                    </div>
 	                    <div class="msg-alarm">4</div>
+	                    </a>
 	                </li>
 	                <li class="chat-list-row">
+	                	<a href="#" class="chat-link">
 	                    <div class="chat-image">그림</div>
 	                    <div class="text-wrap">
 	                        <div class="chat-title">제목</div>
@@ -153,6 +156,7 @@
 	                        <div class="chat-mem-count">정원 4/10</div>
 	                    </div>
 	                    <div class="msg-alarm">4</div>
+	                    </a>
 	                </li>
 	            </ul>            
 	        </section>
