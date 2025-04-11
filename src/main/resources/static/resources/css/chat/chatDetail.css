@@ -151,13 +151,4 @@
 /* 좌측 끝 */
 
 
-/* 우측 전체목록 */
-.allchat-list-wrap{
-    width: 70%;
-    background-color: #d26f534f;
-    margin: 5px;
-    padding:8px;
-    height: 600px;    
-	overflow: auto;    
-}
-
+/* 우측 메세지 목록 */

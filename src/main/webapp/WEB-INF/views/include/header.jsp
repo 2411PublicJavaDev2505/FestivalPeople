@@ -9,7 +9,7 @@
             <li style="--offset: 0;"><a href="#">소개</a></li>
             <li style="--offset: 1;"><a href="#">축제</a></li>
             <li style="--offset: 2;"><a href="/course/list">코스 추천</a></li>
-            <li style="--offset: 3;"><a href="#">같이 갈래?</a></li>
+            <li style="--offset: 3;"><a href="/chat/list">같이 갈래?</a></li>
         </ul> 
         <ul  class="group2">
             <li style="--offset: 4;"><a href="/review/list">여행 후기</a></li>
