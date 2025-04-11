@@ -34,6 +34,15 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/logout")
+	public String memberLogout(HttpSession session) {
+		Member member = (Member)session.getAttribute("member");
+		if(member != null) {
+			session.invalidate();
+		}
+		return "redirect:/";
+	}
+	
 	@GetMapping("/insert")
 	public String showMemberInsert() {
 		return "member/memberInsert";
