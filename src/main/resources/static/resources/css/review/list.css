@@ -1,9 +1,49 @@
 @charset "UTF-8";
-/*기본만설정*/
-table{
-	border: 1px solid black;
-    border-collapse: collapse;
+
+.reviewlist-main{
+	margin: 0 auto;
+	margin-top:150px;
+	width: 1350px;
+	height: 450px;
+	padding: 30px;
+	box-shadow: 0 2px 10px rgba(1, 0, 0, 0.2);
+	background-color:#3B7C70;
 }
-td{
-    border: 1px solid rgb(110, 102, 102);
+.reviewlist-h3 {
+	margin: 0 auto;
+	width:200px;
+	margin-bottom: 10px;
+	text-align: center;
+	text-align: center;
+	border-radius: 5px;
+	background-color: #678E79;
+	color: #f5f5f5;
+}
+.reviewlist-table{
+	margin: 0 auto;
+	width: 1300px;
+	text-align: center;
+	font-size: 30px;
+	background-color: #f5f5f5;
+	border-radius: 10px;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.reviewlist-top, td{
+	border: 1px solid rgb(110, 102, 102);
+}
+.reviewsearch{
+	float:right;
+	position: relative;
+	bottom:30px;
+}
+.review-searchbar{
+	font-size: 25px;
+}
+.searchbox{
+	font-size: 25px;
+}
+.search-btn{
+	font-size: 25px;
 }
