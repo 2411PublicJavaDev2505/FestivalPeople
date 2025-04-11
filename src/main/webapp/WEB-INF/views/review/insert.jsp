@@ -19,6 +19,7 @@
 			<main>
 		 		<form action="" method="" enctype="multipart/form-data"> 
 					<div class="review-title">
+					<!-- name값 넣어줘야함! -->
 						제목 <input type="text" name="" size="80">
 					</div>
 					<div class="review-content">
