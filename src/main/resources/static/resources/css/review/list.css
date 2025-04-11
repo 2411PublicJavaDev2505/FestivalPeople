@@ -14,10 +14,10 @@
 	width:200px;
 	margin-bottom: 10px;
 	text-align: center;
-	text-align: center;
 	border-radius: 5px;
 	background-color: #678E79;
 	color: #f5f5f5;
+	font-size: 25px;
 }
 .reviewlist-table{
 	margin: 0 auto;
@@ -29,14 +29,14 @@
 	border: 1px solid black;
 	border-collapse: collapse;
 }
-
 .reviewlist-top, td{
 	border: 1px solid rgb(110, 102, 102);
 }
 .reviewsearch{
 	float:right;
 	position: relative;
-	bottom:30px;
+	bottom:40px;
+	
 }
 .review-searchbar{
 	font-size: 25px;
@@ -47,3 +47,31 @@
 .search-btn{
 	font-size: 25px;
 }
+
+#reviewinsert-btn{
+	margin: 0 auto;
+	width:150px;
+	background-color: #678E79;
+	font-size: 19px;
+	border:none;
+	padding:10px;
+	position: relative;
+	bottom:40px;
+	right: 5px;
+	border-radius: 10px;
+	color: #f5f5f5;
+	float:right;
+}
+.page{
+	text-align: center;
+	margin: 0 auto;
+	width:150px;
+	background-color: #678E79;
+	font-size: 19px;
+	border:none;
+	padding:10px;
+	position: relative;
+	top:8px;
+	
+}
+

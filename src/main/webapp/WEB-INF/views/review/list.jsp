@@ -86,7 +86,7 @@
 		    </div>
 		    <div class="reviewinsert-btn">
 <!-- 				<a href="/review/insert">글쓰기</a> -->
-		    	<button onClick="reviewinsert();">글쓰기</button>
+		    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
 		    </div>
 			</main>
 	    </div>
