@@ -27,7 +27,7 @@
                 </div>
                 <div class="slidecontroller-text-main">
                     <h1>
-                        <span class="main-text">마음까지 화사해지는</span><br>매화 명소
+                        <span class="main-text">마음까지 화사해지는<br>매화 명소</span>
                     </h1>
                 </div>
             </div>
@@ -77,13 +77,20 @@
         document.querySelector('.prev').addEventListener('click', () => {
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
             updateSlide();
+            updateProgressBar();
         });
 
         document.querySelector('.next').addEventListener('click', () => {
             currentSlide = (currentSlide + 1) % totalSlides;
             updateSlide();
+            updateProgressBar();
         });
 
+        function updateProgressBar() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = progress + '%';
+        }
+        
         function updateSlide() {
             const slide = slides[currentSlide];
             const nextSlide = slides[(currentSlide + 1) % totalSlides];
@@ -92,7 +99,6 @@
             							'<div class="simple-slide next"><img src="'+nextSlide.src+'" alt="'+nextSlide.alt+'"></div>';
             							currentPageElement.textContent = String(currentSlide + 1).padStart(2, '0');
 
-            progressBar.style.width = '+((currentSlide + 1) / totalSlides) * 100%+';
 
             taglineElement.textContent = slide.tagline;
             mainTextElement.textContent = slide.mainText;

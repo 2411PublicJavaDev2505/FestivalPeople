@@ -9,6 +9,9 @@
 	<title>FePeo-login</title>
 </head>
 <body>
+	<div class="background-image">
+    	 <img src="../resources/img/mainback.jpg" alt="바탕화면">
+    </div>
 	<div id="container">
 		<jsp:include page="../include/header.jsp"/>
 		<main>

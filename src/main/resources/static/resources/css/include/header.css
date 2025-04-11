@@ -80,5 +80,6 @@
 .main-nav ul li:nth-child(8) a { background-color: #FFAF00; } /* 회원가입 - 금색 */
 
 .main-nav ul li a:hover {
-    opacity: 0.5;
+    box-shadow: 1px 1px #1e2f3f, 2px 2px #a5aaa3, 3px 3px #ccc;
+	transform: translateX(-3px);
 }

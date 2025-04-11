@@ -18,7 +18,7 @@
 
 .main-container {
     position: relative;
-    width: 100%;
+    width: 1920px;
     height: 100%;
 }
 
@@ -26,7 +26,7 @@
     position: relative;
     width: 400px;
     padding: 20px;
-    margin-top: 200px;
+    margin-top: 230px;
     left: 150px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 20px;
@@ -34,9 +34,12 @@
 }
 
 .slidecontroller-text {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
+.slidecontroller-text-first {
+	margin-bottom: 20px;
+}
 .slidecontroller-text-first h3 {
     display: inline-block;
     background-color: #000;
@@ -47,6 +50,7 @@
 }
 
 .slidecontroller-text-main h1 {
+	
     font-size: 24px;
     font-weight: bold;
     color: #333;
@@ -74,17 +78,17 @@
 .progress-bar {
     position: relative;
     flex-grow: 1;
-    height: 2px;
+    height: 4px;
     background-color: #ccc;
 }
 
 .progress-bar .progress {
+	display: block;
     position: absolute;
-    top: 0;
-    left: 0;
     height: 100%;
     width: 30%;
     background-color: #000;
+    transition: width 0.3s linear;
 }
 
 
@@ -114,19 +118,20 @@
 
 .simple-slide-container {
     position: relative;
-	border: 1 solid #000;
+    background-color: rgba(255, 255, 255, 0.8);
     left: 200px;
-    height: 500px;
-    width: 600px;
+    height: 520px;
+    width: 820px;
     margin: -380px auto;
 }
 
-.simple-slide {
+.simple-slide img{
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 500px;
-    transition: transform 0.3s ease-in-out;
+    top: 10px;
+    left: 10px;
+    width: 800px;
+    height: 500px;
+    transition: transform 2s ease-in-out;
 }
 
 
