@@ -1,33 +1,81 @@
 @charset "UTF-8";
 
+/*   검색창 */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content:flex-end;
+ 	margin:  10px 10px;  
+}
+
+.search-form select, .search-form input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.search-btn {
+    padding: 10px 16px;
+    font-size: 16px;
+    background: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+
 .course-total-container {
     position: relative; 
 	width : 1600px;
 	height : 100%;
     background-color: rgb(250, 249, 248, 0.5);
     margin : 40px 50px;
-    }
+}
+
+.course-recommend-choice{
+	display: flex;
+}
     
 .courseText {
 	font-size: 2em;
 }
 
-
-img {
-	width:100%;
-	float:left;
-}
-
-.festival-title {
-	border : 1px solid grey;
-	text-align : center;
+.course-recommend-main {
+	display: flex;
+	gap: 30px;
 }
 
 .course-recommend-left {
-	width : 60%;
+	width : 1000px;
 	height : 100%;
 	overflow-y: scroll;
+   -ms-overflow-style: none;
+   border: 1px solid yellow;
 }
+
+.course-recommend-img {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 20px 0 10px 0;
+}
+
+.course-recommend-img img {
+	width: 90%;
+}
+
+.festival-title {
+	width: 90%;
+	margin: 10px auto 10px auto;
+	border: 1px solid black;
+	text-align: center;
+	padding: 10px;
+}
+
 
 body{
  -ms-overflow-style: none;
@@ -39,40 +87,61 @@ body{
 
 /*특정 부분 스크롤바 없애기*/
 
-.course-recommend-left{
-   -ms-overflow-style: none;
-}
+/* .course-recommend-left{ */
+/*    -ms-overflow-style: none; */
+/*    justify-content: center; */
+/* } */
 .course-recommend-left::-webkit-scrollbar{
   display:none;
 }
 
 .matzip-container {
-	border : 1px solid grey;
-	text-align : center;
-	flex-direction:colimn;
+	display: flex;
+	gap: 30px;
+	margin-left: 50px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 .matzip-title, .matzip-name {
-	width : 40%;
-	margin : 10px 19px;
-	float: left;
+	height : 80px;
+	background-color: white;
+	border: 0.5px solid black;
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.hotel-container {
+.matzip-title{
+	width: 200px;
+}
+
+.matzip-name{
+	width: 600px;
+}
+
+
+.insert-course {
 	border : 1px solid grey;
 	text-align : center;
-	flex-direction:colimn;
+	width : 40%;
+	margin : 10px auto 10px auto;
 }
 
-.hotel-title, .hotel-name {
+.expect-cost, .expect-time {
 	width : 40%;
 	margin : 10px 19px;
 	float: left;
 }
 
-.course-total-infomation {
-	
-	
+.course-recommend-right {
+	width : 400px;
+	border: 1px solid yellow;
 }
+
+
+
+
 
 

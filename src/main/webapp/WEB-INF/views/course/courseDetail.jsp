@@ -16,54 +16,65 @@
 	<div id="container">
 	<jsp:include page="../include/header.jsp"/>
 		<main>
-			<div class="course-total-container">
-			
-				<div class="course-recommend">
-					<div class="course-recommend-left">
-					<p class="courseText">코스추천</p>
-					<input type="radio" id="distance" name="category">거리순
-					<input type="radio" id="cost"	  name="category">가격순
-					<input type="radio" id="rate"	  name="category">평점순
-						<div class="course-recommend-detail">
-							<div class="course-recommend-map">
-								<img src="../resources/img/course/examMap.png" alt="지도">
-							</div>
-							<div class="festival-title">
-								<p>부산연등회</p>
-							</div>
-							<div class="course-recommend-festival">
-								<img src="../resources/img/course/busanFestival.jpg" alt="부산">
-							</div>
-							<div class="matzip-container">
-								<div class="matzip-title">추천맛집</div>
-								<div class="matzip-name">또또식당</div>
-								<img src="../resources/img/course/matzipPicture.jpg" alt="또또식당">
-							</div>
-							<div class="hotel-container">
-								<div class="hotel-title">추천숙소</div>
-								<div class="hotel-name">이비스 앰배서더 부산 시티 센터</div>
-								<img src="../resources/img/course/hotel.jpg" alt="또또식당">
-							</div>
-							<div class="course-total-infomation">
-							<form action="/" method="post">
-								<div>예상 금액 : ??</div>								
-								<div>예상 소요 시간 : ??</div>								
-								<input type="button" value="코스 저장하기">							
-							</form>
-							
-							
-						</div>
-					</div>	
-					
-					<div class="course-"></div>
-					
+			<div class="course-total-container">		
+				<div class="course-recommend-choice">
+					<div>
+						<p class="courseText">코스추천</p>
+					</div>
+					<div>
+						<input type="radio" id="distance" name="category">거리순
+						<input type="radio" id="cost"	  name="category">가격순
+						<input type="radio" id="rate"	  name="category">평점순
+					</div>
 				</div>
-				
-			</div>
-	
-			
-		</main>
-	
+				<div class="course-recommend-main">
+					<div class="course-recommend-left">
+						<div  class="course-recommend-img">
+							<img src="../resources/img/course/examMap.png" alt="지도">
+						</div>
+						<div class="festival-title">
+							<p>부산연등회</p>
+						</div>
+						<div class="course-recommend-img">
+							<img src="../resources/img/course/busanFestival.jpg" alt="부산">
+						</div>
+						<div class="matzip-container">
+							<div class="matzip-title">추천맛집</div>
+							<div class="matzip-name">또또식당</div>
+						</div>
+						<div class="course-recommend-img">
+							<img src="../resources/img/course/matzipPicture.jpg" alt="또또식당">
+						</div>
+						<div class="matzip-container">
+							<div class="matzip-title">추천숙소</div>
+							<div class="matzip-name">이비스 앰배서더 부산 시티 센터</div>
+						</div>
+						<div class="course-recommend-img">
+							<img src="../resources/img/course/hotel.jpg" alt="또또식당">
+						</div>
+						<form class="insert-course" action="/" method="post">
+							<div class="expect-cost">예상 금액 : ??</div>								
+							<div class="expect-time">예상 소요 시간 : ??</div>								
+							<input type="button" value="코스 저장하기">							
+						</form>													
+					</div>	
+					<div class="course-recommend-right">
+		                <div class="course-search">
+			                <form class="search-form">
+			                    <select>
+			                        <option value="all">전체</option>
+			                        <option value="name">축제명</option>
+			                        <option value="location">지역</option>
+			                        <option value="date">날짜</option>
+			                    </select>
+			                    <input type="text" placeholder="검색" id=" ">
+			                    <button class="search-btn">⌕</button>
+			                </form>
+			            </div>
+					</div>			
+				</div>
+			</div>	
+		</main>	
 	</div>
 
 </body>
