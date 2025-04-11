@@ -15,4 +15,9 @@ public class MemberController {
 	public String showMemberInsert() {
 		return "member/memberInsert";
 	}
+	
+	@GetMapping("/member/delete")
+	public String showMemberDelete() {
+		return "member/memberDelete";
+	}
 }
