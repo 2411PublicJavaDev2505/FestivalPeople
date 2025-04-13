@@ -19,13 +19,13 @@
 					</section>
 					<section class="festival-detail-card">
 						<div class="festival-card">
-							<img src="../resources/img/festival/태안봄꽃정원.jpg" alt="축제 포스터1">
+							<img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
 						</div>
 						<div class="festival-card">
-							<img src="../resources/img/festival/태안봄꽃정원.jpg" alt="축제 포스터1">
+							<img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
 						</div>
 						<div class="festival-card">
-							<img src="../resources/img/festival/태안봄꽃정원.jpg" alt="축제 포스터1">
+							<img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
 						</div>
 					</section>
 					<section class="festival-detail-items">
@@ -35,12 +35,12 @@
 							<li> ❤  대표전화 :  055-880-6583</li>
 							<li> ❤  축제기간 일기예보
 								<div class="weather-api">
-									<img src="img2.jpg" alt="날씨">
+									<img src="../resources/img/festival/weather_example.jpg" alt="날씨">
 								</div>
 							</li>
 							<li>  ❤ 길찾기
 								<div class="map-api">
-									<img src="img4.jpg" alt="길찾기">
+									<img src="../resources/img/festival/examMap.png" alt="길찾기">
 								</div>
 							</li>		
 						</ul>

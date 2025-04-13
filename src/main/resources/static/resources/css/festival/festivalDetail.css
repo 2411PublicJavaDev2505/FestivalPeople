@@ -63,21 +63,25 @@
 	margin-top:30px;
 	padding-left:15%;
 }
-.weather-api, .map-api{
-	background: white;
+
+
+.weather-api,
+.map-api {
+    background: white;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 270px;
-    flex-shrink: 0;
-    margin-right: 10px;
+    width: 100%; /* 전체 너비 */
+    max-width: 1000px; /* 최대 너비 제한 */
+    margin: 0 auto 40px auto; /* 가운데 정렬 + 아래 여백 */
     display: flex;
-    
+    justify-content: center;
+    padding: 20px;
 }
-.weather-api img{
-	width: 100%;
+
+.weather-api img,
+.map-api img {
+    width: 100%; /* 꽉 차게 */
+    height: auto;
     border-radius: 20px;
-}
-.map-api img{
-	width: 100%;
-    border-radius: 20px;
+    object-fit: contain;
 }
