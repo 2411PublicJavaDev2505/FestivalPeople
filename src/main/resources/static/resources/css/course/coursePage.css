@@ -1,6 +1,28 @@
 @charset "UTF-8";
 
 /*   검색창 */
+main {
+	height: 1000px;
+}
+
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* 콘텐츠보다 뒤로 */
+  overflow: hidden;
+}
+
+.background-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8; /* 배경 느낌을 위해 살짝 투명하게 (선택사항) */
+}
+
 .search-form {
     display: flex;
     align-items: center;
@@ -35,6 +57,7 @@
     overflow: hidden;
     margin: auto;
     padding: 0 40px;
+    height : 600px;
 }
 
 .card-slider {
@@ -49,6 +72,7 @@
 .coursecard {
     flex: 0 0 auto;          /* 줄바꿈 방지, 고정폭 유지 */
     width: 250px;
+    height: 500px;
     background: white;
     border-radius: 12px;
     padding: 15px;
@@ -81,4 +105,9 @@
     height: 150px;
     object-fit: cover;
     border-radius: 8px;
+}
+
+
+a.visited {
+	color: green;
 }
