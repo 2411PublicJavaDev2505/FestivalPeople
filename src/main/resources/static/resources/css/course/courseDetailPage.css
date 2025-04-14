@@ -27,6 +27,48 @@
 }
 
 
+/* 검색창 라디오 버튼 */
+.radio-btn {
+	display: flex;
+	flex-direction: row;
+}
+
+.radio-style{
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0px 10px 0px 10px;
+}
+
+.radio-style span{
+	margin-left: 10px;
+}
+ 
+.radio-style [type="radio"]{
+    appearance: none;
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+    border:2px solid #dcdcdc;
+    border-radius: 250px;
+    width:15px;
+    height:15px;
+}
+
+.radio-style [type="radio"]:checked{
+    box-sizing: border-box;
+    border:5px solid #ee8432;
+}
+
+.radio-style [type="radio"]:disabled{
+    background-color: #dcdcdc;
+}
+
+.radio-style[type="radio"]:disabled + span{
+    color:#dcdcdc;
+} 
+
 
 .course-total-container {
     position: relative; 
@@ -140,7 +182,21 @@ body{
 	border: 1px solid yellow;
 }
 
+.course-search {
+	top: 0;
+  	position: sticky;
+	
+}
 
+
+.search-course-title{
+	padding: 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 20px;
+
+}
 
 
 

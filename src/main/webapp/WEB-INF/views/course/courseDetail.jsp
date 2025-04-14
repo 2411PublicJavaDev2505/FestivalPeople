@@ -21,10 +21,19 @@
 					<div>
 						<p class="courseText">코스추천</p>
 					</div>
-					<div>
-						<input type="radio" id="distance" name="category">거리순
-						<input type="radio" id="cost"	  name="category">가격순
-						<input type="radio" id="rate"	  name="category">평점순
+					<div class="radio-btn">
+						<label class="radio-style">
+							<input type="radio" id="distance" name="category">
+							<span>거리순</span>
+						</label>
+						<label class="radio-style">
+							<input type="radio" id="cost"	  name="category">
+							<span>가격순</span>
+						</label>
+						<label class="radio-style">
+							<input type="radio" id="rate"	  name="category">
+							<span>평점순</span>
+						</label>
 					</div>
 				</div>
 				<div class="course-recommend-main">
@@ -70,7 +79,15 @@
 			                    <input type="text" placeholder="검색" id=" ">
 			                    <button class="search-btn">⌕</button>
 			                </form>
+				            <div class="search-course-list">
+				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+				            </div>
 			            </div>
+<!-- 			            forEach 예정 -->
 					</div>			
 				</div>
 			</div>	
