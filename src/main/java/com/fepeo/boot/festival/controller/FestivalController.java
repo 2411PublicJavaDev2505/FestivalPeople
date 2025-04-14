@@ -30,10 +30,10 @@ public class FestivalController {
 		return "festival/festivalDetail";
 	}
 	
-	@GetMapping("/festival")
-    public String festivalPage(Model model) {
+//	@GetMapping("/festival")
+//    public String festivalPage(Model model) {
 //        List<FestivalItem> festivals = festivalService.getFestivalList();
 //        model.addAttribute("festivals", festivals);
-        return "festival/festivalList"; 
-    }
+//        return "festival/festivalList"; 
+//    }
 }

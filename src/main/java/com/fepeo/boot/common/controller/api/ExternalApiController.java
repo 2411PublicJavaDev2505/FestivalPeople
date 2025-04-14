@@ -12,7 +12,30 @@ public class ExternalApiController {
 	//private final WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst");
 	
 	
-	
+	public String callFestivalApi() {
+		String festivalApiKey = ApiKeyLoader.get("festivalApiKey");
+		WebClient webClient = WebClient.create("https://apis.data.go.kr/B551011/KorService1/searchFestival1");
+		
+		String response = webClient.get()
+				.uri(uriBuilder -> uriBuilder
+                        .queryParam("serviceKey", festivalApiKey)
+                        .queryParam("numOfRows", 10)
+                        .queryParam("pageNo", 2)
+                        .queryParam("MobileOS", "ETC")
+                        .queryParam("MobileApp", "AppTest")
+                        .queryParam("_type", "Json")
+                        .queryParam("listYN", "Y")
+                        .queryParam("arrange", "A")
+                        .queryParam("eventStartDate", "20240401")
+                        .build())
+                .header("Accept", "application/json")
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+		
+		return response;
+		
+	}
 	
 	
 	// 기상청 중기 예보 출력 API
