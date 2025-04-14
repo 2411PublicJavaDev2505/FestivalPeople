@@ -26,9 +26,9 @@ public class ManagerController {
 		if(member.getManagerYn().equals("Y")) {
 			return "redirect:/manager/list";
 		}else if(member.getManagerYn().equals("N")) {
-			return "common/error";
+			return "/";
 		} else {
-			return "common/error";
+			return "/";
 		}
 	}
 }

@@ -10,7 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fepeo.boot.common.controller.api.ExternalApiController;
+import com.fepeo.boot.common.controller.api.ApiComponent;
+
 
 @SpringBootTest
 public class ApiControllerTest {
@@ -21,7 +22,7 @@ public class ApiControllerTest {
 
 	
 	@Autowired
-	private ExternalApiController aService;
+	private ApiComponent aService;
 	
 	@BeforeAll
 	public static void setUp() {

@@ -1,17 +1,20 @@
 package com.fepeo.boot.common.controller.api;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fepeo.boot.common.controller.util.ApiKeyLoader;
 
 
-@Service
-public class ExternalApiController {
+@Component
+public class ApiComponent {
 
 	//필드에 선언시 각 API를 따로 부를수가 없어서 방법 변경함
 	//private final WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst");
+
+
 	
 	public String callFestivalApi() {
 		String festivalApiKey = ApiKeyLoader.get("festivalApiKey");
@@ -63,6 +66,8 @@ public class ExternalApiController {
                 .block();
             System.out.println(response);
             return response;
+	
 	}
+	
 	
 }

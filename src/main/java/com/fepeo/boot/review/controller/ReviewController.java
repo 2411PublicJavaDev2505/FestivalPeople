@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import com.fepeo.boot.common.controller.api.ExternalApiController;
 import com.fepeo.boot.member.model.vo.Member;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
 import com.fepeo.boot.review.model.service.ReviewService;
