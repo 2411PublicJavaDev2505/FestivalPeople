@@ -34,6 +34,15 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/logout")
+	public String memberLogout(HttpSession session) {
+		Member member = (Member)session.getAttribute("member");
+		if(member != null) {
+			session.invalidate();
+		}
+		return "redirect:/";
+	}
+	
 	@GetMapping("/insert")
 	public String showMemberInsert() {
 		return "member/memberInsert";
@@ -42,7 +51,7 @@ public class MemberController {
 	@PostMapping("/insert")
 	public String insertMember(@ModelAttribute MemberInsertRequest member) {
 		int result = mService.insertMember(member);
-		return "redirect:/member/login";
+		return "member/insertSucess";
 	}
 	
 	@GetMapping("/delete")
