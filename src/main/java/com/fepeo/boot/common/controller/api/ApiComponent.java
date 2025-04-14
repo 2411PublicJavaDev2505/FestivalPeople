@@ -14,7 +14,10 @@ public class ApiComponent {
 	//필드에 선언시 각 API를 따로 부를수가 없어서 방법 변경함
 	//private final WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst");
 
-
+	@Value("${app-info.properties}")
+	public String weatherApikey;
+	
+	
 	
 	public String callFestivalApi() {
 		String festivalApiKey = ApiKeyLoader.get("festivalApiKey");
@@ -45,6 +48,7 @@ public class ApiComponent {
 	// 기상청 중기 예보 출력 API
 	public String callWeatherApi() {
 		// 키 불러옴
+
 		String weatherApiKey = ApiKeyLoader.get("weatherApiKey");
 		
 		// 이것도 각 메소드에서 API 따로 사용하려고 했던 방식

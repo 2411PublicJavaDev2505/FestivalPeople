@@ -2,6 +2,7 @@ package com.fepeo.boot.manager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fepeo.boot.manager.model.service.ManagerService;
@@ -20,6 +21,7 @@ public class ManagerController {
 //	private final ManagerService manService;
 	
 	
+	@GetMapping("/MYPAGE")
 	public String showManagerPage(HttpSession session) {
 		Member member = (Member)session.getAttribute("member");
 		
