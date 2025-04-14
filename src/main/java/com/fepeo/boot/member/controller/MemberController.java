@@ -220,6 +220,7 @@ public class MemberController {
 		Member member = (Member)session.getAttribute("member");
 		String accessToken = (String)session.getAttribute("accessToken");
 		if(accessToken != null && member.getMemberId().split("_")[0].equals("kakao")) {
+
 			WebClient client = WebClient.create("https://kapi.kakao.com");
 	        String response = client.post()
 	                .uri("/v1/user/logout")
