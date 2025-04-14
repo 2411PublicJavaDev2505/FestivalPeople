@@ -1,9 +1,6 @@
 package com.fepeo.boot.member.controller;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.util.Properties;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -76,7 +73,7 @@ public class MemberController {
 	            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
 	            .retrieve()
 	            .bodyToMono(String.class)
-	            .block(); // 결과를 기다려서 String으로 받음
+	            .block(); 
 		
 		JsonNode userNode = mapper.readTree(userInfo);
         String id = "kakao_"+userNode.path("id").asText();
