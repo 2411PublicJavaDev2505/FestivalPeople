@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+/* 상단 */
+.chat-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: #F3C11B;
+    padding: 10px 40px 10px 40px;
+	--margin: 0 auto;        
+}
+.chat-list-total{
+    display: flex;
+    justify-content: space-evenly;
+	--margin: 0 auto;
+    
+}
+
+/* 검색창(공통적용) */
+.list-search-input{
+    border: none;
+    background-color: rgb(230, 230, 230);
+}
+.chat-search-btn{
+    border: none;
+    background-color: rgb(230, 230, 230);
+    cursor: pointer;
+}
+.chat-list-search{
+    background-color: rgb(230, 230, 230);
+}
+/* 검색창 공통 끝 */
+
+
+.chat-list{
+    list-style-type: none;    
+}
+
+/* 채팅방 목록 출력 */
+.chat-list-row{
+	display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat-image{
+    border: 2px solid #bdbbbb;
+    width: 70px;
+    height: 70px;
+}
+.text-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+	.chat-title{
+	    font-size: large;
+	    font-weight: bolder;
+  		text-align: left;	    
+	}
+	.chat-tag{
+	    font-size: small;
+     	text-align: left;	
+	}
+	.chat-mem-count{
+  		text-align: right;		
+	    font-size: small;
+	    color: #808080;
+	}
+.msg-alarm{
+	width: 30px;
+	height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: none;
+    border-radius: 100px;
+    background-color: #E03E1A;
+    color: #F3C11B;
+}
+.chat-link {
+  display: flex;
+  --flex-direction: row;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+}
+
+/* 좌측 소속방목록 */
+.mychat-list-wrap{
+    width: 30%;
+    background-color: #f3c11b52;
+    margin: 5px;
+    padding:5px;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+	height: 600px;
+	overflow: auto;    /* 스크롤바 자동생성 */
+}
+.mychat-list-search{
+    display: flex;
+    justify-content: center;  /* 가로 중앙 정렬 */    
+    height: 25px;
+}
+.chat-notice{
+    display: flex;
+    justify-content: center;
+    color: #808080;
+}
+/* 방생성 버튼 */
+.chat-room-make {
+  position: sticky;
+  bottom: 0;
+  background-color: #f3c11b52; /* 배경색 다시 지정해서 겹침 방지 */
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+.chat-room-make button{
+    padding: 8px 16px;
+	background-color: #678E79;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+/* 좌측 끝 */

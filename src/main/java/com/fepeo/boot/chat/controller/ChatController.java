@@ -20,4 +20,9 @@ public class ChatController {
 	public String showChatMsgList() {
 		return "chat/chatDetail";
 	}
+	
+	@GetMapping("/insert")
+	public String insertChatRoom() {
+		return "chat/chatInsert";
+	}
 }

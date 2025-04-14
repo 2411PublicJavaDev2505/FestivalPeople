@@ -14,159 +14,23 @@
     box-sizing: border-box;
 }
 
-/* 상단 */
-.chat-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    background-color: #F3C11B;
-    padding: 10px 40px 10px 40px;
-	--margin: 0 auto;        
-}
-.chat-list-total{
-    display: flex;
-    justify-content: space-evenly;
-	--margin: 0 auto;
-    
-}
-
-/* 검색창(공통적용) */
-.list-search-input{
-    border: none;
-    background-color: rgb(230, 230, 230);
-}
-.chat-search-btn{
-    border: none;
-    background-color: rgb(230, 230, 230);
-    cursor: pointer;
-}
-.chat-list-search{
-    background-color: rgb(230, 230, 230);
-}
-/* 검색창 공통 끝 */
-
-
-.chat-list{
-    list-style-type: none;    
-}
-
-/* 채팅방 목록 출력 */
-.chat-list-row{
-	display: flex;
-    flex-direction: row;
-    margin-bottom: 10px;
-    justify-content: space-between;
-    align-items: center;
-}
-.chat-image{
-    border: 2px solid #bdbbbb;
-    width: 70px;
-    height: 70px;
-}
-.text-wrap {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 10px;
-}
-
-	.chat-title{
-	    font-size: large;
-	    font-weight: bolder;
-  		text-align: left;	    
-	}
-	.chat-tag{
-	    font-size: small;
-     	text-align: left;	
-	}
-	.chat-mem-count{
-  		text-align: right;		
-	    font-size: small;
-	    color: #808080;
-	}
-.msg-alarm{
-	width: 30px;
-	height: 30px;
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    border: none;
-    border-radius: 100px;
-    background-color: #E03E1A;
-    color: #F3C11B;
-}
-.chat-link {
-  display: flex;
-  --flex-direction: row;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  justify-content: space-between;
-  align-items: center;
-  width:100%;
-}
-
-/* 좌측 소속방목록 */
-.mychat-list-wrap{
-    width: 30%;
-    background-color: #f3c11b52;
-    margin: 5px;
-    padding:5px;
-    min-width: 400px;
-    display: flex;
-    flex-direction: column;
-	height: 600px;
-	overflow: auto;    /* 스크롤바 자동생성 */
-}
-.mychat-list-search{
-    display: flex;
-    justify-content: center;  /* 가로 중앙 정렬 */    
-    height: 25px;
-}
-.chat-notice{
-    display: flex;
-    justify-content: center;
-    color: #808080;
-}
-/* 방생성 버튼 */
-.chat-room-make {
-  position: sticky;
-  bottom: 0;
-  background-color: #f3c11b52; /* 배경색 다시 지정해서 겹침 방지 */
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-}
-.chat-room-make button{
-    padding: 8px 16px;
-	background-color: #678E79;
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-/* 좌측 끝 */
-
-
 /* 우측 메세지 목록 */
 .chat-msg-list {
     width: 70%;
     background-color: #d26f534f;
     margin: 5px;
     height: 600px;    
-	overflow: auto;    
+ 
 	display: flex;
     flex-direction: column;
 }
 /*우측상단*/
 .chat-header{
 	position: sticky;
+	top:0;
 	display: flex;
     justify-content: space-between;
-    margin: 10px;
+    padding: 15px;
 }
 	.chat-header-left{
 		display: flex;
@@ -190,6 +54,10 @@
 /*우측상단-끝-*/	
 .chat-area{
 	height: 600px;
+	display: flex;
+    flex-direction: column;	
+	overflow: auto;       
+    
 }
 .group_msg_balloon{ /* ul li */
     list-style-type: none;   
@@ -208,14 +76,70 @@
 }
 
 .msg-balloon-area{ /*상대 말풍선*/
-	
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	--margin-top: 10px;	
 }
+	.profile-area{
+		display: flex;
+	}
+	.chat-profile-thumbnail{
+		width: 40px;
+		height: 40px;
+		border: 1px solid #bdbbbb;
+		border-radius: 8px;
+	}
+	.msg-balloon-area-l{
+		position: relative;
+	    float: left;
+	    margin-left: 40px;
+	    display:flex;
+	    align-items: flex-end;
+	}
+	.msg-balloon-box-l{
+	    padding: 12px;
+	    border: 1px solid #bdbbbb;
+	    border-radius: 8px;
+    	max-width: 300px;
+    	background-color:#F5F5F5;
+	}
+	.msg-info{
+	    display:flex;
+	    flex-direction: column;
+	    width: 80px;
+	    margin-left: 5px;
+	}
 .msg-balloon-area-my{ /* 내 말풍선 */
-	
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+	margin-top: 30px;	
 }
+	.msg-balloon-area-r{
+		position: relative;
+	    display:flex;
+	    align-items: flex-end;
+	}
+	.msg-balloon-box-r{
+	    padding: 12px;
+	    border: 1px solid #0C8CE9;
+	    border-radius: 8px;
+	   	max-width: 300px;
+	   	background-color:#CEEAFF;
+	}
+	.msg-info-r{
+		display:flex;
+		flex-direction:column;
+		align-items: flex-end;
+		width: 80px;
+	    margin-right: 5px;
+	}
 
 /* 우측 하단(대화 입력) */
 .chat-write{
+	position: sticky;
+	botoom: 0;
 	display: flex;
 	align-items: center;
 	background-color: #E4E2DD;
@@ -247,7 +171,7 @@
 /* 전송 버튼 */
 .chat-btn-submit {
   background-color: #E4E2DD;
-  color: #fff;
+  color: #A6A4A2;
   border: none;
   padding: 10px 10px;
   font-size: 25px;
