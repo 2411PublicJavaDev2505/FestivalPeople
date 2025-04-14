@@ -19,9 +19,6 @@ public class FestivalController {
 	
     private final FestivalService festivalService;
 
-    public FestivalController(FestivalService festivalService) {
-        this.festivalService = festivalService;
-    }
 	
 	@GetMapping("/list")
 	public String showFestivalList() {
