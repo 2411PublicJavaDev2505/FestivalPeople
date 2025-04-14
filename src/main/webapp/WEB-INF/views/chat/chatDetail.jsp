@@ -8,6 +8,7 @@
 	<title>같이갈래-목록</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatDetail.css">
+	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
 </head>
 <body>
     <div id="container">
@@ -139,10 +140,63 @@
       					<ul class="group_msg_balloon">
       						<li class="date_check"><span>25.4.11.(금)</span></li>
       						<li class="msg-balloon-area">
-      							<div class="chat-profile-thumbnail">프사</div>
-      							<div class="chat-mem-nickname"></div>
+      							<div class="profile-area">
+	      							<div class="chat-profile-thumbnail">프사</div>
+	      							<div class="chat-mem-nickname">펭펭</div>
+      							</div>
       							<div class="msg-balloon-area-l">
-      								<p>어느 정도 모였으면 시간대랑 출발지를 정해야 할 것 같아요<br>
+      								<p class="msg-balloon-box-l">안녕하세요오<br>마감 며칠까지에영?<br>
+									</p>
+      								<div class="msg-info">
+	      								<p class="msg-non-read">안읽음2</p>
+	      								<span class="msg-time">
+	      									<span>오후</span>
+	      									<span>6:00</span>
+	      								</span>
+      								</div>
+      							</div>
+      						</li>
+      						<li class="msg-balloon-area">
+      							<div class="profile-area">
+	      							<div class="chat-profile-thumbnail">프사</div>
+	      							<div class="chat-mem-nickname">쿵치팍치</div>
+      							</div>
+      							<div class="msg-balloon-area-l">
+      								<p class="msg-balloon-box-l">사람들 얼마나 더 모으실 예정인가요?<br>
+									</p>
+      								<div class="msg-info">
+	      								<p class="msg-non-read">안읽음2</p>
+	      								<span class="msg-time">
+	      									<span>오후</span>
+	      									<span>6:00</span>
+	      								</span>
+      								</div>
+      							</div>
+      						</li>
+      						<li class="msg-balloon-area">
+      							<div class="profile-area">
+	      							<div class="chat-profile-thumbnail">프사</div>
+	      							<div class="chat-mem-nickname">먕먕</div>
+      							</div>
+      							<div class="msg-balloon-area-l">
+      								<p class="msg-balloon-box-l">정원까지 꽉 채우시나요<br>
+									</p>
+      								<div class="msg-info">
+	      								<p class="msg-non-read">안읽음2</p>
+	      								<span class="msg-time">
+	      									<span>오후</span>
+	      									<span>6:00</span>
+	      								</span>
+      								</div>
+      							</div>
+      						</li>
+      						<li class="msg-balloon-area">
+      							<div class="profile-area">
+	      							<div class="chat-profile-thumbnail">프사</div>
+	      							<div class="chat-mem-nickname">방장이지롱</div>
+      							</div>
+      							<div class="msg-balloon-area-l">
+      								<p class="msg-balloon-box-l">어느 정도 모였으면 시간대랑 출발지를 정해야 할 것 같아요<br>
 일단 우리는 대중교통으로 가는 게 목적이니까 아예 에버라인에서 만나는 걸로 할까요? 아니면 에버랜드 주차장에서 만나는게 더 낫나요?</p>
       								<div class="msg-info">
 	      								<p class="msg-non-read">안읽음2</p>
@@ -155,14 +209,14 @@
       						</li>
       						<li class="msg-balloon-area-my">
       							<div class="msg-balloon-area-r">
-      								<p>저는 전철역이요</p>
-      								<div class="msg-info">
+      								<div class="msg-info-r">
 	      								<p class="msg-non-read">안읽음4</p>
 	      								<span class="msg-time">
 	      									<span>오후</span>
 	      									<span>5:26</span>
 	      								</span>
       								</div>
+      								<p class="msg-balloon-box-r">저는 전철역이요</p>
       							</div>
       						</li>
       					</ul>
