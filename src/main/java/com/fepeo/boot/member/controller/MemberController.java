@@ -166,7 +166,7 @@ public class MemberController {
 	public String memberLogout(HttpSession session) {
 		Member member = (Member)session.getAttribute("member");
 		String accessToken = (String)session.getAttribute("accessToken");
-		if(accessToken != null || accessToken.trim() != "") {
+		if((accessToken != null || accessToken.trim() != "") && member.getMemberId().split("_")[0].equals("kakao")) {
 			WebClient client = WebClient.create("https://kapi.kakao.com");
 	        String response = client.post()
 	                .uri("/v1/user/logout")
