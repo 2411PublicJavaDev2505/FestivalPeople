@@ -20,12 +20,10 @@ public class ExternalApiController {
 		// 키 불러옴
 		String weatherApiKey = ApiKeyLoader.get("weatherApiKey");
 		
-		
 		// 이것도 각 메소드에서 API 따로 사용하려고 했던 방식
 		//String apiAddress = ApiKeyLoader.get("weatherAddress");
 		// 변경하여 webClient를 각 메소드에서 따로 불러야함
 		WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst");
-		
 		// API 호출
         String response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
@@ -39,7 +37,6 @@ public class ExternalApiController {
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-
             System.out.println(response);
             return response;
 	

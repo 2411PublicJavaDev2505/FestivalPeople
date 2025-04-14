@@ -1,22 +1,22 @@
-//package com.fepeo.boot.festival.model.service.logic;
-//
-//import java.util.List;
-//
-//import org.springframework.stereotype.Service;
-//import org.springframework.web.reactive.function.client.WebClient;
-//
-//import com.fepeo.boot.festival.model.service.FestivalService;
-//import com.fepeo.boot.festival.model.vo.FestivalResponse;
-//import com.fepeo.boot.festival.model.vo.dto.FestivalItem;
-//
-//import lombok.RequiredArgsConstructor;
-//
-//@Service
-//@RequiredArgsConstructor
-//public class FestivalServiceLogic implements FestivalService {
-//
+package com.fepeo.boot.festival.model.service.logic;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.fepeo.boot.festival.model.service.FestivalService;
+import com.fepeo.boot.festival.model.vo.FestivalResponse;
+import com.fepeo.boot.festival.model.vo.dto.FestivalItem;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class FestivalServiceLogic implements FestivalService {
+
 //	private final WebClient webClient;
-//
+
 //	@Override
 //    public List<FestivalItem> getFestivalList() {
 //        String serviceKey = "R5JZpG4itajPJd4pwiwhXgOCT8w19Fvsbj0yIRorF531WoSQxud8S0J0r7zSQfQbcuvYYHgZp3nbd%2BR1DM24xQ%3D%3D";
@@ -42,4 +42,4 @@
 //
 //        return response.getResponse().getBody().getItems().getItem();
 //    }
-//}
+}
