@@ -42,7 +42,7 @@
 	               <div class="moveSlider-track" id="moveSliderTrack">
 	                   <div class="festival-card">
 	                       <a href ="/festival/detail">
-	                       		<img src="../resources/img/festival/태안봄꽃정원.jpg" alt="축제 포스터1">
+	                       		<img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
 	                       </a>
 	                   </div>
 	                   <div class="festival-card">
@@ -65,7 +65,7 @@
 	           <div class="festival-list">
 	               <div class="festival-list-track">
 	                   <div class="festival-card">
-	                       <img src="../resources/img/festival/태안봄꽃정원.jpg" alt="축제 포스터1">
+	                       <img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
 	                   </div>
 	                   <div class="festival-card">
 	                       <img src="img2.jpg" alt="축제 포스터2">
@@ -79,7 +79,7 @@
 	               </div>
 	               <div class="festival-list-track" >
 	                   <div class="festival-card">
-	                       <img src="../resources/img/festival/태안봄꽃정원.jpg" alt="축제 포스터1">
+	                       <img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
 	                   </div>
 	                   <div class="festival-card">
 	                       <img src="img2.jpg" alt="축제 포스터2">
@@ -121,7 +121,7 @@
 	            if (currentSlide < 0) currentSlide = 0;
 	            if (currentSlide > maxSlide) currentSlide = maxSlide;
 	
-	            track.style.transform = 'translateX(-${currentSlide * cardWidth}px)';
+	            track.style.transform = 'translateX(-'+currentSlide * cardWidth+'px)';
 	        }	
     	});
         
