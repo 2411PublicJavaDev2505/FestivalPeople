@@ -20,7 +20,6 @@
     background-color: #d26f534f;
     margin: 5px;
     height: 600px;    
- 
 	display: flex;
     flex-direction: column;
 }
@@ -32,26 +31,43 @@
     justify-content: space-between;
     padding: 15px;
 }
-	.chat-header-left{
-		display: flex;
-	    flex-direction: row;
-	    justify-content: flex-start;
-	    align-items: center;
-		padding: 5px;	    
-	}
+.chat-header-left{
+	display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+	padding: 5px;	    
+}
 	.chat-prev-list a{
   		text-decoration: none;		
   		padding-right: 6px;
 	}
-	.chat-header-right {
-		display: flex;
-	    flex-direction: row;
-	    align-items: center;
+.chat-header-right {
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+	.msg-search{
+	    background-color: rgb(230, 230, 230);
+	    border-radius: 8px;
+	    width: 200px;
+	}
+	.list-search-input{
+		height: 30px;
+	    border: none;
+	    background-color: rgb(230, 230, 230);
+	}
+	.chat-search-btn{
+	    border: none;
+	    background-color: rgb(230, 230, 230);
+	    cursor: pointer;
 	}
 	.chat-menu{
   		padding-left: 6px;	
 	}
+	
 /*우측상단-끝-*/	
+
 .chat-area{
 	height: 600px;
 	display: flex;

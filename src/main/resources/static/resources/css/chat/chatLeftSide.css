@@ -15,9 +15,15 @@
 	--margin: 0 auto;
     
 }
+.chat-list-search{
+    background-color: rgb(230, 230, 230);
+    border-radius: 8px;
+    padding: 0 10px;
+}
 
 /* 검색창(공통적용) */
 .list-search-input{
+	height: 30px;
     border: none;
     background-color: rgb(230, 230, 230);
 }
@@ -25,9 +31,6 @@
     border: none;
     background-color: rgb(230, 230, 230);
     cursor: pointer;
-}
-.chat-list-search{
-    background-color: rgb(230, 230, 230);
 }
 /* 검색창 공통 끝 */
 
@@ -110,7 +113,11 @@
 .mychat-list-search{
     display: flex;
     justify-content: center;  /* 가로 중앙 정렬 */    
-    height: 25px;
+    border-radius: 8px;
+    padding: 0 10px;
+    width:200px;
+    margin: 20px auto;
+    background-color: rgb(230, 230, 230);
 }
 .chat-notice{
     display: flex;

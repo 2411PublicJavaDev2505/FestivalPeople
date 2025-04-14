@@ -35,7 +35,7 @@
 	            <!-- 참여방 있을 경우 → 목록 출력--> 
 	            <ul class="chat-list">
 	                <li class="chat-list-row">
-						<a href="#" class="chat-link">	            
+						<a href="/chat/detail" class="chat-link">	            
 	                    <div class="chat-image">그림</div>
 	                    <div class="text-wrap">
 	                        <div class="chat-title">튤립축제 동행 구해요</div>
@@ -66,7 +66,6 @@
 	                    </div>
 	                    <div class="msg-alarm">4</div></a>
 	                </li>
-	            </ul> 
 	                <li class="chat-list-row">
 						<a href="#" class="chat-link">	            
 	                    <div class="chat-image">그림</div>
@@ -97,7 +96,6 @@
 	                    </div>
 	                    <div class="msg-alarm">4</div></a>
 	                </li>
-	            </ul> 
 	                <li class="chat-list-row">
 						<a href="#" class="chat-link">	            
 	                    <div class="chat-image">그림</div>
