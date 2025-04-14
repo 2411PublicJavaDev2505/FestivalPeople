@@ -50,7 +50,7 @@
     list-style-type: none;    
 }
 
-/* 채팅방 목록 출력(좌 우 공통) */
+/* 채팅방 목록 출력 */
 .chat-list-row{
 	display: flex;
     flex-direction: row;
@@ -152,3 +152,104 @@
 
 
 /* 우측 메세지 목록 */
+.chat-msg-list {
+    width: 70%;
+    background-color: #d26f534f;
+    margin: 5px;
+    height: 600px;    
+	overflow: auto;    
+	display: flex;
+    flex-direction: column;
+}
+/*우측상단*/
+.chat-header{
+	position: sticky;
+	display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+	.chat-header-left{
+		display: flex;
+	    flex-direction: row;
+	    justify-content: flex-start;
+	    align-items: center;
+		padding: 5px;	    
+	}
+	.chat-prev-list a{
+  		text-decoration: none;		
+  		padding-right: 6px;
+	}
+	.chat-header-right {
+		display: flex;
+	    flex-direction: row;
+	    align-items: center;
+	}
+	.chat-menu{
+  		padding-left: 6px;	
+	}
+/*우측상단-끝-*/	
+.chat-area{
+	height: 600px;
+}
+.group_msg_balloon{ /* ul li */
+    list-style-type: none;   
+    padding:8px;     
+}
+.date_check{
+	display: flex;
+    justify-content: center;
+    border:none;
+    border-radius: 5px;
+    color: white;
+    background-color: #A6A4A2;
+    margin: 10px auto;
+    width: 100px;
+    height: 25px;
+}
+
+.msg-balloon-area{ /*상대 말풍선*/
+	
+}
+.msg-balloon-area-my{ /* 내 말풍선 */
+	
+}
+
+/* 우측 하단(대화 입력) */
+.chat-write{
+	display: flex;
+	align-items: center;
+	background-color: #E4E2DD;
+}
+.upload-btn{
+	cursor: pointer;
+	margin: 5px;
+}
+/* input[type=file] 숨기기 */
+#fileUploaderInput {
+  display: none;
+}
+.chat-input-area{
+	height: 50px;
+}
+/* 입력창 영역 */
+.chat-input-area {
+  flex: 1;
+  margin-right: 10px;
+}
+.chat-input {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  background-color: #E4E2DD;
+  font-size: 14px;
+  color: #333;
+}
+/* 전송 버튼 */
+.chat-btn-submit {
+  background-color: #E4E2DD;
+  color: #fff;
+  border: none;
+  padding: 10px 10px;
+  font-size: 25px;
+  cursor: pointer;
+}

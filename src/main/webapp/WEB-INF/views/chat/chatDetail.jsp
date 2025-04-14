@@ -7,14 +7,14 @@
 	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>같이갈래-목록</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
-	<link rel="stylesheet" href="../resources/css/chat/list.css">
+	<link rel="stylesheet" href="../resources/css/chat/chatDetail.css">
 </head>
 <body>
     <div id="container">
     <!-- 헤더 -->
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
-    <!--상단 채팅방검색-->
     <main class="chat-main">
+	    <!--상단 채팅방검색-->
 	    <section class="chat-nav">
 	        <span>참여 채팅 수 : 0</span>
 	        <form class="chat-list-search" action="#" >
@@ -123,7 +123,7 @@
 	        <section class="chat-msg-list">
       			<header class="chat-header">
       				<div class = "chat-header-left">
-      					<div class="chat-prev-list">←</div>
+      					<div class="chat-prev-list"><a href="#">←</a></div>
       					<div class="chat-header-title"><span>튤립축제 동행 구해요</span></div>
       				</div>
       				<div class ="chat-header-right">
@@ -131,13 +131,13 @@
 			                <input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 			                <button class="chat-search-btn" type="submit">⌕</button>
 			            </form>
-      					<div class="chat-menu"></div>
+      					<div class="chat-menu">메뉴</div>
       				</div>
       			</header>
       			<section class="chat-area">
       				<div>
       					<ul class="group_msg_balloon">
-      						<li class="date_check"><span>2025년 4월 11일 금요일</span></li>
+      						<li class="date_check"><span>25.4.11.(금)</span></li>
       						<li class="msg-balloon-area">
       							<div class="chat-profile-thumbnail">프사</div>
       							<div class="chat-mem-nickname"></div>
@@ -169,14 +169,14 @@
       				</div>
       			</section>
       			<footer class="chat-write">
-      				<label id="fileUploadBtn" class="upload-btn" for="fileUploaderInput">첨부아이콘</label>
+      				<label id="fileUploadBtn" class="upload-btn" for="fileUploaderInput">🔗</label>
       				<form action="#" method="post" enctype="multipart/form-data">
       					<input id="fileUploaderInput" name="files[]" type="file">
       				</form>
       				<div class="chat-input-area">
       					<textarea class="chat-input" maxlength="2000" placeholder="메시지를 입력하세요"></textarea>
       				</div>
-      				<button class="chat-btn-submit" type="submit">전송아이콘</button>
+      				<button class="chat-btn-submit" type="submit">➤</button>
       			</footer>
 	        </section>
 	    </section>
