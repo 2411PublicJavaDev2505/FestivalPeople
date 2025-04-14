@@ -37,8 +37,21 @@
 					<span><a>비밀번호 찾기</a></span>
 					<span><a href="/member/insert">회원가입</a></span>
 				</div>
+				<div class="login-social">
+					<img alt="카카오 로그인" src="../resources/img/member/kakao.png" onclick="kakao();">
+					<img alt="네이버 로그인" src="../resources/img/member/naver.png" onclick="naver();">
+				</div>
 			</div>
 		</main>
 	</div>
+	<script type="text/javascript">
+		const kakao = () => {
+			location.href = "https://kauth.kakao.com/oauth/authorize?client_id=${kakao}&redirect_uri=http://localhost:8888/member/kakao&response_type=code";
+		}
+		const naver = () => {
+			const state = crypto.randomUUID();
+			location.href = "https://nid.naver.com/oauth2.0/authorize?client_id=vtFv0628kUp2Kt2meM2v&response_type=code&redirect_uri=http://localhost:8888/member/naver&state="+state;
+		}
+	</script>
 </body>
 </html>

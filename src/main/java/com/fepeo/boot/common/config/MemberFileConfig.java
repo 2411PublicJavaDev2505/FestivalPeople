@@ -1,4 +1,4 @@
-package com.fepeo.boot.common.controller.config;
+package com.fepeo.boot.common.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -6,12 +6,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 // 메소드를 boot가 자동사용함
 @Configuration
-public class FileConfig implements WebMvcConfigurer{
+public class MemberFileConfig implements WebMvcConfigurer{
 
 	// images/ 이하의 모든 경로 처리
-	private final String WEB_PATH = "/images/board/**";
+	private final String WEB_PATH = "/images/member/**";
 	// 실제 경로 입력 
-	private final String REAL_PATH = "file:///c:/uploadImage/board/";
+	private final String REAL_PATH = "file:///c:/uploadImage/member/";
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

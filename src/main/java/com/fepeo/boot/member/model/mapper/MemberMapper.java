@@ -13,4 +13,6 @@ public interface MemberMapper {
 
 	Member memberLogin(MemberLoginRequest login);
 
+	Member memberSocialLogin(String id);
+
 }
