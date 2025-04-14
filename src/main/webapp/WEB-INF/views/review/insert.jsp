@@ -17,14 +17,14 @@
 				<h3>여행후기 등록</h3>
 			</div>
 			<main>
-		 		<form action="" method="" enctype="multipart/form-data"> 
+		 		<form action="/review/insert" method="post" enctype="multipart/form-data"> 
 					<div class="review-title">
 					<!-- name값 넣어줘야함! -->
-						제목 <input type="text" name="" size="80">
+						제목 <input type="text" name="reviewTitle" size="80">
 					</div>
 					<div class="review-content">
 						<div><span>내용 </span></div>
-						<textarea rows="5" cols="82" name=""></textarea>
+						<textarea rows="5" cols="82" name="reviewContent"></textarea>
 					</div>
 					<div class="review-attach">
 						<input type="file" name="images"><br>
