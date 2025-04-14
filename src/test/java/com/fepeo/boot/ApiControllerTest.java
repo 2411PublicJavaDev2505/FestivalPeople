@@ -30,8 +30,9 @@ public class ApiControllerTest {
 	
 	@Test
 	public void testApiLoader() {
-		String apiKey = aService.callWeatherApi();
-		String apiKey1 = aService.callFestivalApi();
+		/*
+		 * String apiKey = aService.callWeatherApi();
+		 */		String apiKey1 = aService.callFestivalApi();
 		System.out.println(apiKey1);
 		
 	}

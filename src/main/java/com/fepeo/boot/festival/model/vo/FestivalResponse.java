@@ -2,8 +2,6 @@ package com.fepeo.boot.festival.model.vo;
 
 import java.util.List;
 
-import com.fepeo.boot.festival.model.vo.dto.FestivalItem;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,6 +30,20 @@ public class FestivalResponse {
             @Getter @Setter
             public static class Items {
                 private List<FestivalItem> item;
+            }
+            
+            @Getter @Setter
+            public class FestivalItem {
+            	private String contentid;
+            	private String title;
+                private String eventstartdate;
+                private String eventenddate;
+                private String firstimage;
+                private String tel;
+                private String addr1;
+                private String addr2;
+                private String mapx;
+                private String mapy;
             }
         }
     }
