@@ -6,8 +6,9 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../resources/css/root.css">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
-	<link rel="stylesheet" href="../resources/css/member/memberInsert.css">
+	<link rel="stylesheet" href="../resources/css/member/socialInsert.css">
 	<title>FePeo-회원가입</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -25,29 +26,22 @@
 		<main>
 			<div class="register-container">
 				<div class="register-header">
-					<span>회원가입</span>
+					<span>회원가입</span> <br>
+					<span>${nickname }님 반갑습니다!</span>
 				</div>
 				<form action="/member/insert" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="socialYn" value="N">
+					<input type="hidden" name="memberId" value="${id }">
+					<input type="hidden" name="memberCode" value="${id }">
+					<input type="hidden" name="nickname" value="${nickname }">
+					<input type="hidden" name="email" value="${email }">
+					<input type="hidden" name="profileUrl" value="${profileUrl }">
+					<input type="hidden" name="socialYn" value="Y">
 					<div class="register-main">
 						<div class="register-left">
-							<div class="profile-img"></div>
-							<input type="file" name="profile">
+							<div class="profile-img"> <img alt="프사" src="${profileUrl }"> </div>
 						</div>
 						<div class="register-right">
 							<ul class="register-input">
-								<li class="register-btn">
-									<input type="text" placeholder="아이디" name="memberId" id="input-id">
-									<button type="button" onclick="checkId();">중복확인</button>
-								</li>
-								<li class="check id"></li>
-								<li class="register-notbtn">
-									<input type="password" placeholder="비밀번호" name="memberPw" id="input-pw">
-								</li>
-								<li class="register-notbtn">
-									<input type="password" placeholder="비밀번호 확인" id="input-pw-re">
-								</li>
-								<li class="check pw"></li>
 								<li class="register-btn">
 									<input type="text" placeholder="주소" name="address" id="input-address" readonly="readonly">
 									<button type="button" onclick="findAddress();">검색</button>
@@ -61,16 +55,6 @@
 								<li class="register-radio">
 									여: <input type="radio" name="gender" value="F">
 								</li>
-								<li class="register-btn">
-									<input type="text" placeholder="닉네임" name="nickname" id="input-nickname">
-									<button type="button" onclick="checkNickname();">중복확인</button>
-								</li>
-								<li class="check nickname"></li>
-								<li class="register-btn">
-									<input type="text" placeholder="이메일" name="email">
-									<button type="button" onclick="checkEmail();" id="input-email">중복확인</button>
-								</li>
-								<li class="check email"></li>
 								<li class="register-last-btn">
 									<button type="submit" onclick="checkRegister();">회원가입</button>
 								</li>
