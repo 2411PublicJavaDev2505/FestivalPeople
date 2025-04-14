@@ -22,6 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fepeo.boot.common.controller.util.ApiKeyLoader;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
 import com.fepeo.boot.member.model.service.MemberService;
@@ -36,13 +37,10 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	private final MemberService mService;
-	private final Properties prop;
 
 	@GetMapping("/login")
 	public String showLogin(Model model) throws IOException {
-		Reader reader = new FileReader(System.getProperty("user.dir")+"\\src\\main\\resources\\api\\api");
-		prop.load(reader);
-		String kakao = prop.getProperty("kakao");
+		String kakao = ApiKeyLoader.get("kakao");
 		model.addAttribute("kakao",kakao);
 		return "member/login";
 	}
@@ -140,7 +138,7 @@ public class MemberController {
 	            .block();
 	    
 	    JsonNode userNode = mapper.readTree(userInfo);
-        String id = userNode.path("response").path("id").asText();
+        String id = "naver_"+userNode.path("response").path("id").asText();
         String nickname = userNode.path("response").path("nickname").asText();
         String email = userNode.path("response").path("email").asText();
         String profileUrl = userNode.path("response").path("profile_image").asText();
@@ -162,11 +160,66 @@ public class MemberController {
 		}
 	}
 	
+	@GetMapping("/google")
+	public String googleLogin(@RequestParam("code") String code, Model model
+			,HttpSession session) throws JsonMappingException, JsonProcessingException {
+	    WebClient client = WebClient.create("https://oauth2.googleapis.com");
+
+	    String token = client.post()
+	            .uri("/token")
+	            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+	            .body(BodyInserters.fromFormData("code", code)
+	                    .with("client_id", "242617315070-ldaq9mj659bp7t82r97ae0gcp2uinugc.apps.googleusercontent.com")
+	                    .with("client_secret", "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")
+	                    .with("redirect_uri", "http://localhost:8888/member/google")
+	                    .with("grant_type", "authorization_code"))
+	            .retrieve()
+	            .bodyToMono(String.class)
+	            .block();
+	    
+	    ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(token);
+		String accessToken = root.path("access_token").asText();
+	    
+		WebClient userClient = WebClient.create();
+		String userInfo = userClient.get()
+		        .uri("https://www.googleapis.com/oauth2/v2/userinfo")
+		        .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+		        .retrieve()
+		        .bodyToMono(String.class)
+		        .block();
+		
+		System.out.println(userInfo);
+		
+		JsonNode userNode = mapper.readTree(userInfo);
+        String id = "google_" + userNode.path("id").asText();
+        String nickname = userNode.path("name").asText();
+        String email = userNode.path("email").asText();
+        String profileUrl = userNode.path("picture").asText();
+        
+        Member member = mService.memberSocialLogin(id);
+        model.addAttribute("id",id);
+        model.addAttribute("nickname",nickname);
+        model.addAttribute("email",email);
+        model.addAttribute("profileUrl",profileUrl);
+	    
+	    
+	    if(member != null) {
+			session.setAttribute("member", member);
+			session.setAttribute("accessToken", accessToken);
+			return "redirect:/";
+		}else {
+			return "member/socialInsert";
+		}
+		
+	}
+	
+	
 	@GetMapping("/logout")
 	public String memberLogout(HttpSession session) {
 		Member member = (Member)session.getAttribute("member");
 		String accessToken = (String)session.getAttribute("accessToken");
-		if(accessToken != null || accessToken.trim() != "") {
+		if(accessToken != null && member.getMemberId().split("_")[0].equals("kakao")) {
 			WebClient client = WebClient.create("https://kapi.kakao.com");
 	        String response = client.post()
 	                .uri("/v1/user/logout")

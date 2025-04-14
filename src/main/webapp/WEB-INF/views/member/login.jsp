@@ -40,6 +40,7 @@
 				<div class="login-social">
 					<img alt="카카오 로그인" src="../resources/img/member/kakao.png" onclick="kakao();">
 					<img alt="네이버 로그인" src="../resources/img/member/naver.png" onclick="naver();">
+					<img alt="구글 로그인" src="" onclick="google();">
 				</div>
 			</div>
 		</main>
@@ -51,6 +52,9 @@
 		const naver = () => {
 			const state = crypto.randomUUID();
 			location.href = "https://nid.naver.com/oauth2.0/authorize?client_id=vtFv0628kUp2Kt2meM2v&response_type=code&redirect_uri=http://localhost:8888/member/naver&state="+state;
+		}
+		const google = () => {
+			location.href = "https://accounts.google.com/o/oauth2/v2/auth?client_id=242617315070-ldaq9mj659bp7t82r97ae0gcp2uinugc.apps.googleusercontent.com&redirect_uri=http://localhost:8888/member/google&response_type=code&scope=email%20profile&access_type=offline&prompt=consent"
 		}
 	</script>
 </body>
