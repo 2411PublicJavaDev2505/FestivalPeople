@@ -17,7 +17,8 @@
 				<h3>여행후기 등록</h3>
 			</div>
 			<main>
-		 		<form action="/review/insert" method="post" enctype="multipart/form-data"> 
+		 		<form action="/review/insert" method="post" enctype="multipart/form-data">
+		 			<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo }"> 
 					<div class="review-title">
 					<!-- name값 넣어줘야함! -->
 						제목 <input type="text" name="reviewTitle" size="80">
@@ -27,6 +28,7 @@
 						<textarea rows="5" cols="82" name="reviewContent"></textarea>
 					</div>
 					<div class="review-attach">
+<!-- 							<input type="file" name="uploadFile"><br> -->
 						<input type="file" name="images"><br>
 						<input type="file" name="images"><br>
 						<input type="file" name="images"><br>

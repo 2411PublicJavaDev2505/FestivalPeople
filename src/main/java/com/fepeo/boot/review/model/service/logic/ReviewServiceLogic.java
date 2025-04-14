@@ -26,8 +26,7 @@ public class ReviewServiceLogic implements ReviewService {
 		//성공후 아래코드 작성..작성전 mapper.xml에 코드 수정했으나 제약조건 뜸..
 		//코드 수정아래 적어줌...에러나면 지울것!15:10
 		int result = mapper.insertReview(review);
-		
-				if(result > 0) {
+			if(result > 0) {
 			result = review.getReviewNo();
 		}
 		return result;
