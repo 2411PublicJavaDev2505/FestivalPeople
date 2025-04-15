@@ -154,6 +154,7 @@ public class ApiComponent {
 		return loginMap;
 	}
 	
+	// 조금씩 변경해서 API로 받아올 예정임
 	public String kakaoMapApi() {
 		String authorization = kakaoApiKey;
 		WebClient webClient = WebClient.create("https://dapi.kakao.com");
@@ -182,6 +183,31 @@ public class ApiComponent {
 	    return "Hello world";	
 	}
 
+	
+	// 저장된 회원 주소지로 주소값 받아오기
+	public String searchMemberAddress(String memberAddress) {
+		String authorization = kakaoApiKey;
+		WebClient webClient = WebClient.create("https://dapi.kakao.com");
+		
+	    KakaoPlaceResponseDto res = webClient.get()
+	            .uri(uriBuilder -> uriBuilder
+	                    .path("/v2/local/search/address..json")
+	                    .queryParam("category_group_code", "FD6")
+	                    .queryParam("x", 126.968357810931)
+	                    .queryParam("y", 37.6063916960376)
+	                    .queryParam("radius", 1000)
+	                    .queryParam("sort", "distance")
+	                    .build())
+	            .header("Authorization", authorization)
+	            .retrieve()
+	            .bodyToMono(KakaoPlaceResponseDto.class)
+	            .block();
+
+
+		
+		
+		return "";
+	}
 	
 	
 	// 기상청 중기 예보 출력 API
