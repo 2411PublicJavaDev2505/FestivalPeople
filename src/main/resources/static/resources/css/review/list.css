@@ -1,20 +1,67 @@
 @charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 900px;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
 
 .reviewlist-main{
 	margin: 0 auto;
 	margin-top:150px;
 	width: 1350px;
-	height: 450px;
+	height: 500px;
 	padding: 30px;
 	box-shadow: 0 2px 10px rgba(1, 0, 0, 0.2);
-	background-color:#3B7C70;
+	background-color:rgb(60,127,114,0.9);
+	border-radius: 10px;
+}
+
+.reviewsearch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+    margin-bottom: -25px;
+}
+
+.review-searchbar, .searchbox, .search-btn {
+    border-radius: 20px;
+    border: 1px solid white;
+    padding: 8px 16px;
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.search-btn {
+    background: #678E79;
+    color: #fff;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-btn:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
+				rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 .reviewlist-h3 {
 	margin: 0 auto;
-	width:200px;
+	border: 1px solid white;
+	width: 200px;
 	margin-bottom: 10px;
 	text-align: center;
-	border-radius: 5px;
+	border-radius: 10px;
 	background-color: #678E79;
 	color: #f5f5f5;
 	font-size: 25px;
@@ -51,9 +98,9 @@
 #reviewinsert-btn{
 	margin: 0 auto;
 	width:150px;
+	border: 1px solid white;
 	background-color: #678E79;
 	font-size: 19px;
-	border:none;
 	padding:10px;
 	position: relative;
 	bottom:40px;
@@ -62,16 +109,22 @@
 	color: #f5f5f5;
 	float:right;
 }
-.page{
-	text-align: center;
-	margin: 0 auto;
-	width:150px;
-	background-color: #678E79;
-	font-size: 19px;
-	border:none;
-	padding:10px;
-	position: relative;
-	top:8px;
-	
+#reviewinsert-btn:hover {
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
+				rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.page {
+    text-align: center;
+    border: 1px solid white;
+    margin: 0 auto;
+    width: 150px;
+    background-color: #678E79;
+    font-size: 19px;
+    padding: 10px;
+    position: relative;
+    top: 8px;
+    text-decoration: none;
+    border-radius: 10px;
+    color: white; /* 텍스트 색상도 명시적으로 지정 */
 }
 
