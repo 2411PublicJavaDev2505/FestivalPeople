@@ -15,4 +15,6 @@ public interface MemberMapper {
 
 	Member memberSocialLogin(String id);
 
+	Member selectOneByNo(int memberNo);
+
 }

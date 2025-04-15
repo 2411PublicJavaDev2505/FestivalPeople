@@ -1,9 +1,9 @@
 package com.fepeo.boot.member.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fepeo.boot.common.controller.util.ApiKeyLoader;
+import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
 import com.fepeo.boot.member.model.service.MemberService;
@@ -33,12 +32,18 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/member")
 public class MemberController {
 
+	private final ApiComponent api;
+	
 	private final MemberService mService;
 
 	@GetMapping("/login")
 	public String showLogin(Model model) throws IOException {
-		String kakao = ApiKeyLoader.get("kakao");
+		String kakao = api.getKakao_client_id();
+		String naver = api.getNaver_client_id();
+		String google = api.getGoogle_client_id();
 		model.addAttribute("kakao",kakao);
+		model.addAttribute("naver",naver);
+		model.addAttribute("google",google);
 		return "member/login";
 	}
 	
@@ -55,27 +60,11 @@ public class MemberController {
 			,Model model
 			,HttpSession session) throws JsonMappingException, JsonProcessingException {
 		
-		WebClient webClient = WebClient.create("https://kauth.kakao.com");
-		String token = webClient.post().uri("/oauth/token")
-				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-				.body(BodyInserters.fromFormData("grant_type", "authorization_code")
-						.with("client_id", "05ae1e70e0b04614496a16fb554e7110")
-						.with("redirect_uri", "http://localhost:8888/member/kakao")
-						.with("code", code)).retrieve()
-				.bodyToMono(String.class).block();
+	
+		Map<String, String> loginMap = api.kakaoLogin(code);
 		
 		ObjectMapper mapper = new ObjectMapper();
-		JsonNode root = mapper.readTree(token);
-		String accessToken = root.path("access_token").asText();
-		WebClient webClient2 = WebClient.create("https://kapi.kakao.com");
-		String userInfo = webClient2.get()
-	            .uri("/v2/user/me")
-	            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-	            .retrieve()
-	            .bodyToMono(String.class)
-	            .block(); 
-		
-		JsonNode userNode = mapper.readTree(userInfo);
+		JsonNode userNode = mapper.readTree(loginMap.get("userInfo"));
         String id = "kakao_"+userNode.path("id").asText();
         String nickname = userNode.path("kakao_account")
                                   .path("profile")
@@ -93,8 +82,8 @@ public class MemberController {
 		Member member = mService.memberSocialLogin(id);
 		if(member != null) {
 			session.setAttribute("member", member);
-			session.setAttribute("accessToken", accessToken);
-			return "redirect:/";
+			session.setAttribute("accessToken", loginMap.get("accessToken"));
+			return "member/successPopup";
 		}else {
 			return "member/socialInsert";
 		}
@@ -107,34 +96,12 @@ public class MemberController {
 	                         HttpSession session
 	                         ,Model model) throws JsonMappingException, JsonProcessingException {
 
-	    WebClient client = WebClient.create("https://nid.naver.com");
 
-	    String token = client.post()
-	            .uri(uriBuilder -> uriBuilder.path("/oauth2.0/token")
-	                    .queryParam("grant_type", "authorization_code")
-	                    .queryParam("client_id", "vtFv0628kUp2Kt2meM2v")
-	                    .queryParam("client_secret", "9OON4RGUOZ")
-	                    .queryParam("code", code)
-	                    .queryParam("state", state)
-	                    .build())
-	            .retrieve()
-	            .bodyToMono(String.class)
-	            .block();
+
+		Map<String, String> loginMap = api.naverLogin(code, state);
 	    
 	    ObjectMapper mapper = new ObjectMapper();
-		JsonNode root = mapper.readTree(token);
-		String accessToken = root.path("access_token").asText();
-	    
-	    WebClient userClient = WebClient.create("https://openapi.naver.com");
-
-	    String userInfo = userClient.get()
-	            .uri("/v1/nid/me")
-	            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-	            .retrieve()
-	            .bodyToMono(String.class)
-	            .block();
-	    
-	    JsonNode userNode = mapper.readTree(userInfo);
+	    JsonNode userNode = mapper.readTree(loginMap.get("userInfo"));
         String id = "naver_"+userNode.path("response").path("id").asText();
         String nickname = userNode.path("response").path("nickname").asText();
         String email = userNode.path("response").path("email").asText();
@@ -149,9 +116,9 @@ public class MemberController {
 	    
 	    if(member != null) {
 			session.setAttribute("member", member);
-			session.setAttribute("accessToken", accessToken);
+			session.setAttribute("accessToken", loginMap.get("accessToken"));
 			session.setAttribute("state", state);
-			return "redirect:/";
+			return "member/successPopup";
 		}else {
 			return "member/socialInsert";
 		}
@@ -160,35 +127,12 @@ public class MemberController {
 	@GetMapping("/google")
 	public String googleLogin(@RequestParam("code") String code, Model model
 			,HttpSession session) throws JsonMappingException, JsonProcessingException {
-	    WebClient client = WebClient.create("https://oauth2.googleapis.com");
+	    
 
-	    String token = client.post()
-	            .uri("/token")
-	            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-	            .body(BodyInserters.fromFormData("code", code)
-	                    .with("client_id", "242617315070-ldaq9mj659bp7t82r97ae0gcp2uinugc.apps.googleusercontent.com")
-	                    .with("client_secret", "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")
-	                    .with("redirect_uri", "http://localhost:8888/member/google")
-	                    .with("grant_type", "authorization_code"))
-	            .retrieve()
-	            .bodyToMono(String.class)
-	            .block();
-	    
-	    ObjectMapper mapper = new ObjectMapper();
-		JsonNode root = mapper.readTree(token);
-		String accessToken = root.path("access_token").asText();
-	    
-		WebClient userClient = WebClient.create();
-		String userInfo = userClient.get()
-		        .uri("https://www.googleapis.com/oauth2/v2/userinfo")
-		        .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
-		        .retrieve()
-		        .bodyToMono(String.class)
-		        .block();
+		Map<String, String> loginMap = api.googleLogin(code);
 		
-		System.out.println(userInfo);
-		
-		JsonNode userNode = mapper.readTree(userInfo);
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode userNode = mapper.readTree(loginMap.get("userInfo"));
         String id = "google_" + userNode.path("id").asText();
         String nickname = userNode.path("name").asText();
         String email = userNode.path("email").asText();
@@ -203,8 +147,8 @@ public class MemberController {
 	    
 	    if(member != null) {
 			session.setAttribute("member", member);
-			session.setAttribute("accessToken", accessToken);
-			return "redirect:/";
+			session.setAttribute("accessToken", loginMap.get("accessToken"));
+			return "member/successPopup";
 		}else {
 			return "member/socialInsert";
 		}
@@ -214,8 +158,10 @@ public class MemberController {
 	
 	@GetMapping("/logout")
 	public String memberLogout(HttpSession session) {
+		
 		Member member = (Member)session.getAttribute("member");
 		String accessToken = (String)session.getAttribute("accessToken");
+		
 		if(accessToken != null && member.getMemberId().split("_")[0].equals("kakao")) {
 
 			WebClient client = WebClient.create("https://kapi.kakao.com");
@@ -226,9 +172,11 @@ public class MemberController {
 	                .bodyToMono(String.class)
 	                .block();
 		}
+		
 		if(member != null) {
 			session.invalidate();
 		}
+		
 		return "redirect:/";
 	}
 	
@@ -243,6 +191,14 @@ public class MemberController {
 		member.setProfile(profile);
 		int result = mService.insertMember(member);
 		return "member/insertSucess";
+	}
+	
+	@GetMapping("/detail")
+	public String showMemberDetail(HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("member");
+		member = mService.selectOneByNo(member.getMemberNo());
+		model.addAttribute("member",member);
+		return "member/memberDetail";
 	}
 	
 	@GetMapping("/delete")

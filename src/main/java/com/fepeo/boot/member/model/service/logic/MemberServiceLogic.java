@@ -46,4 +46,9 @@ public class MemberServiceLogic implements MemberService{
 		return mapper.memberSocialLogin(id);
 	}
 
+	@Override
+	public Member selectOneByNo(int memberNo) {
+		return mapper.selectOneByNo(memberNo);
+	}
+
 }

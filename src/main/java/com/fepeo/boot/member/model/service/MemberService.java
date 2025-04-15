@@ -14,4 +14,6 @@ public interface MemberService {
 
 	Member memberSocialLogin(String id);
 
+	Member selectOneByNo(int memberNo);
+
 }

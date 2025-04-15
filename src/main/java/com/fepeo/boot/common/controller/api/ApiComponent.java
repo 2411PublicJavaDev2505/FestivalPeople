@@ -1,17 +1,28 @@
 package com.fepeo.boot.common.controller.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.fepeo.boot.common.controller.util.ApiKeyLoader;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.course.model.vo.dto.KakaoPlaceResponseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 
+import lombok.Getter;
+
+@Getter
 @Component
 @PropertySource("classpath:app-info.properties")
 public class ApiComponent {
@@ -29,7 +40,118 @@ public class ApiComponent {
 	@Value("${kakaoApiKey}")
 	private String kakaoApiKey;
 	
+	@Value("${kakao_client_id}")
+	private String kakao_client_id;
 	
+	@Value("${naver_client_id}")
+	private String naver_client_id;
+	
+	@Value("${naver_client_secret}")
+	private String naver_client_secret;
+	
+	@Value("${google_client_id}")
+	private String google_client_id;
+	
+	@Value("${google_client_secret}")
+	private String google_client_secret;
+	
+	public Map<String,String> googleLogin(String code) throws JsonMappingException, JsonProcessingException {
+		WebClient client = WebClient.create("https://oauth2.googleapis.com");
+
+	    String token = client.post()
+	            .uri("/token")
+	            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+	            .body(BodyInserters.fromFormData("code", code)
+	                    .with("client_id", "242617315070-ldaq9mj659bp7t82r97ae0gcp2uinugc.apps.googleusercontent.com")
+	                    .with("client_secret", "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")
+	                    .with("redirect_uri", "http://localhost:8888/member/google")
+	                    .with("grant_type", "authorization_code"))
+	            .retrieve()
+	            .bodyToMono(String.class)
+	            .block();
+	    
+	    ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(token);
+		String accessToken = root.path("access_token").asText();
+	    
+		WebClient userClient = WebClient.create();
+		String userInfo = userClient.get()
+		        .uri("https://www.googleapis.com/oauth2/v2/userinfo")
+		        .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+		        .retrieve()
+		        .bodyToMono(String.class)
+		        .block();
+		
+		Map<String, String> loginMap = new HashMap<>();
+		loginMap.put("userInfo", userInfo);
+		loginMap.put("accessToken", accessToken);
+		
+		return loginMap;
+	}
+	
+	public Map<String,String> naverLogin(String code, String state) throws JsonMappingException, JsonProcessingException {
+		WebClient client = WebClient.create("https://nid.naver.com");
+
+	    String token = client.post()
+	            .uri(uriBuilder -> uriBuilder.path("/oauth2.0/token")
+	                    .queryParam("grant_type", "authorization_code")
+	                    .queryParam("client_id", "vtFv0628kUp2Kt2meM2v")
+	                    .queryParam("client_secret", "9OON4RGUOZ")
+	                    .queryParam("code", code)
+	                    .queryParam("state", state)
+	                    .build())
+	            .retrieve()
+	            .bodyToMono(String.class)
+	            .block();
+	    
+	    ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(token);
+		String accessToken = root.path("access_token").asText();
+	    
+	    WebClient userClient = WebClient.create("https://openapi.naver.com");
+
+	    String userInfo = userClient.get()
+	            .uri("/v1/nid/me")
+	            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+	            .retrieve()
+	            .bodyToMono(String.class)
+	            .block();
+	    
+	    Map<String, String> loginMap = new HashMap<>();
+		loginMap.put("userInfo", userInfo);
+		loginMap.put("accessToken", accessToken);
+		
+		return loginMap;
+	}
+	
+	
+	public Map<String,String> kakaoLogin(String code) throws JsonMappingException, JsonProcessingException {
+		WebClient webClient = WebClient.create("https://kauth.kakao.com");
+		String token = webClient.post().uri("/oauth/token")
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.body(BodyInserters.fromFormData("grant_type", "authorization_code")
+						.with("client_id", "05ae1e70e0b04614496a16fb554e7110")
+						.with("redirect_uri", "http://localhost:8888/member/kakao")
+						.with("code", code)).retrieve()
+				.bodyToMono(String.class).block();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(token);
+		String accessToken = root.path("access_token").asText();
+		WebClient webClient2 = WebClient.create("https://kapi.kakao.com");
+		String userInfo = webClient2.get()
+	            .uri("/v2/user/me")
+	            .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+	            .retrieve()
+	            .bodyToMono(String.class)
+	            .block(); 
+		
+		Map<String, String> loginMap = new HashMap<>();
+		loginMap.put("userInfo", userInfo);
+		loginMap.put("accessToken", accessToken);
+		
+		return loginMap;
+	}
 	
 	public String kakaoMapApi() {
 		String authorization = kakaoApiKey;
@@ -89,9 +211,6 @@ public class ApiComponent {
 	
 	// 기상청 중기 예보 출력 API
 	public String callWeatherApi() {
-		// 키 불러옴
-		String weatherApiKey = ApiKeyLoader.get("weatherApiKey");
-
 		
 		// 이것도 각 메소드에서 API 따로 사용하려고 했던 방식
 		//String apiAddress = ApiKeyLoader.get("weatherAddress");
