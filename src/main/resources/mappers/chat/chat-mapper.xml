@@ -7,7 +7,7 @@
 	<insert id="insertChatRoom">
 		insert into CHATROOM values (
 		SEQ_CHATROOM_NO.nextval, #{memberNo}, #{chatroomTitle},#{tag1},#{tag2},#{tag3},
-		#{chatImgName},#{chatImgRename},#{chatImgPath},default, default	)
+		#{chatImgName},#{chatImgRename},#{chatImgPath},#{chatLimit}, default	)
 	</insert>
 
 </mapper>  
