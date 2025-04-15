@@ -33,7 +33,8 @@ public class ApiControllerTest {
 	public void testApiLoader() {
 
 //		String apiKey = aService.callWeatherApi();
-		String apiKey = aService.callFestivalApi();
+//		String apiKey = aService.callFestivalApi();
+		String apiKey = aService.kakaoMapApi();
 		System.out.println(apiKey);
 		//System.out.println(apiKey);
 		

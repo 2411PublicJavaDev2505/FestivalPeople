@@ -1,11 +1,16 @@
 package com.fepeo.boot.common.controller.api;
 
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fepeo.boot.common.controller.util.ApiKeyLoader;
+import com.fepeo.boot.course.model.vo.dto.KakaoPlaceResponseDto;
+import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 
 @Component
 @PropertySource("classpath:app-info.properties")
@@ -20,9 +25,42 @@ public class ApiComponent {
 	
 	@Value("${festivalApiKey}")
 	private String festivalApiKey;
-
-	public String callFestivalApi() {
+	
+	@Value("${kakaoApiKey}")
+	private String kakaoApiKey;
+	
+	
+	
+	public String kakaoMapApi() {
+		String authorization = kakaoApiKey;
+		WebClient webClient = WebClient.create("https://dapi.kakao.com");
 		
+	    KakaoPlaceResponseDto res = webClient.get()
+	            .uri(uriBuilder -> uriBuilder
+	                    .path("/v2/local/search/category.json")
+	                    .queryParam("category_group_code", "FD6")
+	                    .queryParam("x", 126.968357810931)
+	                    .queryParam("y", 37.6063916960376)
+	                    .queryParam("radius", 1000)
+	                    .queryParam("sort", "distance")
+	                    .build())
+	            .header("Authorization", authorization)
+	            .retrieve()
+	            .bodyToMono(KakaoPlaceResponseDto.class)
+	            .block();
+	
+	    List<PlaceDto> tt = res.getDocuments();
+	    System.out.println(tt);
+	    Random random = new Random();
+	    int size = tt.size();
+	    PlaceDto pd = tt.get(random.nextInt(size));
+	    System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
+	    
+	    return "Hello world";	
+	}
+	
+	// 축제 호출
+	public String callFestivalApi() {
 //		String festivalApiKey = ApiKeyLoader.get("festivalApiKey");
 		WebClient webClient = WebClient.create("https://apis.data.go.kr/B551011/KorService1/searchFestival1");
 		
@@ -43,7 +81,9 @@ public class ApiComponent {
                 .bodyToMono(String.class)
                 .block();
 		
+
 		return response;
+
 	}
 	
 	
