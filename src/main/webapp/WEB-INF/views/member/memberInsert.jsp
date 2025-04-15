@@ -20,6 +20,9 @@
 		    }).open();
 		}
 	</script>
+	<div class="background-image">
+    	 <img src="../resources/img/mainback.jpg" alt="바탕화면">
+    </div>
 	<div id="container">
 		<jsp:include page="../include/header.jsp"/>
 		<main>
@@ -55,12 +58,20 @@
 								<li class="register-notbtn">
 									<input type="text" placeholder="이름" name="memberName" id="input-name">
 								</li>
-								<li class="register-radio">
-									남: <input type="radio" name="gender" value="M" checked>
-								</li>
-								<li class="register-radio">
-									여: <input type="radio" name="gender" value="F">
-								</li>
+								<ul class="register-radio-group">
+									<li class="register-radio">
+	  									<label for="male">
+									    <img src="../resources/img/member/male.jpg" alt="남">
+									    <input type="radio" id="male" name="gender" value="M" checked>
+									    </label>
+									</li>
+									<li class="register-radio">
+										<label for="female">
+									    <img src="../resources/img/member/female.jpg" alt="여">
+									    <input type="radio" id="female" name="gender" value="F">
+									    </label>
+									</li>
+								</ul>
 								<li class="register-btn">
 									<input type="text" placeholder="닉네임" name="nickname" id="input-nickname">
 									<button type="button" onclick="checkNickname();">중복확인</button>
