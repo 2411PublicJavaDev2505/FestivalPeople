@@ -30,7 +30,7 @@ public class ApiComponent {
 		String response = webClient.get()
 				.uri(uriBuilder -> uriBuilder
                         .queryParam("serviceKey", festivalApiKey)
-                        .queryParam("numOfRows", 10)
+                        .queryParam("numOfRows", 100)
                         .queryParam("pageNo", 2)
                         .queryParam("MobileOS", "ETC")
                         .queryParam("MobileApp", "AppTest")
