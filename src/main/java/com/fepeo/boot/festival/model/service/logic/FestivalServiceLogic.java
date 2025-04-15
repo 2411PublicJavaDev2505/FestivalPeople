@@ -62,13 +62,16 @@ public class FestivalServiceLogic implements FestivalService {
         return raw.substring(0, 4) + "-" + raw.substring(4, 6) + "-" + raw.substring(6, 8);
     }
 
-		@Override
-		public List<Festival> getFestivalList() {
-			return festivalMapper.selectFestivalList();
-		}
-
+	@Override
+	public List<Festival> getFestivalList() {
+		return festivalMapper.selectFestivalList();
 	}
 
 
-	
-		
+	@Override
+	public Festival getFestivalByNo(int festivalNo) {
+		return festivalMapper.selectFestivalByNo(festivalNo);
+	}
+
+}
+

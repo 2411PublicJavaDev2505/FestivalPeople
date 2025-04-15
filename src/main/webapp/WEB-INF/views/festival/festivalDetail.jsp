@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,28 +13,21 @@
 	<body>
 		<div id="container">
 			<jsp:include page="../include/header.jsp"/>
+			<c:if test="${not empty festival.festivalFilePath}">
 			<main class="festival-list">
 				<div class="festival-detail">
 					<section class="festival-name">
-						<h2 id="festival-head"> 2025 태안봄꽃정원 </h2>
-						<h4 id="festival-date">2025.05.02 ~ 2025.05.05</h4>
+						<h2 id="festival-head"> ${festival.festivalName}</h2>
+						<h4 id="festival-date">🗓️ 축제일정: ${festival.festivalStartDate} ~ ${festival.festivalEndDate}</h4>
 					</section>
 					<section class="festival-detail-card">
-						<div class="festival-card">
-							<img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
-						</div>
-						<div class="festival-card">
-							<img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
-						</div>
-						<div class="festival-card">
-							<img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
-						</div>
-					</section>
+		                <img src="${festival.festivalFilePath}" alt="축제 이미지" />
+		            </section>
 					<section class="festival-detail-items">
 						<ul>
-							<li> 🗓️ 축제 일정: 2025.05.02 ~ 2025.05.05</li>
-							<li> 📍 개최 장소: 서울시 중구  하동야생차치유관, 박물관 일원</li>
-							<li> ❤  대표전화 :  055-880-6583</li>
+							<li> 🗓️ 축제 일정: ${festival.festivalStartDate} ~ ${festival.festivalEndDate}</li>
+							<li> 📍 개최 장소: ${festival.festivalStartDate}</li>
+							<li> 📞 대표 전화:  ${festival.festivalPhone}</li>
 							<li> ❤  축제기간 일기예보
 								<div class="weather-api">
 									<img src="../resources/img/festival/weather_example.jpg" alt="날씨">
@@ -47,6 +42,7 @@
 					</section>
 				</div>
 			</main>
+			</c:if>
 		</div>
 		<script>
 		</script>

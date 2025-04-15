@@ -23,21 +23,15 @@
     </insert>
 
     <select id="selectFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival">
-    SELECT
-        FESTIVAL_NO,
-        FESTIVAL_NAME,
-        FESTIVAL_START_DATE,
-        FESTIVAL_END_DATE,
-        FESTIVAL_FILE_NAME,
-        FESTIVAL_FILE_RENAME,
-        FESTIVAL_FILE_PATH,
-        FESTIVAL_PHONE,
-        FESTIVAL_ADDRESS,
-        FESTIVAL_DETAIL_ADDRESS,
-        MAP_V_CODE,
-        MAP_H_CODE
-    FROM
-        FESTIVAL
-    ORDER BY FESTIVAL_START_DATE DESC
-</select>
+	    SELECT
+	        FESTIVAL_NO,FESTIVAL_NAME,FESTIVAL_START_DATE,FESTIVAL_END_DATE,FESTIVAL_FILE_NAME,
+	        FESTIVAL_FILE_RENAME, FESTIVAL_FILE_PATH,FESTIVAL_PHONE,FESTIVAL_ADDRESS,FESTIVAL_DETAIL_ADDRESS,
+	        MAP_V_CODE, MAP_H_CODE  
+	    FROM FESTIVAL
+	        ORDER BY FESTIVAL_START_DATE DESC
+	</select>
+	<select id="selectFestivalByNo" resultType="com.fepeo.boot.festival.model.vo.Festival">
+		SELECT * FROM festival WHERE FESTIVAL_NO = #{festivalNo}
+	</select>
+	
 </mapper>

@@ -14,6 +14,7 @@ public interface FestivalService {
 
 	public List<Festival> getFestivalList();
 
+	public Festival getFestivalByNo(int festivalNo);
 	
 }
 	
