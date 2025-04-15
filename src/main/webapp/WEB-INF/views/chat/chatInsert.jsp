@@ -133,7 +133,10 @@
    				</div>
 				<div class ="chat-room-top">
    					<input name="chatroomTitle" id="chatRoomTitle"  type="text" maxlength="90" placeholder="채팅방 이름(필수)">
-   					<span id="charCount">0/30</span>
+   					<div id="charCount">
+   						<p>0</p>
+   						<p>/30자</p>
+   					</div>
 				</div>
 				<div class ="room-tag-group">
    					<input name="tag1" class="room-tag1"  type="text" placeholder="#태그1">
@@ -142,8 +145,8 @@
 				</div>
 				<div class ="chat-room-bottom">
 					<div class="image-group">
-						<button type="button" onclick="imgUp()" id=imgUploadBtn>대표사진 선택</button>
-	   					<input id="imgInput" name="image" type="file" onchange="setThumbnail(event);" style="display: none;">
+						<button type="button" onclick="imgUp()" id=imgUploadBtn >대표사진 선택</button>
+	   					<input id="imgInput" accept="image/*" name="image" type="file" onchange="setThumbnail(event);" style="display: none;">
 					</div>
 					<div class="right-group">
 	      				<div class ="chat-mem-limit">
@@ -173,15 +176,30 @@
 	    	const imgInput = document.getElementById("imgInput");
 	    	imgInput.click();
 	    }
-	    <!-- 섬네일 이미지 -->	    
+	    <!-- 썸네일 이미지 -->	    
 	    function setThumbnail(event){
 	    	const reader = new FileReader();
 	    	
+	    	// 파일 읽는 것을 성공했을 때 실행
 	    	reader.onload = function(event){
 	    		const img = document.createElement("img");
 	    		img.setAttribute("src", event.target.result);
-	    	}
+	    		
+	            // 기존 이미지를 제거하고 새 이미지를 추가
+	            const imgUploadBtn = document.querySelector("#imgUploadBtn");
+	            imgUploadBtn.innerHTML = ""; // 기존 내용을 비움
+	            imgUploadBtn.appendChild(img);
+	
+	            // 이미지 스타일 설정
+	            img.style.width = "100%"; // 버튼 너비에 맞춤
+	            img.style.height = "100%"; // 버튼 높이에 맞춤
+	            img.style.objectFit = "cover"; // 이미지 비율을 유지하며 버튼 크기에 맞게 자름
+	            img.style.borderRadius = "10px"; // 버튼과 동일한 둥근 모서리 적용
+		    };    		
+	    	reader.readAsDataURL(event.target.files[0]);
 	    }
+	    	
+	    
     </script>
 </body>
 </html>
