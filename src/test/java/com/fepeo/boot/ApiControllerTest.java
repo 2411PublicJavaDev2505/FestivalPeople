@@ -36,6 +36,7 @@ public class ApiControllerTest {
 //		String apiKey = aService.callFestivalApi();
 		String apiKey = aService.kakaoMapApi();
 		System.out.println(apiKey);
+		
 		//System.out.println(apiKey);
 		
 	}
