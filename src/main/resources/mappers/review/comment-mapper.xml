@@ -3,5 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
      <mapper namespace="com.fepeo.boot.review.model.mapper.CommentMapper" > 
-  		
+  		<insert id="insertComment">
+  			 INSERT INTO REVIEW_COMMENT
+        	VALUES(SEQ_COMMENT_NO.NEXTVAL,
+                #{commentContent}, 
+                DEFAULT ,DEFAULT, #{reviewNo}, #{memberNo}, DEFAULT,NULL)
+  		</insert>
 </mapper>
