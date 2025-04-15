@@ -142,8 +142,8 @@
 				</div>
 				<div class ="chat-room-bottom">
 					<div class="image-group">
-						<button type="button" id=roomImageUpload>대표사진 선택</button>
-	   					<input name="image" id="imageInput" type="file" style="display: none;">
+						<button type="button" onclick="imgUp()" id=imgUploadBtn>대표사진 선택</button>
+	   					<input id="imgInput" name="image" type="file" onchange="setThumbnail(event);" style="display: none;">
 					</div>
 					<div class="right-group">
 	      				<div class ="chat-mem-limit">
@@ -159,19 +159,29 @@
     <!-- 푸터 -->
     </div>
     
-    <script >
+    <script type="text/javascript">
 	    <!-- 채팅방 제목 글자 카운트 -->
 	    const title = document.getElementById('chatRoomTitle');
 	    const counter = document.getElementById('charCount');	
 	    input.addEventListener('chatRoomTitle', () => {
 	      const length = title.value.length;
-	      counter.textContent = '${length}/90';
+	      counter.textContent = `${length}/90`;
 	    });
 	    
-	    <!-- 채팅방 대표 이미지 첨부 -->
-	    document.getElementById('roomImageUpload').addEventListener('click', function() {
-	    	  document.getElementById('imageInput').click();
-	    });
+	    <!-- 이미지 삽입 -->
+	    function imgUp(){
+	    	const imgInput = document.getElementById("imgInput");
+	    	imgInput.click();
+	    }
+	    <!-- 섬네일 이미지 -->	    
+	    function setThumbnail(event){
+	    	const reader = new FileReader();
+	    	
+	    	reader.onload = function(event){
+	    		const img = document.createElement("img");
+	    		img.setAttribute("src", event.target.result);
+	    	}
+	    }
     </script>
 </body>
 </html>
