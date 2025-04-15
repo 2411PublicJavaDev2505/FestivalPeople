@@ -3,6 +3,7 @@ package com.fepeo.boot.member.controller;
 import java.io.IOException;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.common.controller.api.ApiComponent;
+import com.fepeo.boot.course.controller.CourseController;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
 import com.fepeo.boot.member.model.service.MemberService;
@@ -208,13 +210,12 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/delcheck")
-	public String deleteMember(String pw) {
-		System.out.println("확인");
-		System.out.println("확인");
-		System.out.println("확인");
-		System.out.println("확인");
-		System.out.println("확인");
-		return "AJAX";
+	@PostMapping("/delete")
+	public String deleteMember(MemberLoginRequest login) {
+		Member member = mService.memberLogin(login);
+		JSONObject json = new JSONObject();
+		json.put("memberId", member.getMemberId());
+		
+		return json.toString();
 	}
 }
