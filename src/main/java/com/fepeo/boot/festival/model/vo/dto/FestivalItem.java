@@ -1,6 +1,7 @@
 package com.fepeo.boot.festival.model.vo.dto;
 
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
@@ -19,4 +20,5 @@ public class FestivalItem {
     private String addr2;
     private String mapx;
     private String mapy;
+
 }

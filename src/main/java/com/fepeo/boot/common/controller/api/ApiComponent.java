@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.course.model.vo.dto.KakaoPlaceResponseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 
+
 import lombok.Getter;
 
 @Getter
@@ -153,6 +154,7 @@ public class ApiComponent {
 		return loginMap;
 	}
 	
+	// 조금씩 변경해서 API로 받아올 예정임
 	public String kakaoMapApi() {
 		String authorization = kakaoApiKey;
 		WebClient webClient = WebClient.create("https://dapi.kakao.com");
@@ -180,11 +182,12 @@ public class ApiComponent {
 	    
 	    return "Hello world";	
 	}
+
 	
-	// 축제 호출
-	public String callFestivalApi() {
-//		String festivalApiKey = ApiKeyLoader.get("festivalApiKey");
-		WebClient webClient = WebClient.create("https://apis.data.go.kr/B551011/KorService1/searchFestival1");
+	// 저장된 회원 주소지로 주소값 받아오기
+	public String searchMemberAddress(String memberAddress) {
+		String authorization = kakaoApiKey;
+		WebClient webClient = WebClient.create("https://dapi.kakao.com");
 		
 		String response = webClient.get()
 				.uri(uriBuilder -> uriBuilder
@@ -202,10 +205,25 @@ public class ApiComponent {
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
+
+	    KakaoPlaceResponseDto res = webClient.get()
+	            .uri(uriBuilder -> uriBuilder
+	                    .path("/v2/local/search/address..json")
+	                    .queryParam("category_group_code", "FD6")
+	                    .queryParam("x", 126.968357810931)
+	                    .queryParam("y", 37.6063916960376)
+	                    .queryParam("radius", 1000)
+	                    .queryParam("sort", "distance")
+	                    .build())
+	            .header("Authorization", authorization)
+	            .retrieve()
+	            .bodyToMono(KakaoPlaceResponseDto.class)
+	            .block();
+
+
 		
-
-		return response;
-
+		
+		return "";
 	}
 	
 	
@@ -232,6 +250,11 @@ public class ApiComponent {
             System.out.println(response);
             return response;
 	
+	}
+
+	public String callFestivalApi() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

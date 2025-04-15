@@ -13,6 +13,7 @@ public interface FestivalService {
 	public void insertFestivalList();
 
 	public List<Festival> getFestivalList();
+
 	
 }
 	

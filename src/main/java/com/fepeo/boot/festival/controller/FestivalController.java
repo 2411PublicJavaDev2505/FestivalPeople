@@ -2,6 +2,7 @@ package com.fepeo.boot.festival.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/festival")
 public class FestivalController {
 	
-    private final FestivalService festivalService;
+	private FestivalService festivalService;
 
 	
 	@GetMapping("/list")
@@ -32,6 +33,7 @@ public class FestivalController {
 		return "festival/festivalDetail";
 	}
 	
+
 	@GetMapping("/insert")
 	public String insertFestivalList(Model model) {
 		festivalService.insertFestivalList();
@@ -39,5 +41,6 @@ public class FestivalController {
 		return "festival/list";
 		
 	}
-	
+
+
 }
