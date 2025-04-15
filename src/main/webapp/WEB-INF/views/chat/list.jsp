@@ -128,7 +128,7 @@
 	                    </a>
 	                </li>
 	            </ul> 
-	            <form class="chat-room-make" action="#">
+	            <form class="chat-room-make" action="/chat/insert">
 	                <button type="submit">채팅방 생성</button>
 	            </form>                 
 	        </section>

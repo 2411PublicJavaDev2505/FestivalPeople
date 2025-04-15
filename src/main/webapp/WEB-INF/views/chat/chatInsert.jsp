@@ -124,30 +124,30 @@
 	        </section>
 	        <!--우 채팅방 만들기 상세 -->
 	        <section class="chat-room-insert">
-	        <form action="/chat/insert" method="post">
+	        <form action="/chat/insert" method="post" enctype="multipart/form-data">
    				<div class = "room-header">
    					<div class="chat-prev-list"><a href="#">←</a></div>
    					<div class="chat-header-title"><span>채팅방 만들기</span></div>
    				</div>
 				<div class ="chat-room-top">
-   					<input id="chatRoomTitle"  type="text" maxlength="90" placeholder="채팅방 이름(필수)">
+   					<input name="chatroomTitle" id="chatRoomTitle"  type="text" maxlength="90" placeholder="채팅방 이름(필수)">
    					<span id="charCount">0/30</span>
 				</div>
 				<div class ="room-tag-group">
-   					<input class="room-tag1"  type="text" placeholder="#태그1">
-   					<input class="room-tag2"  type="text" placeholder="#태그2">
-   					<input class="room-tag3"  type="text" placeholder="#태그3">
+   					<input name="tag1" class="room-tag1"  type="text" placeholder="#태그1">
+   					<input name="tag2" class="room-tag2"  type="text" placeholder="#태그2">
+   					<input name="tag3" class="room-tag3"  type="text" placeholder="#태그3">
 				</div>
 				<div class ="chat-room-bottom">
 					<div class="image-group">
 						<button id=roomImageUpload>대표사진 선택</button>
-	   					<input id="imageInput" type="file" style="display: none;">
+	   					<input name="image" id="imageInput" type="file" style="display: none;">
 					</div>
 					<div class="right-group">
 	      				<div class ="chat-mem-limit">
-		   					<input class="room-mem"  type="text" placeholder="인원(최대50)">
+		   					<input name="chatLimit" class="room-mem"  type="text" placeholder="인원(최대50)">
 	      				</div>
-	      				<button class ="room-register-button">완료</button>
+	      				<button type="submit" class ="room-register-button">완료</button>
 					</div>
 				</div>
 	        </form>
@@ -167,8 +167,8 @@
 	    });
 	    
 	    <!-- 채팅방 대표 이미지 첨부 -->
-	    document.getElementById('uploadBtn').addEventListener('click', function() {
-	    	  document.getElementById('fileInput').click();
+	    document.getElementById('roomImageUpload').addEventListener('click', function() {
+	    	  document.getElementById('imageInput').click();
 	    });
     </script>
 </body>
