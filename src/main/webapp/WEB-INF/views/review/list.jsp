@@ -10,6 +10,9 @@
 	<title>후기 게시판 List 전체</title>
 </head>
 <body>
+	<div class="background-image">
+    	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
+    </div>
     <div id="container">
      	<jsp:include page="../include/header.jsp"/>
 		    <div class="reviewlist-main">

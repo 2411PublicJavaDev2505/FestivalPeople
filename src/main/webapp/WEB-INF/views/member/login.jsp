@@ -40,7 +40,7 @@
 				<div class="login-social">
 					<img alt="카카오 로그인" src="../resources/img/member/kakao.png" onclick="kakao();">
 					<img alt="네이버 로그인" src="../resources/img/member/naver.png" onclick="naver();">
-					<img alt="구글 로그인" src="" onclick="google();">
+					<img alt="구글 로그인" src="../resources/img/member/google.png" onclick="google();">
 				</div>
 			</div>
 		</main>

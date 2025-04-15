@@ -76,7 +76,7 @@
 	height: 43px;
 	font-weight: bold;
 	font-size: 24px;
-	color: #3b4146;
+	color: #e4e2dd;
 	background-color: #D34A24;
 	border: none;
 	border-radius: 20px;
@@ -84,7 +84,8 @@
 }
 
 .login-btn button:hover {
-	background-color:#D26F53;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
+				rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 .login-footer {
@@ -98,4 +99,18 @@
 }
 .login-footer span:nth-child(3){
 	padding-left: 20px;
+}
+
+.login-social {
+	display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.login-social img{
+	width: 183px;
+	height: 45px;
+	object-fit: cover;
+	border-radius: 10px;
 }
