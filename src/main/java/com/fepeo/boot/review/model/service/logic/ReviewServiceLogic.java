@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
 import com.fepeo.boot.review.model.mapper.ReviewMapper;
 import com.fepeo.boot.review.model.service.ReviewService;
+import com.fepeo.boot.review.model.vo.Review;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,6 +32,15 @@ public class ReviewServiceLogic implements ReviewService {
 		}
 		return result;
 //		return mapper.insertReview(review); 원래코드!!
+	}
+	
+	
+	//detail
+	@Override
+	public Review selectOneByNo(int reviewNo) {
+		Review review = mapper.selectOneByNo(reviewNo);
+		System.out.println("review");
+		return review;
 	}
 
 }

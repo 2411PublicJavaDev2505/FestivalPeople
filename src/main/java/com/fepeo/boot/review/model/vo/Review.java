@@ -1,6 +1,7 @@
 package com.fepeo.boot.review.model.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -26,4 +27,6 @@ public class Review {
 	private String		reviewFilePath3;
 	//이거 확인 부탁드립니다 이걸 써야되는게 맞는것인가요?
 	private int			memberNo;
+	//댓글목록 추가!! 옆에 commentList수정해야되는지확인할것!
+	private List<ReviewComment> commentList;
 }

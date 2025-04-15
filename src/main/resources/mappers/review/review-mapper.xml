@@ -3,24 +3,42 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
      <mapper namespace="com.fepeo.boot.review.model.mapper.ReviewMapper" > 
-<!--   		<resultMap type="Review" id="reviewResultMap"> -->
-<!--   		<id property="reviewNo" column="REVIEW_NO"/> -->
-<!--   		<result property="reviewTitle" column="REVIEW_TITLE"/> -->
-<!--   		<result property="reviewContent" column="REVIEW_CONTENT"/> -->
-<!--   		<result property="reviewWriteTime" column="REVIEW_WRITE_TIME"/> -->
-<!--   		<result property="reviewCount" column="REVIEW_COUNT"/> -->
-<!--   		<result property="reviewYn" column="REVIEW_YN"/> -->
-<!--   		<result property="reviewFileName1" column="REVIEW_FILE_NAME1"/> -->
-<!--   		<result property="reviewFileRename1" column="REVIEW_FILE_RENAME1"/> -->
-<!--   		<result property="reviewFilePath1" column="REVIEW_FILE_PATH1"/> -->
-<!--   		<result property="reviewFileName2" column="REVIEW_FILE_NAME2"/> -->
-<!--   		<result property="reviewFileRename2" column="REVIEW_FILE_RENAME2"/> -->
-<!--   		<result property="reviewFilePath2" column="REVIEW_FILE_PATH2"/> -->
-<!--   		<result property="reviewFileName3" column="REVIEW_FILE_NAME3"/> -->
-<!--   		<result property="reviewFileRename3" column="REVIEW_FILE_RENAME3"/> -->
-<!--   		<result property="reviewFilePath3" column="REVIEW_FILE_PATH3"/> -->
-<!--   		</resultMap> -->
+  		<resultMap type="Review" id="reviewResultMap">
+  		<id property="reviewNo" column="REVIEW_NO"/>
+  		<result property="reviewTitle" column="REVIEW_TITLE"/>
+  		<result property="reviewContent" column="REVIEW_CONTENT"/>
+  		<result property="reviewWriteTime" column="REVIEW_WRITE_TIME"/>
+  		<result property="reviewCount" column="REVIEW_COUNT"/>
+  		<result property="reviewYn" column="REVIEW_YN"/>
+  		<result property="reviewFileName1" column="REVIEW_FILE_NAME1"/>
+  		<result property="reviewFileRename1" column="REVIEW_FILE_RENAME1"/>
+  		<result property="reviewFilePath1" column="REVIEW_FILE_PATH1"/>
+  		<result property="reviewFileName2" column="REVIEW_FILE_NAME2"/>
+  		<result property="reviewFileRename2" column="REVIEW_FILE_RENAME2"/>
+  		<result property="reviewFilePath2" column="REVIEW_FILE_PATH2"/>
+  		<result property="reviewFileName3" column="REVIEW_FILE_NAME3"/>
+  		<result property="reviewFileRename3" column="REVIEW_FILE_RENAME3"/>
+  		<result property="reviewFilePath3" column="REVIEW_FILE_PATH3"/>
+  		
+  		<!-- 아래코드 코드작성되면 주석풀기 -->
+<!--   		<collection property="commentList"  -->
+<!--   		 			select="selectCommentList" column="REVIEW_NO" -->
+<!--   		 									javaType="java.util.List" -->
+<!--   		 									ofType="ReviewComment"></collection> -->
+  		
+  		</resultMap>
   		<!-- insert id만 적음! seleckey적용하기위해 추가함!에러나면 지우기!!15:50 -->
+  		<!-- detail하면서 아래 추가해줬음!4/14 20:37 -->
+  		<!-- ***N으로 된거 Y로 나중에 변경해주기*** -->
+ 		<select id="selectOneByNo" resultMap="reviewResultMap">
+ 			SELECT * FROM REVIEW WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N'
+ 		</select>
+ 			
+ 			<!-- 아래도 코드작성하면 주석풀기! -->
+<!--  		<select id="selectCommentList" resultType="ReviewComment"> -->
+<!--  			SELECT * FROM REVIEWCOMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC -->
+<!--  		</select> -->
+ 		
  		<insert id="insertReview" useGeneratedKeys="true">
 	  		<selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">
 	  			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL
