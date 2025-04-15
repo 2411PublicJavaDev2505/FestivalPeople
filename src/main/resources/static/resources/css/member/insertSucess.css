@@ -17,7 +17,9 @@
 }
 
 .success-container {
-    position: relative;
+    margin-top: 350px;
+    left: 800px;
+    position: fixed;
     z-index: 2;
 }
 
@@ -27,11 +29,13 @@
 }
 
 .success-message h1 {
+    margin-bottom: 20px;
     font-size: 36px;
     color: #333;
 }
 
 .success-message .username {
+    margin-bottom: 20px;
     font-size: 24px;
 }
 
