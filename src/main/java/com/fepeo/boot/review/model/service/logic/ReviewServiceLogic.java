@@ -39,7 +39,7 @@ public class ReviewServiceLogic implements ReviewService {
 	@Override
 	public Review selectOneByNo(int reviewNo) {
 		Review review = mapper.selectOneByNo(reviewNo);
-		System.out.println("review");
+		System.out.println(review);
 		return review;
 	}
 

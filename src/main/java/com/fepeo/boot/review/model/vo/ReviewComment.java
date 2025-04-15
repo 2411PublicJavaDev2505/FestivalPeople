@@ -9,11 +9,11 @@ import lombok.ToString;
 @ToString
 public class ReviewComment {
 	
-//	private int			commentNo;
-//	private String		commentContent;
-//	private Timestamp	commentTime;
-//	//여기 밑에도 확인부탁드려용!
-//	//private int			reviewNo;
-//	//private int			memberNo;
-//	//private String		deleteYn;
+	//detail 댓글 작업시작하면서 주석풀어줌!4/15 10:15
+	private int			commentNo;
+	private String		commentContent;
+	private Timestamp	commentTime;
+	private int			reviewNo;
+	private int			memberNo;
+	private String		deleteYn;
 }

@@ -21,10 +21,10 @@
   		<result property="reviewFilePath3" column="REVIEW_FILE_PATH3"/>
   		
   		<!-- 아래코드 코드작성되면 주석풀기 -->
-<!--   		<collection property="commentList"  -->
-<!--   		 			select="selectCommentList" column="REVIEW_NO" -->
-<!--   		 									javaType="java.util.List" -->
-<!--   		 									ofType="ReviewComment"></collection> -->
+  		<collection property="commentList" 
+  		 			select="selectCommentList" column="REVIEW_NO"
+  		 									javaType="java.util.List"
+  		 									ofType="ReviewComment"></collection>
   		
   		</resultMap>
   		<!-- insert id만 적음! seleckey적용하기위해 추가함!에러나면 지우기!!15:50 -->
@@ -35,9 +35,9 @@
  		</select>
  			
  			<!-- 아래도 코드작성하면 주석풀기! -->
-<!--  		<select id="selectCommentList" resultType="ReviewComment"> -->
-<!--  			SELECT * FROM REVIEWCOMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC -->
-<!--  		</select> -->
+ 		<select id="selectCommentList" resultType="ReviewComment">
+ 			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
+ 		</select>
  		
  		<insert id="insertReview" useGeneratedKeys="true">
 	  		<selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">
