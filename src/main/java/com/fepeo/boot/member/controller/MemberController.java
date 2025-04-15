@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -204,5 +205,11 @@ public class MemberController {
 	@GetMapping("/delete")
 	public String showMemberDelete() {
 		return "member/memberDelete";
+	}
+	
+	@ResponseBody
+	@PostMapping("/delete")
+	public String deleteMember(String pw) {
+		return pw;
 	}
 }

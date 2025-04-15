@@ -36,8 +36,8 @@
 						<li>${member.address }</li>
 					</ul>
 					<div class="mypage-left-button">
-						<button>수정하기</button>
-						<button>탈퇴하기</button>
+						<button onclick="memberUpdate();">수정하기</button>
+						<button onclick="memberDelete();">탈퇴하기</button>
 					</div>
 				</div>
 				<div class="mypage-right">
@@ -94,6 +94,9 @@
 			document.querySelector(".my-course-list").style.display = "block";
 			document.querySelector(".mypage-right-top button:first-child").style.backgroundColor = "white";
 			document.querySelector(".mypage-right-top button:last-child").style.backgroundColor = "#FFAF00";
+		}
+		const memberDelete = () => {
+			location.href="/member/delete";
 		}
 	</script>
 </body>
