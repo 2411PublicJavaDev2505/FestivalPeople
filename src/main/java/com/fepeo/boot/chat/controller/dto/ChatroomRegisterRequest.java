@@ -1,13 +1,16 @@
-package com.fepeo.boot.chat.model.vo;
+package com.fepeo.boot.chat.controller.dto;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
 @ToString
-public class ChatRoom {
-	
-	private int chatroomNo;
+public class ChatroomRegisterRequest {
+
 	private int memberNo;
 	private String chatroomTitle;
 	private String tag1;
@@ -17,5 +20,5 @@ public class ChatRoom {
 	private String chatImgRename;
 	private String chatImgPath;
 	private int chatLimit;
-	private int chatMemberCount;
+	private MultipartFile image;
 }
