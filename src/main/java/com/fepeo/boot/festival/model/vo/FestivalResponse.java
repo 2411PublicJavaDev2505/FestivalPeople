@@ -29,7 +29,7 @@ public class FestivalResponse {
 
             @Getter @Setter
             public static class Items {
-                private List<FestivalItem> item;
+                private List<com.fepeo.boot.festival.model.vo.dto.FestivalItem> item;
             }
             
             @Getter @Setter

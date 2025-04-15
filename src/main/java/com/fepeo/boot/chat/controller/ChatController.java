@@ -29,6 +29,7 @@ public class ChatController {
 	public String showChatRoomInsert() {
 		return "chat/chatInsert";
 	}
+	
 	@PostMapping("/insert")
 	public String insertChatRoom(@ModelAttribute ChatroomRegisterRequest chatRoom,
 			@RequestParam(value="image", required=false) MultipartFile image

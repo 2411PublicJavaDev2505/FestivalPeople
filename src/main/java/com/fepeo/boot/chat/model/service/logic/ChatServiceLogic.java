@@ -3,7 +3,6 @@ package com.fepeo.boot.chat.model.service.logic;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class ChatServiceLogic implements ChatService {
 	
 	private final ChatMapper mapper;
-	private final SqlSession session;
 	
 	private String webPath = "/files/chat/"; // 브라우저를 통해 저장되는 url
 	private String folderPath = "C:/uploadFile/chat/"; // 실제 서버 안에 저장되는 폴더 url

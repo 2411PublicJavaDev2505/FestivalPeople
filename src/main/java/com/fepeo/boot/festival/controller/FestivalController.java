@@ -2,6 +2,7 @@ package com.fepeo.boot.festival.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/festival")
 public class FestivalController {
 	
-    private final FestivalService festivalService;
+
 
 	
 	@GetMapping("/list")
@@ -29,6 +30,7 @@ public class FestivalController {
 	public String showFestivalDetail() {
 		return "festival/festivalDetail";
 	}
+	
 	
 //	@GetMapping("/festival")
 //    public String festivalPage(Model model) {
