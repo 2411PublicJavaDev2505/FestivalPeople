@@ -18,4 +18,12 @@
 		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, ADDRESS, GENDER, MANAGER_YN FROM MEMBER 
 		WHERE MEMBER_ID = #{id}
 	</select>
+	
+	<select id="selectMemberList" resultType="Member">
+		SELECT * FROM MEMBER
+	</select>
+	
+	<select id="getMemberTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
 </mapper>

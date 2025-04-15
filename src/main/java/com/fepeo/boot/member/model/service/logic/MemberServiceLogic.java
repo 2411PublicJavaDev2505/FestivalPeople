@@ -2,7 +2,9 @@ package com.fepeo.boot.member.model.service.logic;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,6 +46,21 @@ public class MemberServiceLogic implements MemberService{
 	@Override
 	public Member memberSocialLogin(String id) {
 		return mapper.memberSocialLogin(id);
+	}
+
+	
+	@Override
+	public List<Member> selectMemberList(int currentPage) {
+		int limit = 10;
+		int offset = (currentPage-1)* limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return mapper.selectMemberList(rowBounds);
+	}
+
+	@Override
+	public int getMemberTotalCount() {
+		
+		return mapper.getMemberTotalCount();
 	}
 
 }
