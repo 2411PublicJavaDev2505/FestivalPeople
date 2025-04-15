@@ -4,24 +4,26 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>같이갈래-채팅방생성</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
-	<link rel="stylesheet" href="../resources/css/chat/chatDetail.css">
+	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatInsert.css">
 </head>
 <body>
-	    <div id="container">
+    <div id="container">
     <!-- 헤더 -->
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
     <main class="chat-main">
 	    <!--상단 채팅방검색-->
 	    <section class="chat-nav">
 	        <span>참여 채팅 수 : 0</span>
-	        <form class="chat-list-search" action="#" >
-	            <input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
-	            <button class="chat-search-btn" >⌕</button>
-	        </form>
+	        <div class="chat-list-search" >
+		        <form action="#" >
+		            <input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
+		            <button class="chat-search-btn" >⌕</button>
+		        </form>
+	        </div>
 	    </section>
 	    <section class="chat-list-total">
 	        <!--좌 소속방목록-->
@@ -122,7 +124,7 @@
 	        </section>
 	        <!--우 채팅방 만들기 상세 -->
 	        <section class="chat-room-insert">
-	        <form action="#" method="post">
+	        <form action="/chat/insert" method="post">
    				<div class = "room-header">
    					<div class="chat-prev-list"><a href="#">←</a></div>
    					<div class="chat-header-title"><span>채팅방 만들기</span></div>
@@ -137,11 +139,16 @@
    					<input class="room-tag3"  type="text" placeholder="#태그3">
 				</div>
 				<div class ="chat-room-bottom">
-   					<input class="" name="files[]" type="file" placeholder="대표사진 선택">
-      				<div class ="chat-mem-limit">
-	   					<input class="room-mem"  type="text" placeholder="인원(최대50)">
-      				</div>
-      				<button class ="room-register-button">완료</button>
+					<div class="image-group">
+						<button id=roomImageUpload>대표사진 선택</button>
+	   					<input id="imageInput" type="file" style="display: none;">
+					</div>
+					<div class="right-group">
+	      				<div class ="chat-mem-limit">
+		   					<input class="room-mem"  type="text" placeholder="인원(최대50)">
+	      				</div>
+	      				<button class ="room-register-button">완료</button>
+					</div>
 				</div>
 	        </form>
 	        </section>
@@ -155,8 +162,13 @@
 	    const title = document.getElementById('chatRoomTitle');
 	    const counter = document.getElementById('charCount');	
 	    input.addEventListener('title', () => {
-	      const length = input.value.length;
+	      const length = title.value.length;
 	      counter.textContent = `${length}/90`;
+	    });
+	    
+	    <!-- 채팅방 대표 이미지 첨부 -->
+	    document.getElementById('uploadBtn').addEventListener('click', function() {
+	    	  document.getElementById('fileInput').click();
 	    });
     </script>
 </body>

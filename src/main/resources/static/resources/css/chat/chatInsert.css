@@ -1,1 +1,113 @@
 @charset "UTF-8";
+
+#container{
+  	width: 100%;
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;    
+}
+.chat-main{
+	width: 100%;
+	max-width: 1020px;
+    padding: 0 20px;
+    background-color: antiquewhite;
+    box-sizing: border-box;
+}
+
+.chat-room-insert {
+    width: 70%;
+    background-color: #d26f534f;
+    margin: 5px;
+    height: 600px;    
+	display: flex;
+    flex-direction: column;
+}
+
+.room-header{
+	display: flex;
+    flex-direction: row;
+    margin: 20px 10px;
+    height: 50px;
+}
+	.chat-prev-list a{
+  		text-decoration: none;		
+  		margin-right: 10px;
+	}
+.chat-room-top{
+	display:flex;
+	justify-content: space-between;	
+	align-items: center;
+	margin: 20px auto;
+    border-radius:10px;
+    background-color: #F5F5F5;	
+    width: 400px;
+    height:50px;
+}	
+	#chatRoomTitle{
+	    border: none;
+        border-radius:10px;
+	    background-color: #F5F5F5;	
+	    height:50px;
+	    width:100%;
+	    padding:0 10px;
+	}
+	#charCount{
+	    padding:0 20px;
+  		color: #A6A4A2;	    
+	}
+.room-tag-group{
+	display:flex;
+	justify-content: space-between;
+    width: 400px;
+    margin: 30px auto;
+}
+	.room-tag1, .room-tag2, .room-tag3{
+	    border: none;
+	    border-radius:10px;    
+	    background-color: #F5F5F5;	
+	    height:50px;	
+	    width: 30%;
+		text-align: center;
+	}
+
+.chat-room-bottom{
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+    width: 400px;
+    margin: 10px auto;    
+}
+	#roomImageUpload{
+	    border: none;
+	    border-radius:10px;    
+	    background-color: #F5F5F5;	
+	    height:150px;
+	    width: 250px;		
+	    cursor:pointer;
+	    color: #A6A4A2;	
+	}
+.right-group{
+	display:flex;
+	flex-direction: column;
+	width: 130px;
+}
+.room-mem{
+    border: none;
+    border-radius:10px;    
+    background-color: #F5F5F5;	
+    width: 130px;
+    height:50px;
+    margin: 20px auto;
+	text-align: center;    
+}
+
+.room-register-button{
+    padding: 8px 16px;
+	background-color: #678E79;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	margin: 20px 0;
+	height: 60px;
+	cursor: pointer;	
+}
