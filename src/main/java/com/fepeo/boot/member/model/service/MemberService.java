@@ -1,6 +1,7 @@
 package com.fepeo.boot.member.model.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
@@ -15,5 +16,9 @@ public interface MemberService {
 	Member memberSocialLogin(String id);
 
 	Member selectOneByNo(int memberNo);
+	
+	List<Member> selectMemberList(int currentPage);
+
+	int getMemberTotalCount();
 
 }

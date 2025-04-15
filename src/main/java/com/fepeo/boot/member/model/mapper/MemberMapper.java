@@ -1,6 +1,9 @@
 package com.fepeo.boot.member.model.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
@@ -16,5 +19,9 @@ public interface MemberMapper {
 	Member memberSocialLogin(String id);
 
 	Member selectOneByNo(int memberNo);
+	
+	List<Member> selectMemberList(RowBounds rowBounds);
+
+	int getMemberTotalCount();
 
 }
