@@ -14,7 +14,7 @@
         </ul> 
         <ul  class="group2">
             <li style="--offset: 4;"><a href="/review/list">여행 후기</a></li>
-            <li style="--offset: 5;"><a href="#">공지사항</a></li>
+            <li style="--offset: 5;"><a href="/notice/list">공지사항</a></li>
             <c:if test="${member.memberId eq null }">
 	            <li style="--offset: 6;"><a href="/member/login">로그인</a></li>
             </c:if>
