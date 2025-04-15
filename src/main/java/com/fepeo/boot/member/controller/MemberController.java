@@ -208,8 +208,9 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/delete")
+	@RequestMapping("/delcheck")
 	public String deleteMember(String pw) {
-		return pw;
+		System.out.println("확인");
+		return "AJAX";
 	}
 }

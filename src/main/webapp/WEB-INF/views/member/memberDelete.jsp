@@ -47,12 +47,11 @@
 			}else{
 				$.ajax({
 					dataType: "json",
-					url: "/member/delete",
+					url: "/member/delcheck",
 					data : {"pw" : pw},
-					type: "POST",
+					type: "GET",
 					success: function(data) {
 						alert("결과 : "+ data);
-						event.preventDefault();
 					},
 					error: function() {
 						alert("통신 오류!!");

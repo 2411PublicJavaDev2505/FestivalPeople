@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fepeo.boot.festival.model.service.FestivalService;
 import com.fepeo.boot.festival.model.vo.Festival;
-import com.fepeo.boot.festival.model.vo.dto.FestivalItem;
 
 import lombok.RequiredArgsConstructor;
 
