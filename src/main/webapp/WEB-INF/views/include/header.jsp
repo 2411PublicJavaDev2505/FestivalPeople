@@ -25,7 +25,7 @@
 	            <li style="--offset: 7;"><a href="/member/insert">회원가입</a></li>
             </c:if>
             <c:if test="${member.memberId ne null && member.managerYn eq 'N'}">
-	            <li style="--offset: 7;"><a href="/member/insert">마이페이지</a></li>
+	            <li style="--offset: 7;"><a href="/member/detail">마이페이지</a></li>
             </c:if>
             <c:if test="${member.memberId ne null && member.managerYn eq 'Y'}">
 	            <li style="--offset: 7;"><a href="/manager/mypage">관리자페이지</a></li>
