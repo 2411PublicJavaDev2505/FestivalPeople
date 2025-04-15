@@ -37,6 +37,8 @@ public class ChatController {
 		chatRoom.setImage(image);
 		int result = cService.insertChatRoom(chatRoom);
 		
+		//updateChatMember(); 채팅방 회원수 업데이트
+		
 		return "redirect:/chat/list"; // 추후 상세페이지로 수정필요
 	}
 
