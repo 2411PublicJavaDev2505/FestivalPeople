@@ -211,6 +211,10 @@ public class MemberController {
 	@RequestMapping("/delcheck")
 	public String deleteMember(String pw) {
 		System.out.println("확인");
+		System.out.println("확인");
+		System.out.println("확인");
+		System.out.println("확인");
+		System.out.println("확인");
 		return "AJAX";
 	}
 }
