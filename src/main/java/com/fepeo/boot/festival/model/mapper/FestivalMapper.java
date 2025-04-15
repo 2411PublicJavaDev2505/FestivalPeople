@@ -12,6 +12,8 @@ public interface FestivalMapper {
 	int insertFestival(Festival festival);
     
 	List<Festival> selectFestivalList();
+
+	Festival selectFestivalByNo(int festivalNo);
 	
 	
 }

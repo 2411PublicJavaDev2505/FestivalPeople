@@ -12,13 +12,13 @@
     <ul>
         <c:forEach var="festival" items="${festivals}">
             <li>
-                <a href="/festival/detail?contentid=${festival.contentid}">
-				    <h3>${festival.title}</h3>
+                <a href="/festival/detail?contentid=${festival.festivalNo}">
+				    <h3>${festival.festivalName}</h3>
 				</a>
-                <p>📍 주소: ${festival.addr1}</p>
-                <p>🗓️ 날짜: ${festival.eventstartdate} ~ ${festival.eventenddate}</p>
-                <c:if test="${not empty festival.firstimage}">
-                <img src="${festival.firstimage}" alt="축제 이미지" width="300" />
+                <p>📍 주소: ${festival.festivalStartDate}</p>
+                <p>🗓️ 날짜: ${festival.festivalStartDate} ~ ${festival.festivalEndDate}</p>
+                <c:if test="${not empty festival.festivalFilePath}">
+                <img src="${festival.festivalFilePath}" alt="축제 이미지" width="300" />
             	</c:if>
             </li>
         </c:forEach>

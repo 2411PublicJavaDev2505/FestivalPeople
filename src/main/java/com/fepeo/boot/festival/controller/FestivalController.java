@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fepeo.boot.festival.model.service.FestivalService;
 import com.fepeo.boot.festival.model.vo.Festival;
@@ -23,13 +25,15 @@ public class FestivalController {
 	
 	@GetMapping("/list")
 	public String showFestivalList(Model model) {
-		List<Festival> list = festivalService.getFestivalList();
-		model.addAttribute("festivals", list);
+		List<Festival> festivals = festivalService.getFestivalList();
+	    model.addAttribute("festivals", festivals);  
 	    return "festival/list";
 	}
 	
-	@GetMapping("/detail")
-	public String showFestivalDetail() {
+	@GetMapping("/detail/{festivalNo}")
+	public String showFestivalDetail(@PathVariable  int festivalNo, Model model) {
+		Festival festival = festivalService.getFestivalByNo(festivalNo);
+		model.addAttribute("festival",festival);
 		return "festival/festivalDetail";
 	}
 	

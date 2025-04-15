@@ -13,6 +13,8 @@ public interface FestivalService {
 	public void insertFestivalList();
 
 	public List<Festival> getFestivalList();
+
+	public Festival getFestivalByNo(int festivalNo);
 	
 }
 	

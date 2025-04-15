@@ -66,4 +66,9 @@ public class FestivalServiceLogic implements FestivalService {
 			return festivalMapper.selectFestivalList();
 		}
 
+		@Override
+		public Festival getFestivalByNo(int festivalNo) {
+			return festivalMapper.selectFestivalByNo(festivalNo);
+		}
+
 	}

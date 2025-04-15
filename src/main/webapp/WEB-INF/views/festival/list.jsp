@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -39,22 +40,18 @@
 	                   </button>
 	               </div>
 	               
-	               <div class="moveSlider-track" id="moveSliderTrack">
-	                   <div class="festival-card">
-	                       <a href ="/festival/detail">
-	                       		<img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
-	                       </a>
-	                   </div>
-	                   <div class="festival-card">
-	                       <img src="img2.jpg" alt="축제 포스터2">
-	                   </div>
-	                   <div class="festival-card">
-	                       <img src="img3.jpg" alt="축제 포스터3">
-	                   </div>
-	                   <div class="festival-card">
-	                       <img src="img4.jpg" alt="축제 포스터4">
-	                   </div>
-	               </div>
+					<div class="moveSlider-track" id="moveSliderTrack">
+						<c:forEach var="festival" items="${festivals}">
+								<c:if test="${not empty festival.festivalFilePath}">
+							<div class="festival-card">
+									<a href="/festival/detail/${festival.festivalNo}">
+					                	<img src="${festival.festivalFilePath}" alt="축제 이미지" width="300" />
+									</a>
+							</div>
+								</c:if>
+						</c:forEach>
+					</div>
+	               
 	               <div class ="moveSlider-next-button">
 	                   <button class="slider-btn-next" onclick="moveSlide(1)">
 	                       <img class="on" src="../resources/img/festival/next_off_btn_2.png" alt="다음 버튼" >
@@ -64,34 +61,17 @@
 	
 	           <div class="festival-list">
 	               <div class="festival-list-track">
-	                   <div class="festival-card">
-	                       <img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
-	                   </div>
-	                   <div class="festival-card">
-	                       <img src="img2.jpg" alt="축제 포스터2">
-	                   </div>
-	                   <div class="festival-card">
-	                       <img src="img3.jpg" alt="축제 포스터3">
-	                   </div>
-	                   <div class="festival-card">
-	                       <img src="img4.jpg" alt="축제 포스터4">
-	                   </div>
+	                 <c:forEach var="festival" items="${festivals}">
+                        <c:if test="${not empty festival.festivalFilePath}">
+	                    <div class="festival-card">
+	                        <a href="/festival/detail?festivalNo=${festival.festivalNo}">
+	                                <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+	                        </a>
+	                    </div>
+                        </c:if>
+                	</c:forEach>
 	               </div>
-	               <div class="festival-list-track" >
-	                   <div class="festival-card">
-	                       <img src="../resources/img/festival/festival_img_exapmle.jpg" alt="축제 포스터1">
-	                   </div>
-	                   <div class="festival-card">
-	                       <img src="img2.jpg" alt="축제 포스터2">
-	                   </div>
-	                   <div class="festival-card">
-	                       <img src="img3.jpg" alt="축제 포스터3">
-	                   </div>
-	                   <div class="festival-card">
-	                       <img src="img4.jpg" alt="축제 포스터4">
-	                   </div>
-	               </div>
-	           </div>
+	               
 			   <div class="pagination">
 					<a href="/recipe/list?page=1"> ◁◁ </a>
 					<c:if test= "${startNavi ne 1 }">
