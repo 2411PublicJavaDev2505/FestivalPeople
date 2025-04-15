@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fepeo.boot.festival.model.service.FestivalService;
+import com.fepeo.boot.festival.model.vo.Festival;
 import com.fepeo.boot.festival.model.vo.dto.FestivalItem;
 
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,10 @@ public class FestivalController {
 
 	
 	@GetMapping("/list")
-	public String showFestivalList() {
-		return "festival/list";
+	public String showFestivalList(Model model) {
+		List<Festival> list = festivalService.getFestivalList();
+		model.addAttribute("festivals", list);
+	    return "festival/list";
 	}
 	
 	@GetMapping("/detail")
@@ -30,10 +33,12 @@ public class FestivalController {
 		return "festival/festivalDetail";
 	}
 	
-//	@GetMapping("/festival")
-//    public String festivalPage(Model model) {
-//        List<FestivalItem> festivals = festivalService.getFestivalList();
-//        model.addAttribute("festivals", festivals);
-//        return "festival/festivalList"; 
-//    }
+	@GetMapping("/insert")
+	public String insertFestivalList(Model model) {
+		festivalService.insertFestivalList();
+		model.addAttribute("msg", "저장완료");
+		return "festival/list";
+		
+	}
+	
 }

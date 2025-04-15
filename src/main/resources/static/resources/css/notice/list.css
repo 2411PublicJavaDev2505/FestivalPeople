@@ -1,6 +1,5 @@
-@charset "UTF-8";
 .notice-board {
-    width: 600px;
+    width: 1350px;
     margin: 40px auto;
     background: rgba(60, 120, 100, 0.85);
     border-radius: 12px;
@@ -17,22 +16,12 @@
     font-size: 22px;
     font-weight: bold;
     text-align: center;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 10px;
     position: relative;
     padding: 8px 0;
 }
 
-.notice-pointer {
-    width: 0;
-    height: 0;
-    border-left: 18px solid transparent;
-    border-right: 18px solid transparent;
-    border-top: 18px solid #5e9c8c;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 100%;
-}
+
 
 .notice-table {
     width: 100%;
@@ -68,8 +57,9 @@
 
 .notice-pagination {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 300px;
+    margin-left: 525px;
+    justify-content: space-evenly;
     gap: 8px;
     background: #5e9c8c;
     border-radius: 8px;

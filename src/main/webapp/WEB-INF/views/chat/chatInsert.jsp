@@ -118,15 +118,17 @@
 	                    <div class="msg-alarm">4</div>
 	                </li>
 	            </ul> 
-	            <form class="chat-room-make" action="#">
+	            <form class="chat-room-make" action="/chat/insert">
 	                <button type="submit">채팅방 생성</button>
 	            </form>                 
 	        </section>
 	        <!--우 채팅방 만들기 상세 -->
 	        <section class="chat-room-insert">
 	        <form action="/chat/insert" method="post" enctype="multipart/form-data">
+	        ${member.nickname }님 안녕!
+	        	<input type="hidden" name="memberNo"  value="${member.memberNo }">
    				<div class = "room-header">
-   					<div class="chat-prev-list"><a href="#">←</a></div>
+   					<div class="chat-prev-list"><a href="/chat/list">←</a></div>
    					<div class="chat-header-title"><span>채팅방 만들기</span></div>
    				</div>
 				<div class ="chat-room-top">
@@ -140,7 +142,7 @@
 				</div>
 				<div class ="chat-room-bottom">
 					<div class="image-group">
-						<button id=roomImageUpload>대표사진 선택</button>
+						<button type="button" id=roomImageUpload>대표사진 선택</button>
 	   					<input name="image" id="imageInput" type="file" style="display: none;">
 					</div>
 					<div class="right-group">
@@ -161,9 +163,9 @@
 	    <!-- 채팅방 제목 글자 카운트 -->
 	    const title = document.getElementById('chatRoomTitle');
 	    const counter = document.getElementById('charCount');	
-	    input.addEventListener('title', () => {
+	    input.addEventListener('chatRoomTitle', () => {
 	      const length = title.value.length;
-	      counter.textContent = `${length}/90`;
+	      counter.textContent = '${length}/90';
 	    });
 	    
 	    <!-- 채팅방 대표 이미지 첨부 -->

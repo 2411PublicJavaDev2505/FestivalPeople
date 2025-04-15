@@ -1,22 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../resources/css/include/header.css">
-	<link rel="stylesheet" href="../resources/css/review/list.css">
-	<title>후기 게시판 List 전체</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival People</title>
+    <link rel="stylesheet" href="../resources/css/notice/list.css">
 </head>
 <body>
-	<div class="background-image">
-    	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
-    </div>
-     	<jsp:include page="../include/header.jsp"/>
-	<div class="notice-board">
+<div class="notice-board">
     <div class="notice-title">
         <span>공지사항</span>
-        <div class="notice-pointer"></div>
     </div>
     <table class="notice-table">
         <thead>
@@ -88,6 +82,5 @@
         <button class="page-btn">&gt;</button>
     </div>
 </div>
-	
 </body>
 </html>
