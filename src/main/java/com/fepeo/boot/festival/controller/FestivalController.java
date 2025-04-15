@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/festival")
 public class FestivalController {
 	
-	private FestivalService festivalService;
+	private final FestivalService festivalService;
 
 	
 	@GetMapping("/list")
