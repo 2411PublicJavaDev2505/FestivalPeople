@@ -5,9 +5,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.fepeo.boot.common.controller.util.ApiKeyLoader;
-
-
 @Component
 @PropertySource("classpath:app-info.properties")
 public class ApiComponent {
@@ -45,7 +42,6 @@ public class ApiComponent {
                 .block();
 		
 		return response;
-		
 	}
 	
 	
