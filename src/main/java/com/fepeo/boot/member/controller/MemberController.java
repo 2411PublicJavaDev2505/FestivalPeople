@@ -1,10 +1,13 @@
 package com.fepeo.boot.member.controller;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +25,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.course.controller.CourseController;
+import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
+import com.fepeo.boot.member.controller.dto.MemberUpdatePwRequest;
+import com.fepeo.boot.member.controller.dto.MemberUpdateRequest;
 import com.fepeo.boot.member.model.service.MemberService;
 import com.fepeo.boot.member.model.vo.Member;
 
@@ -36,7 +42,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	private final ApiComponent api;
-	
+	private final JavaMailSender mailSender;
 	private final MemberService mService;
 
 	@GetMapping("/login")
@@ -158,6 +164,51 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("/findid")
+	public String showFindId() {
+		return "member/findId";
+	}
+	
+	@PostMapping("/findid")
+	public String findId(@ModelAttribute MemberFindIdRequest member) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		Member findMember = mService.selectOneByEmail(member);
+		message.setTo(member.getEmail());
+		message.setSubject("Festival People 아이디 찾기");
+	    message.setText("회원님의 아이디는 " + findMember.getMemberId() + " 입니다.");
+	    mailSender.send(message);
+		return "/member/closeFindId";
+	}
+	
+	@GetMapping("/findpw")
+	public String showFindPw() {
+		return "member/findPw";
+	}
+	
+	@PostMapping("/findpw")
+	public String findPw(@RequestParam("memberId") String memberId) {
+		
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		alphabet += alphabet.toUpperCase();
+		SecureRandom rand = new SecureRandom();
+		String memberPw = "";
+		for(int i=0;i<10;i++) {
+			memberPw += alphabet.charAt(rand.nextInt(alphabet.length()));
+		}
+		MemberUpdatePwRequest member = new MemberUpdatePwRequest();
+		member.setMemberId(memberId);
+		member.setMemberPw(memberPw);
+		int result = mService.updateMemberPw(member);
+		Member findMember = mService.selectOneById(memberId);
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(findMember.getEmail());
+		message.setSubject("Festival People 비밀번호 찾기");
+		String text = "비밀번호는 "+ memberPw+"입니다 \n 로그인 후 비밀번호를 변경해주세요.";
+	    message.setText(text);
+	    mailSender.send(message);
+		return "member/closeFindPw";
+	}
+	
 	
 	@GetMapping("/logout")
 	public String memberLogout(HttpSession session) {
@@ -193,7 +244,33 @@ public class MemberController {
 			,@RequestParam(required=false) MultipartFile profile) throws IllegalStateException, IOException {
 		member.setProfile(profile);
 		int result = mService.insertMember(member);
+		if(member.getSocialYn().equals("Y")) {
+			return "member/socialInsertPopup";
+		}else {
+			return "member/insertSucess";
+		}
+	}
+	
+	@GetMapping("/insertsuccess")
+	public String showMemberInsertSuccess() {
 		return "member/insertSucess";
+	}
+	
+	@GetMapping("/update")
+	public String showMemberUpdate(HttpSession session
+			,Model model) {
+		Member member = (Member)session.getAttribute("member");
+		member = mService.selectOneByNo(member.getMemberNo());
+		model.addAttribute("member",member);
+		return "member/memberUpdate";
+	}
+	
+	@PostMapping("/update")
+	public String updateMember(@ModelAttribute MemberUpdateRequest member
+			,@RequestParam(required=false) MultipartFile profile) throws IllegalStateException, IOException {
+		member.setProfile(profile);
+		int result = mService.updateMember(member);
+		return "redirect:/member/detail";
 	}
 	
 	@GetMapping("/detail")
@@ -214,8 +291,20 @@ public class MemberController {
 	public String deleteMember(MemberLoginRequest login) {
 		Member member = mService.memberLogin(login);
 		JSONObject json = new JSONObject();
-		json.put("memberId", member.getMemberId());
+		if(member != null) {
+			json.put("memberId", member.getMemberId());
+		}
+		int result = mService.deleteMember(member.getMemberNo());
 		
 		return json.toString();
+	}
+	
+	@GetMapping("/socialdelete")
+	public String deleteSocialMember(HttpSession session) {
+		Member member = (Member)session.getAttribute("member");
+		int result = mService.deleteSocialMember(member.getMemberNo());
+		if(result > 0)
+			session.invalidate();
+		return "redirect:/";
 	}
 }

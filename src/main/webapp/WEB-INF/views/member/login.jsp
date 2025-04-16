@@ -33,8 +33,8 @@
 					</form>
 				</div>
 				<div class="login-footer">
-					<span><a>아이디 찾기</a></span>
-					<span><a>비밀번호 찾기</a></span>
+					<span><a onclick="findId();">아이디 찾기</a></span>
+					<span><a onclick="findPw();">비밀번호 찾기</a></span>
 					<span><a href="/member/insert">회원가입</a></span>
 				</div>
 				<div class="login-social">
@@ -62,6 +62,18 @@
 		const google = () => {
 			let loc = "https://accounts.google.com/o/oauth2/v2/auth?client_id=${google}&redirect_uri=http://localhost:8888/member/google&response_type=code&scope=email%20profile&access_type=offline&prompt=consent";
 			let title = "Festival People - 구글 로그인";
+			let option = "width = 1000, height = 700, top = 100, left = 200, location = no";
+			window.open(loc,title,option);
+		}
+		const findId = () => {
+			let loc = "http://localhost:8888/member/findid";
+			let title = "아이디 찾기";
+			let option = "width = 1000, height = 700, top = 100, left = 200, location = no";
+			window.open(loc,title,option);
+		}
+		const findPw = () => {
+			let loc = "http://localhost:8888/member/findpw";
+			let title = "비밀번호 찾기";
 			let option = "width = 1000, height = 700, top = 100, left = 200, location = no";
 			window.open(loc,title,option);
 		}

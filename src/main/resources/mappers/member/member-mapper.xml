@@ -12,14 +12,14 @@
 	</insert>
 	<select id="memberLogin" resultType="Member">
 		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN FROM MEMBER 
-		WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw}
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw} AND MEMBER_YN = 'Y'
 	</select>
 	<select id="memberSocialLogin" resultType="Member">
 		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN FROM MEMBER 
-		WHERE MEMBER_ID = #{id}
+		WHERE MEMBER_ID = #{id} AND MEMBER_YN = 'Y'
 	</select>
 
-	<select id="selectOneByNo">
+	<select id="selectOneByNo" resultType="Member">
 		SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
@@ -29,6 +29,36 @@
 	
 	<select id="getMemberTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
-
+	</select>
+	
+	<select id="selectOneByEmail">
+		SELECT * FROM MEMBER WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email} AND SOCIAL_YN='N'
+	</select>
+	
+	<update id="updateMember">
+		UPDATE MEMBER SET MEMBER_PW=#{memberPw},NICKNAME=#{nickname},EMAIL=#{email},ADDRESS=#{address}
+		,PROFILE_FILE_NAME=#{profileFileName}
+		,PROFILE_FILE_RENAME=#{profileFileRename}
+		,PROFILE_FILE_PATH=#{profileFilePath} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="updateSocialMember">
+		UPDATE MEMBER SET ADDRESS=#{address} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="deleteMember">
+		UPDATE MEMBER SET MEMBER_YN='N' WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<delete id="deleteSocialMember">
+		DELETE FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+	</delete>
+	
+	<update id="updateMemberPw">
+		UPDATE MEMBER SET MEMBER_PW = #{memberPw} WHERE MEMBER_ID=#{memberId}
+	</update>
+	
+	<select id="selectOneById" resultType="Member">
+		SELECT * FROM MEMBER WHERE MEMBER_ID=#{memberId}
 	</select>
 </mapper>

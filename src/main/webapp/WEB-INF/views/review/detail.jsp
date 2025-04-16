@@ -94,7 +94,7 @@
 						.then(result => {
 							if(result > 0 ){
 								alert("댓글이 등록되었습니다");
- 								getCommentList()
+ 								getCommentList();
 						}else {
 							alert("댓글 등록이 완료되지 않았습니다");
 						}

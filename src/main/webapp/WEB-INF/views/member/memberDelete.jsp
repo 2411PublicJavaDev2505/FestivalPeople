@@ -43,20 +43,28 @@
 				document.querySelector(".input-check").innerHTML = "비밀번호가 다릅니다.";
 				event.preventDefault();
 			}else{
-				$.ajax({
-					url: "/member/delete",
-					data : {
-						"memberPw" : pw,
-						"memberId" : id
-					},
-					type: "POST",
-					success: function(data) {
-						alert("결과 : "+ data);
-					},
-					error: function() {
-						alert("통신 오류!!");
-					}
-				});
+				if(confirm("정말 탈퇴하시겠습니까? ㅠㅠ..")){
+					$.ajax({
+						dataType: "json",
+						url: "/member/delete",
+						data : {
+							"memberPw" : pw,
+							"memberId" : id
+						},
+						type: "POST",
+						success: function(data) {
+							if(data.memberId == null){
+								alert("비밀번호를 다시 입력해주세요.");
+							}else{
+								alert("탈퇴가 완료되었습니다.");
+								location.href="/member/logout";
+							}
+						},
+						error: function() {
+							alert("통신 오류!!");
+						}
+					});
+				}
 			}
 		}
 	</script>

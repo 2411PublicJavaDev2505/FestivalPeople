@@ -21,57 +21,52 @@
 		    }).open();
 		}
 	</script>
-	<div id="container">
-		<jsp:include page="../include/header.jsp"/>
-		<main>
-			<div class="register-container">
-				<div class="register-header">
-					<span>회원가입</span> <br>
-					<p>${nickname }님 반갑습니다!</p>
+	<div class="register-container">
+		<div class="register-header">
+			<span>회원가입</span> <br>
+			<p>${nickname }님 반갑습니다!</p>
+		</div>
+		<form action="/member/insert" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="memberId" value="${id }">
+			<input type="hidden" name="memberCode" value="${id }">
+			<input type="hidden" name="nickname" value="${nickname }">
+			<input type="hidden" name="email" value="${email }">
+			<input type="hidden" name="profileUrl" value="${profileUrl }">
+			<input type="hidden" name="socialYn" value="Y">
+			<div class="register-main">
+				<div class="register-left">
+					<div class="profile-img"> <img alt="프사" src="${profileUrl }"> </div>
 				</div>
-				<form action="/member/insert" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="memberId" value="${id }">
-					<input type="hidden" name="memberCode" value="${id }">
-					<input type="hidden" name="nickname" value="${nickname }">
-					<input type="hidden" name="email" value="${email }">
-					<input type="hidden" name="profileUrl" value="${profileUrl }">
-					<input type="hidden" name="socialYn" value="Y">
-					<div class="register-main">
-						<div class="register-left">
-							<div class="profile-img"> <img alt="프사" src="${profileUrl }"> </div>
-						</div>
-						<div class="register-right">
-							<ul class="register-input">
-								<li class="register-btn">
-									<input type="text" placeholder="주소" name="address" id="input-address" readonly="readonly">
-									<button type="button" onclick="findAddress();">검색</button>
-								</li>
-								<li class="register-notbtn">
-									<input type="text" placeholder="이름" name="memberName" id="input-name">
-								</li>
-								<ul class="register-radio-group">
-									<li class="register-radio">
-	  							        <label for="male">
-									    <img src="../resources/img/member/male.jpg" alt="남">
-									    <input type="radio" id="male" name="gender" value="M" checked>
-									    </label>
-									</li>
-									<li class="register-radio">
-										<label for="female">
-									    <img src="../resources/img/member/female.jpg" alt="여">
-									    <input type="radio" id="female" name="gender" value="F">
-									    </label>
-									</li>
-								</ul>
-								<li class="register-last-btn">
-									<button type="submit" onclick="checkRegister();">회원가입</button>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</form>
+				<div class="register-right">
+					<ul class="register-input">
+						<li class="register-btn">
+							<input type="text" placeholder="주소" name="address" id="input-address" readonly="readonly">
+							<button type="button" onclick="findAddress();">검색</button>
+						</li>
+						<li class="register-notbtn">
+							<input type="text" placeholder="이름" name="memberName" id="input-name">
+						</li>
+						<ul class="register-radio-group">
+							<li class="register-radio">
+ 							        <label for="male">
+							    <img src="../resources/img/member/male.jpg" alt="남">
+							    <input type="radio" id="male" name="gender" value="M" checked>
+							    </label>
+							</li>
+							<li class="register-radio">
+								<label for="female">
+							    <img src="../resources/img/member/female.jpg" alt="여">
+							    <input type="radio" id="female" name="gender" value="F">
+							    </label>
+							</li>
+						</ul>
+						<li class="register-last-btn">
+							<button type="submit" onclick="checkRegister();">회원가입</button>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</main>
+		</form>
 	</div>
 	<script type="text/javascript">
 		let memberId = document.querySelector("#input-id").value;

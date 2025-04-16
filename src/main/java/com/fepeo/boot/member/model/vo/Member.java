@@ -1,6 +1,7 @@
 package com.fepeo.boot.member.model.vo;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Getter

@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.common.util.Util;
+import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
+import com.fepeo.boot.member.controller.dto.MemberUpdatePwRequest;
+import com.fepeo.boot.member.controller.dto.MemberUpdateRequest;
 import com.fepeo.boot.member.model.mapper.MemberMapper;
 import com.fepeo.boot.member.model.service.MemberService;
 import com.fepeo.boot.member.model.vo.Member;
@@ -32,7 +35,7 @@ public class MemberServiceLogic implements MemberService{
 			String filePath = "/images/member/"+fileRename;
 			profile.transferTo(new File("C:/uploadImage/member/"+fileRename));
 			member.setProfileFileName(filename);
-			member.setProfileFileName(fileRename);
+			member.setProfileFileRename(fileRename);
 			member.setProfileFilePath(filePath);
 		}
 		return mapper.insertMember(member);
@@ -65,6 +68,55 @@ public class MemberServiceLogic implements MemberService{
 	public int getMemberTotalCount() {
 		
 		return mapper.getMemberTotalCount();
+	}
+
+	@Override
+	public int deleteMember(int memberNo) {
+		return mapper.deleteMember(memberNo);
+	}
+
+	@Override
+	public int deleteSocialMember(int memberNo) {
+		return mapper.deleteSocialMember(memberNo);
+	}
+
+	@Override
+	public int updateMember(MemberUpdateRequest member) throws IllegalStateException, IOException {
+		if(member.getProfile() != null && !member.getProfile().isEmpty()) {
+			MultipartFile profile = member.getProfile();
+			String filename = profile.getOriginalFilename();
+			String fileRename = Util.fileRename(filename);
+			String filePath = "/images/member/"+fileRename;
+			profile.transferTo(new File("C:/uploadImage/member/"+fileRename));
+			member.setProfileFileName(filename);
+			member.setProfileFileRename(fileRename);
+			member.setProfileFilePath(filePath);
+		}else {
+			Member existing = mapper.selectOneByNo(member.getMemberNo());
+			member.setProfileFileName(existing.getProfileFileName());
+			member.setProfileFileRename(existing.getProfileFileRename());
+			member.setProfileFilePath(existing.getProfileFilePath());
+		}
+		if(member.getSocialYn().equals("Y")) {
+			return mapper.updateSocialMember(member);
+		}else {
+			return mapper.updateMember(member);
+		}
+	}
+
+	@Override
+	public Member selectOneByEmail(MemberFindIdRequest member) {
+		return mapper.selectOneByEmail(member);
+	}
+
+	@Override
+	public int updateMemberPw(MemberUpdatePwRequest member) {
+		return mapper.updateMemberPw(member);
+	}
+
+	@Override
+	public Member selectOneById(String memberId) {
+		return mapper.selectOneById(memberId);
 	}
 
 }
