@@ -89,7 +89,11 @@
 		    </div>
 		    <div class="reviewinsert-btn">
 <!-- 				<a href="/review/insert">글쓰기</a> -->
-		    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
+	<!--  글쓰기 버튼 로그인 하면 보이고 안보이는거 도전해보기 안되면 지울것!~ -->
+<%-- 				<input type="hidden" value="${sessionScope.member.memberNo}" id="memberNo"> --%>
+				<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne ''}" >
+			    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
+				</c:if>
 		    </div>
 			</main>
 	    </div>

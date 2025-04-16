@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+/*   검색창 */
+main {
+	height: 1000px;
+}
+
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* 콘텐츠보다 뒤로 */
+  overflow: hidden;
+}
+
+.background-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8; /* 배경 느낌을 위해 살짝 투명하게 (선택사항) */
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content:flex-end;
+ 	margin:  10px 10px;  
+}
+
+.search-form select, .search-form input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.search-btn {
+    padding: 10px 16px;
+    font-size: 16px;
+    background: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+
+.course-slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+    margin: auto;
+    padding: 0 40px;
+    height : 600px;
+}
+
+.card-slider {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 20px;
+}
+
+.coursecard {
+    flex: 0 0 auto;          /* 줄바꿈 방지, 고정폭 유지 */
+    width: 250px;
+    height: 500px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.slide-btn {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: rgba(255,255,255,0.8);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.slide-btn.left {
+    left: 0;
+}
+
+.slide-btn.right {
+    right: 0;
+}
+
+.coursecard img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+
+a.visited {
+	color: green;
+}

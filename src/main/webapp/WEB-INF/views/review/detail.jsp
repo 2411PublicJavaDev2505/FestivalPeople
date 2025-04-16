@@ -48,36 +48,87 @@
 									<button id="addComment">댓글등록</button>
 								</div>	
 							</div>
-						<ul id="reviewcommentlist">
-						<c:forEach items="${review.commentList }" var="comment">
-							<li class="reviewcomment-row">
-								<p>
-									<span>${comment.commentNo }</span>
-<!-- 									<span>여기부터생각!멤버번호</span> -->
-									<span>${comment.commentTime }</span>
-								</p>
-								<p>${comment.commentContent }</p>
-								<div>
-									<button>답글</button>
-									<button>수정</button>
-									<button>삭제</button>
-								</div>
-							</li>
-						</c:forEach>
-					</ul>
+						<div class="comment-list-area">
+							<ul id="reviewcommentlist">
+							<c:forEach items="${review.commentList }" var="comment">
+								<li class="reviewcomment-row">
+									<p>
+	<%-- 									<span>${comment.commentNo }</span> --%>
+										<span>작성자(멤버번호,아이디?)</span>
+	<!-- 									<span>여기부터생각!멤버번호</span> -->
+										내용:<span>${comment.commentContent }</span>
+										작성시간:<span>${comment.commentTime }</span>
+									</p>
+									<div class="comment-btn-area">
+										<button class="replyBtn">답글</button>
+										<button class="modifyBtn">수정</button>
+										<button class="deleteBtn">삭제</button>
+									</div>
+								</li>
+							</c:forEach>
+						</ul>
+						</div>
 				</div>
 			</main>
 				<script>
-// 				const reviewNo = "${review.reviewNo}";
+				const reviewNo = "${review.reviewNo}";
 				
-// 				function getCommentList() {
-// 					fetch("/review/comment/list?reviewNo="+reviewNo)
-// 					.then(response => response.json())
-//  					.then(cList => console.log(cList))
-// 					.catch(error => alert("Error :"  +error))
-// 				}
+				function getCommentList() {
+					fetch("/review/comment/list?reviewNo="+reviewNo)
+					.then(response => response.json())
+//   					.then(cList => console.log(cList))
+					.then(cList => {
+						//#commentList 확인필요!
+						const cListTag = document.querySelector("#commentList");
+						cListTag.innerHTML ="";
+						for(let comment of cList) {
+							//li태그
+							const commentRow = document.createElement("li");
+							commentRow.classList.add("reviewcomment-row");
+							
+							//p태그(출력할 화면정해야함!) (코드확인필요)
+							const commentPtag = document.createElement("p");
+							//comment-writer 인지 어디다 적을지 정해야함(작성자,아이디,닉네임이냐)comment-writer"?
+							commentPtag.classList.add("comment-writer");
+							
+							//작성자,아이디,닉네임(코드확인필요)
+							const memberIdTag = document.createElement("span");
+							memberIdTag.innerText ="아이디";
+							
+							//작성일(코드확인필요)
+							const commentTimeTag = document.createElement("span");
+							commentTimeTag.innerText = comment.commentCreateDate;
+							
+							//내용 
+							const contentTag = document.createElement("p");
+							contentTag.innerText = document.commentContent;
+							
+							//버튼영역
+							const buttonArea = document.createElement("div");
+							buttonArea.classList.add("comment-btn-area");
+							const replyBtn = document.createElement("button");
+							replyBtn.innerText ="답글";
+							const modifyBtn = document.createElement("button");
+							modifyBtn.innerText = "수정";
+							const deleteBtn = document.createElement("button");
+							deleteBtn.innerText = "삭제";
+							buttonArea.append(replyBtn, modifyBtn, deleteBtn);
+							//list 붙여넣기
+							commentPtag.append(memberIdTag,commentTimeTag);
+							commentRow.append(commentPtag,contentTag,buttonArea);
+							// 댓글 목록(ul) 에 댓글(li) 추가?!
+							cListTag.append(reviewcomment-row);
+						}
+					})
+					.catch(error => alert("Error :"  +error))
+				}
 				
 				//****등록하면 에러페이지 뜸 확인필요**** commentNo값 가져오지 못함!!!!!
+				// list 코드 작성후 에러페이지는 안뜨는거 확인 해결.
+				//***해결할일 commentNo값 가져오지 못하는거 해결해야함*****
+				//여기부터는 도저히 모르겠습니다.... list 다음코드는 전혀 모르겠어서 여기서
+				//시간끌으니 다음걸로 넘어가고 다시 찾아볼것!!!!!****
+				///***아니면 어떤 방법이 좋은지 찾아볼것!!jsp새로 만들거나~~
 				document.querySelector("#addComment").addEventListener("click", function() {
 						const commentContent = document.querySelector("#commentContent").value;
 						const reviewNo = document.querySelector("#reviewNo").value;

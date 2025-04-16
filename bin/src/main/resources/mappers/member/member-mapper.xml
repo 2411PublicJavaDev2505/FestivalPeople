@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fepeo.boot.member.model.mapper.MemberMapper">
+	<insert id="insertMember">
+		INSERT INTO MEMBER VALUES(SEQ_MEMBER_NO.NEXTVAL
+		,#{memberId}, #{memberPw}, #{memberCode}, #{memberName}
+		,#{nickname}, #{email}, #{address}, #{gender}
+		,#{profileFileName}, #{profileFileRename}, #{profileFilePath}, #{profileUrl}, #{socialYn}, DEFAULT, DEFAULT
+		,DEFAULT)
+	</insert>
+	<select id="memberLogin" resultType="Member">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN FROM MEMBER 
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw}
+	</select>
+	<select id="memberSocialLogin" resultType="Member">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN FROM MEMBER 
+		WHERE MEMBER_ID = #{id}
+	</select>
+
+	<select id="selectOneByNo">
+		SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="selectMemberList" resultType="Member">
+		SELECT * FROM MEMBER
+	</select>
+	
+	<select id="getMemberTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+
+	</select>
+</mapper>
