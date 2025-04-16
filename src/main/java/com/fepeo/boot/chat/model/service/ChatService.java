@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
 import com.fepeo.boot.chat.controller.dto.MyChatroom;
+import com.fepeo.boot.chat.model.vo.ChatMember;
 import com.fepeo.boot.chat.model.vo.ChatRoom;
 
 public interface ChatService {
@@ -14,5 +15,7 @@ public interface ChatService {
 	List<ChatRoom> selectChatRoomList();
 
 	List<MyChatroom> selectChatRoomListByNo(int memberNo);
+
+	List<ChatMember> selectChatMember();
 
 }

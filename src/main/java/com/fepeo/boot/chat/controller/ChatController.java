@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
 import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.service.ChatService;
+import com.fepeo.boot.chat.model.vo.ChatMember;
 import com.fepeo.boot.chat.model.vo.ChatRoom;
 import com.fepeo.boot.member.model.vo.Member;
 
@@ -46,7 +47,7 @@ public class ChatController {
 		//int member = cService.updateChatMember(); 
 		
 		// 각 채팅방별 참여인원수 불러오기
-		// List<ChatMember> memberList = cService.selectChatMember();
+		List<ChatMember> memberList = cService.selectChatMember();
 
 		return "redirect:/chat/list"; // 추후 상세페이지로 수정필요
 	}
@@ -58,23 +59,21 @@ public class ChatController {
 		Member member = (Member)session.getAttribute("member");
 		int memberNo = member.getMemberNo();
 		System.out.println("Session memberNo: "+session.getAttribute("memberNo"));
-	    // 세션에 memberNo가 없을 경우 처리
-	    if (memberNo < 0) {
+	    // 미로그인 시 로그인 페이지로
+	    if (member == null) {
 	        return "redirect:/member/login";
-	    }		
-		// 내가 속한 방만 출력
-		List<MyChatroom> myList = cService.selectChatRoomListByNo(memberNo);
-		model.addAttribute("myList",myList);
-		
-		// 전체 리스트 출력
-		List<ChatRoom> cRooms = cService.selectChatRoomList();
-		model.addAttribute("cRooms", cRooms);
-		
-		
-		// 각 채팅방별 참여인원수 불러오기
-		// List<ChatMember> memberList = cService.selectChatMember();
-		
-		return "chat/list";
+	    }else {
+	    	// 내가 속한 방만 출력
+	    	List<MyChatroom> myList = cService.selectChatRoomListByNo(memberNo);
+	    	model.addAttribute("myList",myList);
+	    	// 전체 리스트 출력
+	    	List<ChatRoom> cRooms = cService.selectChatRoomList();
+	    	model.addAttribute("cRooms", cRooms);
+	    	
+	    	// 각 채팅방별 참여인원수 불러오기
+	    	List<ChatMember> memberList = cService.selectChatMember();
+	    	return "chat/list";
+	    }
 	}
 	
 	// 채팅방 입장(상세페이지)

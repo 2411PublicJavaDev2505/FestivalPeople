@@ -46,7 +46,7 @@
 		                    <div class="text-wrap">
 		                        <div class="chat-title">${myList.chatroomTitle }</div>
 		                        <div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
-		                        <div class="chat-mem-count">정원 0 / ${myList.chatLimit }</div>
+		                        <div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
 		                    </div>
 		                    <div class="msg-alarm">2</div>
 		                    </a>
@@ -69,7 +69,7 @@
 	                    <div class="text-wrap">
 	                        <div class="chat-title">${cRoom.chatroomTitle }</div>
 	                        <div class="chat-tag">#${cRoom.tag1 } #${cRoom.tag2 } #${cRoom.tag3 }</div>
-	                        <div class="chat-mem-count">정원 숫자 / ${cRoom.chatLimit }</div>
+	                        <div class="chat-mem-count">정원 ${cRoom.chatMemberCount } / ${cRoom.chatLimit }</div>
 	                    </div>
 	                    <div class="msg-alarm">4</div>
 	                    </a>

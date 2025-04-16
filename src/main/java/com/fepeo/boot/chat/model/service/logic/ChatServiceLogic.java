@@ -11,6 +11,7 @@ import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
 import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.mapper.ChatMapper;
 import com.fepeo.boot.chat.model.service.ChatService;
+import com.fepeo.boot.chat.model.vo.ChatMember;
 import com.fepeo.boot.chat.model.vo.ChatRoom;
 import com.fepeo.boot.common.util.Util;
 
@@ -47,6 +48,11 @@ public class ChatServiceLogic implements ChatService {
 	@Override // 회원별 리스트 출력
 	public List<MyChatroom> selectChatRoomListByNo(int memberNo) {
 		return mapper.selectChatRoomListByNo(memberNo);
+	}
+
+	@Override // 채팅방 참여인원수 출력
+	public List<ChatMember> selectChatMember() {
+		return mapper.selectChatMember();
 	}
 
 }
