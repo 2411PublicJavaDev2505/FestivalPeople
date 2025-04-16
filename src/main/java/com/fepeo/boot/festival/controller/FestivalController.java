@@ -1,13 +1,16 @@
 package com.fepeo.boot.festival.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fepeo.boot.common.util.PageUtil;
 import com.fepeo.boot.festival.model.service.FestivalService;
 import com.fepeo.boot.festival.model.vo.Festival;
 
@@ -19,12 +22,26 @@ import lombok.RequiredArgsConstructor;
 public class FestivalController {
 	
 	private final FestivalService festivalService;
+	private final PageUtil pageUtil;
 
 	
 	@GetMapping("/list")
-	public String showFestivalList(Model model) {
-		List<Festival> festivals = festivalService.getFestivalList();
-	    model.addAttribute("festivals", festivals);  
+	public String showFestivalList(
+	    @RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+	    Model model
+	) {
+	    int totalCount = festivalService.getTotalCount();
+	    int itemsPerPage = 8;
+
+	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
+	    List<Festival> festivals = festivalService.getFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
+	    System.out.println("불러온 축제 수: " + festivals.size());
+	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
+	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
+	    model.addAttribute("endNavi", pageInfo.get("endNavi"));
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("festivals", festivals);
+
 	    return "festival/list";
 	}
 	

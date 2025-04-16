@@ -3,8 +3,11 @@ package com.fepeo.boot.festival.model.service.logic;
 
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +26,7 @@ public class FestivalServiceLogic implements FestivalService {
 
 	private final ApiComponent apiComponent;
     private final FestivalMapper festivalMapper;
-
+    
     @Override
     public void insertFestivalList() {
         try {
@@ -62,15 +65,23 @@ public class FestivalServiceLogic implements FestivalService {
         return raw.substring(0, 4) + "-" + raw.substring(4, 6) + "-" + raw.substring(6, 8);
     }
 
-	@Override
-	public List<Festival> getFestivalList() {
-		return festivalMapper.selectFestivalList();
-	}
+    @Override
+    public List<Festival> getFestivalList(int startRow, int endRow) {
+        Map<String, Integer> params = new HashMap<>();
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+        return festivalMapper.selectFestivalList(params);
+    }
 
 
 	@Override
 	public Festival getFestivalByNo(int festivalNo) {
 		return festivalMapper.selectFestivalByNo(festivalNo);
+	}
+
+	@Override
+	public int getTotalCount() {
+		return festivalMapper.getTotalCount();
 	}
 
 }
