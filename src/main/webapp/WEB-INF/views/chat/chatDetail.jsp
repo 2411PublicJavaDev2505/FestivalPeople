@@ -30,102 +30,29 @@
 	                <input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 	                <button class="chat-search-btn" type="submit">⌕</button>
 	            </form>
+	            
+	            <!-- 참여방 없을 경우 -->
+	            <c:if test="${empty myList }">
+		            <span class="chat-notice">참여중인 채팅방이 없습니다</span>
+	            </c:if>
 	            <!-- 참여방 있을 경우 → 목록 출력--> 
-	            <ul class="chat-list">
-	                <li class="chat-list-row">
-						<a href="/chat/detail" class="chat-link">	            
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">튤립축제 동행 구해요</div>
-	                        <div class="chat-tag">#전주 #영화제 #여자만</div>
-	                        <div class="chat-mem-count">정원 6/10</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div>
-	                    </a>
-	                </li>
-	                <li class="chat-list-row">
-						<a href="#" class="chat-link">	            
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">전주국제영화제 같이 가실 분</div>
-	                        <div class="chat-tag">#전주 #영화제 #여자만</div>
-	                        <div class="chat-mem-count">정원 2/10</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div>
-	                    </a>
-	                </li>
-	                <li class="chat-list-row">
-						<a href="#" class="chat-link">	            
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">마라톤 동행 구합니다</div>
-	                        <div class="chat-tag">태그</div>
-	                        <div class="chat-mem-count">정원 12/30</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div></a>
-	                </li>
-	                <li class="chat-list-row">
-						<a href="#" class="chat-link">	            
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">튤립축제 동행 구해요</div>
-	                        <div class="chat-tag">#전주 #영화제 #여자만</div>
-	                        <div class="chat-mem-count">정원 6/10</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div></a>
-	                </li>
-	                <li class="chat-list-row">
-						<a href="#" class="chat-link">	            
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">전주국제영화제 같이 가실 분</div>
-	                        <div class="chat-tag">#전주 #영화제 #여자만</div>
-	                        <div class="chat-mem-count">정원 2/10</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div></a>
-	                </li>
-	                <li class="chat-list-row">
-						<a href="#" class="chat-link">	            
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">마라톤 동행 구합니다</div>
-	                        <div class="chat-tag">태그</div>
-	                        <div class="chat-mem-count">정원 12/30</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div></a>
-	                </li>
-	                <li class="chat-list-row">
-						<a href="#" class="chat-link">	            
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">튤립축제 동행 구해요</div>
-	                        <div class="chat-tag">#전주 #영화제 #여자만</div>
-	                        <div class="chat-mem-count">정원 6/10</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div></a>
-	                </li>
-	                <li class="chat-list-row">
-						<a href="#" class="chat-link">	            
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">전주국제영화제 같이 가실 분</div>
-	                        <div class="chat-tag">#전주 #영화제 #여자만</div>
-	                        <div class="chat-mem-count">정원 2/10</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div></a>
-	                </li>
-	                <li class="chat-list-row">
-						<a href="#" class="chat-link">	            
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">마라톤 동행 구합니다</div>
-	                        <div class="chat-tag">태그</div>
-	                        <div class="chat-mem-count">정원 12/30</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div>
-	                    </a>
-	                </li>
-	            </ul> 
+	            <c:if test="${not empty myList }">
+	       	        <c:forEach items="${myList }" var="myList" varStatus="i">
+		            <ul class="chat-list">
+		                <li class="chat-list-row">
+							<a href="/chat/detail" class="chat-link">	            
+							<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
+		                    <div class="text-wrap">
+		                        <div class="chat-title">${myList.chatroomTitle }</div>
+		                        <div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
+		                        <div class="chat-mem-count">정원 0 / ${myList.chatLimit }</div>
+		                    </div>
+		                    <div class="msg-alarm">2</div>
+		                    </a>
+		                </li>
+		            </ul> 
+		            </c:forEach>
+	            </c:if>
 	            <form class="chat-room-make" action="/chat/insert">
 	                <button type="submit">채팅방 생성</button>
 	            </form>                 
@@ -134,7 +61,7 @@
 	        <section class="chat-msg-list">
       			<header class="chat-header">
       				<div class = "chat-header-left">
-      					<div class="chat-prev-list"><a href="#">←</a></div>
+      					<div class="chat-prev-list"><a href="/chat/list">←</a></div>
       					<div class="chat-header-title"><span>튤립축제 동행 구해요</span></div>
       				</div>
       				<div class ="chat-header-right">

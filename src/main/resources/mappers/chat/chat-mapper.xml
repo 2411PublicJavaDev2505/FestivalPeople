@@ -13,5 +13,8 @@
 	<select id="selectChatRoomList" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		select * from CHATROOM
 	</select>
+	<select id="selectChatRoomListByNo" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
+		select * from CHATROOM where MEMBER_NO = #{memberNo}
+	</select>
 
 </mapper>  
