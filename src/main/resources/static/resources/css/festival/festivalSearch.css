@@ -66,59 +66,6 @@
     border-top-right-radius: 20px;
 }
 
-
-/*슬라이드 넘기는 이미지 부분 */
-.moveSlider {
-    position: relative;
-    overflow: hidden;
-    margin-top: 40px;
-}
-
-.moveSlider-track {
-    display: flex;
-    padding-top: 100px;
-    justify-content:space-evenly;
-    transition: transform 0.5s ease;
-    will-change: transform ;
-}
-
-
-
-.moveSlider-prev-button {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    z-index: 10;
-    cursor: pointer;
-    pointer-events: auto;
-}
-.moveSlider-prev-button img, .moveSlider-next-button img {
-    opacity: 1 !important;  /* 화면에 보이게 */
-    width: 44px;            /* 원하는 크기로 조정 */
-    height: auto;
-}
-.moveSlider-next-button{
-    position: absolute;
-    top: 50%;
-    right: 60px;
-    transform: translateY(-50%);
-    z-index: 10;
-    cursor: pointer;
-    pointer-events: auto;
-}
-.slider-btn-prev, .slider-btn-next {
-    position: absolute;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 2;
-    border-radius: 100%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-
 .festival-list-track {
     display: flex;
     padding-left: 80px;

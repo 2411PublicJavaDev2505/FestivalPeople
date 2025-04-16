@@ -85,10 +85,16 @@ public class FestivalServiceLogic implements FestivalService {
 		return festivalMapper.getTotalCount();
 	}
 
+
 	// 지역명 기반으로 축제리스트 출력
 	@Override
 	public List<Festival> selectFestivalListByRegion(List<String> goodWeather, Map<String, String> mapPoint) {		
 		return festivalMapper.selectFestivalListByRegion(goodWeather, mapPoint);
+	}
+	@Override
+	public List<Festival> getrFestivalList() {
+		return festivalMapper.selectrecommendFestivalList();
+		
 	}
 
 }

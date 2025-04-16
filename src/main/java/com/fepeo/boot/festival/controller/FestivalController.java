@@ -35,12 +35,16 @@ public class FestivalController {
 	    int itemsPerPage = 8;
 
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
+	    List<Festival> rfestivals =festivalService.getrFestivalList();
 	    List<Festival> festivals = festivalService.getFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
+
+
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
 	    model.addAttribute("endNavi", pageInfo.get("endNavi"));
 	    model.addAttribute("currentPage", currentPage);
 	    model.addAttribute("festivals", festivals);
+	    model.addAttribute("rfestivals",rfestivals);
 
 	    return "festival/list";
 	}

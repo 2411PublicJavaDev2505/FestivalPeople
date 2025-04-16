@@ -19,6 +19,10 @@ public interface FestivalMapper {
 
 	int getTotalCount();
 
+
 	List<Festival> selectFestivalListByRegion(@Param("regionNames") List<String> regionNames, Map<String,String> mapPoint);
+
+	List<Festival> selectrecommendFestivalList();
+
 	
 }
