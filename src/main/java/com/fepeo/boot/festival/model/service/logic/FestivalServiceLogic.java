@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
@@ -82,6 +83,12 @@ public class FestivalServiceLogic implements FestivalService {
 	@Override
 	public int getTotalCount() {
 		return festivalMapper.getTotalCount();
+	}
+
+	// 지역명 기반으로 축제리스트 출력
+	@Override
+	public List<Festival> selectFestivalListByRegion(List<String> goodWeather, Map<String, String> mapPoint) {		
+		return festivalMapper.selectFestivalListByRegion(goodWeather, mapPoint);
 	}
 
 }

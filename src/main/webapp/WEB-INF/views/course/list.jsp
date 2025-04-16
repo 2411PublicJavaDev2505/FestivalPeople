@@ -34,8 +34,8 @@
 			        
 			        <button class="slide-btn left" onclick="slideLeft()">&#10094;</button>
 				        <div class="card-slider" id="cardSlider">
-				        
-				                <a href="/course/detail">
+							<c:forEach items="${fList }" var="festival" varStatus="i">
+				                <a href="/course/detail?festivalNo=${festival.festivalNo }">
 				                	<div class="coursecard">
 				                    <img src="../resources/img/course/examPic1.png" alt="이미지" />
 				                    <h3>벚꽃축제</h3>
@@ -43,35 +43,7 @@
 				                    <p class="hashtags">꽃구경</p>
 				                	</div>
 				                </a>
-				                
-				                
-				                <a href="/course/detail">
-				                	<div class="coursecard">
-				                    <img src="../resources/img/course/examPic2.jpg" alt="이미지" />
-				                    <h3>벚꽃축제</h3>
-				                    <p>한강</p>
-				                    <p class="hashtags">꽃구경</p>
-				               		</div>
-				                </a>
-				                
-				                
-				                <a href="/course/detail">
-				                	<div class="coursecard">
-				                    <img src="../resources/img/course/examPic3.jpg" alt="이미지" />
-				                    <h3>벚꽃축제</h3>
-				                    <p>한강</p>
-				                    <p class="hashtags">꽃구경</p>
-				                	</div>
-				                </a>
-				                
-				                <a href="/course/detail">
-				               		<div class="coursecard">
-				                    <img src="../resources/img/course/examPic4.jpg" alt="이미지" />
-				                    <h3>벚꽃축제</h3>
-				                    <p>한강</p>
-				                    <p class="hashtags">꽃구경</p>
-				                	</div>
-				                </a>
+				            </c:forEach>
 				        </div>
 			    
 			        <button class="slide-btn right" onclick="slideRight()">&#10095;</button>

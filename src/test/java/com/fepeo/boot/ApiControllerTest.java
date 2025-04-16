@@ -42,6 +42,7 @@ public class ApiControllerTest {
 		//Map<String, String> apiKey = aService.callWeatherApi("202504160600");
 		// 축제 테스트
 //		String apiKey = aService.callFestivalApi();
+		//String apiKey = aService.callseoulWeather();
 		// 지도 테스트
 //		String apiKey = aService.kakaoMapApi();
 		// 좌표 테스트
