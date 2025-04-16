@@ -39,14 +39,14 @@ public class ApiControllerTest {
 	public void testApiLoader() throws JsonMappingException, JsonProcessingException {
 
 		//날씨 테스트
-		Map<String, String> apiKey = aService.callWeatherApi("202504160600");
+		//Map<String, String> apiKey = aService.callWeatherApi("202504160600");
 		// 축제 테스트
 //		String apiKey = aService.callFestivalApi();
 		// 지도 테스트
 //		String apiKey = aService.kakaoMapApi();
 		// 좌표 테스트
 //		Map<String, String> apiKey = aService.searchMemberAddress("서울시 평창 10길 3");
-		System.out.println(apiKey);
+		//System.out.println(apiKey);
 		
 
 //		List<FestivalItem> apiKey = aService.callFestivalApi();
