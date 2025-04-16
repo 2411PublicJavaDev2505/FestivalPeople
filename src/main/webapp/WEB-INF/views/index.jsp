@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="slidecontroller-detail">
-                <a href="/festival/detail/${festival.festivalNo}" >자세히 보기</a>
+                <a href="/festival/detail/${rfestivals[0].festivalNo}">자세히 보기</a>
             </div>
             <div class="slidecontroller-pagination">
                 <div class="progress-bar">
