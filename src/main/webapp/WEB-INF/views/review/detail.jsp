@@ -35,6 +35,9 @@
 					</div>
 					
 				</section>
+				<input type="hidden" value="${review.reviewNo }" id="reviewNo">
+<%-- 				<input type="hidden" value="${comment.commentNo }" id="commentNo"> --%>
+				<input type="hidden" value="${sessionScope.member.memberNo}" id="memberNo">
 				<!-- 댓글 -->
 				<div class="review-comment-list-area">
 							<div class="review-comment-write-area">
@@ -49,7 +52,8 @@
 						<c:forEach items="${review.commentList }" var="comment">
 							<li class="reviewcomment-row">
 								<p>
-									<span>여기부터생각!멤버번호</span>
+									<span>${comment.commentNo }</span>
+<!-- 									<span>여기부터생각!멤버번호</span> -->
 									<span>${comment.commentTime }</span>
 								</p>
 								<p>${comment.commentContent }</p>
@@ -64,8 +68,38 @@
 				</div>
 			</main>
 				<script>
-					document.querySelector("#commentContent").addEventListener("click", function() {
-						alert("test");
+// 				const reviewNo = "${review.reviewNo}";
+				
+// 				function getCommentList() {
+// 					fetch("/review/comment/list?reviewNo="+reviewNo)
+// 					.then(response => response.json())
+//  					.then(cList => console.log(cList))
+// 					.catch(error => alert("Error :"  +error))
+// 				}
+				
+				//****등록하면 에러페이지 뜸 확인필요**** commentNo값 가져오지 못함!!!!!
+				document.querySelector("#addComment").addEventListener("click", function() {
+						const commentContent = document.querySelector("#commentContent").value;
+						const reviewNo = document.querySelector("#reviewNo").value;
+						const memberNo = document.querySelector("#memberNo").value;
+						
+// 						const commentNo = document.querySelector("#commentNo").value;
+						const data = {"reviewNo" : reviewNo, "commentContent": commentContent, "memberNo" : memberNo};
+						//console.log(data)
+						fetch("/review/comment/insert", {
+							method:"POST"
+ 							,headers: {"Content-type": "application/json"}
+						, body: JSON.stringify(data)})
+						.then(response => response.text())
+						.then(result => {
+							if(result > 0 ){
+								alert("댓글이 등록되었습니다");
+ 								getCommentList()
+						}else {
+							alert("댓글 등록이 완료되지 않았습니다");
+						}
+					})
+					.catch(error => alert("Error :" , error));
 					});
 				</script>
 		</div>

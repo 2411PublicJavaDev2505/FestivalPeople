@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.fepeo.boot.member.model.vo.Member;
+import com.fepeo.boot.review.controller.dto.CommentAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
 import com.fepeo.boot.review.model.service.CommentService;
 import com.fepeo.boot.review.model.service.ReviewService;
@@ -75,8 +77,9 @@ public class ReviewController {
 	
 	//댓글 등록 !!4/15 시작!!
 	
+	@ResponseBody
 	@PostMapping("/comment/insert")
-	public int insertComment(@RequestBody ReviewComment comment) {
+	public int insertComment(@RequestBody CommentAddRequest comment) {
 		//아래확인하고 지울것!!
 		System.out.println(comment);
 		int result = cService.insertComment(comment);
@@ -84,6 +87,13 @@ public class ReviewController {
 		System.out.println(result);
 		return result;
 	}
+	
+	//등록해주고 작성!
+	
+//	@GetMapping("/comment/list")
+//	public List<ReviewComment> selectCommentList(int reviewNo) {
+//		return cService.selectCommentList(reviewNo);
+//	}
 }
 
 

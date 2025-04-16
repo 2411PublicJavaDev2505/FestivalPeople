@@ -7,6 +7,6 @@
   			 INSERT INTO REVIEW_COMMENT
         	VALUES(SEQ_COMMENT_NO.NEXTVAL,
                 #{commentContent}, 
-                DEFAULT ,DEFAULT, #{reviewNo}, #{memberNo}, DEFAULT,NULL)
+                DEFAULT ,#{reviewNo}, #{memberNo}, DEFAULT)
   		</insert>
 </mapper>
