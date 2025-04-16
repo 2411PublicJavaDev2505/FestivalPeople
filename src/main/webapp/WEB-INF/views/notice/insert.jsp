@@ -10,7 +10,9 @@
 </head>
 <body>
     
-    <div class="background-image"></div>
+    <div class="background-image">
+    	<img src="../resources/img/notice/background.jpg" alt="바탕화면">
+    </div>
 
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
