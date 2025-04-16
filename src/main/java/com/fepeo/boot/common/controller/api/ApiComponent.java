@@ -1,5 +1,6 @@
 package com.fepeo.boot.common.controller.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.course.model.vo.dto.KakaoPlaceResponseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
-
+import com.fepeo.boot.course.model.vo.dto.RegionDto;
 
 import lombok.Getter;
 
@@ -183,74 +184,91 @@ public class ApiComponent {
 	    return "Hello world";	
 	}
 
-	
-	// 저장된 회원 주소지로 주소값 받아오기
-	public String searchMemberAddress(String memberAddress) {
+
+	// 저장된 회원 주소지로 좌표값 받아오기
+	public Map<String, String> searchMemberAddress(String memberAddress) throws JsonMappingException, JsonProcessingException {
 		String authorization = kakaoApiKey;
 		WebClient webClient = WebClient.create("https://dapi.kakao.com");
-		
-		String response = webClient.get()
-				.uri(uriBuilder -> uriBuilder
-                        .queryParam("serviceKey", festivalApiKey)
-                        .queryParam("numOfRows", 100)
-                        .queryParam("pageNo", 5)
-                        .queryParam("MobileOS", "ETC")
-                        .queryParam("MobileApp", "AppTest")
-                        .queryParam("_type", "Json")
-                        .queryParam("listYN", "Y")
-                        .queryParam("arrange", "A")
-                        .queryParam("eventStartDate", "20100401")
-                        .build())
-                .header("Accept", "application/json")
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
-
-	    KakaoPlaceResponseDto res = webClient.get()
+				
+		//Map<String, String> result = new HashMap<String, String>();	
+		String result = webClient.get()
 	            .uri(uriBuilder -> uriBuilder
-	                    .path("/v2/local/search/address..json")
-	                    .queryParam("category_group_code", "FD6")
-	                    .queryParam("x", 126.968357810931)
-	                    .queryParam("y", 37.6063916960376)
-	                    .queryParam("radius", 1000)
-	                    .queryParam("sort", "distance")
+	                    .path("/v2/local/search/address.json")
+	                    .queryParam("query", memberAddress)
 	                    .build())
 	            .header("Authorization", authorization)
 	            .retrieve()
-	            .bodyToMono(KakaoPlaceResponseDto.class)
-	            .block();
-
-
+	            .bodyToMono(String.class)
+	            .block();  
 		
+		//String -> Json 파싱		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(result);
+		JsonNode documents = root.path("documents");
 		
-		return "";
+		Map<String, String> mapPoint = new HashMap<>();
+		JsonNode firstDoc = documents.get(0);
+		String x = firstDoc.path("x").asText(); //x 좌표값
+		String y = firstDoc.path("y").asText(); //y 좌표값
+
+		mapPoint.put("x", x);
+		mapPoint.put("y", y);
+		
+		return mapPoint;	
 	}
 	
 	
-	// 기상청 중기 예보 출력 API
-	public String callWeatherApi() {
+	// 기상청 중기 예보 향후 7일간 날씨가 좋은 지역 출력
+	public List<String> callWeatherApi(String nowTime, List<RegionDto> regionList) throws JsonMappingException, JsonProcessingException {
 		
-		// 이것도 각 메소드에서 API 따로 사용하려고 했던 방식
-		//String apiAddress = ApiKeyLoader.get("weatherAddress");
+		
 		// 변경하여 webClient를 각 메소드에서 따로 불러야함
-		WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst");
+		WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst");
 		// API 호출
-        String response = webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                    .queryParam("serviceKey", weatherApiKey)
-                    .queryParam("pageNo", 2)
-                    .queryParam("numOfRows", 10)
-                    .queryParam("dataType", "JSON")
-                    .queryParam("stnId", 109)
-                    .queryParam("tmFc", "202504140600")
-                    .build())
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
-            System.out.println(response);
-            return response;
-	
+		List<String> sunnyRegions = new ArrayList<>();
+		for(RegionDto region : regionList) {
+			//지역코드 출력 확인
+			//System.out.println(region.getRegionNo());
+			String response = webClient.get()
+					.uri(uriBuilder -> uriBuilder
+							.queryParam("serviceKey", weatherApiKey)
+							.queryParam("pageNo", 1)
+							.queryParam("numOfRows", 10)
+							.queryParam("dataType", "JSON")
+							.queryParam("regId", region.getRegionNo())
+							.queryParam("tmFc", nowTime)
+							.build())
+					.retrieve()
+					.bodyToMono(String.class)
+					.block();
+			
+			//System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode root = mapper.readTree(response);
+			JsonNode items = root.path("response").path("body").path("items").path("item");
+			
+			if(items.isArray() && items.size() > 0) {
+				JsonNode item = items.get(0);
+				String wf4 = item.path("wf4am").asText();
+				String wf5 = item.path("wf5am").asText();
+				String wf6 = item.path("wf6am").asText();
+//				String wf7 = item.path("wf7am").asText();
+//				String wf8 = item.path("wf8").asText();
+//				String wf9 = item.path("wf9").asText();
+//				String wf10 = item.path("wf10").asText();
+				
+				// 날씨 필터링하려고 했음
+                //if (wf4.contains("맑음") || wf5.contains("맑음")) {
+                    sunnyRegions.add(region.getRegionName());
+                //}
+		
+			}
+		} 
+			return sunnyRegions;
 	}
+	
+	
 
 	// 축제 호출
 		public String callFestivalApi() {
