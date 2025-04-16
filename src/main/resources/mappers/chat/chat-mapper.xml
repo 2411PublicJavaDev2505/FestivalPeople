@@ -9,5 +9,9 @@
 		SEQ_CHATROOM_NO.nextval, #{memberNo}, #{chatroomTitle},#{tag1},#{tag2},#{tag3},
 		#{chatImgName},#{chatImgRename},#{chatImgPath},#{chatLimit}, default	)
 	</insert>
+	
+	<select id="selectChatRoomList" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
+		select * from CHATROOM
+	</select>
 
 </mapper>  

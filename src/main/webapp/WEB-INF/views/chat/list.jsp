@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>같이갈래-목록</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
@@ -132,32 +133,24 @@
 	                <button type="submit">채팅방 생성</button>
 	            </form>                 
 	        </section>
+	        
 	        <!--우 전체목록-->
 	        <section class="allchat-list-wrap">
+	        <c:forEach items="${cRooms }" var="cRoom" varStatus="i">
 	            <ul class="chat-list">
 	                <li class="chat-list-row">
 	                	<a href="#" class="chat-link">
-	                    <div class="chat-image">그림</div>
+	                    <img class="chat-image" alt="${cRoom.chatImgName}" src="${cRoom.chatImgPath}">
 	                    <div class="text-wrap">
-	                        <div class="chat-title">제목</div>
-	                        <div class="chat-tag">태그</div>
-	                        <div class="chat-mem-count">정원 4/10</div>
-	                    </div>
-	                    <div class="msg-alarm">4</div>
-	                    </a>
-	                </li>
-	                <li class="chat-list-row">
-	                	<a href="#" class="chat-link">
-	                    <div class="chat-image">그림</div>
-	                    <div class="text-wrap">
-	                        <div class="chat-title">제목</div>
-	                        <div class="chat-tag">태그</div>
-	                        <div class="chat-mem-count">정원 4/10</div>
+	                        <div class="chat-title">${cRoom.chatroomTitle }</div>
+	                        <div class="chat-tag">#${cRoom.tag1 } #${cRoom.tag2 } #${cRoom.tag3 }</div>
+	                        <div class="chat-mem-count">정원 ${chatMemberCount} / ${chatLimit }</div>
 	                    </div>
 	                    <div class="msg-alarm">4</div>
 	                    </a>
 	                </li>
 	            </ul>            
+	        </c:forEach>
 	        </section>
 	    </section>
     </main>

@@ -132,10 +132,9 @@
    					<div class="chat-header-title"><span>채팅방 만들기</span></div>
    				</div>
 				<div class ="chat-room-top">
-   					<input name="chatroomTitle" id="chatRoomTitle"  type="text" maxlength="90" placeholder="채팅방 이름(필수)">
-   					<div id="charCount">
-   						<p>0</p>
-   						<p>/30자</p>
+   					<input name="chatroomTitle" id="chatRoomTitle" type="text" placeholder="채팅방 이름(필수)">
+   					<div id="charLength">
+   						<span id="charCount">0/30</span>
    					</div>
 				</div>
 				<div class ="room-tag-group">
@@ -163,14 +162,29 @@
     </div>
     
     <script type="text/javascript">
-	    <!-- 채팅방 제목 글자 카운트 -->
-	    const title = document.getElementById('chatRoomTitle');
-	    const counter = document.getElementById('charCount');	
-	    input.addEventListener('chatRoomTitle', () => {
-	      const length = title.value.length;
-	      counter.textContent = `${length}/90`;
+	    <!-- 채팅방 제목 글자 카운트(30자 제한) --> //현재 작동안되고 있는 중 ㅠ
+	    document.addEventListener("DOMContentLoaded", function () {
+	        const chatRoomTitle = document.getElementById("chatRoomTitle");
+	        const maxlength = 30; // 최대 글자수
+
+	        chatRoomTitle.addEventListener("input", function () {
+	            const currentLength = chatRoomTitle.value.length;
+
+	            // 초과 글자수 제거
+	            if (currentLength > maxlength) {
+	                chatRoomTitle.value = chatRoomTitle.value.substr(0, maxlength);
+	            }
+
+	            // 글자수 업데이트
+	            const charCountSpan = document.getElementById("charCount");
+	            if (charCountSpan) {
+	                charCountSpan.textContent = `${chatRoomTitle.value.length}/${maxlength}`;
+	            }
+	        });
 	    });
+		
 	    
+		
 	    <!-- 이미지 삽입 -->
 	    function imgUp(){
 	    	const imgInput = document.getElementById("imgInput");
