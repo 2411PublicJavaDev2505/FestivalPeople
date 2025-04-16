@@ -1,6 +1,8 @@
 package com.fepeo.boot.review.model.service.logic;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +41,13 @@ public class ReviewServiceLogic implements ReviewService {
 	@Override
 	public Review selectOneByNo(int reviewNo) {
 		Review review = mapper.selectOneByNo(reviewNo);
+		return review;
+	}
+
+	//리뷰 전체 리스트(4/16)
+	@Override
+	public List<Review> selectReviewList() {
+		List<Review> review = mapper.selectReviewList();
 		return review;
 	}
 

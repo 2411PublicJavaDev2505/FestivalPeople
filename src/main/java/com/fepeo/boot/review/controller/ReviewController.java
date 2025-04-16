@@ -36,17 +36,17 @@ public class ReviewController {
 	
 	private final ReviewService rService;
 
-    
+    //후기 게시판!
 	
 	@GetMapping("/list")
-	public String showReviewList(HttpSession session
-			) {
-//		session.setAttribute("member", member);
-//		String member = (String)session.getAttribute("memberId",member);
-//		System.out.println(member);
+	public String showReviewList(
+			Model model) {
+			List<Review>  rList = rService.selectReviewList();
+			model.addAttribute("rList", rList);
+			return "/review/list";
+			
+}
 
-		return "review/list";
-	}
 	
 	//후기등록
 	

@@ -17,9 +17,9 @@
 					<div class="review-h1">
 						<h1>여행후기</h1>
 					</div>
-					<div class="review-report-btn">
-						<button>신고하기</button>
-					</div>
+						<div class="review-report-btn">
+							<button>신고하기</button>
+						</div>
 					<div class="reviewtitle-h1">
 						<!-- 리뷰제목 -->
 						<h1>${review.reviewTitle }</h1>
@@ -76,7 +76,7 @@
 				function getCommentList() {
 					fetch("/review/comment/list?reviewNo="+reviewNo)
 					.then(response => response.json())
-//   					.then(cList => console.log(cList))
+//    					.then(cList => console.log(cList))
 					.then(cList => {
 						//#commentList 확인필요!
 						const cListTag = document.querySelector("#commentList");
