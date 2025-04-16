@@ -12,9 +12,11 @@ public interface FestivalService {
 	
 	public void insertFestivalList();
 
-	public List<Festival> getFestivalList();
+	public List<Festival> getFestivalList(int startRow, int endRow);
 
 	public Festival getFestivalByNo(int festivalNo);
+
+	public int getTotalCount();
 	
 }
 	

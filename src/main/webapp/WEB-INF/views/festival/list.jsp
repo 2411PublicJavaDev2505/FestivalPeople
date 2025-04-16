@@ -10,7 +10,11 @@
 		<title>Festival Main Page</title>
 	</head>
 	<body>
+		
 	    <div class="container">
+	    <div class="background-image">
+    	 	<img src="../resources/img/festival/우도.jpg" alt="바탕화면">
+    	 </div>
 		<jsp:include page="../include/header.jsp"/>
 	       <main class="festival-list">
 	           <div class="buttons">
@@ -41,15 +45,23 @@
 	               </div>
 	               
 					<div class="moveSlider-track" id="moveSliderTrack">
-						<c:forEach var="festival" items="${festivals}">
-								<c:if test="${not empty festival.festivalFilePath}">
-							<div class="festival-card">
-									<a href="/festival/detail/${festival.festivalNo}">
-					                	<img src="${festival.festivalFilePath}" alt="축제 이미지" width="300" />
-									</a>
-							</div>
-								</c:if>
-						</c:forEach>
+						<c:forEach var="festival" items="${festivals}" varStatus="status">
+						   <c:if test="${status.index % 4 == 0}">
+						     <div class="slide-group">
+						   </c:if>
+						
+						   <c:if test="${not empty festival.festivalFilePath}">
+						     <div class="festival-card">
+						       <a href="/festival/detail/${festival.festivalNo}">
+						         <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+						       </a>
+						     </div>
+						   </c:if>
+						
+						   <c:if test="${status.index % 4 == 3 || status.last}">
+						     </div> 
+						   </c:if>
+						 </c:forEach>
 					</div>
 	               
 	               <div class ="moveSlider-next-button">
@@ -61,16 +73,17 @@
 	
 	           <div class="festival-list">
 	               <div class="festival-list-track">
-	                 <c:forEach var="festival" items="${festivals}">
-                        <c:if test="${not empty festival.festivalFilePath}">
-	                    <div class="festival-card">
-	                        <a href="/festival/detail/${festival.festivalNo}">
-	                                <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
-	                        </a>
-	                    </div>
-                        </c:if>
-                	</c:forEach>
-	               </div>
+					    <c:forEach var="festival" items="${festivals}">
+					        <c:if test="${not empty festival.festivalFilePath}">
+					            <div class="festival-card">
+					                <a href="/festival/detail/${festival.festivalNo}">
+					                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+					                </a>
+					            </div>
+					        </c:if>
+					    </c:forEach>
+					</div>
+               </div>
 	               
 			   <div class="pagination">
 					<a href="/recipe/list?page=1"> ◁◁ </a>
@@ -89,21 +102,39 @@
 	   </div>
 
     <script>
-    	document.addEventListener('DOMContentLoaded', function (){
-	        let currentSlide = 0;
-	        const cardWidth = 270;
+	   document.addEventListener('DOMContentLoaded', function () {
+	       let currentSlide = 0;
+	       const track = document.getElementById("moveSliderTrack");
+	       const totalGroups = track.querySelectorAll(".slide-group").length;
+	       let autoSlideInterval;
+	       let restartTimeout;
 	
-	        window.moveSlide = function (direction) {
-	            const track = document.getElementById("moveSliderTrack");
-	            const maxSlide = track.children.length - 3;
-
-	            currentSlide += direction;
-	            if (currentSlide < 0) currentSlide = 0;
-	            if (currentSlide > maxSlide) currentSlide = maxSlide;
+	       function startAutoSlide() {
+	           autoSlideInterval = setInterval(() => {
+	               moveSlide(1);
+	           }, 5000);
+	       }
 	
-	            track.style.transform = 'translateX(-'+currentSlide * cardWidth+'px)';
-	        }	
-    	});
+	       function moveSlide(direction) {
+	           clearInterval(autoSlideInterval);
+	           clearTimeout(restartTimeout);
+	
+	           currentSlide += direction;
+	           if (currentSlide >= totalGroups) currentSlide = 0;
+	           if (currentSlide < 0) currentSlide = totalGroups - 1;
+	
+	           const groupWidth = track.offsetWidth;
+	           track.style.transform = 'translateX(-' + currentSlide * groupWidth + 'px)';
+	
+	           restartTimeout = setTimeout(() => {
+	               startAutoSlide();
+	           }, 10000); // 10초 뒤 자동 재시작
+	       }
+	
+	       window.moveSlide = moveSlide;
+	
+	       startAutoSlide(); // 페이지 로드시 자동 시작
+	   });
         
     </script>
 	</body>

@@ -26,11 +26,11 @@
 					<section class="festival-detail-items">
 						<ul>
 							<li> 🗓️ 축제 일정: ${festival.festivalStartDate} ~ ${festival.festivalEndDate}</li>
-							<li> 📍 개최 장소: ${festival.festivalStartDate}</li>
+							<li> 📍 개최 장소: ${festival.festivalAddress} ${festival.festivalDetailAddress}</li>
 							<li> 📞 대표 전화:  ${festival.festivalPhone}</li>
 							<li> ❤  축제기간 일기예보
 								<div class="weather-api">
-									<img src="../resources/img/festival/weather_example.jpg" alt="날씨">
+									<img src="../resources/img/festival/weather_example.jpg alt="날씨">
 								</div>
 							</li>
 							<li>  ❤ 길찾기

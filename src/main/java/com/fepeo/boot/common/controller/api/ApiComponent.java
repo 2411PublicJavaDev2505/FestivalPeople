@@ -261,7 +261,7 @@ public class ApiComponent {
 					.uri(uriBuilder -> uriBuilder
 	                        .queryParam("serviceKey", festivalApiKey)
 	                        .queryParam("numOfRows", 100)
-	                        .queryParam("pageNo", 5)
+	                        .queryParam("pageNo", 1)
 	                        .queryParam("MobileOS", "ETC")
 	                        .queryParam("MobileApp", "AppTest")
 	                        .queryParam("_type", "Json")

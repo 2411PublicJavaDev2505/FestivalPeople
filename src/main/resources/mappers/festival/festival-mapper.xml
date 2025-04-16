@@ -22,16 +22,26 @@
         )
     </insert>
 
-    <select id="selectFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival">
-	    SELECT
-	        FESTIVAL_NO,FESTIVAL_NAME,FESTIVAL_START_DATE,FESTIVAL_END_DATE,FESTIVAL_FILE_NAME,
-	        FESTIVAL_FILE_RENAME, FESTIVAL_FILE_PATH,FESTIVAL_PHONE,FESTIVAL_ADDRESS,FESTIVAL_DETAIL_ADDRESS,
-	        MAP_V_CODE, MAP_H_CODE  
-	    FROM FESTIVAL
-	        ORDER BY FESTIVAL_START_DATE DESC
+    <select id="selectFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival" parameterType="map">
+	    SELECT * FROM (
+	        SELECT f.*, ROWNUM AS rnum
+	        FROM (
+	            SELECT 
+	                FESTIVAL_NO, FESTIVAL_NAME, FESTIVAL_START_DATE, FESTIVAL_END_DATE,
+	                FESTIVAL_FILE_NAME, FESTIVAL_FILE_RENAME, FESTIVAL_FILE_PATH,
+	                FESTIVAL_PHONE, FESTIVAL_ADDRESS, FESTIVAL_DETAIL_ADDRESS,
+	                MAP_V_CODE, MAP_H_CODE
+	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL
+	            ORDER BY FESTIVAL_START_DATE DESC
+	        ) f
+	        WHERE ROWNUM &lt;= #{endRow}
+	    )
+	    WHERE rnum &gt;= #{startRow}
 	</select>
 	<select id="selectFestivalByNo" resultType="com.fepeo.boot.festival.model.vo.Festival">
-		SELECT * FROM festival WHERE FESTIVAL_NO = #{festivalNo}
+		SELECT * FROM FESTIVAL WHERE FESTIVAL_NO = #{festivalNo}
 	</select>
-	
+	<select id="getTotalCount" resultType="int">
+	    SELECT COUNT(*) FROM FESTIVAL
+	</select>
 </mapper>
