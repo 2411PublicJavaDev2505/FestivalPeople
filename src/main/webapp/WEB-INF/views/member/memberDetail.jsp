@@ -37,7 +37,7 @@
 					</ul>
 					<div class="mypage-left-button">
 						<button onclick="memberUpdate();">수정하기</button>
-						<button onclick="memberDelete();">탈퇴하기</button>
+						<button onclick="memberDelete('${member.socialYn}');">탈퇴하기</button>
 					</div>
 				</div>
 				<div class="mypage-right">
@@ -95,8 +95,17 @@
 			document.querySelector(".mypage-right-top button:first-child").style.backgroundColor = "white";
 			document.querySelector(".mypage-right-top button:last-child").style.backgroundColor = "#FFAF00";
 		}
-		const memberDelete = () => {
-			location.href="/member/delete";
+		const memberDelete = (socialYn) => {
+			if(socialYn == 'N'){
+				location.href="/member/delete";
+			}else{
+				if(confirm("정말로 탈퇴하시겠습니까? ㅠㅠ")){
+					location.href="/member/socialdelete";
+				}
+			}
+		}
+		const memberUpdate = () => {
+			location.href="/member/update";
 		}
 	</script>
 </body>
