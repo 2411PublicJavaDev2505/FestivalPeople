@@ -74,7 +74,7 @@
 	display:flex;
 	justify-content: space-between;
 	align-items: center;
-    width: 400px;
+    width: 350px;
     margin: 10px auto;    
 }
 	#imgUploadBtn{
@@ -82,9 +82,13 @@
 	    border-radius:10px;    
 	    background-color: #F5F5F5;	
 	    height:150px;
-	    width: 250px;		
+	    width: 150px;		
 	    cursor:pointer;
 	    color: #A6A4A2;	
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    overflow: hidden; /* 버튼 크기를 넘는 이미지가 잘리도록 설정 */	    
 	}
 .right-group{
 	display:flex;

@@ -34,7 +34,6 @@ public class ChatServiceLogic implements ChatService {
 			chatRoom.setChatImgName(imgName);
 			chatRoom.setChatImgRename(imgRename);
 			chatRoom.setChatImgPath(imgPath);
-			
 		}
 		int result = mapper.insertChatRoom(chatRoom);
 		return result;
