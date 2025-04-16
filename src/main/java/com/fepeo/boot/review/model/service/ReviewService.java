@@ -18,8 +18,10 @@ public interface ReviewService {
 	Review selectOneByNo(int reviewNo);
 	
 	
-	//리뷰 전체 리스트(4/16)
+	//리뷰 전체 리스트(4/16) 21:28커렌트페이지
 	List<Review> selectReviewList();
+
+	
 
 
 }

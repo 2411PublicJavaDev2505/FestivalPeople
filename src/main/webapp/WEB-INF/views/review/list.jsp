@@ -10,7 +10,6 @@
 	<title>후기 게시판 List 전체</title>
 </head>
 <body>
-	${rList }
 	<div class="background-image">
     	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
     </div>
@@ -44,11 +43,11 @@
 		            </tr>
 		            <c:forEach var="review" items="${rList }">
 			            <tr>
-			                <td>555</td>
-			                <td>user1</td>
-			                <td>외로움을 달랠남자구합니다..</td>
-			                <td>25/04/07</td>
-			                <td>50033</td>
+			                <td>${review.reviewNo}</td>
+			                <td>작성자</td>
+			                <td>${review.reviewTitle }</td>
+			                <td>${review.reviewWriteTime }</td>
+			                <td>${review.reviewCount }</td>
 			            </tr>
 		            </c:forEach>
 		        </table>

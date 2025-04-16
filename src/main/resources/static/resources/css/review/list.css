@@ -20,7 +20,7 @@
 	margin: 0 auto;
 	margin-top:150px;
 	width: 1350px;
-	height: 500px;
+	height: 900px;
 	padding: 30px;
 	box-shadow: 0 2px 10px rgba(1, 0, 0, 0.2);
 	background-color:rgb(60,127,114,0.9);
@@ -69,6 +69,7 @@
 .reviewlist-table{
 	margin: 0 auto;
 	width: 1300px;
+	height: 700px;
 	text-align: center;
 	font-size: 30px;
 	background-color: #f5f5f5;
@@ -76,7 +77,13 @@
 	border: 1px solid black;
 	border-collapse: collapse;
 }
-.reviewlist-top, td{
+.reviewlist-top{
+	border: 1px solid rgb(110, 102, 102);
+}
+
+td {
+	font-size: 16px;
+	padding: 10px 10px;
 	border: 1px solid rgb(110, 102, 102);
 }
 .reviewsearch{

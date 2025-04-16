@@ -36,7 +36,7 @@ public class ReviewController {
 	
 	private final ReviewService rService;
 
-    //후기 게시판!
+    //후기 게시판!(4/16)커렌트페이지하다만거 23:46분 시작!
 	
 	@GetMapping("/list")
 	public String showReviewList(

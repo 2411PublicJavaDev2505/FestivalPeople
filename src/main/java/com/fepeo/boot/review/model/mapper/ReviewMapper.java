@@ -13,7 +13,7 @@ public interface ReviewMapper {
 	int insertReview(ReviewAddRequest review);
 	//detail꺼!
 	Review selectOneByNo(int reviewNo);
-	//여행후기 전체 리스트!
+	//여행후기 전체 리스트! 페이징(21:39)int currentPage
 	List<Review> selectReviewList();
 
 }

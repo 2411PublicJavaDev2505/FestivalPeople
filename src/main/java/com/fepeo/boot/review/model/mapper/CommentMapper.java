@@ -11,7 +11,7 @@ import com.fepeo.boot.review.model.vo.ReviewComment;
 public interface CommentMapper {
 	//댓글등록!!(
 	int insertComment(CommentAddRequest comment);
-	//댓글리스트! 
+	//댓글리스트! 23:48분 int reviewNo
 	List<ReviewComment> selectCommentList(int reviewNo);
 
 }
