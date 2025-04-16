@@ -252,10 +252,32 @@ public class ApiComponent {
 	
 	}
 
-	public String callFestivalApi() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// 축제 호출
+		public String callFestivalApi() {
+//			String festivalApiKey = ApiKeyLoader.get("festivalApiKey");
+			WebClient webClient = WebClient.create("https://apis.data.go.kr/B551011/KorService1/searchFestival1");
+			
+			String response = webClient.get()
+					.uri(uriBuilder -> uriBuilder
+	                        .queryParam("serviceKey", festivalApiKey)
+	                        .queryParam("numOfRows", 100)
+	                        .queryParam("pageNo", 5)
+	                        .queryParam("MobileOS", "ETC")
+	                        .queryParam("MobileApp", "AppTest")
+	                        .queryParam("_type", "Json")
+	                        .queryParam("listYN", "Y")
+	                        .queryParam("arrange", "A")
+	                        .queryParam("eventStartDate", "20100401")
+	                        .build())
+	                .header("Accept", "application/json")
+	                .retrieve()
+	                .bodyToMono(String.class)
+	                .block();
+			
+
+			return response;
+
+		}
 	
 	
 }
