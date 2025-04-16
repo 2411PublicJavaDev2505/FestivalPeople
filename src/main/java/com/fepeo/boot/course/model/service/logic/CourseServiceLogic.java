@@ -1,5 +1,26 @@
 package com.fepeo.boot.course.model.service.logic;
 
-public class CourseServiceLogic {
+import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.fepeo.boot.course.model.mapper.CourseMapper;
+import com.fepeo.boot.course.model.service.CourseService;
+import com.fepeo.boot.course.model.vo.dto.RegionDto;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class CourseServiceLogic implements CourseService{
+	
+	private final CourseMapper mapper;
+
+	@Override
+	public List<RegionDto> getAllRegions() {
+		return mapper.selectRegionList();
+	}
+
+	
+	
 }
