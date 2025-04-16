@@ -64,7 +64,7 @@
 	                 <c:forEach var="festival" items="${festivals}">
                         <c:if test="${not empty festival.festivalFilePath}">
 	                    <div class="festival-card">
-	                        <a href="/festival/detail?festivalNo=${festival.festivalNo}">
+	                        <a href="/festival/detail/${festival.festivalNo}">
 	                                <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
 	                        </a>
 	                    </div>

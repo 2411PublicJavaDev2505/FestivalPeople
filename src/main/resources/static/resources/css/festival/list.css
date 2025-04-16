@@ -65,9 +65,9 @@
 .festival-card {
     background: white;
     border-radius: 20px;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    
     width: 270px;
-    height:200px;
+    height:400px;
     flex-shrink: 0;
     margin-right: 40px;
 }
