@@ -53,8 +53,9 @@
 						   <c:if test="${not empty festival.festivalFilePath}">
 						     <div class="festival-card">
 						       <a href="/festival/detail/${festival.festivalNo}">
-						         <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+						        <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
 						       </a>
+					       		<h4>${festival.festivalName}</h4>	
 						     </div>
 						   </c:if>
 						
@@ -79,6 +80,7 @@
 					                <a href="/festival/detail/${festival.festivalNo}">
 					                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
 					                </a>
+					                <h4>${festival.festivalName}</h4>	
 					            </div>
 					        </c:if>
 					    </c:forEach>
