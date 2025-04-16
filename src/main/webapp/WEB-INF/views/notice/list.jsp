@@ -98,5 +98,7 @@
 			location.href = "/notice/insert";
 		}
 	</script>
+
+
 </body>
 </html>
