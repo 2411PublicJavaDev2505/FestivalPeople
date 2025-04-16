@@ -1,11 +1,5 @@
 package com.fepeo.boot;
 
-
-
-import java.util.List;
-import java.util.Map;
-
-import org.junit.jupiter.api.AutoClose;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -16,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fepeo.boot.common.controller.api.ApiComponent;
-import com.fepeo.boot.festival.model.vo.dto.FestivalItem;
-
 
 @SpringBootTest
 public class ApiControllerTest {

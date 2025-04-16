@@ -34,13 +34,15 @@ public class FestivalController {
 	    int itemsPerPage = 8;
 
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
+	    List<Festival> rfestivals =festivalService.getrFestivalList();
 	    List<Festival> festivals = festivalService.getFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
-	    System.out.println("불러온 축제 수: " + festivals.size());
+//	    System.out.println("불러온 축제 수: " + festivals.size());
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
 	    model.addAttribute("endNavi", pageInfo.get("endNavi"));
 	    model.addAttribute("currentPage", currentPage);
 	    model.addAttribute("festivals", festivals);
+	    model.addAttribute("rfestivals",rfestivals);
 
 	    return "festival/list";
 	}

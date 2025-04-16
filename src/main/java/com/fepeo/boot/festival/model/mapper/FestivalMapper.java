@@ -16,5 +16,7 @@ public interface FestivalMapper {
 	Festival selectFestivalByNo(int festivalNo);
 
 	int getTotalCount();
+
+	List<Festival> selectrecommendFestivalList();
 	
 }

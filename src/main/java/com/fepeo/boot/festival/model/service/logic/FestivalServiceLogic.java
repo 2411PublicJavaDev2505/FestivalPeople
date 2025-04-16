@@ -84,5 +84,10 @@ public class FestivalServiceLogic implements FestivalService {
 		return festivalMapper.getTotalCount();
 	}
 
+	@Override
+	public List<Festival> getrFestivalList() {
+		return festivalMapper.selectrecommendFestivalList();
+	}
+
 }
 

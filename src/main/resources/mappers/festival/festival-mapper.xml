@@ -31,12 +31,16 @@
 	                FESTIVAL_FILE_NAME, FESTIVAL_FILE_RENAME, FESTIVAL_FILE_PATH,
 	                FESTIVAL_PHONE, FESTIVAL_ADDRESS, FESTIVAL_DETAIL_ADDRESS,
 	                MAP_V_CODE, MAP_H_CODE
-	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL
-	            ORDER BY FESTIVAL_START_DATE DESC
+	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL AND FESTIVAL_END_DATE >=SYSDATE
+	            ORDER BY FESTIVAL_END_DATE
 	        ) f
 	        WHERE ROWNUM &lt;= #{endRow}
 	    )
 	    WHERE rnum &gt;= #{startRow}
+	</select>
+	<select id="selectrecommendFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival">
+		SELECT * FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL
+		ORDER BY FESTIVAL_NO ASC
 	</select>
 	<select id="selectFestivalByNo" resultType="com.fepeo.boot.festival.model.vo.Festival">
 		SELECT * FROM FESTIVAL WHERE FESTIVAL_NO = #{festivalNo}

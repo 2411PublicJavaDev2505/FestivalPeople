@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <header class="main-header">
     <div class="logo-container">
-        <a href="/"><img src="../resources/img/logo.png" alt="Festival People"></a>
+        <a href="/"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Festival People"></a>
     </div>
     <nav class="main-nav">
         <ul class="group1">

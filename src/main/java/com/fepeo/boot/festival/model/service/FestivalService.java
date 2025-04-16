@@ -17,6 +17,8 @@ public interface FestivalService {
 	public Festival getFestivalByNo(int festivalNo);
 
 	public int getTotalCount();
+
+	public List<Festival> getrFestivalList();
 	
 }
 	
