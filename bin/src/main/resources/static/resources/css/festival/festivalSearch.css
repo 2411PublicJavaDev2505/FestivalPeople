@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+.container {
+   max-width:1920px;
+    margin: 0 auto;
+    text-align: center;
+}
+/* 메인 클래스 */
+.festival-list{
+	padding:80px;
+}
+/* 축제 선택 탭  */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.festival-button button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* 검색 버튼  */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-form select, .search-form input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.search-btn {
+    padding: 10px 16px;
+    font-size: 16px;
+    background: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/*  축제 대표이미지 */
+.festival-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 270px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.festival-card img {
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+
+/*슬라이드 넘기는 이미지 부분 */
+.moveSlider {
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.moveSlider-track {
+    display: flex;
+    padding-top: 100px;
+    justify-content:space-evenly;
+    transition: transform 0.5s ease;
+    will-change: transform ;
+}
+
+
+
+.moveSlider-prev-button {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
+}
+.moveSlider-prev-button img, .moveSlider-next-button img {
+    opacity: 1 !important;  /* 화면에 보이게 */
+    width: 44px;            /* 원하는 크기로 조정 */
+    height: auto;
+}
+.moveSlider-next-button{
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
+}
+.slider-btn-prev, .slider-btn-next {
+    position: absolute;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+
+.festival-list-track {
+    display: flex;
+    padding-left: 80px;
+    padding-top: 100px;
+    justify-content:space-evenly;
+    transition: transform 0.5s ease;
+    margin-top: 40px;
+    
+}

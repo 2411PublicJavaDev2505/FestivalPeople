@@ -9,4 +9,8 @@
                 #{commentContent}, 
                 DEFAULT ,#{reviewNo}, #{memberNo}, DEFAULT)
   		</insert>
+  		<select id="selectCommentList" resultType="ReviewComment">
+  			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
+  		</select>
+		
 </mapper>

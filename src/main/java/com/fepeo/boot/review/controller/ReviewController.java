@@ -88,12 +88,12 @@ public class ReviewController {
 		return result;
 	}
 	
-	//등록해주고 작성!
+	//등록해주고 작성!4/16 오전 9:24분작성시작 
 	
-//	@GetMapping("/comment/list")
-//	public List<ReviewComment> selectCommentList(int reviewNo) {
-//		return cService.selectCommentList(reviewNo);
-//	}
+	@GetMapping("/comment/list")
+	public List<ReviewComment> selectCommentList(int reviewNo) {
+		return cService.selectCommentList(reviewNo);
+	}
 }
 
 
