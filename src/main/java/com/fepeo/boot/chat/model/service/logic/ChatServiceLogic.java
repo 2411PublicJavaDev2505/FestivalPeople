@@ -2,6 +2,7 @@ package com.fepeo.boot.chat.model.service.logic;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
 import com.fepeo.boot.chat.model.mapper.ChatMapper;
 import com.fepeo.boot.chat.model.service.ChatService;
+import com.fepeo.boot.chat.model.vo.ChatRoom;
 import com.fepeo.boot.common.util.Util;
 
 import lombok.RequiredArgsConstructor;
@@ -22,8 +24,9 @@ public class ChatServiceLogic implements ChatService {
 	private String webPath = "/img/chat/"; // 브라우저를 통해 저장되는 url
 	private String folderPath = "C:/uploadFile/chat/"; // 실제 서버 안에 저장되는 폴더 url
 	
-	@Override
+	@Override // 채팅방 생성
 	public int insertChatRoom(ChatroomRegisterRequest chatRoom) throws IllegalStateException, IOException {
+		
 		
 		if(chatRoom.getImage() != null && !chatRoom.getImage().isEmpty()) {
 			MultipartFile image = chatRoom.getImage();
@@ -37,6 +40,11 @@ public class ChatServiceLogic implements ChatService {
 		}
 		int result = mapper.insertChatRoom(chatRoom);
 		return result;
+	}
+
+	@Override // 전체리스트 출력
+	public List<ChatRoom> selectChatRoomList() {
+		return mapper.selectChatRoomList();
 	}
 
 }

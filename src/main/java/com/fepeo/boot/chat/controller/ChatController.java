@@ -1,6 +1,7 @@
 package com.fepeo.boot.chat.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
 import com.fepeo.boot.chat.model.service.ChatService;
+import com.fepeo.boot.chat.model.vo.ChatRoom;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -44,9 +46,15 @@ public class ChatController {
 	}
 
 	@GetMapping("/list")
-	public String showChatRoomList() {
+	public String showChatRoomList(Model model) {
+		
+		List<ChatRoom> cRooms = cService.selectChatRoomList();
+		model.addAttribute("cRooms", cRooms);
 		return "chat/list";
 	}
+	
+	
+	
 
 	@GetMapping("/detail")
 	public String showChatMsgList() {
