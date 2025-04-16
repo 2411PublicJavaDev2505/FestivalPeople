@@ -216,12 +216,10 @@ public class ApiComponent {
 		
 		return mapPoint;	
 	}
-	
+
 	
 	// 기상청 중기 예보 향후 7일간 날씨가 좋은 지역 출력
-	public List<String> callWeatherApi(String nowTime, List<RegionDto> regionList) throws JsonMappingException, JsonProcessingException {
-		
-		
+	public List<String> callWeatherApi(String nowTime, List<RegionDto> regionList) throws JsonMappingException, JsonProcessingException {	
 		// 변경하여 webClient를 각 메소드에서 따로 불러야함
 		WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst");
 		// API 호출
@@ -249,19 +247,23 @@ public class ApiComponent {
 			
 			if(items.isArray() && items.size() > 0) {
 				JsonNode item = items.get(0);
-				String wf4 = item.path("wf4am").asText();
-				String wf5 = item.path("wf5am").asText();
-				String wf6 = item.path("wf6am").asText();
-//				String wf7 = item.path("wf7am").asText();
-//				String wf8 = item.path("wf8").asText();
-//				String wf9 = item.path("wf9").asText();
-//				String wf10 = item.path("wf10").asText();
+				// 확인할 키 목록
+				String[] weatherKeys = {"wf4am", "wf4pm", "wf5am", "wf5pm", "wf6am", "wf6pm", "wf7am", "wf7pm"};
 				
-				// 날씨 필터링하려고 했음
-                //if (wf4.contains("맑음") || wf5.contains("맑음")) {
-                sunnyRegions.add(region.getRegionName());
-                //}
+				boolean isValid = false;
+
 		
+
+				for(String key : weatherKeys) {
+					String forecast = item.path(key).asText();
+					if(forecast.contains("맑음")) {
+						isValid = true;
+						break;
+					}	
+				}
+				if(!isValid) {
+					sunnyRegions.add(region.getRegionName());
+				}
 			}
 		} 
 			return sunnyRegions;

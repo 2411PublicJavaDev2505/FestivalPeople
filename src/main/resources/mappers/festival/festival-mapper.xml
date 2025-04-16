@@ -38,10 +38,27 @@
 	    )
 	    WHERE rnum &gt;= #{startRow}
 	</select>
+	
 	<select id="selectFestivalByNo" resultType="com.fepeo.boot.festival.model.vo.Festival">
 		SELECT * FROM FESTIVAL WHERE FESTIVAL_NO = #{festivalNo}
 	</select>
+	
 	<select id="getTotalCount" resultType="int">
 	    SELECT COUNT(*) FROM FESTIVAL
 	</select>
+	
+	<select id="selectFestivalListByRegion" resultType="com.fepeo.boot.festival.model.vo.Festival">
+	    SELECT f.*,
+	           POWER(f.MAP_V_CODE - #{mapPoint.x}, 2) + POWER(f.MAP_H_CODE - #{mapPoint.y}, 2) AS distance
+	    FROM FESTIVAL f
+	    <where>
+	        <foreach collection="regionNames" item="region" open="(" separator="OR" close=")">
+	            f.FESTIVAL_ADDRESS LIKE '%' || #{region} || '%'
+	        </foreach>
+	    </where>
+	    ORDER BY distance ASC
+	</select>
+	
+
+
 </mapper>
