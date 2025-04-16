@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="../resources/css/notice/list.css">
 </head>
 <body>
+	<div class="background-image">
+		<img src="../resources/img/notice/background.jpg" alt="바탕화면">
+    </div>
 	<jsp:include page="../include/header.jsp"/>
 	<div class="notice-board">
 	    <div class="notice-title">
@@ -85,7 +88,7 @@
 	    </div>
 	    <c:if test="${member.memberId ne null && member.managerYn eq 'Y'}">
 	    <div class="noticeinsert-btn">
-		    	<button onClick="reviewinsert();" id="noticeinsert-btn">글쓰기</button>
+		    	<button onClick="noticeInsert();" id="noticeinsert-btn">글쓰기</button>
 		</div>
 		</c:if>
 	</div>

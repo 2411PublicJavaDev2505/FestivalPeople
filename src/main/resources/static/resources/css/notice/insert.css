@@ -1,0 +1,97 @@
+body {
+    background: #fff;
+  }
+  
+  .notice-write-container {
+    width: 800px;
+    height: 350px;
+    margin: 120px auto;
+    background: #3b7c6e;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    padding: 40px 30px 30px 30px;
+    position: relative;
+  }
+  
+  .write-title-bar {
+    width: 320px;
+    margin: 0 auto 30px auto;
+    background: #5e9c8c;
+    font-weight: bold;
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px 0;
+    opacity: 0.7;
+  }
+  
+  .write-form .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  
+  .write-form label {
+    width: 60px;
+    color: #fff;
+    font-size: 17px;
+    margin-right: 10px;
+  }
+  
+  .write-input {
+    flex: 1;
+    height: 32px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 0 8px;
+  }
+  
+  .write-textarea {
+    flex: 1;
+    height: 180px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 8px;
+    resize: none;
+  }
+  
+  .file-row {
+    margin-bottom: 30px;
+  }
+  
+  .btn-row {
+    justify-content: flex-end;
+    gap: 0;
+  }
+  
+  .btn {
+    width: 80px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .submit-btn {
+    margin-top: -50px;
+    background: #d97a4a;
+    color: #fff;
+    margin-right: 2px;
+    border-radius: 10px;
+  }
+  
+  .cancel-btn {
+    margin-top: -50px;
+    background: #f2c94c;
+    color: #333;
+    margin-left: 2px;
+    border-radius: 10px;
+  }
+  

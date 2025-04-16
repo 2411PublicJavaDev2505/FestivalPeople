@@ -1,5 +1,17 @@
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 900px;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
 .notice-board {
-    width: 1350px;
+    width: 1525px;
     margin: 40px auto;
     background: rgba(60, 120, 100, 0.85);
     border-radius: 12px;
@@ -58,7 +70,7 @@
 .notice-pagination {
     display: flex;
     width: 300px;
-    margin-left: 525px;
+    margin-left: 600px;
     justify-content: space-evenly;
     gap: 8px;
     background: #5e9c8c;
