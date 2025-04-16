@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -87,10 +88,15 @@
 	        <button class="page-btn">&gt;</button>
 	    </div>
 	    <c:if test="${member.memberId ne null && member.managerYn eq 'Y'}">
-	    <div class="noticeinsert-btn">
-		    	<button onClick="noticeInsert();" id="noticeinsert-btn">글쓰기</button>
-		</div>
+		    <div class="noticeinsert-btn">
+			    	<button onClick="noticeInsert();" id="noticeinsert-btn">글쓰기</button>
+			</div>
 		</c:if>
 	</div>
+	<script type="text/javascript">
+		const noticeInsert = () => {
+			location.href = "/notice/insert";
+		}
+	</script>
 </body>
 </html>

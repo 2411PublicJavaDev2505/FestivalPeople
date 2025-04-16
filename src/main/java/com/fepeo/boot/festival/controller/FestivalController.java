@@ -1,5 +1,6 @@
 package com.fepeo.boot.festival.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,6 @@ public class FestivalController {
 
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
 	    List<Festival> festivals = festivalService.getFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
-	    System.out.println("불러온 축제 수: " + festivals.size());
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
 	    model.addAttribute("endNavi", pageInfo.get("endNavi"));

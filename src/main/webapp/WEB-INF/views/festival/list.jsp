@@ -88,15 +88,15 @@
 			   <div class="pagination">
 					<a href="/recipe/list?page=1"> ◁◁ </a>
 					<c:if test= "${startNavi ne 1 }">
-						<a href="/festivallist?page=${startNavi-1 }" class="prev">◀</a>
+						<a href="/festival/list?currentPage=${startNavi-1 }" class="prev">◀</a>
 					</c:if>	
 					<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-						<a href="/festival/list?page=${p }">${p }</a>
+						<a href="/festival/list?currentPage=${p }">${p }</a>
 					</c:forEach>					
 					<c:if test="${endNavi ne maxPage }">
-						<a href="/festival/list?page=${endNavi+1 }" class="next">▶</a>
+						<a href="/festival/list?currentPage=${endNavi+1 }" class="next">▶</a>
 					</c:if>    
-		           	<a href="/festivallist?page=${maxPage }"> ▷▷ </a>
+		           	<a href="/festival/list?page=${maxPage }"> ▷▷ </a>
 	            </div>
 	       </main>
 	   </div>

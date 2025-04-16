@@ -4,14 +4,21 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>아이디 찾기</title>
+	<link rel="stylesheet" href="../resources/css/member/findId.css">
 </head>
 <body>
-	<h1>아이디 찾기</h1>
-	<form action="/member/findid" method="post">
-		이름 : <input type="text" name="memberName">
-		이메일 주소 : <input type="text" name="email">
-		<button>이메일 전송</button>
-	</form>
+	<div id="find-container">
+		<div class="find-title">
+			<h1>아이디 찾기</h1>
+		</div>
+		<form action="/member/findid" method="post">
+			<ul class="find-ul">
+				<li>이름 : <input type="text" name="memberName"></li>
+				<li>이메일 주소 : <input type="text" name="email"></li>
+				<li><button>이메일 전송</button></li>
+			</ul>
+		</form>
+	</div>
 </body>
 </html>

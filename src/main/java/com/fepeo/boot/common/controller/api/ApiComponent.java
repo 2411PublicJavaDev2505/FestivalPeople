@@ -241,7 +241,6 @@ public class ApiComponent {
 					.retrieve()
 					.bodyToMono(String.class)
 					.block();
-			
 			//System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
 			
 			ObjectMapper mapper = new ObjectMapper();
@@ -260,7 +259,7 @@ public class ApiComponent {
 				
 				// 날씨 필터링하려고 했음
                 //if (wf4.contains("맑음") || wf5.contains("맑음")) {
-                    sunnyRegions.add(region.getRegionName());
+                sunnyRegions.add(region.getRegionName());
                 //}
 		
 			}
