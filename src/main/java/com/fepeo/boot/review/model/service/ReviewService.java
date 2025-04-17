@@ -19,11 +19,12 @@ public interface ReviewService {
 	
 	
 	//리뷰 전체 리스트(커렌트 4/17 09:13원복중!)
-	//List<Review> selectReviewList(int currentPage);
-	//토탈카운드
-	//int getTotalCount();
+	List<Review> selectReviewList(int currentPage);
+	
+	//토탈카운트!4/17 10:21
+	int getTotalCount();
 
-	List<Review> selectReviewList();
+	//List<Review> selectReviewList();
 
 	
 

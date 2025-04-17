@@ -53,9 +53,14 @@
   			#{reviewContent},
   			 DEFAULT,DEFAULT,DEFAULT,
   				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
+<!-- 			INSERT INTO REVIEW(REVIEW_NO,) VALUES(#{reviewNo}, -->
+<!--   			#{reviewTitle}, -->
+<!--   			#{reviewContent}, -->
+<!--   			 DEFAULT,DEFAULT,DEFAULT, -->
+<!--   				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo}) -->
   		</insert>
   		
-<!--   		<select id="getTotalCount" resultType="_int"> -->
-<!-- 			SELECT COUNT(*) FROM REVIEW WHERE REVIEW_YN = 'N' -->
-<!-- 		</select> -->
+  		<select id="getTotalCount" resultType="_int">
+			SELECT COUNT(*) FROM REVIEW WHERE REVIEW_YN = 'Y'
+		</select>
 </mapper>

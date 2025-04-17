@@ -45,39 +45,38 @@ public class ReviewServiceLogic implements ReviewService {
 		return review;
 	}
 
-	//원복중 다시 만듬(4/17:09:33)
-	@Override
-	public List<Review> selectReviewList() {
-		List<Review> rList = mapper.selectReviewList();
-		return rList;
-	}
-	
-	//리뷰 전체 리스트(4/17)//리스트커렌트페이지00:20분시작
-	//코드 수정할부분있음!!!!!!!!!!!****** 
-	//return rList; List<Review> rList //int currentPage 서비스로 연결!거꾸로!!
-	//아래코드 원복중 주석처리 4/17 09:32
+	//원복중 다시 만듬(4/17:09:33)등록확인후 주석처리!정리되면 지울것!!
 //	@Override
-//	public List<Review> selectReviewList(int currentPage) {
-//		//int limit =10;
-//		//int offset =(currentPage-1)*limit;
-////		RowBounds rowBounds = new RowBounds(offset, limit); 
-////		List<Review> review = mapper.selectReviewList();//2개도 출력가능하다!!
-////		return review;(가로 안에 원래 스프링부트로쓰면 어떻게 써야함???? )
-////		List<Review> rList = mapper.selectReviewList(null,rowBounds);
-////		List<Review> rList = mapper.selectReviewList(currentPage);
+//	public List<Review> selectReviewList() {
+//		List<Review> rList = mapper.selectReviewList();
+//		return rList;
+//	}
+	
+	//원복하고 4/17 10:02분 여기부터시작!
+	
+	@Override
+	public List<Review> selectReviewList(int currentPage) {
+		int limit =10;
+		int offset =(currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit); 
+		List<Review> rList = mapper.selectReviewList(rowBounds);
+		return rList;
+
 //		int limit =10;
 //		int offset =(currentPage-1)*limit;
 //		RowBounds rowBounds = new RowBounds(offset, limit); 
 //		List<Review> rList = mapper.selectReviewList(rowBounds);
 //		return rList;
-//		
-//	}
+		
+	}
 
-//
-//	@Override
-//	public int getTotalCount() {
-//		int totalCount = mapper.getTotalCount();
-//		return totalCount;
-//	}
+	//토탈카운트!!
+	@Override
+	public int getTotalCount() {
+		int totalCount = mapper.getTotalCount();
+		return totalCount;
+	}
+
+
 
 }
