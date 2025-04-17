@@ -17,7 +17,7 @@
     <main class="chat-main">
 	    <!--상단 채팅방검색-->
 	    <section class="chat-nav">
-	        <span>참여 채팅 수 : 0</span>
+	        <span>${member.nickname }참여 채팅 수 : 0</span> memNo.${member.memberNo }
 	        <form class="chat-list-search" action="#" >
 	            <input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 	            <button class="chat-search-btn" >⌕</button>

@@ -12,7 +12,7 @@ import com.fepeo.boot.chat.model.vo.ChatRoom;
 @Mapper
 public interface ChatMapper {
 
-	//채팅방 생성
+	// 채팅방 생성
 	int insertChatRoom(ChatroomRegisterRequest chatRoom);
 
 	// 채팅방 전체 목록
@@ -22,5 +22,8 @@ public interface ChatMapper {
 
 	// 채팅방 참여인원수 출력
 	List<ChatMember> selectChatMember();
+
+	// 채팅방 삭제
+	int deleteCahtRoom(int chatroomNom);
 
 }
