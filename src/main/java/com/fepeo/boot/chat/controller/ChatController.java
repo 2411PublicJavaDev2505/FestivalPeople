@@ -44,7 +44,13 @@ public class ChatController {
 	public String insertChatRoom(@ModelAttribute ChatroomRegisterRequest chatRoom,
 			@RequestParam(value="image", required=false) MultipartFile image
 			, HttpSession session, Model model) throws IllegalStateException, IOException {
-		
+		Member member = (Member)session.getAttribute("member"); 
+    	// 세션에서 memberNo 가져오기
+    	int memberNo = member.getMemberNo();
+    	// 내가 속한 방만 출력
+    	List<MyChatroom> myList = cService.selectChatRoomListByNo(memberNo);
+    	model.addAttribute("myList",myList);
+    	
 		chatRoom.setImage(image);
 		int result = cService.insertChatRoom(chatRoom);
 		
@@ -60,14 +66,13 @@ public class ChatController {
 	// 채팅방 목록
 	@GetMapping("/list")
 	public String showChatRoomList(HttpSession session, Model model) {
-		// 세션에서 memberNo 가져오기
-		Member member = (Member)session.getAttribute("member");
-		int memberNo = member.getMemberNo();
-		System.out.println("Session memberNo: "+session.getAttribute("memberNo"));
-	    // 미로그인 시 로그인 페이지로
+		// 미로그인 시 로그인 페이지로
+		Member member = (Member)session.getAttribute("member"); 
 	    if (member == null) {
-	        return "member/login";
+	        return "redirect:/member/login";
 	    }else {
+	    	// 세션에서 memberNo 가져오기
+	    	int memberNo = member.getMemberNo();
 	    	// 내가 속한 방만 출력
 	    	List<MyChatroom> myList = cService.selectChatRoomListByNo(memberNo);
 	    	model.addAttribute("myList",myList);
@@ -77,6 +82,8 @@ public class ChatController {
 	    	
 	    	// 각 채팅방별 참여인원수 불러오기
 	    	List<ChatMember> memberList = cService.selectChatMember();
+	    	model.addAttribute("memberList", memberList);
+	    	
 	    	return "chat/list";
 	    }
 	}
@@ -87,6 +94,7 @@ public class ChatController {
 				,HttpSession session, Model model) {
 		// 세션에서 memberNo 가져오기
 		Member member = (Member)session.getAttribute("member");
+		ChatRoom chatRoom = (ChatRoom)session.getAttribute("chatRoom");
 		int memberNo = member.getMemberNo();	
 		// 좌측 목록(내가 속한 방) 출력
 		List<MyChatroom> myList = cService.selectChatRoomListByNo(memberNo);
@@ -97,7 +105,10 @@ public class ChatController {
 		// 대화내용(말풍선) 출력
 		List<ChatMsg> msgList = msgService.selectChatMsgListByNo(chatroomNo);
 		model.addAttribute("msgList", msgList);
-		model.addAttribute("nickname", member.getNickname()); // 참가자 닉네임
+		
+		model.addAttribute("chatroomNo", chatroomNo);
+		model.addAttribute("member", member);
+		model.addAttribute("chatRoom", chatRoom);
 		
 		// 채팅방 회원수 업데이트
 		//int member = cService.updateChatMember();
