@@ -25,7 +25,7 @@
 			    <div class="reviewlist-h3">
 				    <h3>여행후기</h3>
 			    </div>
-		<main>
+			<main>
 		    <div class="reviewsearch">
 		        <!-- action값넣기 -->
 		        <form action="" >

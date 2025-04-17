@@ -6,66 +6,75 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="../resources/css/include/header.css">
-		<link rel="stylesheet" href="../resources/css/review/.css">
+		<link rel="stylesheet" href="../resources/css/review/detail.css">
 		<title>후기글 상세조회</title>
 	</head>
 	<body>
 		<div id="container">
 			<jsp:include page="../include/header.jsp"/>
-			<main>
-				<section>
-					<div class="review-h1">
-						<h1>여행후기</h1>
+				<div class="reviewdetail-main">
+					<div class="review-h3">
+						<h3>여행후기</h3>
 					</div>
-						<div class="review-report-btn">
-							<button>신고하기</button>
+					<main>
+					<section>
+							<div class="review-report-btn">
+								<button>신고하기</button>
+							</div>
+						<div class="reviewtitle-h1">
+							<!-- 리뷰제목 -->
+							<h1>${review.reviewTitle }</h1>
+<%-- 							<input type="hidden" id="reviewNo" value="${review.reviewNo }"> --%>
 						</div>
-					<div class="reviewtitle-h1">
-						<!-- 리뷰제목 -->
-						<h1>${review.reviewTitle }</h1>
-						<input type="hidden" id="reviewNo" value="${review.reviewNo }">
+						<div class="review-info-main">
+							<div class="review-info">
+								<p><span>이름|</span></p><p>
+							</div>
+							<div class="review-info">
+								<span>|</span>${review.reviewWriteTime }</p>	
+							</div>
+							<div class="review-info">
+								<p><span>조회수|</span>${review.reviewCount }</p>	
+							</div>
+						</div>
+						<div class="review-content">
+							<p><div>${review.reviewContent }</div></p>
+						</div>
+						
+					</section>
+					<input type="hidden" value="${review.reviewNo }" id="reviewNo">
+					<input type="hidden" value="${sessionScope.member.memberNo}" id="memberNo">
+					<!-- 댓글 -->
+					<div class="review-comment-list-area">
+						<div class="review-comment-write-area">
+							<div class="comentwrite-p">
+								<p>댓글쓰기</p><br>
+							</div>
+							<textarea id="commentContent" placeholder="댓글내용을 입력해주세요"></textarea>
+							<div>
+								<button id="addComment">댓글등록</button>
+							</div>	
+						</div>
+						<div class="comment-list-area">
+							<ul id="reviewcommentlist">
+								<c:forEach items="${review.commentList }" var="comment">
+									<li class="reviewcomment-row">
+										<p>
+											내용:<span>${comment.commentContent }</span>
+											작성시간:<span>${comment.commentTime }</span>
+										</p>
+										<div class="comment-btn-area">
+											<button class="replyBtn">답글</button>
+											<button class="modifyBtn">수정</button>
+											<button class="deleteBtn">삭제</button>
+										</div>
+									</li>
+								</c:forEach>
+							</ul>
+						</div>
 					</div>
-					<div>
-						<p><span>아이디|</span></p>
-						<p><span>|</span>${review.reviewWriteTime }</p>	
-						<p><span>조회수|</span>${review.reviewCount }</p>	
-					</div>
-					<div>
-						<p><div>${review.reviewContent }</div></p>
-					</div>
-					
-				</section>
-				<input type="hidden" value="${review.reviewNo }" id="reviewNo">
-				<input type="hidden" value="${sessionScope.member.memberNo}" id="memberNo">
-				<!-- 댓글 -->
-				<div class="review-comment-list-area">
-					<div class="review-comment-write-area">
-						<p>댓글쓰기</p><br>
-<!-- 						<input type="text" name="" size="80"> -->
-						<textarea id="commentContent" placeholder="댓글내용을 입력해주세요"></textarea>
-						<div>
-							<button id="addComment">댓글등록</button>
-						</div>	
-					</div>
-					<div class="comment-list-area">
-						<ul id="reviewcommentlist">
-							<c:forEach items="${review.commentList }" var="comment">
-								<li class="reviewcomment-row">
-									<p>
-										내용:<span>${comment.commentContent }</span>
-										작성시간:<span>${comment.commentTime }</span>
-									</p>
-									<div class="comment-btn-area">
-										<button class="replyBtn">답글</button>
-										<button class="modifyBtn">수정</button>
-										<button class="deleteBtn">삭제</button>
-									</div>
-								</li>
-							</c:forEach>
-						</ul>
-					</div>
-				</div>
-			</main>
+				</main>
+			</div>
 		</div>
 		<script>
 			const reviewNo = "${review.reviewNo}";

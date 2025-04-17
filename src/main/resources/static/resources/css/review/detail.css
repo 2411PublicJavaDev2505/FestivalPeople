@@ -1,0 +1,46 @@
+@charset "UTF-8";
+* {
+	margin:0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.reviewdetail-main {
+	margin: 0 auto;
+	margin-top:150px;
+	width: 1350px;
+	height: 900px;
+	padding: 30px;
+	box-shadow: 0 2px 10px rgba(1, 0, 0, 0.2);
+	background-color:rgb(60,127,114,0.9);
+	border-radius: 10px;
+}
+.review-h3{
+	margin: 0 auto;
+	border: 1px solid white;
+	width: 200px;
+	margin-bottom: 10px;
+	text-align: center;
+	border-radius: 10px;
+	background-color: #E4E2DD;
+	color: black;
+	font-size: 25px;
+}
+.review-report-btn{
+	float:right;
+}
+.reviewtitle-h1 {
+	color: #f2f2f2;
+}
+.reviewtitle-h1:after {
+	content:"";
+	display: block;
+	border-bottom: 2px solid white;;
+}
+.review-info-main{
+	 /*위로보내기*/
+	 display:flex;
+	 float:right;
+}
+
+
+
