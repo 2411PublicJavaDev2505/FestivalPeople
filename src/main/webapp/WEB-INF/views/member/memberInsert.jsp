@@ -147,23 +147,22 @@
 			email = document.querySelector("#input-email").value;
 			$.ajax({
 				dataType: "json",
-				url: "/member/checknickname",
+				url: "/member/checkemail",
 				data: {
-					"nickname" : nickname
+					"email" : email
 				},
 				type: "GET",
 				success: function(data) {
 					if(data.check == 0){
-						document.querySelector(".check.nickname").innerText = "* 가능한 닉네임입니다";
+						document.querySelector(".check.email").innerText = "* 가능한 이메일입니다";
 					}else{
-						document.querySelector(".check.nickname").innerText = "* 이미 존재하는 닉네임입니다";
+						document.querySelector(".check.email").innerText = "* 이미 존재하는 이메일입니다";
 					}
 				},
 				error: function() {
 					alert("통신 오류!");
 				}
 			});
-			document.querySelector(".check.email").innerText = "* 가능한 이메일입니다";
 		}
 		const checkRegister = () => {
 			if(memberId.trim() == ''){

@@ -35,11 +35,10 @@
 		SELECT * FROM MEMBER WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email} AND SOCIAL_YN='N'
 	</select>
 	
-	<update id="updateMember">
-		UPDATE MEMBER SET MEMBER_PW=#{memberPw},NICKNAME=#{nickname},EMAIL=#{email},ADDRESS=#{address}
-		,PROFILE_FILE_NAME=#{profileFileName}
-		,PROFILE_FILE_RENAME=#{profileFileRename}
-		,PROFILE_FILE_PATH=#{profileFilePath} WHERE MEMBER_NO = #{memberNo}
+	<update id="updateMemberProfile">
+		UPDATE MEMBER SET PROFILE_FILE_NAME = #{profileFileName},
+		PROFILE_FILE_RENAME = #{profileFileRename}, PROFILE_FILE_PATH = #{profileFilePath} 
+		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
 	<update id="updateSocialMember">
@@ -67,5 +66,8 @@
 	</select>
 	<select id="checkMemberByNickname" resultType="_int">
 		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE NICKNAME = #{nickname}
+	</select>
+	<select id="checkMemberEmail" resultType="_int">
+		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE EMAIL = #{email} AND SOCIAL_YN = 'N'
 	</select>
 </mapper>

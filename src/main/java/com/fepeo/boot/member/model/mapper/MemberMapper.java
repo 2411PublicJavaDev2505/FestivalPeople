@@ -31,7 +31,7 @@ public interface MemberMapper {
 
 	int deleteSocialMember(int memberNo);
 
-	int updateMember(MemberUpdateRequest member);
+	int updateMemberProfile(MemberUpdateRequest member);
 
 	int updateSocialMember(MemberUpdateRequest member);
 
@@ -44,5 +44,7 @@ public interface MemberMapper {
 	int checkMemberById(String memberId);
 
 	int checkMemberByNickname(String nickname);
+
+	int checkMemberEmail(String email);
 
 }
