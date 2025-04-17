@@ -17,18 +17,17 @@
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
 
     <main class="main-container">
+    	<form action="/notice/insert" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo }">
         <div class="notice-write-container">
             <div class="write-title-bar">
               <span>공지사항 작성</span>
             </div>
-            <form class="write-form">
               <div class="form-row">
-                <label for="title">제목</label>
-                <input type="text" id="title" name="title" class="write-input" />
+                <input type="text" id="title" name="noticeTitle" class="write-input" placeholder="제목" />
               </div>
               <div class="form-row">
-                <label for="content">내용</label>
-                <textarea id="content" name="content" class="write-textarea"></textarea>
+                <textarea id="content" name="content" class="write-textarea" placeholder="내용"></textarea>
               </div>
               <div class="form-row file-row">
                 <input type="file" id="file" name="file" />
@@ -37,9 +36,8 @@
                 <button type="submit" class="btn submit-btn">등록</button>
                 <button type="button" class="btn cancel-btn">작성취소</button>
               </div>
-            </form>
           </div>
-          
+          </form>
     </main>
 </body>
 </html>
