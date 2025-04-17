@@ -10,6 +10,10 @@
 		#{chatImgName},#{chatImgRename},#{chatImgPath},#{chatLimit}, default	)
 	</insert>
 	
+	<delete id="deleteCahtRoom">
+		delete from CHATROOM where CHATROOM_NO = #{chatroomNo}
+	</delete>
+	
 	<select id="selectChatRoomList" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		select * from CHATROOM
 	</select>

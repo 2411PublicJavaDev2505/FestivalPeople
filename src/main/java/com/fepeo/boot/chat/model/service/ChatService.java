@@ -18,4 +18,6 @@ public interface ChatService {
 
 	List<ChatMember> selectChatMember();
 
+	int deleteCahtRoom(int chatroomNom);
+
 }

@@ -55,4 +55,9 @@ public class ChatServiceLogic implements ChatService {
 		return mapper.selectChatMember();
 	}
 
+	@Override // 채팅방 삭제
+	public int deleteCahtRoom(int chatroomNom) {
+		return mapper.deleteCahtRoom(chatroomNom);
+	}
+
 }
