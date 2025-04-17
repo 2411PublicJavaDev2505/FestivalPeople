@@ -28,7 +28,7 @@ public interface MemberService {
 
 	int deleteSocialMember(int memberNo);
 
-	int updateMember(MemberUpdateRequest member) throws IllegalStateException, IOException;
+	int updateMemberProfile(MemberUpdateRequest member) throws IllegalStateException, IOException;
 
 	Member selectOneByEmail(MemberFindIdRequest member);
 
@@ -39,5 +39,7 @@ public interface MemberService {
 	int checkMemberById(String memberId);
 
 	int checkMemberByNickname(String nickname);
+
+	int checkMemberEmail(String email);
 
 }

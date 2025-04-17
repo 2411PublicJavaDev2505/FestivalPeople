@@ -1,5 +1,7 @@
 package com.fepeo.boot.notice.controller;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,10 +39,10 @@ public class NoticeController {
 	
 	@PostMapping("/insert")
 	public String insertNotice(@ModelAttribute NoticeAddRequest notice,
-			MultipartFile uploadFile,
+			MultipartFile file,
 			HttpSession session,
-			Model model) {
-
+			Model model) throws IllegalStateException, IOException {
+		notice.setFile(file);
 		int result = nService.insertNotice(notice);
 		
 		return "redirect:/notice/list";

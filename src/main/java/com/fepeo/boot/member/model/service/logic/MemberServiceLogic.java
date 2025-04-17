@@ -81,7 +81,7 @@ public class MemberServiceLogic implements MemberService{
 	}
 
 	@Override
-	public int updateMember(MemberUpdateRequest member) throws IllegalStateException, IOException {
+	public int updateMemberProfile(MemberUpdateRequest member) throws IllegalStateException, IOException {
 		if(member.getProfile() != null && !member.getProfile().isEmpty()) {
 			MultipartFile profile = member.getProfile();
 			String filename = profile.getOriginalFilename();
@@ -97,11 +97,7 @@ public class MemberServiceLogic implements MemberService{
 			member.setProfileFileRename(existing.getProfileFileRename());
 			member.setProfileFilePath(existing.getProfileFilePath());
 		}
-		if(member.getSocialYn().equals("Y")) {
-			return mapper.updateSocialMember(member);
-		}else {
-			return mapper.updateMember(member);
-		}
+		return mapper.updateMemberProfile(member);
 	}
 
 	@Override
@@ -127,6 +123,11 @@ public class MemberServiceLogic implements MemberService{
 	@Override
 	public int checkMemberByNickname(String nickname) {
 		return mapper.checkMemberByNickname(nickname);
+	}
+
+	@Override
+	public int checkMemberEmail(String email) {
+		return mapper.checkMemberEmail(email);
 	}
 
 }

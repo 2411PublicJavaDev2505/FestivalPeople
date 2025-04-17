@@ -168,7 +168,7 @@ public class MemberController {
         model.addAttribute("nickname",nickname);
         model.addAttribute("email",email);
         model.addAttribute("profileUrl",profileUrl);
-	    
+	    System.out.println(profileUrl);
 	    
 	    if(member != null) {
 			session.setAttribute("member", member);
@@ -281,12 +281,19 @@ public class MemberController {
 		return "member/memberUpdate";
 	}
 	
-	@PostMapping("/update")
-	public String updateMember(@ModelAttribute MemberUpdateRequest member
-			,@RequestParam(required=false) MultipartFile profile) throws IllegalStateException, IOException {
+	@ResponseBody
+	@PostMapping("/updateprofile")
+	public String updateMemberProfile(@RequestParam(required=false) MultipartFile profile
+			,HttpSession session) throws IllegalStateException, IOException {
+		MemberUpdateRequest member = new MemberUpdateRequest();
+		Member loginMember = (Member)session.getAttribute("member");
+		member.setMemberNo(loginMember.getMemberNo());
 		member.setProfile(profile);
-		int result = mService.updateMember(member);
-		return "redirect:/member/detail";
+		int result = mService.updateMemberProfile(member);
+		loginMember = mService.selectOneByNo(loginMember.getMemberNo());
+		JSONObject json = new JSONObject();
+		json.put("profile", member.getProfileFilePath());
+		return json.toString();
 	}
 	
 	@GetMapping("/detail")
@@ -337,6 +344,15 @@ public class MemberController {
 	@GetMapping("/checknickname")
 	public String checkMemberNickname(String nickname) {
 		int check = mService.checkMemberByNickname(nickname);
+		JSONObject json = new JSONObject();
+		json.put("check", check);
+		return json.toString();
+	}
+	
+	@ResponseBody
+	@GetMapping("/checkemail")
+	public String checkMemberEmail(String email) {
+		int check = mService.checkMemberEmail(email);
 		JSONObject json = new JSONObject();
 		json.put("check", check);
 		return json.toString();

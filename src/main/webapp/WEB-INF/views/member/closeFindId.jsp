@@ -11,6 +11,7 @@
 	<button onclick="close();">닫기</button>
 	<script type="text/javascript">
 		function close() {
+			window.opener.location.href = "/member/login";
 			window.close();
 		}
 	</script>

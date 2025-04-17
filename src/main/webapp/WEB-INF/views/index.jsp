@@ -74,7 +74,6 @@
         }<c:if test="${!loop.last}">,</c:if>
         </c:forEach>
     ];
-    	console.log(slides);
         const totalSlides = slides.length;
 
         const slideContainer = document.querySelector('.simple-slide-container');

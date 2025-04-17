@@ -32,6 +32,7 @@
 			<input type="hidden" name="nickname" value="${nickname }">
 			<input type="hidden" name="email" value="${email }">
 			<input type="hidden" name="profileUrl" value="${profileUrl }">
+			<input type="hidden" name="profileFilePath" value="${profileUrl }">
 			<input type="hidden" name="socialYn" value="Y">
 			<div class="register-main">
 				<div class="register-left">
@@ -69,27 +70,16 @@
 		</form>
 	</div>
 	<script type="text/javascript">
-		let memberId = document.querySelector("#input-id").value;
-		let pw = document.querySelector("#input-pw").value;
-		let pwRe = document.querySelector("#input-pw-re").value;
-		let address = document.querySelector("#input-address").value;
-		let name = document.querySelector("#input-name").value;
-		let nickname = document.querySelector("#input-nickname").value;
-		let email = document.querySelector("#input-email").value;
-		const checkId = () => {
-			document.querySelector(".check.id").innerText = "* 가능한 아이디입니다";
-		}
 		const checkRegister = () => {
-			if(pw != pwRe){
-				document.querySelector(".check.pw").innerText = "* 비밀번호를 다시 확인해주세요";
+			let address = document.querySelector("#input-address").value;
+			let name = document.querySelector("#input-name").value;
+			if(address.trim() == ''){
+				alert("주소를 입력해주세요");
+				event.preventDefault();
+			}else if(name.trim() == ''){
+				alert("이름을 입력해주세요.");
 				event.preventDefault();
 			}
-		}
-		const checkNickname = () => {
-			document.querySelector(".check.nickname").innerText = "* 가능한 닉네임입니다";
-		}
-		const checkEmail = () => {
-			document.querySelector(".check.email").innerText = "* 가능한 이메일입니다";
 		}
 	</script>
 </body>

@@ -16,7 +16,7 @@
 		</div>
 		<form action="/member/findpw" method="post">
 			<ul class="find-ul">
-				<li><input type="text" name="memberName" placeholder="아이디를 입력해주세요"></li>
+				<li><input type="text" name="memberId" placeholder="아이디를 입력해주세요"></li>
 				<li><button class="submit">이메일 전송</button></li>
 			</ul>
 		</form>
