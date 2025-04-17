@@ -10,6 +10,12 @@
 	<title>후기 게시판 List 전체</title>
 </head>
 <body>
+	<div class="side-banner left-banner">
+        <a href="http://localhost:8888/festival/detail/287"><img src="../resources/img/review/banner-poster.jpg" alt="왼쪽 광고" /></a>
+    </div>
+    <div class="side-banner right-banner">
+        <a href="http://localhost:8888/festival/detail/288"><img src="../resources/img/review/banner-posterR.jpg" alt="오른쪽 광고" /></a>
+    </div>
 	<div class="background-image">
     	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
     </div>

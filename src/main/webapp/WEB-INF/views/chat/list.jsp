@@ -12,6 +12,14 @@
 	<link rel="stylesheet" href="../resources/css/chat/list.css">
 </head>
 <body>
+	<!-- 광고 배너 -->
+	<div class="side-banner left-banner">
+        <a href="http://localhost:8888/festival/detail/287"><img src="../resources/img/review/banner-poster.jpg" alt="왼쪽 광고" /></a>
+    </div>
+    <div class="side-banner right-banner">
+        <a href="http://localhost:8888/festival/detail/288"><img src="../resources/img/review/banner-posterR.jpg" alt="오른쪽 광고" /></a>
+    </div>
+
     <div id="container">
     <!-- 헤더 -->
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
