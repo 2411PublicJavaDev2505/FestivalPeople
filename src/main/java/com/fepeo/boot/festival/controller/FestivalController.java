@@ -1,6 +1,5 @@
 package com.fepeo.boot.festival.controller;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +34,7 @@ public class FestivalController {
 	    int itemsPerPage = 8;
 
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
-	    List<Festival> rfestivals =festivalService.getrFestivalList();
+	    List<Festival> rfestivals =festivalService.selectFestivalListById();
 	    List<Festival> festivals = festivalService.getFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
 
 
@@ -62,8 +61,8 @@ public class FestivalController {
 		festivalService.insertFestivalList();
 		model.addAttribute("msg", "저장완료");
 		return "festival/list";
-		
 	}
-
+	
+	
 
 }

@@ -19,7 +19,7 @@ public class CommonController {
 	
 	@GetMapping("/")
 	public String showMain(Model model) {
-	    List<Festival> rfestivals =festivalService.getrFestivalList();
+	    List<Festival> rfestivals =festivalService.selectFestivalListById();
 	    
 	    model.addAttribute("rfestivals",rfestivals);
 		
