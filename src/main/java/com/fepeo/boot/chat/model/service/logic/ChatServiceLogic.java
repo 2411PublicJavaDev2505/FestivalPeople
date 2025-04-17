@@ -60,4 +60,9 @@ public class ChatServiceLogic implements ChatService {
 		return mapper.deleteCahtRoom(chatroomNom);
 	}
 
+	@Override // 채팅방 정보 가져오기
+	public ChatRoom selectChatRoomByNo(int chatroomNo) {
+		return mapper.selectChatRoomByNo(chatroomNo);
+	}
+
 }

@@ -5,12 +5,13 @@
 <mapper namespace="com.fepeo.boot.chat.model.mapper.ChatMsgMapper">
 
 	<insert id="insertChatMsg">
-		insert into CHAT_MSG values (SEQ_CHAT_MSG_NO.nextval, ${chatMsgContent}, default, ${chatFileName},
-		${chatFileRename}, ${chatFilePath}, ${nonReadMember}, ${memberNo}, ${chatroomNo})
+		insert into CHAT_MSG values (SEQ_CHAT_MSG_NO.nextval, #{chatMsgContent}, default, #{chatFileName},
+		#{chatFileRename}, #{chatFilePath}, #{nonReadMember}, #{memberNo}, #{chatroomNo})
 	</insert>
 
 	<select id="selectChatMsgListByNo" resultType="com.fepeo.boot.chat.model.vo.ChatMsg">
 		select * from CHAT_MSG where CHATROOM_NO = #{chatroomNo}
+		order by CHAT_MSG_TIME asc
 	</select>
 	
 </mapper>

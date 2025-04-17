@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,7 @@
       			<header class="chat-header">
       				<div class = "chat-header-left">
       					<div class="chat-prev-list"><a href="/chat/list">←</a></div>
-      					<div class="chat-header-title"><span>제목${chatRoom.chatroomTitle }</span>
+      					<div class="chat-header-title"><span>${chatRoom.chatroomTitle }</span>
       					<input type="hidden" value="${chatroomNo }" >
       					</div>
       				</div>
@@ -81,7 +82,17 @@
       				<div>
       				<c:forEach items="${msgList }" var="mList" varStatus="i">
       					<ul id="balloonList" class="group_msg_balloon">
-      						<li class="date_check"><span>25.4.11.(금)</span></li>
+      					
+      						<!-- 날짜 한번만 출력(중복출력불가) -->
+      						<c:set var="preDate" value=""/>
+      						<c:set var="currentDate" value="${mList.chatMsgTime.time }"/>
+      						<fmt:formatDate  var="formattedDate" value="${mList.chatMsgTime}" pattern="yyyy.MM.dd(E)"/>
+      						
+      						<c:if test="${formattedDate ne prevDate}">
+	      						<li class="date_check"><span>${formattedDate}</span></li>
+	      						<c:set var="prevDate" value="${formattedDate}" />
+      						</c:if>
+	      					
 	      					<c:if test="${sessionScope.memberNo != member.memberNo }">
       						<li class="msg-balloon-area">
       							<div class="profile-area">
@@ -89,12 +100,11 @@
 	      							<div class="chat-mem-nickname">닉넴${member.nickname }</div>
       							</div>
       							<div class="msg-balloon-area-l">
-      								<p class="msg-balloon-box-l">내용${mList.chatMsgContent }</p>
+      								<p class="msg-balloon-box-l">${mList.chatMsgContent }</p>
       								<div class="msg-info">
 	      								<p class="msg-non-read">안읽음2</p>
 	      								<span class="msg-time">
-	      									<span>오후</span>
-	      									<span>6:00${mList.chatMsgTime }</span>
+	      									<fmt:formatDate value="${mList.chatMsgTime}" pattern="a h:mm" />
 	      								</span>
       								</div>
       							</div>
@@ -106,11 +116,10 @@
       								<div class="msg-info-r">
 	      								<p class="msg-non-read">안읽음4</p>
 	      								<span class="msg-time">
-	      									<span>오후</span>
-	      									<span>5:26${mList.chatMsgTime }</span>
+	      									<fmt:formatDate value="${mList.chatMsgTime}" pattern="a h:mm" />
 	      								</span>
       								</div>
-      								<p class="msg-balloon-box-r">내용${mList.chatMsgContent }</p>
+      								<p class="msg-balloon-box-r">${mList.chatMsgContent }</p>
       							</div>
       						</li>
       						</c:if>
@@ -136,6 +145,9 @@
     	const chatroomNo = "${chatroomNo}"
     	
     	document.querySelector("#addChat").addEventListener("click", function(){
+    		
+    		console.log("댓글 버튼 눌림")
+    		
     		const msgContent = document.querySelector("#msgContent").value.trim(); //.trim()을 추가하면 공백여부 가려줌
     		const fileInput = document.querySelector("#fileUploaderInput");
     		
@@ -152,23 +164,22 @@
     			formData.append("uplodeFile", fileInput.files[0]);
     		}
     		
-    		fetch("chat/msgInsert",{
+    		fetch("/chat/msgInsert",{
 				method:"POST",
 				body: formData })
 			.then(response => response.text())
 			.then(result => {
 				if(result >0){
 					// 성공 시 메시지 목록 다시 불러오기 또는 화면에 추가
-					document.querySelector("msgContent").value = "";
 					location.reload(); 
 				}
 			});
    		});
     	
     	//입력이 있을 때만 버튼 활성화
-    	msgInput.addEventListener("input", () => {
-    		addChatBtn.disabled = msgInput.value.trim() === "";
-    	});
+//     	msgInput.addEventListener("input", () => {
+//     		addChatBtn.disabled = msgInput.value.trim() === "";
+//     	});
     
     </script>
 </body>

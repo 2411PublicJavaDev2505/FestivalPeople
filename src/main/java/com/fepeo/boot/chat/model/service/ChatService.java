@@ -20,4 +20,6 @@ public interface ChatService {
 
 	int deleteCahtRoom(int chatroomNom);
 
+	ChatRoom selectChatRoomByNo(int chatroomNo);
+
 }
