@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
@@ -107,6 +108,7 @@ public class ChatController {
 		model.addAttribute("msgList", msgList);
 		
 		model.addAttribute("chatroomNo", chatroomNo);
+		session.setAttribute("memberNo", member.getMemberNo());
 		model.addAttribute("member", member);
 		model.addAttribute("chatRoom", chatRoom);
 		
@@ -130,9 +132,10 @@ public class ChatController {
 	
 	// 메시지입력
 	@PostMapping("/msgInsert")
-	public String insertChatMsg(@ModelAttribute MsgInsertRequest msg,
+	@ResponseBody
+	public int insertChatMsg(@ModelAttribute MsgInsertRequest msg,
 				@RequestParam(value="uplodeFile", required=false) MultipartFile uplodeFile,
-				@PathVariable("chatroomNo") int chatroomNo
+				@RequestParam("chatroomNo") int chatroomNo
 				,HttpSession session, Model model) {
 		// 세션에서 memberNo 가져오기
 		Member member = (Member)session.getAttribute("member");
@@ -153,7 +156,7 @@ public class ChatController {
 		model.addAttribute("msgList", msgList);
 		model.addAttribute("nickname", member.getNickname()); // 참가자 닉네임
 
-		return "redirect:/chat/detail/" + chatroomNo; 
+		return result; 
 	}
 	
 	// 메시지 검색

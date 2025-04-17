@@ -24,8 +24,7 @@
 	    SELECT * FROM (
 	        SELECT f.*, ROWNUM AS rnum
 	        FROM (
-	            SELECT 
-	                *
+	            SELECT *
 	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL AND FESTIVAL_END_DATE >=SYSDATE
 	            ORDER BY FESTIVAL_END_DATE
 	        ) f

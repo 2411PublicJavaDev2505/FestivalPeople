@@ -133,25 +133,42 @@
     </div>
     
     <script>
-//     	const chatroomNo = "${msgList.chatroomNo}"
+    	const chatroomNo = "${chatroomNo}"
     	
-//     	function getMsgList(){
-//     		fetch("/chat/detail/"+chatroomNo)
-//     		.then(response => response.json())
-//     	}
+    	document.querySelector("#addChat").addEventListener("click", function(){
+    		const msgContent = document.querySelector("#msgContent").value.trim(); //.trim()을 추가하면 공백여부 가려줌
+    		const fileInput = document.querySelector("#fileUploaderInput");
+    		
+    		// 아무 입력 없으면 알림없이 return (서버 미전송으로 완료)
+    		if (msgContent === "" && fileInput.files.length === 0){
+    			return;
+    		}
+    		
+    		const formData = new FormData();
+    		formData.append("chatroomNo",chatroomNo);
+    		formData.append("msgContent",msgContent);
+    		
+    		if(fileInput.files.length > 0){
+    			formData.append("uplodeFile", fileInput.files[0]);
+    		}
+    		
+    		fetch("chat/msgInsert",{
+				method:"POST",
+				body: formData })
+			.then(response => response.text())
+			.then(result => {
+				if(result >0){
+					// 성공 시 메시지 목록 다시 불러오기 또는 화면에 추가
+					document.querySelector("msgContent").value = "";
+					location.reload(); 
+				}
+			});
+   		});
     	
-//     	document.querySelector("#addChat").addEventListener("click", function(){
-//     		const msgContent = document.querySelector("#msgContent").value;
-//     		// 서버로 제출할 데이터를 모아둔 JS객체
-//     		const data = {"chatroomNo":chatroomNo, "msgContent":msgContent};
-//     		fetch("chat/msgInsert",{
-// 				method:"POST",
-// 				enctype:"multipart/form-data",
-// 				headers: {"Content-Type": "application/json"},
-// 				body: JSON.stringify(data) })
-// 			.then(response => response.text())    			
-//     		});
-//     	});
+    	//입력이 있을 때만 버튼 활성화
+    	msgInput.addEventListener("input", () => {
+    		addChatBtn.disabled = msgInput.value.trim() === "";
+    	});
     
     </script>
 </body>
