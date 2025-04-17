@@ -157,7 +157,7 @@
 	        image : markerImage // 마커 이미지 
 	    });
 	    
-	 	// 인포윈도우 생성 팝업으로 해당 축제 설명 
+	 	// 인포윈도우 생성 팝업으로 해당 장소 설명 
 	    var infowindow = new kakao.maps.InfoWindow({
 	        content: '<div style="padding:5px;font-size:14px;">' + positions[i].title + '</div>'
 	    });
