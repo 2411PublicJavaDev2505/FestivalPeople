@@ -34,48 +34,14 @@
 	                <td>152</td>
 	                <td>25.04.07</td>
 	            </tr>
-	            <tr>
-	                <td>2</td>
-	                <td>안내드립니다</td>
-	                <td>253</td>
-	                <td>23.02.04</td>
-	            </tr>
-	            <tr>
-	                <td>3</td>
-	                <td>안내드립니다</td>
-	                <td>325</td>
-	                <td>23.01.09</td>
-	            </tr>
-	            <tr>
-	                <td>4</td>
-	                <td>안내드립니다</td>
-	                <td>434</td>
-	                <td>22.12.31</td>
-	            </tr>
-	            <tr>
-	                <td>5</td>
-	                <td>안내드립니다</td>
-	                <td>452</td>
-	                <td>22.12.25</td>
-	            </tr>
-	            <tr>
-	                <td>6</td>
-	                <td>안내드립니다</td>
-	                <td>553</td>
-	                <td>22.11.11</td>
-	            </tr>
-	            <tr>
-	                <td>7</td>
-	                <td>매랑꽃 별꽃 축제 안내 사항</td>
-	                <td>475</td>
-	                <td>22.08.11</td>
-	            </tr>
-	            <tr>
-	                <td>8</td>
-	                <td>안내드립니다</td>
-	                <td>522</td>
-	                <td>21.04.09</td>
-	            </tr>
+	        	<c:forEach items="${nList }" var="notice">
+		            <tr>
+		                <td>${notice.noticeNo }</td>
+		                <td><b>${notice.noticeTitle }</b></td>
+		                <td>${notice.noticeCount }</td>
+		                <td>${notice.noticeWriteDate }</td>
+		            </tr>
+	        	</c:forEach>
 	        </tbody>
 	    </table>
 	    <div class="notice-pagination">

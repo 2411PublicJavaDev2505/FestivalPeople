@@ -1,5 +1,6 @@
 package com.fepeo.boot.member.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.common.controller.api.ApiComponent;
+import com.fepeo.boot.common.util.Util;
 import com.fepeo.boot.course.controller.CourseController;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
@@ -257,19 +259,16 @@ public class MemberController {
 	
 	@PostMapping("/insert")
 	public String insertMember(@ModelAttribute MemberInsertRequest member
-			,@RequestParam(required=false) MultipartFile profile) throws IllegalStateException, IOException {
+			,@RequestParam(required=false) MultipartFile profile
+			,Model model) throws IllegalStateException, IOException {
 		member.setProfile(profile);
 		int result = mService.insertMember(member);
 		if(member.getSocialYn().equals("Y")) {
 			return "member/socialInsertPopup";
 		}else {
+			model.addAttribute("memberName",member.getMemberName());
 			return "member/insertSucess";
 		}
-	}
-	
-	@GetMapping("/insertsuccess")
-	public String showMemberInsertSuccess() {
-		return "member/insertSucess";
 	}
 	
 	@GetMapping("/update")
@@ -294,6 +293,34 @@ public class MemberController {
 		JSONObject json = new JSONObject();
 		json.put("profile", member.getProfileFilePath());
 		return json.toString();
+	}
+	
+	@ResponseBody
+	@PostMapping("/updatepw")
+	public String updateMemberPw(MemberUpdatePwRequest member) {
+		int result = mService.updateMemberPw(member);
+		return "비밀번호가 변경되었습니다.";
+	}
+	
+	@ResponseBody
+	@PostMapping("/updateaddress")
+	public String updateMemberAddress(MemberUpdateRequest member) {
+		int result = mService.updateMemberAddress(member);
+		return member.getAddress();
+	}
+	
+	@ResponseBody
+	@PostMapping("/updatenickname")
+	public String updateMemberNickname(MemberUpdateRequest member) {
+		int result = mService.updateMemberNickname(member);
+		return member.getNickname();
+	}
+	
+	@ResponseBody
+	@PostMapping("/updateemail")
+	public String updateMemberEmail(MemberUpdateRequest member) {
+		int result = mService.updateMemberEmail(member);
+		return member.getEmail();
 	}
 	
 	@GetMapping("/detail")
@@ -356,6 +383,19 @@ public class MemberController {
 		JSONObject json = new JSONObject();
 		json.put("check", check);
 		return json.toString();
+	}
+	
+	@ResponseBody
+	@PostMapping("/changeprofile")
+	public String changeProfile(@RequestParam(required=false) MultipartFile profile) throws IllegalStateException, IOException {
+		String filePath = "";
+		if(profile != null && !profile.isEmpty()) {
+			String filename = profile.getOriginalFilename();
+			String fileRename = Util.fileRename(filename);
+			filePath = "/images/member/"+fileRename;
+			profile.transferTo(new File("C:/uploadImage/member/"+fileRename));
+		}
+		return filePath;
 	}
 	
 }

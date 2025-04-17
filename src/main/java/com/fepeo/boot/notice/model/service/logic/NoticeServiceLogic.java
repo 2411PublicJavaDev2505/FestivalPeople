@@ -2,6 +2,7 @@ package com.fepeo.boot.notice.model.service.logic;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,6 +40,11 @@ public class NoticeServiceLogic implements NoticeService {
 	public Notice selecrOneByNo(int noticeNo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Notice> selectNoticeList() {
+		return mapper.selectNoticeList();
 	}
 
 }

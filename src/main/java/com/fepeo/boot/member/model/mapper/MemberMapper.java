@@ -47,4 +47,11 @@ public interface MemberMapper {
 
 	int checkMemberEmail(String email);
 
+	int updateMemberAddress(MemberUpdateRequest member);
+
+	int updateMemberNickname(MemberUpdateRequest member);
+
+	int updateMemberEmail(MemberUpdateRequest member);
+
+
 }

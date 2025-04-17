@@ -57,6 +57,18 @@
 		UPDATE MEMBER SET MEMBER_PW = #{memberPw} WHERE MEMBER_ID=#{memberId}
 	</update>
 	
+	<update id="updateMemberAddress">
+		UPDATE MEMBER SET ADDRESS = #{address} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="updateMemberNickname">
+		UPDATE MEMBER SET NICKNAME = #{nickname} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="updateMemberEmail">
+		UPDATE MEMBER SET EMAIL = #{email} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 	<select id="selectOneById" resultType="Member">
 		SELECT * FROM MEMBER WHERE MEMBER_ID=#{memberId}
 	</select>
