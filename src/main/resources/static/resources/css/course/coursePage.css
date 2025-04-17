@@ -20,7 +20,7 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.8; /* 배경 느낌을 위해 살짝 투명하게 (선택사항) */
+  opacity: 0.8; /* 배경 느낌을 위해 살짝 투명하게  */
 }
 
 .search-form {
@@ -49,7 +49,7 @@ main {
 }
 
 
-
+/*  이전에 사용하던 것 카드 양옆에 살짝씩 공백 넣어짐
 .course-slider-container {
     position: relative;
     width: 100%;
@@ -63,41 +63,77 @@ main {
 .card-slider {
     display: flex;
     flex-direction: row;
-    overflow-x: auto;
+    overflow-x: hidden;
     scroll-behavior: smooth;
     gap: 20px;
     padding: 20px;
+}  */
+
+.course-slider-wrapper {
+    position: relative;
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    align-items: center;
 }
+
+.course-slider-container {
+    position: relative;
+    width: 1250px; /* 250*4 + 20*3 */
+    margin: auto;
+    overflow: hidden;
+    height: 600px;
+}
+
+.card-slider {
+    display: flex;
+    gap: 20px;
+    overflow: hidden; /* auto → hidden으로 변경 */
+    width: 1060px;     /* 카드 4개 × 250px + gap 3개 × 20px = 1060px */
+    margin: 0 auto;    /* 가운데 정렬 */
+    scroll-behavior: smooth;
+}
+
 
 .coursecard {
     flex: 0 0 auto;          /* 줄바꿈 방지, 고정폭 유지 */
     width: 250px;
-    height: 500px;
+    height: 450px;
     background: white;
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    opacity:0.9;
 }
 
 .slide-btn {
-    position: absolute;
-    top: 40%;
-    transform: translateY(-50%);
+    position: relative;
     background-color: rgba(255,255,255,0.8);
     border: none;
-    font-size: 24px;
+    font-size: 18px; /* 기존보다 작게 */
     cursor: pointer;
-    z-index: 1;
-    padding: 10px;
+    z-index: 10;
+    padding: 8px;
     border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+}
+
+.slide-btn:hover {
+    background-color: rgba(255,255,255,1);
 }
 
 .slide-btn.left {
-    left: 0;
+    left: 10px;
 }
 
 .slide-btn.right {
-    right: 0;
+    right: 10px;
 }
 
 .coursecard img {
@@ -108,6 +144,21 @@ main {
 }
 
 
-a.visited {
-	color: green;
+a {
+  color: green;
+  text-decoration: none;
+}
+
+a:focus, a:hover {
+  display: inline-block;
+  color: lightgreen;
+  text-decoration-color: green;
+  transform: translateY(-2px);
+  transition: 1s;
+}
+
+html {
+  color: hsl(210, 9%, 31%);
+  font-family: sans-serif;
+  line-height: 1.6;
 }
