@@ -121,7 +121,7 @@ public class CourseController {
 		
 		
 		// 선택한 축제 번호로 축제 정보 가져오기
-		Festival festival = fService.getFestivalByNo(festivalNo);
+		Festival festival = fService.selectFestivalByNo(festivalNo);
 		// 축제 주소 좌표값 설정
 		Map<String, String> festivalXY = new HashMap<String, String>();
 		festivalXY.put("x", festival.getMapVCode());
