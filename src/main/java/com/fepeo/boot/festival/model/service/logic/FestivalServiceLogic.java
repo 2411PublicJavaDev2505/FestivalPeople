@@ -102,5 +102,13 @@ public class FestivalServiceLogic implements FestivalService {
 		return festivalMapper.searchFestivalList(searchMap);
 	}
 
+	@Override
+	public List<Festival> searchFestivalListAll(int startRow, int endRow, Map<String, String> searchMap) {
+		Map<String, Integer> params = new HashMap<>();
+        params.put("startRow", startRow);
+        params.put("endRow", endRow);
+		return festivalMapper.searchFestivalListAll(params,searchMap);
+	}
+
 }
 

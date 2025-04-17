@@ -11,8 +11,6 @@
             #{festivalName},
             #{festivalStartDate},
             #{festivalEndDate},
-            #{festivalFileName},
-            #{festivalFileRename},
             #{festivalFilePath},
             #{festivalPhone},
             #{festivalAddress},
@@ -27,10 +25,7 @@
 	        SELECT f.*, ROWNUM AS rnum
 	        FROM (
 	            SELECT 
-	                FESTIVAL_NO, FESTIVAL_NAME, FESTIVAL_START_DATE, FESTIVAL_END_DATE,
-	                FESTIVAL_FILE_NAME, FESTIVAL_FILE_RENAME, FESTIVAL_FILE_PATH,
-	                FESTIVAL_PHONE, FESTIVAL_ADDRESS, FESTIVAL_DETAIL_ADDRESS,
-	                MAP_V_CODE, MAP_H_CODE
+	                *
 	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL AND FESTIVAL_END_DATE >=SYSDATE
 	            ORDER BY FESTIVAL_END_DATE
 	        ) f
@@ -85,7 +80,34 @@
 			</if>	
 		</where>
 	</select>
-	
+	<select id="searchFestivalListAll" resultType="com.fepeo.boot.festival.model.vo.Festival">
+	    SELECT * FROM (
+	        SELECT f.*, ROWNUM AS rnum
+	        FROM (
+	            SELECT *
+	            FROM FESTIVAL
+	            <where>
+	                FESTIVAL_FILE_PATH IS NOT NULL
+	                AND FESTIVAL_END_DATE >= SYSDATE
+	                <if test="searchCondition != null and searchCondition.equals('name')">
+	                    AND FESTIVAL_NAME LIKE '%' || #{searchKeyword} || '%'
+	                </if>
+	                <if test="searchCondition != null and searchCondition.equals('location')">
+	                    AND FESTIVAL_ADDRESS LIKE '%' || #{searchKeyword} || '%'
+	                </if>
+	                <if test="searchCondition != null and searchCondition.equals('all')">
+	                    AND (
+	                        FESTIVAL_NAME LIKE '%' || #{searchKeyword} || '%'
+	                        OR FESTIVAL_ADDRESS LIKE '%' || #{searchKeyword} || '%'
+	                    )
+	                </if>
+	            </where>
+	            ORDER BY FESTIVAL_END_DATE
+	        ) f
+	        WHERE ROWNUM &lt;= #{endRow}
+	    )
+	    WHERE rnum &gt;= #{startRow}
+	</select>
 
 	
 
