@@ -56,12 +56,28 @@ public class MemberController {
 		return "member/login";
 	}
 	
+
+	@ResponseBody
 	@PostMapping("/login")
 	public String memberLogin(@ModelAttribute MemberLoginRequest login
 			,HttpSession session) {
+		JSONObject json = new JSONObject();
+		int check = mService.checkMemberById(login.getMemberId());
+		String checkMsg = "";
+		if(check == 0) {
+			checkMsg = "등록되지 않은 계정입니다.";
+			json.put("checkMsg", checkMsg);
+			return json.toString();
+		}
 		Member member = mService.memberLogin(login);
-		session.setAttribute("member", member);
-		return "redirect:/";
+		if(member != null) {
+			session.setAttribute("member", member);
+			json.put("memberNo", member.getMemberNo());
+		}else {
+			checkMsg = "비밀번호가 틀렸습니다.";
+		}
+		json.put("checkMsg", checkMsg);
+		return json.toString();
 	}
 	
 	@GetMapping("/kakao")
@@ -307,4 +323,23 @@ public class MemberController {
 			session.invalidate();
 		return "redirect:/";
 	}
+	
+	@ResponseBody
+	@GetMapping("/checkid")
+	public String checkMemberId(String memberId) {
+		int check = mService.checkMemberById(memberId);
+		JSONObject json = new JSONObject();
+		json.put("check", check);
+		return json.toString();
+	}
+	
+	@ResponseBody
+	@GetMapping("/checknickname")
+	public String checkMemberNickname(String nickname) {
+		int check = mService.checkMemberByNickname(nickname);
+		JSONObject json = new JSONObject();
+		json.put("check", check);
+		return json.toString();
+	}
+	
 }

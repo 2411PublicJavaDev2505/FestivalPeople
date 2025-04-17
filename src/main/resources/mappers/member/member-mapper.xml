@@ -61,4 +61,11 @@
 	<select id="selectOneById" resultType="Member">
 		SELECT * FROM MEMBER WHERE MEMBER_ID=#{memberId}
 	</select>
+	
+	<select id="checkMemberById" resultType="_int">
+		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE MEMBER_ID = #{memberId}
+	</select>
+	<select id="checkMemberByNickname" resultType="_int">
+		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE NICKNAME = #{nickname}
+	</select>
 </mapper>
