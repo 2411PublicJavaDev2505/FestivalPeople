@@ -1,6 +1,7 @@
 package com.fepeo.boot.review.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,16 +36,18 @@ public class ReviewController {
 	private final CommentService cService;
 	
 	private final ReviewService rService;
+	
+	//
+	//private final PageUtil pageUtil;
 
-    //후기 게시판!(4/16)커렌트페이지하다만거 23:46분 시작!
+    //후기 게시판!(4/17 09:28분 원복중!
 	
 	@GetMapping("/list")
 	public String showReviewList(
 			Model model) {
-			List<Review>  rList = rService.selectReviewList();
-			model.addAttribute("rList", rList);
+			List<Review> rList = rService.selectReviewList();
+			model.addAttribute("rList",rList);
 			return "/review/list";
-			
 }
 
 	
@@ -57,8 +60,8 @@ public class ReviewController {
 	
 	@PostMapping("/insert")
 	public String insertReview(@ModelAttribute ReviewAddRequest review,
-			MultipartFile uploadFile
-			,HttpSession session
+//			MultipartFile uploadFile,
+			HttpSession session
 			,Model model) {
 		//19:22 
 		int result = rService.insertReview(review);
@@ -67,7 +70,7 @@ public class ReviewController {
 	
 	//등록성공하고 여기부터 시작! Service 메소드만들고!
 	
-	@GetMapping("/{reviewNo}")
+	@GetMapping("/detail/{reviewNo}")
 	public String reviewDetail(@PathVariable("reviewNo") int reviewNo
 			,Model model) {
 		Review review = rService.selectOneByNo(reviewNo);

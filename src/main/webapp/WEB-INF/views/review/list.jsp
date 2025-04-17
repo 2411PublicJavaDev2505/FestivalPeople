@@ -45,7 +45,7 @@
 			            <tr>
 			                <td>${review.reviewNo}</td>
 			                <td>작성자</td>
-			                <td>${review.reviewTitle }</td>
+			                <td><a href="/review/detail/${review.reviewNo}">${review.reviewTitle }</td>
 			                <td>${review.reviewWriteTime }</td>
 			                <td>${review.reviewCount }</td>
 			            </tr>

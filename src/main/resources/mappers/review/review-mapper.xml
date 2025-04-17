@@ -40,7 +40,7 @@
  		</select>
  		
  		<select id="selectReviewList" resultMap="reviewResultMap">
- 			SELECT * FROM REVIEW
+ 			SELECT * FROM REVIEW ORDER BY REVIEW_NO DESC
  		</select>
  		
  		
@@ -49,10 +49,13 @@
 	  			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL
 	  		</selectKey>
   			INSERT INTO REVIEW VALUES(#{reviewNo},
-<!--   			INSERT INTO REVIEW VALUES(SEQ_REVIEW_NO.NEXTVAL, -->
   			#{reviewTitle},
   			#{reviewContent},
-  			DEFAULT,DEFAULT,DEFAULT,
+  			 DEFAULT,DEFAULT,DEFAULT,
   				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
   		</insert>
+  		
+<!--   		<select id="getTotalCount" resultType="_int"> -->
+<!-- 			SELECT COUNT(*) FROM REVIEW WHERE REVIEW_YN = 'N' -->
+<!-- 		</select> -->
 </mapper>
