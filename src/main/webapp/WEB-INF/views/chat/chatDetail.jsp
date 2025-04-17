@@ -79,8 +79,8 @@
       			</header>
       			<section class="chat-area">
       				<div>
-      				<c:forEach items="${msgList }" var="msg" varStatus="i">
-      					<ul class="group_msg_balloon">
+      				<c:forEach items="${msgList }" var="mList" varStatus="i">
+      					<ul id="balloonList" class="group_msg_balloon">
       						<li class="date_check"><span>25.4.11.(금)</span></li>
 	      					<c:if test="${sessionScope.memberNo != member.memberNo }">
       						<li class="msg-balloon-area">
@@ -89,12 +89,12 @@
 	      							<div class="chat-mem-nickname">닉넴${member.nickname }</div>
       							</div>
       							<div class="msg-balloon-area-l">
-      								<p class="msg-balloon-box-l">내용${msg.chatMsgContent }</p>
+      								<p class="msg-balloon-box-l">내용${mList.chatMsgContent }</p>
       								<div class="msg-info">
 	      								<p class="msg-non-read">안읽음2</p>
 	      								<span class="msg-time">
 	      									<span>오후</span>
-	      									<span>6:00${msg.chatMsgTime }</span>
+	      									<span>6:00${mList.chatMsgTime }</span>
 	      								</span>
       								</div>
       							</div>
@@ -107,10 +107,10 @@
 	      								<p class="msg-non-read">안읽음4</p>
 	      								<span class="msg-time">
 	      									<span>오후</span>
-	      									<span>5:26${msg.chatMsgTime }</span>
+	      									<span>5:26${mList.chatMsgTime }</span>
 	      								</span>
       								</div>
-      								<p class="msg-balloon-box-r">내용${msg.chatMsgContent }</p>
+      								<p class="msg-balloon-box-r">내용${mList.chatMsgContent }</p>
       							</div>
       						</li>
       						</c:if>
@@ -120,18 +120,39 @@
       			</section>
       			<footer class="chat-write">
       				<label id="fileUploadBtn" class="upload-btn" for="fileUploaderInput">🔗</label>
-      				<form action="#" method="post" enctype="multipart/form-data">
-      					<input id="fileUploaderInput" name="files[]" type="file">
-      				</form>
+   					<input id="fileUploaderInput" name="files[]" type="file">
       				<div class="chat-input-area">
-      					<textarea class="chat-input" maxlength="2000" placeholder="메시지를 입력하세요"></textarea>
+      					<textarea id="msgContent" class="chat-input" maxlength="2000" placeholder="메시지를 입력하세요"></textarea>
       				</div>
-      				<button class="chat-btn-submit" type="submit">➤</button>
+      				<button id="addChat" class="chat-btn-submit" type="submit">➤</button>
       			</footer>
 	        </section>
 	    </section>
     </main>
     <!-- 푸터 -->
     </div>
+    
+    <script>
+//     	const chatroomNo = "${msgList.chatroomNo}"
+    	
+//     	function getMsgList(){
+//     		fetch("/chat/detail/"+chatroomNo)
+//     		.then(response => response.json())
+//     	}
+    	
+//     	document.querySelector("#addChat").addEventListener("click", function(){
+//     		const msgContent = document.querySelector("#msgContent").value;
+//     		// 서버로 제출할 데이터를 모아둔 JS객체
+//     		const data = {"chatroomNo":chatroomNo, "msgContent":msgContent};
+//     		fetch("chat/msgInsert",{
+// 				method:"POST",
+// 				enctype:"multipart/form-data",
+// 				headers: {"Content-Type": "application/json"},
+// 				body: JSON.stringify(data) })
+// 			.then(response => response.text())    			
+//     		});
+//     	});
+    
+    </script>
 </body>
 </html>
