@@ -61,21 +61,21 @@
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 
     <script>
-    let currentSlide = 0;
-
-    const slides = [
-        <c:forEach var="festival" items="${rfestivals}" varStatus="loop">
-        {
-            src: '${festival.festivalFilePath}',
-            alt : '${festival.festivalStartDate}',
-            tagline: '${festival.festivalEndDate}',
-            mainText: "${festival.festivalName}",
-            subText: "${festival.festivalPhone}",
-            festivalNo: ${festival.festivalNo}
-        }<c:if test="${!loop.last}">,</c:if>
-        </c:forEach>
-    ];
-		console.log(slides);
+	    let currentSlide = 0;
+	
+	    const slides = [
+	        <c:forEach var="festival" items="${rfestivals}" varStatus="loop">
+	        {
+	            src: '${festival.festivalFilePath}',
+	            alt : '${festival.festivalStartDate}',
+	            tagline: '${festival.festivalEndDate}',
+	            mainText: "${festival.festivalName}",
+	            subText: "${festival.festivalPhone}",
+	            festivalNo: ${festival.festivalNo}
+	        }<c:if test="${!loop.last}">,</c:if>
+	        </c:forEach>
+	    ];
+	    
     	const totalSlides = slides.length;
         const slideContainer = document.querySelector('.simple-slide-container');
         const currentPageElement = document.querySelector('.current-page');
