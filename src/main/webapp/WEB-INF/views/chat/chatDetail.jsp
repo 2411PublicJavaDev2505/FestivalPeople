@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>같이갈래-목록</title>
-	<link rel="stylesheet" href="../resources/css/include/header.css">
-	<link rel="stylesheet" href="../resources/css/chat/chatDetail.css">
-	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/header.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chatDetail.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chatLeftSide.css">
 </head>
 <body>
     <div id="container">
@@ -45,7 +46,7 @@
 		                    <div class="text-wrap">
 		                        <div class="chat-title">${myList.chatroomTitle }</div>
 		                        <div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
-		                        <div class="chat-mem-count">정원 0 / ${myList.chatLimit }</div>
+		                        <div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
 		                    </div>
 		                    <div class="msg-alarm">2</div>
 		                    </a>
@@ -62,7 +63,9 @@
       			<header class="chat-header">
       				<div class = "chat-header-left">
       					<div class="chat-prev-list"><a href="/chat/list">←</a></div>
-      					<div class="chat-header-title"><span>튤립축제 동행 구해요</span></div>
+      					<div class="chat-header-title"><span>제목${chatRoom.chatroomTitle }</span>
+      					<input type="hidden" value="${chatroomNo }" >
+      					</div>
       				</div>
       				<div class ="chat-header-right">
 			            <form action="#" >
@@ -76,89 +79,43 @@
       			</header>
       			<section class="chat-area">
       				<div>
+      				<c:forEach items="${msgList }" var="msg" varStatus="i">
       					<ul class="group_msg_balloon">
       						<li class="date_check"><span>25.4.11.(금)</span></li>
+	      					<c:if test="${sessionScope.memberNo != member.memberNo }">
       						<li class="msg-balloon-area">
       							<div class="profile-area">
-	      							<div class="chat-profile-thumbnail">프사</div>
-	      							<div class="chat-mem-nickname">펭펭</div>
+	      							<div class="chat-profile-thumbnail">프사${member.profileFilePath }</div>
+	      							<div class="chat-mem-nickname">닉넴${member.nickname }</div>
       							</div>
       							<div class="msg-balloon-area-l">
-      								<p class="msg-balloon-box-l">안녕하세요오<br>마감 며칠까지에영?<br>
-									</p>
+      								<p class="msg-balloon-box-l">내용${msg.chatMsgContent }</p>
       								<div class="msg-info">
 	      								<p class="msg-non-read">안읽음2</p>
 	      								<span class="msg-time">
 	      									<span>오후</span>
-	      									<span>6:00</span>
+	      									<span>6:00${msg.chatMsgTime }</span>
 	      								</span>
       								</div>
       							</div>
       						</li>
-      						<li class="msg-balloon-area">
-      							<div class="profile-area">
-	      							<div class="chat-profile-thumbnail">프사</div>
-	      							<div class="chat-mem-nickname">쿵치팍치</div>
-      							</div>
-      							<div class="msg-balloon-area-l">
-      								<p class="msg-balloon-box-l">사람들 얼마나 더 모으실 예정인가요?<br>
-									</p>
-      								<div class="msg-info">
-	      								<p class="msg-non-read">안읽음2</p>
-	      								<span class="msg-time">
-	      									<span>오후</span>
-	      									<span>6:00</span>
-	      								</span>
-      								</div>
-      							</div>
-      						</li>
-      						<li class="msg-balloon-area">
-      							<div class="profile-area">
-	      							<div class="chat-profile-thumbnail">프사</div>
-	      							<div class="chat-mem-nickname">먕먕</div>
-      							</div>
-      							<div class="msg-balloon-area-l">
-      								<p class="msg-balloon-box-l">정원까지 꽉 채우시나요<br>
-									</p>
-      								<div class="msg-info">
-	      								<p class="msg-non-read">안읽음2</p>
-	      								<span class="msg-time">
-	      									<span>오후</span>
-	      									<span>6:00</span>
-	      								</span>
-      								</div>
-      							</div>
-      						</li>
-      						<li class="msg-balloon-area">
-      							<div class="profile-area">
-	      							<div class="chat-profile-thumbnail">프사</div>
-	      							<div class="chat-mem-nickname">방장이지롱</div>
-      							</div>
-      							<div class="msg-balloon-area-l">
-      								<p class="msg-balloon-box-l">어느 정도 모였으면 시간대랑 출발지를 정해야 할 것 같아요<br>
-일단 우리는 대중교통으로 가는 게 목적이니까 아예 에버라인에서 만나는 걸로 할까요? 아니면 에버랜드 주차장에서 만나는게 더 낫나요?</p>
-      								<div class="msg-info">
-	      								<p class="msg-non-read">안읽음2</p>
-	      								<span class="msg-time">
-	      									<span>오후</span>
-	      									<span>6:12</span>
-	      								</span>
-      								</div>
-      							</div>
-      						</li>
+  							</c:if>
+	      					<c:if test="${sessionScope.memberNo eq member.memberNo }">
       						<li class="msg-balloon-area-my">
       							<div class="msg-balloon-area-r">
       								<div class="msg-info-r">
 	      								<p class="msg-non-read">안읽음4</p>
 	      								<span class="msg-time">
 	      									<span>오후</span>
-	      									<span>5:26</span>
+	      									<span>5:26${msg.chatMsgTime }</span>
 	      								</span>
       								</div>
-      								<p class="msg-balloon-box-r">저는 전철역이요</p>
+      								<p class="msg-balloon-box-r">내용${msg.chatMsgContent }</p>
       							</div>
       						</li>
+      						</c:if>
       					</ul>
+      				</c:forEach>	
       				</div>
       			</section>
       			<footer class="chat-write">

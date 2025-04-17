@@ -4,5 +4,13 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fepeo.boot.chat.model.mapper.ChatMsgMapper">
 
+	<insert id="insertChatMsg">
+		insert into CHAT_MSG values (SEQ_CHAT_MSG_NO.nextval, ${chatMsgContent}, default, ${chatFileName},
+		${chatFileRename}, ${chatFilePath}, ${nonReadMember}, ${memberNo}, ${chatroomNo})
+	</insert>
 
+	<select id="selectChatMsgListByNo" resultType="com.fepeo.boot.chat.model.vo.ChatMsg">
+		select * from CHAT_MSG where CHATROOM_NO = #{chatroomNo}
+	</select>
+	
 </mapper>

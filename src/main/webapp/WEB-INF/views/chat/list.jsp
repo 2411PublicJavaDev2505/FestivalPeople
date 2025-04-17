@@ -49,7 +49,7 @@
 	       	        <c:forEach items="${myList }" var="myList" varStatus="i">
 		            <ul class="chat-list">
 		                <li class="chat-list-row">
-							<a href="/chat/detail" class="chat-link">	            
+							<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
 							<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
 		                    <div class="text-wrap">
 		                        <div class="chat-title">${myList.chatroomTitle }</div>
@@ -72,7 +72,7 @@
 	        <c:forEach items="${cRooms }" var="cRoom" varStatus="i">
 	            <ul class="chat-list">
 	                <li class="chat-list-row">
-	                	<a href="#" class="chat-link">
+	                	<a href="/chat/detail/${cRoom.chatroomNo }" class="chat-link">
 	                    <img class="chat-image" alt="${cRoom.chatImgName}" src="${cRoom.chatImgPath}">
 	                    <div class="text-wrap">
 	                        <div class="chat-title">${cRoom.chatroomTitle }</div>
