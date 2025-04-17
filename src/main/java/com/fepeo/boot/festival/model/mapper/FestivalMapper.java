@@ -15,14 +15,14 @@ public interface FestivalMapper {
     
 	List<Festival> selectFestivalList(Map<String, Integer> params);
 
+	List<Festival> selectFestivalListById ();
+
 	Festival selectFestivalByNo(int festivalNo);
 
 	int getTotalCount();
 
-
 	List<Festival> selectFestivalListByRegion(@Param("regionNames") List<String> regionNames, Map<String,String> mapPoint);
 
-	List<Festival> selectrecommendFestivalList();
 
 	List<Festival> searchFestivalList(Map<String, String> searchMap);
 

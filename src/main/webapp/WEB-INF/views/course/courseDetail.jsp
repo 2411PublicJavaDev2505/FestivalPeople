@@ -117,6 +117,10 @@
 	var mapOptions = {
 			center : new kakao.maps.LatLng(Number("${coursePoint.festivalY}"), Number("${coursePoint.festivalX}")),
 			level: 3	 
+
+
+	
+
 	};
 	
 	var map = new kakao.maps.Map(kakaoMapContainer, mapOptions);

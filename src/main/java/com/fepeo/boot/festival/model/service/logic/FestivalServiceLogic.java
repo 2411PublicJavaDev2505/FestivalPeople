@@ -92,8 +92,8 @@ public class FestivalServiceLogic implements FestivalService {
 		return festivalMapper.selectFestivalListByRegion(goodWeather, mapPoint);
 	}
 	@Override
-	public List<Festival> getrFestivalList() {
-		return festivalMapper.selectrecommendFestivalList();
+	public List<Festival> selectFestivalListById() {
+		return festivalMapper.selectFestivalListById ();
 		
 	}
 
