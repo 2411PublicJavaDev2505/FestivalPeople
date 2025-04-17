@@ -1,6 +1,7 @@
 package com.fepeo.boot.review.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fepeo.boot.common.util.PageUtil;
 import com.fepeo.boot.member.model.vo.Member;
 import com.fepeo.boot.review.controller.dto.CommentAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
@@ -35,16 +38,25 @@ public class ReviewController {
 	private final CommentService cService;
 	
 	private final ReviewService rService;
+	
+	//원복하고 페이지유틸 정상으로 임포트!확인할것!(4/17 10:13)
+	private final PageUtil pageUtil;
 
-    //후기 게시판!(4/16)커렌트페이지하다만거 23:46분 시작!
+    //후기 게시판!(4/17 원복하고 코드커렌트페이지!!시작!!
 	
 	@GetMapping("/list")
-	public String showReviewList(
-			Model model) {
-			List<Review>  rList = rService.selectReviewList();
-			model.addAttribute("rList", rList);
+	public String showReviewList(@RequestParam(value="page",defaultValue="1") int currentPage
+			,Model model) {
+			//캐치 해줘야함!
+			List<Review> rList = rService.selectReviewList(currentPage);
+			int totalCount = rService.getTotalCount();
+			Map<String, Integer> pageInfo
+			= pageUtil.generatePageInfo(totalCount, currentPage);
+			model.addAttribute("maxPage", pageInfo.get("maxPage"));
+			model.addAttribute("startNavi" ,pageInfo.get("startNavi"));
+			model.addAttribute("endNavi", pageInfo.get("endNavi"));
+			model.addAttribute("rList",rList);
 			return "/review/list";
-			
 }
 
 	
@@ -57,8 +69,8 @@ public class ReviewController {
 	
 	@PostMapping("/insert")
 	public String insertReview(@ModelAttribute ReviewAddRequest review,
-			MultipartFile uploadFile
-			,HttpSession session
+//			MultipartFile uploadFile,
+			HttpSession session
 			,Model model) {
 		//19:22 
 		int result = rService.insertReview(review);
@@ -67,7 +79,7 @@ public class ReviewController {
 	
 	//등록성공하고 여기부터 시작! Service 메소드만들고!
 	
-	@GetMapping("/{reviewNo}")
+	@GetMapping("/detail/{reviewNo}")
 	public String reviewDetail(@PathVariable("reviewNo") int reviewNo
 			,Model model) {
 		Review review = rService.selectOneByNo(reviewNo);
