@@ -10,7 +10,6 @@
 
 	
 	<title>코스 추천</title>
-	
 </head>
 <body>
 	<div id="container">
@@ -21,13 +20,14 @@
 					<div>
 						<p class="courseText">코스추천</p>
 					</div>
-					<form id="sortForm" action="controllerURL" method="get">
+					<form id="sortForm" action="/course/detail" method="get">
+						<input type="hidden" value="${festival.festivalNo }" name="festivalNo">
 						<div class="radio-btn">
 							<label class="radio-style">
-								<input type="radio" id="distance" name="sort" checked>거리순
+								<input type="radio" id="distance" name="sort" checked onchange="document.querySelector('sortForm').submit();">거리순
 							</label>
 							<label class="radio-style">
-								<input type="radio" id="rate"	  name="sort"> 평점순
+								<input type="radio" id="rate"	  name="sort"	onchange="document.querySelector('sortForm').submit();"> 평점순
 							</label>
 						</div>
 					</form>
@@ -80,23 +80,22 @@
 					</div>	
 					<div class="course-recommend-right">
 		                <div class="course-search">
-			                <form class="search-form">
+			                <form class="search-form" action="course/list" method="get">
 			                    <select>
 			                        <option value="all">전체</option>
 			                        <option value="name">축제명</option>
 			                        <option value="location">지역</option>
-			                        <option value="date">날짜</option>
 			                    </select>
 			                    <input type="text" placeholder="검색" id=" ">
 			                    <button class="search-btn">⌕</button>
 			                </form>
-				            <div class="search-course-list">
-				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-				            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-				            </div>
+					            <div class="search-course-list">
+					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+					            </div>
 			            </div>
 <!-- 			            forEach 예정 -->
 					</div>			

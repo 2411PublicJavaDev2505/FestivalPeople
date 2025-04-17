@@ -72,6 +72,7 @@ public class CourseController {
 			List<RegionDto> regionList = cService.getAllRegions();
 			List<String> goodWeather = api.callWeatherApi(nowTime, regionList);
 //			System.out.println(goodWeather);	
+			//날씨 좋은 지역과 회원 좌표를 가지고 축제 리스트 출력
 			List<Festival> fList = fService.selectFestivalListByRegion(goodWeather, mapPoint);
 //			System.out.println(fList);
 //			System.out.println(fList.size());
@@ -85,7 +86,7 @@ public class CourseController {
 //				List<Festival> rList = fService.getrFestivalList();
 //			}
 			
-			return "/course/list";
+			return "redirect:/course/list";
 		}
 	}
 	
@@ -107,8 +108,11 @@ public class CourseController {
 		System.out.println(fList);
 		model.addAttribute("fList", fList);
 		
-		return "/course/list";
+		return "redirect:/course/list";
 	}
+	
+	
+
 	
 	
 	
@@ -117,12 +121,13 @@ public class CourseController {
 	
 	@GetMapping("/detail")
 	public String showCourseDetail(@RequestParam("festivalNo") int festivalNo
-			,Model model ) {
+			,Model model
+			,@RequestParam(value ="sort", defaultValue ="distance") String sort) {
 		
 		
 		// 선택한 축제 번호로 축제 정보 가져오기
-
 		Festival festival = fService.selectFestivalByNo(festivalNo);
+		
 		// 축제 주소 좌표값 설정
 		Map<String, String> festivalXY = new HashMap<String, String>();
 		festivalXY.put("x", festival.getMapVCode());
@@ -133,8 +138,8 @@ public class CourseController {
 //		System.out.println(matZipRec);
 		// 축제 좌표값으로 가까운 숙박시설 한개 선택
 		PlaceDto hotelRec = api.kakaoHotelApi(festivalXY);
-
-		
+	
+		// 추천 코스 좌표값 매핑하기
 		Map<String, String> coursePoint = new HashMap<String, String>();
 		coursePoint.put("festivalX", festival.getMapVCode());
 		coursePoint.put("festivalY", festival.getMapHcode());
@@ -143,14 +148,9 @@ public class CourseController {
 		coursePoint.put("hotelX", hotelRec.getX());
 		coursePoint.put("hotelY", hotelRec.getY());
 //		System.out.println(coursePoint);
-		
-		
-		
 		// 이건 추후에 사용할 키 숨김
 //		String kakaoKey = api.getKakaoApiKey();
 		//System.out.println(festival.getFestivalFileName());
-		
-		
 		
 		
 		
