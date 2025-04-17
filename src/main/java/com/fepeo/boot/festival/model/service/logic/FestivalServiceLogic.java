@@ -97,5 +97,10 @@ public class FestivalServiceLogic implements FestivalService {
 		
 	}
 
+	@Override
+	public List<Festival> searchFestivalList(Map<String, String> searchMap) {
+		return festivalMapper.searchFestivalList(searchMap);
+	}
+
 }
 

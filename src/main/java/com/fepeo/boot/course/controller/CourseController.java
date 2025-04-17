@@ -5,12 +5,14 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.course.model.service.CourseService;
+import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
 import com.fepeo.boot.festival.model.service.FestivalService;
 import com.fepeo.boot.festival.model.vo.Festival;
@@ -92,13 +95,19 @@ public class CourseController {
 			,@RequestParam("searchCondition") String searchCondition
 			,@RequestParam("searchKeyword") String searchKeyword) {
 		
+		Map<String, String> searchMap = new HashMap<String, String>();
+		searchMap.put("searchKeyword", searchKeyword);
+		searchMap.put("searchCondition", searchCondition);
+		
+		System.out.println(searchKeyword);
+		System.out.println(searchCondition);
 		
 		
+		List<Festival> fList = fService.searchFestivalList(searchMap);
+		System.out.println(fList);
+		model.addAttribute("fList", fList);
 		
-		
-		
-		
-		return "";
+		return "/course/list";
 	}
 	
 	
@@ -107,8 +116,47 @@ public class CourseController {
 	
 	
 	@GetMapping("/detail")
-	public String showCourseDetail() {
-
+	public String showCourseDetail(@RequestParam("festivalNo") int festivalNo
+			,Model model ) {
+		
+		
+		// 선택한 축제 번호로 축제 정보 가져오기
+		Festival festival = fService.getFestivalByNo(festivalNo);
+		// 축제 주소 좌표값 설정
+		Map<String, String> festivalXY = new HashMap<String, String>();
+		festivalXY.put("x", festival.getMapVCode());
+		festivalXY.put("y", festival.getMapHcode());
+		
+		// 축제 좌표값으로 가까운 밥집 한개 선택
+		PlaceDto matZipRec = api.kakaoMatzipApi(festivalXY);
+		System.out.println(matZipRec);
+		// 축제 좌표값으로 가까운 숙박시설 한개 선택
+		PlaceDto hotelRec = api.kakaoHotelApi(festivalXY);
+		System.out.println(hotelRec);
+		
+		Map<String, String> coursePoint = new HashMap<String, String>();
+		coursePoint.put("festivalX", festival.getMapVCode());
+		coursePoint.put("festivaly", festival.getMapHcode());
+		coursePoint.put("matzipX", matZipRec.getX());
+		coursePoint.put("matzipY", matZipRec.getY());
+		coursePoint.put("hotelX", hotelRec.getX());
+		coursePoint.put("hotelY", hotelRec.getY());
+		
+		
+		
+		// 이건 추후에 사용할 키 숨김
+//		String kakaoKey = api.getKakaoApiKey();
+//		System.out.println(festival);
+		
+		
+		
+		
+		
+//		model.addAttribute("kakaoKey", kakaoKey);
+		model.addAttribute("hotel", hotelRec);
+		model.addAttribute("matZip", matZipRec);
+		model.addAttribute("festival", festival);
+		model.addAttribute("coursePoint", coursePoint);
 		return "course/courseDetail";
 	}
 	
