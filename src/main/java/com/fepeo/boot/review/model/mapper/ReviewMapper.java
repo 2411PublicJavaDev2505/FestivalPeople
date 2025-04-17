@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import com.fepeo.boot.review.controller.dto.ImgAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
 import com.fepeo.boot.review.model.vo.Review;
 
@@ -26,6 +27,12 @@ public interface ReviewMapper {
 	List<Review> selectReviewList(RowBounds rowBounds);
 	//토탈카운트 4/17 10:24추가
 	int getTotalCount();
+	//이미지등록 ( 4/18 00:46)
+	int insertReviewImageList(List<ImgAddRequest> imageList);
+	
+	//이미지등록4/17 20:32 (에러나면 지울것!)List로 받아야하니 아래 2개주석!23:53
+	//int insertReview(ImgAddRequest review);
+	//int insertImgAddRequest(ImgAddRequest img);
 	
 	//토탈카운트
 //	int getTotalCount();

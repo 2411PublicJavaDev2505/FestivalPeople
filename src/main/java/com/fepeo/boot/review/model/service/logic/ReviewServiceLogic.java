@@ -1,12 +1,17 @@
 package com.fepeo.boot.review.model.service.logic;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fepeo.boot.common.util.Util;
+import com.fepeo.boot.review.controller.dto.ImgAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
 import com.fepeo.boot.review.model.mapper.ReviewMapper;
 import com.fepeo.boot.review.model.service.ReviewService;
@@ -29,15 +34,64 @@ public class ReviewServiceLogic implements ReviewService {
 	
 	//insertReview(ReviewAddRequest review,MultipartFile images) 원래코드
 	// 수정코드! 파일업로드파일 코드작성 4/17 17:25분!!코드 수정하고 추가해줌!!
+	// ***review에서 imgdto만들어준다!!!!일단 코드 적기! 4/17 19:19 
+	//
 //	@Override
-//	public int insertReview(ReviewAddRequest review, MultipartFile images) {
+//	public int insertReview(ReviewAddRequest review,List<MultipartFile> images) 
+//			throws IllegalStateException, IOException {
 //		int result = mapper.insertReview(review);
-//			if(result == 0) return 0; 
-//			
-//			int reviewNo = 
-//			//result = review.getReviewNo();
-//		}
-//		return result;
+//		//게시글 등록 실패시!!return 밑으로 코드 진행 안된다!!
+//				if(result == 0) return 0;
+//				//게시글 번호 꺼내기!!
+//				int reviewNo = review.getReviewNo();
+//				List<ImgAddRequest> imageList = new ArrayList<ImgAddRequest>();
+//				//4/11 코드 추가해줌!그리고 if 안에 코드넣어주고 아래 4/11
+//				if(images != null) {
+//					for(int i = 0; i < images.size(); i++) {
+//						if(images.get(i).getSize() > 0) {
+//							ImgAddRequest img = new ImgAddRequest();
+//							//img에 파일 정보를 담기!!
+//							img.setReviewNo(reviewNo);
+//							
+//							
+//							String reviewFileName1 = images.get(i).getOriginalFilename();
+//							String reviewFileRename1 = Util.fileRename(reviewFileName1);
+//							String reviewFileName2 = images.get(i).getOriginalFilename();
+//							String reviewFileRename2 = Util.fileRename(reviewFileName2);
+//							String reviewFileName3 = images.get(i).getOriginalFilename();
+//							String reviewFileRename3 = Util.fileRename(reviewFileName3);
+//							
+//							img.setReviewFileName1(reviewFileName1);
+//							img.setReviewFileRename1(reviewFileRename1);
+//							img.setReviewFilePath1(webPath+reviewFileRename1);
+//							img.setReviewFileName2(reviewFileName2);
+//							img.setReviewFileRename2(reviewFileRename2);
+//							img.setReviewFilePath2(webPath+reviewFileRename2);
+//							img.setReviewFileName3(reviewFileName3);
+//							img.setReviewFileRename3(reviewFileRename3);
+//							img.setReviewFilePath3(webPath+reviewFileRename3);
+//							img.setImageFile(images.get(i));
+//							
+//							//img를 imageList에 추가!!
+//							imageList.add(img);
+//							//1:06분 15초부터 코드적기!
+//						}//여기부터 아래코드 4/11강의때 한칸 올려줌!!***
+//					}//images -> imageList 처리 작업종료 
+//					//1.처리후 ImageList에 정보를 DB에 Insert 해야함!!
+//					//2.실제 파일저장!!
+//					if(!imageList.isEmpty()) {
+//						//1. imageList정보를 DB에 insert해야함.
+//						result = mapper.insertReviewImageList(imageList);
+//						//2. 실제 파일 저장!!
+//						for(ImgAddRequest img: imageList) {
+//							img.getImageFile().transferTo(new File(folderPath+img.getReviewFileName1()));
+//							img.getImageFile().transferTo(new File(folderPath+img.getReviewFileName2()));
+//							img.getImageFile().transferTo(new File(folderPath+img.getReviewFileName3()));
+//							
+//						}
+//					}
+//				}
+//				return result;
 //		return mapper.insertReview(review); 원래코드!!
 //	}
 	
@@ -82,11 +136,45 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	@Override
-	public int insertReview(ReviewAddRequest review, MultipartFile images) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertReview(ReviewAddRequest review, List<MultipartFile> images)
+			throws IllegalStateException, IOException {
+		int result = mapper.insertReview(review);
+		if(result == 0) return 0;
+		//게시글 번호 꺼내기!!
+		int reviewNo = review.getReviewNo();
+		List<ImgAddRequest> imageList = new ArrayList<ImgAddRequest>();
+		//4/11 코드 추가해줌!그리고 if 안에 코드넣어주고 아래 4/11
+		if(images != null) {
+			for(int i = 0; i < images.size(); i++) {
+				if(images.get(i).getSize() > 0) {
+					ImgAddRequest img = new ImgAddRequest();
+					//img에 파일 정보를 담기!!
+					img.setReviewNo(reviewNo);
+					
+					String fileName = images.get(i).getOriginalFilename();
+					String fileRename = Util.fileRename(fileName);
+					img.setReviewFileName1(fileName);
+					img.setReviewFileRename1(fileRename);
+					img.setReviewFilePath1(webPath+fileRename);
+					img.setReviewFileName2(fileName);
+					img.setReviewFileRename2(fileRename);
+					img.setReviewFilePath2(webPath+fileRename);
+					img.setReviewFileName3(fileName);
+					img.setReviewFileRename3(fileRename);
+					img.setReviewFilePath3(webPath+fileRename);
+					imageList.add(img);
+				}
+			}
+				if(!imageList.isEmpty()) {
+					result = mapper.insertReviewImageList(imageList);
+					for(ImgAddRequest img : imageList) {
+						img.getImageFile().transferTo(new File(folderPath+img.getReviewFileRename1()));
+						img.getImageFile().transferTo(new File(folderPath+img.getReviewFileRename2()));
+						img.getImageFile().transferTo(new File(folderPath+img.getReviewFileRename3()));
+						System.out.println("저장확인");
+					}
+			}
+		}
+		return result;
 	}
-
-
-
 }

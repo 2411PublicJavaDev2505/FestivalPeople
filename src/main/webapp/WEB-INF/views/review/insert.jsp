@@ -28,10 +28,10 @@
 						<textarea rows="5" cols="82" name="reviewContent"></textarea>
 					</div>
 					<div class="review-attach">
-							<input type="file" name="uploadFile"><br>
-<!-- 						<input type="file" name="images"><br> -->
-<!-- 						<input type="file" name="images"><br> -->
-<!-- 						<input type="file" name="images"><br> -->
+<!-- 							<input type="file" name="uploadFile"><br> -->
+						<input type="file" name="images"><br>
+						<input type="file" name="images"><br>
+						<input type="file" name="images"><br>
 					</div>
 					<div class="reviewinsert-btn">
 						<button type="submit" id="submitbtn">등록</button>

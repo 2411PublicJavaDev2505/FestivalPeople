@@ -1,5 +1,6 @@
 package com.fepeo.boot.review.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fepeo.boot.common.util.PageUtil;
 import com.fepeo.boot.member.model.vo.Member;
 import com.fepeo.boot.review.controller.dto.CommentAddRequest;
+import com.fepeo.boot.review.controller.dto.ImgAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
 import com.fepeo.boot.review.model.service.CommentService;
 import com.fepeo.boot.review.model.service.ReviewService;
@@ -41,6 +43,8 @@ public class ReviewController {
 	
 	//원복하고 페이지유틸 정상으로 임포트!확인할것!(4/17 10:13)
 	private final PageUtil pageUtil;
+	
+	
 
     //후기 게시판!(4/17 원복하고 코드커렌트페이지!!시작!!
 	
@@ -67,18 +71,19 @@ public class ReviewController {
 	public String showReviewInsert(HttpSession session) {
 		return "review/insert";
 	}
-	//후기등록 이미지파일 시작하며 코드 추가!
+	//후기등록 이미지파일 시작하며 코드 추가!코드확인!!23:13
 	
-//	@PostMapping("/insert")
-//	public String insertReview(@ModelAttribute ReviewAddRequest review,
-//			@RequestParam("images") MultipartFile images,
-//			HttpSession session
-//			,Model model) {
-//		//19:22 
-//		int result = rService.insertReview(review);
-//		return "redirect:/review/list";
-//	}
-//	
+	@PostMapping("/insert")
+	public String insertReview(@ModelAttribute ReviewAddRequest review,
+			@RequestParam(value="images",required=false) List<MultipartFile> images,
+			HttpSession session
+			,Model model) throws IllegalStateException, IOException {
+		//4/17 21:47
+		System.out.println(images);
+		int result = rService.insertReview(review,images);
+		return "redirect:/review/list";
+	}
+	
 	//등록성공하고 여기부터 시작! Service 메소드만들고!
 	
 	@GetMapping("/{reviewNo}")

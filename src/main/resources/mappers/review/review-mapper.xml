@@ -58,4 +58,6 @@
   		<select id="getTotalCount" resultType="_int">
 			SELECT COUNT(*) FROM REVIEW 
 		</select>
+		
+		<insert id="insertReviewImageList"></insert>
 </mapper>
