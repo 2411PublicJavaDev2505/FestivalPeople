@@ -75,7 +75,7 @@
 		  };	
 		  
 		  
-		  const slider = document.querySelector("cardSlider");
+		  const slider = document.querySelector(".card-slider");
 		  const cardWidth = 250 + 20;
 		  const visibleCards = 4;
 		  const scrollAmount = cardWidth * visibleCards;

@@ -9,7 +9,7 @@
         <ul class="group1">
             <li style="--offset: 0;"><a href="#">소개</a></li>
             <li style="--offset: 1;"><a href="/festival/list">축제</a></li>
-            <li style="--offset: 2;"><a href="/course/list">코스 추천</a></li>
+            <li style="--offset: 2;"><a onclick="goCourse();">코스 추천</a></li>
             <li style="--offset: 3;"><a onclick="goChat();">같이 갈래?</a></li>
         </ul> 
         <ul  class="group2">
@@ -42,5 +42,16 @@
     			location.href = "/chat/list";
     		}
     	}
+    	
+    	const goCourse = () => {
+    		let memberId = '${member.memberId}';
+    		if(memberId.trim() == ''){
+	    		alert("로그인이 필요한 서비스입니다");
+	    		location.href = "/member/login";
+    		}else {
+    			location.href = "/course/list";
+    		}
+    	}
+    	
     </script>
 </header>
