@@ -18,24 +18,28 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReviewServiceLogic implements ReviewService {
 	
-	//아래것도 적는게 맞는지 확인필요!
+	//아래것도 적는게 맞는지 확인필요!지워줄것!!!
 	//private final SqlSession session;
 	
 	private final ReviewMapper mapper;
 	
+	//파일업로드 추가 4/17 17:23~!
+	private String webPath ="/images/review/";
+	private String folderPath = "C:/uploadImage/review/";
+	
 	//insertReview(ReviewAddRequest review,MultipartFile images) 원래코드
-	// 수정코드!
-	@Override
-	public int insertReview(ReviewAddRequest review) {
-		//성공후 아래코드 작성..작성전 mapper.xml에 코드 수정했으나 제약조건 뜸..
-		//코드 수정아래 적어줌...에러나면 지울것!15:10
-		int result = mapper.insertReview(review);
-			if(result > 0) {
-			result = review.getReviewNo();
-		}
-		return result;
+	// 수정코드! 파일업로드파일 코드작성 4/17 17:25분!!코드 수정하고 추가해줌!!
+//	@Override
+//	public int insertReview(ReviewAddRequest review, MultipartFile images) {
+//		int result = mapper.insertReview(review);
+//			if(result == 0) return 0; 
+//			
+//			int reviewNo = 
+//			//result = review.getReviewNo();
+//		}
+//		return result;
 //		return mapper.insertReview(review); 원래코드!!
-	}
+//	}
 	
 	
 	//detail
@@ -75,6 +79,12 @@ public class ReviewServiceLogic implements ReviewService {
 	public int getTotalCount() {
 		int totalCount = mapper.getTotalCount();
 		return totalCount;
+	}
+
+	@Override
+	public int insertReview(ReviewAddRequest review, MultipartFile images) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

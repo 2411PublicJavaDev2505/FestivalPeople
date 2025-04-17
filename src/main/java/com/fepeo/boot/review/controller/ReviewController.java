@@ -67,17 +67,18 @@ public class ReviewController {
 	public String showReviewInsert(HttpSession session) {
 		return "review/insert";
 	}
+	//후기등록 이미지파일 시작하며 코드 추가!
 	
-	@PostMapping("/insert")
-	public String insertReview(@ModelAttribute ReviewAddRequest review,
-//			MultipartFile uploadFile,
-			HttpSession session
-			,Model model) {
-		//19:22 
-		int result = rService.insertReview(review);
-		return "redirect:/review/list";
-	}
-	
+//	@PostMapping("/insert")
+//	public String insertReview(@ModelAttribute ReviewAddRequest review,
+//			@RequestParam("images") MultipartFile images,
+//			HttpSession session
+//			,Model model) {
+//		//19:22 
+//		int result = rService.insertReview(review);
+//		return "redirect:/review/list";
+//	}
+//	
 	//등록성공하고 여기부터 시작! Service 메소드만들고!
 	
 	@GetMapping("/{reviewNo}")
