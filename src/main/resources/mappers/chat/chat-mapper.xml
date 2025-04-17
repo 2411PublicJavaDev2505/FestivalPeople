@@ -24,5 +24,8 @@
 	<select id="selectChatMember" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		select CHAT_MEMBER_COUNT from CHATROOM where CHATROOM_NO = #{chatroomNo}
 	</select>
-
+	<!-- 채팅방 정보 가져오기  -->
+	<select id="selectChatRoomByNo" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
+		 SELECT * FROM CHATROOM WHERE CHATROOM_NO = #{chatroomNo}
+	</select>
 </mapper>  

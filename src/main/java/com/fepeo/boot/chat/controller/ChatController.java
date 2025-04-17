@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
 import com.fepeo.boot.chat.controller.dto.MsgInsertRequest;
 import com.fepeo.boot.chat.controller.dto.MyChatroom;
+import com.fepeo.boot.chat.model.mapper.ChatMapper;
 import com.fepeo.boot.chat.model.service.ChatMsgService;
 import com.fepeo.boot.chat.model.service.ChatService;
 import com.fepeo.boot.chat.model.vo.ChatMember;
@@ -95,25 +96,33 @@ public class ChatController {
 				,HttpSession session, Model model) {
 		// 세션에서 memberNo 가져오기
 		Member member = (Member)session.getAttribute("member");
-		ChatRoom chatRoom = (ChatRoom)session.getAttribute("chatRoom");
 		int memberNo = member.getMemberNo();	
+
+		// 채팅방 정보 조회 (제목,태그 등 출력용)
+		ChatRoom chatRoom = cService.selectChatRoomByNo(chatroomNo); 
+		model.addAttribute("chatRoom", chatRoom);
+		
 		// 좌측 목록(내가 속한 방) 출력
 		List<MyChatroom> myList = cService.selectChatRoomListByNo(memberNo);
 		model.addAttribute("myList",myList);
 		// 각 채팅방별 참여인원수 불러오기
 		List<ChatMember> memberList = cService.selectChatMember();
+		model.addAttribute("memberList", memberList);
 		
 		// 대화내용(말풍선) 출력
 		List<ChatMsg> msgList = msgService.selectChatMsgListByNo(chatroomNo);
 		model.addAttribute("msgList", msgList);
-		
-		model.addAttribute("chatroomNo", chatroomNo);
+
+		session.setAttribute("chatroomTitle", chatRoom.getChatroomTitle());
 		session.setAttribute("memberNo", member.getMemberNo());
 		model.addAttribute("member", member);
-		model.addAttribute("chatRoom", chatRoom);
+		model.addAttribute("nickname", member.getNickname());
+		model.addAttribute("profile", member.getProfileFilePath());
 		
 		// 채팅방 회원수 업데이트
 		//int member = cService.updateChatMember();
+
+		model.addAttribute("chatroomNo", chatroomNo); // 채팅방 번호 전달
 		
 		return "chat/chatDetail";
 	}
@@ -133,10 +142,10 @@ public class ChatController {
 	// 메시지입력
 	@PostMapping("/msgInsert")
 	@ResponseBody
-	public int insertChatMsg(@ModelAttribute MsgInsertRequest msg,
+	public int insertChatMsg(@RequestParam("msgContent") String  msgContent,
+				@RequestParam("chatroomNo") int chatroomNo,
 				@RequestParam(value="uplodeFile", required=false) MultipartFile uplodeFile,
-				@RequestParam("chatroomNo") int chatroomNo
-				,HttpSession session, Model model) {
+				HttpSession session, Model model) {
 		// 세션에서 memberNo 가져오기
 		Member member = (Member)session.getAttribute("member");
 		int memberNo = member.getMemberNo();	
@@ -144,7 +153,11 @@ public class ChatController {
     	// 각 채팅방별 참여인원수 불러오기
     	List<ChatMember> memberList = cService.selectChatMember();
 
-    	// 말풍선 생성
+    	// 말풍선 생성(채팅내용 입력)
+    	MsgInsertRequest msg = new MsgInsertRequest();
+    	msg.setChatroomNo(chatroomNo);
+    	msg.setChatMsgContent(msgContent);
+    	msg.setMemberNo(memberNo);
     	msg.setUplodeFile(uplodeFile);
     	int result = msgService.insertChatMsg(msg);
     	
@@ -156,6 +169,8 @@ public class ChatController {
 		model.addAttribute("msgList", msgList);
 		model.addAttribute("nickname", member.getNickname()); // 참가자 닉네임
 
+		System.out.println("chat내용: "+ msgContent);
+		
 		return result; 
 	}
 	
