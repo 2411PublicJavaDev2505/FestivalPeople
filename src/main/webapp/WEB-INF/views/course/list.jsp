@@ -25,10 +25,9 @@
 		                        <option value="all">전체</option>
 		                        <option value="name">축제명</option>
 		                        <option value="location">지역</option>
-		                        <option value="date">날짜</option>
 		                    </select>
 		                    <input type="text" placeholder="검색" name="searchKeyword">
-		                    <button class="search-btn">⌕</button>
+		                    <button class="search-btn" type="submit">⌕</button>
 		                </form>
 		            </div>
 			        <div class="course-slider-wrapper">
@@ -76,7 +75,7 @@
 		  };	
 		  
 		  
-		  const slider = document.getElementById("cardSlider");
+		  const slider = document.querySelector("cardSlider");
 		  const cardWidth = 250 + 20;
 		  const visibleCards = 4;
 		  const scrollAmount = cardWidth * visibleCards;

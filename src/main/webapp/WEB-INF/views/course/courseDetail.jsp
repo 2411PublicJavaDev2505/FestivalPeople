@@ -37,26 +37,33 @@
 					</div>
 				</div>
 				<div class="course-recommend-main">
+					<input type="hidden" value="${festival}">
+					<input type="hidden" value="${matZip}">
+					<input type="hidden" value="${hotel}">
+					<input type="hidden" value="${coursePoint}">
+					
 					<div class="course-recommend-left">
-						<div  class="course-recommend-img">
-							<img src="../resources/img/course/examMap.png" alt="지도">
+						<div  class="course-recommend-map" style="width:100%; height:400px;">							
+							<!-- <img src="../resources/img/course/examMap.png" alt="지도"> -->
 						</div>
 						<div class="festival-title">
-							<p>부산연등회</p>
+
+							<p>${festival.festivalName}</p>
 						</div>
 						<div class="course-recommend-img">
+
 							<img src="../resources/img/course/busanFestival.jpg" alt="부산">
 						</div>
 						<div class="matzip-container">
 							<div class="matzip-title">추천맛집</div>
-							<div class="matzip-name">또또식당</div>
+							<div class="matzip-name">${matZip.place_name }</div>
 						</div>
 						<div class="course-recommend-img">
 							<img src="../resources/img/course/matzipPicture.jpg" alt="또또식당">
 						</div>
 						<div class="matzip-container">
 							<div class="matzip-title">추천숙소</div>
-							<div class="matzip-name">이비스 앰배서더 부산 시티 센터</div>
+							<div class="matzip-name">${hotel.place_name }</div>
 						</div>
 						<div class="course-recommend-img">
 							<img src="../resources/img/course/hotel.jpg" alt="또또식당">
@@ -93,6 +100,50 @@
 			</div>	
 		</main>	
 	</div>
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce2765b5c8d1c862f02d7a486094793d"></script>
+
+<script>
+
+/* 	const coursePoints = {
+			
+			festival: {
+				x : "${coursePoint.festivalX}",
+				y : "${coursePoint.festivalY}",
+				name : "${coursePoint.festivalName}",
+			},
+			
+			matzip: {
+				x: "${coursePoint.matZipX}",
+				y: "${coursePoint.matZipY}",
+				name: "${coursePoint.place_name}",
+			},
+			
+			hotel: {
+				x: "${coursePoint.hotelX}",
+				y: "${coursePoint.hotelY}",
+				name: "${coursePoint.place_name}",
+			}
+	}; */
+
+	
+
+
+	var kakaoMapContainer = document.querySelector('.course-recommend-map')
+	var mapOptions = {
+			center : new kakao.maps.LatLng(festival.x, festival.y)
+/* 			level: 3	 */
+	};
+	
+	var map = new kakao.maps.Map(kakaoMapContainer, mapOptions);
+	
+	
+	
+	
+	
+</script>
+
 
 </body>
 </html>

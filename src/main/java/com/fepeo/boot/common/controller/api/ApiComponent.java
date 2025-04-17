@@ -155,8 +155,39 @@ public class ApiComponent {
 		return loginMap;
 	}
 	
-	// 조금씩 변경해서 API로 받아올 예정임
-	public String kakaoMapApi() {
+	
+	// 축제 주소지 기준 추천 숙소 정보 1개 출력
+	public PlaceDto kakaoHotelApi(Map<String, String> festivalXY) {
+		String authorization = kakaoApiKey;
+		WebClient webClient = WebClient.create("https://dapi.kakao.com");
+		
+	    KakaoPlaceResponseDto res = webClient.get()
+	            .uri(uriBuilder -> uriBuilder
+	                    .path("/v2/local/search/category.json")
+	                    .queryParam("category_group_code", "AD5")
+	                    .queryParam("x", festivalXY.get("x"))
+	                    .queryParam("y", festivalXY.get("y"))
+	                    .queryParam("radius", 1000)
+	                    .queryParam("sort", "distance")
+	                    .build())
+	            .header("Authorization", authorization)
+	            .retrieve()
+	            .bodyToMono(KakaoPlaceResponseDto.class)
+	            .block();
+	
+	    List<PlaceDto> tt = res.getDocuments();
+	    System.out.println(tt);
+	    // 랜덤으로 필터링하는건 다음에 사용
+//	    Random random = new Random();
+//	    int size = tt.size();
+	    PlaceDto pd = tt.get(0);
+	    //System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
+	    return pd;	
+	}
+	
+	
+	// 축제 주소지 기준 추천 맛집 정보 1개 출력
+	public PlaceDto kakaoMatzipApi(Map<String, String> festivalXY) {
 		String authorization = kakaoApiKey;
 		WebClient webClient = WebClient.create("https://dapi.kakao.com");
 		
@@ -164,8 +195,8 @@ public class ApiComponent {
 	            .uri(uriBuilder -> uriBuilder
 	                    .path("/v2/local/search/category.json")
 	                    .queryParam("category_group_code", "FD6")
-	                    .queryParam("x", 126.968357810931)
-	                    .queryParam("y", 37.6063916960376)
+	                    .queryParam("x", festivalXY.get("x"))
+	                    .queryParam("y", festivalXY.get("y"))
 	                    .queryParam("radius", 1000)
 	                    .queryParam("sort", "distance")
 	                    .build())
@@ -178,10 +209,9 @@ public class ApiComponent {
 	    System.out.println(tt);
 	    Random random = new Random();
 	    int size = tt.size();
-	    PlaceDto pd = tt.get(random.nextInt(size));
-	    System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
-	    
-	    return "Hello world";	
+	    PlaceDto pd = tt.get(0);
+	    //System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
+	    return pd;	
 	}
 
 

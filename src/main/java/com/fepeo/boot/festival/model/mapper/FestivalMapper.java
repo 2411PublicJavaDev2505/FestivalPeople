@@ -24,5 +24,7 @@ public interface FestivalMapper {
 
 	List<Festival> selectrecommendFestivalList();
 
+	List<Festival> searchFestivalList(Map<String, String> searchMap);
+
 	
 }

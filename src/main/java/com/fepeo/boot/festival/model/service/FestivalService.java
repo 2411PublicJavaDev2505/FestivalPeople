@@ -24,6 +24,8 @@ public interface FestivalService {
 
 	public List<Festival> getrFestivalList();
 
+	public List<Festival> searchFestivalList(Map<String, String> searchMap);
+
 	
 }
 	
