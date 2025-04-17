@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fepeo.boot.festival.controller.FestivalController;
 import com.fepeo.boot.festival.model.service.FestivalService;
 import com.fepeo.boot.festival.model.vo.Festival;
 
@@ -22,7 +21,7 @@ public class FestivalTest {
 	private static final Logger LOGGER =LoggerFactory.getLogger(FestivalTest.class);
 	
 	@Autowired
-	private FestivalService  fService;
+	private static FestivalService  fService;
 	
 	@BeforeAll
 	public static void setUp() {
@@ -37,7 +36,7 @@ public class FestivalTest {
 
 	            int startRow = 1;
 	            int endRow = 10;
-	            List<Festival> list = fService.getFestivalList(startRow, endRow);
+	            List<Festival> list = fService.selectFestivalList(startRow, endRow);
 	            LOGGER.info("✅ DB에서 가져온 축제 수: {}", list.size());
 
 	            assertFalse(list.isEmpty(), "축제 리스트가 비어 있지 않아야 합니다");
@@ -47,4 +46,6 @@ public class FestivalTest {
 	            fail("테스트 실패: 예외 발생");
 	        }
 	    }
+	 
+	
 }

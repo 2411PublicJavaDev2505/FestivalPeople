@@ -28,9 +28,8 @@
 	                           <option value="all">전체</option>
 	                           <option value="name">축제명</option>
 	                           <option value="location">지역</option>
-	                           <option value="date">날짜</option>
 	                       </select>
-	                       <input type="text" placeholder="검색" id=" ">
+	                       <input type="text" placeholder="검색" name="searchKeyword">
 	                       <button class="search-btn" onclick="/festival/festivalSearch.jsp">⌕</button>
 	                   </form>
 	               </div>

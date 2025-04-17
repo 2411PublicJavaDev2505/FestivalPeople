@@ -1,5 +1,6 @@
 package com.fepeo.boot.festival.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.fepeo.boot.common.util.PageUtil;
 import com.fepeo.boot.festival.model.service.FestivalService;
 import com.fepeo.boot.festival.model.vo.Festival;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -35,9 +37,7 @@ public class FestivalController {
 
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
 	    List<Festival> rfestivals =festivalService.selectFestivalListById();
-	    List<Festival> festivals = festivalService.getFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
-
-
+	    List<Festival> festivals = festivalService.selectFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
 	    model.addAttribute("endNavi", pageInfo.get("endNavi"));
@@ -50,7 +50,7 @@ public class FestivalController {
 	
 	@GetMapping("/detail/{festivalNo}")
 	public String showFestivalDetail(@PathVariable  int festivalNo, Model model) {
-		Festival festival = festivalService.getFestivalByNo(festivalNo);
+		Festival festival = festivalService.selectFestivalByNo(festivalNo);
 		model.addAttribute("festival",festival);
 		return "festival/festivalDetail";
 	}
@@ -63,6 +63,20 @@ public class FestivalController {
 		return "festival/list";
 	}
 	
+	@GetMapping("/search")
+	public String searchFestivalList(HttpSession session
+			,Model model
+			,@RequestParam("searchCondition") String searchCondition
+			,@RequestParam("searchKeyword") String searchKeyword){
+		Map<String, String> searchMap = new HashMap <String, String>();
+		searchMap.put("searchKeyword", searchKeyword);
+		searchMap.put("searchCondition", searchCondition);
+		
+	    List<Festival> festivals = festivalService.searchFestivalList(searchMap);
+	    model.addAttribute("festivals",festivals);
+	    
+	    return "/festivalSearch";
+	}
 	
 
 }

@@ -33,14 +33,14 @@
                 </div>
             </div>
             <div class="slidecontroller-detail">
-                <a href="/festival/detail/${rfestivals[0].festivalNo}">자세히 보기</a>
+                <a href="/festival/detail/${rfestivals[0].festivalNo}" id="detailLink">자세히 보기</a>
             </div>
             <div class="slidecontroller-pagination">
                 <div class="progress-bar">
                     <span class="progress"></span>
                 </div>
                 <div class="page-number">
-                    <span class="current-page">01</span> / <span class="total-pages">03</span>
+<!--                     <span class="current-page">01</span> / <span class="total-pages">03</span> -->
                 </div>
                 <div class="navigation-buttons">
                     <button class="prev">&#10094;</button>
@@ -70,12 +70,13 @@
             alt : '${festival.festivalStartDate}',
             tagline: '${festival.festivalEndDate}',
             mainText: "${festival.festivalName}",
-            subText: '${festival.festivalPhone}' // 필요시 다른 필드로 변경 가능
+            subText: "${festival.festivalPhone}",
+            festivalNo: ${festival.festivalNo}
         }<c:if test="${!loop.last}">,</c:if>
         </c:forEach>
     ];
-        const totalSlides = slides.length;
-
+		console.log(slides);
+    	const totalSlides = slides.length;
         const slideContainer = document.querySelector('.simple-slide-container');
         const currentPageElement = document.querySelector('.current-page');
         const progressBar = document.querySelector('.progress');
@@ -107,12 +108,12 @@
             
             slideContainer.innerHTML = '<div class="simple-slide active"><img src="'+slide.src+'" alt="'+slide.alt+'"></div>' + '<div class="simple-slide next"><img src="'+nextSlide.src+'" alt="'+nextSlide.alt+'"></div>';
             							
-			currentPageElement.textContent = String(currentSlide + 1).padStart(2, '0');
-
+// 			currentPageElement.textContent = String(currentSlide + 1).padStart(2, '0');
 
             taglineElement.textContent = slide.tagline;
             mainTextElement.textContent = slide.mainText;
             subTextElement.innerHTML = '<span class="main-text">'+slide.mainText+'</span><br>'+slide.subText+'';
+        	document.getElementById("detailLink").href='/festival/detail/'+slide.fesivalNo+'';
         }
 
         updateSlide();
