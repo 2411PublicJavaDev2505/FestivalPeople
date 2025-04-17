@@ -23,12 +23,10 @@
             </div>
             <form class="write-form" enctype="multipart/form-data" action="/notice/insert" method="post">
               <div class="form-row">
-                <label for="title">제목</label>
-                <input type="text" id="title" name="noticeTitle" class="write-input" />
+                <input type="text" id="title" name="noticeTitle" class="write-input" placeholder="제목" />
               </div>
               <div class="form-row">
-                <label for="content">내용</label>
-                <textarea id="content" name="noticeContent" class="write-textarea"></textarea>
+                <textarea id="content" name="noticeContent" class="write-textarea" placeholder="내용"></textarea>
               </div>
               <div class="form-row file-row">
                 <input type="file" id="file" name="file"/>

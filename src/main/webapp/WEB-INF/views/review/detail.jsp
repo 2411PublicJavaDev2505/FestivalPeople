@@ -31,7 +31,7 @@
 								<p><span>이름|</span></p><p>
 							</div>
 							<div class="review-info">
-								<span>|</span>${review.reviewWriteTime }</p>	
+								<p><span>|</span>${review.reviewWriteTime }</p>	
 							</div>
 							<div class="review-info">
 								<p><span>조회수|</span>${review.reviewCount }</p>	
