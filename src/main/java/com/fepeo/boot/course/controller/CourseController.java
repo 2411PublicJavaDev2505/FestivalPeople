@@ -86,7 +86,7 @@ public class CourseController {
 //				List<Festival> rList = fService.getrFestivalList();
 //			}
 			
-			return "redirect:/course/list";
+			return "/course/list";
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class CourseController {
 		System.out.println(fList);
 		model.addAttribute("fList", fList);
 		
-		return "redirect:/course/list";
+		return "/course/list";
 	}
 	
 	
