@@ -11,7 +11,9 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,6 +26,7 @@ import com.fepeo.boot.festival.model.vo.Festival;
 import com.fepeo.boot.member.model.service.MemberService;
 import com.fepeo.boot.member.model.vo.Member;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +39,7 @@ public class CourseController {
 	private final MemberService mService;
 	private final FestivalService fService;
 	private final ApiComponent api;
+	
 	
 	
 	// 비회원은 확인 불가능한 회원 위치기반 전용 코스 추천 리스트 출력
@@ -66,12 +70,40 @@ public class CourseController {
 			List<String> goodWeather = api.callWeatherApi(nowTime, regionList);
 //			System.out.println(goodWeather);	
 			List<Festival> fList = fService.selectFestivalListByRegion(goodWeather, mapPoint);
-			System.out.println(fList);
+//			System.out.println(fList);
+//			System.out.println(fList.size());
 			
-			model.addAttribute(fList);
+			if(fList.size() > 0 && !fList.isEmpty()) {
+				model.addAttribute("fList", fList);				
+			}
+
+			//추후에 빈값 분기처리해서 메세지 넘기기
+//			if(fList.size() == 0 && fList.isEmpty()) {
+//				List<Festival> rList = fService.getrFestivalList();
+//			}
+			
 			return "/course/list";
 		}
 	}
+	
+	@PostMapping("/list")
+	public String showSearchCourse(HttpSession session
+			, Model model
+			,@RequestParam("searchCondition") String searchCondition
+			,@RequestParam("searchKeyword") String searchKeyword) {
+		
+		
+		
+		
+		
+		
+		
+		return "";
+	}
+	
+	
+	
+	
 	
 	
 	@GetMapping("/detail")

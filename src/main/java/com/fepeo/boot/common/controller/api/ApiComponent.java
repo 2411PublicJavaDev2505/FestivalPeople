@@ -248,12 +248,8 @@ public class ApiComponent {
 			if(items.isArray() && items.size() > 0) {
 				JsonNode item = items.get(0);
 				// 확인할 키 목록
-				String[] weatherKeys = {"wf4am", "wf4pm", "wf5am", "wf5pm", "wf6am", "wf6pm", "wf7am", "wf7pm"};
-				
+				String[] weatherKeys = {"wf4am", "wf4pm", "wf5am", "wf5pm", "wf6am", "wf6pm", "wf7am", "wf7pm"};				
 				boolean isValid = false;
-
-		
-
 				for(String key : weatherKeys) {
 					String forecast = item.path(key).asText();
 					if(forecast.contains("맑음")) {

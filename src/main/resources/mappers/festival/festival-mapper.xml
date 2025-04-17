@@ -52,17 +52,26 @@
 	    SELECT COUNT(*) FROM FESTIVAL
 	</select>
 	
+
 	<select id="selectFestivalListByRegion" resultType="com.fepeo.boot.festival.model.vo.Festival">
-	    SELECT f.*,
-	           POWER(f.MAP_V_CODE - #{mapPoint.x}, 2) + POWER(f.MAP_H_CODE - #{mapPoint.y}, 2) AS distance
-	    FROM FESTIVAL f
-	    <where>
-	        <foreach collection="regionNames" item="region" open="(" separator="OR" close=")">
-	            f.FESTIVAL_ADDRESS LIKE '%' || #{region} || '%'
-	        </foreach>
-	    </where>
-	    ORDER BY distance ASC
+	    SELECT * FROM (
+	        SELECT f.*, 
+	               POWER(f.MAP_V_CODE - #{mapPoint.x}, 2) + POWER(f.MAP_H_CODE - #{mapPoint.y}, 2) AS distance
+	        FROM FESTIVAL f
+	        <where>
+	            <foreach collection="regionNames" item="region" open="(" separator="OR" close=")">
+	                f.FESTIVAL_ADDRESS LIKE '%' || #{region} || '%'
+	            </foreach>
+	        </where>
+	        ORDER BY distance
+	    ) 
+<!-- 	    부등호를 인식 못해서 넣은 문구 -->
+	    <![CDATA[ 
+	    WHERE ROWNUM <= 20
+	    ]]>
 	</select>
+	
+
 	
 
 
