@@ -49,7 +49,6 @@
 						   <c:if test="${status.index % 4 == 0}">
 						     <div class="slide-group">
 						   </c:if>
-						
 						   <c:if test="${not empty festival.festivalFilePath}">
 						     <div class="festival-card">
 						       <a href="/festival/detail/${festival.festivalNo}">
