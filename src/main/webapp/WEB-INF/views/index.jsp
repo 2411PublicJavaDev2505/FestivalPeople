@@ -73,9 +73,10 @@
 	            subText: "${festival.festivalPhone}",
 	            festivalNo: ${festival.festivalNo}
 	        }<c:if test="${!loop.last}">,</c:if>
+        	<c:if test="${not empty festival.festivalFilePath}">,</c:if>
 	        </c:forEach>
 	    ];
-	    
+
     	const totalSlides = slides.length;
         const slideContainer = document.querySelector('.simple-slide-container');
         const currentPageElement = document.querySelector('.current-page');

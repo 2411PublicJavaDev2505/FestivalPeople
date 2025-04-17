@@ -50,6 +50,8 @@ public class FestivalController {
 	@GetMapping("/detail/{festivalNo}")
 	public String showFestivalDetail(@PathVariable  int festivalNo, Model model) {
 		Festival festival = festivalService.selectFestivalByNo(festivalNo);
+		System.out.println("mapVCode: " + festival.getMapVCode());
+		System.out.println("mapHcode: " + festival.getMapHcode());
 		model.addAttribute("festival",festival);
 		return "festival/festivalDetail";
 	}
@@ -77,6 +79,10 @@ public class FestivalController {
 	    int itemsPerPage = 8;
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
 	    List<Festival> festivals = festivalService.searchFestivalListAll(pageInfo.get("startRow"), pageInfo.get("endRow"),searchMap);
+	    System.out.println("검색된 축제 수 : " + festivals.size());
+	    for (Festival f : festivals) {
+	        System.out.println("축제명: " + f.getFestivalName());
+	    }
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
 	    model.addAttribute("endNavi", pageInfo.get("endNavi"));

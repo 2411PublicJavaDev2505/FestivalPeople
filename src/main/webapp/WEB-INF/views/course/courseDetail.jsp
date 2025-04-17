@@ -156,6 +156,24 @@
 	        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 	        image : markerImage // 마커 이미지 
 	    });
+	    
+	 	// 인포윈도우 생성 팝업으로 해당 축제 설명 
+	    var infowindow = new kakao.maps.InfoWindow({
+	        content: '<div style="padding:5px;font-size:14px;">' + positions[i].title + '</div>'
+	    });
+
+	    // 마우스 버튼 선택시에만 팝업 창 나옴
+	    kakao.maps.event.addListener(marker, 'mouseover', function(marker, infowindow) {
+	        return function() {
+	            infowindow.open(map, marker);
+	        };
+	    }(marker, infowindow));  // 클로저로 묶어서 i값 유지
+
+	    kakao.maps.event.addListener(marker, 'mouseout', function(marker, infowindow) {
+	        return function() {
+	            infowindow.close();
+	        };
+	    }(marker, infowindow));
 	}
 	
 	
