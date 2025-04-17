@@ -1,6 +1,9 @@
 package com.fepeo.boot.review.model.service.logic;
 
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,6 +43,21 @@ public class ReviewServiceLogic implements ReviewService {
 	public Review selectOneByNo(int reviewNo) {
 		Review review = mapper.selectOneByNo(reviewNo);
 		return review;
+	}
+	
+	//리뷰 전체 리스트(4/17)//리스트커렌트페이지00:20분시작
+	//코드 수정할부분있음!!!!!!!!!!!****** 
+	//return rList; List<Review> rList //int currentPage
+	@Override
+	public List<Review> selectReviewList() {
+		//int limit =10;
+		//int offset =(currentPage-1)*limit;
+		//RowBounds rowBounds = new RowBounds(offset, limit); 
+//		List<Review> review = mapper.selectReviewList();//2개도 출력가능하다!!
+//		return review;
+		List<Review> rList = mapper.selectReviewList();
+		return rList;
+		
 	}
 
 }

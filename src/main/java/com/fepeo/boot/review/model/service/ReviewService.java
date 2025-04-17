@@ -1,5 +1,7 @@
 package com.fepeo.boot.review.model.service;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
@@ -14,6 +16,12 @@ public interface ReviewService {
 	
 	//여긴 detail만들때 메소드만들어줌!
 	Review selectOneByNo(int reviewNo);
+	
+	
+	//리뷰 전체 리스트(4/16) 21:28커렌트페이지
+	List<Review> selectReviewList();
+
+	
 
 
 }

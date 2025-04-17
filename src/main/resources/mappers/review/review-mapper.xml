@@ -39,6 +39,11 @@
  			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
  		</select>
  		
+ 		<select id="selectReviewList" resultMap="reviewResultMap">
+ 			SELECT * FROM REVIEW
+ 		</select>
+ 		
+ 		
  		<insert id="insertReview" useGeneratedKeys="true">
 	  		<selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">
 	  			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL

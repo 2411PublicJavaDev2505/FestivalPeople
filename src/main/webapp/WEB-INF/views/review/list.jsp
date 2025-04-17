@@ -41,41 +41,15 @@
 		                <td>작성시간</td>
 		                <td>조회수</td>
 		            </tr>
-		            <tr>
-		                <td>555</td>
-		                <td>user1</td>
-		                <td>외로움을 달랠남자구합니다..</td>
-		                <td>25/04/07</td>
-		                <td>50033</td>
-		            </tr>
-		            <tr>
-		                <td>554</td>
-		                <td>user02</td>
-		                <td>같이갈래 후기글 남깁니다..</td>
-		                <td>25/04/05</td>
-		                <td>30003</td>
-		            </tr>
-		            <tr>
-		                <td>553</td>
-		                <td>user03</td>
-		                <td>벚꽃아 개나리한테 좀 배우...</td>
-		                <td>25/04/03</td>
-		                <td>555</td>
-		            </tr>
-		            <tr>
-		                <td>552</td>
-		                <td>kintex</td>
-		                <td>2025서울모빌리티쇼..</td>
-		                <td>25/04/03</td>
-		                <td>10234</td>
-		            </tr>
-		            <tr>
-		                <td>551</td>
-		                <td>strawber</td>
-		                <td>논산딸기먹기 헬기타기 사..</td>
-		                <td>25/03/24</td>
-		                <td>9414</td>
-		            </tr>
+		            <c:forEach var="review" items="${rList }">
+			            <tr>
+			                <td>${review.reviewNo}</td>
+			                <td>작성자</td>
+			                <td>${review.reviewTitle }</td>
+			                <td>${review.reviewWriteTime }</td>
+			                <td>${review.reviewCount }</td>
+			            </tr>
+		            </c:forEach>
 		        </table>
 		    </div>
 		    <div class="page">
