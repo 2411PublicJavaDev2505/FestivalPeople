@@ -47,7 +47,7 @@ public class ReviewController {
 	@GetMapping("/list")
 	public String showReviewList(@RequestParam(value="page",defaultValue="1") int currentPage
 			,Model model) {
-			//캐치 해줘야함!
+			//캐치 해줘야한다?
 			List<Review> rList = rService.selectReviewList(currentPage);
 			int totalCount = rService.getTotalCount();
 			Map<String, Integer> pageInfo
@@ -55,6 +55,7 @@ public class ReviewController {
 			model.addAttribute("maxPage", pageInfo.get("maxPage"));
 			model.addAttribute("startNavi" ,pageInfo.get("startNavi"));
 			model.addAttribute("endNavi", pageInfo.get("endNavi"));
+			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("rList",rList);
 			return "/review/list";
 }
@@ -79,7 +80,7 @@ public class ReviewController {
 	
 	//등록성공하고 여기부터 시작! Service 메소드만들고!
 	
-	@GetMapping("/detail/{reviewNo}")
+	@GetMapping("/{reviewNo}")
 	public String reviewDetail(@PathVariable("reviewNo") int reviewNo
 			,Model model) {
 		Review review = rService.selectOneByNo(reviewNo);
@@ -106,6 +107,7 @@ public class ReviewController {
 	public List<ReviewComment> selectCommentList(int reviewNo) {
 		return cService.selectCommentList(reviewNo);
 	}
+	
 }
 
 

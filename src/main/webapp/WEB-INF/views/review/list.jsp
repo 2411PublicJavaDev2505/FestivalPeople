@@ -51,7 +51,7 @@
 			            <tr>
 			                <td>${review.reviewNo}</td>
 			                <td>작성자</td>
-			                <td><a href="/review/detail/${review.reviewNo}">${review.reviewTitle }</td>
+			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td>
 			                <td>${review.reviewWriteTime }</td>
 			                <td>${review.reviewCount }</td>
 			            </tr>
@@ -59,18 +59,17 @@
 		        </table>
 		    </div>
 		    <div class="page">
-			    <a href="#"><</a>
-			    <a href="#">1</a>
-			    <a href="#">2</a>
-			    <a href="#">3</a>
-			    <a href="#">4</a>
-			    <a href="#">5</a>
-			    <a href="#">></a>
+			    <c:if test="${startNavi ne 1 }">
+			    	<a href="/review/list?page=${startNavi-1 }"><</a>
+			    </c:if>
+			    <c:forEach begin="${startNavi }" end="${endNavi }" var="p">
+			    	<a href="/review/list?page=${p }">${p }</a>
+			    </c:forEach>
+			    <c:if test="${endNavi ne maxPage }">
+			    	<a href="/review/list?page=${endNavi+1 }">></a>
+			    </c:if>
 		    </div>
 		    <div class="reviewinsert-btn">
-<!-- 				<a href="/review/insert">글쓰기</a> -->
-	<!--  글쓰기 버튼 로그인 하면 보이고 안보이는거 도전해보기 안되면 지울것!~ -->
-<%-- 				<input type="hidden" value="${sessionScope.member.memberNo}" id="memberNo"> --%>
 				<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne ''}" >
 			    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
 				</c:if>

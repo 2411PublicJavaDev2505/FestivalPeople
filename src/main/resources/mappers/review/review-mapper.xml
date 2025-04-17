@@ -34,7 +34,7 @@
  			SELECT * FROM REVIEW WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N'
  		</select>
  			
- 			<!-- 아래도 코드작성하면 주석풀기! -->
+ 			<!-- 아래도 코드작성하면 주석풀기! *-->
  		<select id="selectCommentList" resultType="ReviewComment">
  			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
  		</select>
@@ -53,14 +53,9 @@
   			#{reviewContent},
   			 DEFAULT,DEFAULT,DEFAULT,
   				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
-<!-- 			INSERT INTO REVIEW(REVIEW_NO,) VALUES(#{reviewNo}, -->
-<!--   			#{reviewTitle}, -->
-<!--   			#{reviewContent}, -->
-<!--   			 DEFAULT,DEFAULT,DEFAULT, -->
-<!--   				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo}) -->
   		</insert>
   		
   		<select id="getTotalCount" resultType="_int">
-			SELECT COUNT(*) FROM REVIEW WHERE REVIEW_YN = 'Y'
+			SELECT COUNT(*) FROM REVIEW 
 		</select>
 </mapper>
