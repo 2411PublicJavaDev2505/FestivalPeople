@@ -3,6 +3,9 @@ package com.fepeo.boot.review.model.vo;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fepeo.boot.review.controller.dto.ImgAddRequest;
+
+
 import lombok.Getter;
 import lombok.ToString;
 
@@ -28,4 +31,6 @@ public class Review {
 	private int			memberNo;
 	//댓글목록 추가!! 옆에 commentList수정해야되는지확인할것!
 	private List<ReviewComment> commentList;
+	//다중파일 등록 추가 23:18
+	private List<ImgAddRequest> imgList;
 }
