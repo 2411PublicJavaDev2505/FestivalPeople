@@ -15,8 +15,6 @@ public class Festival {
 	private String festivalName;
 	private Date festivalStartDate;
 	private Date festivalEndDate;
-	private String festivalFileName;
-	private String festivalFileRename;
 	private String festivalFilePath;
 	private String festivalPhone;
 	private String festivalAddress;
