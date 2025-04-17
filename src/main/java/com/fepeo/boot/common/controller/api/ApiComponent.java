@@ -167,7 +167,7 @@ public class ApiComponent {
 	                    .queryParam("category_group_code", "AD5")
 	                    .queryParam("x", festivalXY.get("x"))
 	                    .queryParam("y", festivalXY.get("y"))
-	                    .queryParam("radius", 1000)
+	                    .queryParam("radius", 10000)
 	                    .queryParam("sort", "distance")
 	                    .build())
 	            .header("Authorization", authorization)
@@ -176,7 +176,7 @@ public class ApiComponent {
 	            .block();
 	
 	    List<PlaceDto> tt = res.getDocuments();
-	    System.out.println(tt);
+//	    System.out.println(tt);
 	    // 랜덤으로 필터링하는건 다음에 사용
 //	    Random random = new Random();
 //	    int size = tt.size();
@@ -197,7 +197,7 @@ public class ApiComponent {
 	                    .queryParam("category_group_code", "FD6")
 	                    .queryParam("x", festivalXY.get("x"))
 	                    .queryParam("y", festivalXY.get("y"))
-	                    .queryParam("radius", 1000)
+	                    .queryParam("radius", 10000)
 	                    .queryParam("sort", "distance")
 	                    .build())
 	            .header("Authorization", authorization)
@@ -206,7 +206,7 @@ public class ApiComponent {
 	            .block();
 	
 	    List<PlaceDto> tt = res.getDocuments();
-	    System.out.println(tt);
+//	    System.out.println(tt);
 	    Random random = new Random();
 	    int size = tt.size();
 	    PlaceDto pd = tt.get(0);

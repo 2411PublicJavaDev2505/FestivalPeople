@@ -128,11 +128,12 @@
 	}; */
 
 	
-
+    console.log("${coursePoint.festivalX}");
+    console.log("${coursePoint.festivalY}");
 
 	var kakaoMapContainer = document.querySelector('.course-recommend-map')
 	var mapOptions = {
-			center : new kakao.maps.LatLng(festival.x, festival.y)
+			center : new kakao.maps.LatLng(Number("${coursePoint.festivalX}"), Number("${coursePoint.festivalY}"))
 /* 			level: 3	 */
 	};
 	

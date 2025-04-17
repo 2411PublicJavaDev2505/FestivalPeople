@@ -129,18 +129,19 @@ public class CourseController {
 		
 		// 축제 좌표값으로 가까운 밥집 한개 선택
 		PlaceDto matZipRec = api.kakaoMatzipApi(festivalXY);
-		System.out.println(matZipRec);
+//		System.out.println(matZipRec);
 		// 축제 좌표값으로 가까운 숙박시설 한개 선택
 		PlaceDto hotelRec = api.kakaoHotelApi(festivalXY);
-		System.out.println(hotelRec);
+//		System.out.println(hotelRec);
 		
 		Map<String, String> coursePoint = new HashMap<String, String>();
 		coursePoint.put("festivalX", festival.getMapVCode());
-		coursePoint.put("festivaly", festival.getMapHcode());
+		coursePoint.put("festivalY", festival.getMapHcode());
 		coursePoint.put("matzipX", matZipRec.getX());
 		coursePoint.put("matzipY", matZipRec.getY());
 		coursePoint.put("hotelX", hotelRec.getX());
 		coursePoint.put("hotelY", hotelRec.getY());
+//		System.out.println(coursePoint);
 		
 		
 		
