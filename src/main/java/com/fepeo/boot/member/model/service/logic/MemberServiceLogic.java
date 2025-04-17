@@ -119,4 +119,14 @@ public class MemberServiceLogic implements MemberService{
 		return mapper.selectOneById(memberId);
 	}
 
+	@Override
+	public int checkMemberById(String memberId) {
+		return mapper.checkMemberById(memberId);
+	}
+
+	@Override
+	public int checkMemberByNickname(String nickname) {
+		return mapper.checkMemberByNickname(nickname);
+	}
+
 }

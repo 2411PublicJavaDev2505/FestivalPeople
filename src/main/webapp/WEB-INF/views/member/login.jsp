@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/member/login.css">
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<title>FePeo-login</title>
 </head>
 <body>
@@ -20,17 +21,16 @@
 					<span>로그인</span>
 				</div>
 				<div class="login-main">
-					<form action="/member/login" method="post">
-						<div  class="login-input">
-							<input type="text" placeholder="아이디를 입력하세요" name="memberId">
-						</div>
-						<div class="login-input">
-							<input type="text" placeholder="비밀번호를 입력하세요" name="memberPw">
-						</div>
-						<div class="login-btn">
-							<button>로그인</button>
-						</div>
-					</form>
+					<div  class="login-input">
+						<input type="text" placeholder="아이디를 입력하세요" name="memberId" id="id">
+					</div>
+					<div class="login-input">
+						<input type="password" placeholder="비밀번호를 입력하세요" name="memberPw" id="pw">
+					</div>
+					<div class="check-input"></div>
+					<div class="login-btn">
+						<button onclick="login();">로그인</button>
+					</div>
 				</div>
 				<div class="login-footer">
 					<span><a onclick="findId();">아이디 찾기</a></span>
@@ -46,6 +46,37 @@
 		</main>
 	</div>
 	<script type="text/javascript">
+		const login = () => {
+			document.querySelector(".check-input").innerHTML = "";
+			let memberId = document.querySelector("#id").value;
+			let memberPw = document.querySelector("#pw").value;
+			if(memberId.trim() == ""){
+				document.querySelector(".check-input").innerHTML = "아이디를 입력해주세요.";
+			}else if(memberPw.trim() == ""){
+				document.querySelector(".check-input").innerHTML = "비밀번호를 입력해주세요.";
+			}else{
+				$.ajax({
+					dataType: "json",
+					url: "/member/login",
+					data: {
+						"memberId" : memberId,
+						"memberPw" : memberPw
+					},
+					type: "POST",
+					success: function(data) {
+						if(data.memberNo == null){
+							document.querySelector(".check-input").innerHTML = data.checkMsg;
+						}else{
+							location.href = "/";
+						}
+					},
+					error: function() {
+						alert("통신오류!!");
+					}
+				});
+			}
+		}
+	
 		const kakao = () => {
 			let loc = "https://kauth.kakao.com/oauth/authorize?client_id=${kakao}&redirect_uri=http://localhost:8888/member/kakao&response_type=code";
 			let title = "Festival People - 카카오 로그인";
@@ -68,13 +99,13 @@
 		const findId = () => {
 			let loc = "http://localhost:8888/member/findid";
 			let title = "아이디 찾기";
-			let option = "width = 1000, height = 700, top = 100, left = 200, location = no";
+			let option = "width = 600, height = 550, top = 100, left = 200, location = no";
 			window.open(loc,title,option);
 		}
 		const findPw = () => {
 			let loc = "http://localhost:8888/member/findpw";
 			let title = "비밀번호 찾기";
-			let option = "width = 1000, height = 700, top = 100, left = 200, location = no";
+			let option = "width = 600, height = 550, top = 100, left = 200, location = no";
 			window.open(loc,title,option);
 		}
 	</script>

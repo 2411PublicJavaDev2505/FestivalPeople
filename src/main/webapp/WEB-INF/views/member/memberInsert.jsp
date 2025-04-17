@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="../resources/css/root.css">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/member/memberInsert.css">
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<title>FePeo-회원가입</title>
 </head>
 <body>
@@ -100,20 +101,93 @@
 		let name = document.querySelector("#input-name").value;
 		let nickname = document.querySelector("#input-nickname").value;
 		let email = document.querySelector("#input-email").value;
-		const checkId = () => {
-			document.querySelector(".check.id").innerText = "* 가능한 아이디입니다";
+		function checkId() {
+			memberId = document.querySelector("#input-id").value;
+			$.ajax({
+				dataType: "json",
+				url: "/member/checkid",
+				data : {
+					"memberId" : memberId
+				},
+				type : "GET",
+				success : function(data) {
+					if(data.check == 0){
+						document.querySelector(".check.id").innerText = "* 가능한 아이디입니다";
+					}else{
+						document.querySelector(".check.id").innerText = "* 이미 존재하는 아이디입니다";
+					}
+				},
+				error : function() {
+					alert("통신 오류!");
+				}
+			});
+		}
+		const checkNickname = () => {
+			nickname = document.querySelector("#input-nickname").value;
+			$.ajax({
+				dataType: "json",
+				url: "/member/checknickname",
+				data: {
+					"nickname" : nickname
+				},
+				type: "GET",
+				success: function(data) {
+					if(data.check == 0){
+						document.querySelector(".check.nickname").innerText = "* 가능한 닉네임입니다";
+					}else{
+						document.querySelector(".check.nickname").innerText = "* 이미 존재하는 닉네임입니다";
+					}
+				},
+				error: function() {
+					alert("통신 오류!");
+				}
+			});
+		}
+		const checkEmail = () => {
+			email = document.querySelector("#input-email").value;
+			$.ajax({
+				dataType: "json",
+				url: "/member/checknickname",
+				data: {
+					"nickname" : nickname
+				},
+				type: "GET",
+				success: function(data) {
+					if(data.check == 0){
+						document.querySelector(".check.nickname").innerText = "* 가능한 닉네임입니다";
+					}else{
+						document.querySelector(".check.nickname").innerText = "* 이미 존재하는 닉네임입니다";
+					}
+				},
+				error: function() {
+					alert("통신 오류!");
+				}
+			});
+			document.querySelector(".check.email").innerText = "* 가능한 이메일입니다";
 		}
 		const checkRegister = () => {
-			if(pw != pwRe){
+			if(memberId.trim() == ''){
+				alert("아이디를 입력해주세요.");
+				event.preventDefault();
+			}else if(pw.trim() == ''){
+				alert("비밀번호를 입력해주세요.");
+				event.preventDefault();
+			}else if(address.trim() == ''){
+				alert("주소를 입력해주세요.");
+				event.preventDefault();
+			}else if(name.trim() == ''){
+				alert("이름를 입력해주세요.");
+				event.preventDefault();
+			}else if(nickname.trim() == ''){
+				alert("닉네임를 입력해주세요.");
+				event.preventDefault();
+			}else if(email.trim() == ''){
+				alert("이메일를 입력해주세요.");
+				event.preventDefault();
+			}else if(pw != pwRe){
 				document.querySelector(".check.pw").innerText = "* 비밀번호를 다시 확인해주세요";
 				event.preventDefault();
 			}
-		}
-		const checkNickname = () => {
-			document.querySelector(".check.nickname").innerText = "* 가능한 닉네임입니다";
-		}
-		const checkEmail = () => {
-			document.querySelector(".check.email").innerText = "* 가능한 이메일입니다";
 		}
 	</script>
 </body>

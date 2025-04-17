@@ -3,10 +3,11 @@
 .main-login-container {
 	margin: 100px auto 100px auto;
 	width: 700px;
-	height: 500px;
+	--height: 600px;
 	background-color: rgba(228, 226, 221, 0.9);
 	border-radius: 20px;
 	box-shadow: 0px 0px 3px #444;
+	padding-bottom: 30px;
 }
 
 .background-image {
@@ -60,6 +61,12 @@
 
 .login-input input:focus {
 	outline: 0.5px solid gray;
+}
+
+.check-input {
+	text-align: center;
+	margin-bottom: 20px;
+	color: red;
 }
 
 .login-btn {

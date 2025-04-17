@@ -36,4 +36,8 @@ public interface MemberService {
 
 	Member selectOneById(String memberId);
 
+	int checkMemberById(String memberId);
+
+	int checkMemberByNickname(String nickname);
+
 }

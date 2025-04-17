@@ -10,13 +10,15 @@
 <body>
 	<div id="find-container">
 		<div class="find-title">
-			<h1>아이디 찾기</h1>
+			<div>
+				<span>아이디 찾기</<span>
+			</div>
 		</div>
 		<form action="/member/findid" method="post">
 			<ul class="find-ul">
-				<li>이름 : <input type="text" name="memberName"></li>
-				<li>이메일 주소 : <input type="text" name="email"></li>
-				<li><button>이메일 전송</button></li>
+				<li><input type="text" name="memberName" placeholder="이름을 입력해주세요"></li>
+				<li><input type="text" name="email" placeholder="이메일을 입력해주세요"></li>
+				<li><button class="submit">이메일 전송</button></li>
 			</ul>
 		</form>
 	</div>
