@@ -22,9 +22,8 @@ public interface FestivalService {
 	// 날씨가 좋은 지역명으로 축제 검색
 	public List<Festival> selectFestivalListByRegion(List<String> goodWeather, Map<String, String> mapPoint);
 
-	public List<Festival> getrFestivalList();
-
-	
+	//날씨 기반으로 추천 리스트 출력
+	public List<Festival> selectFestivalListById();
 }
 	
 	

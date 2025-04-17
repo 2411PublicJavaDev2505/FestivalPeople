@@ -153,7 +153,7 @@
     padding-top: 180px;
     transition: transform 0.5s ease;
 }
-
+/*사진 밑에 나오는 축제 이름  */
 .festival-card h4 {
 	position: relative;
 	display: block;
@@ -165,4 +165,14 @@
     line-height: 19px;
     z-index: 3;
 }
+
+/* 페이지네이션  */
+
+.pagination a{
+	color: white;
+	text-decoration-line:none;
+	letter-spacing:12px;
+	word-spacing:30px;
+}
+
 

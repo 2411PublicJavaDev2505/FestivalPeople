@@ -39,7 +39,7 @@
 	    WHERE rnum &gt;= #{startRow}
 	</select>
 
-	<select id="selectrecommendFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival">
+	<select id="selectFestivalListById" resultType="com.fepeo.boot.festival.model.vo.Festival">
 		SELECT * FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL
 		ORDER BY FESTIVAL_NO ASC
 	</select>
