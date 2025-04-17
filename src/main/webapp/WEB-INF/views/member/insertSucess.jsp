@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../resources/css/root.css">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/member/insertSucess.css">
-	<title>Insert title here</title>
+	<title>환영합니다!!!</title>
 </head>
 <body>
 	<div class="background-image">
@@ -16,10 +16,9 @@
     <div class="success-container">
         <main class="success-message">
             <h1>Welcome!!!</h1>
-            <p class="username">"###"님</p>
+            <p class="username">${memberName }님</p>
             <div class="button-container">
                 <button onclick="location.href='/'">메인 페이지로</button>
-                <button onclick="location.href='/logout'">로그아웃</button>
             </div>
         </main>
     </div>

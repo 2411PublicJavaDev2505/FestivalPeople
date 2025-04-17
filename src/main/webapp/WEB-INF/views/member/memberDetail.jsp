@@ -31,6 +31,7 @@
 							<li>${member.memberId }</li>
 						</c:if>
 						<li>${member.memberName }</li>
+						<li>${member.nickname }</li>
 						<li>${member.email }</li>
 						<li>신고누적횟수 : ${member.reportCount }</li>
 						<li>${member.address }</li>

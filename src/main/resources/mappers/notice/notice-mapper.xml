@@ -9,4 +9,7 @@
 		,DEFAULT, DEFAULT, #{noticeFileName}
 		, #{noticeFileRename}, #{noticeFilePath}, DEFAULT)
 	</insert>
+	<select id="selectNoticeList" resultType="Notice">
+		SELECT * FROM NOTICE
+	</select>
 </mapper>

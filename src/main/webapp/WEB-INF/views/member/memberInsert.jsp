@@ -35,14 +35,15 @@
 					<input type="hidden" name="socialYn" value="N">
 					<div class="register-main">
 						<div class="register-left">
-							<div class="profile-img"></div>
-							<input type="file" name="profile">
+							<div class="profile-img">
+								<img alt="" src="" id="profile-img">
+							</div>
+							<input type="file" name="profile" onchange="changeProfile();" id="input-profile">
 						</div>
 						<div class="register-right">
 							<ul class="register-input">
 								<li class="register-btn">
-									<input type="text" placeholder="아이디" name="memberId" id="input-id">
-									<button type="button" onclick="checkId();">중복확인</button>
+									<input type="text" placeholder="아이디" name="memberId" id="input-id" onchange="checkId();">
 								</li>
 								<li class="check id"></li>
 								<li class="register-notbtn">
@@ -74,13 +75,11 @@
 									</li>
 								</ul>
 								<li class="register-btn">
-									<input type="text" placeholder="닉네임" name="nickname" id="input-nickname">
-									<button type="button" onclick="checkNickname();">중복확인</button>
+									<input type="text" placeholder="닉네임" name="nickname" id="input-nickname" onchange="checkNickname();">
 								</li>
 								<li class="check nickname"></li>
 								<li class="register-btn">
-									<input type="text" placeholder="이메일" name="email">
-									<button type="button" onclick="checkEmail();" id="input-email">중복확인</button>
+									<input type="text" placeholder="이메일" name="email" onchange="checkEmail();" id="input-email">
 								</li>
 								<li class="check email"></li>
 								<li class="register-last-btn">
@@ -101,6 +100,31 @@
 		let name = document.querySelector("#input-name").value;
 		let nickname = document.querySelector("#input-nickname").value;
 		let email = document.querySelector("#input-email").value;
+		let idYn = false;
+		let nicknameYn = false;
+		let emailYn = false;
+		
+		function changeProfile() {
+			let formData = new FormData();
+		    let fileInput = $("#input-profile")[0];
+		    if (fileInput.files.length > 0) {
+		        formData.append("profile", fileInput.files[0]);
+		        $.ajax({
+		        	url: "/member/changeprofile",
+		        	data: formData,
+		        	type: "POST",
+		        	contentType: false,
+		            processData: false, 
+		        	success: function(data) {
+		        		document.querySelector("#profile-img").src = data;
+		        	},
+		        	error: function() {
+		        		alert("통신 오류!!");
+		        	}
+		        });
+		    }
+		}
+		
 		function checkId() {
 			memberId = document.querySelector("#input-id").value;
 			$.ajax({
@@ -113,8 +137,10 @@
 				success : function(data) {
 					if(data.check == 0){
 						document.querySelector(".check.id").innerText = "* 가능한 아이디입니다";
+						idYn = true;
 					}else{
 						document.querySelector(".check.id").innerText = "* 이미 존재하는 아이디입니다";
+						idYn = false;
 					}
 				},
 				error : function() {
@@ -134,8 +160,10 @@
 				success: function(data) {
 					if(data.check == 0){
 						document.querySelector(".check.nickname").innerText = "* 가능한 닉네임입니다";
+						nicknameYn = true;
 					}else{
 						document.querySelector(".check.nickname").innerText = "* 이미 존재하는 닉네임입니다";
+						nicknameYn = false;
 					}
 				},
 				error: function() {
@@ -155,8 +183,10 @@
 				success: function(data) {
 					if(data.check == 0){
 						document.querySelector(".check.email").innerText = "* 가능한 이메일입니다";
+						emailYn = true;
 					}else{
 						document.querySelector(".check.email").innerText = "* 이미 존재하는 이메일입니다";
+						emailYn = false;
 					}
 				},
 				error: function() {
@@ -165,6 +195,13 @@
 			});
 		}
 		const checkRegister = () => {
+			memberId = document.querySelector("#input-id").value;
+			pw = document.querySelector("#input-pw").value;
+			pwRe = document.querySelector("#input-pw-re").value;
+			address = document.querySelector("#input-address").value;
+			name = document.querySelector("#input-name").value;
+			nickname = document.querySelector("#input-nickname").value;
+			email = document.querySelector("#input-email").value;
 			if(memberId.trim() == ''){
 				alert("아이디를 입력해주세요.");
 				event.preventDefault();
@@ -185,6 +222,15 @@
 				event.preventDefault();
 			}else if(pw != pwRe){
 				document.querySelector(".check.pw").innerText = "* 비밀번호를 다시 확인해주세요";
+				event.preventDefault();
+			}else if(!idYn){
+				alert("아이디를 변경해주세요");
+				event.preventDefault();
+			}else if(!nicknameYn){
+				alert("닉네임을 변경해주세요");
+				event.preventDefault();
+			}else if(!emailYn){
+				alert("이메일을 변경해주세요");
 				event.preventDefault();
 			}
 		}

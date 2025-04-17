@@ -42,4 +42,10 @@ public interface MemberService {
 
 	int checkMemberEmail(String email);
 
+	int updateMemberAddress(MemberUpdateRequest member);
+
+	int updateMemberNickname(MemberUpdateRequest member);
+
+	int updateMemberEmail(MemberUpdateRequest member);
+
 }

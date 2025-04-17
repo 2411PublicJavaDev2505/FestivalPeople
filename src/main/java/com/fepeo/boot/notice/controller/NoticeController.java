@@ -1,6 +1,7 @@
 package com.fepeo.boot.notice.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.notice.controller.dto.NoticeAddRequest;
 import com.fepeo.boot.notice.model.service.NoticeService;
+import com.fepeo.boot.notice.model.vo.Notice;
 import com.fepeo.boot.review.model.service.CommentService;
 import com.fepeo.boot.review.model.service.ReviewService;
 
@@ -27,7 +29,9 @@ public class NoticeController {
 
 	@GetMapping("/list")
 	public String showNoticeList(HttpSession session
-			) {
+			,Model model) {
+		List<Notice> nList = nService.selectNoticeList();
+		model.addAttribute("nList",nList);
 		return "notice/list";
 	}
 	

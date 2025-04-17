@@ -130,4 +130,19 @@ public class MemberServiceLogic implements MemberService{
 		return mapper.checkMemberEmail(email);
 	}
 
+	@Override
+	public int updateMemberAddress(MemberUpdateRequest member) {
+		return mapper.updateMemberAddress(member);
+	}
+
+	@Override
+	public int updateMemberNickname(MemberUpdateRequest member) {
+		return mapper.updateMemberNickname(member);
+	}
+
+	@Override
+	public int updateMemberEmail(MemberUpdateRequest member) {
+		return mapper.updateMemberEmail(member);
+	}
+
 }
