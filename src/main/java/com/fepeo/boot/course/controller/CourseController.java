@@ -122,6 +122,7 @@ public class CourseController {
 		
 		// 선택한 축제 번호로 축제 정보 가져오기
 		Festival festival = fService.getFestivalByNo(festivalNo);
+		System.out.println(festival);
 		// 축제 주소 좌표값 설정
 		Map<String, String> festivalXY = new HashMap<String, String>();
 		festivalXY.put("x", festival.getMapVCode());
@@ -132,11 +133,11 @@ public class CourseController {
 		System.out.println(matZipRec);
 		// 축제 좌표값으로 가까운 숙박시설 한개 선택
 		PlaceDto hotelRec = api.kakaoHotelApi(festivalXY);
-		System.out.println(hotelRec);
+		//System.out.println(hotelRec);
 		
 		Map<String, String> coursePoint = new HashMap<String, String>();
 		coursePoint.put("festivalX", festival.getMapVCode());
-		coursePoint.put("festivaly", festival.getMapHcode());
+		coursePoint.put("festivalY", festival.getMapHcode());
 		coursePoint.put("matzipX", matZipRec.getX());
 		coursePoint.put("matzipY", matZipRec.getY());
 		coursePoint.put("hotelX", hotelRec.getX());
@@ -146,7 +147,7 @@ public class CourseController {
 		
 		// 이건 추후에 사용할 키 숨김
 //		String kakaoKey = api.getKakaoApiKey();
-//		System.out.println(festival);
+		//System.out.println(festival.getFestivalFileName());
 		
 		
 		

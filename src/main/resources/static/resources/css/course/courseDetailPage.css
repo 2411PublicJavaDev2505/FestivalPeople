@@ -195,7 +195,16 @@ body{
 	
 }
 
+.course-recommend-section {
+	width: 90%;
+	margin: 0 auto 40px auto; /* 가운데 정렬 + 아래 마진 */
+}
 
+.iframe-description {
+	margin-top: 10px;
+	text-align: center;
+	font-size: 16px;
+}
 .search-course-title{
 	padding: 15px;
     font-size: 16px;

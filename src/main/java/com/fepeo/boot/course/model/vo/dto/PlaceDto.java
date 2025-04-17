@@ -10,6 +10,12 @@ public class PlaceDto {
     private String phone;
     private String x;
     private String y;
+    private String place_url;
+    
+    public String getPlace_url() {
+    	return place_url;
+    }
+    
 	public String getPlace_name() {
 		return place_name;
 	}

@@ -214,7 +214,6 @@ public class ApiComponent {
 	    return pd;	
 	}
 
-
 	// 저장된 회원 주소지로 좌표값 받아오기
 	public Map<String, String> searchMemberAddress(String memberAddress) throws JsonMappingException, JsonProcessingException {
 		String authorization = kakaoApiKey;
