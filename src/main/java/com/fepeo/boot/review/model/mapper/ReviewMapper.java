@@ -27,11 +27,13 @@ public interface ReviewMapper {
 	List<Review> selectReviewList(RowBounds rowBounds);
 	//토탈카운트 4/17 10:24추가
 	int getTotalCount();
-	//이미지등록 ( 4/18 00:46)
+	//이미지등록 ( 4/18 00:46) 아래 4개 이미지 detail 꺼!!
 	int insertReviewImageList(List<ImgAddRequest> imageList);
 	int insertReviewFirstImage(ImgAddRequest img);
 	int insertReviewSecondImage(ImgAddRequest img);
 	int insertReviewThirdImage(ImgAddRequest img);
+	//4/18 16:23분 리뷰게시판 삭제!
+	int reviewDelete(int reviewNo);
 	
 	//이미지등록4/17 20:32 (에러나면 지울것!)List로 받아야하니 아래 2개주석!23:53
 	//int insertReview(ImgAddRequest review);

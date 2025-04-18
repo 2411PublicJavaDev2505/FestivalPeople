@@ -83,7 +83,7 @@ public class ReviewController {
 		return "redirect:/review/list";
 	}
 	
-	//등록성공하고 여기부터 시작! Service 메소드만들고!
+	//등록성공하고 여기부터 시작! Service 메소드만들고(후기게시판detail)
 	
 	@GetMapping("/{reviewNo}")
 	public String reviewDetail(@PathVariable("reviewNo") int reviewNo
@@ -92,6 +92,32 @@ public class ReviewController {
 		model.addAttribute("review",review);
 		return"review/detail";
 	}
+	
+	//게시글 수정및 삭제(어노테이션확인할것!!!수정은 하지도 못했음...
+	
+	@GetMapping("/update")
+	public String reviewUpdate(Model model) {
+		return "review/update";
+	}
+	
+	@PostMapping("/update")
+	public String reviewUpdate() {
+		return "redirect:/review/";
+	}
+	
+	//게시물 삭제(삭제부터 ...16:03) 삭제안됨..원인은??
+	//org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'reviewNo': Failed to convert value of type 
+	//'java.lang.String' to required type 'int'; For input string: "undefined"
+	
+	@GetMapping("/delete")
+	public String reviewDelete(@PathVariable("reviewNo") int reviewNo
+			,Model model) {
+		int result = rService.reviewDelete(reviewNo);
+		//model.addAttribute("reviewNo",reviewNo);
+		System.out.println("확인");
+		return "redirect:/review/list";
+	}
+	
 	
 	//댓글 등록 !!4/15 시작!!
 	

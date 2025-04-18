@@ -169,4 +169,11 @@ public class ReviewServiceLogic implements ReviewService {
 		}
 		return result;
 	}
+	
+	//04/18 16:21 리뷰 게시판 삭제
+	@Override
+	public int reviewDelete(int reviewNo) {
+		int result = mapper.reviewDelete(reviewNo);
+		return reviewNo;
+	}
 }
