@@ -19,7 +19,10 @@
     <div class="side-banner right-banner">
         <a href="http://localhost:8888/festival/detail/288"><img src="../resources/img/review/banner-posterR.jpg" alt="오른쪽 광고" /></a>
     </div>
-
+    <!-- 바탕화면 -->
+	<div class="background-image">
+    	 <img src="../resources/img/chat/chat-background.jpg" alt="바탕화면">
+    </div>
     <div id="container">
     <!-- 헤더 -->
     <jsp:include page="/WEB-INF/views/include/header.jsp" />

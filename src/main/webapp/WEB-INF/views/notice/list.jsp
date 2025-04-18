@@ -10,14 +10,17 @@
     <link rel="stylesheet" href="../resources/css/notice/list.css">
 </head>
 <body>
+	<!-- 바탕화면 -->
 	<div class="background-image">
 		<img src="../resources/img/notice/background.jpg" alt="바탕화면">
     </div>
+    <!-- 헤더 -->
 	<jsp:include page="../include/header.jsp"/>
 	<div class="notice-board">
 	    <div class="notice-title">
 	        <span>공지사항</span>
 	    </div>
+	    <!-- 공시사항 게시판 -->
 	    <table class="notice-table">
 	        <thead>
 	            <tr>
@@ -44,6 +47,7 @@
 	        	</c:forEach>
 	        </tbody>
 	    </table>
+	    <!-- 페이지네이션 -->
 	    <div class="notice-pagination">
 	        <button class="page-btn">&lt;</button>
 	        <span class="page-num active">1</span>
@@ -59,6 +63,7 @@
 			</div>
 		</c:if>
 	</div>
+	<!-- 자바스크립트 -->
 	<script type="text/javascript">
 		const noticeInsert = () => {
 			location.href = "/notice/insert";
