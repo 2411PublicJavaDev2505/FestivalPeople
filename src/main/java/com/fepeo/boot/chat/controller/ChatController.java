@@ -1,7 +1,9 @@
 package com.fepeo.boot.chat.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,14 +41,18 @@ public class ChatController {
 		return "chat/chatInsert";
 	}
 	@PostMapping("/insert")
-	public String insertChatRoom(@ModelAttribute ChatroomRegisterRequest chatRoom,
+	public String insertChatRoom(@PathVariable("chatroomNo") int chatroomNo,
+			@ModelAttribute ChatroomRegisterRequest chatRoom,
 			@RequestParam(value="image", required=false) MultipartFile image
 			, HttpSession session, Model model) throws IllegalStateException, IOException {
-		Member member = (Member)session.getAttribute("member"); 
-    	// 세션에서 memberNo 가져오기
-		int memberNo = member.getMemberNo();
+		// 세션에서 memberNo 가져오기
+		Member member = (Member)session.getAttribute("member");
+		int memberNo = member.getMemberNo();	
+
 		// 내가 속한 방만 출력
-		List<MyChatroom> myList = service.selectChatRoomListByNo(memberNo);
+		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
+		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		// ↑ 내가 속한 채팅방(nonBlock방의 채팅방 정보를 가져오기 위한 과정)
 		model.addAttribute("myList",myList);
 		
 		chatRoom.setImage(image);
@@ -69,7 +75,8 @@ public class ChatController {
 	    	// 세션에서 memberNo 가져오기
 			int memberNo = member.getMemberNo();
 			// 내가 속한 방만 출력
-			List<MyChatroom> myList = service.selectChatRoomListByNo(memberNo);
+			List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
+			List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
 			model.addAttribute("myList",myList);
 			// 전체 리스트 출력
 			List<ChatRoom> cRooms = service.selectChatRoomList();
@@ -82,6 +89,26 @@ public class ChatController {
 			return "chat/list";
 		}
 	}
+	
+	// 채팅방 가입여부 확인 (JS에서 확인을 위해서)
+	@GetMapping("/check-access")
+	@ResponseBody
+	public Map<String, Object> checkAccess(@RequestParam int chatroomNo, HttpSession session) {
+	    Member member = (Member) session.getAttribute("member");
+	    int memberNo = member.getMemberNo();
+	    Map<String, Object> result = new HashMap<>(); // DTO 생성 대신에 여러 정보를 묶어서 보냄
+
+	    // 가입여부 확인**
+	    ChatMember cMember = service.selectChatMember(chatroomNo, memberNo);
+
+	    if (cMember != null && "Y".equals(cMember.getEnterYn())) {
+	        result.put("status", "joined"); // 상태, 기가입
+	    } else {
+	        result.put("status", "notJoined"); // 상태, 미가입
+	    }
+	    return result;
+	}
+	
 	
 	// 채팅방 가입(처음 입장)
 	@GetMapping("/enter/{chatroomNo}")
@@ -105,25 +132,7 @@ public class ChatController {
 			int yn = service.enterMemberYn(chatroomNo, memberNo);
 		}
 
-		// 좌측 목록(내가 속한 방) 출력
-		List<MyChatroom> myList = service.selectChatRoomListByNo(memberNo);
-		model.addAttribute("myList",myList);
-		// 각 채팅방별 참여인원수 불러오기
-		List<ChatMember> memberList = service.selectChatMember();
-		model.addAttribute("memberList", memberList);
-		
-		// 대화내용(말풍선) 출력
-		List<ChatMsg> msgList = service.selectChatMsgListByNo(chatroomNo);
-		model.addAttribute("msgList", msgList);
-
-		session.setAttribute("chatroomTitle", chatRoom.getChatroomTitle());
-		session.setAttribute("memberNo", member.getMemberNo());
-		model.addAttribute("member", member);
-		model.addAttribute("nickname", member.getNickname());
-		model.addAttribute("profile", member.getProfileFilePath());
-		model.addAttribute("chatroomNo", chatroomNo); // 채팅방 번호 전달
-		
-		return "chat/chatDetail";
+		return showChatMsgList(chatroomNo, session, model); // 중복부분 있어서 기존 입장(detail) 메서드 호출
 	}
 	
 	// 채팅방 입장(상세페이지)
@@ -137,10 +146,12 @@ public class ChatController {
 		// 채팅방 정보 조회 (제목,태그 등 출력용)
 		ChatRoom chatRoom = service.selectChatRoomByNo(chatroomNo); 
 		model.addAttribute("chatRoom", chatRoom);
-		
-		// 좌측 목록(내가 속한 방) 출력
-		List<MyChatroom> myList = service.selectChatRoomListByNo(memberNo);
+
+		// 내가 속한 방만 출력
+		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
+		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
 		model.addAttribute("myList",myList);
+		
 		// 각 채팅방별 참여인원수 불러오기
 		List<ChatMember> memberList = service.selectChatMember();
 		model.addAttribute("memberList", memberList);

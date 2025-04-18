@@ -10,22 +10,34 @@
 		#{chatImgName},#{chatImgRename},#{chatImgPath},#{chatLimit}, default	)
 	</insert>
 	
+	<update id="updateChatMember">
+		update CHATROOM set CHAT_MEMBER_COUNT = CHAT_MEMBER_COUNT + 1
+		where CHATROOM_NO = #{chatroomNo}
+	</update>
+	
 	<delete id="deleteCahtRoom">
 		delete from CHATROOM where CHATROOM_NO = #{chatroomNo}
 	</delete>
 	
+	<!-- 전체리스트 출력 -->
 	<select id="selectChatRoomList" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		select * from CHATROOM
 	</select>
+<!-- 	
 	<select id="selectChatRoomListByNo" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
-		select * from CHATROOM where MEMBER_NO = #{memberNo}
-	</select>
+		select * from CHATROOM where MEMBER_NO = #{memberNo} 방장
+	</select> -->
 	
+	<!-- 가입인원수 -->
 	<select id="selectChatMember" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		select CHAT_MEMBER_COUNT from CHATROOM where CHATROOM_NO = #{chatroomNo}
 	</select>
 	<!-- 채팅방 정보 가져오기  -->
 	<select id="selectChatRoomByNo" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		 SELECT * FROM CHATROOM WHERE CHATROOM_NO = #{chatroomNo}
+	</select>
+	<!-- 내가 속한 채팅방 정보 가져오기 -->
+	<select id="selectMyChatRoomListByChatMember" resultType="ChatRoom">
+		SELECT * FROM CHATROOM WHERE CHATROOM_NO = #{chatroomNo}
 	</select>
 </mapper>  
