@@ -142,7 +142,6 @@ public class ReviewServiceLogic implements ReviewService {
 		if(result == 0) return 0;
 		//게시글 번호 꺼내기!!
 		int reviewNo = review.getReviewNo();
-		List<ImgAddRequest> imageList = new ArrayList<ImgAddRequest>();
 		//4/11 코드 추가해줌!그리고 if 안에 코드넣어주고 아래 4/11
 		if(images != null) {
 			for(int i = 0; i < images.size(); i++) {
@@ -153,26 +152,19 @@ public class ReviewServiceLogic implements ReviewService {
 					
 					String fileName = images.get(i).getOriginalFilename();
 					String fileRename = Util.fileRename(fileName);
-					img.setReviewFileName1(fileName);
-					img.setReviewFileRename1(fileRename);
-					img.setReviewFilePath1(webPath+fileRename);
-					img.setReviewFileName2(fileName);
-					img.setReviewFileRename2(fileRename);
-					img.setReviewFilePath2(webPath+fileRename);
-					img.setReviewFileName3(fileName);
-					img.setReviewFileRename3(fileRename);
-					img.setReviewFilePath3(webPath+fileRename);
-					imageList.add(img);
-				}
-			}
-				if(!imageList.isEmpty()) {
-					result = mapper.insertReviewImageList(imageList);
-					for(ImgAddRequest img : imageList) {
-						img.getImageFile().transferTo(new File(folderPath+img.getReviewFileRename1()));
-						img.getImageFile().transferTo(new File(folderPath+img.getReviewFileRename2()));
-						img.getImageFile().transferTo(new File(folderPath+img.getReviewFileRename3()));
-						System.out.println("저장확인");
+					String filePath = "/images/review/"+fileRename;
+					img.setReviewFileName(fileName);
+					img.setReviewFileRename(fileRename);
+					img.setReviewFilePath(filePath);
+					images.get(i).transferTo(new File("C:/uploadImage/review/"+fileRename));
+					if(i == 0) {
+						result += mapper.insertReviewFirstImage(img);
+					}else if(i == 1) {
+						result += mapper.insertReviewSecondImage(img);
+					}else if(i == 2) {
+						result += mapper.insertReviewThirdImage(img);
 					}
+				}
 			}
 		}
 		return result;

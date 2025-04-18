@@ -40,6 +40,14 @@
 						<div class="review-content">
 							<p><div>${review.reviewContent }</div></p>
 						</div>
+						<!-- 사진내용 출력?!4/18 12:22뜨는지안뜨는지확인 확인되어서 커밋하고 지우기! -->
+						<div class="review-imagefile">
+							<c:forEach items="${review.imgList }" var="ImgAddRequest">
+								<img alt="review-img" src="${review.reviewFilePath1 }">
+								<img alt="review-img" src="${review.reviewFilePath2 }">
+								<img alt="review-img" src="${review.reviewFilePath3 }">
+							</c:forEach>
+						</div> 
 						
 					</section>
 					<input type="hidden" value="${review.reviewNo }" id="reviewNo">

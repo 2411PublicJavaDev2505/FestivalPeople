@@ -79,7 +79,6 @@ public class ReviewController {
 			HttpSession session
 			,Model model) throws IllegalStateException, IOException {
 		//4/17 21:47
-		System.out.println(images);
 		int result = rService.insertReview(review,images);
 		return "redirect:/review/list";
 	}
