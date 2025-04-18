@@ -41,14 +41,16 @@
 							<li> 🚩 지도
 								<div class="map-wrapper" >
 								  <!-- Kakao Map Container -->
-								  <div class="map-api" style="width:100%;height:350px;"></div>
+								  <div class="map-api" style="width:100%;height:350px;">
+									  <a class="map_shortcut" 
+									     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHcode},${festival.mapVCode}" 
+									     target="_blank">
+									     📍 길찾기
+									  </a>
+								  </div>
 								
 								  <!-- 길찾기 버튼 -->
-								  <a class="map_shortcut" 
-								     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHcode},${festival.mapVCode}" 
-								     target="_blank">
-								     📍 길찾기
-								  </a>
+								  
 								</div>
 							</li>		
 						</ul>

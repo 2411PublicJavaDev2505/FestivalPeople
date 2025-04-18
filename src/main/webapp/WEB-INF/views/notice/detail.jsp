@@ -23,18 +23,18 @@
             <div class="write-title-bar">
               <span>공지사항</span>
             </div>
-              <div class="form-row">
+              <div class="form-row-title">
                 ${notice.noticeTitle }
               </div>
-              <div class="form-row">
-              	<img alt="공지사항 사진" src="${notice.noticeFilePath}">
+              <div class="form-row-content">
+              	<img alt="공지사항 사진" src="${notice.noticeFilePath}"> <br>
                 ${notice.noticeContent }
               </div>
-              <div class="form-row btn-row">
-                <button class="btn submit-btn" onclick="location.href='/notice/list';">목록으로</button>
+              <div class="form-row-btn">
+                <button class="btn-list-btn" onclick="location.href='/notice/list';">목록으로</button>
                 <c:if test="${sessionScope.member.managerYn eq 'Y' }">
-	                <button class="btn submit-btn" onclick="updateNotice();">수정하기</button>
-	                <button class="btn submit-btn" onclick="deleteNotice();">삭제하기</button>
+	                <button class="btn-submit-btn" onclick="updateNotice();">수정하기</button>
+	                <button class="btn-delete-btn" onclick="deleteNotice();">삭제하기</button>
                 </c:if>
               </div>
    		</div>
