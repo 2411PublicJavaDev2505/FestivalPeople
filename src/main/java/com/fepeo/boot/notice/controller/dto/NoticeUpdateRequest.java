@@ -9,8 +9,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class NoticeAddRequest {
-	
+public class NoticeUpdateRequest {
+
 	private int noticeNo;
 	private String noticeTitle;
 	private String noticeContent;
@@ -18,5 +18,4 @@ public class NoticeAddRequest {
 	private String noticeFileRename;
 	private String noticeFilePath;
 	private MultipartFile file;
-	
 }

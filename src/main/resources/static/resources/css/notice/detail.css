@@ -1,0 +1,101 @@
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 900px;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+  
+  .notice-write-container {
+    width: 1525px;
+    height: 650px;
+    margin-top: 70px;
+    margin-left: 195px;
+    background: #3b7c6e;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    padding: 40px 30px 30px 30px;
+    position: relative;
+  }
+  
+  .write-title-bar {
+    width: 320px;
+    margin: 0 auto 30px auto;
+    background: #5e9c8c;
+    font-weight: bold;
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px 0;
+    opacity: 0.7;
+  }
+
+  
+  .write-input {
+    flex: 1;
+    width: 900px;
+    height: 32px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 0 8px;
+    margin-bottom: 5px;
+  }
+  
+  .write-textarea {
+    flex: 1;
+    width:1500px;
+    height: 300px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 8px;
+    resize: none;
+    margin-left: 50px;
+  }
+  
+ input[type="file" i] {
+  	margin-left: 0;
+    margin-bottom: 30px;
+  }
+  
+  .btn-row {
+    margin-left: 1265px;
+  }
+  
+  .btn {
+    width: 80px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .submit-btn {
+    --margin-top: -50px;
+    background: #d97a4a;
+    color: #fff;
+    margin-right: 2px;
+    border-radius: 10px;
+  }
+  
+  .cancel-btn {
+	font-size: 14px;
+    margin-top: -50px;
+    background: #f2c94c;
+    color: #333;
+    margin-left: 2px;
+    border-radius: 10px;
+  }
+  
+.tox.tox-tinymce {
+    width: 1475px;
+}
