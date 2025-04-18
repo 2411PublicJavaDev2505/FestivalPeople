@@ -16,8 +16,6 @@ public interface ChatService {
 
 	List<ChatRoom> selectChatRoomList();
 
-	List<MyChatroom> selectChatRoomListByNo(int memberNo);
-
 	List<ChatMember> selectChatMember();
 	
 	List<ChatMsg> selectChatMsgListByNo(int chatroomNo);
@@ -35,5 +33,9 @@ public interface ChatService {
 	int updateChatMember(int chatroomNo);
 
 	int enterMemberYn(int chatroomNo, int memberNo);
+
+	List<ChatMember> selectMyChatRoomList(int memberNo);
+
+	List<ChatRoom> selectMyChatRoomListByChatMember(List<ChatMember> myChatRoomList);
 
 }

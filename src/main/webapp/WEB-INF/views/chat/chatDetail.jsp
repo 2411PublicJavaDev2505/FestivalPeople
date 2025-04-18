@@ -93,11 +93,12 @@
 								<c:set var="prevDate" value="${formattedDate}" />
 							</c:if>
 							
-							<c:if test="${sessionScope.memberNo != member.memberNo }">
+							<!-- 다른사람 채팅은 왼쪽에 -->
+							<c:if test="${sessionScope.memberNo != mList.memberNo }">
 							<li class="msg-balloon-area">
 								<div class="profile-area">
-									<div class="chat-profile-thumbnail">프사${member.profileFilePath }</div>
-									<div class="chat-mem-nickname">닉넴${member.nickname }</div>
+									<div class="chat-profile-thumbnail">${member.profileFilePath }</div>
+									<div class="chat-mem-nickname">${member.nickname }</div>
 								</div>
 								<div class="msg-balloon-area-l">
 									<p class="msg-balloon-box-l">${mList.chatMsgContent }</p>
@@ -110,7 +111,8 @@
 								</div>
 							</li>
 							</c:if>
-							<c:if test="${sessionScope.memberNo eq member.memberNo }">
+							<!-- 내 채팅은 오른쪽에 -->
+							<c:if test="${sessionScope.memberNo eq mList.memberNo }">
 							<li class="msg-balloon-area-my">
 								<div class="msg-balloon-area-r">
 									<div class="msg-info-r">

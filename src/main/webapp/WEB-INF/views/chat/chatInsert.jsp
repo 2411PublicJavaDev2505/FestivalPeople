@@ -18,7 +18,7 @@
     <main class="chat-main">
 		<!--상단 채팅방검색-->
 		<section class="chat-nav">
-			<span>${member.nickname } 참여 채팅 수 : 0</span>
+			<span>${member.nickname } 참여 채팅 수 : 0</span>memNo.${member.memberNo }
 			<form action="#" class="chat-list-search"  >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 				<button class="chat-search-btn" >⌕</button>
@@ -31,6 +31,7 @@
 					<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 					<button class="chat-search-btn" type="submit">⌕</button>
 				</form>
+				
 				<!-- 참여방 없을 경우 -->
 				<c:if test="${empty myList }">
 					<span class="chat-notice">참여중인 채팅방이 없습니다</span>

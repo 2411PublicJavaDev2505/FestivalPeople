@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fepeo.boot.chat.model.mapper.ChatMemberMapper">
+
+	<insert id="insertChatRoom">
+		insert into CHAT_MEMBER values (#{chatroomNo}, #{memberNo},
+		default, default, default) 
+	</insert>
+
+	<update id="enterMemberYn"> <!-- 입장 상태 변경 (가입상태아님 주의) -->
+		update CHAT_MEMBER set ENTER_YN = 'Y'
+		where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 내 채팅방 목록 조회 -->
+	<select id="selectMyChatRoomList" resultType="ChatMember">
+		select * from CHAT_MEMBER where BLOCK_YN = 'N' AND MEMBER_NO = #{memberNo}
+	</select>
+		
+	<!-- 채팅방 가입자 정보 조회 -->
+	<select id="selectChatMemberList" resultType="com.fepeo.boot.chat.model.vo.ChatMember">
+		select * from CHAT_MEMBER
+		where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}
+	</select>
+
+</mapper>  

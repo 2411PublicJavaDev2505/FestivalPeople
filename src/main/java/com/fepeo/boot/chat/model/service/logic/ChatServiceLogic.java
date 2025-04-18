@@ -2,6 +2,7 @@ package com.fepeo.boot.chat.model.service.logic;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class ChatServiceLogic implements ChatService {
 	private final ChatMsgMapper msgMapper;
 	private final ChatMemberMapper mMapper;
 	
+	/** 채팅방 */
 	@Override // 채팅방 생성
 	public int insertChatRoom(ChatroomRegisterRequest chatRoom) throws IllegalStateException, IOException {
 		
@@ -46,24 +48,33 @@ public class ChatServiceLogic implements ChatService {
 		return result;
 	}
 
+	@Override // 채팅방 삭제
+	public int deleteCahtRoom(int chatroomNom) {
+		return cMapper.deleteCahtRoom(chatroomNom);
+	}
+
 	@Override // 전체리스트 출력
 	public List<ChatRoom> selectChatRoomList() {
 		return cMapper.selectChatRoomList();
 	}
 
-	@Override // 회원별 리스트 출력
-	public List<MyChatroom> selectChatRoomListByNo(int memberNo) {
-		return cMapper.selectChatRoomListByNo(memberNo);
+	@Override // 내가 속한 채팅방의 목록
+	public List<ChatMember> selectMyChatRoomList(int memberNo) {
+		return mMapper.selectMyChatRoomList(memberNo);
 	}
 
-	@Override // 채팅방 참여인원수 출력
+	@Override // 내가 속한 채팅방의 정보 가져오기
+	public List<ChatRoom> selectMyChatRoomListByChatMember(List<ChatMember> myChatRoomList) {
+		List<ChatRoom> myList  = new ArrayList<>();
+		for(int i=0;i<myChatRoomList.size();i++) {
+			myList.add(cMapper.selectMyChatRoomListByChatMember(myChatRoomList.get(i)));
+		}
+		return myList;
+	}
+
+	@Override // 채팅방 가입인원수 출력 CHAT_MEMBER_COUNT
 	public List<ChatMember> selectChatMember() {
 		return cMapper.selectChatMember();
-	}
-
-	@Override // 채팅방 삭제
-	public int deleteCahtRoom(int chatroomNom) {
-		return cMapper.deleteCahtRoom(chatroomNom);
 	}
 
 	@Override // 채팅방 정보 가져오기
@@ -71,24 +82,15 @@ public class ChatServiceLogic implements ChatService {
 		return cMapper.selectChatRoomByNo(chatroomNo);
 	}
 
-	@Override // 채팅메시지 조회
-	public List<ChatMsg> selectChatMsgListByNo(int chatroomNo) {
-		return msgMapper.selectChatMsgListByNo(chatroomNo);
-	}
-
+	/** 메시지(말풍선) */
 	@Override // 메시지 입력
 	public int insertChatMsg(MsgInsertRequest msg) {
 		return msgMapper.insertChatMsg(msg);
 	}
-
-	@Override // 채팅방 참여자 조회
-	public ChatMember selectChatMember(int chatroomNo, int memberNo) {
-		return mMapper.selectChatMember(chatroomNo, memberNo);
-	}
-
-	@Override // 신규 입장 등록
-	public int insertChatRoom(int chatroomNo, int memberNo) {
-		return mMapper.insertChatRoom(chatroomNo,memberNo);
+	
+	@Override // 채팅메시지 조회
+	public List<ChatMsg> selectChatMsgListByNo(int chatroomNo) {
+		return msgMapper.selectChatMsgListByNo(chatroomNo);
 	}
 
 	@Override // 참여인원수 증가
@@ -96,9 +98,20 @@ public class ChatServiceLogic implements ChatService {
 		return cMapper.updateChatMember(chatroomNo);
 	}
 
-	@Override // 입장 상태 변경
+	/** 채팅방 유저 */
+	@Override // 신규 입장 등록
+	public int insertChatRoom(int chatroomNo, int memberNo) {
+		return mMapper.insertChatRoom(chatroomNo,memberNo);
+	}
+	
+	@Override // 채팅방 가입자 정보 조회
+	public ChatMember selectChatMember(int chatroomNo, int memberNo) {
+		return mMapper.selectChatMemberList(chatroomNo, memberNo);
+	}
+
+	@Override // 입장 상태 변경 (가입상태아님 주의)
 	public int enterMemberYn(int chatroomNo, int memberNo) {
 		return mMapper.enterMemberYn(chatroomNo,memberNo);
-		
 	}
+	
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
-import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.vo.ChatMember;
 import com.fepeo.boot.chat.model.vo.ChatRoom;
 
@@ -17,8 +16,6 @@ public interface ChatMapper {
 
 	// 채팅방 전체 목록
 	List<ChatRoom> selectChatRoomList();
-	// 회원별 채팅방 목록
-	List<MyChatroom> selectChatRoomListByNo(int memberNo);
 
 	// 채팅방 참여인원수 출력
 	List<ChatMember> selectChatMember();
@@ -31,5 +28,8 @@ public interface ChatMapper {
 
 	// 참여인원수 증가
 	int updateChatMember(int chatroomNo);
+
+	// 내 채팅방 정보 출력
+	ChatRoom selectMyChatRoomListByChatMember(ChatMember chatMember);
 
 }

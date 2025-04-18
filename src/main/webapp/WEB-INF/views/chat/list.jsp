@@ -21,7 +21,7 @@
     </div>
     <!-- 바탕화면 -->
 	<div class="background-image">
-    	 <img src="../resources/img/chat/chat-background.jpg" alt="바탕화면">
+		<img src="../resources/img/chat/chat-background.jpg" alt="바탕화면">
     </div>
     <div id="container">
     <!-- 헤더 -->
@@ -75,7 +75,7 @@
 			<c:forEach items="${cRooms }" var="cRoom" varStatus="i">
 				<ul class="chat-list">
 					<li class="chat-list-row">
-						<a href="/chat/enter/${cRoom.chatroomNo }" class="chat-link">
+						<a href="javascript:void(0);" onclick="checkAndEnter(${cRoom.chatroomNo});" class="chat-link">
 						<img class="chat-image" alt="${cRoom.chatImgName}" src="${cRoom.chatImgPath}">
 						<div class="text-wrap">
 							<div class="chat-title">${cRoom.chatroomTitle }</div>
@@ -92,5 +92,27 @@
     </main>
     <!-- 푸터 -->
     </div>
+
+	<script>
+		function checkAndEnter(chatroomNo) {
+			fetch("/chat/check-access?chatroomNo=" + chatroomNo)
+			.then(res => res.json())
+			.then(data => {
+				if (data.status === "joined") {
+					// 가입자: 바로 입장
+					location.href = "/chat/enter/" + chatroomNo;
+				} else if (data.status === "notJoined") {
+					// 미가입자: 팝업으로 물어봄
+					const ok = confirm("첫입장을 환영합니다! 가입 후 입장하시겠습니까?");
+					if (ok) {
+						location.href = "/chat/enter/" + chatroomNo;
+					}
+				}
+			})
+			.catch(err => {
+				alert("서버 오류 발생: " + err);
+			});
+		}
+	</script>
 </body>
 </html>
