@@ -1,7 +1,10 @@
 package com.fepeo.boot.chat.model.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.fepeo.boot.chat.model.vo.ChatMember;
 
+@Mapper
 public interface ChatMemberMapper {
 
 	// 채팅방 참여자 조회(목록)
