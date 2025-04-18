@@ -127,40 +127,54 @@ public class CourseController {
 		
 		// 선택한 축제 번호로 축제 정보 가져오기
 		Festival festival = fService.selectFestivalByNo(festivalNo);
-		
 		// 축제 주소 좌표값 설정
 		Map<String, String> festivalXY = new HashMap<String, String>();
 		festivalXY.put("x", festival.getMapVCode());
 		festivalXY.put("y", festival.getMapHcode());
+		// 축제 좌표값 근처로 가까운 밥집 리스트 15개 출력
+		List<PlaceDto> matZipList = api.kakaoMatzipApi(festivalXY);
+		// 축제 좌표값 근처로 가까운 숙박시설 리스트 15개 출력
+		List<PlaceDto> hotelList =  api.kakaoHotelApi(festivalXY);
+
 		
-		// 축제 좌표값으로 가까운 밥집 한개 선택
-		PlaceDto matZipRec = api.kakaoMatzipApi(festivalXY);
-//		System.out.println(matZipRec);
-		// 축제 좌표값으로 가까운 숙박시설 한개 선택
-		PlaceDto hotelRec = api.kakaoHotelApi(festivalXY);
-	
-		// 추천 코스 좌표값 매핑하기
-		Map<String, String> coursePoint = new HashMap<String, String>();
-		coursePoint.put("festivalX", festival.getMapVCode());
-		coursePoint.put("festivalY", festival.getMapHcode());
-		coursePoint.put("matzipX", matZipRec.getX());
-		coursePoint.put("matzipY", matZipRec.getY());
-		coursePoint.put("hotelX", hotelRec.getX());
-		coursePoint.put("hotelY", hotelRec.getY());
-//		System.out.println(coursePoint);
-		// 이건 추후에 사용할 키 숨김
-//		String kakaoKey = api.getKakaoApiKey();
-		//System.out.println(festival.getFestivalFileName());
+		//courseDetail.jsp에서 평점순으로 체크시 결과 출력
+		if(sort.equals("rate") && !sort.isBlank()) {
+		PlaceDto bestPlace = api.getPlaceInfoFromNaver(matZipList);
+		System.out.println("최적의 장소" + bestPlace);
+			
 		
 		
-		
-//		model.addAttribute("kakaoKey", kakaoKey);
-		model.addAttribute("hotel", hotelRec);
-		model.addAttribute("matZip", matZipRec);
-		model.addAttribute("festival", festival);
-		model.addAttribute("coursePoint", coursePoint);
-		return "course/courseDetail";
 	}
-	
-	
+		
+		
+			
+		// courseDetail.jsp에서 거리순으로 체크시 결과 출력
+		if(sort.equals("distance") && !sort.isBlank()) {
+			// 축제 좌표값으로 가까운 밥집 한개 선택
+			PlaceDto matZipRec = matZipList.get(0);
+//			System.out.println(matZipRec);
+			// 축제 좌표값으로 가까운 숙박시설 한개 선택
+			PlaceDto hotelRec = hotelList.get(0);
+//			System.out.println(hotelRec);
+			// 추천 코스 좌표값 매핑하기
+			Map<String, String> coursePoint = new HashMap<String, String>();
+			coursePoint.put("festivalX", festival.getMapVCode());
+			coursePoint.put("festivalY", festival.getMapHcode());
+			coursePoint.put("matzipX", matZipRec.getX());
+			coursePoint.put("matzipY", matZipRec.getY());
+			coursePoint.put("hotelX", hotelRec.getX());
+			coursePoint.put("hotelY", hotelRec.getY());
+//		System.out.println(coursePoint);
+			// 이건 추후에 사용할 키 숨김
+//		String kakaoKey = api.getKakaoApiKey();
+			//System.out.println(festival.getFestivalFileName());		
+//		model.addAttribute("kakaoKey", kakaoKey);
+			model.addAttribute("hotel", hotelRec);
+			model.addAttribute("matZip", matZipRec);
+			model.addAttribute("festival", festival);
+			model.addAttribute("coursePoint", coursePoint);
+			return "course/courseDetail";
+		}		
+		return "course/courseDetail";		
+	}
 }

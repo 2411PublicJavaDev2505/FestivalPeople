@@ -24,10 +24,10 @@
 						<input type="hidden" value="${festival.festivalNo }" name="festivalNo">
 						<div class="radio-btn">
 							<label class="radio-style">
-								<input type="radio" id="distance" name="sort" checked onchange="document.querySelector('sortForm').submit();">거리순
+								<input type="radio" id="distance" name="sort" value="distance" ${param.sort == 'distance' || empty param.sort ? 'checked' : ''} onchange="this.form.submit();"> 거리순
 							</label>
 							<label class="radio-style">
-								<input type="radio" id="rate"	  name="sort"	onchange="document.querySelector('sortForm').submit();"> 평점순
+								<input type="radio" id="rate" name="sort" value="rate" ${param.sort == 'rate' ? 'checked' : ''} onchange="this.form.submit();"> 평점순
 							</label>
 						</div>
 					</form>

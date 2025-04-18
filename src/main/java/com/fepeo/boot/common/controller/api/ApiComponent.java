@@ -1,16 +1,35 @@
 package com.fepeo.boot.common.controller.api;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -21,7 +40,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.course.model.vo.dto.KakaoPlaceResponseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
+import com.fepeo.boot.report.controller.ReportController;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 
 @Getter
@@ -29,9 +50,18 @@ import lombok.Getter;
 @PropertySource("classpath:app-info.properties")
 public class ApiComponent {
 
+    private final ReportController reportController;
+
+	private final RestTemplate restTemplate;
+	private final ObjectMapper objectMapper;
 	//필드에 선언시 각 API를 따로 부를수가 없어서 방법 변경함
 	//private final WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst");
-
+	public ApiComponent(RestTemplateBuilder builder, ObjectMapper objectMapper, ReportController reportController) {
+        this.restTemplate = builder.build();
+        this.objectMapper = objectMapper;
+        this.reportController = reportController;		
+	}
+	
 
 	@Value("${weatherApiKey}")
     private String weatherApiKey;
@@ -155,9 +185,90 @@ public class ApiComponent {
 		return loginMap;
 	}
 	
+		// 네이버 플레이스 크롤링
+	public PlaceDto getPlaceInfoFromNaver(List<PlaceDto> placeList) {
+	    // WebDriverManager로 크롬 드라이버 자동 설정
+	    WebDriverManager.chromedriver().driverVersion("135.0.0").setup();// 자동으로 크롬 드라이버 다운로드 및 설정
+
+	    // ChromeOptions 설정
+	    ChromeOptions options = new ChromeOptions();
+	    options.addArguments("--headless"); // 창 없이 실행
+	    options.addArguments("--no-sandbox");
+	    options.addArguments("--disable-dev-shm-usage");
+
+	    // WebDriver 초기화
+	    WebDriver driver = new ChromeDriver(options);
+
+	    for (PlaceDto place : placeList) {
+	        try {
+	            // 검색어 URL 인코딩
+	            String keyword = URLEncoder.encode(place.getPlace_name(), StandardCharsets.UTF_8);
+	            String url = "https://search.naver.com/search.naver?query=" + keyword;
+
+	            driver.get(url);
+	            Thread.sleep(1500); // 로딩 대기
+
+	            // 첫 번째 결과 링크 클릭
+	            List<WebElement> links = driver.findElements(By.cssSelector(".place_bluelink, .api_txt_lines.total_tit"));
+	            if (!links.isEmpty()) {
+	                links.get(0).click();
+	                Thread.sleep(1500); // 상세 페이지 로딩 대기
+
+	                // 새 창 전환
+	                for (String windowHandle : driver.getWindowHandles()) {
+	                    driver.switchTo().window(windowHandle);
+	                }
+
+	                // 평점 가져오기
+	                WebElement ratingEl = driver.findElement(By.cssSelector(".PXMot.LXIwF")); // 평점
+	                String rating = ratingEl != null ? ratingEl.getText() : "0.0";
+
+	                // 리뷰 수 가져오기
+	                WebElement reviewEl = driver.findElement(By.cssSelector("._totalCount")); // 리뷰 수
+	                int reviewCount = 0;
+	                if (reviewEl != null) {
+	                    String count = reviewEl.getText().replaceAll("[^0-9]", "");
+	                    reviewCount = Integer.parseInt(count);
+	                }
+
+	                // DTO 세팅
+	                place.setGrade(rating);
+	                place.setReviewCount(reviewCount);
+
+	            } else {
+	                place.setGrade("0.0");
+	                place.setReviewCount(0);
+	            }
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            place.setGrade("0.0");
+	            place.setReviewCount(0);
+	        }
+	    }
+
+	    driver.quit();
+
+	    // 평점 기준 정렬
+	    placeList.sort((a, b) -> Float.compare(
+	        parseGrade(b.getGrade()), parseGrade(a.getGrade())
+	    ));
+
+	    return placeList.isEmpty() ? null : placeList.get(0);
+	}
+
+	private float parseGrade(String grade) {
+	    try {
+	        return Float.parseFloat(grade);
+	    } catch (Exception e) {
+	        return 0.0f;
+	    }
+	}
 	
-	// 축제 주소지 기준 추천 숙소 정보 1개 출력
-	public PlaceDto kakaoHotelApi(Map<String, String> festivalXY) {
+	
+	
+	// 축제 주소지 기준 추천 숙소 정보 15개 출력
+	public List<PlaceDto> kakaoHotelApi(Map<String, String> festivalXY) {
 		String authorization = kakaoApiKey;
 		WebClient webClient = WebClient.create("https://dapi.kakao.com");
 		
@@ -182,12 +293,12 @@ public class ApiComponent {
 //	    int size = tt.size();
 	    PlaceDto pd = tt.get(0);
 	    //System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
-	    return pd;	
+	    return tt;	
 	}
 	
 	
-	// 축제 주소지 기준 추천 맛집 정보 1개 출력
-	public PlaceDto kakaoMatzipApi(Map<String, String> festivalXY) {
+	// 축제 주소지 기준 추천 맛집 정보 15개 출력
+	public  List<PlaceDto> kakaoMatzipApi(Map<String, String> festivalXY) {
 		String authorization = kakaoApiKey;
 		WebClient webClient = WebClient.create("https://dapi.kakao.com");
 		
@@ -211,7 +322,7 @@ public class ApiComponent {
 	    int size = tt.size();
 	    PlaceDto pd = tt.get(0);
 	    //System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
-	    return pd;	
+	    return tt;	
 	}
 
 	// 저장된 회원 주소지로 좌표값 받아오기
@@ -322,6 +433,8 @@ public class ApiComponent {
 			return response;
 
 		}
+
+
 	
 	
 }
