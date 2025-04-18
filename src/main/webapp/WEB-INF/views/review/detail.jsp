@@ -57,8 +57,8 @@
 						</div>
 						<div class="review-delete-btn">
 							<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne '' }">
-								<button onclick="reviewdelete();" id="review-delete-btn">삭제하기</button>
 							</c:if>
+								<button onclick="reviewdelete();" id="review-delete-btn">삭제하기</button>
 						</div>
 						
 					</section>
@@ -97,11 +97,12 @@
 			</div>
 		</div>
 		<script>
-			const reviewdelete = (reviewNo) => {
-				if(confirm("정말 삭제하시겠습니까??")) {
-					location.replace("/review/delete"+reviewNo);
-				}
-			}
+			//이것도 안먹힘...4/18 18:29종료!!
+// 			const reviewdelete = (reviewNo) => {
+// 				if(confirm("정말 삭제하시겠습니까??")) {
+// 					location.replace("/review/delete"+reviewNo);
+// 				}
+// 			}
 		
 			
 			const reviewupdate = () => {
