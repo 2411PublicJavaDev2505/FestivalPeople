@@ -39,6 +39,10 @@
 	box-shadow: 0px 0px 3px #444
 }
 
+.register-header span:hover {
+	cursor: default;
+}
+
 .register-main {
 	display: flex;
 	justify-content: center;
@@ -48,6 +52,32 @@
 	width: 25%;
 	margin-left: 20px;
 	margin-right: 20px;
+}
+
+.register-left label div{
+	background-color: #FFAF00;
+	margin-left: 40px;
+	text-align: center;
+	border-radius: 10px;
+	width:100px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition-duration: 0.5s;
+}
+
+.register-left label div:hover{
+	background-color: #d58f00;
+	cursor: pointer;
+}
+
+#input-profile{
+	width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
 }
 
 .profile-img {
@@ -83,7 +113,7 @@
 }
 
 .register-right input:focus {
-	outline: 0.5px solid gray;
+	outline: 2px solid gray;
 }
 
 .register-btn {
@@ -108,6 +138,7 @@
 	border: none;
 	border-radius: 10px;
 	box-shadow: 0px 0px 2px #444;
+	transition-duration: 0.5s;
 }
 
 .register-notbtn input{
@@ -129,16 +160,17 @@
 	border-radius: 10px;
 	box-shadow: 0px 0px 2px #444;
 	margin-bottom: 30px;
+	transition-duration: 1s;
 }
 
 .register-last-btn button:hover {
-	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
-				rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+	background-color: #d58f00;
+	cursor: pointer;
 }
 
 .register-btn button:hover {
-	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, 
-				rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+	background-color: #d58f00;
+	cursor: pointer;
 }
 
 

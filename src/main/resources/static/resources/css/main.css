@@ -75,14 +75,14 @@
     justify-content: space-between;
 }
 
-.progress-bar {
+.my-progress-bar {
     position: relative;
     flex-grow: 1;
     height: 4px;
     background-color: #ccc;
 }
 
-.progress-bar .progress {
+.my-progress-bar .progress {
 	display: block;
     position: absolute;
     height: 100%;
