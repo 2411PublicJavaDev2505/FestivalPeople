@@ -12,6 +12,9 @@
 	</head>
 	<body>
 		<div id="container">
+			<div class="background-image">
+	    	 	<img src="${pageContext.request.contextPath}/resources/img/festival/우도.jpg" alt="바탕화면">
+	    	 </div>
 			<jsp:include page="../include/header.jsp"/>
 			<input type="hidden" value="${festival}">
 			
@@ -35,10 +38,17 @@
 									<img src="${pageContext.request.contextPath}/resources/img/festival/weather_example.jpg" alt="날씨">
 								</div>
 							</li>
-							<li> 🚩 길찾기
-								<div class="map-api" style="width:100%; height:400px;">
-								<%--<img src="${pageContext.request.contextPath}/resources/img/festival/examMap.png" alt="길찾기"> --%>
+							<li> 🚩 지도
+								<div class="map-wrapper" >
+								  <!-- Kakao Map Container -->
+								  <div class="map-api" style="width:100%;height:350px;"></div>
 								
+								  <!-- 길찾기 버튼 -->
+								  <a class="map_shortcut" 
+								     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHcode},${festival.mapVCode}" 
+								     target="_blank">
+								     📍 길찾기
+								  </a>
 								</div>
 							</li>		
 						</ul>
@@ -52,7 +62,7 @@
 			var kakaoMapContainer = document.querySelector('.map-api')
 			var mapOptions = {
 				center : new kakao.maps.LatLng(Number("${festival.mapHcode}"), Number("${festival.mapVCode}")),
-					level: 3
+					level: 2
 			};
 			
 			var map = new kakao.maps.Map(kakaoMapContainer,mapOptions);
@@ -97,6 +107,7 @@
 			            infowindow.close();
 			        };
 			    }(marker, infowindow));
+			    
 			    
 			}
 		</script>

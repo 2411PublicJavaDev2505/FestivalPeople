@@ -61,21 +61,21 @@
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 
     <script>
-	let currentSlide = 0;
-	
-	const slides = [
-	<c:forEach var="festival" items="${rfestivals}" varStatus="loop">
-	{
-	src: '${festival.festivalFilePath}',
-	alt : '${festival.festivalStartDate}',
-	tagline: '${festival.festivalEndDate}',
-	mainText: "${festival.festivalName}",
-	subText: "${festival.festivalPhone}",
-	festivalNo: ${festival.festivalNo}
-    }<c:if test="${!loop.last}">,</c:if>
-    <c:if test="${not empty festival.festivalFilePath}">,</c:if>
-	</c:forEach>
-	];
+	    let currentSlide = 0;
+		//메인페이지 사진 및, 제목 정보 받아오기 
+	    const slides = [
+	        <c:forEach var="festival" items="${rfestivals}" varStatus="loop">
+	        {
+	            src: '${festival.festivalFilePath}',
+	            alt : '${festival.festivalStartDate}',
+	            tagline: '${festival.festivalEndDate}',
+	            mainText: "${festival.festivalName}",
+	            subText: "${festival.festivalPhone}",
+	            festivalNo: ${festival.festivalNo}
+	        }<c:if test="${!loop.last}">,</c:if>
+        	<c:if test="${not empty festival.festivalFilePath}">,</c:if>
+	        </c:forEach>
+	    ];
 
     const totalSlides = slides.length;
         const slideContainer = document.querySelector('.simple-slide-container');
