@@ -1,6 +1,6 @@
 
 .background-image {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 1920px;
@@ -13,6 +13,8 @@
 .notice-board {
     width: 1525px;
     margin: 40px auto;
+    margin-top: 50px;
+    margin-left: 195px;
     background: rgba(60, 120, 100, 0.85);
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
