@@ -40,7 +40,7 @@
 	        	<c:forEach items="${nList }" var="notice" varStatus="i">
 		            <tr>
 		                <td>${(currentPage-1)*10 + i.index + 1}</td>
-		                <td><b onclick="showDetail('${notice.noticeNo}');">${notice.noticeTitle }</b></td>
+		                <td id="notice-title"><b onclick="showDetail('${notice.noticeNo}');">${notice.noticeTitle }</b></td>
 		                <td>${notice.noticeCount }</td>
 		                <td>${notice.noticeWriteDate }</td>
 		            </tr>
