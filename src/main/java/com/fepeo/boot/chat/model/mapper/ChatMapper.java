@@ -29,4 +29,7 @@ public interface ChatMapper {
 	// 채팅방 정보 가져오기
 	ChatRoom selectChatRoomByNo(int chatroomNo);
 
+	// 참여인원수 증가
+	int updateChatMember(int chatroomNo);
+
 }
