@@ -28,7 +28,7 @@
 
 
 /* 검색창 라디오 버튼 */
-.radio-btn {
+.check-btn {
 	display: flex;
 	flex-direction: row;
 }

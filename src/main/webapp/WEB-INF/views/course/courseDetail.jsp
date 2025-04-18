@@ -18,18 +18,33 @@
 			<div class="course-total-container">		
 				<div class="course-recommend-choice">
 					<div>
-						<p class="courseText">코스추천</p>
-					</div>
+					<p class="courseText">코스추천</p>
 					<form id="sortForm" action="/course/detail" method="get">
-						<input type="hidden" value="${festival.festivalNo }" name="festivalNo">
-						<div class="radio-btn">
-							<label class="radio-style">
-								<input type="radio" id="distance" name="sort" value="distance" ${param.sort == 'distance' || empty param.sort ? 'checked' : ''} onchange="this.form.submit();"> 거리순
-							</label>
-							<label class="radio-style">
-								<input type="radio" id="rate" name="sort" value="rate" ${param.sort == 'rate' ? 'checked' : ''} onchange="this.form.submit();"> 평점순
-							</label>
-						</div>
+						<label>
+							<input type="checkbox" name="category" value="FD6">
+							맛집
+						</label>
+						<label>
+							<input type="checkbox" name="category" value="AD5">
+							숙박업소
+						</label>
+						<label>
+							<input type="checkbox" name="category" value="CE7">
+							카페
+						</label>
+						<label>
+							<input type="checkbox" name="category" value="AT4">
+							관광명소
+						</label>
+						<label>
+							<input type="checkbox" name="category" value="PK6">
+							주차장
+						</label>
+						<label>
+							<input type="checkbox" name="category" value="CT1">
+							문화시설
+						</label>
+							</div>
 					</form>
 				</div>
 				<div class="course-recommend-main">
@@ -50,7 +65,10 @@
 
 							<img src= "${festival.festivalFilePath}" alt="부산">
 						</div>
-						<div class="matzip-container">
+						<div id="resultContainer" class="place-result-container"></div>
+						<div id="recommendation-container"></div>
+						<!--  얘네는 어차피 밑에서 다 넣어줄거임-->
+ 						<%-- <div class="matzip-container">
 							<div class="matzip-title">추천맛집</div>
 							<div class="matzip-name">${matZip.place_name }</div>
 						</div>
@@ -70,7 +88,7 @@
 							<div class="iframe-description">
 							<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
 							<a href="${hotel.place_url}" target="_blank">${hotel.place_url}</a>
-							</div>
+							</div> --%>
 						</div>
 						<form class="insert-course" action="/" method="post">
 							<div class="expect-cost">예상 금액 : ??</div>								
@@ -103,27 +121,28 @@
 			</div>	
 		</main>	
 	</div>
-
+<input type="hidden" id="festivalNo" value="${festival.festivalNo}">
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce2765b5c8d1c862f02d7a486094793d"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+	// 넘어오는 자료 확인용
+	let festivalNo = $('#festivalNo').val
 	console.log("festivalX: ", "${coursePoint.festivalX}");
 	console.log("festivalY: ", "${coursePoint.festivalY}");
 
-
+	
+	// 카카오맵 , 최상단 마커 꽂는 지도 표시할때 필요한부분
 	var kakaoMapContainer = document.querySelector('.course-recommend-map')
 	var mapOptions = {
 			center : new kakao.maps.LatLng(Number("${coursePoint.festivalY}"), Number("${coursePoint.festivalX}")),
 			level: 3	 
 
-
-	
-
 	};
-	
+	// 지도 생성
 	var map = new kakao.maps.Map(kakaoMapContainer, mapOptions);
 	
+	// 마커 찍기 위해 축제, 맛집, 호텔 좌표값 보내주는거
 	var positions = [
 		{
 			title: "${festival.festivalName}",
@@ -140,6 +159,7 @@
 			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
 		}
 	]
+	
 	
 	// 마커 이미지의 이미지 주소입니다
 	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
@@ -177,8 +197,56 @@
 	}
 	
 	
+	$(document).ready(function () {
+		let selectedCategories = [];
+
+		$('input[name="category"]').change(function() {
+			const value = $(this).val();
+
+			if($(this).is(':checked')) {
+				if(!selectedCategories.includes(value)) {
+					selectedCategories.push(value);
+				}
+			} else {
+				selectedCategories = selectedCategories.filter(item => item !== value);
+			}
+
+			// 여기에 AJAX 넣어야 함!
+			$.ajax({
+				url: '/course/filter',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					categories: selectedCategories,
+					festivalNo: $('#festivalNo').val()
+				}),
+				success: function (data) {
+					console.log("서버 응답:", data); // 확인용 콘솔
+					$('#recommendation-container').html(data);
+				},
+				error: function(err) {
+					console.error('ajax 오류', err);
+				}
+			});
+
+			console.log("보내는 데이터:", JSON.stringify({
+				categories: selectedCategories,
+				festivalNo: $('#festivalNo').val()
+			}));
+		});
+	});
+	
+	console.log(JSON.stringify({
+		  categories: selectedCategories,
+		  festivalNo: $('#festivalNo').val()
+		}));
 	
 	
+	$(document).ready(function () {
+	    $('input[name="category"]').change(function () {
+	        console.log("체크박스 변경됨:", $(this).val());
+	    });
+	});
 </script>
 
 
