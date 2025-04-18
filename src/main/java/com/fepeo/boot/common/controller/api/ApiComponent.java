@@ -1,16 +1,39 @@
 package com.fepeo.boot.common.controller.api;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -21,7 +44,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.course.model.vo.dto.KakaoPlaceResponseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
+import com.fepeo.boot.report.controller.ReportController;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 
 @Getter
@@ -29,9 +54,18 @@ import lombok.Getter;
 @PropertySource("classpath:app-info.properties")
 public class ApiComponent {
 
+    private final ReportController reportController;
+
+	private final RestTemplate restTemplate;
+	private final ObjectMapper objectMapper;
 	//필드에 선언시 각 API를 따로 부를수가 없어서 방법 변경함
 	//private final WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst");
-
+	public ApiComponent(RestTemplateBuilder builder, ObjectMapper objectMapper, ReportController reportController) {
+        this.restTemplate = builder.build();
+        this.objectMapper = objectMapper;
+        this.reportController = reportController;		
+	}
+	
 
 	@Value("${weatherApiKey}")
     private String weatherApiKey;
@@ -155,9 +189,122 @@ public class ApiComponent {
 		return loginMap;
 	}
 	
+		// 네이버 플레이스 크롤링 (포기 ! )
+//	public PlaceDto getPlaceInfoFromNaver(List<PlaceDto> placeList) {
+//	    // WebDriverManager로 크롬 드라이버 자동 설정
+//	    WebDriverManager.chromedriver().driverVersion("135.0.0").setup();
+//
+//	    // ChromeOptions 설정
+//	    ChromeOptions options = new ChromeOptions();
+//	    options.addArguments("--headless"); // 창 없이 실행
+//	    options.addArguments("--no-sandbox");
+//	    options.addArguments("--disable-dev-shm-usage");
+//
+//	    WebDriver driver = new ChromeDriver(options);
+//	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//	    for (PlaceDto place : placeList) {
+//	        try {
+//	            System.out.println(place);
+//
+//	            // 좌표와 상호명 기반 URL 생성
+//	            String keyword = URLEncoder.encode(place.getPlace_name(), StandardCharsets.UTF_8);
+//	            String x = place.getX();
+//	            String y = place.getY();
+//	            String url = "https://map.naver.com/p/search/" + keyword + "?c=15.00," + y + "," + x;
+//	            System.out.println("접속 URL: " + url);
+//
+//	            driver.get(url);
+//
+//	            // iframe 진입 (검색 결과 iframe 로딩 대기 후 전환)
+//	            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe[src*='search']")));
+//
+//	            // 평점 요소 탐색
+//	            String rating = "0.0";
+//	            try {
+//	                WebElement ratingEl = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".PXMot.LXIwF")));
+//	                rating = ratingEl.getText();
+//	            } catch (Exception e) {
+//	                System.out.println("평점 없음 처리");
+//	            }
+//
+//	            // 리뷰 수 탐색
+//	            int reviewCount = 0;
+//	            try {
+//	                WebElement reviewEl = driver.findElement(By.cssSelector("._totalCount"));
+//	                String count = reviewEl.getText().replaceAll("[^0-9]", "");
+//	                reviewCount = Integer.parseInt(count);
+//	            } catch (Exception e) {
+//	                System.out.println("리뷰 없음 처리");
+//	            }
+//
+//	            // DTO에 값 설정
+//	            place.setGrade(rating);
+//	            place.setReviewCount(reviewCount);
+//
+//	            // iframe 나가기
+//	            driver.switchTo().defaultContent();
+//
+//	        } catch (Exception e) {
+//	            e.printStackTrace();
+//	            place.setGrade("0.0");
+//	            place.setReviewCount(0);
+//	        }
+//	    }
+//
+//	    driver.quit();
+//
+//	    // 평점 기준 정렬
+//	    placeList.sort((a, b) -> Float.compare(
+//	        parseGrade(b.getGrade()), parseGrade(a.getGrade())
+//	    ));
+//
+//	    return placeList.isEmpty() ? null : placeList.get(0);
+//	}
+//
+//	private float parseGrade(String grade) {
+//	    try {
+//	        return Float.parseFloat(grade);
+//	    } catch (Exception e) {
+//	        return 0.0f;
+//	    }
+//	}
 	
-	// 축제 주소지 기준 추천 숙소 정보 1개 출력
-	public PlaceDto kakaoHotelApi(Map<String, String> festivalXY) {
+	
+	
+	public  List<PlaceDto> kakaoCategorySearch(Map<String, String> festivalXY, String category) {
+		String authorization = kakaoApiKey;
+		WebClient webClient = WebClient.create("https://dapi.kakao.com");
+			
+	    KakaoPlaceResponseDto res = webClient.get()
+	            .uri(uriBuilder -> uriBuilder
+	                    .path("/v2/local/search/category.json")
+	                    .queryParam("category_group_code", category)
+	                    .queryParam("x", festivalXY.get("x"))
+	                    .queryParam("y", festivalXY.get("y"))
+	                    .queryParam("radius", 10000)
+	                    .queryParam("sort", "distance")
+	                    .build())
+	            .header("Authorization", authorization)
+	            .retrieve()
+	            .bodyToMono(KakaoPlaceResponseDto.class)
+	            .block();
+	    
+	    
+	    List<PlaceDto> tt = res.getDocuments();
+	    Random random = new Random();
+	    int size = tt.size();
+	    PlaceDto pd = tt.get(random.nextInt(size)); 
+	    return tt;
+		
+	}
+	
+	
+	
+	
+	
+	// 축제 주소지 기준 추천 숙소 정보 15개 출력
+	public List<PlaceDto> kakaoHotelApi(Map<String, String> festivalXY) {
 		String authorization = kakaoApiKey;
 		WebClient webClient = WebClient.create("https://dapi.kakao.com");
 		
@@ -182,12 +329,12 @@ public class ApiComponent {
 //	    int size = tt.size();
 	    PlaceDto pd = tt.get(0);
 	    //System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
-	    return pd;	
+	    return tt;	
 	}
 	
 	
-	// 축제 주소지 기준 추천 맛집 정보 1개 출력
-	public PlaceDto kakaoMatzipApi(Map<String, String> festivalXY) {
+	// 축제 주소지 기준 추천 맛집 정보 15개 출력
+	public  List<PlaceDto> kakaoMatzipApi(Map<String, String> festivalXY) {
 		String authorization = kakaoApiKey;
 		WebClient webClient = WebClient.create("https://dapi.kakao.com");
 		
@@ -211,7 +358,7 @@ public class ApiComponent {
 	    int size = tt.size();
 	    PlaceDto pd = tt.get(0);
 	    //System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
-	    return pd;	
+	    return tt;	
 	}
 
 	// 저장된 회원 주소지로 좌표값 받아오기
@@ -322,6 +469,9 @@ public class ApiComponent {
 			return response;
 
 		}
+
+
+
 	
 	
 }

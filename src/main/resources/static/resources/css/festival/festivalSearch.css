@@ -5,6 +5,18 @@
     margin: 0 auto;
     text-align: center;
 }
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000;
+}
 /* 메인 클래스 */
 .festival-list{
 	padding:80px;
@@ -54,24 +66,55 @@
 .festival-card {
     background: white;
     border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 270px;
+    height: 570px;
     flex-shrink: 0;
-    margin-right: 10px;
+    width:calc(25% - 40px);
+	box-sizing: border-box;
+    margin-bottom: 80px;
 }
 
 .festival-card img {
+	margin-top:0px;
     width: 100%;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    position: relative;
+    z-index: 4;
 }
-
 .festival-list-track {
     display: flex;
-    padding-left: 80px;
-    padding-top: 100px;
-    justify-content:space-evenly;
+    flex-wrap: wrap;
+    justify-content: space-around;  
+    gap: 0;                         
+    row-gap: 80px;                  
+    padding-top: 180px;
     transition: transform 0.5s ease;
-    margin-top: 40px;
-    
 }
+/*사진 밑에 나오는 축제 이름  */
+.festival-card h4 {
+	position: relative;
+	display: block;
+    color: rgba(0,0,0,1);
+    font-size: 20px;
+    margin-top: -46px;
+    margin-left: 10px;
+    font-weight: bold;
+    line-height: 19px;
+    z-index: 3;
+}
+
+/* 페이지네이션  */
+
+.pagination a{
+	color: white;
+	text-decoration-line:none;
+	letter-spacing:12px;
+	font-size: 16px;
+	word-spacing:30px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    padding-left:10px;
+}
+

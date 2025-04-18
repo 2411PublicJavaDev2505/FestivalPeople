@@ -74,8 +74,8 @@ public class FestivalController {
 		Map<String, String> searchMap = new HashMap <String, String>();
 		searchMap.put("searchKeyword", searchKeyword);
 		searchMap.put("searchCondition", searchCondition);
-		System.out.println(searchKeyword);
-		int totalCount = festivalService.getTotalCount();
+		System.out.println(searchCondition);
+		int totalCount = festivalService.getSearchTotalCount(searchMap);
 	    int itemsPerPage = 8;
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
 	    List<Festival> festivals = festivalService.searchFestivalListAll(pageInfo.get("startRow"), pageInfo.get("endRow"),searchMap);
@@ -89,7 +89,7 @@ public class FestivalController {
 	    model.addAttribute("currentPage", currentPage);
 	    model.addAttribute("festivals",festivals);
 	    
-	    return "/festivalSearch";
+	    return "festival/festivalSearch";
 	}
 	
 

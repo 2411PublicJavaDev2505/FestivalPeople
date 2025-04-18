@@ -1,0 +1,141 @@
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 900px;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+  
+  .notice-write-container {
+    width: 1525px;
+    height: 880px;
+    margin-top: 50px;
+    margin-left: 195px;
+    background: #3b7c6e;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    padding: 40px 30px 30px 30px;
+    position: relative;
+  }
+  
+  .write-title-bar {
+    width: 320px;
+    margin: 0 auto 30px auto;
+    background: #5e9c8c;
+    font-weight: bold;
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px 0;
+    opacity: 0.7;
+  }
+
+  
+  .write-input {
+    flex: 1;
+    width: 900px;
+    height: 32px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 0 8px;
+    margin-bottom: 5px;
+  }
+  
+  .write-textarea {
+    flex: 1;
+    width:1500px;
+    height: 300px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 8px;
+    resize: none;
+    margin-left: 50px;
+  }
+  
+ input[type="file" i] {
+  	margin-left: 0;
+    margin-bottom: 30px;
+  }
+  
+  .btn-row {
+    margin-left: 1265px;
+  }
+  
+  .btn {
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .btn-submit-btn {
+  	width: 100px;
+    height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+    background: #d97a4a;
+    color: #fff;
+    border-radius: 10px;
+  }
+  
+ .btn-list-btn {
+ 	width: 100px;
+    height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+    background: #f2c94c;
+    color: #fff;
+    border-radius: 10px;
+  }
+  
+   .btn-delete-btn {
+ 	width: 100px;
+    height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+    background: #e82734;
+    color: #fff;
+    border-radius: 10px;
+  }
+  
+.tox.tox-tinymce {
+    width: 1475px;
+}
+
+.form-row-title {
+	border: 1px solid white;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.form-row-content {
+	width: 1465px;
+	height: 600px;
+	margin: 0 auto;
+	margin-top: 10px;
+	border: 1px solid white;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.form-row-btn {
+	display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    gap: 5px;
+    margin-top: 30px;
+}

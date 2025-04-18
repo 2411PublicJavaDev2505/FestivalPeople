@@ -11,6 +11,23 @@ public class PlaceDto {
     private String x;
     private String y;
     private String place_url;
+    private String id; //
+    private String grade;
+    private int reviewCount;
+    private String category;
+    
+    
+    public int getReviewCount() {
+    	return reviewCount;
+    }
+    
+    public String getGrade() {
+    	return grade;
+    }
+    
+    public String getId() {
+    	return id;
+    }
     
     public String getPlace_url() {
     	return place_url;
@@ -30,5 +47,9 @@ public class PlaceDto {
 	}
 	public String getY() {
 		return y;
+	}
+
+	public String getCategory() {
+		return category;
 	}
 }

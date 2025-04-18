@@ -20,4 +20,5 @@ public class MyChatroom {
 	private String chatImgPath;
 	private int chatLimit;
 	private int chatMemberCount;
+	private String blockYn;
 }

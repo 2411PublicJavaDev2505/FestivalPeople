@@ -96,18 +96,23 @@ public class FestivalServiceLogic implements FestivalService {
 	public List<Festival> selectFestivalListByRegion(List<String> goodWeather, Map<String, String> mapPoint) {		
 		return festivalMapper.selectFestivalListByRegion(goodWeather, mapPoint);
 	}
-
+	//코스추천에서 사용하는 축제 검색 기능
 	@Override
 	public List<Festival> searchFestivalList(Map<String, String> searchMap) {
 		return festivalMapper.searchFestivalList(searchMap);
 	}
-
+	//축제페이지에서 사용하는 축제 검색 기능 
 	@Override
 	public List<Festival> searchFestivalListAll(int startRow, int endRow, Map<String, String> searchMap) {
 		Map<String, Integer> params = new HashMap<>();
         params.put("startRow", startRow);
         params.put("endRow", endRow);
 		return festivalMapper.searchFestivalListAll(params,searchMap);
+	}
+
+	@Override
+	public int getSearchTotalCount(Map<String, String> searchMap) {
+		return festivalMapper.getSearchTotalCount(searchMap);
 	}
 
 }

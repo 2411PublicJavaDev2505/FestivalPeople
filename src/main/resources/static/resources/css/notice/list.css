@@ -1,6 +1,6 @@
 
 .background-image {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 1920px;
@@ -12,7 +12,9 @@
 
 .notice-board {
     width: 1525px;
-    margin: 40px auto;
+    height: 800px; 
+    margin-top: 50px;
+    margin-left: 195px;
     background: rgba(60, 120, 100, 0.85);
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -51,6 +53,15 @@
     text-align: center;
     font-size: 17px;
     background: rgba(255,255,255,0.12);
+}
+
+.notice-table tr:nth-child(odd) td {
+    background: rgba(255,255,255,0.3); /* 홀수 행 색상 */
+}
+
+#notice-title:hover {
+	cursor: pointer;
+	filter: brightness(50%);
 }
 
 .notice-table th {

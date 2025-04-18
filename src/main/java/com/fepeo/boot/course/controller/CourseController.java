@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -112,54 +114,68 @@ public class CourseController {
 	}
 	
 	
+	@PostMapping("/filter")
+	@ResponseBody
+	public String filterByCategory(@RequestBody Map<String, Object> request) {
+		
+		List<String> categoryList = (List<String>) request.get("categories");
+	    int festivalNo = (int) request.get("festivalNo");
 
+	    System.out.println("카테고리 리스트: " + categoryList);
+	    System.out.println("축제 번호: " + festivalNo);
+	    
+		return "성공!";
+		
+	}
 	
 	
-	
+
+
 	
 	
 	
 	@GetMapping("/detail")
 	public String showCourseDetail(@RequestParam("festivalNo") int festivalNo
 			,Model model
-			,@RequestParam(value ="sort", defaultValue ="distance") String sort) {
+			) {
 		
+		String sort = "";
 		
 		// 선택한 축제 번호로 축제 정보 가져오기
 		Festival festival = fService.selectFestivalByNo(festivalNo);
-		
 		// 축제 주소 좌표값 설정
 		Map<String, String> festivalXY = new HashMap<String, String>();
 		festivalXY.put("x", festival.getMapVCode());
 		festivalXY.put("y", festival.getMapHcode());
-		
-		// 축제 좌표값으로 가까운 밥집 한개 선택
-		PlaceDto matZipRec = api.kakaoMatzipApi(festivalXY);
-//		System.out.println(matZipRec);
-		// 축제 좌표값으로 가까운 숙박시설 한개 선택
-		PlaceDto hotelRec = api.kakaoHotelApi(festivalXY);
-	
-		// 추천 코스 좌표값 매핑하기
-		Map<String, String> coursePoint = new HashMap<String, String>();
-		coursePoint.put("festivalX", festival.getMapVCode());
-		coursePoint.put("festivalY", festival.getMapHcode());
-		coursePoint.put("matzipX", matZipRec.getX());
-		coursePoint.put("matzipY", matZipRec.getY());
-		coursePoint.put("hotelX", hotelRec.getX());
-		coursePoint.put("hotelY", hotelRec.getY());
+		// 축제 좌표값 근처로 가까운 밥집 리스트 15개 출력
+//		List<PlaceDto> matZipList = api.kakaoMatzipApi(festivalXY);
+//		// 축제 좌표값 근처로 가까운 숙박시설 리스트 15개 출력
+//		List<PlaceDto> hotelList =  api.kakaoHotelApi(festivalXY);
+//		
+//			PlaceDto matZipRec = matZipList.get(0);
+//			System.out.println(matZipRec);
+			// 축제 좌표값으로 가까운 숙박시설 한개 선택
+//			PlaceDto hotelRec = hotelList.get(0);
+//			System.out.println(hotelRec);
+			// 추천 코스 좌표값 매핑하기
+			Map<String, String> coursePoint = new HashMap<String, String>();
+			coursePoint.put("festivalX", festival.getMapVCode());
+			coursePoint.put("festivalY", festival.getMapHcode());
+//			coursePoint.put("matzipX", matZipRec.getX());
+//			coursePoint.put("matzipY", matZipRec.getY());
+//			coursePoint.put("hotelX", hotelRec.getX());
+//			coursePoint.put("hotelY", hotelRec.getY());
 //		System.out.println(coursePoint);
-		// 이건 추후에 사용할 키 숨김
+			// 이건 추후에 사용할 키 숨김
 //		String kakaoKey = api.getKakaoApiKey();
-		//System.out.println(festival.getFestivalFileName());
-		
-		
-		
+			//System.out.println(festival.getFestivalFileName());		
 //		model.addAttribute("kakaoKey", kakaoKey);
-		model.addAttribute("hotel", hotelRec);
-		model.addAttribute("matZip", matZipRec);
-		model.addAttribute("festival", festival);
-		model.addAttribute("coursePoint", coursePoint);
-		return "course/courseDetail";
+//			model.addAttribute("hotel", hotelRec);
+//			model.addAttribute("matZip", matZipRec);
+			model.addAttribute("festival", festival);
+//			model.addAttribute("coursePoint", coursePoint);
+			return "course/courseDetail";
+	
 	}
 	
 	

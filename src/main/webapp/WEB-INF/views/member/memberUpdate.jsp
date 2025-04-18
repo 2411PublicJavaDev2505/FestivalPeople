@@ -194,7 +194,6 @@
 		const updateProfile = () => {
 			let formData = new FormData();
 		    let fileInput = $("#profile-input")[0];
-			console.log(fileInput);
 		    if (fileInput.files.length > 0) {
 		        formData.append("profile", fileInput.files[0]);
 		        $.ajax({
