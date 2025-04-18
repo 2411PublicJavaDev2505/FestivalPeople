@@ -18,6 +18,10 @@
 			</div>
 			<main>
 		 		<form action="/review/insert" method="post" enctype="multipart/form-data">
+						<!-- 원래자리로 되돌려주기!!4/18 11:11 -->
+						<input type="file" name ="images"> <br>
+						<input type="file" name ="images"> <br>
+						<input type="file" name ="images"> <br>
 		 			<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo }"> 
 					<div class="review-title">
 					<!-- name값 넣어줘야함! -->
@@ -27,11 +31,13 @@
 						<div><span>내용 </span></div>
 						<textarea rows="5" cols="82" name="reviewContent"></textarea>
 					</div>
+					
 					<div class="review-attach">
-<!-- 							<input type="file" name="uploadFile"><br> -->
-						<input type="file" name="images"><br>
-						<input type="file" name="images"><br>
-						<input type="file" name="images"><br>
+						<!-- div풀기4/18 11:00 -->
+						<!-- 첨부파일버튼 다시 옮기기! -->
+<!-- 						<input type="file" name ="images"> <br>  -->
+<!-- 						<input type="file" name ="images"> <br>  -->
+<!--  						<input type="file" name ="images"> <br>  -->
 					</div>
 					<div class="reviewinsert-btn">
 						<button type="submit" id="submitbtn">등록</button>

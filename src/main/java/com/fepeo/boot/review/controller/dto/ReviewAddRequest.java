@@ -1,6 +1,7 @@
 package com.fepeo.boot.review.controller.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class ReviewAddRequest {
 	private	String		reviewTitle;		
 	private String		reviewContent;		
 	private int			memberNo;
+	private List<ImgAddRequest> imageList;
 	
 	
 }

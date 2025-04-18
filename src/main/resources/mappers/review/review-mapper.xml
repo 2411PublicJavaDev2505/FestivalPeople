@@ -25,6 +25,12 @@
   		 			select="selectCommentList" column="REVIEW_NO"
   		 									javaType="java.util.List"
   		 									ofType="ReviewComment"></collection>
+  		<!-- 이미지 다중으로 다이렉트로 왔긴했지만 코드 작성해줌 4/18 09:22 -->
+  		<!-- 조회코드 첫번째 작성하고 아래작성하기!! 작성법은 본실습계정 내용보고 참고!적고 다시 밑에 ~ -->
+  		<collection property="imgList"
+  					select="selectReviewImgByNo" column="REVIEW_NO"
+  					javaType="java.util.List"
+  					ofType="ImgAddRequest"></collection>
   		
   		</resultMap>
   		<!-- insert id만 적음! seleckey적용하기위해 추가함!에러나면 지우기!!15:50 -->
@@ -59,5 +65,34 @@
 			SELECT COUNT(*) FROM REVIEW 
 		</select>
 		
-		<insert id="insertReviewImageList"></insert>
+		<!-- 이미지 업로드 조회 쿼리 작성먼저함4/1810:02 에러나면 바꿔줄것! 그리고 COLLECTION태그 적어줌!-->
+		<select id="selectReviewImgByNo" resultType="ImgAddRequest">
+			SELECT * FROM REVIEW WHERE REVIEW_NO = #{reviewNo}
+		</select>
+		
+		<!-- 4/18 9:14분추가!값의수가 충분하지않아 전체 다시 넣고 확인!11:13 -->
+		<!-- 	#{img.reviewTitle} REVIEW_TITLE,
+							#{img.reviewContent} REVIEW_CONTENT,
+							#{img.reviewWriteTime} REVIEW_WRITE_TIME,
+							#{img.reviewCount} REVIEW_COUNT,
+							#{img.reviewYn} REVIEW_YN, -->
+		<update id="insertReviewFirstImage">
+			UPDATE REVIEW SET REVIEW_FILE_NAME1 = #{reviewFileName},
+			REVIEW_FILE_RENAME1 = #{reviewFileRename},
+			REVIEW_FILE_PATH1 = #{reviewFilePath} 
+			WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		<update id="insertReviewSecondImage">
+			UPDATE REVIEW SET REVIEW_FILE_NAME2 = #{reviewFileName},
+			REVIEW_FILE_RENAME2 = #{reviewFileRename},
+			REVIEW_FILE_PATH2 = #{reviewFilePath} 
+			WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		<update id="insertReviewThirdImage">
+			UPDATE REVIEW SET REVIEW_FILE_NAME3 = #{reviewFileName},
+			REVIEW_FILE_RENAME3 = #{reviewFileRename},
+			REVIEW_FILE_PATH3 = #{reviewFilePath} 
+			WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		
 </mapper>
