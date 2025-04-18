@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<head>
+	<link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+         crossorigin="anonymous"
+    />
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
 <header class="main-header">
     <div class="logo-container">
         <a href="/"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Festival People"></a>
@@ -33,11 +44,30 @@
         </ul>
     </nav>
     <script type="text/javascript">
+		function customConfirm(url) {
+	        Swal.fire({
+	          title: '로그인이 필요한 서비스입니다.',
+	          text: "로그인하시겠습니까?",
+	          icon: 'warning',
+	          showCancelButton: true,
+	          confirmButtonColor: '#3085d6',
+	          cancelButtonColor: '#d33',
+	          confirmButtonText: '로그인',
+	          cancelButtonText: '취소',
+	          reverseButtons: true, // 버튼 순서 거꾸로
+	          
+	        }).then((result) => {
+	          if (result.isConfirmed) {
+	            location.href = url;
+	          }
+	        })
+	      }
     	const goChat = () => {
     		let memberId = '${member.memberId}';
     		if(memberId.trim() == ''){
-	    		alert("로그인이 필요한 서비스입니다");
-	    		location.href = "/member/login";
+//     			alert("로그인이 필요한 서비스입니다");
+//     			customAlert("로그인이 필요한 서비스입니다");
+    			customConfirm("/member/login");
     		}else {
     			location.href = "/chat/list";
     		}
@@ -46,8 +76,9 @@
     	const goCourse = () => {
     		let memberId = '${member.memberId}';
     		if(memberId.trim() == ''){
-	    		alert("로그인이 필요한 서비스입니다");
-	    		location.href = "/member/login";
+//     			alert("로그인이 필요한 서비스입니다");
+//     			customAlert("로그인이 필요한 서비스입니다");
+				customConfirm("/member/login");
     		}else {
     			location.href = "/course/list";
     		}

@@ -1,5 +1,6 @@
 package com.fepeo.boot.common.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,6 @@ public class CommonController {
 	@GetMapping("/")
 	public String showMain(Model model) {
 	    List<Festival> rfestivals =festivalService.selectFestivalListById();
-	    
 	    model.addAttribute("rfestivals",rfestivals);
 		
 	    return "index";

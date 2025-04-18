@@ -7,7 +7,15 @@
 	<link rel="stylesheet" href="../resources/css/root.css">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/member/memberInsert.css">
+	<link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+         crossorigin="anonymous"
+    />
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<title>FePeo-회원가입</title>
 </head>
 <body>
@@ -38,11 +46,14 @@
 							<div class="profile-img">
 								<img alt="" src="" id="profile-img">
 							</div>
+							<label for="input-profile">
+								<div>파일찾기</div>
+							</label>
 							<input type="file" name="profile" onchange="changeProfile();" id="input-profile">
 						</div>
 						<div class="register-right">
 							<ul class="register-input">
-								<li class="register-btn">
+								<li class="register-notbtn">
 									<input type="text" placeholder="아이디" name="memberId" id="input-id" onchange="checkId();">
 								</li>
 								<li class="check id"></li>
@@ -74,11 +85,11 @@
 									    </label>
 									</li>
 								</ul>
-								<li class="register-btn">
+								<li class="register-notbtn">
 									<input type="text" placeholder="닉네임" name="nickname" id="input-nickname" onchange="checkNickname();">
 								</li>
 								<li class="check nickname"></li>
-								<li class="register-btn">
+								<li class="register-notbtn">
 									<input type="text" placeholder="이메일" name="email" onchange="checkEmail();" id="input-email">
 								</li>
 								<li class="check email"></li>
@@ -194,6 +205,15 @@
 				}
 			});
 		}
+		
+		function customAlert(message) {
+		    Swal.fire({
+		      icon: 'warning',
+		      title: message,
+		      text: "",
+		    });
+		  }
+		
 		const checkRegister = () => {
 			memberId = document.querySelector("#input-id").value;
 			pw = document.querySelector("#input-pw").value;
@@ -203,34 +223,34 @@
 			nickname = document.querySelector("#input-nickname").value;
 			email = document.querySelector("#input-email").value;
 			if(memberId.trim() == ''){
-				alert("아이디를 입력해주세요.");
+				customAlert('아이디를 입력해주세요!!');
 				event.preventDefault();
 			}else if(pw.trim() == ''){
-				alert("비밀번호를 입력해주세요.");
+				customAlert("비밀번호를 입력해주세요.");
 				event.preventDefault();
 			}else if(address.trim() == ''){
-				alert("주소를 입력해주세요.");
+				customAlert("주소를 입력해주세요.");
 				event.preventDefault();
 			}else if(name.trim() == ''){
-				alert("이름를 입력해주세요.");
+				customAlert("이름를 입력해주세요.");
 				event.preventDefault();
 			}else if(nickname.trim() == ''){
-				alert("닉네임를 입력해주세요.");
+				customAlert("닉네임를 입력해주세요.");
 				event.preventDefault();
 			}else if(email.trim() == ''){
-				alert("이메일를 입력해주세요.");
+				customAlert("이메일를 입력해주세요.");
 				event.preventDefault();
 			}else if(pw != pwRe){
 				document.querySelector(".check.pw").innerText = "* 비밀번호를 다시 확인해주세요";
 				event.preventDefault();
 			}else if(!idYn){
-				alert("아이디를 변경해주세요");
+				customAlert("아이디를 변경해주세요");
 				event.preventDefault();
 			}else if(!nicknameYn){
-				alert("닉네임을 변경해주세요");
+				customAlert("닉네임을 변경해주세요");
 				event.preventDefault();
 			}else if(!emailYn){
-				alert("이메일을 변경해주세요");
+				customAlert("이메일을 변경해주세요");
 				event.preventDefault();
 			}
 		}

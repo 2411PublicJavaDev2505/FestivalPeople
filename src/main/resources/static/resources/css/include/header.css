@@ -67,6 +67,7 @@
     position: relative;
     overflow: visible;
     background-color: var(--bg-color, #ccc);
+    transition-duration: 0.3s;
 }
 
 
@@ -85,4 +86,5 @@
     			rgb(211,74,36) 0px 0px 0px 9px, 
     			rgb(255,175,0) 0px 0px 0px 12px; 
 	transform: translateX(-3px);
+	cursor: pointer;
 }
