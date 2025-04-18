@@ -48,6 +48,18 @@
 								<img alt="review-img" src="${review.reviewFilePath3 }">
 							</c:forEach>
 						</div> 
+						<!-- 4/18 15:05분 수정하기버튼 추가! 요구사항에 작성자가쓴글만 삭제하는 기능은??? -->
+						<!-- 4/18 16:04삭제하기 버튼추가! -->
+						<div class="review-update-btn">
+							<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne '' }">
+								<button onclick="reviewupdate();" id="review-update-btn">수정하기</button>
+							</c:if>
+						</div>
+						<div class="review-delete-btn">
+							<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne '' }">
+								<button onclick="reviewdelete();" id="review-delete-btn">삭제하기</button>
+							</c:if>
+						</div>
 						
 					</section>
 					<input type="hidden" value="${review.reviewNo }" id="reviewNo">
@@ -85,6 +97,18 @@
 			</div>
 		</div>
 		<script>
+			const reviewdelete = (reviewNo) => {
+				if(confirm("정말 삭제하시겠습니까??")) {
+					location.replace("/review/delete"+reviewNo);
+				}
+			}
+		
+			
+			const reviewupdate = () => {
+				location.href ="/review/update";
+			}
+		
+			
 			const reviewNo = "${review.reviewNo}";
 		
 			function getCommentList() {

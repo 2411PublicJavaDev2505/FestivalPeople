@@ -95,4 +95,9 @@
 			WHERE REVIEW_NO = #{reviewNo}
 		</update>
 		
+		<!-- 게시물 삭제는 update n 해줌! 4/18 16:25 -->
+		<delete id="reviewDelete">
+			UPDATE REVIEW SET REVIEW_YN = 'N' WHERE REVIEW_NO = #{reviewNo}
+		</delete>
+		
 </mapper>
