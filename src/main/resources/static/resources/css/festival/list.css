@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.festival-list{
+	position:sticky;
+}
+
 .background-image {
   position: fixed;
   top: 0;
@@ -168,11 +172,18 @@
 
 /* 페이지네이션  */
 
+
 .pagination a{
 	color: white;
 	text-decoration-line:none;
+	text-align:center;
 	letter-spacing:12px;
+	font-size: 16px;
 	word-spacing:30px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+   	padding-left:10px;
 }
 
 

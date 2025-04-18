@@ -62,7 +62,7 @@
 
     <script>
 	    let currentSlide = 0;
-	
+		//메인페이지 사진 및, 제목 정보 받아오기 
 	    const slides = [
 	        <c:forEach var="festival" items="${rfestivals}" varStatus="loop">
 	        {

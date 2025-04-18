@@ -79,6 +79,7 @@
 			</if>	
 		</where>
 	</select>
+	 <!-- 축제 리스트 검색 기능 -->
 	<select id="searchFestivalListAll" resultType="com.fepeo.boot.festival.model.vo.Festival">
 	    SELECT * FROM (
 	        SELECT f.*, ROWNUM AS rnum
@@ -88,26 +89,44 @@
 	            <where>
 	                FESTIVAL_FILE_PATH IS NOT NULL
 	                AND FESTIVAL_END_DATE >= SYSDATE
-	                <if test="searchCondition != null and searchCondition.equals('name')">
-	                    AND FESTIVAL_NAME LIKE '%' || #{searchKeyword} || '%'
+	                <if test="searchMap.searchCondition != null and searchMap.searchCondition == 'name'">
+	                    AND FESTIVAL_NAME LIKE '%' || #{searchMap.searchKeyword} || '%'
 	                </if>
-	                <if test="searchCondition != null and searchCondition.equals('location')">
-	                    AND FESTIVAL_ADDRESS LIKE '%' || #{searchKeyword} || '%'
+	                <if test="searchMap.searchCondition != null and searchMap.searchCondition == 'location'">
+	                    AND FESTIVAL_ADDRESS LIKE '%' || #{searchMap.searchKeyword} || '%'
 	                </if>
-	                <if test="searchCondition != null and searchCondition.equals('all')">
+	                <if test="searchMap.searchCondition != null and searchMap.searchCondition == 'all'">
 	                    AND (
-	                        FESTIVAL_NAME LIKE '%' || #{searchKeyword} || '%'
-	                        OR FESTIVAL_ADDRESS LIKE '%' || #{searchKeyword} || '%'
+	                        FESTIVAL_NAME LIKE '%' || #{searchMap.searchKeyword} || '%'
+	                        OR FESTIVAL_ADDRESS LIKE '%' || #{searchMap.searchKeyword} || '%'
 	                    )
 	                </if>
 	            </where>
 	            ORDER BY FESTIVAL_END_DATE
 	        ) f
-	        WHERE ROWNUM &lt;= #{endRow}
+	        WHERE ROWNUM &lt;= #{params.endRow}
 	    )
-	    WHERE rnum &gt;= #{startRow}
+	    WHERE rnum &gt;= #{params.startRow}
 	</select>
-
+	
+	<select id="getSearchTotalCount" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM FESTIVAL
+	    <where>
+	        FESTIVAL_FILE_PATH IS NOT NULL
+	        AND FESTIVAL_END_DATE >= SYSDATE
+	        <if test="searchMap.searchCondition == 'name'">
+	            AND FESTIVAL_NAME LIKE '%' || #{searchMap.searchKeyword} || '%'
+	        </if>
+	        <if test="searchMap.searchCondition == 'location'">
+	            AND FESTIVAL_ADDRESS LIKE '%' || #{searchMap.searchKeyword} || '%'
+	        </if>
+	        <if test="searchMap.searchCondition == 'all'">
+	            AND (FESTIVAL_NAME LIKE '%' || #{searchMap.searchKeyword} || '%'
+	            OR FESTIVAL_ADDRESS LIKE '%' || #{searchMap.searchKeyword} || '%')
+	        </if>
+	    </where>
+	</select>
 	
 
 

@@ -29,6 +29,8 @@ public interface FestivalService {
 
 	public List<Festival> searchFestivalListAll(int startRow, int endRow, Map<String, String> searchMap);
 
+	public int getSearchTotalCount(Map<String, String> searchMap);
+
 	
 }
 	

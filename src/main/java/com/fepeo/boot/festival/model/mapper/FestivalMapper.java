@@ -21,14 +21,15 @@ public interface FestivalMapper {
 
 	int getTotalCount();
 	
-	List<Festival> searchFestivalListAll(Map<String, Integer> params, Map<String, String> searchMap);
-	
+	List<Festival> searchFestivalListAll(@Param("params")Map<String, Integer> params,@Param("searchMap") Map<String, String> searchMap);
+	//search paginaiton 받는 값
+	int getSearchTotalCount(@Param("searchMap")Map<String, String> searchMap);
+
+
+
 	//코스에서 사용하는 메소드
 	List<Festival> selectFestivalListByRegion(@Param("regionNames") List<String> regionNames, Map<String,String> mapPoint);
-
+	
 	List<Festival> searchFestivalList(Map<String, String> searchMap);
-
-
-
 	
 }
