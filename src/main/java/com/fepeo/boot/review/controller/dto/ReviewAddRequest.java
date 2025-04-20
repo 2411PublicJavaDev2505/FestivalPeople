@@ -15,7 +15,11 @@ public class ReviewAddRequest {
 	//
 	private	int			reviewNo;			
 	private	String		reviewTitle;		
-	private String		reviewContent;		
+	private String		reviewContent;	
+	//4/19 추가
+	private String 		reviewCount;
+	private int			reviewYn;
+	
 	private int			memberNo;
 	private List<ImgAddRequest> imageList;
 	

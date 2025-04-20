@@ -33,4 +33,6 @@ public class Review {
 	private List<ReviewComment> commentList;
 	//다중파일 등록 추가 23:18
 	private List<ImgAddRequest> imgList;
+	//04/18 19:55  멤버변수 추가!! 
+	private String memberName;
 }

@@ -170,10 +170,16 @@ public class ReviewServiceLogic implements ReviewService {
 		return result;
 	}
 	
-	//04/18 16:21 리뷰 게시판 삭제
+	//04/18 16:21 리뷰 게시판 삭제 원래 아래 int reviewNo임!!
 	@Override
 	public int reviewDelete(int reviewNo) {
 		int result = mapper.reviewDelete(reviewNo);
+		System.out.println("확인");
 		return reviewNo;
+	}
+
+	@Override
+	public int reviewCount(int reviewNo) {
+		return mapper.reviewCount(reviewNo);
 	}
 }

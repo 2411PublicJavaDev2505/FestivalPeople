@@ -50,6 +50,7 @@ public class ReviewController {
 	
 	@GetMapping("/list")
 	public String showReviewList(@RequestParam(value="page",defaultValue="1") int currentPage
+			,HttpSession session
 			,Model model) {
 			//캐치 해줘야한다?
 			List<Review> rList = rService.selectReviewList(currentPage);
@@ -81,15 +82,25 @@ public class ReviewController {
 		//4/17 21:47
 		int result = rService.insertReview(review,images);
 		return "redirect:/review/list";
+		//return "redirect:/review/detail?reviewNo=" + result;
 	}
 	
 	//등록성공하고 여기부터 시작! Service 메소드만들고(후기게시판detail)
+	//("reviewNo") <--이거추가!! 그래도 
+	// org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'reviewNo' for method parameter type int is not present
+	//public String reviewDetail(@RequestParam("reviewNo") int reviewNo
+	//,HttpSession session <--이게 필요함??
 	
-	@GetMapping("/{reviewNo}")
-	public String reviewDetail(@PathVariable("reviewNo") int reviewNo
+	@GetMapping("/detail")
+	public String reviewDetail(@RequestParam("reviewNo") int reviewNo
+			,HttpSession session
 			,Model model) {
 		Review review = rService.selectOneByNo(reviewNo);
+		//4/19 조회수 추가 코드 작성 !!했으나 안됨...확인필요!되는거 확인! dto?에 추가!
+		int result = rService.reviewCount(reviewNo);
 		model.addAttribute("review",review);
+		//4/19추가해도 삭제 안됨
+		model.addAttribute("reviewNo",reviewNo);
 		return"review/detail";
 	}
 	
@@ -107,15 +118,17 @@ public class ReviewController {
 	
 	//게시물 삭제(삭제부터 ...16:03) 삭제안됨..원인은??
 	//org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'reviewNo': Failed to convert value of type 
-	//'java.lang.String' to required type 'int'; For input string: "undefined"
+	//'java.lang.String' to required type 'int'; For input string: "undefined" ****
+	//public String reviewDelete(@RequestParam(value="reviewNo",required=false) int reviewNo)
+	//다른거 하기...
 	
 	@GetMapping("/delete")
-	public String reviewDelete(@PathVariable("reviewNo") int reviewNo
-			,Model model) {
+	public String reviewDelete(@RequestParam("reviewNo") int reviewNo) {
+		
 		int result = rService.reviewDelete(reviewNo);
-		//model.addAttribute("reviewNo",reviewNo);
-		System.out.println("확인");
+		//System.out.println(reviewNo);
 		return "redirect:/review/list";
+		
 	}
 	
 	

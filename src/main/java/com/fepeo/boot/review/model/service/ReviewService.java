@@ -29,6 +29,11 @@ public interface ReviewService {
 
 	//4/18 16:20분 리뷰게시판 삭제
 	int reviewDelete(int reviewNo);
+	//4/19 삭제안되서 코드바꿈 안되면 원래대로 복귀!
+	//int reviewDelete(Integer reviewNo);
+
+	//리뷰 조회수 추가 4/19
+	int reviewCount(int reviewNo);
 
 	//이미지만들기!20:17ㅉ
 	//int insertReview(ReviewAddRequest review, ImgAddRequest img, MultipartFile images) throws IllegalStateException, IOException;

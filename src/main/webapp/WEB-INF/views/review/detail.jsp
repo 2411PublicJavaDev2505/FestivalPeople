@@ -24,17 +24,17 @@
 						<div class="reviewtitle-h1">
 							<!-- 리뷰제목 -->
 							<h1>${review.reviewTitle }</h1>
-<%-- 							<input type="hidden" id="reviewNo" value="${review.reviewNo }"> --%>
+<!-- 							<input type="hidden" id="reviewNo" value="${review.reviewNo }"> -->
 						</div>
 						<div class="review-info-main">
 							<div class="review-info">
-								<p><span>이름|</span></p><p>
+								<p><span>작성자|</span>${review.memberName}</p>
 							</div>
 							<div class="review-info">
 								<p><span>|</span>${review.reviewWriteTime }</p>	
 							</div>
 							<div class="review-info">
-								<p><span>조회수|</span>${review.reviewCount }</p>	
+								<p><span>|조회수|</span>${review.reviewCount }</p>	
 							</div>
 						</div>
 						<div class="review-content">
@@ -50,15 +50,19 @@
 						</div> 
 						<!-- 4/18 15:05분 수정하기버튼 추가! 요구사항에 작성자가쓴글만 삭제하는 기능은??? -->
 						<!-- 4/18 16:04삭제하기 버튼추가! -->
+						<!-- 4/19 12:05 목록으로 버튼 추가! -->
 						<div class="review-update-btn">
+							<div class="">
+								<button class="back-list-btn" onclick="location.href='/review/list';">목록으로</button>
+							</div>
 							<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne '' }">
 								<button onclick="reviewupdate();" id="review-update-btn">수정하기</button>
 							</c:if>
 						</div>
 						<div class="review-delete-btn">
 							<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne '' }">
+								<button onclick="reviewDelete();">삭제하기</button>
 							</c:if>
-								<button onclick="reviewdelete();" id="review-delete-btn">삭제하기</button>
 						</div>
 						
 					</section>
@@ -97,13 +101,14 @@
 			</div>
 		</div>
 		<script>
-			//이것도 안먹힘...4/18 18:29종료!!
-// 			const reviewdelete = (reviewNo) => {
-// 				if(confirm("정말 삭제하시겠습니까??")) {
-// 					location.replace("/review/delete"+reviewNo);
-// 				}
-// 			}
+			//이것도 안먹힘...4/18 17:48종료!!
+			const reviewDelete = () => {
+ 				if(confirm("정말 삭제하시겠습니까??")) {
+ 					location.href = "/review/delete?revieNo="+"${rievew.reviewNo}";
+ 				}
+ 			}
 		
+			
 			
 			const reviewupdate = () => {
 				location.href ="/review/update";

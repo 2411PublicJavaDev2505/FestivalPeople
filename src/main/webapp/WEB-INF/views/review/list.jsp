@@ -49,9 +49,12 @@
 		            </tr>
 		            <c:forEach var="review" items="${rList }">
 			            <tr>
+			                <!-- 4/19 18:34분 수정시작! -->
+			                <!-- 수정했으나 list에 밑줄나오게하는건?? -->
 			                <td>${review.reviewNo}</td>
-			                <td>작성자</td>
-			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td>
+			                <td>${review.memberName}</td>
+<%-- 			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td> --%>
+			                 <td id="review-title"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
 			                <td>${review.reviewWriteTime }</td>
 			                <td>${review.reviewCount }</td>
 			            </tr>
@@ -60,13 +63,14 @@
 		    </div>
 		    <div class="page">
 			    <c:if test="${startNavi ne 1 }">
-			    	<a href="/review/list?page=${startNavi-1 }"><</a>
+			    	<!-- 수정했음! -->
+			    	<a href="/review/list?page=${startNavi-1 }">&lt;</a>
 			    </c:if>
 			    <c:forEach begin="${startNavi }" end="${endNavi }" var="p">
 			    	<a href="/review/list?page=${p }">${p }</a>
 			    </c:forEach>
 			    <c:if test="${endNavi ne maxPage }">
-			    	<a href="/review/list?page=${endNavi+1 }">></a>
+			    	<a href="/review/list?page=${endNavi+1 }">&gt;</a>
 			    </c:if>
 		    </div>
 		    <div class="reviewinsert-btn">
@@ -78,6 +82,10 @@
 	    </div>
 	</div>
 	<script type="text/javascript">
+		const reviewDetail = (reviewNo) => {
+			location.href ="/review/detail?reviewNo=" + reviewNo;
+		}
+	
 		const reviewinsert = () => {
 			location.href = "/review/insert";
 		}
