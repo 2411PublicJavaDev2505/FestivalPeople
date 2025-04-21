@@ -1,7 +1,11 @@
 @charset "UTF-8";
 
-.festival-list{
+.festival-main{
 	position:sticky;
+	margin-left: 100px;
+	margin-right:100px;
+	margin-top:50px;
+	margin-bottom:100px;
 }
 
 .background-image {
@@ -22,9 +26,7 @@
     margin: 0 auto;
     text-align: center;
 }
-.festival-list{
-	padding:80px;
-}
+
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -68,15 +70,14 @@
 .moveSlider {
     position: relative;
     overflow: hidden;
-    margin: 40px;
 }
 
 .moveSlider-track {
     display: flex;
     justify-content:space-evenly;
     transition: transform 0.5s ease-in-out;
-    /*width:100%;*/
     will-change: transform ;
+    transform-origin:center;
 }
 .slide-group{
 	display:flex;
@@ -90,6 +91,7 @@
     background: white;
     border-radius: 20px;
     width: 300px;
+    margin:0 20px;
     aspect-ratio: 367.25 / 570;         /* px 단위로 고정 */
     flex-shrink: 0;
     box-sizing: border-box;
@@ -150,10 +152,9 @@
 .festival-list-track {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;  
-    gap: 0;                         
-    row-gap: 80px;                  
-    /* padding-top: 180px; */
+    justify-content: center;   /* 가운데 정렬 */
+    gap: 40px;                 /* 카드 간 간격 조정 */
+    row-gap: 80px;             /* 줄 사이 간격 */
     transition: transform 0.5s ease;
 }
 /*사진 밑에 나오는 축제 이름  */
@@ -171,6 +172,12 @@
 
 /* 페이지네이션  */
 
+.pagination{
+	display:flex;
+	padding-left:0;
+	list-style:none;
+	justify-content:center;
+}
 
 .pagination a{
 	color: white;
@@ -178,11 +185,11 @@
 	text-align:center;
 	letter-spacing:12px;
 	font-size: 16px;
+	font-weight:bold;
 	word-spacing:30px;
     border: 2px solid #ddd;
     border-radius: 10px;
     cursor: pointer;
    	padding-left:10px;
+   	background-color:gray;
 }
-
-
