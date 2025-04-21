@@ -33,6 +33,7 @@
 					<div class="review-attach">
 						<!-- div풀기4/21 -->
 						<!-- 첨부파일버튼 다시 옮기기!첨부파일 코드 추가해줘야함! -->
+						<!-- hidden값도 적어줘야함?4/21 12:38분 수정하기 전체 종료!!! -->
 						<input type="file" name ="images"> <br> 
 						<input type="file" name ="images"> <br> 
  						<input type="file" name ="images"> <br> 

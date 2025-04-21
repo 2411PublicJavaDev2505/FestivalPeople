@@ -178,12 +178,16 @@ public class ReviewServiceLogic implements ReviewService {
 		System.out.println("확인");
 		return reviewNo;
 	}
-
+	
+	//리뷰조회수!
+	
 	@Override
 	public int reviewCount(int reviewNo) {
 		return mapper.reviewCount(reviewNo);
 	}
 
+	//수정인데 코드 이해 부족으로 작성어려움있음.
+	
 	@Override
 	public int reviewUpdate(ReviewUpdateRequest review) {
 		// TODO Auto-generated method stub
