@@ -21,7 +21,7 @@ public class FestivalTest {
 	private static final Logger LOGGER =LoggerFactory.getLogger(FestivalTest.class);
 	
 	@Autowired
-	private FestivalService  fService;
+	private static FestivalService  fService;
 	
 	@BeforeAll
 	public static void setUp() {

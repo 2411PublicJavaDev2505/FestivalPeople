@@ -114,18 +114,7 @@
 
 /* 길찾기 버튼 위치 및 스타일 */
 .map_shortcut {
-  position: absolute;
-  top: 10px;
-  right: 40px;
-  z-index: 999; /* 지도 위로 올리기 */
-  background-color: #FFEB3B;
-  color: #000;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
-  transition: 0.2s ease-in-out;
+
 }
 
 .map_shortcut:hover {

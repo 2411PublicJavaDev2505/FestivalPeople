@@ -44,41 +44,25 @@
 	                   </button>
 	               </div>
 	               
-					<!-- 추천 축제용 트랙 -->
-		    <div class="moveSlider-track" id="track-recommend">
-		        <c:forEach var="festival" items="${rfestivals}" varStatus="status">
-		            <c:if test="${status.index % 4 == 0}">
-		                <div class="slide-group">
-		            </c:if>
-		            <div class="festival-card">
-		                <a href="/festival/detail/${festival.festivalNo}">
-		                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
-		                </a>
-		                <h4>${festival.festivalName}</h4>
-		            </div>
-		            <c:if test="${status.index % 4 == 3 || status.last}">
-		                </div>
-		            </c:if>
-		        </c:forEach>
-		    </div>
-		
-		    <!-- 다가오는 축제용 트랙 -->
-		    <div class="moveSlider-track" id="track-upcoming" style="display:none;">
-		        <c:forEach var="festival" items="${festivals}" varStatus="status">
-		            <c:if test="${status.index % 4 == 0}">
-		                <div class="slide-group">
-		            </c:if>
-		            <div class="festival-card">
-		                <a href="/festival/detail/${festival.festivalNo}">
-		                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
-		                </a>
-		                <h4>${festival.festivalName}</h4>
-		            </div>
-		            <c:if test="${status.index % 4 == 3 || status.last}">
-		                </div>
-		            </c:if>
-		        </c:forEach>
-		    </div>
+					<div class="moveSlider-track" id="moveSliderTrack">
+						<c:forEach var="festival" items="${rfestivals}" varStatus="status">
+						   <c:if test="${status.index % 4 == 0}">
+						     <div class="slide-group">
+						   </c:if>
+						   <c:if test="${not empty festival.festivalFilePath}">
+						     <div class="festival-card">
+						       <a href="/festival/detail/${festival.festivalNo}">
+						        <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+						       </a>
+					       		<h4>${festival.festivalName}</h4>	
+						     </div>
+						   </c:if>
+						
+						   <c:if test="${status.index % 4 == 3 || status.last}">
+						     </div> 
+						   </c:if>
+						 </c:forEach>
+					</div>
 	               
 	               <div class ="moveSlider-next-button">
 	                   <button class="slider-btn-next" onclick="moveSlide(1)">
@@ -120,42 +104,39 @@
 	   </div>
 		
     <script>
-	    let currentSlide = 0;
-	    let activeTrackId = 'track-recommend';
+	   document.addEventListener('DOMContentLoaded', function () {
+	       let currentSlide = 0;
+	       const track = document.getElementById("moveSliderTrack");
+	       const totalGroups = track.querySelectorAll(".slide-group").length;
+	       let autoSlideInterval;
+	       let restartTimeout;
 	
-	    document.querySelectorAll('.festival-button button')[0].addEventListener('click', () => {
-	        switchTrack('track-recommend');
-	    });
+	       function startAutoSlide() {
+	           autoSlideInterval = setInterval(() => {
+	               moveSlide(1);
+	           }, 5000);
+	       }
 	
-	    document.querySelectorAll('.festival-button button')[1].addEventListener('click', () => {
-	        switchTrack('track-upcoming');
-	    });
+	       function moveSlide(direction) {
+	           clearInterval(autoSlideInterval);
+	           clearTimeout(restartTimeout);
 	
-	    function switchTrack(trackId) {
-	        document.getElementById(activeTrackId).style.display = 'none';
-	        document.getElementById(trackId).style.display = 'flex';
-	        activeTrackId = trackId;
-	        currentSlide = 0;
-	        updateSlide();
-	    }
+	           currentSlide += direction;
+	           if (currentSlide >= totalGroups) currentSlide = 0;
+	           if (currentSlide < 0) currentSlide = totalGroups - 1;
 	
-	    function moveSlide(direction) {
-	        const track = document.getElementById(activeTrackId);
-	        const totalGroups = track.querySelectorAll('.slide-group').length;
+	           const groupWidth = track.offsetWidth;
+	           track.style.transform = 'translateX(-' + currentSlide * groupWidth + 'px)';
 	
-	        currentSlide += direction;
-	        if (currentSlide >= totalGroups) currentSlide = 0;
-	        if (currentSlide < 0) currentSlide = totalGroups - 1;
+	           restartTimeout = setTimeout(() => {
+	               startAutoSlide();
+	           }, 10000); // 10초 뒤 자동 재시작
+	       }
 	
-	        const groupWidth = track.offsetWidth;
-	        track.style.transform = 'translateX(-' + currentSlide * groupWidth + 'px)';
-	    }
+	       window.moveSlide = moveSlide;
 	
-	    function updateSlide() {
-	        const track = document.getElementById(activeTrackId);
-	        const groupWidth = track.offsetWidth;
-	        track.style.transform = 'translateX(-' + currentSlide * groupWidth + 'px)';
-	    }
+	       startAutoSlide(); // 페이지 로드시 자동 시작
+	   });
         
     </script>
 	</body>
