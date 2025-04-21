@@ -50,8 +50,9 @@
 		            <c:forEach var="review" items="${rList }">
 			            <tr>
 			                <td>${review.reviewNo}</td>
-			                <td>작성자</td>
-			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td>
+			                <td>${review.memberName}</td>
+<%-- 			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td> --%>
+			                 <td id="review-title"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
 			                <td>${review.reviewWriteTime }</td>
 			                <td>${review.reviewCount }</td>
 			            </tr>
