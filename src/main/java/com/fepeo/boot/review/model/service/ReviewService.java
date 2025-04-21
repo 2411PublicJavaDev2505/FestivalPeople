@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.review.controller.dto.ImgAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
+import com.fepeo.boot.review.controller.dto.ReviewUpdateRequest;
 import com.fepeo.boot.review.model.vo.Review;
 
 public interface ReviewService {
@@ -34,6 +35,9 @@ public interface ReviewService {
 
 	//리뷰 조회수 추가 4/19
 	int reviewCount(int reviewNo);
+
+	//후기 수정 1 
+	int reviewUpdate(ReviewUpdateRequest review);
 
 	//이미지만들기!20:17ㅉ
 	//int insertReview(ReviewAddRequest review, ImgAddRequest img, MultipartFile images) throws IllegalStateException, IOException;

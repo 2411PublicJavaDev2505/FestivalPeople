@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fepeo.boot.common.util.Util;
 import com.fepeo.boot.review.controller.dto.ImgAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
+import com.fepeo.boot.review.controller.dto.ReviewUpdateRequest;
 import com.fepeo.boot.review.model.mapper.ReviewMapper;
 import com.fepeo.boot.review.model.service.ReviewService;
 import com.fepeo.boot.review.model.vo.Review;
@@ -181,5 +182,11 @@ public class ReviewServiceLogic implements ReviewService {
 	@Override
 	public int reviewCount(int reviewNo) {
 		return mapper.reviewCount(reviewNo);
+	}
+
+	@Override
+	public int reviewUpdate(ReviewUpdateRequest review) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

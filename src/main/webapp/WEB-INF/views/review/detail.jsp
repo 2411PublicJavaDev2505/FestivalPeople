@@ -28,6 +28,7 @@
 						</div>
 						<div class="review-info-main">
 							<div class="review-info">
+								<!-- 작성자 안뜸현상! -->
 								<p><span>작성자|</span>${review.memberName}</p>
 							</div>
 							<div class="review-info">
@@ -56,7 +57,9 @@
 								<button class="back-list-btn" onclick="location.href='/review/list';">목록으로</button>
 							</div>
 							<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne '' }">
-								<button onclick="reviewupdate();" id="review-update-btn">수정하기</button>
+<!-- 								<button onclick="reviewupdate();" id="review-update-btn">수정하기</button> -->
+								<!-- 4/21 코드수정하면서 위에것은주석처리함 -->
+								<button onclick="reviewupdate(${review.reviewNo});" id="review-update-btn">수정하기</button>
 							</c:if>
 						</div>
 						<div class="review-delete-btn">
@@ -109,9 +112,12 @@
  			}
 		
 			
-			
-			const reviewupdate = () => {
-				location.href ="/review/update";
+			//4/21 코드수정함!
+// 			const reviewupdate = () => {
+// 				location.href ="/review/update";
+// 			}
+			const reviewupdate = (reviewNo) => {
+				location.href ="/review/update?reviewNo="+reviewNo;
 			}
 		
 			

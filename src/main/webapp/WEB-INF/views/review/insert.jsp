@@ -19,6 +19,7 @@
 			<main>
 		 		<form action="/review/insert" method="post" enctype="multipart/form-data">
 						<!-- 원래자리로 되돌려주기!!4/18 11:11 -->
+						<!--  -->
 						<input type="file" name ="images"> <br>
 						<input type="file" name ="images"> <br>
 						<input type="file" name ="images"> <br>
@@ -35,9 +36,13 @@
 					<div class="review-attach">
 						<!-- div풀기4/18 11:00 -->
 						<!-- 첨부파일버튼 다시 옮기기! -->
-<!-- 						<input type="file" name ="images"> <br>  -->
-<!-- 						<input type="file" name ="images"> <br>  -->
-<!--  						<input type="file" name ="images"> <br>  -->
+						<!-- 되돌리고 css position: relative 주석처리-->
+						<!-- 되돌렸어도 등록하면 상세페이지 이미지 출력??!되는 현상! -->
+						<!-- position: relative 지워도 파일선택 안됨현상...다시 되돌려줌!! 
+						<!--원인은??-->
+<!--  						<input type="file" name ="images"> <br>   -->
+<!--  						<input type="file" name ="images"> <br>   -->
+<!--   						<input type="file" name ="images"> <br>   -->
 					</div>
 					<div class="reviewinsert-btn">
 						<button type="submit" id="submitbtn">등록</button>

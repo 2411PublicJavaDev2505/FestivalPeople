@@ -30,14 +30,14 @@
 }
 
 .review-attach{
-	position: relative;
+/* 	position: relative; */
   	left: 38px;
   	top:5px;
 	
 }
 
 #submitbtn {
-	padding:10px;
+	padding :10px;
 	width:11%;
 	background-color: #D26F52;
 	cursor:pointer;
@@ -54,5 +54,5 @@
 	position: relative;
   	right: 38px;
   	bottom:60px;
-  
 }
+
