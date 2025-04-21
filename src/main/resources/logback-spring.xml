@@ -7,29 +7,30 @@
 	<property name="CONSOLE_LOG_PATTERN"
 	    value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %clr(%5level) %cyan(%logger) - %msg%n" />
 
+
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 	    <encoder>
 	        <pattern>${CONSOLE_LOG_PATTERN}</pattern>
 	    </encoder>
-	</appender>
+	</appender>	    
 	
 	<!-- JDBC 로깅 설정 (현재 주석 처리됨) -->
     <logger name="jdbc" level="OFF"/>
-	<!--SQL 문만 로깅 -->
+	<!--     SQL 문만 로깅 -->
     <logger name="jdbc.sqlonly" level="INFO"/> 
-	<!--SQL 실행 시간 포함 로깅 -->
+	<!--     SQL 실행 시간 포함 로깅 -->
     <logger name="jdbc.sqltiming" level="INFO"/> 
-	<!--결과 집합을 테이블 형식으로 로깅     -->
+	<!--     결과 집합을 테이블 형식으로 로깅     -->
     <logger name="jdbc.resultsettable" level="DEBUG"/> 
-	<!--JDBC 호출 감사 로깅 -->
+	<!--     JDBC 호출 감사 로깅 -->
     <logger name="jdbc.audit" level="OFF"/> 
-	<!--ResultSet 관련 로깅 -->
+	<!--     ResultSet 관련 로깅 -->
     <logger name="jdbc.resultset" level="OFF"/> 
-	<!--연결 관련 로깅 -->
+	<!--     연결 관련 로깅 -->
 	<logger name="jdbc.connection" level="OFF"/>
 	
 	<root level="INFO">
-		<appender-ref ref="CONSOLE"/>
+	    <appender-ref ref="CONSOLE"/>
 	</root>
-
+	
 </configuration>

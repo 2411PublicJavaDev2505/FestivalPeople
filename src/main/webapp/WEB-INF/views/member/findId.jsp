@@ -23,40 +23,46 @@
 				<span>아이디 찾기</<span>
 			</div>
 		</div>
-		<form action="/member/findid" method="post">
-			<ul class="find-ul">
-				<li><input type="text" name="memberName" placeholder="이름을 입력해주세요" id="#input-name"></li>
-				<li><input type="text" name="email" placeholder="이메일을 입력해주세요" id="input-email"></li>
-				<li><button class="submit" onclick="findId();">이메일 전송</button></li>
-			</ul>
-		</form>
+		<ul class="find-ul">
+			<li><input type="text" name="memberName" placeholder="이름을 입력해주세요" id="input-name"></li>
+			<li><input type="text" name="email" placeholder="이메일을 입력해주세요" id="input-email"></li>
+			<li><button class="submit" onclick="findId();">이메일 전송</button></li>
+		</ul>
 	</div>
 	<script type="text/javascript">
-		const checkEmail = () => {
-			email = document.querySelector("#input-email").value;
-			$.ajax({
-				dataType: "json",
-				url: "/member/checkemail",
-				data: {
-					"email" : email
-				},
-				type: "GET",
-				success: function(data) {
-					if(data.check == 0){
-						document.querySelector(".check.email").innerText = "* 가능한 이메일입니다";
-						emailYn = true;
-					}else{
-						document.querySelector(".check.email").innerText = "* 이미 존재하는 이메일입니다";
-						emailYn = false;
-					}
-				},
-				error: function() {
-					alert("통신 오류!");
-				}
-			});
-		}
+		function customAlert(message) {
+		    Swal.fire({
+		      icon: 'warning',
+		      title: message,
+		      text: "",
+		    });
+		  }
 		const findId = () => {
-			
+			let email = document.querySelector("#input-email").value;
+			let memberName = document.querySelector("#input-name").value;
+			if(email.trim() =='' || memberName.trim() == ''){
+				customAlert("이름과 이메일을 입력해주세요!");
+			}else{
+				$.ajax({
+					dataType: "json",
+					url: "/member/findid",
+					data: {
+						"email" : email,
+						"memberName" : memberName,
+					},
+					type: "POST",
+					success: function(data) {
+						if(data.check == 0){
+							customAlert("이름과 이메일을 다시 한번 확인해주세요!");
+						}else{
+							location.href = "/member/closefindid";
+						}
+					},
+					error: function() {
+						alert("통신 오류!");
+					}
+				});
+			}
 		}
 	</script>
 </body>
