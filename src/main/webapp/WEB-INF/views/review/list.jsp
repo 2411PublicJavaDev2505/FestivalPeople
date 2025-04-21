@@ -28,14 +28,14 @@
 			<main>
 		    <div class="reviewsearch">
 		        <!-- action값넣기 -->
-		        <form action="" >
-			        <select class="review-searchbar" name="reviewSearch">
+		        <form action="/review/search" method="get" >
+			        <select class="review-searchbar" name="reviewsearchCondition">
 			            <option value="all">전체</option>
 			            <option value="review_title">제목</option>
 			            <option value="review_content">내용</option>
 			        </select>
 			        <input class="searchbox" type="text" name="searchKeyword" placeholder="검색">
-			        <button class="search-btn">⌕</button>
+			        <button  type="submit" class="search-btn">⌕</button>
 		        </form>
 		    </div>
 		    <div class="reviewlist">
@@ -47,7 +47,7 @@
 		                <td>작성시간</td>
 		                <td>조회수</td>
 		            </tr>
-		            <c:forEach var="review" items="${rList }">
+		            <c:forEach var="review" items="${seachList }">
 			            <tr>
 			                <!-- 4/19 18:34분 수정시작! -->
 			                <!-- 수정했으나 list에 밑줄나오게하는건?? -->

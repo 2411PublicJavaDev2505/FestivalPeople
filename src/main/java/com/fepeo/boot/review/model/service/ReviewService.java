@@ -2,6 +2,7 @@ package com.fepeo.boot.review.model.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,6 +39,9 @@ public interface ReviewService {
 
 	//후기 수정 1 
 	int reviewUpdate(ReviewUpdateRequest review);
+
+	//리뷰검색 4/21 16:05
+	List<Review> searchListByKeyword(Map<String, String> paramMap);
 
 	//이미지만들기!20:17ㅉ
 	//int insertReview(ReviewAddRequest review, ImgAddRequest img, MultipartFile images) throws IllegalStateException, IOException;
