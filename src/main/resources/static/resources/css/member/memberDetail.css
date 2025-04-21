@@ -28,7 +28,7 @@
 
 .mypage-left h3 {
 	background-color: #FFAF00;
-	width: 120px;
+	width: 180px;
 	height: 40px;
 	display: flex;
 	justify-content: center;
@@ -36,13 +36,19 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 	border-radius: 20px;
+	cursor: default;
 }
 
 .mypage-left img {
-	width: 100px;
-	height: 100px;
+	width: 110px;
+	height: 110px;
 	border-radius: 100%;
-	margin-left: 10px;
+	margin-left: 30px;
+	box-shadow: 0px 0px 2px #444;
+}
+
+.mypage-left ul {
+	padding: 0;
 }
 
 .mypage-left ul li {
@@ -51,6 +57,7 @@
 	margin-top: 10px;
 	padding: 10px;
 	border-radius: 10px;
+	box-shadow: 0px 0px 2px #444;
 }
 
 .mypage-left-button {
@@ -64,7 +71,13 @@
 	border: none;
 	border-radius: 10px;
 	background-color: #FFAF00;
+	box-shadow: 0px 0px 3px #444;
+	transition-duration: 0.5s;
 }
+.mypage-left-button button:hover{
+	background-color: #d58f00;
+}
+
 
 .mypage-right {
 	width: 100%;
@@ -90,19 +103,28 @@
 	border: none;
 	border-radius: 10px;
 	margin-left: 30px;
+	box-shadow: 0px 0px 3px #444;
+	transition-duration: 0.5s;
 }
 
 .mypage-right-top button:first-child {
 	background-color: #FFAF00;
 }
+.mypage-right-top button:first-child:hover {
+	background-color: #d58f00;
+}
 .mypage-right-top button:last-child {
 	background-color: white;
+}
+.mypage-right-top button:last-child:hover {
+	background-color: #e9e9e9;
 }
 
 .my-chat {
 	display:flex;
 	height: 95px;
 	margin-bottom: 20px;
+	transition-duration: 0.5s;
 }
 
 .my-chat img {
@@ -124,6 +146,7 @@
 
 .my-course-list {
 	display: none;
+	transition-duration: 0.5s;
 }
 
 .my-course {
