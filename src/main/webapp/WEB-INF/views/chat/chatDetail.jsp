@@ -75,7 +75,23 @@
 							<button class="chat-search-btn" type="submit">⌕</button>
 						</div>
 						</form>
-						<div class="chat-menu">메뉴</div>
+						<!-- 메뉴 버튼- 모달창 -->
+						<button class="chat-menu-open">메뉴</button>
+						<div class="menu--bg hidden">
+							<div class="chat-modal">
+								<button class="chat-menu-close">Χ</button>
+								<ul>
+									<li><button>채팅방 신고</button></li>
+									<li><button>채팅방 나가기</button></li>
+									<li><button>채팅방 삭제</button></li>
+								</ul>
+								<ul>
+									<li>(나)</li>								
+									<li>방장</li>								
+									<li>남</li>								
+								</ul>
+							</div>
+						</div>
 					</div>
 				</header>
 				<section class="chat-area">
@@ -146,6 +162,7 @@
 	<script>
 		const chatroomNo = "${chatroomNo}"
 		
+		/* 채팅창 입장 시 팝업 및 가입 */
 		document.querySelector("#addChat").addEventListener("click", function(){
 			
 			console.log("댓글 버튼 눌림")
@@ -177,6 +194,24 @@
 				}
 			});
 		});
+		
+		/* 메뉴창 팝업 */
+		const openBtn = document.querySelector('.chat-menu-open');
+		const closeBtn = document.querySelector('.chat-menu-close');
+		const modal = document.querySelector('.menu--bg');
+		
+		openBtn = addEventListener('click', showModal);
+		closeBtn = addEventListener('click', closeModal);
+		
+		function showModal(){
+			modal.classList.remove('hidden');
+			modal.classList.add('visible');
+		}
+		function closeModal(){
+			modal.classList.add('hidden');
+			modal.classList.remove('visible');
+		}
+		
 		
     	//입력이 있을 때만 버튼 활성화
 //     	msgInput.addEventListener("input", () => {
