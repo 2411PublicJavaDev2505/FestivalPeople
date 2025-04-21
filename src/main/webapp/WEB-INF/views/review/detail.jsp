@@ -43,11 +43,15 @@
 						</div>
 						<!-- 사진내용 출력?!4/18 12:22뜨는지안뜨는지확인 확인되어서 커밋하고 지우기! -->
 						<div class="review-imagefile">
-							<c:forEach items="${review.imgList }" var="ImgAddRequest">
+							<c:if test="${review.reviewFilePath1 ne null }">
 								<img alt="review-img" src="${review.reviewFilePath1 }">
+							</c:if>
+							<c:if test="${review.reviewFilePath2 ne null }">
 								<img alt="review-img" src="${review.reviewFilePath2 }">
+							</c:if>
+							<c:if test="${review.reviewFilePath3 ne null }">
 								<img alt="review-img" src="${review.reviewFilePath3 }">
-							</c:forEach>
+							</c:if>
 						</div> 
 						<!-- 4/18 15:05분 수정하기버튼 추가! 요구사항에 작성자가쓴글만 삭제하는 기능은??? -->
 						<!-- 4/18 16:04삭제하기 버튼추가! -->
@@ -107,7 +111,7 @@
 			//이것도 안먹힘...4/18 17:48종료!!
 			const reviewDelete = () => {
  				if(confirm("정말 삭제하시겠습니까??")) {
- 					location.href = "/review/delete?revieNo="+"${rievew.reviewNo}";
+ 					location.href = "/review/delete?reviewNo=${review.reviewNo}";
  				}
  			}
 		

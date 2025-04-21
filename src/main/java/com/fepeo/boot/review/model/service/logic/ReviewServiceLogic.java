@@ -25,8 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReviewServiceLogic implements ReviewService {
 	
-	//아래것도 적는게 맞는지 확인필요!지워줄것!!!
-	//private final SqlSession session;
+
 	
 	private final ReviewMapper mapper;
 	
@@ -34,85 +33,14 @@ public class ReviewServiceLogic implements ReviewService {
 	private String webPath ="/images/review/";
 	private String folderPath = "C:/uploadImage/review/";
 	
-	//insertReview(ReviewAddRequest review,MultipartFile images) 원래코드
-	// 수정코드! 파일업로드파일 코드작성 4/17 17:25분!!코드 수정하고 추가해줌!!
-	// ***review에서 imgdto만들어준다!!!!일단 코드 적기! 4/17 19:19 
-	//
-//	@Override
-//	public int insertReview(ReviewAddRequest review,List<MultipartFile> images) 
-//			throws IllegalStateException, IOException {
-//		int result = mapper.insertReview(review);
-//		//게시글 등록 실패시!!return 밑으로 코드 진행 안된다!!
-//				if(result == 0) return 0;
-//				//게시글 번호 꺼내기!!
-//				int reviewNo = review.getReviewNo();
-//				List<ImgAddRequest> imageList = new ArrayList<ImgAddRequest>();
-//				//4/11 코드 추가해줌!그리고 if 안에 코드넣어주고 아래 4/11
-//				if(images != null) {
-//					for(int i = 0; i < images.size(); i++) {
-//						if(images.get(i).getSize() > 0) {
-//							ImgAddRequest img = new ImgAddRequest();
-//							//img에 파일 정보를 담기!!
-//							img.setReviewNo(reviewNo);
-//							
-//							
-//							String reviewFileName1 = images.get(i).getOriginalFilename();
-//							String reviewFileRename1 = Util.fileRename(reviewFileName1);
-//							String reviewFileName2 = images.get(i).getOriginalFilename();
-//							String reviewFileRename2 = Util.fileRename(reviewFileName2);
-//							String reviewFileName3 = images.get(i).getOriginalFilename();
-//							String reviewFileRename3 = Util.fileRename(reviewFileName3);
-//							
-//							img.setReviewFileName1(reviewFileName1);
-//							img.setReviewFileRename1(reviewFileRename1);
-//							img.setReviewFilePath1(webPath+reviewFileRename1);
-//							img.setReviewFileName2(reviewFileName2);
-//							img.setReviewFileRename2(reviewFileRename2);
-//							img.setReviewFilePath2(webPath+reviewFileRename2);
-//							img.setReviewFileName3(reviewFileName3);
-//							img.setReviewFileRename3(reviewFileRename3);
-//							img.setReviewFilePath3(webPath+reviewFileRename3);
-//							img.setImageFile(images.get(i));
-//							
-//							//img를 imageList에 추가!!
-//							imageList.add(img);
-//							//1:06분 15초부터 코드적기!
-//						}//여기부터 아래코드 4/11강의때 한칸 올려줌!!***
-//					}//images -> imageList 처리 작업종료 
-//					//1.처리후 ImageList에 정보를 DB에 Insert 해야함!!
-//					//2.실제 파일저장!!
-//					if(!imageList.isEmpty()) {
-//						//1. imageList정보를 DB에 insert해야함.
-//						result = mapper.insertReviewImageList(imageList);
-//						//2. 실제 파일 저장!!
-//						for(ImgAddRequest img: imageList) {
-//							img.getImageFile().transferTo(new File(folderPath+img.getReviewFileName1()));
-//							img.getImageFile().transferTo(new File(folderPath+img.getReviewFileName2()));
-//							img.getImageFile().transferTo(new File(folderPath+img.getReviewFileName3()));
-//							
-//						}
-//					}
-//				}
-//				return result;
-//		return mapper.insertReview(review); 원래코드!!
-//	}
 	
-	
-	//detail
 	@Override
 	public Review selectOneByNo(int reviewNo) {
 		Review review = mapper.selectOneByNo(reviewNo);
 		return review;
 	}
 
-	//원복중 다시 만듬(4/17:09:33)등록확인후 주석처리!정리되면 지울것!!
-//	@Override
-//	public List<Review> selectReviewList() {
-//		List<Review> rList = mapper.selectReviewList();
-//		return rList;
-//	}
 	
-	//원복하고 4/17 10:02분 여기부터시작!
 	
 	@Override
 	public List<Review> selectReviewList(int currentPage) {
@@ -121,12 +49,6 @@ public class ReviewServiceLogic implements ReviewService {
 		RowBounds rowBounds = new RowBounds(offset, limit); 
 		List<Review> rList = mapper.selectReviewList(rowBounds);
 		return rList;
-
-//		int limit =10;
-//		int offset =(currentPage-1)*limit;
-//		RowBounds rowBounds = new RowBounds(offset, limit); 
-//		List<Review> rList = mapper.selectReviewList(rowBounds);
-//		return rList;
 		
 	}
 
@@ -187,7 +109,7 @@ public class ReviewServiceLogic implements ReviewService {
 		return mapper.reviewCount(reviewNo);
 	}
 
-	//수정인데 코드 이해 부족으로 작성어려움있음.작성해줘야함!
+	//수정인데 코드 이해 부족으로 작성어려움있음.작성해줘야함!****
 	
 	@Override
 	public int reviewUpdate(ReviewUpdateRequest review) {
@@ -197,11 +119,20 @@ public class ReviewServiceLogic implements ReviewService {
 	
 	//리뷰검색
 	@Override
-	public List<Review> searchListByKeyword(Map<String, String> paramMap) {
+	public List<Review> searchListByKeyword(Map<String, String> paramMap,int currentPage) {
 		int limit =10;
-		//int offset =(currentPage-1)*limit;
-		//RowBounds rowBounds = new RowBounds(offset, limit); 
-		List<Review> searchList = mapper.searchListByKeyword();
+		int offset =(currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit); 
+		List<Review> searchList = mapper.searchListByKeyword(rowBounds, paramMap);
 		return searchList;
+	}
+
+	
+	
+	//검색 2 4/21 18:55 //
+	@Override
+	public int getTotalCount(Map<String, String> paramMap) {
+		int totalCount = mapper.getTotalCountBySearch(paramMap);
+		return totalCount;
 	}
 }

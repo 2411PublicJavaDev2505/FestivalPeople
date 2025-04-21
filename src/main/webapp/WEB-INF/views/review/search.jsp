@@ -29,13 +29,13 @@
 		    <div class="reviewsearch">
 		        <!-- action값넣기 -->
 		        <form action="/review/search" method="get" >
-			        <select class="review-searchbar" name="reviewsearchCondition">
-			            <option value="all">전체</option>
-			            <option value="review_title">제목</option>
-			            <option value="review_content">내용</option>
+			        <select class="review-searchbar" name="searchCondition">
+			            <option value="all"<c:if test="${searchCondition eq 'all' }">selected</c:if>>전체</option>
+			            <option value="review_title"<c:if test="${searchCondition eq 'review_title' }">selected</c:if>>제목</option>
+			            <option value="review_content"<c:if test="${searchCondition eq 'review_content' }">selected</c:if>>내용</option>
 			        </select>
-			        <input class="searchbox" type="text" name="searchKeyword" placeholder="검색">
-			        <button class="search-btn">⌕</button>
+			        <input class="searchbox" type="text" name="searchKeyword" placeholder="검색" value="${searchKeyword }">
+			        <button  type="submit" class="search-btn">⌕</button>
 		        </form>
 		    </div>
 		    <div class="reviewlist">
@@ -64,13 +64,13 @@
 		    <div class="page">
 			    <c:if test="${startNavi ne 1 }">
 			    	<!-- 수정했음! -->
-			    	<a href="/review/list?page=${startNavi-1 }">&lt;</a>
+			    	<a href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=${startNavi-1 }">&lt;</a>
 			    </c:if>
 			    <c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-			    	<a href="/review/list?page=${p }">${p }</a>
+			    	<a href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}$page=${p }">${p }</a>
 			    </c:forEach>
 			    <c:if test="${endNavi ne maxPage }">
-			    	<a href="/review/list?page=${endNavi+1 }">&gt;</a>
+			    	<a href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=${endNavi+1 }">&gt;</a>
 			    </c:if>
 		    </div>
 		    <div class="reviewinsert-btn">

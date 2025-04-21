@@ -1,6 +1,7 @@
 package com.fepeo.boot.review.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
@@ -40,7 +41,9 @@ public interface ReviewMapper {
 	int reviewCount(int reviewNo);
 	
 	//검색!4/21 16:12
-	List<Review> searchListByKeyword();
+	List<Review> searchListByKeyword(RowBounds rowBounds, Map<String, String> paramMap);
+	//검색 2 카운트 (추가할거 있음 할것!)(아래는 지워야하나??)
+	int getTotalCountBySearch(Map<String, String> paramMap);
 	
 	
 	//이미지등록4/17 20:32 (에러나면 지울것!)List로 받아야하니 아래 2개주석!23:53
