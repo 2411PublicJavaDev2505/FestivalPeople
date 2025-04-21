@@ -54,7 +54,7 @@
 			                <td>${review.reviewNo}</td>
 			                <td>${review.memberName}</td>
 <%-- 			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td> --%>
-			                 <td id="review-title"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
+			                 <td id="review-title" onclick="reviewDetail('${review.reviewNo}');"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
 			                <td>${review.reviewWriteTime }</td>
 			                <td>${review.reviewCount }</td>
 			            </tr>

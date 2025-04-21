@@ -37,9 +37,9 @@
               <div class="form-row file-row">
                 <input type="file" id="file" name="file"/>
               </div>
-              <div class="form-row btn-row">
-                <button type="submit" class="btn submit-btn">등록</button>
-                <button type="button" class="btn cancel-btn" onclick="location.href='/notice/list';">작성취소</button>
+              <div class="form-row-btn">
+                <button type="submit" class="btn-submit-btn">등록</button>
+                <button type="button" class="btn-cancel-btn" onclick="location.href='/notice/list';">작성취소</button>
               </div>
           	</form>
    		</div>

@@ -37,9 +37,9 @@
 	            <div class="form-row file-row">
 					<input type="file" id="file" name="file" onchange="changeFile();"/>
 	            </div>
-	            <div class="form-row btn-row">
-					<button type="submit" class="btn submit-btn">수정</button>
-					<button type="button" class="btn cancel-btn" onclick="location.href='/notice/list';">수정취소</button>
+	            <div class="form-row-btn">
+					<button type="submit" class="btn-submit-btn">수정</button>
+					<button type="button" class="btn-cancel-btn" onclick="location.href='/notice/list';">수정취소</button>
 	            </div>
           	</form>
    		</div>
