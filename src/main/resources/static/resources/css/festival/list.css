@@ -17,7 +17,7 @@
   background-color: #000;
 }
 
-.container {
+#container {
    max-width:1920px;
     margin: 0 auto;
     text-align: center;

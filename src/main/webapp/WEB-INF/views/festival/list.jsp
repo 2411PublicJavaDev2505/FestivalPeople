@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		
-	    <div class="container">
+	    <div id="container">
 	    <div class="background-image">
     	 	<img src="../resources/img/festival/우도.jpg" alt="바탕화면">
     	 </div>

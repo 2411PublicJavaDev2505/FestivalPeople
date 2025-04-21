@@ -54,7 +54,7 @@
 	          cancelButtonColor: '#d33',
 	          confirmButtonText: '로그인',
 	          cancelButtonText: '취소',
-	          reverseButtons: true, // 버튼 순서 거꾸로
+	          reverseButtons: false, // 버튼 순서 거꾸로
 	          
 	        }).then((result) => {
 	          if (result.isConfirmed) {
@@ -65,8 +65,6 @@
     	const goChat = () => {
     		let memberId = '${member.memberId}';
     		if(memberId.trim() == ''){
-//     			alert("로그인이 필요한 서비스입니다");
-//     			customAlert("로그인이 필요한 서비스입니다");
     			customConfirm("/member/login");
     		}else {
     			location.href = "/chat/list";
@@ -76,8 +74,6 @@
     	const goCourse = () => {
     		let memberId = '${member.memberId}';
     		if(memberId.trim() == ''){
-//     			alert("로그인이 필요한 서비스입니다");
-//     			customAlert("로그인이 필요한 서비스입니다");
 				customConfirm("/member/login");
     		}else {
     			location.href = "/course/list";
