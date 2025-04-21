@@ -75,7 +75,7 @@
 	overflow: auto;       
     
 }
-.group_msg_balloon{ /* ul li */
+.group_msg_balloon{ /* 말풍선 ul li */
     list-style-type: none;   
     padding:8px;     
 }
@@ -193,3 +193,56 @@
   font-size: 25px;
   cursor: pointer;
 }
+
+
+/* 메뉴 버튼(모달창) */
+.menu--bg {
+	position: absolute;
+	box-sizing: border-box;
+	width: 290px;
+	--height: 600px;
+	padding: 0 20px;
+	margin-left: auto;
+	background-color: #fff;
+	display: flex;
+}
+
+.visible {
+	visibility: visible;
+}
+.hidden{
+	background-color: #fff;
+	visibility: hidden;
+}
+
+.chat-modal li{
+    list-style-type: none;   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
