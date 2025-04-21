@@ -8,7 +8,6 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +25,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.common.util.Util;
-import com.fepeo.boot.course.controller.CourseController;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
 import com.fepeo.boot.member.controller.dto.MemberUpdatePwRequest;
 import com.fepeo.boot.member.controller.dto.MemberUpdateRequest;
 import com.fepeo.boot.member.model.service.MemberService;
+import com.fepeo.boot.member.model.service.logic.MailService;
 import com.fepeo.boot.member.model.vo.Member;
 
 import jakarta.servlet.http.HttpSession;
@@ -44,8 +43,8 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	private final ApiComponent api;
-	private final JavaMailSender mailSender;
 	private final MemberService mService;
+	private final MailService mailService;
 
 	@GetMapping("/login")
 	public String showLogin(Model model) throws IOException {
@@ -170,7 +169,6 @@ public class MemberController {
         model.addAttribute("nickname",nickname);
         model.addAttribute("email",email);
         model.addAttribute("profileUrl",profileUrl);
-	    System.out.println(profileUrl);
 	    
 	    if(member != null) {
 			session.setAttribute("member", member);
@@ -199,10 +197,7 @@ public class MemberController {
 			json.put("check", 0);
 			return json.toString();
 		}else {
-			message.setTo(member.getEmail());
-			message.setSubject("Festival People 아이디 찾기");
-			message.setText("회원님의 아이디는 " + findMember.getMemberId() + " 입니다.");
-			mailSender.send(message);
+			mailService.sendMail(member.getEmail(), "Festival People 아이디 찾기", "회원님의 아이디는 " + findMember.getMemberId() + " 입니다.");
 			
 			json.put("check", 1);
 			return json.toString();
@@ -242,12 +237,9 @@ public class MemberController {
 		member.setMemberId(memberId);
 		member.setMemberPw(memberPw);
 		int result = mService.updateMemberPw(member);
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(findMember.getEmail());
-		message.setSubject("Festival People 비밀번호 찾기");
+		
 		String text = "비밀번호는 "+ memberPw+"입니다 \n 로그인 후 비밀번호를 변경해주세요.";
-	    message.setText(text);
-	    mailSender.send(message);
+	    mailService.sendMail(findMember.getEmail(), "Festival People 비밀번호 찾기", text);
 	    
 	    json.put("check", 1);
 		return json.toString();

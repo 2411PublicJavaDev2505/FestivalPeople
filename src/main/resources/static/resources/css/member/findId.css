@@ -70,6 +70,10 @@ body {
 	background-color: rgba(50, 50, 93, 0.25);
 }
 
-
+.send-msg {
+	margin-top: 50px;
+	font-size: 2em;
+	text-align: center;
+}
 
 
