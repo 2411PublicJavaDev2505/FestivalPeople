@@ -75,7 +75,6 @@
     display: flex;
     justify-content:space-evenly;
     transition: transform 0.5s ease-in-out;
-    /*width:100%;*/
     will-change: transform ;
 }
 .slide-group{
@@ -150,10 +149,9 @@
 .festival-list-track {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;  
+    justify-content: space-between;  
     gap: 0;                         
     row-gap: 80px;                  
-    /* padding-top: 180px; */
     transition: transform 0.5s ease;
 }
 /*사진 밑에 나오는 축제 이름  */
@@ -171,6 +169,12 @@
 
 /* 페이지네이션  */
 
+.pagination{
+	display:flex;
+	padding-left:0;
+	list-style:none;
+	justify-content:center;
+}
 
 .pagination a{
 	color: white;

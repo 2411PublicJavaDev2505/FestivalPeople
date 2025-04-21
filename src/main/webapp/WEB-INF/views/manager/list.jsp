@@ -23,7 +23,7 @@
 							<div class="left-select-area">
 								<button>회원관리</button>
 								<button>신고관리</button>
-								<a href="/festival/save"><button>축제최신화</button></a>
+								<a href="/festival/insert" class="insert-btn"><button>축제최신화</button></a>
 							</div>
 							<div class="right-search-area">
 				                <form class="search-form">

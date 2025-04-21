@@ -43,7 +43,7 @@
 	<!--회원 축제 추천 리스트-->
 	<select id="selectFestivalListByRegionName" resultType="Festival">
 	    SELECT * FROM FESTIVAL 
-	    WHERE FESTIVAL_ADDRESS LIKE CONCAT('%', #{regionName}, '%')
+	    WHERE FESTIVAL_ADDRESS LIKE '%' || #{region} || '%'
 	    AND FESTIVAL_END_DATE >= SYSDATE
 	</select>
 	<!--비회원 축제 추천 리스트   -->
