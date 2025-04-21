@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 로그 색상 변환을 위한 규칙 정의 -->
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+	
+	<!-- 콘솔 로그 출력 패턴 정의: 타임스탬프, 스레드, 색상이 적용된 로그 레벨, 청록색 로거 이름, 메시지 -->
+	<property name="CONSOLE_LOG_PATTERN"
+	    value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %clr(%5level) %cyan(%logger) - %msg%n" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	    <encoder>
+	        <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+	    </encoder>
+	</appender>
+	
+	<!-- JDBC 로깅 설정 (현재 주석 처리됨) -->
+    <logger name="jdbc" level="OFF"/>
+	<!--SQL 문만 로깅 -->
+    <logger name="jdbc.sqlonly" level="INFO"/> 
+	<!--SQL 실행 시간 포함 로깅 -->
+    <logger name="jdbc.sqltiming" level="INFO"/> 
+	<!--결과 집합을 테이블 형식으로 로깅     -->
+    <logger name="jdbc.resultsettable" level="DEBUG"/> 
+	<!--JDBC 호출 감사 로깅 -->
+    <logger name="jdbc.audit" level="OFF"/> 
+	<!--ResultSet 관련 로깅 -->
+    <logger name="jdbc.resultset" level="OFF"/> 
+	<!--연결 관련 로깅 -->
+	<logger name="jdbc.connection" level="OFF"/>
+	
+	<root level="INFO">
+		<appender-ref ref="CONSOLE"/>
+	</root>
+
+</configuration>

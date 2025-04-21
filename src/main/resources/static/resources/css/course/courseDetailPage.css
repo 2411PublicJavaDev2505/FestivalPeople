@@ -144,7 +144,7 @@ body{
   display:none;
 }
 
-.matzip-container {
+.place-container {
 	display: flex;
 	gap: 30px;
 	margin-left: 50px;
@@ -152,7 +152,7 @@ body{
 	margin-bottom: 30px;
 }
 
-.matzip-title, .matzip-name {
+.place-title, .place-name {
 	height : 80px;
 	background-color: white;
 	border: 0.5px solid black;
@@ -162,11 +162,11 @@ body{
 	align-items: center;
 }
 
-.matzip-title{
+.place-title{
 	width: 200px;
 }
 
-.matzip-name{
+.place-name{
 	width: 600px;
 }
 

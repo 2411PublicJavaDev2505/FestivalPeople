@@ -14,7 +14,7 @@ public class PlaceDto {
     private String id; //
     private String grade;
     private int reviewCount;
-    private String category;
+    private String category_group_code;
     
     
     public int getReviewCount() {
@@ -50,6 +50,6 @@ public class PlaceDto {
 	}
 
 	public String getCategory() {
-		return category;
+		return category_group_code;
 	}
 }
