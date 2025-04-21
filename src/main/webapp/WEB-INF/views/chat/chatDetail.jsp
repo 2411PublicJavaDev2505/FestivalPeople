@@ -83,11 +83,36 @@
 						<div class="slide-menu">
 							<button class="chat-menu-close">Χ</button>
 							<ul>
-								<li><button>채팅방 신고</button></li>
+								<li>
+									<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
+											<button>채팅방 신고</button>
+									</c:if>
+								</li>
 								<li><button>채팅방 나가기</button></li>
-								<li><button>채팅방 삭제</button></li>
+								<li>
+									<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
+										<button>회원 강퇴</button>
+									</c:if>
+								</li>	
+								<li>
+									<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
+									<form action="/chat/delete" id="deleteForm" method="get">
+										<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
+										<button type="button" onclick="deleteConfirm(${chatRoom.chatroomNo});">채팅방 삭제</button>
+									</form>
+									</c:if>
+								</li>	
 							</ul>
 							<ul>
+								<c:forEach items="${memberList }" var="mbList" varStatus="i">
+									<li>
+										<div>${mbList.nickname }</div>
+										<div><img src="${mbList.profileFilePath }" width="40" /></div>
+										<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
+											<div>내보내기</div>
+										</c:if>
+									</li>
+								</c:forEach>								
 								<li>(나)</li>								
 								<li>방장</li>								
 								<li>남</li>								
@@ -213,6 +238,14 @@
 
 		closeBtn.addEventListener('click', closeModal);
 		overlay.addEventListener('click', closeModal); // 채팅화면 눌러도 창 닫힘
+		
+		/* 채팅방 삭제 */
+		function deleteConfirm(chatroomNo) {
+			var result = confirm("정말로 삭제하시겠습니까?");
+			if(result) {
+				document.getElementById('deleteForm').submit();
+			}
+		}		
 		
 		
     	//입력이 있을 때만 버튼 활성화

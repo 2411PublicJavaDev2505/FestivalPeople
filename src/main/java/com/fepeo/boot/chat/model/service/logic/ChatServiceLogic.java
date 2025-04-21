@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
+import com.fepeo.boot.chat.controller.dto.MemberProfileList;
 import com.fepeo.boot.chat.controller.dto.MsgInsertRequest;
 import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.mapper.ChatMapper;
@@ -104,7 +105,7 @@ public class ChatServiceLogic implements ChatService {
 		return mMapper.insertChatRoom(chatroomNo,memberNo);
 	}
 	
-	@Override // 채팅방 가입자 정보 조회
+	@Override // 채팅방 가입 여부 조회
 	public ChatMember selectChatMember(int chatroomNo, int memberNo) {
 		return mMapper.selectChatMemberList(chatroomNo, memberNo);
 	}
@@ -112,6 +113,11 @@ public class ChatServiceLogic implements ChatService {
 	@Override // 입장 상태 변경 (가입상태아님 주의)
 	public int enterMemberYn(int chatroomNo, int memberNo) {
 		return mMapper.enterMemberYn(chatroomNo,memberNo);
+	}
+
+	@Override // 가입 멤버 프로필 출력
+	public List<MemberProfileList> chatMemberList(int chatroomNo) {
+		return mMapper.chatMemberList(chatroomNo);
 	}
 	
 }

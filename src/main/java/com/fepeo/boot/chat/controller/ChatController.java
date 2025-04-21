@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
+import com.fepeo.boot.chat.controller.dto.MemberProfileList;
 import com.fepeo.boot.chat.controller.dto.MsgInsertRequest;
 import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.service.ChatService;
@@ -153,7 +154,10 @@ public class ChatController {
 		model.addAttribute("myList",myList);
 		
 		// 각 채팅방별 참여인원수 불러오기
-		List<ChatMember> memberList = service.selectChatMember();
+		List<ChatMember> memberCount = service.selectChatMember();
+		
+		// 가입 멤버 프로필 출력
+		List<MemberProfileList>  memberList = service.chatMemberList(chatroomNo);
 		model.addAttribute("memberList", memberList);
 		
 		// 대화내용(말풍선) 출력
@@ -164,7 +168,7 @@ public class ChatController {
 		session.setAttribute("memberNo", member.getMemberNo());
 		model.addAttribute("member", member);
 		model.addAttribute("nickname", member.getNickname());
-		model.addAttribute("profile", member.getProfileFilePath());
+		model.addAttribute("profileFilePath", member.getProfileFilePath());
 		
 		model.addAttribute("chatroomNo", chatroomNo); // 채팅방 번호 전달
 		
