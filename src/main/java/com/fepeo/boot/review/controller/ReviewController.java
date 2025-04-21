@@ -118,6 +118,7 @@ public class ReviewController {
 	}
 	
 	//잘몰라 notice꺼 참고하여 일단 작성 4/21 revivewInsert랑 같게 작성함. 에러나면 새로작성!
+	//ServiceLogic에 코드 작성해줘야함...
 	
 	@PostMapping("/update")
 	public String reviewUpdate(@ModelAttribute ReviewUpdateRequest review,
@@ -136,7 +137,8 @@ public class ReviewController {
 	//다른거 하기...
 	
 	@GetMapping("/delete")
-	public String reviewDelete(@RequestParam("reviewNo") int reviewNo) {
+	public String reviewDelete(@RequestParam("reviewNo") int reviewNo
+			,Model model) {
 		
 		int result = rService.reviewDelete(reviewNo);
 		//System.out.println(reviewNo);
