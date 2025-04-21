@@ -4,16 +4,17 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>아이디 찾기 이메일 전송 완료</title>
+	<title>${msg } 찾기 이메일 전송 완료</title>
+	<link rel="stylesheet" href="../resources/css/member/findId.css">
 </head>
 <body>
-	<h1>이메일 전송이 완료되었습니다.</h1>
-	<button onclick="close();">닫기</button>
-	<script type="text/javascript">
-		function close() {
-			window.opener.location.href = "/member/login";
-			window.close();
-		}
-	</script>
+	<div id="find-container">
+		<div class="find-title">
+			<div>
+				<span>아이디 찾기</<span>
+			</div>
+		</div>
+		<h1>이메일 전송이 완료되었습니다.</h1>
+	</div>
 </body>
 </html>

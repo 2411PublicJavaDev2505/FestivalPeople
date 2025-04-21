@@ -187,15 +187,32 @@ public class MemberController {
 		return "member/findId";
 	}
 	
+	@ResponseBody
 	@PostMapping("/findid")
-	public String findId(@ModelAttribute MemberFindIdRequest member) {
+	public String findId(MemberFindIdRequest member) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		Member findMember = mService.selectOneByEmail(member);
-		message.setTo(member.getEmail());
-		message.setSubject("Festival People 아이디 찾기");
-	    message.setText("회원님의 아이디는 " + findMember.getMemberId() + " 입니다.");
-	    mailSender.send(message);
-		return "/member/closeFindId";
+		
+		JSONObject json = new JSONObject();
+		
+		if(findMember == null) {
+			json.put("check", 0);
+			return json.toString();
+		}else {
+			message.setTo(member.getEmail());
+			message.setSubject("Festival People 아이디 찾기");
+			message.setText("회원님의 아이디는 " + findMember.getMemberId() + " 입니다.");
+			mailSender.send(message);
+			
+			json.put("check", 1);
+			return json.toString();
+		}
+	}
+	
+	@GetMapping("/closefindid")
+	public String showCloseFindId(Model model) {
+		model.addAttribute("msg","아이디");
+		return "member/closeFindId";
 	}
 	
 	@GetMapping("/findpw")
@@ -203,8 +220,16 @@ public class MemberController {
 		return "member/findPw";
 	}
 	
+	@ResponseBody
 	@PostMapping("/findpw")
 	public String findPw(@RequestParam("memberId") String memberId) {
+		
+		Member findMember = mService.selectOneById(memberId);
+		JSONObject json = new JSONObject();
+		if(findMember == null) {
+			json.put("check", 0);
+			return json.toString();
+		}
 		
 		String alphabet = "abcdefghijklmnopqrstuvwxyz";
 		alphabet += alphabet.toUpperCase();
@@ -217,14 +242,21 @@ public class MemberController {
 		member.setMemberId(memberId);
 		member.setMemberPw(memberPw);
 		int result = mService.updateMemberPw(member);
-		Member findMember = mService.selectOneById(memberId);
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(findMember.getEmail());
 		message.setSubject("Festival People 비밀번호 찾기");
 		String text = "비밀번호는 "+ memberPw+"입니다 \n 로그인 후 비밀번호를 변경해주세요.";
 	    message.setText(text);
 	    mailSender.send(message);
-		return "member/closeFindPw";
+	    
+	    json.put("check", 1);
+		return json.toString();
+	}
+	
+	@GetMapping("/closefindpw")
+	public String showCloseFindPw(Model model) {
+		model.addAttribute("msg","비밀번호");
+		return "member/closeFindId";
 	}
 	
 	
