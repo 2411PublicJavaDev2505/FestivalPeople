@@ -77,26 +77,26 @@
 						</form>
 						<!-- 메뉴 버튼- 모달창 -->
 						<button class="chat-menu-open">메뉴</button>
-						<div class="menu-wrapper hidden">
-							<div class="modal-overlay"></div><!-- 반투명 배경 -->
-							<div class="menu--bg"></div>
-							<div class="chat-modal">
-								<button class="chat-menu-close">Χ</button>
-								<ul>
-									<li><button>채팅방 신고</button></li>
-									<li><button>채팅방 나가기</button></li>
-									<li><button>채팅방 삭제</button></li>
-								</ul>
-								<ul>
-									<li>(나)</li>								
-									<li>방장</li>								
-									<li>남</li>								
-								</ul>
-							</div>
+					</div>
+					<div class="menu-wrapper hidden">
+						<div class="modal-overlay"></div><!-- 반투명 배경 -->
+						<div class="slide-menu">
+							<button class="chat-menu-close">Χ</button>
+							<ul>
+								<li><button>채팅방 신고</button></li>
+								<li><button>채팅방 나가기</button></li>
+								<li><button>채팅방 삭제</button></li>
+							</ul>
+							<ul>
+								<li>(나)</li>								
+								<li>방장</li>								
+								<li>남</li>								
+							</ul>
 						</div>
 					</div>
 				</header>
 				<section class="chat-area">
+
 					<div>
 					<c:forEach items="${msgList }" var="mList" varStatus="i">
 						<ul id="balloonList" class="group_msg_balloon">
@@ -200,20 +200,19 @@
 		/* 메뉴창 팝업 */
 		const openBtn = document.querySelector('.chat-menu-open');
 		const closeBtn = document.querySelector('.chat-menu-close');
-		const wrapper = document.querySelector('.modal-wrapper');
+		const wrapper = document.querySelector('.menu-wrapper');
 		const overlay = document.querySelector('.modal-overlay');
 		
 		openBtn.addEventListener('click', () => {
 			wrapper.classList.add('visible');
 		});
 
-		closeBtn.addEventListener('click', () => {
+		const closeModal = () => {
 			wrapper.classList.remove('visible');
-		});
+		};
 
-		overlay.addEventListener('click', () => {
-			wrapper.classList.remove('visible'); // 배경 클릭 시 닫기
-		});
+		closeBtn.addEventListener('click', closeModal);
+		overlay.addEventListener('click', closeModal); // 채팅화면 눌러도 창 닫힘
 		
 		
     	//입력이 있을 때만 버튼 활성화
