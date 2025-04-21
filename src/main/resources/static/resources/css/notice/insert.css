@@ -69,7 +69,7 @@
   }
   
   .btn {
-    width: 80px;
+    width: 100px;
     height: 40px;
     font-size: 16px;
     border: none;
@@ -79,23 +79,36 @@
     font-weight: bold;
   }
   
-  .submit-btn {
-    margin-top: -50px;
+.btn-submit-btn {
+  	width: 100px;
+    height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
     background: #d97a4a;
     color: #fff;
-    margin-right: 2px;
     border-radius: 10px;
   }
   
-  .cancel-btn {
-	font-size: 14px;
-    margin-top: -50px;
-    background: #f2c94c;
-    color: #333;
-    margin-left: 2px;
+  .btn-cancel-btn {
+	width: 100px;
+    height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+    background: #e82734;
+    color: #fff;
     border-radius: 10px;
   }
   
 .tox.tox-tinymce {
     width: 1475px;
+}
+
+.form-row-btn {
+	display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    gap: 5px;
+    margin-top: -30px;
 }
