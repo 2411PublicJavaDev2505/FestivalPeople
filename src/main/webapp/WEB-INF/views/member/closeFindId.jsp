@@ -11,10 +11,12 @@
 	<div id="find-container">
 		<div class="find-title">
 			<div>
-				<span>아이디 찾기</<span>
+				<span>${msg } 찾기</<span>
 			</div>
 		</div>
-		<h1>이메일 전송이 완료되었습니다.</h1>
+		<div class="send-msg">
+			<span>이메일 전송이 완료되었습니다.</span>
+		</div>
 	</div>
 </body>
 </html>
