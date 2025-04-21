@@ -131,4 +131,27 @@
 			UPDATE REVIEW SET REVIEW_COUNT = REVIEW_COUNT+1 WHERE REVIEW_NO=#{reviewNo}
 		</update>
 		
+		<!-- 검색 -->
+		
+		<select id="searchListByKeyword" resultMap="reviewResultMap">
+			SELECT * FROM REVIEW
+			<where>	
+				<!-- 제목검색 -->
+				<if test="searchCondition == 'review_title'" >
+					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%'
+				</if>
+				<!-- 내용검색 -->
+				<if test="searchCondition == 'review_content'">
+					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%'
+				</if>
+				<!-- 전체검색 -->
+				<if test="searchCondition == 'all'">
+					REVIEW_CONTENT LIKE '%'|| #{searchKeyword}||'%' OR
+					REVIEW_CONTENT LIKE '%'|| #{searchKeyword}||'%'
+				</if>
+				AND REVIEW_YN = 'N'
+			</where>
+			ORDER BY REVIEW_NO DESC
+		</select>
+		
 </mapper>

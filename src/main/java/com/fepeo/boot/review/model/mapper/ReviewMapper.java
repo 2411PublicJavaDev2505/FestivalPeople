@@ -39,6 +39,10 @@ public interface ReviewMapper {
 	//리뷰 조회수 추가 4/19
 	int reviewCount(int reviewNo);
 	
+	//검색!4/21 16:12
+	List<Review> searchListByKeyword();
+	
+	
 	//이미지등록4/17 20:32 (에러나면 지울것!)List로 받아야하니 아래 2개주석!23:53
 	//int insertReview(ImgAddRequest review);
 	//int insertImgAddRequest(ImgAddRequest img);

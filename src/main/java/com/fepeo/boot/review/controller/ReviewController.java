@@ -1,6 +1,7 @@
 package com.fepeo.boot.review.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -144,6 +145,30 @@ public class ReviewController {
 		//System.out.println(reviewNo);
 		return "redirect:/review/list";
 		
+	}
+	
+	//검색 4/21 15:21
+	
+	@GetMapping("/search")
+	public String showSearchList(
+			@RequestParam("reviewsearchCondition") String searchCondition
+			,@RequestParam("searchKeyword") String searchKeyword
+			//,@RequestParam(value="page", defaultValue="1") int currentPage
+			,Model model) {
+			Map<String, String> paramMap = new HashMap<String, String>();
+			paramMap.put("searchCondition", searchCondition);
+			paramMap.put("searchKeyword", searchKeyword);
+			List<Review> searchList = rService.searchListByKeyword(paramMap);
+			//int totalCount = rService.getTotalCount(paramMap);
+			//Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			
+			//model.addAttribute("maxPage",pageInfo.get("maxPage"));
+			//model.addAttribute("startNavi",pageInfo.get("startNavi"));
+			//model.addAttribute("endNavi",pageInfo.get("endNavi"));
+			model.addAttribute("seachList", searchList);
+			//model.addAttribute("searchCondition",searchCondition);
+			//model.addAttribute("searchKeyword",searchKeyword);
+			return "/review/search";
 	}
 	
 	

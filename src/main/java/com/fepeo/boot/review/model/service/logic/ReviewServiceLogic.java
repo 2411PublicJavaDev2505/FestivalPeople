@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
@@ -186,11 +187,21 @@ public class ReviewServiceLogic implements ReviewService {
 		return mapper.reviewCount(reviewNo);
 	}
 
-	//수정인데 코드 이해 부족으로 작성어려움있음.
+	//수정인데 코드 이해 부족으로 작성어려움있음.작성해줘야함!
 	
 	@Override
 	public int reviewUpdate(ReviewUpdateRequest review) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	//리뷰검색
+	@Override
+	public List<Review> searchListByKeyword(Map<String, String> paramMap) {
+		int limit =10;
+		//int offset =(currentPage-1)*limit;
+		//RowBounds rowBounds = new RowBounds(offset, limit); 
+		List<Review> searchList = mapper.searchListByKeyword();
+		return searchList;
 	}
 }
