@@ -144,7 +144,7 @@ body{
   display:none;
 }
 
-.place-container {
+.course-matzip {
 	display: flex;
 	gap: 30px;
 	margin-left: 50px;
@@ -161,6 +161,9 @@ body{
 	justify-content: center;
 	align-items: center;
 }
+
+
+
 
 .place-title{
 	width: 200px;

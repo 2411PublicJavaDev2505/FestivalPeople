@@ -68,49 +68,15 @@
 						<div id="resultContainer" class="place-result-container">
 						
 						<div id="recommendation-container">
-							<%-- <c:forEach items="${placeList }" var="place" varStatus="i">
-								<c:if test="${place.category_group_code eq 'FD6'}">
-									<div class="place-container">
-										<div class="place-title">인근 맛집</div>
-										<div class="place-name">"${place.place_name }"</div>
-									</div>								
-								</c:if>
-								<c:if test="${place.category_group-code eq 'AD5'}">
-									<div class="place-container">
-										<div class="place-title">인근 숙박업소</div>
-										<div class="place-name">"${place.place_name }"</div>
-									</div>								
-								</c:if>
-								<c:if test="${place.category_group-code eq 'CE7'}">
-									<div class="place-container">
-										<div class="place-title">인근 카페</div>
-										<div class="place-name">"${place.place_name }"</div>
-									</div>								
-								</c:if>
-								<c:if test="${place.category_group-code eq 'AT4'}">
-									<div class="place-container">
-										<div class="place-title">인근 관광지</div>
-										<div class="place-name">"${place.place_name }"</div>
-									</div>								
-								</c:if>
-								<c:if test="${place.category_group-code eq 'PK6'}">
-									<div class="place-container">
-										<div class="place-title">인근 주차장</div>
-										<div class="place-name">"${place.place_name }"</div>
-									</div>								
-								</c:if>
-								<c:if test="${place.category_group-code eq 'CT1'}">
-									<div class="place-container">
-										<div class="place-title">인근 문화공간</div>
-										<div class="place-name">"${place.place_name }"</div>
-									</div>								
-								</c:if>
-							
-							</c:forEach> --%>
-							
+							<div id="course-matzip"></div>
+							<div id="course-hotel"></div>
+							<div id="course-cafe"></div>
+							<div id="course-tour"></div>
+							<div id="course-parking"></div>
+							<div id="course-culture"></div>						
 						</div>
 						
-						
+
 							<form class="insert-course" action="/" method="post">
 								<div class="expect-cost">예상 금액 : ??</div>								
 								<div class="expect-time">예상 소요 시간 : ??</div>								
@@ -153,6 +119,9 @@
 <script>
 	// 넘어오는 자료 확인용
 	let festivalNo = $('#festivalNo').val();
+	let festivalY = $('#festivalY').val();
+	let festivalX = $('#festivalX').val();
+
 	console.log("festivalX: ", "${coursePoint.festivalX}");
 	console.log("festivalY: ", "${coursePoint.festivalY}");
 
@@ -169,10 +138,10 @@
 	var map = new kakao.maps.Map(kakaoMapContainer, mapOptions);
 	
 	// 마커 찍기 위해 축제, 맛집, 호텔 좌표값 보내주는거
-	var positions = [
+ 	var positions = [
 		{
 			title: "${festival.festivalName}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.festivalY}"), Number("${coursePoint.festivalX}"))
+
 		},
 		
 		{
@@ -184,7 +153,7 @@
 			title: "${hotel.place_name}",
 			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
 		}
-	]
+	] 
 	
 	
 	// 마커 이미지의 이미지 주소입니다
@@ -225,10 +194,12 @@
 	
 	$(document).ready(function () {
 		let selectedCategories = [];
-
+		
 		$('input[type=checkbox]').change(function() {
 			const value = $(this).val();
 			console.log(value);
+			
+			$('#recommendation-container').html('');
 
 			if($(this).is(':checked')) {
 				if(!selectedCategories.includes(value)) {
@@ -259,100 +230,117 @@
 					  data.forEach(place => {
 					    if(place.category_group_code == "FD6") {
 					    html += `
-						<div class="place-container">
+						<div id="course-matzip">
 							<div class="place-title">추천맛집</div>
-							<div class="place-name">${place.place_name }</div>
+							<div class="place-name">`+place.place_name+`</div>
 								</div>
 								<div class="course-recommend-section">
 									<iframe src= "`+place.place_url +`" width="100%" height="600px"></iframe><br>
 								<div class="iframe-description">
 									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
+								<input type="hidden" name="matzipX" value=`+place.x+`>
+								<input type="hidden" name="matzipY" value=`+place.y+`>
+								<input type="hidden" name="matzipName" value=`+place.place_name+`>
 							</div>
 						</div>					    	
 					    `;
 					    }
 					    if(place.category_group_code == "AD5") {
 					    html += `
-						<div class="place-container">
+						<div class="course-hotel">
 							<div class="place-title">추천 숙소</div>
-							<div class="place-name">${place.place_name }</div>
+							<div class="place-name">`+place.place_name+`</div>
 								</div>
 								<div class="course-recommend-section">
-									<iframe src= "${place.place_url }" width="100%" height="600px"></iframe><br>
+									<iframe src= "`+place.place_url +`" width="100%" height="600px"></iframe><br>
 								<div class="iframe-description">
 									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
+								<input type="hidden" name="hotelX" value=`+place.x+`>
+								<input type="hidden" name="hotelY" value=`+place.y+`>
+								<input type="hidden" name="hotelName" value=`+place.place_name+`>
 							</div>
 						</div>					    	
 					    `;
 					    }
 					    if(place.category_group_code == "CE7") {
 					    html += `
-						<div class="place-container">
+						<div class="course-cafe">
 							<div class="place-title">추천 카페</div>
-							<div class="place-name">${place.place_name }</div>
+							<div class="place-name">`+place.place_name+`</div>
 								</div>
 								<div class="course-recommend-section">
-									<iframe src= "${place.place_url }" width="100%" height="600px"></iframe><br>
+									<iframe src= "`+place.place_url+`" width="100%" height="600px"></iframe><br>
 								<div class="iframe-description">
 									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
+								<input type="hidden" name="cafeX" value=`+place.x+`>
+								<input type="hidden" name="cafeY" value=`+place.y+`>
+								<input type="hidden" name="cafeName" value=`+place.place_name+`>
 							</div>
 						</div>					    	
 					    `;
 					    }
 					    if(place.category_group_code == "AT4") {
 					    html += `
-						<div class="place-container">
+						<div class="cours-tour">
 							<div class="place-title">추천 관강지</div>
-							<div class="place-name">${place.place_name }</div>
+							<div class="place-name">`+place.place_name+`</div>
 								</div>
 								<div class="course-recommend-section">
-									<iframe src= "${place.place_url }" width="100%" height="600px"></iframe><br>
+									<iframe src= "`+place.place_url+`" width="100%" height="600px"></iframe><br>
 								<div class="iframe-description">
 									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
+								<input type="hidden" name="tourX" value=`+place.x+`>
+								<input type="hidden" name="tourY" value=`+place.y+`>
+								<input type="hidden" name="tourName" value=`+place.place_name+`>
 							</div>
 						</div>					    	
 					    `;
 					    }
 					    if(place.category_group_code == "PK6") {
 					    html += `
-						<div class="place-container">
+						<div class="course-parking">
 							<div class="place-title">추천 주차장</div>
-							<div class="place-name">${place.place_name }</div>
+							<div class="place-name">`+place.place_name+`</div>
 								</div>
 								<div class="course-recommend-section">
-									<iframe src= "${place.place_url }" width="100%" height="600px"></iframe><br>
+									<iframe src= "`+place.place_url+`" width="100%" height="600px"></iframe><br>
 								<div class="iframe-description">
 									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
+								<input type="hidden" name="parkingX" value=`+place.x+`>
+								<input type="hidden" name="parkingY" value=`+place.y+`>
+								<input type="hidden" name="parkingName" value=`+place.place_name+`>
 							</div>
 						</div>					    	
 					    `;
 					    }
 					    if(place.category_group_code == "CT1") {
 					    html += `
-						<div class="place-container">
+						<div class="course-culture">
 							<div class="place-title">추천 문화 시설</div>
-							<div class="place-name">${place.place_name }</div>
+							<div class="place-name">`+place.place_name+`</div>
 								</div>
 								<div class="course-recommend-section">
-									<iframe src= "${place.place_url }" width="100%" height="600px"></iframe><br>
+									<iframe src= "`+place.place_url+`" width="100%" height="600px"></iframe><br>
 								<div class="iframe-description">
 									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
+								<input type="hidden" name="cultureX" value=`+place.x+`>
+								<input type="hidden" name="cultureY" value=`+place.y+`>
+								<input type="hidden" name="cultureName" value=`+place.place_name+`>
 							</div>
 						</div>					    	
 					    `;
 					    }
-					    
-					    
+
 					    
 					  });
 					
-					$('#recommendation-container').html(html);
+					 $('#recommendation-container').html(html);
 				},
 				error: function(err) {
 					console.error('ajax 오류', err);

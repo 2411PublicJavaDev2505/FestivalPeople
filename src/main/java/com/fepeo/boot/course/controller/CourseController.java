@@ -162,11 +162,18 @@ public class CourseController {
 
 			
 		}
-
 		System.out.println(placeList);
 		return placeList;
-		
 	}
+	
+	@PostMapping("/insert")
+	public String insertCourse() {
+		
+		
+		return "";
+	}
+	
+	
 	
 	
 
