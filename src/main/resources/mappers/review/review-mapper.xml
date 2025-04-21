@@ -35,19 +35,41 @@
   		</resultMap>
   		<!-- insert id만 적음! seleckey적용하기위해 추가함!에러나면 지우기!!15:50 -->
   		<!-- detail하면서 아래 추가해줬음!4/14 20:37 -->
-  		<!-- ***N으로 된거 Y로 나중에 변경해주기*** -->
+  		<!-- ***N으로 된거 Y로 나중에 변경해주기??*** -->
+  		<!-- 4/20 한번 바꿔봄!아래 안되면 다시 원복! -->
  		<select id="selectOneByNo" resultMap="reviewResultMap">
  			SELECT * FROM REVIEW WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N'
  		</select>
+<!--  		<select id="selectOneByNo" resultMap="reviewResultMap"> -->
+<!--  			SELECT A.REVIEW_NO, -->
+<!-- 				A.REVIEW_TITLE, -->
+<!-- 				A.REVIEW_WRITE_TIME, -->
+<!-- 				A.REVIEW_COUNT, -->
+<!-- 				B.MEMBER_NAME -->
+<!-- 				FROM REVIEW A  -->
+<!-- 				LEFT OUTER JOIN MEMBER B -->
+<!-- 				ON A.MEMBER_NO = B.MEMBER_NO WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N' -->
+<!--  		</select> -->
  			
  			<!-- 아래도 코드작성하면 주석풀기! *-->
  		<select id="selectCommentList" resultType="ReviewComment">
  			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
  		</select>
  		
- 		<select id="selectReviewList" resultMap="reviewResultMap">
- 			SELECT * FROM REVIEW ORDER BY REVIEW_NO DESC
- 		</select>
+<!--  		<select id="selectReviewList" resultMap="reviewResultMap"> -->
+<!--  			SELECT * FROM REVIEW ORDER BY REVIEW_NO DESC -->
+<!--  		</select> -->
+			<select id="selectReviewList" resultMap="reviewResultMap">
+				SELECT A.REVIEW_NO,
+					A.REVIEW_TITLE,
+					A.REVIEW_WRITE_TIME,
+					A.REVIEW_COUNT,
+					B.MEMBER_NAME
+					FROM REVIEW A 
+					LEFT OUTER JOIN MEMBER B
+					ON A.MEMBER_NO = B.MEMBER_NO
+					WHERE B.MEMBER_NAME = MEMBER_NAME ORDER BY 1 DESC
+			</select>
  		
  		
  		<insert id="insertReview" useGeneratedKeys="true">
@@ -96,8 +118,17 @@
 		</update>
 		
 		<!-- 게시물 삭제는 update n 해줌! 4/18 16:25 -->
-		<delete id="reviewDelete">
+		<!-- 주석처리하고 delete로 작성!안되면 다시살리기 -->
+		<update  id="reviewDelete">
 			UPDATE REVIEW SET REVIEW_YN = 'N' WHERE REVIEW_NO = #{reviewNo}
-		</delete>
+		</update>
+<!-- 			<delete id="reviewDelete"> -->
+<!-- 				DELETE FROM REVIEW WHERE REVIEW_NO = #{reviewNo} -->
+<!-- 			</delete> -->
+		
+		<!-- 조회수 -->
+		<update id="reviewCount">
+			UPDATE REVIEW SET REVIEW_COUNT = REVIEW_COUNT+1 WHERE REVIEW_NO=#{reviewNo}
+		</update>
 		
 </mapper>

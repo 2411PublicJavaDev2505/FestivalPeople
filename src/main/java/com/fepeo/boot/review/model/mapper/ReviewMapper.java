@@ -34,6 +34,10 @@ public interface ReviewMapper {
 	int insertReviewThirdImage(ImgAddRequest img);
 	//4/18 16:23분 리뷰게시판 삭제!
 	int reviewDelete(int reviewNo);
+	//4/19 삭제 안되서 바꿔봄 안되면 다시 복귀!
+	//int reviewDelete(Integer reviewNo);
+	//리뷰 조회수 추가 4/19
+	int reviewCount(int reviewNo);
 	
 	//이미지등록4/17 20:32 (에러나면 지울것!)List로 받아야하니 아래 2개주석!23:53
 	//int insertReview(ImgAddRequest review);

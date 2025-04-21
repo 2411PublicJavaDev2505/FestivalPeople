@@ -21,6 +21,7 @@ import com.fepeo.boot.member.model.vo.Member;
 import com.fepeo.boot.review.controller.dto.CommentAddRequest;
 import com.fepeo.boot.review.controller.dto.ImgAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
+import com.fepeo.boot.review.controller.dto.ReviewUpdateRequest;
 import com.fepeo.boot.review.model.service.CommentService;
 import com.fepeo.boot.review.model.service.ReviewService;
 import com.fepeo.boot.review.model.vo.Review;
@@ -50,6 +51,7 @@ public class ReviewController {
 	
 	@GetMapping("/list")
 	public String showReviewList(@RequestParam(value="page",defaultValue="1") int currentPage
+			,HttpSession session
 			,Model model) {
 			//캐치 해줘야한다?
 			List<Review> rList = rService.selectReviewList(currentPage);
@@ -81,41 +83,65 @@ public class ReviewController {
 		//4/17 21:47
 		int result = rService.insertReview(review,images);
 		return "redirect:/review/list";
+		//return "redirect:/review/detail?reviewNo=" + result;
 	}
 	
 	//등록성공하고 여기부터 시작! Service 메소드만들고(후기게시판detail)
+	//("reviewNo") <--이거추가!! 그래도 
+	// org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'reviewNo' for method parameter type int is not present
+	//public String reviewDetail(@RequestParam("reviewNo") int reviewNo
+	//,HttpSession session <--이게 필요함??
 	
-	@GetMapping("/{reviewNo}")
-	public String reviewDetail(@PathVariable("reviewNo") int reviewNo
+	@GetMapping("/detail")
+	public String reviewDetail(@RequestParam("reviewNo") int reviewNo
+			,HttpSession session
 			,Model model) {
 		Review review = rService.selectOneByNo(reviewNo);
+		//4/19 조회수 추가 코드 작성 !!했으나 안됨...확인필요!되는거 확인! dto?에 추가!
+		int result = rService.reviewCount(reviewNo);
 		model.addAttribute("review",review);
+		//4/19추가해도 삭제 안됨
+		model.addAttribute("reviewNo",reviewNo);
 		return"review/detail";
 	}
 	
 	//게시글 수정및 삭제(어노테이션확인할것!!!수정은 하지도 못했음...
+	//4/21 수정부터진행 !updatejsp 조금작성하고 여기로 넘어옴! 그리고 아래 post작성해줌!
+	//showreviewUpdate라고 이름 바꿔줌!
 	
 	@GetMapping("/update")
-	public String reviewUpdate(Model model) {
+	public String showreviewUpdate(@RequestParam("reviewNo") int reviewNo
+			,Model model) {
+		Review review = rService.selectOneByNo(reviewNo);
+		model.addAttribute("review",review); 
 		return "review/update";
 	}
 	
+	//잘몰라 notice꺼 참고하여 일단 작성 4/21 revivewInsert랑 같게 작성함. 에러나면 새로작성!
+	
 	@PostMapping("/update")
-	public String reviewUpdate() {
-		return "redirect:/review/";
+	public String reviewUpdate(@ModelAttribute ReviewUpdateRequest review,
+			@RequestParam(value="images", required=false) List<MultipartFile> images,
+			HttpSession session
+			,Model model) {
+		//notice에서는 	notice.setFile(file);코드가 존재! 여기서는????
+		int result = rService.reviewUpdate(review);
+		return "redirect:/review/detail?/reviewNo="+review.getReviewNo();
 	}
 	
 	//게시물 삭제(삭제부터 ...16:03) 삭제안됨..원인은??
 	//org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'reviewNo': Failed to convert value of type 
-	//'java.lang.String' to required type 'int'; For input string: "undefined"
+	//'java.lang.String' to required type 'int'; For input string: "undefined" ****
+	//public String reviewDelete(@RequestParam(value="reviewNo",required=false) int reviewNo)
+	//다른거 하기...
 	
 	@GetMapping("/delete")
-	public String reviewDelete(@PathVariable("reviewNo") int reviewNo
-			,Model model) {
+	public String reviewDelete(@RequestParam("reviewNo") int reviewNo) {
+		
 		int result = rService.reviewDelete(reviewNo);
-		//model.addAttribute("reviewNo",reviewNo);
-		System.out.println("확인");
+		//System.out.println(reviewNo);
 		return "redirect:/review/list";
+		
 	}
 	
 	
