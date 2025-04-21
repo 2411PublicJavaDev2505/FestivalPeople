@@ -198,26 +198,39 @@
 /* 메뉴 버튼(모달창) */
 .menu--bg {
 	position: absolute;
-	box-sizing: border-box;
-	width: 290px;
-	--height: 600px;
-	padding: 0 20px;
-	margin-left: auto;
+	top: 0;
+	right: 0;
+	width: 350px;
+	height: 100%;
 	background-color: #fff;
-	display: flex;
+	box-shadow: -3px 0 10px  rgba(0,0,0,0.1);
+	z-index: 1000;	
+	
+	/* 애니메이션 관련 */
+	transform: translateX(100%);
+	transition: transform 0.3s ease-in-out;
 }
+
+
+.chat-modal {
+	padding: 0 20px;
+}
+	.chat-modal li{
+	    list-style-type: none;   
+	}
+
 
 .visible {
-	visibility: visible;
+	transform: translateX(0);
+	--visibility: visible;
+	--display: flex;
 }
 .hidden{
-	background-color: #fff;
-	visibility: hidden;
+	transform: translateX(100%);
+	--visibility: hidden;
+	--display: none;
 }
 
-.chat-modal li{
-    list-style-type: none;   
-}
 
 
 

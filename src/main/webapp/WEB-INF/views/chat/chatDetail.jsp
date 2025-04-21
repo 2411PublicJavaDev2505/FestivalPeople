@@ -77,7 +77,9 @@
 						</form>
 						<!-- 메뉴 버튼- 모달창 -->
 						<button class="chat-menu-open">메뉴</button>
-						<div class="menu--bg hidden">
+						<div class="menu-wrapper hidden">
+							<div class="modal-overlay"></div><!-- 반투명 배경 -->
+							<div class="menu--bg"></div>
 							<div class="chat-modal">
 								<button class="chat-menu-close">Χ</button>
 								<ul>
@@ -198,19 +200,20 @@
 		/* 메뉴창 팝업 */
 		const openBtn = document.querySelector('.chat-menu-open');
 		const closeBtn = document.querySelector('.chat-menu-close');
-		const modal = document.querySelector('.menu--bg');
+		const wrapper = document.querySelector('.modal-wrapper');
+		const overlay = document.querySelector('.modal-overlay');
 		
-		openBtn = addEventListener('click', showModal);
-		closeBtn = addEventListener('click', closeModal);
-		
-		function showModal(){
-			modal.classList.remove('hidden');
-			modal.classList.add('visible');
-		}
-		function closeModal(){
-			modal.classList.add('hidden');
-			modal.classList.remove('visible');
-		}
+		openBtn.addEventListener('click', () => {
+			wrapper.classList.add('visible');
+		});
+
+		closeBtn.addEventListener('click', () => {
+			wrapper.classList.remove('visible');
+		});
+
+		overlay.addEventListener('click', () => {
+			wrapper.classList.remove('visible'); // 배경 클릭 시 닫기
+		});
 		
 		
     	//입력이 있을 때만 버튼 활성화
