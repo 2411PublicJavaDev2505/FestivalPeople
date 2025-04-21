@@ -89,9 +89,11 @@
 									<input type="text" placeholder="닉네임" name="nickname" id="input-nickname" onchange="checkNickname();">
 								</li>
 								<li class="check nickname"></li>
-								<li class="register-notbtn">
+								<li class="register-btn">
 									<input type="text" placeholder="이메일" name="email" onchange="checkEmail();" id="input-email">
+									<button type="button" onclick="sendEmail();">이메일 인증</button>
 								</li>
+								<li id="input-email-check" class="register-btn"></li>
 								<li class="check email"></li>
 								<li class="register-last-btn">
 									<button type="submit" onclick="checkRegister();">회원가입</button>
@@ -114,6 +116,45 @@
 		let idYn = false;
 		let nicknameYn = false;
 		let emailYn = false;
+		let emailCodeYn = false;
+		let emailCode = "";
+		
+		const checkEmailCode = () => {
+			let code = document.querySelector("#input-email-code").value;
+			console.log(code);
+			console.log(emailCode);
+			if(code.trim() == emailCode.trim()){
+				customAlert("이메일 인증이 완료되었습니다.");
+				document.querySelector("#input-email").readOnly = "readonly";
+				emailCodeYn = true;
+			}else{
+				customAlert("이메일 코드가 다릅니다!");
+			}
+		}
+		
+		const sendEmail = () => {
+			if(emailYn){
+				email = document.querySelector("#input-email").value;
+				customAlert("인증코드가 전송되었습니다");
+				$.ajax({
+					dataType: "json",
+					url: "/member/sendcode",
+					data : {
+						"email" : email,
+					},
+					type: "GET",
+					success: function(data) {
+						emailCode = data.emailCode;
+						document.querySelector("#input-email-check").innerHTML = '<input type="text" id="input-email-code"><button type="button" onclick="checkEmailCode();">확인</button>';
+					},
+					error: function() {
+						customAlert("통신 오류!!");
+					}
+				});
+			}else{
+				customAlert("이메일을 다시 확인해주세요!");
+			}
+		}
 		
 		function changeProfile() {
 			let formData = new FormData();
@@ -130,7 +171,7 @@
 		        		document.querySelector("#profile-img").src = data;
 		        	},
 		        	error: function() {
-		        		alert("통신 오류!!");
+		        		customAlert("통신 오류!!");
 		        	}
 		        });
 		    }
@@ -155,7 +196,7 @@
 					}
 				},
 				error : function() {
-					alert("통신 오류!");
+					customAlert("통신 오류!");
 				}
 			});
 		}
@@ -178,7 +219,7 @@
 					}
 				},
 				error: function() {
-					alert("통신 오류!");
+					customAlert("통신 오류!");
 				}
 			});
 		}
@@ -201,7 +242,7 @@
 					}
 				},
 				error: function() {
-					alert("통신 오류!");
+					customAlert("통신 오류!");
 				}
 			});
 		}
@@ -222,35 +263,40 @@
 			name = document.querySelector("#input-name").value;
 			nickname = document.querySelector("#input-nickname").value;
 			email = document.querySelector("#input-email").value;
-			if(memberId.trim() == ''){
-				customAlert('아이디를 입력해주세요!!');
-				event.preventDefault();
-			}else if(pw.trim() == ''){
-				customAlert("비밀번호를 입력해주세요.");
-				event.preventDefault();
-			}else if(address.trim() == ''){
-				customAlert("주소를 입력해주세요.");
-				event.preventDefault();
-			}else if(name.trim() == ''){
-				customAlert("이름를 입력해주세요.");
-				event.preventDefault();
-			}else if(nickname.trim() == ''){
-				customAlert("닉네임를 입력해주세요.");
-				event.preventDefault();
-			}else if(email.trim() == ''){
-				customAlert("이메일를 입력해주세요.");
-				event.preventDefault();
-			}else if(pw != pwRe){
-				document.querySelector(".check.pw").innerText = "* 비밀번호를 다시 확인해주세요";
-				event.preventDefault();
-			}else if(!idYn){
-				customAlert("아이디를 변경해주세요");
-				event.preventDefault();
-			}else if(!nicknameYn){
-				customAlert("닉네임을 변경해주세요");
-				event.preventDefault();
-			}else if(!emailYn){
-				customAlert("이메일을 변경해주세요");
+			if(emailCodeYn){
+				if(memberId.trim() == ''){
+					customAlert('아이디를 입력해주세요!!');
+					event.preventDefault();
+				}else if(pw.trim() == ''){
+					customAlert("비밀번호를 입력해주세요.");
+					event.preventDefault();
+				}else if(address.trim() == ''){
+					customAlert("주소를 입력해주세요.");
+					event.preventDefault();
+				}else if(name.trim() == ''){
+					customAlert("이름를 입력해주세요.");
+					event.preventDefault();
+				}else if(nickname.trim() == ''){
+					customAlert("닉네임를 입력해주세요.");
+					event.preventDefault();
+				}else if(email.trim() == ''){
+					customAlert("이메일를 입력해주세요.");
+					event.preventDefault();
+				}else if(pw != pwRe){
+					document.querySelector(".check.pw").innerText = "* 비밀번호를 다시 확인해주세요";
+					event.preventDefault();
+				}else if(!idYn){
+					customAlert("아이디를 변경해주세요");
+					event.preventDefault();
+				}else if(!nicknameYn){
+					customAlert("닉네임을 변경해주세요");
+					event.preventDefault();
+				}else if(!emailYn){
+					customAlert("이메일을 변경해주세요");
+					event.preventDefault();
+				}
+			}else{
+				customAlert('이메일 인증이 완료되지 않았습니다.');
 				event.preventDefault();
 			}
 		}

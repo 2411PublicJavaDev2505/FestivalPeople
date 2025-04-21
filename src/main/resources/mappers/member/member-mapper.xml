@@ -20,19 +20,19 @@
 	</select>
 
 	<select id="selectOneByNo" resultType="Member">
-		SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+		SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo} AND MEMBER_YN = 'Y'
 	</select>
 	
 	<select id="selectMemberList" resultType="Member">
-		SELECT * FROM MEMBER
+		SELECT * FROM MEMBER AND MEMBER_YN = 'Y'
 	</select>
 	
 	<select id="getMemberTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER
+		SELECT COUNT(*) FROM MEMBER AND MEMBER_YN = 'Y'
 	</select>
 	
 	<select id="selectOneByEmail">
-		SELECT * FROM MEMBER WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email} AND SOCIAL_YN='N'
+		SELECT * FROM MEMBER WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email} AND SOCIAL_YN='N' AND MEMBER_YN = 'Y'
 	</select>
 	
 	<update id="updateMemberProfile">
@@ -70,16 +70,16 @@
 	</update>
 	
 	<select id="selectOneById" resultType="Member">
-		SELECT * FROM MEMBER WHERE MEMBER_ID=#{memberId}
+		SELECT * FROM MEMBER WHERE MEMBER_ID=#{memberId} AND MEMBER_YN = 'Y'
 	</select>
 	
 	<select id="checkMemberById" resultType="_int">
-		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE MEMBER_ID = #{memberId}
+		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
 	</select>
 	<select id="checkMemberByNickname" resultType="_int">
-		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE NICKNAME = #{nickname}
+		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE NICKNAME = #{nickname} AND MEMBER_YN = 'Y'
 	</select>
 	<select id="checkMemberEmail" resultType="_int">
-		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE EMAIL = #{email} AND SOCIAL_YN = 'N'
+		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE EMAIL = #{email} AND SOCIAL_YN = 'N' AND MEMBER_YN = 'Y'
 	</select>
 </mapper>

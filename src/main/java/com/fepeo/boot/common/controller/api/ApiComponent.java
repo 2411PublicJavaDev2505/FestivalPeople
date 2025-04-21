@@ -368,7 +368,11 @@ public class ApiComponent {
 			
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode root = mapper.readTree(response);
+			
 			JsonNode items = root.path("response").path("body").path("items").path("item");
+			
+			System.out.println("확인");
+			System.out.println(items.toString());
 			
 			if(items.isArray() && items.size() > 0) {
 				JsonNode item = items.get(0);

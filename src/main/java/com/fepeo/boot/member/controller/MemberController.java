@@ -228,6 +228,7 @@ public class MemberController {
 		
 		String alphabet = "abcdefghijklmnopqrstuvwxyz";
 		alphabet += alphabet.toUpperCase();
+		alphabet += "0123456789";
 		SecureRandom rand = new SecureRandom();
 		String memberPw = "";
 		for(int i=0;i<10;i++) {
@@ -420,6 +421,22 @@ public class MemberController {
 			profile.transferTo(new File("C:/uploadImage/member/"+fileRename));
 		}
 		return filePath;
+	}
+	
+	@ResponseBody
+	@GetMapping("/sendcode")
+	public String sendEmailCode(String email) {
+		String number = "0123456789";
+		SecureRandom rand = new SecureRandom();
+		String code = "";
+		for(int i=0;i<6;i++) {
+			code += number.charAt(rand.nextInt(number.length()));
+		}
+		String text = "인증코드는 "+ code+"입니다.";
+		mailService.sendMail(email, "Festival People 이메일 인증 코드", text);
+		JSONObject json = new JSONObject();
+		json.put("emailCode", code);
+		return json.toString();
 	}
 	
 }
