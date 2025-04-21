@@ -19,7 +19,7 @@
 				<div class="course-recommend-choice">
 					<div>
 					<p class="courseText">코스추천</p>
-					<form id="sortForm" action="/course/detail" method="get">
+<!-- 					<form id="sortForm" action="/course/detail" method="get"> -->
 						<label>
 							<input type="checkbox" name="category" value="FD6">
 							맛집
@@ -44,8 +44,8 @@
 							<input type="checkbox" name="category" value="CT1">
 							문화시설
 						</label>
-							</div>
-					</form>
+<!-- 					</form> -->
+					</div>
 				</div>
 				<div class="course-recommend-main">
 					<input type="hidden" value="${festival}">
@@ -66,36 +66,16 @@
 							<img src= "${festival.festivalFilePath}" alt="부산">
 						</div>
 						<div id="resultContainer" class="place-result-container"></div>
-						<div id="recommendation-container"></div>
-						<!--  얘네는 어차피 밑에서 다 넣어줄거임-->
- 						<%-- <div class="matzip-container">
-							<div class="matzip-title">추천맛집</div>
-							<div class="matzip-name">${matZip.place_name }</div>
-						</div>
-						<div class="course-recommend-section">
-							<iframe src="${matZip.place_url }" width="100%" height="600px"></iframe><br>
-							<div class="iframe-description">
-							<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-							<a href="${matZip.place_url}" target="_blank">${matZip.place_url}</a>
-							</div>
-						</div>
-						<div class="matzip-container">
-							<div class="matzip-title">추천숙소</div>
-							<div class="matzip-name">${hotel.place_name }</div>
-						</div>
-						<div class="course-recommend-section">
-							<iframe src="${hotel.place_url }" width="100%" height="600px"></iframe><br>
-							<div class="iframe-description">
-							<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-							<a href="${hotel.place_url}" target="_blank">${hotel.place_url}</a>
-							</div> --%>
-						</div>
+						<div id="recommendation-container">
 						<form class="insert-course" action="/" method="post">
 							<div class="expect-cost">예상 금액 : ??</div>								
 							<div class="expect-time">예상 소요 시간 : ??</div>								
 							<input type="button" value="코스 저장하기">							
 						</form>													
-					</div>	
+							
+						</div>
+
+						</div>
 					<div class="course-recommend-right">
 		                <div class="course-search">
 			                <form class="search-form" action="course/list" method="get">
@@ -119,6 +99,7 @@
 					</div>			
 				</div>
 			</div>	
+			</div>	
 		</main>	
 	</div>
 <input type="hidden" id="festivalNo" value="${festival.festivalNo}">
@@ -127,7 +108,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	// 넘어오는 자료 확인용
-	let festivalNo = $('#festivalNo').val
+	let festivalNo = $('#festivalNo').val();
 	console.log("festivalX: ", "${coursePoint.festivalX}");
 	console.log("festivalY: ", "${coursePoint.festivalY}");
 
@@ -200,8 +181,9 @@
 	$(document).ready(function () {
 		let selectedCategories = [];
 
-		$('input[name="category"]').change(function() {
+		$('input[type=checkbox]').change(function() {
 			const value = $(this).val();
+			console.log(value);
 
 			if($(this).is(':checked')) {
 				if(!selectedCategories.includes(value)) {
@@ -209,17 +191,19 @@
 				}
 			} else {
 				selectedCategories = selectedCategories.filter(item => item !== value);
-			}
+			}	
 
 			// 여기에 AJAX 넣어야 함!
+			const obj = {
+					"categories": selectedCategories,
+					"festivalNo": $('#festivalNo').val()
+				};
+			
 			$.ajax({
 				url: '/course/filter',
 				type: 'POST',
 				contentType: 'application/json',
-				data: JSON.stringify({
-					categories: selectedCategories,
-					festivalNo: $('#festivalNo').val()
-				}),
+				data: JSON.stringify(obj),
 				success: function (data) {
 					console.log("서버 응답:", data); // 확인용 콘솔
 					$('#recommendation-container').html(data);
@@ -236,17 +220,17 @@
 		});
 	});
 	
-	console.log(JSON.stringify({
+/*  	console.log(JSON.stringify({
 		  categories: selectedCategories,
 		  festivalNo: $('#festivalNo').val()
-		}));
+		})); */ 
 	
 	
-	$(document).ready(function () {
+ 	$(document).ready(function () {
 	    $('input[name="category"]').change(function () {
 	        console.log("체크박스 변경됨:", $(this).val());
 	    });
-	});
+	}); 
 </script>
 
 

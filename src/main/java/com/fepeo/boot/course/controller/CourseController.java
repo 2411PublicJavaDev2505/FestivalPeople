@@ -24,6 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.course.model.service.CourseService;
+import com.fepeo.boot.course.model.vo.dto.Categories;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
 import com.fepeo.boot.festival.model.service.FestivalService;
@@ -114,17 +115,56 @@ public class CourseController {
 	}
 	
 	
-	@PostMapping("/filter")
 	@ResponseBody
-	public String filterByCategory(@RequestBody Map<String, Object> request) {
+	@PostMapping("/filter")
+	public List<PlaceDto> filterByCategory(@RequestBody Categories categories) {
+		System.out.println(categories.getCategories());
+		System.out.println(categories.getFestivalNo());
+		int festivalNo = categories.getFestivalNo();
+		Festival festival = fService.selectFestivalByNo(festivalNo);
+		Map<String, String> festivalXY = new HashMap<String, String>();
+		festivalXY.put("X", festival.getMapVCode());
+		festivalXY.put("Y", festival.getMapHcode());
 		
-		List<String> categoryList = (List<String>) request.get("categories");
-	    int festivalNo = (int) request.get("festivalNo");
+		List<PlaceDto> placeList = new ArrayList<PlaceDto>(); 
 
-	    System.out.println("카테고리 리스트: " + categoryList);
-	    System.out.println("축제 번호: " + festivalNo);
-	    
-		return "성공!";
+		for(String cate : categories.getCategories()) {
+			if(cate.equals("FD6")) {
+				PlaceDto matzip = api.kakaoCourseApi(festivalXY, cate);
+				placeList.add(matzip);
+				System.out.println(matzip);
+			}
+			if(cate.equals("AD5")) {
+				PlaceDto hotel = api.kakaoCourseApi(festivalXY, cate);
+				placeList.add(hotel);
+				System.out.println(hotel);
+			}
+			if(cate.equals("CE7")) {
+				PlaceDto cafe = api.kakaoCourseApi(festivalXY, cate);
+				placeList.add(cafe);
+				System.out.println(cafe);
+			}
+			if(cate.equals("AT4")) {
+				PlaceDto tour = api.kakaoCourseApi(festivalXY, cate);
+				placeList.add(tour);
+				System.out.println(tour);
+			}
+			if(cate.equals("PK6")) {
+				PlaceDto parking = api.kakaoCourseApi(festivalXY, cate);
+				placeList.add(parking);
+				System.out.println(parking);
+			}
+			if(cate.equals("CT1")) {
+				PlaceDto culture = api.kakaoCourseApi(festivalXY, cate);
+				placeList.add(culture);
+				System.out.println(culture);
+			}
+
+			
+		}
+
+		System.out.println(placeList);
+		return placeList;
 		
 	}
 	
