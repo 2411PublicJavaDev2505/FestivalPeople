@@ -50,41 +50,39 @@
         	<div class="simple-slide active">
                 <img src="" alt="" onclick="showDetail();">
             </div>
-<!--             <div class="simple-slide next"> -->
-<!--                 <img src="" alt=""> -->
-<!--             </div> -->
+
+        </div>
         </div>
     </main>
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
-
     <script>
     
-	    let currentSlide = 0;
-		//메인페이지 사진 및, 제목 정보 받아오기 
-	    const slides = [
-	        <c:forEach var="festival" items="${rfestivals}" varStatus="loop">
-	        {
-	            src: "${festival.festivalFilePath}",
-	            alt : "${festival.festivalStartDate}",
-	            tagline: "${festival.festivalEndDate}",
-	            mainText: "${festival.festivalName}",
-	            subText: "${festival.festivalPhone}",
-	            festivalNo: "${festival.festivalNo}"
-	        }<c:if test="${!loop.last}">,</c:if>
-	        </c:forEach>
-	    ];
-    	const totalSlides = slides.length;
-        const slideContainer = document.querySelector('.simple-slide-container');
-        const currentPageElement = document.querySelector('.current-page');
-        const progressBar = document.querySelector('.progress');
-        const taglineElement = document.querySelector('.tagline');
-        const mainTextElement = document.querySelector('.main-text');
-        const subTextElement = document.querySelector('.slidecontroller-text-main h1');
-        
-        const showDetail = () => {
-			console.log(slides[currentSlide].festivalNo);
-        	location.href = "/festival/detail/" + slides[currentSlide].festivalNo;
-        }
+    let currentSlide = 0;
+	//메인페이지 사진 및, 제목 정보 받아오기 
+    const slides = [
+        <c:forEach var="festival" items="${rfestivals}" varStatus="loop">
+        {
+            src: "${festival.festivalFilePath}",
+            alt : "${festival.festivalStartDate}",
+            tagline: "${festival.festivalEndDate}",
+            mainText: "${festival.festivalName}",
+            subText: "${festival.festivalPhone}",
+            festivalNo: "${festival.festivalNo}"
+        }<c:if test="${!loop.last}">,</c:if>
+        </c:forEach>
+    ];
+	const totalSlides = slides.length;
+    const slideContainer = document.querySelector('.simple-slide-container');
+    const currentPageElement = document.querySelector('.current-page');
+    const progressBar = document.querySelector('.progress');
+    const taglineElement = document.querySelector('.tagline');
+    const mainTextElement = document.querySelector('.main-text');
+    const subTextElement = document.querySelector('.slidecontroller-text-main h1');
+    
+    const showDetail = () => {
+		console.log(slides[currentSlide].festivalNo);
+    	location.href = "/festival/detail/" + slides[currentSlide].festivalNo;
+    }
 
 
         document.querySelector('.prev').addEventListener('click', () => {
@@ -136,6 +134,7 @@
 
         updateSlide();
         updateProgressBar();
+
     </script>
 </body>
 </html>

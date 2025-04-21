@@ -3,6 +3,7 @@ package com.fepeo.boot.festival.model.service.logic;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,11 +75,6 @@ public class FestivalServiceLogic implements FestivalService {
         return festivalMapper.selectFestivalList(params);
     }
 
-    @Override
-    public List<Festival> selectFestivalListById() {
-    	return festivalMapper.selectFestivalListById ();
-    	
-    }
 
 	@Override
 	public Festival selectFestivalByNo(int festivalNo) {
@@ -91,29 +87,41 @@ public class FestivalServiceLogic implements FestivalService {
 	}
 
 
-	// 지역명 기반으로 축제리스트 출력
-	@Override
-	public List<Festival> selectFestivalListByRegion(List<String> goodWeather, Map<String, String> mapPoint) {		
-		return festivalMapper.selectFestivalListByRegion(goodWeather, mapPoint);
-	}
-	//코스추천에서 사용하는 축제 검색 기능
-	@Override
-	public List<Festival> searchFestivalList(Map<String, String> searchMap) {
-		return festivalMapper.searchFestivalList(searchMap);
-	}
-	//축제페이지에서 사용하는 축제 검색 기능 
+	//축제에서 사용하는 축제 검색 기능 
 	@Override
 	public List<Festival> searchFestivalListAll(int startRow, int endRow, Map<String, String> searchMap) {
 		Map<String, Integer> params = new HashMap<>();
-        params.put("startRow", startRow);
-        params.put("endRow", endRow);
+		params.put("startRow", startRow);
+		params.put("endRow", endRow);
 		return festivalMapper.searchFestivalListAll(params,searchMap);
 	}
-
 	@Override
 	public int getSearchTotalCount(Map<String, String> searchMap) {
 		return festivalMapper.getSearchTotalCount(searchMap);
 	}
 
+		
+	@Override
+	public List<Festival> selectFestivalListByRegionName(String matchedRegion) {
+		return festivalMapper.selectFestivalListByRegionName(matchedRegion);
+	}
+
+	@Override
+	public List<Festival> selectFestivalListByWeather(List<String> goodWeatherRegions) {
+		List<Festival> rfestivals = festivalMapper.selectFestivalListByWeather(goodWeatherRegions);
+		return rfestivals;
+	}
+
+	
+	//코스추천에서 사용하는 축제 검색 기능
+	@Override
+	public List<Festival> searchFestivalList(Map<String, String> searchMap) {
+		return festivalMapper.searchFestivalList(searchMap);
+	}
+	// 지역명 기반으로 축제리스트 출력 (코스 Controller에서 사용함 )
+	@Override
+	public List<Festival> selectFestivalListByRegion(List<String> goodWeather, Map<String, String> mapPoint) {		
+		return festivalMapper.selectFestivalListByRegion(goodWeather, mapPoint);
+	}
 }
 

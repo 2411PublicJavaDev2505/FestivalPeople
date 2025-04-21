@@ -18,19 +18,19 @@ public interface FestivalService {
 	public Festival selectFestivalByNo(int festivalNo);
 
 	public int getTotalCount();
+	public List<Festival> searchFestivalListAll(int startRow, int endRow, Map<String, String> searchMap);
+	
+	public List<Festival> searchFestivalList(Map<String, String> searchMap);
+	
+	public int getSearchTotalCount(Map<String, String> searchMap);
 
-	//날씨 기반으로 추천 리스트 출력
-	public List<Festival> selectFestivalListById();
+	
+	public List<Festival> selectFestivalListByRegionName(String matchedRegion);
+
+	public List<Festival> selectFestivalListByWeather(List<String> goodWeatherRegions);
 	
 	// 날씨가 좋은 지역명으로 축제 검색
 	public List<Festival> selectFestivalListByRegion(List<String> goodWeather, Map<String, String> mapPoint);
-	
-	public List<Festival> searchFestivalList(Map<String, String> searchMap);
-
-	public List<Festival> searchFestivalListAll(int startRow, int endRow, Map<String, String> searchMap);
-
-	public int getSearchTotalCount(Map<String, String> searchMap);
-
 	
 }
 	

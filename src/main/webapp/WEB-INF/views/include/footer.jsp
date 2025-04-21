@@ -13,7 +13,7 @@
                 <a href="/privacy">개인정보 처리방침</a>
             </div>
             <div class="logo-container">
-                <a href="/"><img src="../resources/img/footerlogo.png" alt="Festival People"></a>
+                <a href="/"><img src="${pageContext.request.contextPath}/resources/img/footerlogo.png" alt="Festival People"></a>
             </div>
             <div class="footer-right">
                 대표 상수리 | 대표전화 1234-4321

@@ -33,11 +33,6 @@
 	    WHERE rnum &gt;= #{startRow}
 	</select>
 
-	<select id="selectFestivalListById" resultType="com.fepeo.boot.festival.model.vo.Festival">
-		SELECT * FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL
-		ORDER BY FESTIVAL_NO ASC
-	</select>
-
 	<select id="selectFestivalByNo" resultType="com.fepeo.boot.festival.model.vo.Festival">
 		SELECT * FROM FESTIVAL WHERE FESTIVAL_NO = #{festivalNo}
 	</select>
@@ -45,6 +40,31 @@
 	<select id="getTotalCount" resultType="int">
 	    SELECT COUNT(*) FROM FESTIVAL
 	</select>
+	<!--회원 축제 추천 리스트-->
+	<select id="selectFestivalListByRegionName" resultType="Festival">
+	    SELECT * FROM FESTIVAL 
+	    WHERE FESTIVAL_ADDRESS LIKE CONCAT('%', #{regionName}, '%')
+	    AND FESTIVAL_END_DATE >= SYSDATE
+	</select>
+	<!--비회원 축제 추천 리스트   -->
+	<select id="selectFestivalListByWeather" resultType="Festival">
+	    SELECT * FROM(
+	    SELECT * FROM FESTIVAL
+	        <where>
+	        	FESTIVAL_END_DATE >=SYSDATE
+	        	AND (
+	            <foreach collection="list" item="region" separator="OR" open="" close="">
+	                FESTIVAL_ADDRESS LIKE '%' || #{region} || '%'
+	            </foreach>
+	        	)
+	        </where>
+	  		ORDER BY DBMS_RANDOM.RANDOM 
+	    )
+	    <![CDATA[ 
+	    WHERE ROWNUM <= 10
+	    ]]>
+	  </select>
+	
 	
 
 	<select id="selectFestivalListByRegion" resultType="com.fepeo.boot.festival.model.vo.Festival">

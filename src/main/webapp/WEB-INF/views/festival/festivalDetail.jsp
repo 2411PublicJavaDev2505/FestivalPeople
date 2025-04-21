@@ -9,6 +9,7 @@
 		<title>festival Detail</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/header.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/festival/festivalDetail.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/footer.css">
 	</head>
 	<body>
 		<div id="container">
@@ -41,16 +42,14 @@
 							<li> 🚩 지도
 								<div class="map-wrapper" >
 								  <!-- Kakao Map Container -->
-								  <div class="map-api" style="width:100%;height:350px;">
-									  <a class="map_shortcut" 
-									     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHcode},${festival.mapVCode}" 
-									     target="_blank">
-									     📍 길찾기
-									  </a>
-								  </div>
-								
+								  <div class="map-api" style="width:100%;height:350px;">								
 								  <!-- 길찾기 버튼 -->
-								  
+								  <a class="map_shortcut" 
+								     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHcode},${festival.mapVCode}" 
+								     target="_blank">
+								     📍 길찾기
+								  </a>
+								  </div>
 								</div>
 							</li>		
 						</ul>
@@ -58,6 +57,7 @@
 				</div>
 			</main>
 			</c:if>
+			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		</div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce2765b5c8d1c862f02d7a486094793d"></script>
 		<script>

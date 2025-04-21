@@ -5,11 +5,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<title>Festival Main Page</title>
 		<link rel="stylesheet" href="../resources/css/include/header.css">
 		<link rel="stylesheet" href="../resources/css/festival/list.css">
 		<link rel="stylesheet" href="../resources/css/include/footer.css">
-		
-		<title>Festival Main Page</title>
 	</head>
 	<body>
 		
