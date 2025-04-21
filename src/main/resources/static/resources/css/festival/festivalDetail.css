@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+.festival-list{
+	position:sticky;
+}
 .container {
    max-width:1920px;
     margin: 0 auto;
@@ -113,7 +116,7 @@
 .map_shortcut {
   position: absolute;
   top: 10px;
-  right: 250px;
+  right: 40px;
   z-index: 999; /* 지도 위로 올리기 */
   background-color: #FFEB3B;
   color: #000;

@@ -398,7 +398,7 @@ public class ApiComponent {
 					}	
 				}
 				if(!isValid) {
-					sunnyRegions.add(region.getRegionName());
+				    sunnyRegions.add(region.getRegionName());
 				}
 			}
 		} 
@@ -434,7 +434,6 @@ public class ApiComponent {
 
 		}
 
-
-	
+		
 	
 }
