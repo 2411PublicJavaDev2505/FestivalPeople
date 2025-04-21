@@ -35,6 +35,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -393,9 +394,14 @@ public class ApiComponent {
 
 	// 축제 호출
 		public String callFestivalApi() {
-//			String festivalApiKey = ApiKeyLoader.get("festivalApiKey");
-			WebClient webClient = WebClient.create("https://apis.data.go.kr/B551011/KorService1/searchFestival1");
-			
+			WebClient webClient = WebClient.builder()
+					.baseUrl("https://apis.data.go.kr/B551011/KorService1/searchFestival1")
+					.exchangeStrategies(
+							ExchangeStrategies.builder()
+							.codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024)) // 10MB
+			                .build()
+			        )
+			        .build();
 			String response = webClient.get()
 					.uri(uriBuilder -> uriBuilder
 	                        .queryParam("serviceKey", festivalApiKey)

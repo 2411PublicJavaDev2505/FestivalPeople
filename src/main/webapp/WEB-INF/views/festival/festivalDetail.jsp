@@ -23,7 +23,7 @@
 			<main class="festival-list">
 				<div class="festival-detail">
 					<section class="festival-name">
-						<h2 id="festival-head"> ${festival.festivalName}</h2>
+						<h2 id="festival-head"> 🎪${festival.festivalName}</h2>
 						<h4 id="festival-date">🗓️ 축제일정: ${festival.festivalStartDate} ~ ${festival.festivalEndDate}</h4>
 					</section>
 					<section class="festival-detail-card">
@@ -34,11 +34,11 @@
 							<li> 🗓️ 축제 일정: ${festival.festivalStartDate} ~ ${festival.festivalEndDate}</li>
 							<li> 📍 개최 장소: ${festival.festivalAddress} ${festival.festivalDetailAddress}</li>
 							<li> 📞 대표 전화:  ${festival.festivalPhone}</li>
-							<li> 🔅 축제기간 일기예보
+							<%-- <li> 🔅 축제기간 일기예보
 								<div class="weather-api">
 									<img src="${pageContext.request.contextPath}/resources/img/festival/weather_example.jpg" alt="날씨">
 								</div>
-							</li>
+							</li> --%>
 							<li> 🚩 지도
 								<div class="map-wrapper" >
 								  <!-- Kakao Map Container -->
@@ -85,30 +85,19 @@
 			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
 			    // 마커를 생성
 			    var marker = new kakao.maps.Marker({
-			        map: map, // 마커를 표시할 지도
-			        position: positions[i].latlng, // 마커를 표시할 위치
-			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			        image : markerImage // 마커 이미지 
-			      			    
+			        map: map,
+			        position: positions[i].latlng,
+			        title: positions[i].title,
+			        image: markerImage
 			    });
-			    
-			    // 인포윈도우 생성 팝업으로 해당 축제 설명 
+
 			    var infowindow = new kakao.maps.InfoWindow({
-			        content: '<div style="padding:5px;font-size:14px;">' + positions[i].title + '</div>'
+			        content: '<div style="padding:5px;font-size:14px;">' + positions[i].title + '</div>',
+			        removable: false
 			    });
 
-			    // 마우스 버튼 선택시에만 팝업 창 나옴
-			    kakao.maps.event.addListener(marker, 'mouseover', function(marker, infowindow) {
-			        return function() {
-			            infowindow.open(map, marker);
-			        };
-			    }(marker, infowindow));  // 클로저로 묶어서 i값 유지
-
-			    kakao.maps.event.addListener(marker, 'mouseout', function(marker, infowindow) {
-			        return function() {
-			            infowindow.close();
-			        };
-			    }(marker, infowindow));
+			    // 지도 로드 시 항상 보이도록
+			    infowindow.open(map, marker);
 			    
 			    
 			}
