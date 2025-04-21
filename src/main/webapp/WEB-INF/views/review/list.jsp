@@ -47,7 +47,7 @@
 		                <td>작성시간</td>
 		                <td>조회수</td>
 		            </tr>
-		            <c:forEach var="review" items="${seachList }">
+		            <c:forEach var="review" items="${rList }">
 			            <tr>
 			                <!-- 4/19 18:34분 수정시작! -->
 			                <!-- 수정했으나 list에 밑줄나오게하는건?? -->
