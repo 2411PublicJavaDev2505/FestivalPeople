@@ -26,16 +26,16 @@
 				 		<form action="/review/insert" method="post" enctype="multipart/form-data">
 								<!-- 원래자리로 되돌려주기!!4/18 11:11 -->
 								<!--  -->
-								<input type="file" name ="images"> <br>
-								<input type="file" name ="images"> <br>
-								<input type="file" name ="images"> <br>
+<!-- 								<input type="file" name ="images"> <br> -->
+<!-- 								<input type="file" name ="images"> <br> -->
+<!-- 								<input type="file" name ="images"> <br> -->
 				 			<input type="hidden" name="memberNo"  value="${sessionScope.member.memberNo }"> 
 							<div class="review-title">
 							<!-- name값 넣어줘야함! -->
 								<input type="text" id="title" name="reviewTitle" class="write-input" placeholder="제목" />
 							</div>
 							<div class="review-content">
-								<textarea id="tiny" name="noticeContent" class="write-textarea" placeholder="내용"></textarea>
+								<textarea id="tiny" name="reviewContent" class="write-textarea" placeholder="내용"></textarea>
 							</div>
 							
 							<div class="review-attach">
@@ -45,9 +45,10 @@
 								<!-- 되돌렸어도 등록하면 상세페이지 이미지 출력??!되는 현상! -->
 								<!-- position: relative 지워도 파일선택 안됨현상...다시 되돌려줌!! 
 								<!--원인은??-->
-		<!--  						<input type="file" name ="images"> <br>   -->
-		<!--  						<input type="file" name ="images"> <br>   -->
-		<!--   						<input type="file" name ="images"> <br>   -->
+								<!-- 밑에꺼 살리면 등록버튼이 사라지는 현상  4/22 09:27 -->
+		 						<input type="file" name ="images"> <br>  
+		 						<input type="file" name ="images"> <br>  
+		  						<input type="file" name ="images"> <br>  
 							</div>
 							<div class="reviewinsert-btn">
 									<button type="submit" id="submitbtn">등록</button>

@@ -135,4 +135,12 @@ public class ReviewServiceLogic implements ReviewService {
 		int totalCount = mapper.getTotalCountBySearch(paramMap);
 		return totalCount;
 	}
+
+
+	//4/22 10:33 분 추가 안되면 지울것detail 작성자!
+	@Override
+	public List<Review> selectReviewList() {
+		List<Review> rList = mapper.selectReviewList();
+		return rList;
+	}
 }
