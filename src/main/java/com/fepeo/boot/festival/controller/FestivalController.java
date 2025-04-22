@@ -48,7 +48,10 @@ public class FestivalController {
 	) throws JsonMappingException, JsonProcessingException {
 		// 현재 날짜 기준으로 어제 날짜 포맷 설정
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -2);
+		System.out.println("씨발아 대답을 하라고"+calendar);
+		calendar.add(Calendar.DATE, 0);
+		
+		System.out.println("현재시간 찍으" + calendar.getTime());
 		String nowTime = new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()) + "1800";
 		Member member = (Member)session.getAttribute("member");		
 		//전체 리스트 출력시 페이지 네이션 코드 

@@ -34,8 +34,12 @@ public class CommonController {
 
 		
 			Calendar calendar = Calendar.getInstance();
+			System.out.println(calendar);
 			calendar.add(Calendar.DATE, -1);
+			
+			
 			String nowTime = new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()) + "1800";
+			
 		
 			//전체 리스트 출력시 페이지 네이션 코드 
 		    List<Festival> rfestivals = null;
