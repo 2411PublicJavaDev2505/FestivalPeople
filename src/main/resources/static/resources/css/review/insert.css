@@ -1,9 +1,21 @@
 @charset "UTF-8";
 
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 900px;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
 .reviewinsert-main{
 	width: 1525px;
     height: 750px;
-    margin-top: 70px;
+    margin-top: 50px;
     margin-left: 195px;
     background: #3b7c6e;
     border-radius: 6px;
