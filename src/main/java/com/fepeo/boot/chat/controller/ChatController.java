@@ -102,7 +102,7 @@ public class ChatController {
 	    // 가입여부 확인**
 	    ChatMember cMember = service.selectChatMember(chatroomNo, memberNo);
 
-	    if (cMember != null && "Y".equals(cMember.getEnterYn())) {
+	    if (cMember != null) {
 	        result.put("status", "joined"); // 상태, 기가입
 	    } else {
 	        result.put("status", "notJoined"); // 상태, 미가입
@@ -178,7 +178,18 @@ public class ChatController {
 	
 	// 채팅방 검색(전체)
 	// 나의 채팅방 검색
-	// 채팅방 퇴장
+
+	// 채팅방 퇴장(탈퇴)
+	@GetMapping("/leave")
+	public String leaveChatroom(@RequestParam("chatroomNo")int chatroomNo,HttpSession session) {
+		Member member = (Member)session.getAttribute("member");
+		int memberNo = member.getMemberNo();
+		
+		int result = service.leaveChatMember(chatroomNo, memberNo); // CHAT_MEMBER > delete
+		int count = service.subtractionChatMember(chatroomNo); // CHATROOM > chat_member_count -1		
+		return "redirect:/chat/list";
+	}
+	
 	
 	// 채팅방 삭제
 	@GetMapping("/delete")
@@ -226,6 +237,7 @@ public class ChatController {
 	
 	// 멤버 강퇴
 	
+	// 채팅방 신고하기
 	
 	
 }

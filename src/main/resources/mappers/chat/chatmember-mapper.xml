@@ -8,6 +8,10 @@
 		insert into CHAT_MEMBER values (#{chatroomNo}, #{memberNo},
 		default, default, default) 
 	</insert>
+	
+	<delete id="leaveChatMember"> <!-- 채팅방 탈퇴 -->
+		delete from CHAT_MEMBER where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}
+	</delete>
 
 	<update id="enterMemberYn"> <!-- 입장 상태 변경 (가입상태아님 주의) -->
 		update CHAT_MEMBER set ENTER_YN = 'Y'

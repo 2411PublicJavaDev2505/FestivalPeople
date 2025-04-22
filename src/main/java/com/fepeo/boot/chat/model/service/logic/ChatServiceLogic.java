@@ -54,6 +54,16 @@ public class ChatServiceLogic implements ChatService {
 		return cMapper.deleteCahtRoom(chatroomNom);
 	}
 
+	@Override // 참여인원수 증가
+	public int updateChatMember(int chatroomNo) {
+		return cMapper.updateChatMember(chatroomNo);
+	}
+
+	@Override // 참여인원수 감소
+	public int subtractionChatMember(int chatroomNo) {
+		return cMapper.subtractionChatMember(chatroomNo);
+	}
+
 	@Override // 전체리스트 출력
 	public List<ChatRoom> selectChatRoomList() {
 		return cMapper.selectChatRoomList();
@@ -94,17 +104,17 @@ public class ChatServiceLogic implements ChatService {
 		return msgMapper.selectChatMsgListByNo(chatroomNo);
 	}
 
-	@Override // 참여인원수 증가
-	public int updateChatMember(int chatroomNo) {
-		return cMapper.updateChatMember(chatroomNo);
-	}
-
 	/** 채팅방 유저 */
 	@Override // 신규 입장 등록
 	public int insertChatRoom(int chatroomNo, int memberNo) {
 		return mMapper.insertChatRoom(chatroomNo,memberNo);
 	}
 	
+	@Override // 채팅방 탈퇴
+	public int leaveChatMember(int chatroomNo, int memberNo) {
+		return mMapper.leaveChatMember(chatroomNo,memberNo);
+	}
+
 	@Override // 채팅방 가입 여부 조회
 	public ChatMember selectChatMember(int chatroomNo, int memberNo) {
 		return mMapper.selectChatMemberList(chatroomNo, memberNo);

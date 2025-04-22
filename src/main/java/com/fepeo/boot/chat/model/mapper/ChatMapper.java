@@ -32,4 +32,7 @@ public interface ChatMapper {
 	// 내 채팅방 정보 출력
 	ChatRoom selectMyChatRoomListByChatMember(ChatMember chatMember);
 
+	// 참여인원수 감소
+	int subtractionChatMember(int chatroomNo);
+
 }

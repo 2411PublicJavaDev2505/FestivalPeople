@@ -26,4 +26,7 @@ public interface ChatMemberMapper {
 	// 가입 멤버 프로필 출력
 	List<MemberProfileList> chatMemberList(int chatroomNo);
 
+	// 채팅방 탈퇴
+	int leaveChatMember(int chatroomNo, int memberNo);
+
 }

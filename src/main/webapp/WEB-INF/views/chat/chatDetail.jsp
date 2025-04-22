@@ -88,7 +88,12 @@
 											<button>채팅방 신고</button>
 									</c:if>
 								</li>
-								<li><button>채팅방 나가기</button></li>
+								<li>
+									<form action="/chat/leave" id="leaveForm" method="get">
+										<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
+										<button type="button" onclick="leaveConfirm(${chatRoom.chatroomNo});">채팅방 나가기</button>
+									</form>
+								</li>
 								<li>
 									<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
 										<button>회원 강퇴</button>
@@ -247,6 +252,13 @@
 			}
 		}		
 		
+		/* 채팅방 탈퇴 */
+		function leaveConfirm(chatroomNo) {
+			var result = confirm("정말 이 방을 나가시겠어요? 채팅방을 나가면 나의 채팅방 목록에서 삭제됩니다.");
+			if(result) {
+				document.getElementById('leaveForm').submit();
+			}
+		}		
 		
     	//입력이 있을 때만 버튼 활성화
 //     	msgInput.addEventListener("input", () => {

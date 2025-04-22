@@ -10,15 +10,20 @@
 		#{chatImgName},#{chatImgRename},#{chatImgPath},#{chatLimit}, default	)
 	</insert>
 	
-	<update id="updateChatMember">
-		update CHATROOM set CHAT_MEMBER_COUNT = CHAT_MEMBER_COUNT + 1
-		where CHATROOM_NO = #{chatroomNo}
-	</update>
-	
 	<delete id="deleteCahtRoom">
 		delete from CHATROOM where CHATROOM_NO = #{chatroomNo}
 	</delete>
 	
+	<update id="updateChatMember">
+		update CHATROOM set CHAT_MEMBER_COUNT = CHAT_MEMBER_COUNT + 1
+		where CHATROOM_NO = #{chatroomNo}
+	</update>
+		
+	<update id="subtractionChatMember">
+		update CHATROOM set CHAT_MEMBER_COUNT = CHAT_MEMBER_COUNT - 1
+		where CHATROOM_NO = #{chatroomNo}
+	</update>
+		
 	<!-- 전체리스트 출력 -->
 	<select id="selectChatRoomList" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		select * from CHATROOM
