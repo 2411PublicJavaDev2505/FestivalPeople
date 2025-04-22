@@ -6,23 +6,20 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="../resources/css/include/header.css">
-		<link rel="stylesheet" href="../resources/css/festival/list.css">
+		<link rel="stylesheet" href="../resources/css/festival/festivalSearch.css">
 		<link rel="stylesheet" href="../resources/css/include/footer.css">
 		<title>Festival Main Page</title>
 	</head>
 	<body>
 		
-	    <div class="container">
+	    <div id="container">
 	    <div class="background-image">
     	 	<img src="../resources/img/festival/우도.jpg" alt="바탕화면">
     	 </div>
 		<jsp:include page="../include/header.jsp"/>
-	       <main class="festival-list">
+	       <main class="festival-main">
 	           <div class="buttons">
-	               <div class="festival-button">
-	                   <button>추천 축제</button>
-	                   <button>다가오는 축제</button>
-	               </div>
+	               
 	               <div class="festival-search">
 	                   <form class="search-form" method="get" action="/festival/search">
 						    <select name="searchCondition">

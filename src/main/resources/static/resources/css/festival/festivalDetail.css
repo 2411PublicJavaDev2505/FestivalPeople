@@ -3,10 +3,9 @@
 .festival-list{
 	position:sticky;
 }
-.container {
+#container {
    max-width:1920px;
-    margin: 0 auto;
-    text-align: center;
+   margin: 0 auto;
 }
 .background-image {
   position: fixed;
