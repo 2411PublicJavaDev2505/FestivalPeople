@@ -2,8 +2,10 @@ package com.fepeo.boot.common.controller.api;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +58,7 @@ import lombok.Getter;
 public class ApiComponent {
 
     private final ReportController reportController;
+    String nowTime = "";
 
 	private final RestTemplate restTemplate;
 	private final ObjectMapper objectMapper;
@@ -344,14 +347,22 @@ public class ApiComponent {
 
 	
 	// 기상청 중기 예보 향후 7일간 날씨가 좋은 지역 출력
-	public List<String> callWeatherApi(String nowTime, List<RegionDto> regionList) throws JsonMappingException, JsonProcessingException {	
+	public List<String> callWeatherApi(List<RegionDto> regionList) throws JsonMappingException, JsonProcessingException {	
 		// 변경하여 webClient를 각 메소드에서 따로 불러야함
 		WebClient webClient = WebClient.create("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst");
 		// API 호출
+		int morning = 6;	
+		Calendar calendar = Calendar.getInstance();
+		if((calendar.HOUR-1)<morning) {
+			calendar.add(Calendar.DATE, -1);
+			nowTime = new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()) + "1800";
+		}else {			
+			calendar.add(Calendar.DATE, 0);
+			nowTime = new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()) + "0600";
+		}
 		List<String> sunnyRegions = new ArrayList<>();
 		for(RegionDto region : regionList) {
 			//지역코드 출력 확인
-			//System.out.println(region.getRegionNo());
 			String response = webClient.get()
 					.uri(uriBuilder -> uriBuilder
 							.queryParam("serviceKey", weatherApiKey)
@@ -369,24 +380,21 @@ public class ApiComponent {
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode root = mapper.readTree(response);
 			
-			JsonNode items = root.path("response").path("body").path("items").path("item");
-			
-			System.out.println("확인");
-			System.out.println(items.toString());
-			
+			JsonNode items = root.path("response").path("body").path("items").path("item");		
 			if(items.isArray() && items.size() > 0) {
 				JsonNode item = items.get(0);
 				// 확인할 키 목록
-				String[] weatherKeys = {"wf4am", "wf4pm", "wf5am", "wf5pm", "wf6am", "wf6pm", "wf7am", "wf7pm"};				
+				//"wf4Am","wf4Pm","wf5Am", "wf5Pm","wf6Am","wf6Pm", "wf7Am", "wf7Pm"
+				String[] weatherKeys = {"wf4Am","wf4Pm","wf5Am", "wf5Pm","wf6Am","wf6Pm", "wf7Am", "wf7Pm"};				
 				boolean isValid = false;
 				for(String key : weatherKeys) {
 					String forecast = item.path(key).asText();
-					if(forecast.contains("맑음")) {
+					if(forecast.equals("맑음")) {
 						isValid = true;
 						break;
 					}	
 				}
-				if(!isValid) {
+				if(isValid == true) {
 				    sunnyRegions.add(region.getRegionName());
 				}
 			}

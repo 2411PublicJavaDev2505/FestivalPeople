@@ -46,13 +46,6 @@ public class FestivalController {
 	    @RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
 	    Model model,HttpSession session
 	) throws JsonMappingException, JsonProcessingException {
-		// 현재 날짜 기준으로 어제 날짜 포맷 설정
-		Calendar calendar = Calendar.getInstance();
-		System.out.println("씨발아 대답을 하라고"+calendar);
-		calendar.add(Calendar.DATE, 0);
-		
-		System.out.println("현재시간 찍으" + calendar.getTime());
-		String nowTime = new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()) + "1800";
 		Member member = (Member)session.getAttribute("member");		
 		//전체 리스트 출력시 페이지 네이션 코드 
 	    int totalCount = festivalService.getTotalCount();
@@ -60,7 +53,7 @@ public class FestivalController {
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
 	    List<Festival> rfestivals = null;
 	    List<RegionDto> regionList = courseService.getAllRegions();
-	    List<String> goodWeatherRegions = api.callWeatherApi(nowTime, regionList);
+	    List<String> goodWeatherRegions = api.callWeatherApi(regionList);
 	    
 	    if(member != null) {
 			//로그인 됬을때 

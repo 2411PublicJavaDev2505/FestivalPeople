@@ -47,65 +47,49 @@
 <!-- 					</form> -->
 					</div>
 				</div>
-				<div class="course-recommend-main">
-					<input type="hidden" value="${festival}">
-					<input type="hidden" value="${matZip}">
-					<input type="hidden" value="${hotel}">
-					<input type="hidden" value="${coursePoint}">
-					
+
+				<div class="course-recommend-main">			
 					<div class="course-recommend-left">
 						<div  class="course-recommend-map" style="width:100%; height:400px;">							
-							<!-- <img src="../resources/img/course/examMap.png" alt="지도"> -->
 						</div>
 						<div class="festival-title">
-
 							<p>${festival.festivalName}</p>
 						</div>
 						<div class="course-recommend-img">
-
 							<img src= "${festival.festivalFilePath}" alt="부산">
 						</div>
 						<div id="resultContainer" class="place-result-container">
 						
-						<div id="recommendation-container">
-							<div id="course-matzip"></div>
-							<div id="course-hotel"></div>
-							<div id="course-cafe"></div>
-							<div id="course-tour"></div>
-							<div id="course-parking"></div>
-							<div id="course-culture"></div>						
+						<!-- 추천 코스 리스트 출력 -->
+						<div id="recommendation-container">					
+						</div>					
+							<form class="insert-course" action="/course/insert" method="post">
+								<div class="expect-cost">선택 장소 수 : ??</div>								
+								<div class="expect-time">예상 소요 시간 : ??</div>							
+								<div id="hiddenPlaceInputs"></div>
+								<input type="submit" value="코스 저장하기">							
+							</form>																			
 						</div>
-						
-
-							<form class="insert-course" action="/" method="post">
-								<div class="expect-cost">예상 금액 : ??</div>								
-								<div class="expect-time">예상 소요 시간 : ??</div>								
-								<input type="button" value="코스 저장하기">							
-							</form>													
-							
 						</div>
-
-						</div>
-					<div class="course-recommend-right">
-		                <div class="course-search">
-			                <form class="search-form" action="course/list" method="get">
-			                    <select>
-			                        <option value="all">전체</option>
-			                        <option value="name">축제명</option>
-			                        <option value="location">지역</option>
-			                    </select>
-			                    <input type="text" placeholder="검색" id=" ">
-			                    <button class="search-btn">⌕</button>
-			                </form>
-					            <div class="search-course-list">
-					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-					            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-					            </div>
-			            </div>
-<!-- 			            forEach 예정 -->
+						<div class="course-recommend-right">
+			                <div class="course-search">
+				                <form class="search-form" action="course/list" method="get">
+				                    <select id="searchCondition">
+				                        <option value="all">전체</option>
+				                        <option value="name">축제명</option>
+				                        <option value="location">지역</option>
+				                    </select>
+				                    <input type="text" placeholder="검색" id="searchKeyword">
+				                    <button class="search-btn">⌕</button>
+				                </form>
+						            <div class="search-course-list">
+						            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+						            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+						            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+						            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+						            	<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
+						            </div>
+				            </div>
 					</div>			
 				</div>
 			</div>	
@@ -117,281 +101,165 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce2765b5c8d1c862f02d7a486094793d"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	// 넘어오는 자료 확인용
 	let festivalNo = $('#festivalNo').val();
-	let festivalY = ${coursePoint.festivalX};
-	let festivalX = ${coursePoint.festivalY};
+	let festivalY = ${coursePoint.festivalY};
+	let festivalX = ${coursePoint.festivalX};
 
-	console.log("festivalX: ", festivalY);
-	console.log("festivalY: ", festivalX);
-	console.log("hotelX: ", hotel.getX);
-	console.log("hotelY: ", hotel.getY);
-	console.log("parking: ", parking.getX);
-	console.log("parking: ", parking.getY);
-	console.log("festivalX: ", festivalY);
-	console.log("festivalY: ", festivalX);
-
-
-	
-	// 카카오맵 , 최상단 마커 꽂는 지도 표시할때 필요한부분
-	var kakaoMapContainer = document.querySelector('.course-recommend-map')
-	var mapOptions = {
-			center : new kakao.maps.LatLng(Number(festivalY), Number(festivalX)),
-			level: 3	 
-
-	};
 	// 지도 생성
+	var kakaoMapContainer = document.querySelector('.course-recommend-map');
+	var mapOptions = {
+		center: new kakao.maps.LatLng(Number(festivalY), Number(festivalX)),
+		level: 3
+	};
 	var map = new kakao.maps.Map(kakaoMapContainer, mapOptions);
-	// 마커 찍기 위해 축제, 맛집, 호텔 좌표값 보내주는거
- 	var positions = [
+
+	// 기본 마커들 (축제, 맛집, 호텔 등)
+	var positions = [
 		{
 			title: "${festival.festivalName}",
 			latlng: new kakao.maps.LatLng(Number(festivalY), Number(festivalX))
 		},
-		
 		{
 			title: "${matZip.place_name}",
 			latlng: new kakao.maps.LatLng(Number("${coursePoint.matzipY}"), Number("${coursePoint.matzipX}"))
 		},
-		
 		{
 			title: "${hotel.place_name}",
 			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
 		},
-		
 		{
 			title: "${cafe.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
+			latlng: new kakao.maps.LatLng(Number("${coursePoint.cafeY}"), Number("${coursePoint.cafeX}"))
 		},
-		
 		{
 			title: "${tour.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
+			latlng: new kakao.maps.LatLng(Number("${coursePoint.tourY}"), Number("${coursePoint.tourX}"))
 		},
-		
 		{
 			title: "${parking.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
+			latlng: new kakao.maps.LatLng(Number("${coursePoint.parkingY}"), Number("${coursePoint.parkingX}"))
 		},
-		
 		{
 			title: "${culture.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
+			latlng: new kakao.maps.LatLng(Number("${coursePoint.cultureY}"), Number("${coursePoint.cultureX}"))
 		}
-	] 
-	
-	
-	// 마커 이미지의 이미지 주소입니다
-	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-	    
-	for (var i = 0; i < positions.length; i ++) {
-	    // 마커 이미지 크기
-	    var imageSize = new kakao.maps.Size(24, 35);     
-	    // 마커 이미지를 생성  
-	    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-	    // 마커를 생성
-	    var marker = new kakao.maps.Marker({
-	        map: map, // 마커를 표시할 지도
-	        position: positions[i].latlng, // 마커를 표시할 위치
-	        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-	        image : markerImage // 마커 이미지 
-	    });
-	    
-	 	// 인포윈도우 생성 팝업으로 해당 장소 설명 
-	    var infowindow = new kakao.maps.InfoWindow({
-	        content: '<div style="padding:5px;font-size:14px;">' + positions[i].title + '</div>'
-	    });
+	];
 
-	    // 마우스 버튼 선택시에만 팝업 창 나옴
-	    kakao.maps.event.addListener(marker, 'mouseover', function(marker, infowindow) {
-	        return function() {
-	            infowindow.open(map, marker);
-	        };
-	    }(marker, infowindow));  // 클로저로 묶어서 i값 유지
+	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
-	    kakao.maps.event.addListener(marker, 'mouseout', function(marker, infowindow) {
-	        return function() {
-	            infowindow.close();
-	        };
-	    }(marker, infowindow));
+	// 기본 마커들 찍기
+	positions.forEach(pos => {
+		let markerImage = new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(24, 35));
+		let marker = new kakao.maps.Marker({
+			map: map,
+			position: pos.latlng,
+			title: pos.title,
+			image: markerImage
+		});
+
+		let infowindow = new kakao.maps.InfoWindow({
+			content: '<div style="padding:5px;font-size:14px;">' + pos.title + '</div>'
+		});
+
+		kakao.maps.event.addListener(marker, 'mouseover', () => infowindow.open(map, marker));
+		kakao.maps.event.addListener(marker, 'mouseout', () => infowindow.close());
+	});
+
+	// 동적으로 추가될 마커들
+	let dynamicMarkers = [];
+
+	// 동적 마커 제거 함수
+	function clearMarkers() {
+		dynamicMarkers.forEach(marker => marker.setMap(null));
+		dynamicMarkers = [];
 	}
-	
-	
+
 	$(document).ready(function () {
 		let selectedCategories = [];
-		
-		$('input[type=checkbox]').change(function() {
+
+		$('input[type=checkbox]').change(function () {
 			const value = $(this).val();
-			console.log(value);
-			
+			console.log("선택된 카테고리:", value);
+
+			// 기존 추천 섹션 초기화
 			$('#recommendation-container').html('');
 
-			if($(this).is(':checked')) {
-				if(!selectedCategories.includes(value)) {
+			if ($(this).is(':checked')) {
+				if (!selectedCategories.includes(value)) {
 					selectedCategories.push(value);
 				}
 			} else {
 				selectedCategories = selectedCategories.filter(item => item !== value);
-			}	
+			}
 
-			// 여기에 AJAX 넣어야 함!
 			const obj = {
-					"categories": selectedCategories,
-					"festivalNo": $('#festivalNo').val()
-				};
-			
+				"categories": selectedCategories,
+				"festivalNo": festivalNo
+			};
+
 			$.ajax({
 				url: '/course/filter',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(obj),
 				success: function (data) {
-					console.log("서버 응답:", data); // 확인용 콘솔
-					console.log("thkdls")
-					console.log(data[0].place_name)
-					
-					let html = '';
-					
-					  data.forEach(place => {
-					    if(place.category_group_code == "FD6") {
-					    html += `
-						<div id="course-matzip">
-							<div class="place-title">추천맛집</div>
-							<div class="place-name">`+place.place_name+`</div>
-								</div>
-								<div class="course-recommend-section">
-									<iframe src= "`+place.place_url +`" width="100%" height="600px"></iframe><br>
-								<div class="iframe-description">
-									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
-								<input type="hidden" name="matzipX" value=`+place.x+`>
-								<input type="hidden" name="matzipY" value=`+place.y+`>
-								<input type="hidden" name="matzipName" value=`+place.place_name+`>
-							</div>
-						</div>					    	
-					    `;
-					    }
-					    if(place.category_group_code == "AD5") {
-					    html += `
-						<div class="course-hotel">
-							<div class="place-title">추천 숙소</div>
-							<div class="place-name">`+place.place_name+`</div>
-								</div>
-								<div class="course-recommend-section">
-									<iframe src= "`+place.place_url +`" width="100%" height="600px"></iframe><br>
-								<div class="iframe-description">
-									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
-								<input type="hidden" name="hotelX" value=`+place.x+`>
-								<input type="hidden" name="hotelY" value=`+place.y+`>
-								<input type="hidden" name="hotelName" value=`+place.place_name+`>
-							</div>
-						</div>					    	
-					    `;
-					    }
-					    if(place.category_group_code == "CE7") {
-					    html += `
-						<div class="course-cafe">
-							<div class="place-title">추천 카페</div>
-							<div class="place-name">`+place.place_name+`</div>
-								</div>
-								<div class="course-recommend-section">
-									<iframe src= "`+place.place_url+`" width="100%" height="600px"></iframe><br>
-								<div class="iframe-description">
-									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
-								<input type="hidden" name="cafeX" value=`+place.x+`>
-								<input type="hidden" name="cafeY" value=`+place.y+`>
-								<input type="hidden" name="cafeName" value=`+place.place_name+`>
-							</div>
-						</div>					    	
-					    `;
-					    }
-					    if(place.category_group_code == "AT4") {
-					    html += `
-						<div class="cours-tour">
-							<div class="place-title">추천 관강지</div>
-							<div class="place-name">`+place.place_name+`</div>
-								</div>
-								<div class="course-recommend-section">
-									<iframe src= "`+place.place_url+`" width="100%" height="600px"></iframe><br>
-								<div class="iframe-description">
-									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
-								<input type="hidden" name="tourX" value=`+place.x+`>
-								<input type="hidden" name="tourY" value=`+place.y+`>
-								<input type="hidden" name="tourName" value=`+place.place_name+`>
-							</div>
-						</div>					    	
-					    `;
-					    }
-					    if(place.category_group_code == "PK6") {
-					    html += `
-						<div class="course-parking">
-							<div class="place-title">추천 주차장</div>
-							<div class="place-name">`+place.place_name+`</div>
-								</div>
-								<div class="course-recommend-section">
-									<iframe src= "`+place.place_url+`" width="100%" height="600px"></iframe><br>
-								<div class="iframe-description">
-									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
-								<input type="hidden" name="parkingX" value=`+place.x+`>
-								<input type="hidden" name="parkingY" value=`+place.y+`>
-								<input type="hidden" name="parkingName" value=`+place.place_name+`>
-							</div>
-						</div>					    	
-					    `;
-					    }
-					    if(place.category_group_code == "CT1") {
-					    html += `
-						<div class="course-culture">
-							<div class="place-title">추천 문화 시설</div>
-							<div class="place-name">`+place.place_name+`</div>
-								</div>
-								<div class="course-recommend-section">
-									<iframe src= "`+place.place_url+`" width="100%" height="600px"></iframe><br>
-								<div class="iframe-description">
-									<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
-								<input type="hidden" name="cultureX" value=`+place.x+`>
-								<input type="hidden" name="cultureY" value=`+place.y+`>
-								<input type="hidden" name="cultureName" value=`+place.place_name+`>
-							</div>
-						</div>					    	
-					    `;
-					    }
+					console.log("서버 응답:", data);
 
-					    
-					  });
-					
-					 $('#recommendation-container').html(html);
+					clearMarkers(); // 동적 마커 제거
+
+					let html = '';
+					data.forEach(place => {
+						const latlng = new kakao.maps.LatLng(Number(place.y), Number(place.x));
+						const markerImage = new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(24, 35));
+						const marker = new kakao.maps.Marker({
+							map: map,
+							position: latlng,
+							title: place.place_name,
+							image: markerImage
+						});
+						dynamicMarkers.push(marker); // 배열에 저장
+
+						const infowindow = new kakao.maps.InfoWindow({
+							content: `<div style="padding:5px;font-size:14px;">`+place.place_name+`</div>`
+						});
+						kakao.maps.event.addListener(marker, 'mouseover', () => infowindow.open(map, marker));
+						kakao.maps.event.addListener(marker, 'mouseout', () => infowindow.close());
+
+						// 카테고리 별로 구분 출력
+						let categoryTitle = '';
+						if (place.category_group_code == "FD6") categoryTitle = "추천 맛집";
+						else if (place.category_group_code == "AD5") categoryTitle = "추천 숙소";
+						else if (place.category_group_code == "CE7") categoryTitle = "추천 카페";
+						else if (place.category_group_code == "AT4") categoryTitle = "추천 관광지";
+						else if (place.category_group_code == "PK6") categoryTitle = "추천 주차장";
+						else if (place.category_group_code == "CT1") categoryTitle = "추천 문화시설";
+
+						html += `
+						<div class="course-category">
+							<div class="place-title">`+categoryTitle+`</div>
+							<div class="place-name">`+place.place_name+`</div>
+						</div>
+						<div class="course-recommend-section">
+							<iframe src="`+place.place_url+`" width="100%" height="600px"></iframe><br>
+							<div class="iframe-description">
+								<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
+								<a href="`+place.place_url+`" target="_blank">`+place.place_url+`</a>
+								<input type="hidden" name="${place.category_group_code}_X" value="${place.x}">
+								<input type="hidden" name="${place.category_group_code}_Y" value="${place.y}">
+								<input type="hidden" name="${place.category_group_code}_Name" value="${place.place_name}">
+							</div>
+						</div>`;
+					});
+
+					$('#recommendation-container').append(html);
 				},
-				error: function(err) {
-					console.error('ajax 오류', err);
+				error: function (err) {
+					console.error("AJAX 오류:", err);
 				}
 			});
-
-			console.log("보내는 데이터:", JSON.stringify({
-				categories: selectedCategories,
-				festivalNo: $('#festivalNo').val()
-			}));
 		});
 	});
-	
-/*  	console.log(JSON.stringify({
-		  categories: selectedCategories,
-		  festivalNo: $('#festivalNo').val()
-		})); */ 
-	
-	
- 	$(document).ready(function () {
-	    $('input[name="category"]').change(function () {
-	        console.log("체크박스 변경됨:", $(this).val());
-	    });
-	}); 
 </script>
-
 
 </body>
 </html>

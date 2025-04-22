@@ -44,7 +44,7 @@ public class CommonController {
 		    List<Festival> rfestivals = null;
 		    List<RegionDto> regionList = courseService.getAllRegions();
 		    System.out.println(regionList);
-		    List<String> goodWeatherRegions = api.callWeatherApi(nowTime, regionList);
+		    List<String> goodWeatherRegions = api.callWeatherApi(regionList);
 		    System.out.println(goodWeatherRegions);
 			rfestivals = festivalService.selectFestivalListByWeather(goodWeatherRegions); // 비회원일때 불러오는 리스트 
 			System.out.println("맑은 지역 리스트 수: " + goodWeatherRegions.size());

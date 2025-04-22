@@ -51,12 +51,6 @@ public class CourseController {
 	// 비회원은 확인 불가능한 회원 위치기반 전용 코스 추천 리스트 출력
 	@GetMapping("/list")
 	public String showCourseMain(HttpSession session, Model model) throws JsonMappingException, JsonProcessingException {
-		// 날씨 검색을 위한 현재시간 기준 변수 (날씨 API 호출시 넘김)
-		String nowTime = "";
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, -1);
-		nowTime = new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()) + "1800";
-		
 		// 로그인 회원 분기처리
 		Member member = (Member)session.getAttribute("member");
 
@@ -73,7 +67,7 @@ public class CourseController {
 //			System.out.println(mapPoint);
 			// 현재 시간 기준 전국 날씨 추출
 			List<RegionDto> regionList = cService.getAllRegions();
-			List<String> goodWeather = api.callWeatherApi(nowTime, regionList);
+			List<String> goodWeather = api.callWeatherApi(regionList);
 //			System.out.println(goodWeather);	
 			//날씨 좋은 지역과 회원 좌표를 가지고 축제 리스트 출력
 			List<Festival> fList = fService.selectFestivalListByRegion(goodWeather, mapPoint);
@@ -158,16 +152,17 @@ public class CourseController {
 				PlaceDto culture = api.kakaoCourseApi(festivalXY, cate);
 				placeList.add(culture);
 				System.out.println(culture);
-			}
-
-			
+			}	
 		}
 		System.out.println(placeList);
 		return placeList;
 	}
 	
+	
+	
 	@PostMapping("/insert")
 	public String insertCourse() {
+		
 		
 		
 		return "";
@@ -181,8 +176,7 @@ public class CourseController {
 			,Model model
 			) {
 		
-		String sort = "";
-		
+		String sort = "";	
 		// 선택한 축제 번호로 축제 정보 가져오기
 		Festival festival = fService.selectFestivalByNo(festivalNo);
 		
@@ -220,6 +214,4 @@ public class CourseController {
 			return "course/courseDetail";
 	
 	}
-	
-	
 }
