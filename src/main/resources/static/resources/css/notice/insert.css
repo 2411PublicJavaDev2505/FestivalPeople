@@ -64,21 +64,6 @@
     margin-bottom: 30px;
   }
   
-  .btn-row {
-    margin-left: 1265px;
-  }
-  
-  .btn {
-    width: 100px;
-    height: 40px;
-    font-size: 16px;
-    border: none;
-    margin-left: 0;
-    margin-right: 0;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
 .btn-submit-btn {
   	width: 100px;
     height: 40px;
