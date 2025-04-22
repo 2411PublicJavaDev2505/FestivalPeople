@@ -42,8 +42,7 @@ public class ChatController {
 		return "chat/chatInsert";
 	}
 	@PostMapping("/insert")
-	public String insertChatRoom(@PathVariable("chatroomNo") int chatroomNo,
-			@ModelAttribute ChatroomRegisterRequest chatRoom,
+	public String insertChatRoom(@ModelAttribute ChatroomRegisterRequest chatRoom,
 			@RequestParam(value="image", required=false) MultipartFile image
 			, HttpSession session, Model model) throws IllegalStateException, IOException {
 		// 세션에서 memberNo 가져오기
@@ -62,7 +61,7 @@ public class ChatController {
 		// 각 채팅방별 참여인원수 불러오기
 		List<ChatMember> memberList = service.selectChatMember();
 
-		return "redirect:/chat/list"; // 추후 상세페이지로 수정필요
+		return "redirect:/chat/enter/" + chatRoom.getChatroomNo();
 	}
 
 	// 채팅방 목록
