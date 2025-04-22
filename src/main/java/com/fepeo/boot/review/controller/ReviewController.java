@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.common.util.PageUtil;
-import com.fepeo.boot.member.model.vo.Member;
+import com.fepeo.boot.notice.model.service.logic.NoticeServiceLogic;
 import com.fepeo.boot.review.controller.dto.CommentAddRequest;
-import com.fepeo.boot.review.controller.dto.ImgAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewUpdateRequest;
 import com.fepeo.boot.review.model.service.CommentService;
@@ -37,6 +35,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/review")
 public class ReviewController {
 
+    private final NoticeServiceLogic noticeServiceLogic;
+
    
 	//댓글서비스
 	private final CommentService cService;
@@ -45,8 +45,7 @@ public class ReviewController {
 	
 	//원복하고 페이지유틸 정상으로 임포트!확인할것!(4/17 10:13)
 	private final PageUtil pageUtil;
-	
-	
+
 
     //후기 게시판!(4/17 원복하고 코드커렌트페이지!!시작!!
 	
@@ -151,23 +150,23 @@ public class ReviewController {
 	
 	@GetMapping("/search")
 	public String showSearchList(
-			@RequestParam("reviewsearchCondition") String searchCondition
+			@RequestParam("searchCondition") String searchCondition
 			,@RequestParam("searchKeyword") String searchKeyword
-			//,@RequestParam(value="page", defaultValue="1") int currentPage
+			,@RequestParam(value="page", defaultValue="1") int currentPage
 			,Model model) {
 			Map<String, String> paramMap = new HashMap<String, String>();
 			paramMap.put("searchCondition", searchCondition);
 			paramMap.put("searchKeyword", searchKeyword);
-			List<Review> searchList = rService.searchListByKeyword(paramMap);
-			//int totalCount = rService.getTotalCount(paramMap);
-			//Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
-			
-			//model.addAttribute("maxPage",pageInfo.get("maxPage"));
-			//model.addAttribute("startNavi",pageInfo.get("startNavi"));
-			//model.addAttribute("endNavi",pageInfo.get("endNavi"));
+			List<Review> searchList = rService.searchListByKeyword(paramMap,currentPage);
+			int totalCount = rService.getTotalCount(paramMap);
+			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
+			System.out.println(searchList);
+			model.addAttribute("maxPage",pageInfo.get("maxPage"));
+			model.addAttribute("startNavi",pageInfo.get("startNavi"));
+			model.addAttribute("endNavi",pageInfo.get("endNavi"));
 			model.addAttribute("seachList", searchList);
-			//model.addAttribute("searchCondition",searchCondition);
-			//model.addAttribute("searchKeyword",searchKeyword);
+			model.addAttribute("searchCondition",searchCondition);
+			model.addAttribute("searchKeyword",searchKeyword);
 			return "/review/search";
 	}
 	

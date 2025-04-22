@@ -51,7 +51,7 @@
 }
 .reviewinsert-btn{
 	text-align:right;
-	position: relative;
+/* 	position: relative; */
   	right: 38px;
   	bottom:60px;
 }

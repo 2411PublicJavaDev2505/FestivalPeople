@@ -67,8 +67,8 @@
 					B.MEMBER_NAME
 					FROM REVIEW A 
 					LEFT OUTER JOIN MEMBER B
-					ON A.MEMBER_NO = B.MEMBER_NO
-					WHERE B.MEMBER_NAME = MEMBER_NAME ORDER BY 1 DESC
+					ON A.MEMBER_NO = B.MEMBER_NO AND B.MEMBER_NAME = MEMBER_NAME
+					WHERE REVIEW_YN='N' ORDER BY 1 DESC
 			</select>
  		
  		
@@ -84,7 +84,7 @@
   		</insert>
   		
   		<select id="getTotalCount" resultType="_int">
-			SELECT COUNT(*) FROM REVIEW 
+			SELECT COUNT(*) FROM REVIEW WHERE REVIEW_YN = 'N' 
 		</select>
 		
 		<!-- 이미지 업로드 조회 쿼리 작성먼저함4/1810:02 에러나면 바꿔줄것! 그리고 COLLECTION태그 적어줌!-->
@@ -120,7 +120,7 @@
 		<!-- 게시물 삭제는 update n 해줌! 4/18 16:25 -->
 		<!-- 주석처리하고 delete로 작성!안되면 다시살리기 -->
 		<update  id="reviewDelete">
-			UPDATE REVIEW SET REVIEW_YN = 'N' WHERE REVIEW_NO = #{reviewNo}
+			UPDATE REVIEW SET REVIEW_YN = 'Y' WHERE REVIEW_NO = #{reviewNo}
 		</update>
 <!-- 			<delete id="reviewDelete"> -->
 <!-- 				DELETE FROM REVIEW WHERE REVIEW_NO = #{reviewNo} -->
@@ -134,11 +134,11 @@
 		<!-- 검색 -->
 		
 		<select id="searchListByKeyword" resultMap="reviewResultMap">
-			SELECT * FROM REVIEW
+			SELECT * FROM REVIEW 
 			<where>	
 				<!-- 제목검색 -->
 				<if test="searchCondition == 'review_title'" >
-					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%'
+					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%'
 				</if>
 				<!-- 내용검색 -->
 				<if test="searchCondition == 'review_content'">
@@ -146,12 +146,32 @@
 				</if>
 				<!-- 전체검색 -->
 				<if test="searchCondition == 'all'">
-					REVIEW_CONTENT LIKE '%'|| #{searchKeyword}||'%' OR
-					REVIEW_CONTENT LIKE '%'|| #{searchKeyword}||'%'
+					REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR
+					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%'
 				</if>
 				AND REVIEW_YN = 'N'
 			</where>
 			ORDER BY REVIEW_NO DESC
+		</select>
+		
+		<select id="getTotalCountBySearch" resultType="_int">
+			SELECT COUNT(*) FROM REVIEW 
+			<where>
+				<!-- 제목검색 -->
+				<if test="searchCondition == 'review_title'" >
+					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%'
+				</if>
+				<!-- 내용검색 -->
+				<if test="searchCondition == 'review_content'">
+					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%'
+				</if>
+				<!-- 전체검색 -->
+				<if test="searchCondition == 'all'">
+					REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR
+					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%'
+				</if>
+				AND REVIEW_YN = 'N'
+			</where>
 		</select>
 		
 </mapper>

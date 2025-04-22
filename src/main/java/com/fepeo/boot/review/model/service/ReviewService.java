@@ -41,7 +41,11 @@ public interface ReviewService {
 	int reviewUpdate(ReviewUpdateRequest review);
 
 	//리뷰검색 4/21 16:05
-	List<Review> searchListByKeyword(Map<String, String> paramMap);
+	List<Review> searchListByKeyword(Map<String, String> paramMap, int currentPage);
+
+
+	//리뷰검색 2  4/21 18:54 
+	int getTotalCount(Map<String, String> paramMap);
 
 	//이미지만들기!20:17ㅉ
 	//int insertReview(ReviewAddRequest review, ImgAddRequest img, MultipartFile images) throws IllegalStateException, IOException;
