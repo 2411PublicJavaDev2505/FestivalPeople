@@ -24,11 +24,11 @@
 	</select>
 	
 	<select id="selectMemberList" resultType="Member">
-		SELECT * FROM MEMBER AND MEMBER_YN = 'Y'
+		SELECT * FROM MEMBER WHERE MEMBER_YN = 'Y'
 	</select>
 	
 	<select id="getMemberTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER AND MEMBER_YN = 'Y'
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_YN = 'Y'
 	</select>
 	
 	<select id="selectOneByEmail">

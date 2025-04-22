@@ -63,9 +63,9 @@
 	        </where>
 	  		ORDER BY DBMS_RANDOM.RANDOM 
 	    )
-	    <![CDATA[ 
-	    WHERE ROWNUM <= 10
-	    ]]>
+
+	    WHERE ROWNUM &lt;= 10
+
 	  </select>
 	
 
