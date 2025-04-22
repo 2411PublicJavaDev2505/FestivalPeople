@@ -8,6 +8,14 @@
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/member/socialInsert.css">
 	<title>FePeo-회원가입</title>
+	<link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+         crossorigin="anonymous"
+    />
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
@@ -70,14 +78,23 @@
 		</form>
 	</div>
 	<script type="text/javascript">
+	
+		function customAlert(message) {
+		    Swal.fire({
+		      icon: 'warning',
+		      title: message,
+		      text: "",
+		    });
+		  }
+		
 		const checkRegister = () => {
 			let address = document.querySelector("#input-address").value;
 			let name = document.querySelector("#input-name").value;
 			if(address.trim() == ''){
-				alert("주소를 입력해주세요");
+				customAlert("주소를 입력해주세요");
 				event.preventDefault();
 			}else if(name.trim() == ''){
-				alert("이름을 입력해주세요.");
+				customAlert("이름을 입력해주세요.");
 				event.preventDefault();
 			}
 		}

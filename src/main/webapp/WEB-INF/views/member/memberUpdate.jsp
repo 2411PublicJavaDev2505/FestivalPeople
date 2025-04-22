@@ -49,7 +49,12 @@
 								<img alt="프로필사진" src="${member.profileUrl }">
 							</c:if>
 							<c:if test="${member.socialYn ne 'Y' }">
-								<img alt="프로필사진" src="${member.profileFilePath }" id="profile-div">
+								<c:if test="${member.profileFilePath eq null }">
+									<img alt="" src="../resources/img/member/profile.png" id="profile-div">
+								</c:if>
+								<c:if test="${member.profileFilePath ne null }">
+									<img alt="프로필사진" src="${member.profileFilePath }" id="profile-div">
+								</c:if>
 								<label for="profile-input">
 									<div>파일찾기</div>
 								</label>

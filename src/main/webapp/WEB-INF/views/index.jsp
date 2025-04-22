@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../resources/css/main.css">
 	<link rel="stylesheet" href="../resources/css/include/footer.css">
     <link rel="stylesheet" href="../resources/css/include/header.css">
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <title>Festival People</title>
 </head>
 <body>
@@ -104,12 +105,19 @@
         }
         
         function updateSlide() {
+            
             const slide = slides[currentSlide];
             const nextSlide = slides[(currentSlide + 1) % totalSlides];
             
             let cImage = document.querySelector(".simple-slide.active img");
-            cImage.src = slide.src;
-            cImage.alt = slide.alt;
+            
+            $(".simple-slide.active ").fadeOut("slow", function() {
+	            cImage.src = slide.src;
+	            cImage.alt = slide.alt;
+            });
+            
+            
+           	$(".simple-slide.active ").fadeIn("slow");
 //             let nImage = document.querySelector(".simple-slide.next img");
 //             nImage.src = nextSlide.src;
 //             nImage.alt = nextSlide.alt;

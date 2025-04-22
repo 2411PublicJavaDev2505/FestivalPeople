@@ -35,7 +35,7 @@
 								<input type="text" id="title" name="reviewTitle" class="write-input" placeholder="제목" />
 							</div>
 							<div class="review-content">
-								<textarea id="tiny" name="noticeContent" class="write-textarea" placeholder="내용"></textarea>
+								<textarea id="tiny" name="reviewContent" class="write-textarea" placeholder="내용"></textarea>
 							</div>
 							
 							<div class="review-attach">
