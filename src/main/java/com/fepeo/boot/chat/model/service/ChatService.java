@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
+import com.fepeo.boot.chat.controller.dto.MemberProfileList;
 import com.fepeo.boot.chat.controller.dto.MsgInsertRequest;
 import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.vo.ChatMember;
@@ -37,5 +38,7 @@ public interface ChatService {
 	List<ChatMember> selectMyChatRoomList(int memberNo);
 
 	List<ChatRoom> selectMyChatRoomListByChatMember(List<ChatMember> myChatRoomList);
+
+	List<MemberProfileList> chatMemberList(int chatroomNo);
 
 }

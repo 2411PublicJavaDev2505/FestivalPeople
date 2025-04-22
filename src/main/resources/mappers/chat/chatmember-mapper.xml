@@ -18,11 +18,20 @@
 	<select id="selectMyChatRoomList" resultType="ChatMember">
 		select * from CHAT_MEMBER where BLOCK_YN = 'N' AND MEMBER_NO = #{memberNo}
 	</select>
-		
-	<!-- 채팅방 가입자 정보 조회 -->
+	
+	<!-- 채팅방 가입 여부 조회 -->
 	<select id="selectChatMemberList" resultType="com.fepeo.boot.chat.model.vo.ChatMember">
 		select * from CHAT_MEMBER
 		where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}
+	</select>
+		
+	<!-- 채팅방 가입자 정보 조회 -->
+	<select id="chatMemberList" resultType="com.fepeo.boot.chat.controller.dto.MemberProfileList">
+		select  C.CHATROOM_NO, C.MEMBER_NO, M.NICKNAME, M.PROFILE_FILE_PATH, M.MEMBER_YN, C.BLOCK_YN
+		from CHAT_MEMBER C
+		join member M on C.MEMBER_NO = M.MEMBER_NO
+		where C.CHATROOM_NO = #{chatroomNo}
+			and M.MEMBER_YN = 'Y' and C.BLOCK_YN = 'N'
 	</select>
 
 </mapper>  
