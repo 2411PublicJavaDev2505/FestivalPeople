@@ -41,4 +41,8 @@ public interface ChatService {
 
 	List<MemberProfileList> chatMemberList(int chatroomNo);
 
+	int leaveChatMember(int chatroomNo, int memberNo);
+
+	int subtractionChatMember(int chatroomNo);
+
 }
