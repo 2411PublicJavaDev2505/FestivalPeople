@@ -108,6 +108,7 @@ public class FestivalServiceLogic implements FestivalService {
 
 	@Override
 	public List<Festival> selectFestivalListByWeather(List<String> goodWeatherRegions) {
+		System.out.println(goodWeatherRegions);
 		List<Festival> rfestivals = festivalMapper.selectFestivalListByWeather(goodWeatherRegions);
 		return rfestivals;
 	}

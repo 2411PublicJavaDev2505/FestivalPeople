@@ -11,7 +11,4 @@ import lombok.ToString;
 public class RegionDto {
 	private String regionNo;
 	private String regionName;
-
-	
-	
 }
