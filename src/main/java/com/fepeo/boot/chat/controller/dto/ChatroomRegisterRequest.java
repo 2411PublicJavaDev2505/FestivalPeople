@@ -12,6 +12,7 @@ import lombok.ToString;
 public class ChatroomRegisterRequest {
 
 	private int memberNo;
+	private int chatroomNo;
 	private String chatroomTitle;
 	private String tag1;
 	private String tag2;

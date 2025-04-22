@@ -4,10 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fepeo.boot.chat.model.mapper.ChatMapper">
 
-	<insert id="insertChatRoom">
-		insert into CHATROOM values (
-		SEQ_CHATROOM_NO.nextval, #{memberNo}, #{chatroomTitle},#{tag1},#{tag2},#{tag3},
-		#{chatImgName},#{chatImgRename},#{chatImgPath},#{chatLimit}, default	)
+	<insert id="insertChatRoom" parameterType="ChatroomRegisterRequest">
+		<selectKey keyProperty="chatroomNo" resultType="int" order="BEFORE">
+			SELECT SEQ_CHATROOM_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CHATROOM (
+			CHATROOM_NO, MEMBER_NO, CHATROOM_TITLE, TAG1, TAG2, TAG3,
+			CHAT_IMG_NAME, CHAT_IMG_RENAME, CHAT_IMG_PATH, CHAT_LIMIT, CHAT_MEMBER_COUNT
+		) VALUES (
+			#{chatroomNo}, #{memberNo}, #{chatroomTitle}, #{tag1}, #{tag2}, #{tag3},
+			#{chatImgName}, #{chatImgRename}, #{chatImgPath}, #{chatLimit}, DEFAULT
+		)
 	</insert>
 	
 	<delete id="deleteCahtRoom">
