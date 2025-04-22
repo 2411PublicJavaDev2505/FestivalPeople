@@ -433,19 +433,31 @@ public class ApiComponent {
 		}
 		
 	//기상청 단기예보
-	/*
-	 * public static void main(String[]args)throws IOException{ WebClient webClient
-	 * = WebClient.create(
-	 * "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst");
-	 * String response = WebClient.builder() .uri(uriBuilder -> uriBuilder
-	 * .queryParam("serviceKey", weatherApiKey) .queryParam("pageNo", 1)
-	 * .queryParam("numOfRows", 10) .queryParam("dataType", "JSON")
-	 * .queryParam("base_date", sysdate) .queryParam("base_time", nowTime)
-	 * .queryParam("nx",mapVCode) .queryParam("ny",mapHCode) .build()) .retrieve()
-	 * .bodyToMono(String.class) .block();
-	 * 
-	 * }
-	 */
+		public String callShortWeatherApi(String baseDate, String baseTime, String nx, String ny) {
+		    WebClient webClient = WebClient.builder()
+		            .baseUrl("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst")
+		            .exchangeStrategies(
+		                ExchangeStrategies.builder()
+		                .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024))
+		                .build()
+		            )
+		            .build();
+
+		        return webClient.get()
+		            .uri(uriBuilder -> uriBuilder
+		                .queryParam("serviceKey", weatherApiKey)
+		                .queryParam("pageNo", 1)
+		                .queryParam("numOfRows", 1000)
+		                .queryParam("dataType", "JSON")
+		                .queryParam("base_date", baseDate)
+		                .queryParam("base_time", baseTime)
+		                .queryParam("nx", nx)
+		                .queryParam("ny", ny)
+		                .build())
+		            .retrieve()
+		            .bodyToMono(String.class)
+		            .block();
+		    }
 		
 	
 }
