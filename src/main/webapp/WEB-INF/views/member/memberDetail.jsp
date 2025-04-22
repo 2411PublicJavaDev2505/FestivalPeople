@@ -24,7 +24,12 @@
 						<img alt="" src="${member.profileUrl }" class="mypage-profile">
 					</c:if>
 					<c:if test="${member.socialYn ne 'Y' }">
-						<img alt="" src="${member.profileFilePath }" class="mypage-profile">
+						<c:if test="${member.profileFilePath eq null }">
+							<img alt="" src="../resources/img/member/profile.png" class="mypage-profile">
+						</c:if>
+						<c:if test="${member.profileFilePath ne null }">
+							<img alt="" src="${member.profileFilePath }" class="mypage-profile">
+						</c:if>
 					</c:if>
 					<ul>
 						<c:if test="${member.socialYn ne 'Y' }">

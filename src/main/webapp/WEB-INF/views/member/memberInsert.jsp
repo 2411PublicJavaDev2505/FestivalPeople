@@ -44,7 +44,7 @@
 					<div class="register-main">
 						<div class="register-left">
 							<div class="profile-img">
-								<img alt="" src="" id="profile-img">
+								<img alt="" src="../resources/img/member/profile.png" id="profile-img">
 							</div>
 							<label for="input-profile">
 								<div>파일찾기</div>
