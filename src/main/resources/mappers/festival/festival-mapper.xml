@@ -52,12 +52,14 @@
 	    SELECT * FROM(
 	    SELECT * FROM FESTIVAL
 	        <where>
-	        	FESTIVAL_END_DATE >=SYSDATE
-	        	AND (
-	            <foreach collection="list" item="region" separator="OR" open="" close="">
-	                FESTIVAL_ADDRESS LIKE '%' || #{region} || '%'
-	            </foreach>
-	        	)
+	        	FESTIVAL_END_DATE >= SYSDATE
+        	    <if test="list != null and list.size() > 0">
+		        	AND (
+		            <foreach collection="list" item="region" separator="OR" open="" close="">
+		                FESTIVAL_ADDRESS LIKE '%' || #{region} || '%'
+		            </foreach>
+		        	)
+       	      	</if>
 	        </where>
 	  		ORDER BY DBMS_RANDOM.RANDOM 
 	    )

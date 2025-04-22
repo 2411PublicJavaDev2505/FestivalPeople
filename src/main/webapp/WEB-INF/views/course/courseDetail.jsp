@@ -119,29 +119,34 @@
 <script>
 	// 넘어오는 자료 확인용
 	let festivalNo = $('#festivalNo').val();
-	let festivalY = $('#festivalY').val();
-	let festivalX = $('#festivalX').val();
+	let festivalY = ${coursePoint.festivalX};
+	let festivalX = ${coursePoint.festivalY};
 
-	console.log("festivalX: ", "${coursePoint.festivalX}");
-	console.log("festivalY: ", "${coursePoint.festivalY}");
+	console.log("festivalX: ", festivalY);
+	console.log("festivalY: ", festivalX);
+	console.log("hotelX: ", hotel.getX);
+	console.log("hotelY: ", hotel.getY);
+	console.log("parking: ", parking.getX);
+	console.log("parking: ", parking.getY);
+	console.log("festivalX: ", festivalY);
+	console.log("festivalY: ", festivalX);
 
 
 	
 	// 카카오맵 , 최상단 마커 꽂는 지도 표시할때 필요한부분
 	var kakaoMapContainer = document.querySelector('.course-recommend-map')
 	var mapOptions = {
-			center : new kakao.maps.LatLng(Number("${coursePoint.festivalY}"), Number("${coursePoint.festivalX}")),
+			center : new kakao.maps.LatLng(Number(festivalY), Number(festivalX)),
 			level: 3	 
 
 	};
 	// 지도 생성
 	var map = new kakao.maps.Map(kakaoMapContainer, mapOptions);
-	
 	// 마커 찍기 위해 축제, 맛집, 호텔 좌표값 보내주는거
  	var positions = [
 		{
 			title: "${festival.festivalName}",
-
+			latlng: new kakao.maps.LatLng(Number(festivalY), Number(festivalX))
 		},
 		
 		{
@@ -151,6 +156,26 @@
 		
 		{
 			title: "${hotel.place_name}",
+			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
+		},
+		
+		{
+			title: "${cafe.place_name}",
+			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
+		},
+		
+		{
+			title: "${tour.place_name}",
+			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
+		},
+		
+		{
+			title: "${parking.place_name}",
+			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
+		},
+		
+		{
+			title: "${culture.place_name}",
 			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
 		}
 	] 
