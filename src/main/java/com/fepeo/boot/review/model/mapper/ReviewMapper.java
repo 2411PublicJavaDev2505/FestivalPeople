@@ -44,6 +44,10 @@ public interface ReviewMapper {
 	List<Review> searchListByKeyword(RowBounds rowBounds, Map<String, String> paramMap);
 	//검색 2 카운트 (추가할거 있음 할것!)(아래는 지워야하나??)
 	int getTotalCountBySearch(Map<String, String> paramMap);
+	//4/22 10:32분 추가 안되면 지울것!!
+	List<Review> selectReviewList();
+	
+	
 	
 	
 	//이미지등록4/17 20:32 (에러나면 지울것!)List로 받아야하니 아래 2개주석!23:53

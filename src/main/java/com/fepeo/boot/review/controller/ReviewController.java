@@ -102,6 +102,9 @@ public class ReviewController {
 		model.addAttribute("review",review);
 		//4/19추가해도 삭제 안됨
 		model.addAttribute("reviewNo",reviewNo);
+		//4/22 12:28분 추가 2개 추가 ! 안되면 다시 원복하기!!
+		List<Review> rList = rService.selectReviewList();
+		model.addAttribute("rList",rList);
 		return"review/detail";
 	}
 	
@@ -167,6 +170,9 @@ public class ReviewController {
 			model.addAttribute("seachList", searchList);
 			model.addAttribute("searchCondition",searchCondition);
 			model.addAttribute("searchKeyword",searchKeyword);
+			//4/22 11:27분 추가! 에러나면 지울것!!
+			List<Review> rList = rService.selectReviewList(currentPage);
+			model.addAttribute("rList",rList);
 			return "/review/search";
 	}
 	

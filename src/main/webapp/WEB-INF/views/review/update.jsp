@@ -21,6 +21,9 @@
 						참고사항 notice 참고하기! -->
 		 			<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo }"> 
 		 			<input type="hidden" name="reviewNo" value="${review.reviewNo }">
+		 			<!-- 4/22 추가해볼것!! -->
+		 			<input type="hidden" name="reviewTitle" value="${review.reviewTitle }">
+		 			<input type="hidden" name="reviewContent" value="${review.reviewContent }">
 					<div class="review-title">
 					<!-- 4/21수정 만들면서 아래코드 추가 작성  -->
 						제목 <input type="text" name="reviewTitle" value="${review.reviewTitle }" size="80">

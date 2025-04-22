@@ -27,16 +27,17 @@
 <!-- 							<input type="hidden" id="reviewNo" value="${review.reviewNo }"> -->
 						</div>
 						<div class="review-info-main">
+							<!-- 작성자 안나옴...4/22 -->
 							<div class="review-info">
-								<!-- 작성자 안뜸현상! -->
-								<p><span>작성자|</span>${review.memberName}</p>
+								<p><span>작성자</span>${review.memberName}</p>
 							</div>
 							<div class="review-info">
 								<p><span>|</span>${review.reviewWriteTime }</p>	
 							</div>
 							<div class="review-info">
-								<p><span>|조회수|</span>${review.reviewCount }</p>	
+								<p><span>|조회수</span>${review.reviewCount }</p>	
 							</div>
+							<!-- 밑에는 내용! -->
 						</div>
 						<div class="review-content">
 							<p><div>${review.reviewContent }</div></p>
