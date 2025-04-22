@@ -105,6 +105,7 @@
 	let festivalY = ${coursePoint.festivalY};
 	let festivalX = ${coursePoint.festivalX};
 
+	
 	// 지도 생성
 	var kakaoMapContainer = document.querySelector('.course-recommend-map');
 	var mapOptions = {
@@ -118,30 +119,6 @@
 		{
 			title: "${festival.festivalName}",
 			latlng: new kakao.maps.LatLng(Number(festivalY), Number(festivalX))
-		},
-		{
-			title: "${matZip.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.matzipY}"), Number("${coursePoint.matzipX}"))
-		},
-		{
-			title: "${hotel.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.hotelY}"), Number("${coursePoint.hotelX}"))
-		},
-		{
-			title: "${cafe.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.cafeY}"), Number("${coursePoint.cafeX}"))
-		},
-		{
-			title: "${tour.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.tourY}"), Number("${coursePoint.tourX}"))
-		},
-		{
-			title: "${parking.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.parkingY}"), Number("${coursePoint.parkingX}"))
-		},
-		{
-			title: "${culture.place_name}",
-			latlng: new kakao.maps.LatLng(Number("${coursePoint.cultureY}"), Number("${coursePoint.cultureX}"))
 		}
 	];
 
