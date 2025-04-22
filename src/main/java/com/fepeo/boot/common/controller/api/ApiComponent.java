@@ -1,5 +1,6 @@
 package com.fepeo.boot.common.controller.api;
 
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -220,10 +221,6 @@ public class ApiComponent {
 		
 	}
 	
-	
-	
-	
-	
 	// 축제 주소지 기준 추천 숙소 정보 15개 출력
 	public List<PlaceDto> kakaoHotelApi(Map<String, String> festivalXY) {
 		String authorization = kakaoApiKey;
@@ -252,7 +249,6 @@ public class ApiComponent {
 	    //System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
 	    return tt;	
 	}
-	
 	
 	// 축제 주소지 기준 추천 맛집 정보 15개 출력
 	public  List<PlaceDto> kakaoMatzipApi(Map<String, String> festivalXY) {
@@ -427,5 +423,21 @@ public class ApiComponent {
 			return response;
 
 		}
+		
+	//기상청 단기예보
+	/*
+	 * public static void main(String[]args)throws IOException{ WebClient webClient
+	 * = WebClient.create(
+	 * "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst");
+	 * String response = WebClient.builder() .uri(uriBuilder -> uriBuilder
+	 * .queryParam("serviceKey", weatherApiKey) .queryParam("pageNo", 1)
+	 * .queryParam("numOfRows", 10) .queryParam("dataType", "JSON")
+	 * .queryParam("base_date", sysdate) .queryParam("base_time", nowTime)
+	 * .queryParam("nx",mapVCode) .queryParam("ny",mapHCode) .build()) .retrieve()
+	 * .bodyToMono(String.class) .block();
+	 * 
+	 * }
+	 */
+		
 	
 }
