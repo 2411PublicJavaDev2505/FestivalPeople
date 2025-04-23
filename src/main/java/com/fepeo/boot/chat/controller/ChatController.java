@@ -90,7 +90,7 @@ public class ChatController {
 			List<ChatMember> memberList = service.selectChatMember();
 			model.addAttribute("memberList", memberList);
 			System.out.println(memberList);
-			return "/chat/list";
+			return "chat/list";
 		}
 	}
 	
