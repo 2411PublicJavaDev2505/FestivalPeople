@@ -20,7 +20,7 @@
 	       <main class="festival-main">
 	           <div class="buttons">
 	               <div class="festival-button">
-	                   <button>🔅화창한 지역</button>
+	                   <button>🔅우리지역 축제</button>
 	                   <button>진행중인 축제</button>
 	               </div>
 	               <div class="festival-search">
