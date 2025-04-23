@@ -40,7 +40,7 @@ public class WebSecurityConfig {
                         .failureUrl("/member/login?fail=1")
                         .permitAll())
                 .logout(logout -> logout
-                        .logoutUrl("/member/logout")
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/"));
 		return http.build();
 	}

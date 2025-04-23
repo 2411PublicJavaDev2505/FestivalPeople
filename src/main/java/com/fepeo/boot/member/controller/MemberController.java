@@ -283,10 +283,11 @@ public class MemberController {
 		}
 		
 		if(member != null) {
+			System.out.println(member);
 			session.invalidate();
 		}
 		
-		return "redirect:/";
+		return "redirect:/logout";
 	}
 	
 	@GetMapping("/insert")

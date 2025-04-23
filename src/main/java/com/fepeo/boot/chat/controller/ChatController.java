@@ -68,7 +68,7 @@ public class ChatController {
 	@GetMapping("/list")
 	public String showChatRoomList(HttpSession session, Model model) {
 		// 미로그인 시 로그인 페이지로
-		Member member = (Member)session.getAttribute("member"); 
+		Member member = (Member)session.getAttribute("member");
 		if (member == null) {
 			return "redirect:/member/login";
 		}else {
@@ -77,19 +77,15 @@ public class ChatController {
 			// 내가 속한 방만 출력
 			List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
 			List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
-			System.out.println(myChatRoomList);
-			System.out.println(myList);
 			model.addAttribute("myList",myList);
 			
-			// 전체 리스트 출력
+//			// 전체 리스트 출력
 			List<ChatRoom> cRooms = service.selectChatRoomList();
 			model.addAttribute("cRooms", cRooms);
-			System.out.println(cRooms);
 			
-			// 각 채팅방별 참여인원수 불러오기
+//			// 각 채팅방별 참여인원수 불러오기
 			List<ChatMember> memberList = service.selectChatMember();
 			model.addAttribute("memberList", memberList);
-			System.out.println(memberList);
 			return "chat/list";
 		}
 	}
