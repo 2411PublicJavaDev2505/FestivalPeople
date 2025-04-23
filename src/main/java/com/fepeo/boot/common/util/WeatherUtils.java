@@ -9,16 +9,16 @@ import java.util.Map;
 
 public class WeatherUtils {
 	
-		public static Map<String, String> getWeatherBaseDateTime(String baseTime) {
-	        LocalDate today = LocalDate.now();
-	        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-
-	        Map<String, String> result = new HashMap<>();
-	        result.put("baseDate", today.format(dateFormatter));
-	        result.put("baseTime", baseTime); // "0500" 고정
-	        return result;
-	    }
-		
+	//하루치 일기예보 출력시
+	   public static Map<String, String> getWeatherBaseDateTime(String baseTime) {
+		 LocalDate today = LocalDate.now(); DateTimeFormatter dateFormatter =
+		 DateTimeFormatter.ofPattern("yyyyMMdd");
+		 
+		 Map<String, String> result = new HashMap<>(); result.put("baseDate",
+		 today.format(dateFormatter)); result.put("baseTime", baseTime); // "0500" 고정
+		 return result; }
+	 
+		//3일치 일기예보 출
 		public static List<String> getNext3Days() {
 	        List<String> days = new ArrayList<>();
 	        LocalDate today = LocalDate.now();

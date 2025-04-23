@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -462,54 +463,61 @@ public class ApiComponent {
 		        .block();
 		}
 		
-		public Map<String, String> parseTodayClosestWeather(String json) {
-		    Map<String, String> result = new HashMap<>();
-		    ObjectMapper mapper = new ObjectMapper();
-		    
+		public Map<String, Map<String, String>>parseThreeDayWeather(String json) {
+			Map<String, Map<String, String>> result = new LinkedHashMap<>();
+		    List<String> targetDates = WeatherUtils.getNext3Days();
+
 		    try {
-		        JsonNode root = mapper.readTree(json);
+		        ObjectMapper objectMapper = new ObjectMapper();
+		        JsonNode root = objectMapper.readTree(json);
 		        JsonNode items = root.path("response").path("body").path("items").path("item");
 
-		        // 현재 날짜, 시간 계산
-		        LocalDate today = LocalDate.now();
-		        String todayStr = today.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		        for (String date : targetDates) {
+		            List<Double> temps = new ArrayList<>();
+		            String rain = "강수없음";
+		            Map<String, Integer> skyCount = new HashMap<>();
 
-		        LocalTime now = LocalTime.now();
-		        // 기준 시간: 지금 시간에서 가장 가까운 예보 시간 찾기
-		        int closestDiff = Integer.MAX_VALUE;
-		        String targetFcstTime = null;
+		            for (JsonNode item : items) {
+		                String fcstDate = item.path("fcstDate").asText();
+		                if (!fcstDate.equals(date)) continue;
 
-		        for (JsonNode item : items) {
-		            if (!item.path("fcstDate").asText().equals(todayStr)) continue;
+		                String category = item.path("category").asText();
+		                String value = item.path("fcstValue").asText();
 
-		            String fcstTime = item.path("fcstTime").asText();
-		            int diff = Math.abs(Integer.parseInt(fcstTime) - now.getHour() * 100);
-		            if (diff < closestDiff) {
-		                closestDiff = diff;
-		                targetFcstTime = fcstTime;
+		                switch (category) {
+		                    case "TMP":
+		                        try {
+		                            temps.add(Double.parseDouble(value));
+		                        } catch (NumberFormatException ignored) {}
+		                        break;
+		                    case "PCP":
+		                        if (!value.equals("강수없음") && !value.equals("없음")) {
+		                            rain = value;
+		                        }
+		                        break;
+		                    case "SKY":
+		                        skyCount.put(value, skyCount.getOrDefault(value, 0) + 1);
+		                        break;
+		                }
 		            }
-		        }
 
-		        // 가장 가까운 시간의 TMP, PCP, SKY 값 추출
-		        for (JsonNode item : items) {
-		            String fcstDate = item.path("fcstDate").asText();
-		            String fcstTime = item.path("fcstTime").asText();
-		            String category = item.path("category").asText();
-		            String value = item.path("fcstValue").asText();
+		            // 평균 기온 계산
+		            String avgTemp = temps.isEmpty() ? "정보 없음" :
+		                String.format("%.1f℃", temps.stream().mapToDouble(Double::doubleValue).average().orElse(0.0));
 
-		            if (!fcstDate.equals(todayStr) || !fcstTime.equals(targetFcstTime)) continue;
+		            // SKY: 가장 많이 등장한 값 파악
+		            String skyCode = skyCount.entrySet().stream()
+		                .max(Map.Entry.comparingByValue())
+		                .map(Map.Entry::getKey)
+		                .orElse("정보 없음");
+		            String skyText = parseSky(skyCode);
 
-		            switch (category) {
-		                case "TMP":
-		                    result.put("기온", value + "℃");
-		                    break;
-		                case "PCP":
-		                    result.put("강수량", value);
-		                    break;
-		                case "SKY":
-		                    result.put("하늘상태", parseSky(value));
-		                    break;
-		            }
+		            Map<String, String> summary = new LinkedHashMap<>();
+		            summary.put("기온", avgTemp);
+		            summary.put("강수량", rain);
+		            summary.put("하늘상태", skyText);
+
+		            result.put(date, summary);
 		        }
 
 		    } catch (Exception e) {
@@ -518,14 +526,10 @@ public class ApiComponent {
 
 		    return result;
 		}
-
-		private String parseSky(String value) {
-		    switch (value) {
-		        case "1": return "맑음";
-		        case "3": return "구름 많음";
-		        case "4": return "흐림";
-		        default: return "정보 없음";
-		    }
-		}
+		
+		 private String parseSky(String value) { switch (value) { case "1": return
+		 "맑음"; case "3": return "구름 많음"; case "4": return "흐림"; default: return
+		 "정보 없음"; } }
+		 
 
 }
