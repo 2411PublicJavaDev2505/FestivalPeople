@@ -85,7 +85,7 @@ public class CourseController {
 //				List<Festival> rList = fService.getrFestivalList();
 //			}
 			
-			return "/course/list";
+			return "course/list";
 		}
 	}
 	
