@@ -190,7 +190,7 @@
 		<update id="reviewUpdate">
 			UPDATE REVIEW SET REVIEW_TITLE = #{reviewTitle} , 
 			REVIEW_CONTENT = #{reviewContent}
-			 
+			
 			WHERE REVIEW_NO = #{reviewNo} AND MEMBER_NO = #{memberNo}
   			
 		</update>
