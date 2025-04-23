@@ -58,7 +58,8 @@ public class ReviewServiceLogic implements ReviewService {
 		int totalCount = mapper.getTotalCount();
 		return totalCount;
 	}
-
+	
+	//리뷰게시글등록(첨부파일포함)
 	@Override
 	public int insertReview(ReviewAddRequest review, List<MultipartFile> images)
 			throws IllegalStateException, IOException {
@@ -109,8 +110,7 @@ public class ReviewServiceLogic implements ReviewService {
 		return mapper.reviewCount(reviewNo);
 	}
 
-	//수정인데 코드 이해 부족으로 작성어려움있음.작성해줘야함!****
-	//4/22 12:37 코드추가 시간모잘라면 여기부터 수정및 삭제해줘야함
+	
 	//4/23 강제로 throws IllegalStateException, IOException 넣어줌!
 	
 	@Override
