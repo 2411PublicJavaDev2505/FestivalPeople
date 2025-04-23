@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ page import="java.time.LocalDate" %>
+<%
+    LocalDate today = LocalDate.now();
+    LocalDate tomorrow = today.plusDays(1);
+    LocalDate dayAfterTomorrow = today.plusDays(2);
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -36,9 +41,30 @@
 							<li> 📞 대표 전화:  ${festival.festivalPhone}</li>
 							<li> 🔅 축제기간 일기예보
 								<div class="weather-api">
-									<p>🌡 기온: ${weather["기온"] != null ? weather["기온"] : "정보 없음"}</p>
-									<p>☔ 강수량: ${weather["강수량"]!= null ? weather["강수량"] : "정보 없음"}</p>
-									<p>⛅ 하늘상태: ${weather["하늘상태"]!= null ? weather["하늘상태"] : "정보 없음"}</p>
+									<table>
+										<tr>
+											<th>날짜</th>
+											 <th><%= today %></th>
+											 <th><%= tomorrow %></th>
+											 <th><%= dayAfterTomorrow %></th>
+										</tr>
+										<tr>
+											<th>🌡 기온</th>
+											<td>${weather["기온"] != null ? weather["기온"] : "정보 없음"}</td>
+										</tr>
+										<tr>
+											<th>☔ 강수</th>
+											<td>${weather["강수량"]!= null ? weather["강수량"] : "정보 없음"}</td>
+										</tr>
+										<tr>
+											<th>⛅ 구름</th>
+											<td>${weather["하늘상태"]!= null ? weather["하늘상태"] : "정보 없음"}</td>
+										</tr>
+									</table>
+									
+									<!--  <p>🌡 기온: ${weather["기온"] != null ? weather["기온"] : "정보 없음"}</p><br>
+									<p>☔ 강수량: ${weather["강수량"]!= null ? weather["강수량"] : "정보 없음"}</p><br>
+									<p>⛅ 하늘상태: ${weather["하늘상태"]!= null ? weather["하늘상태"] : "정보 없음"}</p> -->
 								</div>
 							</li>
 							<li> 🚩 지도
@@ -103,6 +129,7 @@
 			    
 			    
 			}
+			
 		</script>
 	</body>
 </html>

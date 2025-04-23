@@ -1,7 +1,5 @@
 package com.fepeo.boot.festival.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fepeo.boot.common.controller.api.ApiComponent;
+import com.fepeo.boot.common.util.GridConverter;
 import com.fepeo.boot.common.util.PageUtil;
 import com.fepeo.boot.common.util.WeatherUtils;
 import com.fepeo.boot.course.model.service.CourseService;
@@ -90,23 +89,35 @@ public class FestivalController {
 	@GetMapping("/detail/{festivalNo}")
 	public String showFestivalDetail(@PathVariable  int festivalNo, Model model) {
 		Festival festival = festivalService.selectFestivalByNo(festivalNo);
-		//좌표 추출
-		String nx = festival.getMapHCode();
-	    String ny = festival.getMapVCode();
-	    System.out.println(nx);
-	    System.out.println(ny);
 
+	    // 위도 경도 가져오기
+	    double lat = Double.parseDouble(festival.getMapHCode()); 
+	    double lon = Double.parseDouble(festival.getMapVCode()); 
+	    
+	    System.out.println("lat: " + festival.getMapVCode() + ", lon: " + festival.getMapHCode());
+
+	    // 위경도 → 격자 좌표 변환
+	    int[] grid = GridConverter.convertToGrid(lat, lon);
+	    String nx = String.valueOf(grid[0]);
+	    String ny = String.valueOf(grid[1]);
+
+	    // 디버깅용 로그
+	    System.out.println("lat: " + lat + ", lon: " + lon);
+	    System.out.println("nx: " + nx + ", ny: " + ny);
+
+	    // 날짜 및 시간 생성
 	    Map<String, String> dateTimeMap = WeatherUtils.getWeatherBaseDateTime("0500");
-			String baseDate = dateTimeMap.get("baseDate");
-	        String baseTime = dateTimeMap.get("baseTime");;
-	        System.out.println(dateTimeMap);
-	        //날짜, 시간 생성
-	    String json = api.callShortWeatherApi(baseDate,baseTime,nx, ny);
-		Map<String, String> weather = api.parseTodayClosestWeather(json);
-		System.out.println(weather);
-		model.addAttribute("festival",festival);
-		model.addAttribute("weather",weather);
-		return "festival/festivalDetail";
+	    String baseDate = dateTimeMap.get("baseDate");
+	    String baseTime = dateTimeMap.get("baseTime");
+
+	    // 날씨 API 호출 및 파싱
+	    String json = api.callShortWeatherApi(baseDate, baseTime, nx, ny);
+	    Map<String, String> weather = api.parseTodayClosestWeather(json);
+	    System.out.println(json);
+	    // 데이터 전달
+	    model.addAttribute("festival", festival);
+	    model.addAttribute("weather", weather);
+	    return "festival/festivalDetail";
 	}
 	
 	//축제 최신화
