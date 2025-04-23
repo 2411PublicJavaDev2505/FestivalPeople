@@ -52,4 +52,5 @@ public class CommonController {
 			model.addAttribute("rfestivals", rfestivals);
 		    return "index";
 		}
+
 }
