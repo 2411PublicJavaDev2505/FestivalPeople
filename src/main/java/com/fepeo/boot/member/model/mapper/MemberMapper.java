@@ -53,5 +53,7 @@ public interface MemberMapper {
 
 	int updateMemberEmail(MemberUpdateRequest member);
 
+	Member memberLoginById(String username);
+
 
 }

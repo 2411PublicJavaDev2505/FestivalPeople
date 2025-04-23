@@ -8,6 +8,8 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.common.util.Util;
+import com.fepeo.boot.member.controller.dto.CustomUserDetail;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
@@ -45,6 +48,7 @@ public class MemberController {
 	private final ApiComponent api;
 	private final MemberService mService;
 	private final MailService mailService;
+	private final PasswordEncoder passwordEncoder;
 
 	@GetMapping("/login")
 	public String showLogin(Model model) throws IOException {
@@ -79,6 +83,14 @@ public class MemberController {
 		}
 		json.put("checkMsg", checkMsg);
 		return json.toString();
+	}
+	
+	@GetMapping("/loginsuccess")
+	public String loginSuccess(@AuthenticationPrincipal CustomUserDetail customUserDetails
+			,HttpSession session) {
+		Member member = customUserDetails.getMember();
+		session.setAttribute("member", member);
+		return "redirect:/";
 	}
 	
 	@GetMapping("/kakao")
@@ -287,7 +299,18 @@ public class MemberController {
 			,@RequestParam(required=false) MultipartFile profile
 			,Model model) throws IllegalStateException, IOException {
 		member.setProfile(profile);
+		
+		System.out.println("뭐지?");
+		
+		if(member.getMemberPw() != null) {
+			member.setMemberPw(passwordEncoder.encode(member.getMemberPw()));
+		}
+		
+		System.out.println("이건 아닌거 같은데");
+		
 		int result = mService.insertMember(member);
+		System.out.println("db 문제");
+		System.out.println(result);
 		if(member.getSocialYn().equals("Y")) {
 			return "member/socialInsertPopup";
 		}else {

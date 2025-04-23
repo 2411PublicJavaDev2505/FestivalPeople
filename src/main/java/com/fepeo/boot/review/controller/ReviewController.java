@@ -63,7 +63,7 @@ public class ReviewController {
 			model.addAttribute("endNavi", pageInfo.get("endNavi"));
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("rList",rList);
-			return "/review/list";
+			return "review/list";
 }
 
 	
@@ -173,7 +173,7 @@ public class ReviewController {
 			//4/22 11:27분 추가! 에러나면 지울것!!
 			List<Review> rList = rService.selectReviewList(currentPage);
 			model.addAttribute("rList",rList);
-			return "/review/search";
+			return "review/search";
 	}
 	
 	
