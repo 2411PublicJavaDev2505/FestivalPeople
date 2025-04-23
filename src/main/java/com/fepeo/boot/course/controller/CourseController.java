@@ -69,10 +69,29 @@ public class CourseController {
 //			System.out.println(mapPoint);
 			// 현재 시간 기준 전국 날씨 추출
 			List<RegionDto> regionList = cService.getAllRegions();
-			List<String> goodWeather = api.callWeatherApi(regionList);
+			
+			String gWRegions = (String)session.getAttribute("gWRegions");
+		    List<String> goodWeatherRegions = new ArrayList<>();
+		    if(gWRegions == null) {
+		    	goodWeatherRegions = api.callWeatherApi(regionList);
+		    	gWRegions = "";
+		    	for(int i=0;i<goodWeatherRegions.size();i++) {
+		    		if(i != goodWeatherRegions.size() -1) {
+		    			gWRegions += goodWeatherRegions.get(i)+",";
+		    		}else {
+		    			gWRegions += goodWeatherRegions.get(i);
+		    		}
+		    	}
+		    	session.setAttribute("gWRegions", gWRegions);
+		    }else {
+		    	String[] strList = gWRegions.split(",");
+		    	for(int i=0;i<strList.length;i++) {
+		    		goodWeatherRegions.add(strList[i]);
+		    	}
+		    }
 //			System.out.println(goodWeather);	
 			//날씨 좋은 지역과 회원 좌표를 가지고 축제 리스트 출력
-			List<Festival> fList = fService.selectFestivalListByRegion(goodWeather, mapPoint);
+			List<Festival> fList = fService.selectFestivalListByRegion(goodWeatherRegions, mapPoint);
 //			System.out.println(fList);
 //			System.out.println(fList.size());
 			
