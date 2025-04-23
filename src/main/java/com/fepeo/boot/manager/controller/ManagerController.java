@@ -53,12 +53,12 @@ public class ManagerController {
 			
 			
 			session.setAttribute("mList", mList);
-			return "/manager/list";
+			return "manager/list";
 			
 		}else if(member.getManagerYn().equals("N")) {
-			return "/common/error";
+			return "common/error";
 		} else {
-			return "/common/error";
+			return "common/error";
 		}
 	}
 }

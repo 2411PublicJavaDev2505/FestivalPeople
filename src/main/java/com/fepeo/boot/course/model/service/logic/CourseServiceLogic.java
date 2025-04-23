@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.fepeo.boot.course.model.mapper.CourseMapper;
 import com.fepeo.boot.course.model.service.CourseService;
+import com.fepeo.boot.course.model.vo.dto.CourseDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
+import com.fepeo.boot.festival.model.vo.Festival;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +21,11 @@ public class CourseServiceLogic implements CourseService{
 	@Override
 	public List<RegionDto> getAllRegions() {
 		return mapper.selectRegionList();
+	}
+
+	@Override
+	public int insertCourse(String courseName, List<CourseDto> course, Festival festival) {
+		return mapper.insertCourse(courseName, course, festival);
 	}
 
 	

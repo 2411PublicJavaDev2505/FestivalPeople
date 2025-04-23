@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.course.model.service.CourseService;
 import com.fepeo.boot.course.model.vo.dto.Categories;
-import com.fepeo.boot.course.model.vo.dto.CourseForm;
+import com.fepeo.boot.course.model.vo.dto.CourseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
 import com.fepeo.boot.festival.model.service.FestivalService;
@@ -107,7 +107,7 @@ public class CourseController {
 		System.out.println(fList);
 		model.addAttribute("fList", fList);
 		
-		return "/course/list";
+		return "course/list";
 	}
 	
 	
@@ -155,6 +155,10 @@ public class CourseController {
 				placeList.add(culture);
 				System.out.println(culture);
 			}	
+			
+			
+			
+			
 		}
 		System.out.println(placeList);
 		return placeList;
@@ -162,11 +166,90 @@ public class CourseController {
 	
 	
 	@PostMapping("/insert")
-	public String insertCourse(@ModelAttribute CourseForm courseForm, Model model) {
-		List<PlaceDto> places = courseForm.getPlaces();
-		System.out.println("왜 안되니 ㅠ"+places);
+	public String insertCourse(@RequestParam("category_group_code") List<String> category
+			,@RequestParam("place_name") List<String> placeName
+			,@RequestParam("x") List<String> xs
+			,@RequestParam("y") List<String> ys
+			,@RequestParam("courseName") String courseName
+			,@RequestParam("festivalNo") int festivalNo
+			,Model model
+			,HttpSession session) {
 		
-		return "/";
+		CourseDto matzip = new CourseDto();
+		CourseDto hotel = new CourseDto();
+		CourseDto cafe = new CourseDto();
+		CourseDto tour = new CourseDto();
+		CourseDto parking = new CourseDto();
+		CourseDto culture = new CourseDto();
+		List<CourseDto> course = new ArrayList<CourseDto>();
+		Festival festival = fService.selectFestivalByNo(festivalNo);
+
+		
+
+	
+		
+		
+		for(int i = 0; i < category.size(); i++) {
+			
+			if(category.get(i).equals("FD6")) {
+				matzip.setCategoryCode(category.get(i));
+				matzip.setPlaceName(placeName.get(i));
+				matzip.setX(xs.get(i));
+				matzip.setY(ys.get(i));
+				course.add(matzip);
+			}
+			
+			
+			if(category.get(i).equals("AD5")) {
+				hotel.setCategoryCode(category.get(i));
+				hotel.setPlaceName(placeName.get(i));
+				hotel.setX(xs.get(i));
+				hotel.setY(ys.get(i));
+				course.add(hotel);
+			}
+			
+			
+			if(category.get(i).equals("CE7")) {
+				cafe.setCategoryCode(category.get(i));
+				cafe.setPlaceName(placeName.get(i));
+				cafe.setX(xs.get(i));
+				cafe.setY(ys.get(i));
+				course.add(cafe);
+			}
+			
+			
+			if(category.get(i).equals("AT4")) {
+				tour.setCategoryCode(category.get(i));
+				tour.setPlaceName(placeName.get(i));
+				tour.setX(xs.get(i));
+				tour.setY(ys.get(i));
+				course.add(tour);
+			}
+			
+			
+			if(category.get(i).equals("PK6")) {
+				parking.setCategoryCode(category.get(i));
+				parking.setPlaceName(placeName.get(i));
+				parking.setX(xs.get(i));
+				parking.setY(ys.get(i));
+				course.add(parking);
+			}
+			
+			
+			if(category.get(i).equals("CT1")) {
+				culture.setCategoryCode(category.get(i));
+				culture.setPlaceName(placeName.get(i));
+				culture.setX(xs.get(i));
+				culture.setY(ys.get(i));
+				course.add(culture);
+			}
+			
+		int result = cService.insertCourse(courseName, course, festival);
+			
+		}
+
+		
+		return "course/list";
 	}
 	
 

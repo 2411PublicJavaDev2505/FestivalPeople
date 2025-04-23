@@ -55,7 +55,10 @@
 												<td class="member-Name">${member.memberName }</td>
 												<td class="member-Nickname">${member.nickname }</td>
 												<td class="member-Email">${member.email }</td>
-												<td class="member-Report">${member.reportCount }</td>
+												<td class="member-Report">${member.reportCount }
+													<button>탈퇴</button>
+												</td>
+
 											</tr>
 										</c:forEach>
 								</table>

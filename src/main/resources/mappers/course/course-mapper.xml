@@ -13,6 +13,9 @@
 		SELECT * FROM REGION_CODE
 	</select>
 
+ 	<insert id="insertCourse">
+		INSERT INTO COURSE VALUES(SEQ_COURSE_NO.NEXTVAL, )
+	</insert> 
 
 
 

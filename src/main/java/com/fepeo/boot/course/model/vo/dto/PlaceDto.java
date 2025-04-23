@@ -17,39 +17,7 @@ public class PlaceDto {
     private String category_group_code;
     
     
-    public int getReviewCount() {
-    	return reviewCount;
-    }
+    public PlaceDto() {}
     
-    public String getGrade() {
-    	return grade;
-    }
-    
-    public String getId() {
-    	return id;
-    }
-    
-    public String getPlace_url() {
-    	return place_url;
-    }
-    
-	public String getPlace_name() {
-		return place_name;
-	}
-	public String getRoad_address_name() {
-		return road_address_name;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public String getX() {
-		return x;
-	}
-	public String getY() {
-		return y;
-	}
-
-	public String getCategory() {
-		return category_group_code;
-	}
+	
 }
