@@ -20,6 +20,6 @@ public class Festival {
 	private String festivalAddress;
 	private String festivalDetailAddress;
 	private String mapVCode;
-	private String mapHcode;
+	private String mapHCode;
 	
 }

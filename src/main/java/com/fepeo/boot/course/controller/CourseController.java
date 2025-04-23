@@ -120,7 +120,7 @@ public class CourseController {
 		Festival festival = fService.selectFestivalByNo(festivalNo);
 		Map<String, String> festivalXY = new HashMap<String, String>();
 		festivalXY.put("X", festival.getMapVCode());
-		festivalXY.put("Y", festival.getMapHcode());
+		festivalXY.put("Y", festival.getMapHCode());
 		
 		List<PlaceDto> placeList = new ArrayList<PlaceDto>(); 
 
@@ -184,7 +184,7 @@ public class CourseController {
 		// 축제 주소 좌표값 설정
 		Map<String, String> festivalXY = new HashMap<String, String>();
 		festivalXY.put("x", festival.getMapVCode());
-		festivalXY.put("y", festival.getMapHcode());
+		festivalXY.put("y", festival.getMapHCode());
 		// 축제 좌표값 근처로 가까운 밥집 리스트 15개 출력
 //		List<PlaceDto> matZipList = api.kakaoMatzipApi(festivalXY);
 //		// 축제 좌표값 근처로 가까운 숙박시설 리스트 15개 출력
@@ -198,7 +198,7 @@ public class CourseController {
 			// 추천 코스 좌표값 매핑하기
 			Map<String, String> coursePoint = new HashMap<String, String>();
 			coursePoint.put("festivalX", festival.getMapVCode());
-			coursePoint.put("festivalY", festival.getMapHcode());
+			coursePoint.put("festivalY", festival.getMapHCode());
 //			coursePoint.put("matzipX", matZipRec.getX());
 //			coursePoint.put("matzipY", matZipRec.getY());
 //			coursePoint.put("hotelX", hotelRec.getX());

@@ -1,9 +1,7 @@
 package com.fepeo.boot.festival.controller;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.common.util.PageUtil;
+import com.fepeo.boot.common.util.WeatherUtils;
 import com.fepeo.boot.course.model.service.CourseService;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
 import com.fepeo.boot.festival.model.service.FestivalService;
@@ -86,24 +86,37 @@ public class FestivalController {
 
 	    return "festival/list";
 	}
-	
+	//상세페이지
 	@GetMapping("/detail/{festivalNo}")
 	public String showFestivalDetail(@PathVariable  int festivalNo, Model model) {
 		Festival festival = festivalService.selectFestivalByNo(festivalNo);
-		System.out.println("mapVCode: " + festival.getMapVCode());
-		System.out.println("mapHcode: " + festival.getMapHcode());
+		//좌표 추출
+		String nx = festival.getMapHCode();
+	    String ny = festival.getMapVCode();
+	    System.out.println(nx);
+	    System.out.println(ny);
+
+	    Map<String, String> dateTimeMap = WeatherUtils.getWeatherBaseDateTime("0500");
+			String baseDate = dateTimeMap.get("baseDate");
+	        String baseTime = dateTimeMap.get("baseTime");;
+	        System.out.println(dateTimeMap);
+	        //날짜, 시간 생성
+	    String json = api.callShortWeatherApi(baseDate,baseTime,nx, ny);
+		Map<String, String> weather = api.parseTodayClosestWeather(json);
+		System.out.println(weather);
 		model.addAttribute("festival",festival);
+		model.addAttribute("weather",weather);
 		return "festival/festivalDetail";
 	}
 	
-
+	//축제 최신화
 	@GetMapping("/insert")
 	public String insertFestivalList(Model model) {
 		festivalService.insertFestivalList();
 		model.addAttribute("msg", "저장완료");
 		return "festival/list";
 	}
-	
+	//축제 검색
 	@GetMapping("/search")
 	public String searchFestivalList(HttpSession session
 			,Model model
@@ -114,14 +127,14 @@ public class FestivalController {
 		Map<String, String> searchMap = new HashMap <String, String>();
 		searchMap.put("searchKeyword", searchKeyword);
 		searchMap.put("searchCondition", searchCondition);
-		System.out.println(searchCondition);
+//		System.out.println(searchCondition);
 		int totalCount = festivalService.getSearchTotalCount(searchMap);
 	    int itemsPerPage = 8;
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
 	    List<Festival> festivals = festivalService.searchFestivalListAll(pageInfo.get("startRow"), pageInfo.get("endRow"),searchMap);
-	    System.out.println("검색된 축제 수 : " + festivals.size());
+//	    System.out.println("검색된 축제 수 : " + festivals.size());
 	    for (Festival f : festivals) {
-	        System.out.println("축제명: " + f.getFestivalName());
+//	        System.out.println("축제명: " + f.getFestivalName());
 	    }
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
@@ -130,6 +143,23 @@ public class FestivalController {
 	    model.addAttribute("festivals",festivals);
 	    
 	    return "festival/festivalSearch";
+	}
+	
+	@GetMapping("/testWeather")
+	@ResponseBody
+	public String testWeather(@RequestParam String nx, @RequestParam String ny) {
+		Map<String, String> dateTimeMap = WeatherUtils.getWeatherBaseDateTime("0500");
+		String baseDate = dateTimeMap.get("baseDate");
+		String baseTime = dateTimeMap.get("baseTime");
+		String json = api.callShortWeatherApi(baseDate, baseTime, nx, ny);
+	    Map<String, String> weather = api.parseTodayClosestWeather(json);
+
+	    return String.format(
+	        "🌡 기온: %s\n☔ 강수량: %s\n⛅ 하늘상태: %s",
+	        weather.getOrDefault("기온", "정보 없음"),
+	        weather.getOrDefault("강수량", "정보 없음"),
+	        weather.getOrDefault("하늘상태", "정보 없음")
+	    );
 	}
 	
 

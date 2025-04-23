@@ -20,8 +20,8 @@
 	       <main class="festival-main">
 	           <div class="buttons">
 	               <div class="festival-button">
-	                   <button>추천 축제</button>
-	                   <button>다가오는 축제</button>
+	                   <button>🔅화창한 지역</button>
+	                   <button>진행중인 축제</button>
 	               </div>
 	               <div class="festival-search">
 	                   <form class="search-form" method="get" action="/festival/search">

@@ -5,9 +5,15 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,9 +51,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fepeo.boot.common.util.WeatherUtils;
 import com.fepeo.boot.course.model.vo.dto.KakaoPlaceResponseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
+import com.fepeo.boot.festival.model.vo.dto.WeatherApiResponse;
+import com.fepeo.boot.festival.model.vo.dto.WeatherItem;
 import com.fepeo.boot.report.controller.ReportController;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -70,7 +79,6 @@ public class ApiComponent {
         this.objectMapper = objectMapper;
         this.reportController = reportController;		
 	}
-	
 
 	@Value("${weatherApiKey}")
     private String weatherApiKey;
@@ -435,29 +443,89 @@ public class ApiComponent {
 	//기상청 단기예보
 		public String callShortWeatherApi(String baseDate, String baseTime, String nx, String ny) {
 		    WebClient webClient = WebClient.builder()
-		            .baseUrl("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst")
-		            .exchangeStrategies(
-		                ExchangeStrategies.builder()
-		                .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024))
-		                .build()
-		            )
-		            .build();
+		        .baseUrl("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst")
+		        .build();
 
-		        return webClient.get()
-		            .uri(uriBuilder -> uriBuilder
-		                .queryParam("serviceKey", weatherApiKey)
-		                .queryParam("pageNo", 1)
-		                .queryParam("numOfRows", 1000)
-		                .queryParam("dataType", "JSON")
-		                .queryParam("base_date", baseDate)
-		                .queryParam("base_time", baseTime)
-		                .queryParam("nx", nx)
-		                .queryParam("ny", ny)
-		                .build())
-		            .retrieve()
-		            .bodyToMono(String.class)
-		            .block();
-		    }
+		    return webClient.get()
+		        .uri(uriBuilder -> uriBuilder
+		            .queryParam("serviceKey", weatherApiKey) 
+		            .queryParam("pageNo", 1)
+		            .queryParam("numOfRows", 1000)
+		            .queryParam("dataType", "JSON")
+		            .queryParam("base_date", baseDate)      
+		            .queryParam("base_time", baseTime)
+		            .queryParam("nx", nx)
+		            .queryParam("ny", ny)
+		            .build())
+		        .retrieve()
+		        .bodyToMono(String.class)
+		        .block();
+		}
 		
-	
+		public Map<String, String> parseTodayClosestWeather(String json) {
+		    Map<String, String> result = new HashMap<>();
+		    ObjectMapper mapper = new ObjectMapper();
+		    
+		    try {
+		        JsonNode root = mapper.readTree(json);
+		        JsonNode items = root.path("response").path("body").path("items").path("item");
+
+		        // 현재 날짜, 시간 계산
+		        LocalDate today = LocalDate.now();
+		        String todayStr = today.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+		        LocalTime now = LocalTime.now();
+		        // 기준 시간: 지금 시간에서 가장 가까운 예보 시간 찾기
+		        int closestDiff = Integer.MAX_VALUE;
+		        String targetFcstTime = null;
+
+		        for (JsonNode item : items) {
+		            if (!item.path("fcstDate").asText().equals(todayStr)) continue;
+
+		            String fcstTime = item.path("fcstTime").asText();
+		            int diff = Math.abs(Integer.parseInt(fcstTime) - now.getHour() * 100);
+		            if (diff < closestDiff) {
+		                closestDiff = diff;
+		                targetFcstTime = fcstTime;
+		            }
+		        }
+
+		        // 가장 가까운 시간의 TMP, PCP, SKY 값 추출
+		        for (JsonNode item : items) {
+		            String fcstDate = item.path("fcstDate").asText();
+		            String fcstTime = item.path("fcstTime").asText();
+		            String category = item.path("category").asText();
+		            String value = item.path("fcstValue").asText();
+
+		            if (!fcstDate.equals(todayStr) || !fcstTime.equals(targetFcstTime)) continue;
+
+		            switch (category) {
+		                case "TMP":
+		                    result.put("기온", value + "℃");
+		                    break;
+		                case "PCP":
+		                    result.put("강수량", value);
+		                    break;
+		                case "SKY":
+		                    result.put("하늘상태", parseSky(value));
+		                    break;
+		            }
+		        }
+
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+
+		    return result;
+		}
+
+		private String parseSky(String value) {
+		    switch (value) {
+		        case "1": return "맑음";
+		        case "3": return "구름 많음";
+		        case "4": return "흐림";
+		        default: return "정보 없음";
+		    }
+		}
+
 }

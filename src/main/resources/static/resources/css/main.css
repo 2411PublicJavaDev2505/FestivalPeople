@@ -50,7 +50,7 @@
 }
 
 .slidecontroller-text-main h1 {
-	
+	padding-bottom: 20px;
     font-size: 24px;
     font-weight: bold;
     color: #333;
@@ -59,6 +59,29 @@
 
 .slidecontroller-text-main h1 span {
     display: block;
+}
+.slidecontroller-text-main h3 span{
+	display: none;
+	font-size:14px;
+    position: absolute;
+    height:40px;
+    left:150px;
+    top:10px;
+    background: black;
+    color: white;
+    border-radius: 30px;
+    padding: 12px 12.8px;
+    z-index:999;	
+}
+.slidecontroller-text-main h3 span:after{
+	border-top: 10px solid black;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 0px solid transparent;
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 20px;
 }
 
 .slidecontroller-detail a {
@@ -92,9 +115,6 @@
 }
 
 
-.page-number {
-    font-size: 12px;
-}
 
 .page-number .current-page {
     font-weight: bold;

@@ -1,5 +1,7 @@
 package com.fepeo.boot;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -29,7 +31,7 @@ public class ApiControllerTest {
 	
 	@Test
 	public void testApiLoader() throws JsonMappingException, JsonProcessingException {
-
+		
 		//날씨 테스트
 		//Map<String, String> apiKey = aService.callWeatherApi("202504160600");
 		// 축제 테스트
@@ -40,13 +42,12 @@ public class ApiControllerTest {
 		// 좌표 테스트
 //		Map<String, String> apiKey = aService.searchMemberAddress("서울시 평창 10길 3");
 		//System.out.println(apiKey);
-		
-
 //		List<FestivalItem> apiKey = aService.callFestivalApi();
 //		String apiKey = aService.kakaoMapApi();
 //		System.out.println(apiKey);
-
-		//System.out.println(apiKey);
+		
+		//날씨 단기 예보 테스트
+		String apiKey = aService.callShortWeatherApi("20250423","0500","55", "127");
 		
 	}
 	
