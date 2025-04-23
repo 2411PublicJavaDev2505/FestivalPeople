@@ -47,7 +47,7 @@ public class ApiControllerTest {
 //		System.out.println(apiKey);
 		
 		//날씨 단기 예보 테스트
-		String apiKey = aService.callShortWeatherApi("55", "127");
+		String apiKey = aService.callShortWeatherApi("20250423","0500","55", "127");
 		
 	}
 	

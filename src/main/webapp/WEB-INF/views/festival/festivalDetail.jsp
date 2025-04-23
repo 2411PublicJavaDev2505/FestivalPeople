@@ -36,8 +36,9 @@
 							<li> 📞 대표 전화:  ${festival.festivalPhone}</li>
 							<li> 🔅 축제기간 일기예보
 								<div class="weather-api">
-									<pre>${weather}</pre>
-									<!-- <img src="${pageContext.request.contextPath}/resources/img/festival/weather_example.jpg" alt="날씨"> -->
+									<p>🌡 기온: ${weather["기온"] != null ? weather["기온"] : "정보 없음"}</p>
+									<p>☔ 강수량: ${weather["강수량"]!= null ? weather["강수량"] : "정보 없음"}</p>
+									<p>⛅ 하늘상태: ${weather["하늘상태"]!= null ? weather["하늘상태"] : "정보 없음"}</p>
 								</div>
 							</li>
 							<li> 🚩 지도

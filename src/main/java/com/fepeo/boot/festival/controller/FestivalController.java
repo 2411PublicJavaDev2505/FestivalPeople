@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -91,14 +92,20 @@ public class FestivalController {
 		Festival festival = festivalService.selectFestivalByNo(festivalNo);
 		//좌표 추출
 		String nx = festival.getMapHCode();
-		String ny = festival.getMapVCode();
-		//날짜, 시간 생성
-		Map<String, String> dateTimeMap = WeatherUtils.getWeatherBaseDateTime();
-		String baseDate = dateTimeMap.get("baseDate");
-		String baseTime = dateTimeMap.get("baseTime");
-		String weatherJson = api.callShortWeatherApi(nx, ny);
+	    String ny = festival.getMapVCode();
+	    System.out.println(nx);
+	    System.out.println(ny);
+
+	    Map<String, String> dateTimeMap = WeatherUtils.getWeatherBaseDateTime("0500");
+			String baseDate = dateTimeMap.get("baseDate");
+	        String baseTime = dateTimeMap.get("baseTime");;
+	        System.out.println(dateTimeMap);
+	        //날짜, 시간 생성
+	    String json = api.callShortWeatherApi(baseDate,baseTime,nx, ny);
+		Map<String, String> weather = api.parseTodayClosestWeather(json);
+		System.out.println(weather);
 		model.addAttribute("festival",festival);
-		model.addAttribute("weather",weatherJson);
+		model.addAttribute("weather",weather);
 		return "festival/festivalDetail";
 	}
 	
@@ -120,7 +127,7 @@ public class FestivalController {
 		Map<String, String> searchMap = new HashMap <String, String>();
 		searchMap.put("searchKeyword", searchKeyword);
 		searchMap.put("searchCondition", searchCondition);
-		System.out.println(searchCondition);
+//		System.out.println(searchCondition);
 		int totalCount = festivalService.getSearchTotalCount(searchMap);
 	    int itemsPerPage = 8;
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
@@ -136,6 +143,23 @@ public class FestivalController {
 	    model.addAttribute("festivals",festivals);
 	    
 	    return "festival/festivalSearch";
+	}
+	
+	@GetMapping("/testWeather")
+	@ResponseBody
+	public String testWeather(@RequestParam String nx, @RequestParam String ny) {
+		Map<String, String> dateTimeMap = WeatherUtils.getWeatherBaseDateTime("0500");
+		String baseDate = dateTimeMap.get("baseDate");
+		String baseTime = dateTimeMap.get("baseTime");
+		String json = api.callShortWeatherApi(baseDate, baseTime, nx, ny);
+	    Map<String, String> weather = api.parseTodayClosestWeather(json);
+
+	    return String.format(
+	        "🌡 기온: %s\n☔ 강수량: %s\n⛅ 하늘상태: %s",
+	        weather.getOrDefault("기온", "정보 없음"),
+	        weather.getOrDefault("강수량", "정보 없음"),
+	        weather.getOrDefault("하늘상태", "정보 없음")
+	    );
 	}
 	
 
