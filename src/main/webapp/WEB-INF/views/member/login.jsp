@@ -6,7 +6,15 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/member/login.css">
+	<link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+         crossorigin="anonymous"
+    />
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<title>FePeo-login</title>
 </head>
 <body>
@@ -21,16 +29,18 @@
 					<span>로그인</span>
 				</div>
 				<div class="login-main">
-					<div  class="login-input">
-						<input type="text" placeholder="아이디를 입력하세요" name="memberId" id="id">
-					</div>
-					<div class="login-input">
-						<input type="password" placeholder="비밀번호를 입력하세요" name="memberPw" id="pw">
-					</div>
-					<div class="check-input"></div>
-					<div class="login-btn">
-						<button onclick="login();">로그인</button>
-					</div>
+					<form action="/login" method="post">
+						<div  class="login-input">
+							<input type="text" placeholder="아이디를 입력하세요" name="username" id="id">
+						</div>
+						<div class="login-input">
+							<input type="password" placeholder="비밀번호를 입력하세요" name="password" id="pw">
+						</div>
+						<div class="check-input"></div>
+						<div class="login-btn">
+							<button onclick="login();">로그인</button>
+						</div>
+					</form>
 				</div>
 				<div class="login-footer">
 					<span><a onclick="findId();">아이디 찾기</a></span>
@@ -61,34 +71,48 @@
 		</main>
 	</div>
 	<script type="text/javascript">
+		const fail = '${fail}';
+		if(fail == 1){
+			customAlert("로그인에 실패하셨습니다!");
+		}
+		function customAlert(message) {
+		    Swal.fire({
+		      icon: 'warning',
+		      title: message,
+		      text: "",
+		    });
+		  }
 		const login = () => {
 			document.querySelector(".check-input").innerHTML = "";
 			let memberId = document.querySelector("#id").value;
 			let memberPw = document.querySelector("#pw").value;
 			if(memberId.trim() == ""){
 				document.querySelector(".check-input").innerHTML = "아이디를 입력해주세요.";
+				event.preventDefault();
 			}else if(memberPw.trim() == ""){
 				document.querySelector(".check-input").innerHTML = "비밀번호를 입력해주세요.";
+				event.preventDefault();
 			}else{
-				$.ajax({
-					dataType: "json",
-					url: "/member/login",
-					data: {
-						"memberId" : memberId,
-						"memberPw" : memberPw
-					},
-					type: "POST",
-					success: function(data) {
-						if(data.memberNo == null){
-							document.querySelector(".check-input").innerHTML = data.checkMsg;
-						}else{
-							location.href = "/";
-						}
-					},
-					error: function() {
-						alert("통신오류!!");
-					}
-				});
+				
+// 				$.ajax({
+// 					dataType: "json",
+// 					url: "/member/login",
+// 					data: {
+// 						"memberId" : memberId,
+// 						"memberPw" : memberPw
+// 					},
+// 					type: "POST",
+// 					success: function(data) {
+// 						if(data.memberNo == null){
+// 							document.querySelector(".check-input").innerHTML = data.checkMsg;
+// 						}else{
+// 							console.log("확인")
+// 						}
+// 					},
+// 					error: function() {
+// 						alert("통신오류!!");
+// 					}
+// 				});
 			}
 		}
 	

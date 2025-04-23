@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +43,7 @@
 					<span>회원가입</span>
 				</div>
 				<form action="/member/insert" method="post" enctype="multipart/form-data">
+					<sec:csrfInput/>
 					<input type="hidden" name="socialYn" value="N">
 					<div class="register-main">
 						<div class="register-left">

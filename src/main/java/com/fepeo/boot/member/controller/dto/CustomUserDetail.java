@@ -10,8 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fepeo.boot.member.model.vo.Member;
 
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class CustomUserDetail implements UserDetails{
 
 	private Member member;

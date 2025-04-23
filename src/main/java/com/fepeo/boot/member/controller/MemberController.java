@@ -51,7 +51,9 @@ public class MemberController {
 	private final PasswordEncoder passwordEncoder;
 
 	@GetMapping("/login")
-	public String showLogin(Model model) throws IOException {
+	public String showLogin(Model model
+			,@RequestParam(value="fail", defaultValue = "0") int fail) throws IOException {
+		model.addAttribute("fail",fail);
 		String kakao = api.getKakao_client_id();
 		String naver = api.getNaver_client_id();
 		String google = api.getGoogle_client_id();
@@ -64,8 +66,7 @@ public class MemberController {
 
 	@ResponseBody
 	@PostMapping("/login")
-	public String memberLogin(@ModelAttribute MemberLoginRequest login
-			,HttpSession session) {
+	public String memberLogin(@ModelAttribute MemberLoginRequest login) {
 		JSONObject json = new JSONObject();
 		int check = mService.checkMemberById(login.getMemberId());
 		String checkMsg = "";
@@ -76,7 +77,6 @@ public class MemberController {
 		}
 		Member member = mService.memberLogin(login);
 		if(member != null) {
-			session.setAttribute("member", member);
 			json.put("memberNo", member.getMemberNo());
 		}else {
 			checkMsg = "비밀번호가 틀렸습니다.";
@@ -300,17 +300,11 @@ public class MemberController {
 			,Model model) throws IllegalStateException, IOException {
 		member.setProfile(profile);
 		
-		System.out.println("뭐지?");
-		
 		if(member.getMemberPw() != null) {
 			member.setMemberPw(passwordEncoder.encode(member.getMemberPw()));
 		}
 		
-		System.out.println("이건 아닌거 같은데");
-		
 		int result = mService.insertMember(member);
-		System.out.println("db 문제");
-		System.out.println(result);
 		if(member.getSocialYn().equals("Y")) {
 			return "member/socialInsertPopup";
 		}else {
@@ -346,6 +340,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/updatepw")
 	public String updateMemberPw(MemberUpdatePwRequest member) {
+		member.setMemberPw(passwordEncoder.encode(member.getMemberPw()));
 		int result = mService.updateMemberPw(member);
 		return "비밀번호가 변경되었습니다.";
 	}
@@ -387,6 +382,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/delete")
 	public String deleteMember(MemberLoginRequest login) {
+		login.setMemberPw(passwordEncoder.encode(login.getMemberPw()));
 		Member member = mService.memberLogin(login);
 		JSONObject json = new JSONObject();
 		if(member != null) {
