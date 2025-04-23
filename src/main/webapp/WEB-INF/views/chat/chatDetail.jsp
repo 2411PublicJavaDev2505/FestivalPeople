@@ -29,10 +29,10 @@
 		<section class="chat-list-total">
 			<!--좌 소속방목록-->
 			<section class="mychat-list-wrap">
-				<form class="mychat-list-search" action="#" >
+<!-- 				<form class="mychat-list-search" action="#" >
 					<input type="text" class="list-search-input" placeholder="검색" name="mySearchKeyword">
 					<button class="chat-search-btn" type="submit">⌕</button>
-				</form>
+				</form> -->
 				
 				<!-- 참여방 없을 경우 -->
 				<c:if test="${empty myList }">
