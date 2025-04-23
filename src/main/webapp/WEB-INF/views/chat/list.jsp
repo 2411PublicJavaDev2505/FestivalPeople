@@ -10,6 +10,10 @@
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
 	<link rel="stylesheet" href="../resources/css/chat/list.css">
+	
+    <script type="text/javascript" src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	
 </head>
 <body>
 	<!-- 광고 배너 -->
@@ -30,7 +34,7 @@
     <main class="chat-main">
 		<section class="chat-nav">
 			<span>${member.nickname } 참여 채팅 수 : 0</span> memNo.${member.memberNo }
-			<form class="chat-list-search" action="#" >
+			<form class="chat-list-search" action="/chat/totalSearch" >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 				<button class="chat-search-btn" >⌕</button>
 			</form>
@@ -38,9 +42,9 @@
 		<section class="chat-list-total">
 			<!--좌 소속방목록-->
 			<section class="mychat-list-wrap">
-				<form class="mychat-list-search" action="#" >
-					<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
-					<button class="chat-search-btn" type="submit">⌕</button>
+				<form class="mychat-list-search" action="/chat/mySearch" >
+					<input type="text" class="list-search-input" id="myChatSearch"  placeholder="검색" name="mySearchKeyword">
+					<button class="chat-search-btn" id="searchBtn" type="button">⌕</button>
 				</form>
 				
 				<!-- 참여방 없을 경우 -->
@@ -94,6 +98,7 @@
     </div>
 
 	<script>
+		/* 채팅방 입장 시  */
 		function checkAndEnter(chatroomNo) {
 			fetch("/chat/check-access?chatroomNo=" + chatroomNo)
 			.then(res => res.json())
@@ -113,6 +118,34 @@
 				alert("서버 오류 발생: " + err);
 			});
 		}
+		
+		/* 좌측 나의 채팅방 검색 */
+/* 		$(document).ready(function(){
+			$("#searchBtn").click(function(){
+				var keyword = $("#myChatSearch").val();
+				$.ajax({
+					type: "GET",
+					url:"/chat/mySearch",
+					data: { keyword: keyword },
+					dataType: "json",
+					success: function(response){
+						var
+					}
+				});
+			});
+		});
+		 */
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</script>
 </body>
 </html>

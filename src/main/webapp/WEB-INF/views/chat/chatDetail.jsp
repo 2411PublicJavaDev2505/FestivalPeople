@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/header.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chatDetail.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chatLeftSide.css">
+	
 </head>
 <body>
     <div id="container">
@@ -29,7 +30,7 @@
 			<!--좌 소속방목록-->
 			<section class="mychat-list-wrap">
 				<form class="mychat-list-search" action="#" >
-					<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
+					<input type="text" class="list-search-input" placeholder="검색" name="mySearchKeyword">
 					<button class="chat-search-btn" type="submit">⌕</button>
 				</form>
 				
@@ -125,8 +126,8 @@
 						</div>
 					</div>
 				</header>
+				
 				<section class="chat-area">
-
 					<div>
 					<c:forEach items="${msgList }" var="mList" varStatus="i">
 						<ul id="balloonList" class="group_msg_balloon">
@@ -151,7 +152,7 @@
 								<div class="msg-balloon-area-l">
 									<p class="msg-balloon-box-l">${mList.chatMsgContent }</p>
 									<div class="msg-info">
-										<p class="msg-non-read">안읽음2</p>
+										<p class="msg-non-read">안읽음</p>
 										<span class="msg-time">
 											<fmt:formatDate value="${mList.chatMsgTime}" pattern="a h:mm" />
 										</span>
@@ -164,7 +165,7 @@
 							<li class="msg-balloon-area-my">
 								<div class="msg-balloon-area-r">
 									<div class="msg-info-r">
-										<p class="msg-non-read">안읽음4</p>
+										<p class="msg-non-read">안읽음</p>
 										<span class="msg-time">
 											<fmt:formatDate value="${mList.chatMsgTime}" pattern="a h:mm" />
 										</span>

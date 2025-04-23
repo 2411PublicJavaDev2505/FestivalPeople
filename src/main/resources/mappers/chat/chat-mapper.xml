@@ -52,4 +52,29 @@
 	<select id="selectMyChatRoomListByChatMember" resultType="ChatRoom">
 		SELECT * FROM CHATROOM WHERE CHATROOM_NO = #{chatroomNo}
 	</select>
+	<!-- 전체 채팅방 검색 -->
+	<select id="searchChatRoom" resultType="ChatRoom">
+		select * from CHATROOM
+		<where>
+			CHATROOM_TITLE like '%'||#{searchKeyword}||'%' or
+			TAG1 like '%'||#{searchKeyword}||'%' or
+			TAG2 like '%'||#{searchKeyword}||'%' or
+			TAG3 like '%'||#{searchKeyword}||'%'
+		</where>
+		ORDER BY CHATROOM_TITLE asc
+	</select>
+	
+	<!-- 나의 채팅방 검색 -->
+	<select id="searchChatRoomByNo" resultType="ChatRoom">
+		select * from CHATROOM
+		where (
+			CHATROOM_TITLE like '%'||#{mySearchKeyword}||'%' or
+			TAG1 like '%'||#{mySearchKeyword}||'%' or
+			TAG2 like '%'||#{mySearchKeyword}||'%' or
+			TAG3 like '%'||#{mySearchKeyword}||'%'
+		)
+		and MEMBER_NO = #{memberNo} 
+		ORDER BY CHATROOM_TITLE asc
+	</select>
+	
 </mapper>  
