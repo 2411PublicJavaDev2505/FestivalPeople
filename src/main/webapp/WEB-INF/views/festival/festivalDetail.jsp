@@ -36,7 +36,8 @@
 							<li> 📞 대표 전화:  ${festival.festivalPhone}</li>
 							<li> 🔅 축제기간 일기예보
 								<div class="weather-api">
-									<img src="${pageContext.request.contextPath}/resources/img/festival/weather_example.jpg" alt="날씨">
+									<pre>${weather}</pre>
+									<!-- <img src="${pageContext.request.contextPath}/resources/img/festival/weather_example.jpg" alt="날씨"> -->
 								</div>
 							</li>
 							<li> 🚩 지도
@@ -45,7 +46,7 @@
 								  <div class="map-api" style="width:100%;height:350px;">								
 								  <!-- 길찾기 버튼 -->
 								  <a class="map_shortcut" 
-								     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHcode},${festival.mapVCode}" 
+								     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHCode},${festival.mapVCode}" 
 								     target="_blank">
 								     📍 길찾기
 								  </a>
@@ -63,7 +64,7 @@
 		<script>
 			var kakaoMapContainer = document.querySelector('.map-api')
 			var mapOptions = {
-				center : new kakao.maps.LatLng(Number("${festival.mapHcode}"), Number("${festival.mapVCode}")),
+				center : new kakao.maps.LatLng(Number("${festival.mapHCode}"), Number("${festival.mapVCode}")),
 					level: 2
 			};
 			
@@ -72,7 +73,7 @@
 			var positions = [
 				{
 					title: "${festival.festivalName}",
-					latlng: new kakao.maps.LatLng(Number("${festival.mapHcode}"), Number("${festival.mapVCode}"))
+					latlng: new kakao.maps.LatLng(Number("${festival.mapHCode}"), Number("${festival.mapVCode}"))
 				}
 			]
 			//마커이미지

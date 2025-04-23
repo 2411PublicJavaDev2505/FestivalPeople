@@ -45,6 +45,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fepeo.boot.common.util.WeatherUtils;
 import com.fepeo.boot.course.model.vo.dto.KakaoPlaceResponseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
@@ -70,7 +71,6 @@ public class ApiComponent {
         this.objectMapper = objectMapper;
         this.reportController = reportController;		
 	}
-	
 
 	@Value("${weatherApiKey}")
     private String weatherApiKey;
@@ -433,8 +433,11 @@ public class ApiComponent {
 		}
 		
 	//기상청 단기예보
-		public String callShortWeatherApi(String baseDate, String baseTime, String nx, String ny) {
-		    WebClient webClient = WebClient.builder()
+		public String callShortWeatherApi(String nx, String ny) {
+			Map<String, String> dateTimeMap = WeatherUtils.getWeatherBaseDateTime();
+			String baseDate = dateTimeMap.get("baseDate");
+			String baseTime = dateTimeMap.get("baseTime");
+			WebClient webClient = WebClient.builder()
 		            .baseUrl("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst")
 		            .exchangeStrategies(
 		                ExchangeStrategies.builder()

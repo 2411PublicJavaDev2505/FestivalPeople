@@ -26,6 +26,9 @@
                     </h3>
                 </div>
                 <div class="slidecontroller-text-main">
+                    <h3>
+	                    <span class="sub-text"></span>
+                    </h3>
                     <h1>
                         <span class="main-text"></span>
                     </h1>
@@ -37,9 +40,6 @@
             <div class="slidecontroller-pagination">
                 <div class="my-progress-bar">
                     <span class="progress"></span>
-                </div>
-                <div class="page-number">
-<!--                     <span class="current-page">01</span> / <span class="total-pages">03</span> -->
                 </div>
                 <div class="navigation-buttons">
                     <button class="prev">&#10094;</button>
@@ -66,8 +66,8 @@
             src: "${festival.festivalFilePath}",
             alt : "${festival.festivalStartDate}",
             tagline: "${festival.festivalEndDate}",
+            subText: "<이번달 추천 축제>",
             mainText: "${festival.festivalName}",
-            subText: "${festival.festivalPhone}",
             festivalNo: "${festival.festivalNo}"
         }<c:if test="${!loop.last}">,</c:if>
         </c:forEach>
@@ -77,8 +77,8 @@
     const currentPageElement = document.querySelector('.current-page');
     const progressBar = document.querySelector('.progress');
     const taglineElement = document.querySelector('.tagline');
+    const subTextElement = document.querySelector('.sub-text');
     const mainTextElement = document.querySelector('.main-text');
-    const subTextElement = document.querySelector('.slidecontroller-text-main h1');
     
     const showDetail = () => {
 		console.log(slides[currentSlide].festivalNo);
@@ -118,19 +118,11 @@
             
             
            	$(".simple-slide.active ").fadeIn("slow");
-//             let nImage = document.querySelector(".simple-slide.next img");
-//             nImage.src = nextSlide.src;
-//             nImage.alt = nextSlide.alt;
-            
-            
-//             slideContainer.innerHTML = '<div class="simple-slide active"><img src="'+ slide.src +'" alt="'+slide.alt+'"></div>' + '<div class="simple-slide next"><img src="'+nextSlide.src+'" alt="'+nextSlide.alt+'"></div>';
-
-// 			currentPageElement.textContent = String(currentSlide + 1).padStart(2, '0');
 
             taglineElement.textContent = slide.tagline;
+            subTextElement.textContent = slide.subText;
             mainTextElement.textContent = slide.mainText;
-            subTextElement.innerHTML = '<span class="main-text">'+slide.mainText+'</span><br>'+slide.subText+'';
-//         	document.getElementById("detailLink").href='/festival/detail/'+slide.fesivalNo+'';
+            $(".slidecontroller-text-main h3 span").show();
         }
 		
         setInterval(function() {

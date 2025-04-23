@@ -52,7 +52,7 @@ public class FestivalServiceLogic implements FestivalService {
                 f.setFestivalAddress(item.getAddr1());
                 f.setFestivalDetailAddress(item.getAddr2());
                 f.setMapVCode(item.getMapx());
-                f.setMapHcode(item.getMapy());
+                f.setMapHCode(item.getMapy());
 
                 festivalMapper.insertFestival(f);
             }
