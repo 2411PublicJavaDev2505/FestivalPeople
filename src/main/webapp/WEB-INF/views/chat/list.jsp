@@ -121,37 +121,7 @@
 		}
 		
  		/* 좌측 나의 채팅방 검색 */
-/*		$("#searchBtn").click(function(){
-			var keyword = $("#myChatSearch").val();
-			$.ajax({
-				type: "GET",
-				url:"/chat/mySearch",
-				data: { keyword: keyword },
-				dataType: "json",
-				success: function(response){
-					var searchBody = ""; //새로운 출력 형태 생성
-					$.each(response, function(index, myList){
-						searchBody +=
-							`<ul class="chat-list">
-								<li class="chat-list-row">
-									<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
-									<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
-									<div class="text-wrap">
-										<div class="chat-title">${myList.chatroomTitle }</div>
-										<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
-										<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
-									</div>
-									<div class="msg-alarm">0</div>
-									</a>
-								</li>
-							</ul> 
-						`;
-					});
-					// 기존 목록을 새 목록으로 교체
-					$(".mychat-list-wrap").html(searchBody);
-				}
-			});
-		}); */
+
 	</script>
 </body>
 </html>
