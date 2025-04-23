@@ -12,6 +12,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.course.model.service.CourseService;
 import com.fepeo.boot.course.model.vo.dto.Categories;
+import com.fepeo.boot.course.model.vo.dto.CourseForm;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
 import com.fepeo.boot.festival.model.service.FestivalService;
@@ -159,13 +161,12 @@ public class CourseController {
 	}
 	
 	
-	
 	@PostMapping("/insert")
-	public String insertCourse() {
+	public String insertCourse(@ModelAttribute CourseForm courseForm, Model model) {
+		List<PlaceDto> places = courseForm.getPlaces();
+		System.out.println("왜 안되니 ㅠ"+places);
 		
-		
-		
-		return "";
+		return "/";
 	}
 	
 

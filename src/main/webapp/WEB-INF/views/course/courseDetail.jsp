@@ -66,7 +66,14 @@
 							<form class="insert-course" action="/course/insert" method="post">
 								<div class="expect-cost">선택 장소 수 : ??</div>								
 								<div class="expect-time">예상 소요 시간 : ??</div>							
-								<div id="hiddenPlaceInputs"></div>
+								<div id="hiddenPlaceInputs">
+						        <c:forEach var="place" items="${places}">
+						            <input type="hidden" name="places[${place.id}].category" value="${place.category}" />
+						            <input type="hidden" name="places[${place.id}].name" value="${place.name}" />
+						            <input type="hidden" name="places[${place.id}].x" value="${place.x}" />
+						            <input type="hidden" name="places[${place.id}].y" value="${place.y}" />
+						        </c:forEach>
+						        </div>
 								<input type="submit" value="코스 저장하기">							
 							</form>																			
 						</div>
@@ -151,6 +158,8 @@
 		dynamicMarkers = [];
 	}
 
+
+	
 	$(document).ready(function () {
 		let selectedCategories = [];
 
@@ -182,8 +191,12 @@
 				success: function (data) {
 					console.log("서버 응답:", data);
 
+	                $('#hiddenPlaceInputs').html(''); // 기존의 hidden inputs 초기화
+	                data.forEach(place => {		
+					
 					clearMarkers(); // 동적 마커 제거
-
+					$('#recommendation-container').html('');
+				    $('#hiddenPlaceInputs').html('');
 					let html = '';
 					data.forEach(place => {
 						const latlng = new kakao.maps.LatLng(Number(place.y), Number(place.x));
@@ -196,6 +209,15 @@
 						});
 						dynamicMarkers.push(marker); // 배열에 저장
 
+		                   let hiddenInputs = `
+		                        <input type="hidden" name="places[${place.id}].category" value="`+place.category_group_code+`"">
+		                        <input type="hidden" name="places[${place.id}].name" value="`+place.place_name+`">
+		                        <input type="hidden" name="places[${place.id}].x" value="`+place.x+`">
+		                        <input type="hidden" name="places[${place.id}].y" value="`+place.y+`">
+		                    `;
+		                    $('#hiddenPlaceInputs').append(hiddenInputs);
+		                });
+						
 						const infowindow = new kakao.maps.InfoWindow({
 							content: `<div style="padding:5px;font-size:14px;">`+place.place_name+`</div>`
 						});
@@ -224,8 +246,18 @@
 								<input type="hidden" name="${place.category_group_code}_X" value="${place.x}">
 								<input type="hidden" name="${place.category_group_code}_Y" value="${place.y}">
 								<input type="hidden" name="${place.category_group_code}_Name" value="${place.place_name}">
+								<input type="hidden" name="${place.category_group_code}_Name" value="${place.place_name}">
 							</div>
 						</div>`;
+/* 				        let hiddenInputs = `
+				            <input type="hidden" name="places[${i}].category_group_code" value="${place.category_group_code}">
+				            <input type="hidden" name="places[${i}].x" value="${place.x}">
+				            <input type="hidden" name="places[${i}].y" value="${place.y}">
+				            <input type="hidden" name="places[${i}].place_name" value="${place.place_name}">
+				        `;
+				        $('#hiddenPlaceInputs').append(hiddenInputs); */
+
+				        i++;						
 					});
 
 					$('#recommendation-container').append(html);
