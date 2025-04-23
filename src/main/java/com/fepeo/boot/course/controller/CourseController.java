@@ -157,8 +157,7 @@ public class CourseController {
 			}	
 			
 			
-			
-			
+		System.out.println(placeList);
 		}
 		System.out.println(placeList);
 		return placeList;
