@@ -114,12 +114,13 @@ public class ReviewController {
 	//showreviewUpdate라고 이름 바꿔줌!
 	//4/23 오전 다시 시작!
 	//4/23 14:38 아래 model.addAttribute("review",review);를 바꿔줌!! 
+	//4/23 15:23분 다시 바꿔줌!!
 	
 	@GetMapping("/update")
 	public String showreviewUpdate(@RequestParam("reviewNo") int reviewNo
 			,Model model) {
 		Review review = rService.selectOneByNo(reviewNo);
-		model.addAttribute("reviewNo",reviewNo); 
+		model.addAttribute("review",review); 
 		return "review/update";
 	}
 	
