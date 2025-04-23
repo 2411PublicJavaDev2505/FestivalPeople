@@ -31,18 +31,32 @@
 					<!-- 4/21수정 만들면서 아래코드 추가 작성  -->
 						제목 <input type="text" name="reviewTitle" value="${review.reviewTitle }" size="80">
 					</div>
+					<!-- 4/23 20:33분 코드 추가! 안되면 원복하기! -->
 					<div class="review-content">
 						<div><span>내용 </span></div>
-						<textarea rows="5" cols="82" name="reviewContent">${review.reviewContent }</textarea>
+						<textarea rows="5" cols="82" name="reviewContent">
+						<div class="review-imagefile">
+							<c:if test="${review.reviewFilePath1 ne null }">
+								<img alt="review-img" src="${review.reviewFilePath1 }" id="review-file">
+							</c:if>
+							<c:if test="${review.reviewFilePath2 ne null }">
+								<img alt="review-img" src="${review.reviewFilePath2 }" id="review-file">
+							</c:if>
+							<c:if test="${review.reviewFilePath3 ne null }">
+								<img alt="review-img" src="${review.reviewFilePath3 }" id="review-file">
+							</c:if>
+						${review.reviewContent }</textarea>
 					</div>
 					
 					<div class="review-attach">
 						<!-- div풀기4/21 -->
 						<!-- 첨부파일버튼 다시 옮기기!첨부파일 코드 추가해줘야함! -->
-						<!-- hidden값도 적어줘야함?4/21 12:38분 수정하기 전체 종료!!! -->
-						<input type="file" name ="images"> <br> 
-						<input type="file" name ="images"> <br> 
- 						<input type="file" name ="images"> <br> 
+						<!-- 4/23 이미지수정파일코드작성 20:06 -->
+						<input type="file"  id="images" name ="images" onchange="changeFile();"> <br> 
+						<input type="file"  id="images" name ="images" onchange="changeFile();"> <br> 
+						<input type="file"  id="images" name ="images" onchange="changeFile();"> <br> 
+					
+<!--  						<input type="file" name ="images"> <br>  -->
 					</div>
 					<div class="reviewinsert-btn">
 						<!-- type이러던지 id값 변경해줘야함4/21 -->
@@ -71,6 +85,26 @@
 				    ],
 				    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
 				  });
+				  //여기부터 4/23일20:05분 코드추가
+// 				  const changeFile() = () => {
+// 					  let formData = new FormData();
+// 					  let fileInput = $("#images")[0]);
+// 					  if (fileInput.files.length > 0) {
+// 						  $.ajax({
+// 							  url: "/review/updateimages",
+// 							  data: formData,
+// 							  contentType: false,
+// 					          processData: false,
+// 					          success: function(data) {
+// 					        	  document.querySelector("#review-file").src = data;
+// 					          },
+// 					          error:function() {
+// 					        	  alert("통신오류");
+// 					          }
+// 						  });
+						  
+// 					  }
+// 				  }
 			</script>
 		</div>
 	</div>
