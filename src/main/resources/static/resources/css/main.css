@@ -5,6 +5,20 @@
     box-sizing: border-box;
 }
 
+@keyframes wave-shake {
+  0%   { transform: rotate(0deg); }
+  10%  { transform: rotate(-10deg); }
+  20%  { transform: rotate(12deg); }
+  30%  { transform: rotate(-10deg); }
+  40%  { transform: rotate(9deg); }
+  50%  { transform: rotate(-6deg); }
+  60%  { transform: rotate(6deg); }
+  70%  { transform: rotate(-3deg); }
+  80%  { transform: rotate(2deg); }
+  90%  { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
 .background-image {
     position: fixed;
     top: 0;
@@ -73,6 +87,12 @@
     padding: 12px 12.8px;
     z-index:999;	
 }
+
+.slidecontroller-text-main h3 span.wave {
+  display: inline-block;
+  animation: wave-shake 1s cubic-bezier(.36,.07,.19,.97) infinite;
+}
+
 .slidecontroller-text-main h3 span:after{
 	border-top: 10px solid black;
     border-left: 10px solid transparent;

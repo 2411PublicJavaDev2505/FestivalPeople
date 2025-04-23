@@ -15,7 +15,7 @@
 		<jsp:include page="../include/header.jsp"/>
 		<!-- 바탕화면 -->
 		<div class="background-image">
-			<img src="../resources/img/intro/intro-background.png" alt="바탕화면">
+			<img src="../resources/img/member/insertSucess.jpg" alt="바탕화면">
 		</div>
 			<main class="container">
 				
@@ -36,7 +36,6 @@
 							<p class="card__title">Festival People 는</p>
 							<p class="card__description">소개내용</p>
 							<button class="card__button v" onclick="location.href='/festival/list';">축제 페이지로</button>
-							<button class="card__button secondary" onclick="location.href='/member/insert';">회원가입</button>
 						</div>
 					</div>
 					
@@ -46,7 +45,6 @@
 							<p class="card__title">Festival People 는</p>
 							<p class="card__description">소개내용</p>
 							<button class="card__button r" onclick="location.href='/course/list';">코스추천 페이지로</button>
-							<button class="card__button secondary" onclick="location.href='/member/insert';">회원가입</button>
 						</div>
 					</div>
 					
@@ -56,7 +54,6 @@
 							<p class="card__title">Festival People 는</p>
 							<p class="card__description">소개내용</p>
 							<button class="card__button t" onclick="location.href='/chat/list';">같이 갈래? 페이지로</button>
-							<button class="card__button secondary" onclick="location.href='/member/insert';">회원가입</button>
 						</div>
 					</div>
 					
@@ -66,7 +63,6 @@
 							<p class="card__title">Festival People 는</p>
 							<p class="card__description">소개내용</p>
 							<button class="card__button re" onclick="location.href='/review/list';">여행 후기 페이지로</button>
-							<button class="card__button secondary" onclick="location.href='/member/insert';">회원가입</button>
 						</div>
 					</div>
 			</main>

@@ -27,7 +27,7 @@
                 </div>
                 <div class="slidecontroller-text-main">
                     <h3>
-	                    <span class="sub-text"></span>
+	                    <span class="sub-text wave"></span>
                     </h3>
                     <h1>
                         <span class="main-text"></span>
