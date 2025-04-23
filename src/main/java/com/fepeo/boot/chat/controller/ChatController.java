@@ -84,7 +84,13 @@ public class ChatController {
 			
 			// 각 채팅방별 참여인원수 불러오기
 			List<ChatMember> memberList = service.selectChatMember();
-			model.addAttribute("memberList", memberList);
+//			model.addAttribute("memberList", memberList);
+			
+		    // 디버깅용 출력
+		    System.out.println("myList: " + myList);
+		    System.out.println("cRooms: " + cRooms);
+		    System.out.println("memberList: " + memberList);
+			
 			
 			return "chat/list";
 		}
@@ -197,23 +203,24 @@ public class ChatController {
 	}
 	
 	// 나의 채팅방 검색
-//	@GetMapping("/mySearch")
-//	public String searchChatRoomByNo(HttpSession session,Model model
-//			,@RequestParam("mySearchKeyword") String mySearchKeyword) {
-//	
-//		// 세션에서 memberNo 가져오기
-//		Member member = (Member)session.getAttribute("member");
-//		int memberNo = member.getMemberNo();			
-//		
-//
-//		
-//		
-//		// 각 채팅방별 참여인원수 불러오기
-//		List<ChatMember> memberList = service.selectChatMember();
-//		model.addAttribute("memberList", memberList);		
-//		
-//		return "";
-//	}
+	@GetMapping("/mySearch")
+	@ResponseBody
+	public List<ChatRoom> searchChatRoomByNo(HttpSession session,Model model
+			,@RequestParam("mySearchKeyword") String mySearchKeyword) {
+	
+		// 세션에서 memberNo 가져오기
+		Member member = (Member)session.getAttribute("member");
+		int memberNo = member.getMemberNo();			
+		
+		// 각 채팅방별 참여인원수 불러오기
+		List<ChatMember> memberList = service.selectChatMember();
+		model.addAttribute("memberList", memberList);		
+		
+		// 검색
+		List<ChatRoom> mySearchList = service.searchChatRoomByNo(mySearchKeyword, memberNo);
+		
+		return mySearchList;
+	}
 	
 	
 

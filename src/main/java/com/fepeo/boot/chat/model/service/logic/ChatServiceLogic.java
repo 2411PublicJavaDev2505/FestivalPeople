@@ -110,8 +110,8 @@ public class ChatServiceLogic implements ChatService {
 	}
 
 	@Override // 나의 채팅방 검색
-	public List<ChatRoom> searchChatRoomByNo(String searchKeyword) {
-		return cMapper.searchChatRoomByNo(searchKeyword);
+	public List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo) {
+		return cMapper.searchChatRoomByNo(mySearchKeyword, memberNo);
 	}
 
 	/** 채팅방 유저 */
@@ -139,5 +139,4 @@ public class ChatServiceLogic implements ChatService {
 	public List<MemberProfileList> chatMemberList(int chatroomNo) {
 		return mMapper.chatMemberList(chatroomNo);
 	}
-	
 }

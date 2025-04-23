@@ -47,6 +47,6 @@ public interface ChatService {
 
 	List<ChatRoom> searchChatRoom(String searchKeyword);
 
-	List<ChatRoom> searchChatRoomByNo(String searchKeyword);
+	List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo);
 
 }
