@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		window.opener.location.href = "/member/insertsuccess";
+		window.opener.location.href = "/member/insertsuccess?memberName=${memberName}";
 		window.close();
 	</script>
 </body>
