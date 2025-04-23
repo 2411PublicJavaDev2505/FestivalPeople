@@ -109,7 +109,8 @@ public class ReviewController {
 		model.addAttribute("review",review); 
 		return "review/update";
 	}
-	//수정
+	//수정 4/23 19:40분 아래 원래 파일!
+	//@RequestParam(value="images" , required=false) List<MultipartFile> images 
 	
 	@PostMapping("/update")
 	public String reviewUpdate(@ModelAttribute ReviewUpdateRequest review,
@@ -120,6 +121,7 @@ public class ReviewController {
 		model.addAttribute("reviewNo",reviewNo);
 		System.out.println("확인");
 		System.out.println(review);
+		//이미지 수정도되면 아래 주석풀어서 확인할것!
 //		return "redirect:/review/detail?/reviewNo="+review.getReviewNo();
 		return "redirect:/review/list";
 	}
