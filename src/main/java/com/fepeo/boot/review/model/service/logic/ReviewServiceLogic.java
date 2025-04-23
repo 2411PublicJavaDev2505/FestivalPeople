@@ -110,11 +110,12 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	//수정인데 코드 이해 부족으로 작성어려움있음.작성해줘야함!****
-	
+	//4/22 12:37 코드추가 시간모잘라면 여기부터 수정및 삭제해줘야함
+	//4/23 강제로 throws IllegalStateException, IOException 넣어줌!
 	@Override
-	public int reviewUpdate(ReviewUpdateRequest review) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException {
+		int result = mapper.reviewUpdate(review);
+		return result;
 	}
 	
 	//리뷰검색

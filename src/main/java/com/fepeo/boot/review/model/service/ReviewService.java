@@ -37,8 +37,8 @@ public interface ReviewService {
 	//리뷰 조회수 추가 4/19
 	int reviewCount(int reviewNo);
 
-	//후기 수정 1 
-	int reviewUpdate(ReviewUpdateRequest review);
+	//후기 수정 1 ( 4/23일 강제 로 throws IllegalStateException, IOException 넣어줌!
+	int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
 
 	//리뷰검색 4/21 16:05
 	List<Review> searchListByKeyword(Map<String, String> paramMap, int currentPage);

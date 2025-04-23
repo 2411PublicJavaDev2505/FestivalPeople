@@ -24,6 +24,11 @@
 		 			<!-- 4/22 추가해볼것!! -->
 		 			<input type="hidden" name="reviewTitle" value="${review.reviewTitle }">
 		 			<input type="hidden" name="reviewContent" value="${review.reviewContent }">
+		 			<!-- 4/23 추가 -->
+		 			<input type="hidden" name="reviewCount" value="${review.reviewCount }">
+		 			<input type="hidden" name="reviewYn" value="${review.reviewYn }">
+		 			<!-- 4/23 11:28 등록 jsp 스크립트? 추가! -->
+		 			<!-- 안먹혀서 다시 지움! -->
 					<div class="review-title">
 					<!-- 4/21수정 만들면서 아래코드 추가 작성  -->
 						제목 <input type="text" name="reviewTitle" value="${review.reviewTitle }" size="80">
@@ -49,10 +54,8 @@
 		 		</form> 
 			</main>
 <%-- 			<jsp:include page="../include/footer.jsp"/> --%>
+			
 		</div>
 	</div>
-	<script type="text/javascript">
-		
-	</script>
 </body>
 </html>
