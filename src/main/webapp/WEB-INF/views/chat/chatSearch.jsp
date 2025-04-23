@@ -37,11 +37,11 @@
 		</section>
 		<section class="chat-list-total">
 			<!--좌 소속방목록-->
-			<section class="mychat-list-wrap">
-				<form class="mychat-list-search" action="/chat/mySearch" >
+		 	<section class="mychat-list-wrap">
+		<%--	<form class="mychat-list-search" action="/chat/mySearch" >
 					<input type="text" class="list-search-input" placeholder="검색" name="mySearchKeyword" value="${mySearchKeyword }">
 					<button class="chat-search-btn" type="submit">⌕</button>
-				</form>
+				</form> --%>
 				
 				<!-- 참여방 없을 경우 -->
 				<c:if test="${empty myList }">
@@ -49,7 +49,7 @@
 				</c:if>
 				<!-- 참여방 있을 경우 → 목록 출력--> 
 				<c:if test="${not empty myList }">
-					<c:forEach items="${mySearchList }" var="myList" varStatus="i">
+					<c:forEach items="${myList }" var="myList" varStatus="i">
 					<ul class="chat-list">
 						<li class="chat-list-row">
 							<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            

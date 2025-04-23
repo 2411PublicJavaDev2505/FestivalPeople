@@ -65,7 +65,7 @@
 	</select>
 	
 	<!-- 나의 채팅방 검색 -->
-	<select id="searchChatRoomByNo" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
+<!-- 	<select id="searchChatRoomByNo" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		select * from CHATROOM
 		where (
 			CHATROOM_TITLE like '%'||#{mySearchKeyword}||'%' or
@@ -75,6 +75,6 @@
 		)
 		and MEMBER_NO = #{memberNo} 
 		ORDER BY CHATROOM_TITLE asc
-	</select>
+	</select> -->
 	
 </mapper>  

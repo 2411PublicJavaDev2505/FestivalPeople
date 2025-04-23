@@ -11,8 +11,8 @@
 	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
 	<link rel="stylesheet" href="../resources/css/chat/list.css">
 	
-    <script type="text/javascript" src="script.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+ <!-- <script type="text/javascript" src="script.js"></script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   -->   
 	
 </head>
 <body>
@@ -42,17 +42,16 @@
 		<section class="chat-list-total">
 			<!--좌 소속방목록-->
 			<section class="mychat-list-wrap">
-				<form class="mychat-list-search" action="/chat/mySearch" >
+			<!-- 	<form class="mychat-list-search" action="/chat/mySearch" >
 					<input type="text" class="list-search-input" id="myChatSearch"  placeholder="검색" name="mySearchKeyword">
 					<button class="chat-search-btn" id="searchBtn" type="button">⌕</button>
-				</form>
+				</form> -->
 				
 				<!-- 참여방 없을 경우 -->
 				<c:if test="${empty myList }">
 					<span class="chat-notice">참여중인 채팅방이 없습니다</span>
 				</c:if>
 				<!-- 참여방 있을 경우 → 목록 출력--> 
-				<c:out value="${cRoom.chatroomNo}" /> 
 				<c:if test="${not empty myList }">
 					<c:forEach items="${myList }" var="myList" varStatus="i">
 						<ul class="chat-list">
@@ -78,9 +77,10 @@
 			<!--우 전체목록-->
 			<section class="allchat-list-wrap">
 			<c:forEach items="${cRooms }" var="cRoom" varStatus="i">
+				 <p>디버깅: ${cRoom.chatroomNo}</p>
 				<ul class="chat-list">
 					<li class="chat-list-row">
-						<a href="javascript:void(0);" onclick="checkAndEnter(${cRoom.chatroomNo});" class="chat-link">
+						<a href="javascript:void(0);" onclick="checkAndEnter('${cRoom.chatroomNo}');" class="chat-link">
 						<img class="chat-image" alt="${cRoom.chatImgName}" src="${cRoom.chatImgPath}">
 						<div class="text-wrap">
 							<div class="chat-title">${cRoom.chatroomTitle }</div>
@@ -120,8 +120,8 @@
 			});
 		}
 		
-		/* 좌측 나의 채팅방 검색 */
-		$("#searchBtn").click(function(){
+ 		/* 좌측 나의 채팅방 검색 */
+/*		$("#searchBtn").click(function(){
 			var keyword = $("#myChatSearch").val();
 			$.ajax({
 				type: "GET",
@@ -151,9 +151,7 @@
 					$(".mychat-list-wrap").html(searchBody);
 				}
 			});
-		});
-		
-		
+		}); */
 	</script>
 </body>
 </html>

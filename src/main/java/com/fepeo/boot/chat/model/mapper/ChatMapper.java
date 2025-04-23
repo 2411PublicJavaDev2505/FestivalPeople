@@ -39,6 +39,6 @@ public interface ChatMapper {
 	List<ChatRoom> searchChatRoom(String searchKeyword);
 
 	// 나의 채팅방 검색
-	List<ChatRoom> searchChatRoomByNo(String searchKeyword, int memberNo);
+//	List<ChatRoom> searchChatRoomByNo(String searchKeyword, int memberNo);
 
 }

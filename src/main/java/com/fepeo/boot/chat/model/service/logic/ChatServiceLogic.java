@@ -109,10 +109,10 @@ public class ChatServiceLogic implements ChatService {
 		return cMapper.searchChatRoom(searchKeyword);
 	}
 
-	@Override // 나의 채팅방 검색
-	public List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo) {
-		return cMapper.searchChatRoomByNo(mySearchKeyword, memberNo);
-	}
+//	@Override // 나의 채팅방 검색
+//	public List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo) {
+//		return cMapper.searchChatRoomByNo(mySearchKeyword, memberNo);
+//	}
 
 	/** 채팅방 유저 */
 	@Override // 신규 입장 등록

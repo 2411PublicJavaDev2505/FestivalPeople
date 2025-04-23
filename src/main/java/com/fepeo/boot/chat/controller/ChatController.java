@@ -77,22 +77,20 @@ public class ChatController {
 			// 내가 속한 방만 출력
 			List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
 			List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+			System.out.println(myChatRoomList);
+			System.out.println(myList);
 			model.addAttribute("myList",myList);
+			
 			// 전체 리스트 출력
 			List<ChatRoom> cRooms = service.selectChatRoomList();
 			model.addAttribute("cRooms", cRooms);
+			System.out.println(cRooms);
 			
 			// 각 채팅방별 참여인원수 불러오기
 			List<ChatMember> memberList = service.selectChatMember();
-//			model.addAttribute("memberList", memberList);
-			
-		    // 디버깅용 출력
-		    System.out.println("myList: " + myList);
-		    System.out.println("cRooms: " + cRooms);
-		    System.out.println("memberList: " + memberList);
-			
-			
-			return "chat/list";
+			model.addAttribute("memberList", memberList);
+			System.out.println(memberList);
+			return "/chat/list";
 		}
 	}
 	
@@ -136,7 +134,6 @@ public class ChatController {
 			// 이미 가입한 회원 - 재입장
 			int yn = service.enterMemberYn(chatroomNo, memberNo);
 		}
-
 		return showChatMsgList(chatroomNo, session, model); // 중복부분 있어서 기존 입장(detail) 메서드 호출
 	}
 	
@@ -203,26 +200,25 @@ public class ChatController {
 	}
 	
 	// 나의 채팅방 검색
-	@GetMapping("/mySearch")
-	@ResponseBody
-	public List<ChatRoom> searchChatRoomByNo(HttpSession session,Model model
-			,@RequestParam("mySearchKeyword") String mySearchKeyword) {
-	
-		// 세션에서 memberNo 가져오기
-		Member member = (Member)session.getAttribute("member");
-		int memberNo = member.getMemberNo();			
-		
-		// 각 채팅방별 참여인원수 불러오기
-		List<ChatMember> memberList = service.selectChatMember();
-		model.addAttribute("memberList", memberList);		
-		
-		// 검색
-		List<ChatRoom> mySearchList = service.searchChatRoomByNo(mySearchKeyword, memberNo);
-		
-		return mySearchList;
-	}
-	
-	
+//	@GetMapping("/mySearch")
+//	@ResponseBody
+//	public List<ChatRoom> searchChatRoomByNo(HttpSession session,Model model
+//			,@RequestParam("mySearchKeyword") String mySearchKeyword) {
+//	
+//		// 세션에서 memberNo 가져오기
+//		Member member = (Member)session.getAttribute("member");
+//		int memberNo = member.getMemberNo();			
+//		
+//		// 각 채팅방별 참여인원수 불러오기
+//		List<ChatMember> memberList = service.selectChatMember();
+//		model.addAttribute("memberList", memberList);		
+//		
+//		// 검색
+//		List<ChatRoom> mySearchList = service.searchChatRoomByNo(mySearchKeyword, memberNo);
+//		
+//		return mySearchList;
+//	}
+//	
 
 	// 채팅방 퇴장(탈퇴)
 	@GetMapping("/leave")
