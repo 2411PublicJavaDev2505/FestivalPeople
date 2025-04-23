@@ -10,6 +10,12 @@
 		,#{profileFileName}, #{profileFileRename}, #{profileFilePath}, #{profileUrl}, #{socialYn}, DEFAULT, DEFAULT
 		,DEFAULT)
 	</insert>
+	
+	<select id="memberLoginById" resultType="Member">
+		SELECT * FROM MEMBER 
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
+	</select>
+	
 	<select id="memberLogin" resultType="Member">
 		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN FROM MEMBER 
 		WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw} AND MEMBER_YN = 'Y'

@@ -8,6 +8,8 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.common.util.Util;
+import com.fepeo.boot.member.controller.dto.CustomUserDetail;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
@@ -45,9 +48,12 @@ public class MemberController {
 	private final ApiComponent api;
 	private final MemberService mService;
 	private final MailService mailService;
+	private final PasswordEncoder passwordEncoder;
 
 	@GetMapping("/login")
-	public String showLogin(Model model) throws IOException {
+	public String showLogin(Model model
+			,@RequestParam(value="fail", defaultValue = "0") int fail) throws IOException {
+		model.addAttribute("fail",fail);
 		String kakao = api.getKakao_client_id();
 		String naver = api.getNaver_client_id();
 		String google = api.getGoogle_client_id();
@@ -60,8 +66,7 @@ public class MemberController {
 
 	@ResponseBody
 	@PostMapping("/login")
-	public String memberLogin(@ModelAttribute MemberLoginRequest login
-			,HttpSession session) {
+	public String memberLogin(@ModelAttribute MemberLoginRequest login) {
 		JSONObject json = new JSONObject();
 		int check = mService.checkMemberById(login.getMemberId());
 		String checkMsg = "";
@@ -72,13 +77,20 @@ public class MemberController {
 		}
 		Member member = mService.memberLogin(login);
 		if(member != null) {
-			session.setAttribute("member", member);
 			json.put("memberNo", member.getMemberNo());
 		}else {
 			checkMsg = "비밀번호가 틀렸습니다.";
 		}
 		json.put("checkMsg", checkMsg);
 		return json.toString();
+	}
+	
+	@GetMapping("/loginsuccess")
+	public String loginSuccess(@AuthenticationPrincipal CustomUserDetail customUserDetails
+			,HttpSession session) {
+		Member member = customUserDetails.getMember();
+		session.setAttribute("member", member);
+		return "redirect:/";
 	}
 	
 	@GetMapping("/kakao")
@@ -287,6 +299,11 @@ public class MemberController {
 			,@RequestParam(required=false) MultipartFile profile
 			,Model model) throws IllegalStateException, IOException {
 		member.setProfile(profile);
+		
+		if(member.getMemberPw() != null) {
+			member.setMemberPw(passwordEncoder.encode(member.getMemberPw()));
+		}
+		
 		int result = mService.insertMember(member);
 		if(member.getSocialYn().equals("Y")) {
 			return "member/socialInsertPopup";
@@ -323,6 +340,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/updatepw")
 	public String updateMemberPw(MemberUpdatePwRequest member) {
+		member.setMemberPw(passwordEncoder.encode(member.getMemberPw()));
 		int result = mService.updateMemberPw(member);
 		return "비밀번호가 변경되었습니다.";
 	}
@@ -364,6 +382,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/delete")
 	public String deleteMember(MemberLoginRequest login) {
+		login.setMemberPw(passwordEncoder.encode(login.getMemberPw()));
 		Member member = mService.memberLogin(login);
 		JSONObject json = new JSONObject();
 		if(member != null) {

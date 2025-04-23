@@ -33,7 +33,6 @@ public class CommonController {
 
 		
 			Calendar calendar = Calendar.getInstance();
-			System.out.println(calendar);
 			calendar.add(Calendar.DATE, -1);
 			
 			
@@ -43,12 +42,8 @@ public class CommonController {
 			//전체 리스트 출력시 페이지 네이션 코드 
 		    List<Festival> rfestivals = null;
 		    List<RegionDto> regionList = courseService.getAllRegions();
-		    System.out.println(regionList);
 		    List<String> goodWeatherRegions = api.callWeatherApi(regionList);
-		    System.out.println(goodWeatherRegions);
 			rfestivals = festivalService.selectFestivalListByWeather(goodWeatherRegions); // 비회원일때 불러오는 리스트 
-			System.out.println("맑은 지역 리스트 수: " + goodWeatherRegions.size());
-		System.out.println(rfestivals.size());
 			model.addAttribute("rfestivals", rfestivals);
 		    return "index";
 		}
