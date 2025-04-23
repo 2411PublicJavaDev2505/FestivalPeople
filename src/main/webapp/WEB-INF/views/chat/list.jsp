@@ -10,6 +10,10 @@
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
 	<link rel="stylesheet" href="../resources/css/chat/list.css">
+	
+    <script type="text/javascript" src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	
 </head>
 <body>
 	<!-- 광고 배너 -->
@@ -30,7 +34,7 @@
     <main class="chat-main">
 		<section class="chat-nav">
 			<span>${member.nickname } 참여 채팅 수 : 0</span> memNo.${member.memberNo }
-			<form class="chat-list-search" action="#" >
+			<form class="chat-list-search" action="/chat/totalSearch" >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 				<button class="chat-search-btn" >⌕</button>
 			</form>
@@ -38,9 +42,9 @@
 		<section class="chat-list-total">
 			<!--좌 소속방목록-->
 			<section class="mychat-list-wrap">
-				<form class="mychat-list-search" action="#" >
-					<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
-					<button class="chat-search-btn" type="submit">⌕</button>
+				<form class="mychat-list-search" action="/chat/mySearch" >
+					<input type="text" class="list-search-input" id="myChatSearch"  placeholder="검색" name="mySearchKeyword">
+					<button class="chat-search-btn" id="searchBtn" type="button">⌕</button>
 				</form>
 				
 				<!-- 참여방 없을 경우 -->
@@ -48,21 +52,22 @@
 					<span class="chat-notice">참여중인 채팅방이 없습니다</span>
 				</c:if>
 				<!-- 참여방 있을 경우 → 목록 출력--> 
+				<c:out value="${cRoom.chatroomNo}" /> 
 				<c:if test="${not empty myList }">
 					<c:forEach items="${myList }" var="myList" varStatus="i">
-					<ul class="chat-list">
-						<li class="chat-list-row">
-							<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
-							<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
-							<div class="text-wrap">
-								<div class="chat-title">${myList.chatroomTitle }</div>
-								<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
-								<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
-							</div>
-							<div class="msg-alarm">2</div>
-							</a>
-						</li>
-					</ul> 
+						<ul class="chat-list">
+							<li class="chat-list-row">
+								<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
+								<img class="chat-image" src="${myList.chatImgPath}" alt="${myList.chatImgName}" >
+								<div class="text-wrap">
+									<div class="chat-title">${myList.chatroomTitle }</div>
+									<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
+									<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
+								</div>
+								<div class="msg-alarm">2</div>
+								</a>
+							</li>
+						</ul> 
 					</c:forEach>
 				</c:if>
 				<form class="chat-room-make" action="/chat/insert">
@@ -94,6 +99,7 @@
     </div>
 
 	<script>
+		/* 채팅방 입장 시  */
 		function checkAndEnter(chatroomNo) {
 			fetch("/chat/check-access?chatroomNo=" + chatroomNo)
 			.then(res => res.json())
@@ -113,6 +119,41 @@
 				alert("서버 오류 발생: " + err);
 			});
 		}
+		
+		/* 좌측 나의 채팅방 검색 */
+		$("#searchBtn").click(function(){
+			var keyword = $("#myChatSearch").val();
+			$.ajax({
+				type: "GET",
+				url:"/chat/mySearch",
+				data: { keyword: keyword },
+				dataType: "json",
+				success: function(response){
+					var searchBody = ""; //새로운 출력 형태 생성
+					$.each(response, function(index, myList){
+						searchBody +=
+							`<ul class="chat-list">
+								<li class="chat-list-row">
+									<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
+									<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
+									<div class="text-wrap">
+										<div class="chat-title">${myList.chatroomTitle }</div>
+										<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
+										<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
+									</div>
+									<div class="msg-alarm">0</div>
+									</a>
+								</li>
+							</ul> 
+						`;
+					});
+					// 기존 목록을 새 목록으로 교체
+					$(".mychat-list-wrap").html(searchBody);
+				}
+			});
+		});
+		
+		
 	</script>
 </body>
 </html>

@@ -35,4 +35,10 @@ public interface ChatMapper {
 	// 참여인원수 감소
 	int subtractionChatMember(int chatroomNo);
 
+	// 전체 채팅방 검색
+	List<ChatRoom> searchChatRoom(String searchKeyword);
+
+	// 나의 채팅방 검색
+	List<ChatRoom> searchChatRoomByNo(String searchKeyword, int memberNo);
+
 }
