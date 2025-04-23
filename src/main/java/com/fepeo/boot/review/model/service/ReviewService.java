@@ -12,8 +12,6 @@ import com.fepeo.boot.review.controller.dto.ReviewUpdateRequest;
 import com.fepeo.boot.review.model.vo.Review;
 
 public interface ReviewService {
-	//리뷰등록2번째 성공하면 주석처리한건 지울것!!(4/17 17:29)
-	//int insertReview(ReviewAddRequest review);
 	
 	//리뷰등록(사진첨부파일(4/17 17:30) 20:51분체인지해줌!! 23:51분확인!!
 	int insertReview(ReviewAddRequest review, List<MultipartFile> images) throws IllegalStateException, IOException;
@@ -31,8 +29,6 @@ public interface ReviewService {
 
 	//4/18 16:20분 리뷰게시판 삭제
 	int reviewDelete(int reviewNo);
-	//4/19 삭제안되서 코드바꿈 안되면 원래대로 복귀!
-	//int reviewDelete(Integer reviewNo);
 
 	//리뷰 조회수 추가 4/19
 	int reviewCount(int reviewNo);
@@ -51,16 +47,5 @@ public interface ReviewService {
 
 	//4/22 10:30 추가!detail에서 왔음!
 	List<Review> selectReviewList();
-
-	//이미지만들기!20:17ㅉ
-	//int insertReview(ReviewAddRequest review, ImgAddRequest img, MultipartFile images) throws IllegalStateException, IOException;
-
-	//이미지 만들기 20:57
-	//int insertReview(ReviewAddRequest review, MultipartFile images) throws IllegalStateException, IOException;
-
-	//List<Review> selectReviewList();
-
-	
-
 
 }
