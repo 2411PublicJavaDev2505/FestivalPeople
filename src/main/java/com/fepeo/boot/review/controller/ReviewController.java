@@ -67,10 +67,11 @@ public class ReviewController {
 }
 
 	
-	//후기등록
+	//후기등록 04/23 12:23 분 public String showReviewInsert(HttpSession session)  ()안에 지워줌!!
+	
 	
 	@GetMapping("/insert")
-	public String showReviewInsert(HttpSession session) {
+	public String showReviewInsert() {
 		return "review/insert";
 	}
 	//후기등록 이미지파일 시작하며 코드 추가!코드확인!!23:13
@@ -91,10 +92,10 @@ public class ReviewController {
 	// org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'reviewNo' for method parameter type int is not present
 	//public String reviewDetail(@RequestParam("reviewNo") int reviewNo
 	//,HttpSession session <--이게 필요함??
+	//4/23 ,HttpSession session 지워줌!!
 	
 	@GetMapping("/detail")
 	public String reviewDetail(@RequestParam("reviewNo") int reviewNo
-			,HttpSession session
 			,Model model) {
 		Review review = rService.selectOneByNo(reviewNo);
 		//4/19 조회수 추가 코드 작성 !!했으나 안됨...확인필요!되는거 확인! dto?에 추가!
@@ -111,26 +112,56 @@ public class ReviewController {
 	//게시글 수정및 삭제(어노테이션확인할것!!!수정은 하지도 못했음...
 	//4/21 수정부터진행 !updatejsp 조금작성하고 여기로 넘어옴! 그리고 아래 post작성해줌!
 	//showreviewUpdate라고 이름 바꿔줌!
+	//4/23 오전 다시 시작!
+	//4/23 14:38 아래 model.addAttribute("review",review);를 바꿔줌!! 
 	
 	@GetMapping("/update")
 	public String showreviewUpdate(@RequestParam("reviewNo") int reviewNo
 			,Model model) {
 		Review review = rService.selectOneByNo(reviewNo);
-		model.addAttribute("review",review); 
+		model.addAttribute("reviewNo",reviewNo); 
 		return "review/update";
 	}
 	
 	//잘몰라 notice꺼 참고하여 일단 작성 4/21 revivewInsert랑 같게 작성함. 에러나면 새로작성!
 	//ServiceLogic에 코드 작성해줘야함...
+	//4/23 오전 시작 던지기 해주기?
+	//4/23 10:23여기는 throws IllegalStateException, IOException 자동 넣어줌!!!
+	//넣어줘도 
+	// org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public java.lang.String com.fepeo.boot.review.controller.ReviewController.reviewUpdate(com.fepeo.boot.review.controller.dto.ReviewUpdateRequest,java.util.List,jakarta.servlet.http.HttpSession,org.springframework.ui.Model) throws java.lang.IllegalStateException,java.io.IOException: [Field error in object 'reviewUpdateRequest' on field 'reviewYn': rejected value [N]; codes [typeMismatch.reviewUpdateRequest.reviewYn,typeMismatch.reviewYn,typeMismatch.int,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [reviewUpdateRequest.reviewYn,reviewYn]; arguments []; default message [reviewYn]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'int' for property 'reviewYn'; For input string: "N"]]
+	//뜸....
+	//4/23 11:16 org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'reviewNo' for method parameter type int is not present
+	//또 이거뜸...수정은 되나 원래 제목 내용과 같이 출력되는 상황....
+	//일단 return "redirect:/review/list";로 바꾸니 에러는 사라짐!! list로 이동!!
+	//HttpSession session 지움 .. 다시 원복~~
+	// 11:40  	@RequestParam(value="images", required=false) List<MultipartFile> images, 지우고
+	//@RequestParam("reviewNo") int reviewNo,로 ...
+	// 4/23 12:12 ,Model model 지우고 안되서 다시 살림..
+	
 	
 	@PostMapping("/update")
 	public String reviewUpdate(@ModelAttribute ReviewUpdateRequest review,
-			@RequestParam(value="images", required=false) List<MultipartFile> images,
+			@RequestParam("reviewNo") int reviewNo,
+			//4/23 12:06추가 아니라서 주석!
+			//@RequestParam("reviewTitle")  String reviewTitle,
+			//@RequestParam("reviewContent")  String reviewContent,
 			HttpSession session
-			,Model model) {
+			,Model model ) throws IllegalStateException, IOException {
 		//notice에서는 	notice.setFile(file);코드가 존재! 여기서는????
+		//04/23 14:43분
+		//int result = rService.reviewUpdate(review);에서 수정!!했다 다시수정!
 		int result = rService.reviewUpdate(review);
-		return "redirect:/review/detail?/reviewNo="+review.getReviewNo();
+		//4/23 14:41분 아래코드1개추가
+		model.addAttribute("reviewNo",reviewNo);
+		//model.addAttribute("reviewTitle",reviewTitle);  
+		//model.addAttribute("reviewContent",reviewContent);  
+		//4/ 23 12:04 추가 이것도 아니라서 주석!
+		//review.setReviewTitle(reviewTitle);
+		//review.setReviewContent(reviewContent);
+		System.out.println("확인");
+		System.out.println(review);
+//		return "redirect:/review/detail?/reviewNo="+review.getReviewNo();
+		return "redirect:/review/list";
 	}
 	
 	//게시물 삭제(삭제부터 ...16:03) 삭제안됨..원인은??

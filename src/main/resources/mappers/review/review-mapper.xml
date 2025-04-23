@@ -36,7 +36,9 @@
   		<!-- insert id만 적음! seleckey적용하기위해 추가함!에러나면 지우기!!15:50 -->
   		<!-- detail하면서 아래 추가해줬음!4/14 20:37 -->
   		<!-- ***N으로 된거 Y로 나중에 변경해주기??*** -->
-  		<!-- 4/20 한번 바꿔봄!아래 안되면 다시 원복! -->
+  		<!-- 4/20 한번 바꿔봄!아래 안되면 다시 원복아래코드임!! -->
+  		<!-- 4/23일 바꾼거 다시 원복! -->
+  		<!-- SELECT * FROM REVIEW WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N' -->
  		<select id="selectOneByNo" resultMap="reviewResultMap">
  			SELECT * FROM REVIEW WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N'
  		</select>
@@ -173,5 +175,24 @@
 				AND REVIEW_YN = 'N'
 			</where>
 		</select>
+		
+		<!-- 4/22 15:20 작성!주석처리!작성할때 다시 작성함!
+		4/23 다시작성! -->
+		<!-- REVIEW_YN = #{reviewYn},빼주고 request도 빼줌!  -->
+		<!-- 다시 원복! -->
+		<!-- 콘트롤러에 에러 적어놨음 안되서  -->
+		<!-- REVIEW_YN = #{reviewYn}, 빼주고 default로 넣어줌 -->
+		<!-- dto 주석처리하고 안쓰는거 다시 빼줌 -->
+		<!-- REVIEW_YN = #{reviewYn},
+			DEFAULT,
+			REVIEW_YN = #{reviewYn}, -->
+			<!-- 안되면 원복! -->
+		<update id="reviewUpdate">
+			UPDATE REVIEW SET REVIEW_TITLE = #{reviewTitle} , 
+			REVIEW_CONTENT = #{reviewContent}
+			
+			WHERE REVIEW_NO = #{reviewNo} AND MEMBER_NO = #{memberNo}
+  			
+		</update>
 		
 </mapper>

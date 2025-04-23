@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.fepeo.boot.review.controller.dto.ImgAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
+import com.fepeo.boot.review.controller.dto.ReviewUpdateRequest;
 import com.fepeo.boot.review.model.vo.Review;
 
 @Mapper
@@ -46,6 +47,10 @@ public interface ReviewMapper {
 	int getTotalCountBySearch(Map<String, String> paramMap);
 	//4/22 10:32분 추가 안되면 지울것!!
 	List<Review> selectReviewList();
+	//4/22 12:41분 코드작성! 안되면 지울것!!!
+	//int selectOneByNo(ReviewUpdateRequest review);
+	int reviewUpdate(ReviewUpdateRequest review);
+	
 	
 	
 	
