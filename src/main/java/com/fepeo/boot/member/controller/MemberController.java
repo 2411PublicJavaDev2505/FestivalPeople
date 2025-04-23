@@ -305,12 +305,20 @@ public class MemberController {
 		}
 		
 		int result = mService.insertMember(member);
+		model.addAttribute("memberName",member.getMemberName());
+		
 		if(member.getSocialYn().equals("Y")) {
 			return "member/socialInsertPopup";
 		}else {
-			model.addAttribute("memberName",member.getMemberName());
-			return "member/insertSucess";
+			return "redirect:/member/insertsuccess?memberName="+member.getMemberName();
 		}
+	}
+	
+	@GetMapping("/insertsuccess")
+	public String showInsertSuccess(@RequestParam("memberName") String memberName
+			,Model model) {
+		model.addAttribute("memberName",memberName);
+		return "member/insertSucess";
 	}
 	
 	@GetMapping("/update")
@@ -328,8 +336,6 @@ public class MemberController {
 			,HttpSession session) throws IllegalStateException, IOException {
 		MemberUpdateRequest member = new MemberUpdateRequest();
 		Member loginMember = (Member)session.getAttribute("member");
-		member.setMemberNo(loginMember.getMemberNo());
-		member.setProfile(profile);
 		int result = mService.updateMemberProfile(member);
 		loginMember = mService.selectOneByNo(loginMember.getMemberNo());
 		JSONObject json = new JSONObject();
@@ -384,6 +390,7 @@ public class MemberController {
 	public String deleteMember(MemberLoginRequest login) {
 		login.setMemberPw(passwordEncoder.encode(login.getMemberPw()));
 		Member member = mService.memberLogin(login);
+		
 		JSONObject json = new JSONObject();
 		if(member != null) {
 			json.put("memberId", member.getMemberId());

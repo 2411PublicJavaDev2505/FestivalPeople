@@ -24,8 +24,14 @@ public class WebSecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-        		.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+        http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
+        				.requestMatchers("/member/update").hasAnyRole("Y","N")
+        				.requestMatchers("/member/detail").hasAnyRole("Y","N")
+        				.requestMatchers("/member/delete").hasAnyRole("Y","N")
+        				.requestMatchers("/course/**").hasAnyRole("Y","N")
+        				.requestMatchers("/chat/**").hasAnyRole("Y","N")
+        				.requestMatchers("/manager/**").hasRole("Y")
+        				.anyRequest().permitAll())
                 .formLogin(form -> form.loginPage("/member/login")
                         .usernameParameter("username")
                         .passwordParameter("password")

@@ -4,6 +4,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="_csrf" content="${_csrf.token}" />
+	<meta name="_csrf_header" content="${_csrf.headerName}" />
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/member/login.css">
 	<link
@@ -30,6 +32,7 @@
 				</div>
 				<div class="login-main">
 					<form action="/login" method="post">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						<div  class="login-input">
 							<input type="text" placeholder="아이디를 입력하세요" name="username" id="id">
 						</div>
@@ -71,6 +74,17 @@
 		</main>
 	</div>
 	<script type="text/javascript">
+		$(document).ready(function () {
+	        let token = $('meta[name="_csrf"]').attr("content");
+	        let header = $('meta[name="_csrf_header"]').attr("content");
+			
+	        console.log(token);
+	        console.log(header);
+	        
+	        $(document).ajaxSend(function (e, xhr, options) {
+	            xhr.setRequestHeader(header, token);
+	        });
+	    });
 		const fail = '${fail}';
 		if(fail == 1){
 			customAlert("로그인에 실패하셨습니다!");
