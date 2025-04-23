@@ -112,11 +112,15 @@ public class FestivalController {
 
 	    // 날씨 API 호출 및 파싱
 	    String json = api.callShortWeatherApi(baseDate, baseTime, nx, ny);
-	    Map<String, String> weather = api.parseTodayClosestWeather(json);
+	    Map<String, Map<String, String>> threeDaySummary = api.parseThreeDayWeather(json);
 	    System.out.println(json);
+	    //3일치 날씨 리스트 출력
+	    List<String> next3Days = WeatherUtils.getNext3Days();
+	    
 	    // 데이터 전달
+	    model.addAttribute("days", next3Days);
+	    model.addAttribute("weatherSummary", threeDaySummary);
 	    model.addAttribute("festival", festival);
-	    model.addAttribute("weather", weather);
 	    return "festival/festivalDetail";
 	}
 	
@@ -156,22 +160,7 @@ public class FestivalController {
 	    return "festival/festivalSearch";
 	}
 	
-	@GetMapping("/testWeather")
-	@ResponseBody
-	public String testWeather(@RequestParam String nx, @RequestParam String ny) {
-		Map<String, String> dateTimeMap = WeatherUtils.getWeatherBaseDateTime("0500");
-		String baseDate = dateTimeMap.get("baseDate");
-		String baseTime = dateTimeMap.get("baseTime");
-		String json = api.callShortWeatherApi(baseDate, baseTime, nx, ny);
-	    Map<String, String> weather = api.parseTodayClosestWeather(json);
-
-	    return String.format(
-	        "🌡 기온: %s\n☔ 강수량: %s\n⛅ 하늘상태: %s",
-	        weather.getOrDefault("기온", "정보 없음"),
-	        weather.getOrDefault("강수량", "정보 없음"),
-	        weather.getOrDefault("하늘상태", "정보 없음")
-	    );
-	}
+	
 	
 
 }

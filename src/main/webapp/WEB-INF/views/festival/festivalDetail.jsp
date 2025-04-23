@@ -44,27 +44,41 @@
 									<table>
 										<tr>
 											<th>날짜</th>
-											 <th><%= today %></th>
-											 <th><%= tomorrow %></th>
-											 <th><%= dayAfterTomorrow %></th>
+											<th><%= today %></th>
+											<th><%= tomorrow %></th>
+											<th><%= dayAfterTomorrow %></th>
+											 <tr>
 										</tr>
 										<tr>
-											<th>🌡 기온</th>
-											<td>${weather["기온"] != null ? weather["기온"] : "정보 없음"}</td>
+										    <th>🌡 기온</th>
+										    <c:forEach var="key" items="${days}">
+										        <td>${weatherSummary[key]["기온"]}</td>
+										    </c:forEach>
 										</tr>
 										<tr>
-											<th>☔ 강수</th>
-											<td>${weather["강수량"]!= null ? weather["강수량"] : "정보 없음"}</td>
+										    <th>☔ 강수</th>
+										    <c:forEach var="key" items="${days}">
+										        <td>${weatherSummary[key]["강수량"]}</td>
+										    </c:forEach>
 										</tr>
 										<tr>
-											<th>⛅ 구름</th>
-											<td>${weather["하늘상태"]!= null ? weather["하늘상태"] : "정보 없음"}</td>
+										    <th>⛅ 구름</th>
+										    <c:forEach var="key" items="${days}">
+										        <td>${weatherSummary[key]["하늘상태"]}</td>
+										    </c:forEach>
 										</tr>
+
 									</table>
+								<!-- table에 입력해야 하는 값
+								<c:forEach var="entry" items="${weatherMap}">
+									    <h3>${entry.key} 예보</h3>
+									    <ul>
+									        <c:forEach var="weather" items="${entry.value}">
+									            <li>${weather.fcstTime} - ${weather.category}: ${weather.fcstValue}</li> 
+									        </c:forEach>
+									    </ul>
+									</c:forEach>-->
 									
-									<!--  <p>🌡 기온: ${weather["기온"] != null ? weather["기온"] : "정보 없음"}</p><br>
-									<p>☔ 강수량: ${weather["강수량"]!= null ? weather["강수량"] : "정보 없음"}</p><br>
-									<p>⛅ 하늘상태: ${weather["하늘상태"]!= null ? weather["하늘상태"] : "정보 없음"}</p> -->
 								</div>
 							</li>
 							<li> 🚩 지도
