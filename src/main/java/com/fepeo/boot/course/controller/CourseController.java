@@ -166,6 +166,14 @@ public class CourseController {
 	
 	
 	@PostMapping("/insert")
+	public String inserCourse2(@ModelAttribute CourseDto courseList) {
+		
+		System.out.println("여기서 Null값이 나온다~"+courseList);
+		return "";
+	}
+	
+	
+	@PostMapping("/insert")
 	public String insertCourse(@RequestParam("category_group_code") List<String> category
 			,@RequestParam("place_name") List<String> placeName
 			,@RequestParam("x") List<String> xs
@@ -184,6 +192,7 @@ public class CourseController {
 		List<CourseDto> course = new ArrayList<CourseDto>();
 		Festival festival = fService.selectFestivalByNo(festivalNo);
 
+		Member member = (Member)session.getAttribute("member");
 		
 
 	
