@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
 import com.fepeo.boot.chat.controller.dto.MemberProfileList;
 import com.fepeo.boot.chat.controller.dto.MsgInsertRequest;
-import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.service.ChatService;
 import com.fepeo.boot.chat.model.vo.ChatMember;
 import com.fepeo.boot.chat.model.vo.ChatMsg;
@@ -46,6 +45,7 @@ public class ChatController {
 		// 내가 속한 방만 출력
 		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
 		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		// ↑ 내가 속한 채팅방(nonBlock방의 채팅방 정보를 가져오기 위한 과정)		
 		model.addAttribute("myList",myList);
 		
 		// 각 채팅방별 참여인원수 불러오기
@@ -55,7 +55,8 @@ public class ChatController {
 	}
 	@PostMapping("/insert")
 	public String insertChatRoom(@ModelAttribute ChatroomRegisterRequest chatRoom,
-			@RequestParam(value="image", required=false) MultipartFile image
+				@RequestParam("chatroomNo") int chatroomNo,
+				@RequestParam(value="image", required=false) MultipartFile image
 			, HttpSession session, Model model) throws IllegalStateException, IOException {
 		// 세션에서 memberNo 가져오기
 		Member member = (Member)session.getAttribute("member");
@@ -64,7 +65,6 @@ public class ChatController {
 		// 내가 속한 방만 출력
 		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
 		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
-		// ↑ 내가 속한 채팅방(nonBlock방의 채팅방 정보를 가져오기 위한 과정)
 		model.addAttribute("myList",myList);
 		
 		chatRoom.setImage(image);
@@ -73,7 +73,9 @@ public class ChatController {
 		// 각 채팅방별 참여인원수 불러오기
 		List<ChatMember> memberList = service.selectChatMember();
 		model.addAttribute("memberList", memberList);		
-
+		// 멤버입장 상태 변경
+		int yn = service.enterMemberYn(chatroomNo, memberNo);
+		
 		return "redirect:/chat/enter/" + chatRoom.getChatroomNo();
 	}
 
@@ -157,6 +159,12 @@ public class ChatController {
 		// 채팅방 정보 조회 (제목,태그 등 출력용)
 		ChatRoom chatRoom = service.selectChatRoomByNo(chatroomNo); 
 		model.addAttribute("chatRoom", chatRoom);
+
+		// 이미 가입한 회원 - 재입장(입장상태 'Y')
+		int yn = service.enterMemberYn(chatroomNo, memberNo);		
+		
+		// 입장상태 나머지방 'N'으로 변경하기
+		int exitRoom = service.exitChatRooms(chatroomNo, memberNo);
 
 		// 내가 속한 방만 출력
 		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
@@ -278,25 +286,21 @@ public class ChatController {
 		model.addAttribute("msgList", msgList);
 		model.addAttribute("nickname", member.getNickname()); // 참가자 닉네임
 
-		System.out.println("chat내용: "+ msgContent);
-		
 		return result; 
 	}
 	
 	// 멤버 강퇴
 	@GetMapping("/block")
-	public String blockChatMember(@RequestParam("chatroomNo")int chatroomNo,HttpSession session) {
+	public String blockChatMember(@RequestParam("chatroomNo")int chatroomNo
+				, @RequestParam("blockMemberNo")int blockMemberNo
+				,HttpSession session) {
 		Member member = (Member)session.getAttribute("member");
 		int memberNo = member.getMemberNo();
 		
-		int result = service.blockChatMember(chatroomNo, memberNo); // CHAT_MEMBER > block_yn 변경
+		int result = service.blockChatMember(chatroomNo, blockMemberNo); // CHAT_MEMBER > block_yn 변경
 		int count = service.subtractionChatMember(chatroomNo); // CHATROOM > chat_member_count -1	
 		
 		return "redirect:/chat/detail/" + chatroomNo;
 	}
-	
-	
-	// 채팅방 신고하기
-	
 	
 }

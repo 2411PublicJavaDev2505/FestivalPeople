@@ -6,7 +6,6 @@ import java.util.List;
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
 import com.fepeo.boot.chat.controller.dto.MemberProfileList;
 import com.fepeo.boot.chat.controller.dto.MsgInsertRequest;
-import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.vo.ChatMember;
 import com.fepeo.boot.chat.model.vo.ChatMsg;
 import com.fepeo.boot.chat.model.vo.ChatRoom;
@@ -48,6 +47,8 @@ public interface ChatService {
 	List<ChatRoom> searchChatRoom(String searchKeyword);
 
 	int blockChatMember(int chatroomNo, int memberNo);
+
+	int exitChatRooms(int chatroomNo, int memberNo);
 
 //	List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo);
 

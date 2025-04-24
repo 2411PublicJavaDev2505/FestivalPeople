@@ -84,7 +84,7 @@
 							<ul>
 								<li>
 									<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
-											<button>채팅방 신고</button>
+											<button><a herf="/report/content">채팅방 신고</a></button>
 									</c:if>
 								</li>
 								<li>
@@ -118,7 +118,11 @@
 											<div><img src="${mbList.profileFilePath }" width="40" /></div>
 										</c:if>	
 										<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
-											<button>내보내기</button>
+										<form action="/chat/block" method="get" id="blockForm${mbList.memberNo }">									
+											<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
+											<input type="hidden" name="blockMemberNo" value="${mbList.memberNo }"> <!-- 블락할 멤버 -->
+											<button type="button" onclick="blockConfirm(${mbList.memberNo});">내보내기</button>
+										</form>
 										</c:if>
 									</li>
 								</c:forEach>														
@@ -258,6 +262,14 @@
 			var result = confirm("정말 이 방을 나가시겠어요? 채팅방을 나가면 나의 채팅방 목록에서 삭제됩니다.");
 			if(result) {
 				document.getElementById('leaveForm').submit();
+			}
+		}		
+		
+		/* 회원 강퇴(방장) */
+		function blockConfirm(memberNo) {
+			var result = confirm("정말로 내보내시겠습니까?");
+			if(result) {
+				document.getElementById('blockForm'+memberNo).submit();
 			}
 		}		
 		
