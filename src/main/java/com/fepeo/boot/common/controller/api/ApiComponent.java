@@ -323,7 +323,6 @@ public class ApiComponent {
 	public Map<String, String> searchMemberAddress(String memberAddress) throws JsonMappingException, JsonProcessingException {
 		String authorization = kakaoApiKey;
 		WebClient webClient = WebClient.create("https://dapi.kakao.com");
-				
 		//Map<String, String> result = new HashMap<String, String>();	
 		String result = webClient.get()
 	            .uri(uriBuilder -> uriBuilder
@@ -387,7 +386,7 @@ public class ApiComponent {
 					.retrieve()
 					.bodyToMono(String.class)
 					.block();
-			System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
+//			System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
 			
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode root = mapper.readTree(response);

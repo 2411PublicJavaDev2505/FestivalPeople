@@ -6,7 +6,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,12 +23,7 @@ public class WebSecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
-        				.requestMatchers("/member/update").hasAnyRole("Y","N")
-        				.requestMatchers("/member/detail").hasAnyRole("Y","N")
-        				.requestMatchers("/member/delete").hasAnyRole("Y","N")
-        				.requestMatchers("/course/**").hasAnyRole("Y","N")
-        				.requestMatchers("/chat/**").hasAnyRole("Y","N")
+		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
         				.requestMatchers("/manager/**").hasRole("Y")
         				.anyRequest().permitAll())
                 .formLogin(form -> form.loginPage("/member/login")

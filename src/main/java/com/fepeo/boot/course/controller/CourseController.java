@@ -58,7 +58,6 @@ public class CourseController {
 	public String showCourseMain(HttpSession session, Model model) throws JsonMappingException, JsonProcessingException {
 		// 로그인 회원 분기처리
 		Member member = (Member)session.getAttribute("member");
-
 		// 비회원은 안되어있으면 로그인페이지로
 		if(member == null) {
 			return "redirect:/member/login";
@@ -69,9 +68,8 @@ public class CourseController {
 			System.out.println("고속도로"+memberInfo);
 			// 회원 정보에 저장된 주소지 값으로 위, 경도 좌표 출력
 			String memberAddress = memberInfo.getAddress();
-			System.out.println("대전 고속도로"+memberAddress);
+
 			String memberName = member.getMemberName();
-			System.out.println("고속도로"+memberName);
 			Map<String, String> mapPoint = api.searchMemberAddress(memberAddress);
 //			System.out.println(mapPoint);
 			// 현재 시간 기준 전국 날씨 추출
