@@ -134,29 +134,30 @@ public class ReviewServiceLogic implements ReviewService {
 //		//return = mapper.reviewUpdate(review);;
 //	
 //	}
+	//4/24 14:13분 오전에 작업한거 주석처리! 코드 다시 작성!
 	//ReviewUpdateRequest 에 변수확인하기!! 파일수정전용코드?
-	@Override
-	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException {
-		if(review.getImageFile() != null && !review.getImageFile().isEmpty()) {
-			MultipartFile imageFile = review.getImageFile();
-			String fileName = imageFile.getOriginalFilename();
-			String fileRename = Util.fileRename(fileName);
-			String filePath = "/images/review/"+fileRename;
-			imageFile.transferTo(new File("C:/uploadImage/review/"+fileRename));
-			review.setReviewFileName(fileName);
-			review.setReviewFileRename(fileRename);
-			review.setReviewFilePath(filePath);
-		}else {
-			Review existing = mapper.selectOneByNo(review.getReviewNo());
-			//일단1개만 해봅시다! 커밋하기전 여기까지 작성..
-			review.setReviewFileName(existing.getReviewFileName1());
-			review.setReviewFileName(existing.getReviewFileRename1());
-			review.setReviewFileName(existing.getReviewFilePath1());
-			
-		}
-		
-		return  mapper.reviewUpdate(review);
-	}
+//	@Override
+//	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException {
+//		if(review.getImageFile() != null && !review.getImageFile().isEmpty()) {
+//			MultipartFile imageFile = review.getImageFile();
+//			String fileName = imageFile.getOriginalFilename();
+//			String fileRename = Util.fileRename(fileName);
+//			String filePath = "/images/review/"+fileRename;
+//			imageFile.transferTo(new File("C:/uploadImage/review/"+fileRename));
+//			review.setReviewFileName(fileName);
+//			review.setReviewFileRename(fileRename);
+//			review.setReviewFilePath(filePath);
+//		}else {
+//			Review existing = mapper.selectOneByNo(review.getReviewNo());
+//			//일단1개만 해봅시다! 커밋하기전 여기까지 작성..
+//			review.setReviewFileName(existing.getReviewFileName1());
+//			review.setReviewFileName(existing.getReviewFileRename1());
+//			review.setReviewFileName(existing.getReviewFilePath1());
+//			
+//		}
+//		
+//		return  mapper.reviewUpdate(review);
+//	}
 	
 	//리뷰검색
 	@Override
@@ -185,13 +186,58 @@ public class ReviewServiceLogic implements ReviewService {
 		return rList;
 	}
 
+	//4/24 15:02분 게시판 수정 
 
-
-	//4/24 이미지 파일 수정 만듬...(제목하고 내용만??)  
 	@Override
-	public int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images)
-			throws IllegalStateException, IOException {
+	public int updateReview(ReviewUpdateRequest review, List<MultipartFile> images) throws IllegalStateException, IOException {
+		int result = mapper.updateReview(review);
+		if(result == 0) return 0;
+		int reviewNo = review.getReviewNo();
+		//4/24 복붙!
+		if(images != null) {
+			for(int i = 0; i < images.size(); i++) {
+				if(images.get(i).getSize() > 0) {
+					ImgAddRequest img = new ImgAddRequest();
+					//img에 파일 정보를 담기!!
+					img.setReviewNo(reviewNo);
+					
+					String fileName = images.get(i).getOriginalFilename();
+					String fileRename = Util.fileRename(fileName);
+					String filePath = "/images/review/"+fileRename;
+					img.setReviewFileName(fileName);
+					img.setReviewFileRename(fileRename);
+					img.setReviewFilePath(filePath);
+					images.get(i).transferTo(new File("C:/uploadImage/review/"+fileRename));
+					if(i == 0) {
+						result += mapper.updateReviewFirstImage(img);
+					}else if(i == 1) {
+						result += mapper.updateReviewSecondImage(img);
+					}else if(i == 2) {
+						result += mapper.updateReviewThirdImage(img);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+
+	
+	@Override
+	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException{
+		//16:09분 제목내용만 수정코드
 		int result = mapper.reviewUpdate(review);
 		return result;
 	}
+
+
+
+	//4/24 이미지 파일 수정 만듬...(제목하고 내용만??)  
+	//이것도 4/24 14:20 코드 다시 작성위해 주석처리!
+//	@Override
+//	public int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images)
+//			throws IllegalStateException, IOException {
+//		int result = mapper.reviewUpdate(review);
+//		return result;
+//	}
 }

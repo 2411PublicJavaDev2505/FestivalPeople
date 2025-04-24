@@ -29,11 +29,13 @@
 		 			<input type="hidden" name="reviewNo" value="${review.reviewNo }">
 		 			<div class="review-title">
 					<!-- 4/21수정 만들면서 아래코드 추가 작성  -->
-						<input type="text" name="reviewTitle" value="${review.reviewTitle }" size="80">
+						제목 <input type="text" name="reviewTitle" value="${review.reviewTitle }" size="80">
 					</div>
 					<!-- 4/23 20:33분 코드 추가! 안되면 원복하기! -->
 					<div class="review-content">
-						<textarea rows="5" cols="82" name="reviewContent">${review.reviewContent }</textarea>
+						<div><span>내용 </span></div>
+						<textarea rows="5" cols="82" name="reviewContent">
+						${review.reviewContent }</textarea>
 					</div>
 					
 					<div class="review-attach">

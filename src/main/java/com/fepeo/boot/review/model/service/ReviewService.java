@@ -39,7 +39,8 @@ public interface ReviewService {
 	//이미지수정추가코드 있어 원래코드는 주석처리하고 다시 작성!
 	//4/23 21:05
 	//int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
-	int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images) throws IllegalStateException, IOException;
+	//4/24 14:22분 코드 다시 작성위해 아래 주석처리
+	//int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images) throws IllegalStateException, IOException;
 
 	//리뷰검색 4/21 16:05
 	List<Review> searchListByKeyword(Map<String, String> paramMap, int currentPage);
@@ -51,7 +52,15 @@ public interface ReviewService {
 	//4/22 10:30 추가!detail에서 왔음!
 	List<Review> selectReviewList();
 
-	//어쩌다가 만듬....4/24 11:31분 이미지수정 코드작업중...
+	//4/24 15:01분 추가!
+	int updateReview(ReviewUpdateRequest review, List<MultipartFile> images)throws IllegalStateException, IOException;
+
+	//4/24 16:08분 다시 추가.....
 	int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
+
+	//어쩌다가 만듬....4/24 11:31분 이미지수정 코드작업중...
+	//처음부터 작성위해 아래코드 주석처리!1
+	//4/24 14:18
+	//int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
 
 }
