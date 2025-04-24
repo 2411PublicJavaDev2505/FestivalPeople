@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fepeo.boot.chat.model.mapper.ChatMemberMapper">
 
-	<insert id="insertChatRoom">
+	<insert id="insertChatRoom"> <!-- 채팅방 가입 -->
 		insert into CHAT_MEMBER values (#{chatroomNo}, #{memberNo},
 		default, default, default) 
 	</insert>
@@ -23,6 +23,11 @@
 		where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}
 	</update>
 	
+	<update id="exitChatRooms"> <!-- 입장 상태 변경 'N'으로 -->
+		update CHAT_MEMBER set ENTER_YN = 'N'
+		where MEMBER_NO = #{memberNo} and CHATROOM_NO != #{chatroomNo} 
+	</update>
+	
 	<!-- 내 채팅방 목록 조회 -->
 	<select id="selectMyChatRoomList" resultType="ChatMember">
 		select * from CHAT_MEMBER where BLOCK_YN = 'N' AND MEMBER_NO = #{memberNo}
@@ -34,7 +39,7 @@
 		where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}
 	</select>
 		
-	<!-- 채팅방 가입자 정보 조회 -->
+	<!-- 채팅방 가입자 정보 출력 -->
 	<select id="chatMemberList" resultType="com.fepeo.boot.chat.controller.dto.MemberProfileList">
 		select  C.CHATROOM_NO, C.MEMBER_NO, M.NICKNAME, M.PROFILE_FILE_PATH, M.MEMBER_YN, C.BLOCK_YN
 		from CHAT_MEMBER C

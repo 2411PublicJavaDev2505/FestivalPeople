@@ -134,6 +134,11 @@ public class ChatServiceLogic implements ChatService {
 	public int enterMemberYn(int chatroomNo, int memberNo) {
 		return mMapper.enterMemberYn(chatroomNo,memberNo);
 	}
+	
+	@Override // 입장상태 'N'으로 변경
+	public int exitChatRooms(int chatroomNo, int memberNo) {
+		return mMapper.exitChatRooms(chatroomNo,memberNo);
+	}
 
 	@Override // 가입 멤버 프로필 출력
 	public List<MemberProfileList> chatMemberList(int chatroomNo) {
@@ -144,4 +149,5 @@ public class ChatServiceLogic implements ChatService {
 	public int blockChatMember(int chatroomNo, int memberNo) {
 		return mMapper.blockChatMember(chatroomNo,memberNo);
 	}
+
 }
