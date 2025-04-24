@@ -436,7 +436,7 @@ public class ApiComponent {
 	                        .queryParam("_type", "Json")
 	                        .queryParam("listYN", "Y")
 	                        .queryParam("arrange", "A")
-	                        .queryParam("eventStartDate", "20240101")
+	                        .queryParam("eventStartDate", "20241101")
 	                        .build())
 	                .header("Accept", "application/json")
 	                .retrieve()

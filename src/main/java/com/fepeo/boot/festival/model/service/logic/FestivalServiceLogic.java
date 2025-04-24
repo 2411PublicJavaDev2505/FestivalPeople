@@ -43,20 +43,29 @@ public class FestivalServiceLogic implements FestivalService {
 
             // 3. 각각 Festival 객체로 매핑 후 DB 저장
             for (FestivalItem item : items) {
-                Festival f = new Festival();
-                f.setFestivalName(item.getTitle());
-                f.setFestivalStartDate(Date.valueOf(formatDate(item.getEventstartdate())));
-                f.setFestivalEndDate(Date.valueOf(formatDate(item.getEventenddate())));
-                f.setFestivalFilePath(item.getFirstimage());
-                f.setFestivalPhone(item.getTel());
-                f.setFestivalAddress(item.getAddr1());
-                f.setFestivalDetailAddress(item.getAddr2());
-                f.setMapVCode(item.getMapx());
-                f.setMapHCode(item.getMapy());
+            	
+            	if (item.getAddr1() == null || item.getAddr1().trim().isEmpty()) {
+                    System.out.println("[SKIP] 주소 정보 없음: " + item.getTitle());
+                    continue; // 다음 아이템으로 넘어감
+                }
+                Festival festival = new Festival();
+                festival.setFestivalName(item.getTitle());
+                festival.setFestivalStartDate(Date.valueOf(formatDate(item.getEventstartdate())));
+                festival.setFestivalEndDate(Date.valueOf(formatDate(item.getEventenddate())));
+                festival.setFestivalFilePath(item.getFirstimage());
+                festival.setFestivalPhone(item.getTel());
+                festival.setFestivalAddress(item.getAddr1());
+                festival.setFestivalDetailAddress(item.getAddr2());
+                festival.setMapVCode(item.getMapx());
+                festival.setMapHCode(item.getMapy());
+//                System.out.println("주소 확인: " + item.getTitle() + " → " + item.getAddr1());
 
-                festivalMapper.insertFestival(f);
+             // 중복 여부 체크
+                if (!festivalMapper.isDuplicateFestival(festival)) {
+                    festivalMapper.insertFestival(festival);
+                }
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

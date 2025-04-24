@@ -5,7 +5,8 @@
 <mapper namespace="com.fepeo.boot.festival.model.mapper.FestivalMapper">
 	
 	<insert id="insertFestival" parameterType="Festival">
-        INSERT INTO FESTIVAL 
+        INSERT INTO FESTIVAL (FESTIVAL_NO,FESTIVAL_NAME,FESTIVAL_START_DATE,FESTIVAL_END_DATE,FESTIVAL_FILE_PATH,
+        FESTIVAL_PHONE,FESTIVAL_ADDRESS,FESTIVAL_DETAIL_ADDRESS,MAP_V_CODE,MAP_H_CODE)
         VALUES (
             SEQ_FESTIVAL_NO.NEXTVAL,
             #{festivalName},
@@ -16,10 +17,16 @@
             #{festivalAddress},
             #{festivalDetailAddress},
             #{mapVCode},
-            #{mapHcode}
+            #{mapHCode}
         )
     </insert>
-
+	<select id="isDuplicateFestival" parameterType="Festival" resultType="boolean">
+		 SELECT COUNT(*)
+		 FROM FESTIVAL
+		 WHERE FESTIVAL_NAME = #{festivalName}
+		  AND FESTIVAL_START_DATE = #{festivalStartDate}
+	</select>
+	
     <select id="selectFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival" parameterType="map">
 	    SELECT * FROM (
 	        SELECT f.*, ROWNUM AS rnum

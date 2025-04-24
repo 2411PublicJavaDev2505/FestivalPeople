@@ -12,6 +12,7 @@ import com.fepeo.boot.festival.model.vo.Festival;
 public interface FestivalMapper {
 	
 	int insertFestival(Festival festival);
+	boolean isDuplicateFestival(Festival festival);
     
 	List<Festival> selectFestivalList(Map<String, Integer> params);
 	//회원인 경우 추천 축제 리스트
@@ -24,9 +25,10 @@ public interface FestivalMapper {
 	int getTotalCount();
 	
 	List<Festival> searchFestivalListAll(@Param("params")Map<String, Integer> params,@Param("searchMap") Map<String, String> searchMap);
+	
 	//search paginaiton 받는 값
 	int getSearchTotalCount(@Param("searchMap")Map<String, String> searchMap);
-
+	
 
 	//코스에서 사용하는 메소드
 	List<Festival> selectFestivalListByRegion(@Param("regionNames") List<String> regionNames, Map<String,String> mapPoint);
@@ -34,6 +36,7 @@ public interface FestivalMapper {
 	List<Festival> selectFestivalListByRegion(Map<String,String> mapPoint);
 
 	List<Festival> searchFestivalList(@Param("searchMap")Map<String, String> searchMap);
+
 
 
 	
