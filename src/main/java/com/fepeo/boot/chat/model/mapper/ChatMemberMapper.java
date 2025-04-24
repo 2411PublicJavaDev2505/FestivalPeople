@@ -29,4 +29,7 @@ public interface ChatMemberMapper {
 	// 채팅방 탈퇴
 	int leaveChatMember(int chatroomNo, int memberNo);
 
+	// 멤버 강퇴
+	int blockChatMember(int chatroomNo, int memberNo);
+
 }

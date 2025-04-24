@@ -72,8 +72,8 @@
 			
 			<!--우 전체목록-->
 			<section class="allchat-list-wrap">
-				<div class="chat-prev-list"><a href="/chat/list">←</a></div>
-				<c:forEach items="${rSearchList }" var="sRoom" varStatus="i">
+				<div class="chat-prev-list"><a href="/chat/totalSearch">←</a></div>
+				<c:forEach items="${rSearchList }" var="cRoom" varStatus="i">
 					<ul class="chat-list">
 						<li class="chat-list-row">
 							<a href="javascript:void(0);" onclick="checkAndEnter(${cRoom.chatroomNo});" class="chat-link">
@@ -93,6 +93,30 @@
     </main>
     <!-- 푸터 -->
     </div>
+    
+	<script>
+		/* 채팅방 입장 시  */
+		function checkAndEnter(chatroomNo) {
+			fetch("/chat/check-access?chatroomNo=" + chatroomNo)
+			.then(res => res.json())
+			.then(data => {
+				if (data.status === "joined") {
+					// 가입자: 바로 입장
+					location.href = "/chat/enter/" + chatroomNo;
+				} else if (data.status === "notJoined") {
+					// 미가입자: 팝업으로 물어봄
+					const ok = confirm("첫입장을 환영합니다! 가입 후 입장하시겠습니까?");
+					if (ok) {
+						location.href = "/chat/enter/" + chatroomNo;
+					}
+				}
+			})
+			.catch(err => {
+				alert("서버 오류 발생: " + err);
+			});
+		}
 
+	</script>	
+	
 </body>
 </html>

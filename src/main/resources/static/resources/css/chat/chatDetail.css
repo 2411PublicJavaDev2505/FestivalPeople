@@ -249,28 +249,8 @@
     list-style-type: none;   
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* 메시지 검색시 하이라이트 */
+.txt-hlight {
+    background-color: yellow;
+    font-weight: bold;
+}

@@ -283,9 +283,18 @@ public class ChatController {
 		return result; 
 	}
 	
-	// 메시지 검색
-	
 	// 멤버 강퇴
+	@GetMapping("/block")
+	public String blockChatMember(@RequestParam("chatroomNo")int chatroomNo,HttpSession session) {
+		Member member = (Member)session.getAttribute("member");
+		int memberNo = member.getMemberNo();
+		
+		int result = service.blockChatMember(chatroomNo, memberNo); // CHAT_MEMBER > block_yn 변경
+		int count = service.subtractionChatMember(chatroomNo); // CHATROOM > chat_member_count -1	
+		
+		return "redirect:/chat/detail/" + chatroomNo;
+	}
+	
 	
 	// 채팅방 신고하기
 	

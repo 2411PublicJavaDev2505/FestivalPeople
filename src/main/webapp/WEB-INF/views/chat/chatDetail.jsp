@@ -70,12 +70,10 @@
 						</div>
 					</div>
 					<div class ="chat-header-right">
-						<form action="#" >
 						<div  class="msg-search">
-							<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
-							<button class="chat-search-btn" type="submit">⌕</button>
+							<input type="text" id="msgSearch" class="list-search-input" placeholder="검색" name="searchKeyword">
+							<button id="searchMoveBtn" class="chat-search-btn" type="submit">⌕</button>
 						</div>
-						</form>
 						<!-- 메뉴 버튼- 모달창 -->
 						<button class="chat-menu-open">메뉴</button>
 					</div>
@@ -97,11 +95,6 @@
 								</li>
 								<li>
 									<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
-										<button>회원 강퇴</button>
-									</c:if>
-								</li>	
-								<li>
-									<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
 									<form action="/chat/delete" id="deleteForm" method="get">
 										<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
 										<button type="button" onclick="deleteConfirm(${chatRoom.chatroomNo});">채팅방 삭제</button>
@@ -112,16 +105,23 @@
 							<ul>
 								<c:forEach items="${memberList }" var="mbList" varStatus="i">
 									<li>
-										<div>${mbList.nickname }</div>
-										<div><img src="${mbList.profileFilePath }" width="40" /></div>
+										<c:if test="${sessionScope.memberNo eq mbList.memberNo }">
+											<div>(나)${mbList.nickname }</div>
+										</c:if>
+										<c:if test="${sessionScope.memberNo ne mbList.memberNo }">
+											<div>${mbList.nickname }</div>
+										</c:if>
+										<c:if test="${sessionScope.memberNo eq chatRoom.memberNo }">	<!-- 방장표시  -->																			
+											<div><img src="${mbList.profileFilePath }" width="40" />⭐ </div>
+										</c:if>	
+										<c:if test="${sessionScope.memberNo ne chatRoom.memberNo }">																			
+											<div><img src="${mbList.profileFilePath }" width="40" /></div>
+										</c:if>	
 										<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
-											<div>내보내기</div>
+											<button>내보내기</button>
 										</c:if>
 									</li>
-								</c:forEach>								
-								<li>(나)</li>								
-								<li>방장</li>								
-								<li>남</li>								
+								</c:forEach>														
 							</ul>
 						</div>
 					</div>
@@ -261,11 +261,53 @@
 			}
 		}		
 		
-    	//입력이 있을 때만 버튼 활성화
-//     	msgInput.addEventListener("input", () => {
-//     		addChatBtn.disabled = msgInput.value.trim() === "";
-//     	});
-    
+		/* 메시지 검색 시 하이라이트 표시 */
+		var matchedElements = [];
+		var highlightIndex = 0;
+		
+		// 검색어 입력 시 하이라이트
+		$('#msgSearch').on('input', function () {
+		    var keyword = $(this).val().trim();
+		    matchedElements = [];
+		    highlightIndex = 0;
+		
+		    // 기존 하이라이트 제거
+		    $('.msg-balloon-box-l, .msg-balloon-box-r').each(function () {
+		        $(this).html($(this).text());
+		    });
+		
+		    if (keyword !== "") {
+		        var regex = new RegExp("(" + keyword + ")", "gi");
+		
+		        $('.msg-balloon-box-l, .msg-balloon-box-r').each(function () {
+		            var originalText = $(this).text();
+		            if (regex.test(originalText)) {
+		                var highlighted = originalText.replace(regex, "<span class='txt-hlight'>$1</span>");
+		                $(this).html(highlighted);
+		                matchedElements.push(this);
+		            }
+		        });
+		        // 역순으로 이동 시작
+		        highlightIndex = matchedElements.length - 1; 
+		    }
+		});
+		
+		// 버튼 클릭 시 역순으로 이동
+		$('#searchMoveBtn').on('click', function () {
+		    if (matchedElements.length > 0 && highlightIndex >= 0) {
+		        matchedElements[highlightIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+		        highlightIndex--; //위로이동
+		    }
+		});
+		
+		/*  페이지 진입 또는 새로고침 시 가장 마지막 메시지로 스크롤 */
+		window.addEventListener('load', function () {
+		    var lastMsg = document.querySelector('.group_msg_balloon:last-child');
+		    if (lastMsg) {
+		        lastMsg.scrollIntoView({ behavior: "auto", block: "end" });
+		    }
+		});
+		
     </script>
 </body>
 </html>
