@@ -380,12 +380,12 @@ public class ApiComponent {
 					.retrieve()
 					.bodyToMono(String.class)
 					.block();
-			//System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
+			System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
 			
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode root = mapper.readTree(response);
 			
-			JsonNode items = root.path("response").path("body").path("items").path("item");		
+			JsonNode items = root.path("response").path("body").path("items").path("item");	
 			if(items.isArray() && items.size() > 0) {
 				JsonNode item = items.get(0);
 				// 확인할 키 목록

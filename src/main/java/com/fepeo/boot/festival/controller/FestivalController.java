@@ -1,5 +1,6 @@
 package com.fepeo.boot.festival.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,25 @@ public class FestivalController {
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
 	    List<Festival> rfestivals = null;
 	    List<RegionDto> regionList = courseService.getAllRegions();
-	    List<String> goodWeatherRegions = api.callWeatherApi(regionList);
+	    String gWRegions = (String)session.getAttribute("gWRegions");
+	    List<String> goodWeatherRegions = new ArrayList<>();
+	    if(gWRegions == null) {
+	    	goodWeatherRegions = api.callWeatherApi(regionList);
+	    	gWRegions = "";
+	    	for(int i=0;i<goodWeatherRegions.size();i++) {
+	    		if(i != goodWeatherRegions.size() -1) {
+	    			gWRegions += goodWeatherRegions.get(i)+",";
+	    		}else {
+	    			gWRegions += goodWeatherRegions.get(i);
+	    		}
+	    	}
+	    	session.setAttribute("gWRegions", gWRegions);
+	    }else {
+	    	String[] strList = gWRegions.split(",");
+	    	for(int i=0;i<strList.length;i++) {
+	    		goodWeatherRegions.add(strList[i]);
+	    	}
+	    }
 	    
 	    if(member != null) {
 			//로그인 됬을때 
