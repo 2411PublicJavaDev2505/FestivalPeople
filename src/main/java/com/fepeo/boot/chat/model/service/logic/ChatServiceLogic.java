@@ -71,12 +71,12 @@ public class ChatServiceLogic implements ChatService {
 
 	@Override // 내가 속한 채팅방의 목록
 	public List<ChatMember> selectMyChatRoomList(int memberNo) {
-		return mMapper.selectMyChatRoomList(memberNo);
+		return cMapper.selectMyChatRoomList(memberNo);
 	}
 
 	@Override // 내가 속한 채팅방의 정보 가져오기
-	public List<ChatRoom> selectMyChatRoomListByChatMember(List<ChatMember> myChatRoomList) {
-		List<ChatRoom> myList  = new ArrayList<>();
+	public List<MyChatroom> selectMyChatRoomListByChatMember(List<ChatMember> myChatRoomList) {
+		List<MyChatroom> myList  = new ArrayList<>();
 		for(int i=0;i<myChatRoomList.size();i++) {
 			myList.add(cMapper.selectMyChatRoomListByChatMember(myChatRoomList.get(i)));
 		}
@@ -148,6 +148,11 @@ public class ChatServiceLogic implements ChatService {
 	@Override // 멤버 강퇴
 	public int blockChatMember(int chatroomNo, int memberNo) {
 		return mMapper.blockChatMember(chatroomNo,memberNo);
+	}
+
+	@Override // 미입장 회원에게 채팅개수 +1
+	public int notReadMsgCount(int chatroomNo) {
+		return mMapper.notReadMsgCount(chatroomNo);
 	}
 
 }
