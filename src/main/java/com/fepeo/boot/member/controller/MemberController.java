@@ -340,6 +340,10 @@ public class MemberController {
 			,HttpSession session) throws IllegalStateException, IOException {
 		MemberUpdateRequest member = new MemberUpdateRequest();
 		Member loginMember = (Member)session.getAttribute("member");
+		
+		member.setProfile(profile);
+		member.setMemberNo(loginMember.getMemberNo());
+		
 		int result = mService.updateMemberProfile(member);
 		loginMember = mService.selectOneByNo(loginMember.getMemberNo());
 		JSONObject json = new JSONObject();

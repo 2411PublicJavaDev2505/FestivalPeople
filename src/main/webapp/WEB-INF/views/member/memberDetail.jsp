@@ -83,17 +83,60 @@
 							</div>
 						</div>
 						<div class="my-course-list">
-							<c:forEach items="${courseList }" var="course">
-								<div class="course-content">
-									<div class="course-content-left">
-										<img alt="축제 이미지" src="${course.festivalImg }">
-										<h5>${course.festivalName }</h5>
+							<c:if test="${courseList.size() eq 0 || courseList eq null }">
+								<div class="course-content">아직 저장한 코스가 없어요..ㅜㅜ</div>
+							</c:if>
+							<c:if test="${courseList ne null }">
+								<c:forEach items="${courseList }" var="course">
+									<div class="course-content">
+										<div class="course-content-left">
+											<img alt="축제 이미지" src="${course.festivalImg }">
+											<h5>${course.festivalName }</h5>
+										</div>
+										<div class="course-content-right">
+											<h4>${course.courseName }</h4>
+											<div class="course-detail">
+												<c:if test="${course.matzipPlaceName ne null }">
+													<div class="course-detail idx">
+														<img alt="아이콘" src="../resources/img/course/icon/matzip.png">
+														<span>${course.matzipPlaceName }</span>
+													</div>
+												</c:if>
+												<c:if test="${course.hotelPlaceName ne null }">
+													<div class="course-detail idx">
+														<img alt="아이콘" src="../resources/img/course/icon/hotel.png">
+														<span>${course.hotelPlaceName }</span>
+													</div>
+												</c:if>
+												<c:if test="${course.cafePlaceName ne null }">
+													<div class="course-detail idx">
+														<img alt="아이콘" src="../resources/img/course/icon/cafe.png">
+														<span>${course.cafePlaceName }</span>
+													</div>
+												</c:if>
+												<c:if test="${course.tourPlaceName ne null }">
+													<div class="course-detail idx">
+														<img alt="아이콘" src="../resources/img/course/icon/tour.png">
+														<span>${course.tourPlaceName }</span>
+													</div>
+												</c:if>
+												<c:if test="${course.parkingPlaceName ne null }">
+													<div class="course-detail idx">
+														<img alt="아이콘" src="../resources/img/course/icon/parking.png">
+														<span>${course.parkingPlaceName }</span>
+													</div>
+												</c:if>
+												<c:if test="${course.culturePlaceName ne null }">
+													<div class="course-detail idx">
+														<img alt="아이콘" src="../resources/img/course/icon/culture.png">
+														<span>${course.culturePlaceName }</span>
+													</div>
+												</c:if>
+											</div>
+										</div>
 									</div>
-									<div class="course-content-right">
-										<span>${course.courseName }</span>
-									</div>
-								</div>
-							</c:forEach>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 				</div>
