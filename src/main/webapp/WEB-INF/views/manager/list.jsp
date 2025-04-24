@@ -22,7 +22,7 @@
 						<div class="manager-select-search">
 							<div class="left-select-area">
 								<button>회원관리</button>
-								<button>신고관리</button>
+								<a href="/report/list"><button>신고관리</button></a>
 								<button id="refreshFestivalBtn">축제 최신화</button>
 							</div>
 							<div class="right-search-area">
