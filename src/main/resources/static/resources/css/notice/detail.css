@@ -59,6 +59,7 @@
     margin-left: 50px;
   }
   
+  
  input[type="file" i] {
   	margin-left: 0;
     margin-bottom: 30px;
@@ -133,10 +134,12 @@
 	height: 600px;
 	margin: 0 auto;
 	margin-top: 10px;
+	padding: 50px 50px;
 	border: 1px solid #e4e2dd;
 	background-color: #e4e2dd;
 	border-radius: 10px;
 }
+
 
 .form-row-btn {
 	display: flex;

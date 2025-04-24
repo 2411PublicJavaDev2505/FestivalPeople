@@ -28,7 +28,7 @@
               </div>
               <div class="form-row-content">
               	<img alt="공지사항 사진" src="${notice.noticeFilePath}"> <br>
-                ${notice.noticeContent }
+                <div class="content-text">${notice.noticeContent }</div>
               </div>
               <div class="form-row-btn">
                 <button class="btn-list-btn" onclick="location.href='/notice/list';">목록으로</button>

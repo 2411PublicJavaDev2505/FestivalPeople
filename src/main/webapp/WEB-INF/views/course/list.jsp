@@ -21,7 +21,7 @@
 			    <div class="course-slider-container">
 	                <div class="course-search">
 		                <form class="search-form" action="/course/search" method="post">
-					    	<div>${memberName}${message }</div>
+					    	<div class="message-box">${memberName}${message }</div>
 		                    <select name="searchCondition">
 		                        <option value="all">전체</option>
 		                        <option value="name">축제명</option>
