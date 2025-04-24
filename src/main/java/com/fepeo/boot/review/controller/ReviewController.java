@@ -40,7 +40,7 @@ public class ReviewController {
 		
     private final NoticeServiceLogic noticeServiceLogic;
 
-    //파
+    
 	//댓글서비스
 	private final CommentService cService;
 	
@@ -120,16 +120,27 @@ public class ReviewController {
 	//수정!!
 	
 	@PostMapping("/update")
-	public String updateReview(@ModelAttribute ReviewUpdateRequest review,
+	public String updateReview(@ModelAttribute ReviewAddRequest review,
 			@RequestParam(value="images",required=false) List<MultipartFile> images,
-			@RequestParam("reviewNo") int reviewNo,
+			//@RequestParam("reviewNo") int reviewNo,
 			HttpSession session
 			,Model model) throws IllegalStateException, IOException { //강제로 넣기!
-			int result = rService.updateReview(review,images);
+			//아래 코드 주석하니 제목이랑 내용 다시 수정됨! 04/24 19:22
+			//int result = rService.updateReview(review,images);
+		
+			//여기부분 추가해보고 안되면 원
+			//Review review = rService.updateReview(review,images);
+			
 			//제목,내용만수정 ? 
-			result = rService.reviewUpdate(review);
+			//04/24 19:47 아래 코드 수정할예정!수정전 주석처리해줌
+			//int result = rService.reviewUpdate(review);
+			//04-24 20:28 코드추가수정!
+			int result = rService.reviewUpdate(review,images);
+			
+			System.out.println("확인");
 			//추가코드
-			model.addAttribute("reviewNo",reviewNo);
+			//model.addAttribute("reviewNo",reviewNo);
+			//int result = rService.reviewUpdate(review,images);
 			
 		return "redirect:/review/list";
 		//return "redirect:/review/detail?reviewNo=" + result;

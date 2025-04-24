@@ -188,12 +188,60 @@ public class ReviewServiceLogic implements ReviewService {
 
 	//4/24 15:02분 게시판 수정 
 
+//	@Override
+//	public int updateReview(ReviewAddRequest review, List<MultipartFile> images) throws IllegalStateException, IOException {
+//		//04/24 19:43분 맵퍼주소 바꿔줌.원래껀 주석 에러나면 살리고 지울것!
+//		//int result = mapper.updateReview(review);
+//		int result = mapper.reviewUpdate(review);
+//		if(result == 0) return 0;
+//		int reviewNo = review.getReviewNo();
+//		//4/24 복붙!
+//		if(images != null) {
+//			for(int i = 0; i < images.size(); i++) {
+//				if(images.get(i).getSize() > 0) {
+//					ImgAddRequest img = new ImgAddRequest();
+//					//img에 파일 정보를 담기!!
+//					img.setReviewNo(reviewNo);
+//					
+//					String fileName = images.get(i).getOriginalFilename();
+//					String fileRename = Util.fileRename(fileName);
+//					String filePath = "/images/review/"+fileRename;
+//					img.setReviewFileName(fileName);
+//					img.setReviewFileRename(fileRename);
+//					img.setReviewFilePath(filePath);
+//					images.get(i).transferTo(new File("C:/uploadImage/review/"+fileRename));
+//					if(i == 0) {
+//						result += mapper.updateReviewFirstImage(img);
+//					}else if(i == 1) {
+//						result += mapper.updateReviewSecondImage(img);
+//					}else if(i == 2) {
+//						result += mapper.updateReviewThirdImage(img);
+//					}
+//				}
+//			}
+//		}
+//		return result;
+//	}
+
+	//제목,내용수정
+
+//	@Override
+//	public int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images)
+//			throws IllegalStateException, IOException {
+//		int result = mapper.reviewUpdate(review);
+//		return result;
+//	}
+
+
+
 	@Override
-	public int updateReview(ReviewUpdateRequest review, List<MultipartFile> images) throws IllegalStateException, IOException {
-		int result = mapper.updateReview(review);
+	public int reviewUpdate(ReviewAddRequest review, List<MultipartFile> images) throws IllegalStateException, IOException {
+		// TODO Auto-generated method stub
+		int result = mapper.reviewUpdate(review);
 		if(result == 0) return 0;
+		//게시글 번호 꺼내기!!
 		int reviewNo = review.getReviewNo();
-		//4/24 복붙!
+		//4/11 코드 추가해줌!그리고 if 안에 코드넣어주고 아래 4/11
 		if(images != null) {
 			for(int i = 0; i < images.size(); i++) {
 				if(images.get(i).getSize() > 0) {
@@ -222,13 +270,13 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 
-	
-	@Override
-	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException{
-		//16:09분 제목내용만 수정코드
-		int result = mapper.reviewUpdate(review);
-		return result;
-	}
+	//제목내용만 수정코드!04/24 20:21
+//	@Override
+//	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException{
+//		//16:09분 제목내용만 수정코드
+//		int result = mapper.reviewUpdate(review);
+//		return result;
+//	}
 
 
 
