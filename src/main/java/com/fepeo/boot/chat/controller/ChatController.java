@@ -38,7 +38,19 @@ public class ChatController {
 	
 	// 채팅방 개설
 	@GetMapping("/insert")
-	public String showChatRoomInsert() {
+	public String showChatRoomInsert(HttpSession session, Model model) {
+		// 세션에서 memberNo 가져오기
+		Member member = (Member)session.getAttribute("member");
+		int memberNo = member.getMemberNo();	
+
+		// 내가 속한 방만 출력
+		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
+		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		model.addAttribute("myList",myList);
+		
+		// 각 채팅방별 참여인원수 불러오기
+		List<ChatMember> memberList = service.selectChatMember();
+
 		return "chat/chatInsert";
 	}
 	@PostMapping("/insert")
@@ -60,6 +72,7 @@ public class ChatController {
 		
 		// 각 채팅방별 참여인원수 불러오기
 		List<ChatMember> memberList = service.selectChatMember();
+		model.addAttribute("memberList", memberList);		
 
 		return "redirect:/chat/enter/" + chatRoom.getChatroomNo();
 	}
