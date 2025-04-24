@@ -23,7 +23,7 @@
 							<div class="left-select-area">
 								<button>회원관리</button>
 								<button>신고관리</button>
-								<a href="/festival/insert" ><button>축제최신화</button></a>
+								<button id="refreshFestivalBtn">축제 최신화</button>
 							</div>
 							<div class="right-search-area">
 				                <form class="search-form">
@@ -76,15 +76,23 @@
 										<a href="/manager/mypage?currentPage=${maxPage }"> ▷▷ </a>
 								</div>
 							</div>
-							
-
-						
-
 					</div>	
 				</main>	
 		</div>
-	
-	
-	
+		<script>
+			document.getElementById("refreshFestivalBtn").addEventListener("click",function(){
+				fetch("/festival/insert",{
+					method: "GET"
+				})
+				.then(response => response.text())
+				.then(data =>{
+					alert("축제 정보 최신화가 되었습니다");
+				})
+				.catch(error=>{
+					alert("최신화 중 오류가 발생 했습니다");
+					console.error(error);
+				});
+			});
+		</script>
 	</body>
 </html>
