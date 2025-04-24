@@ -78,9 +78,7 @@
 	padding-left:15%;
 	list-style-type: none;
 }
-
-
-.weather-api,
+/* 길찾기 */
 .map-api {
     background: white;
     border-radius: 20px;
@@ -93,7 +91,6 @@
     padding: 20px;
 }
 
-.weather-api img,
 .map-api img {
     width: 100%; /* 꽉 차게 */
     height: auto;
@@ -131,4 +128,58 @@
 .map_shortcut:hover {
   background-color: #FFC107;
 }
+
+/* 일기예보 */
+
+.weather-api{
+	background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 900px;
+    margin: 40px auto 40px auto; /* 가운데 정렬 + 아래 여백 */
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
   
+.weather-api table {
+    width: 800px;
+    border-collapse: collapse;
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.weather-api th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+}
+
+.weather-api td {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+}
+
+.weather-api tr:nth-child(1) th {
+    background-color: #f1f5f9;
+    font-size: 15px;
+    color: #111;
+}
+
+.weather-api tr td {
+    background-color: #ffffff;
+}
+
+.weather-api th:first-child {
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
+}
+
+.weather-api td, .weather-api th {
+    text-align: center;
+    vertical-align: middle;
+}

@@ -81,10 +81,7 @@
 	        </where>
 	        ORDER BY distance
 	    ) 
-<!-- 	    부등호를 인식 못해서 넣은 문구 -->
-	    <![CDATA[ 
-	    WHERE ROWNUM <= 20
-	    ]]>
+	    WHERE ROWNUM &lt;= 20
 	</select>
 	
 	<select id="searchFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival">
@@ -101,6 +98,7 @@
 			</if>	
 		</where>
 	</select>
+	
 	 <!-- 축제 리스트 검색 기능 -->
 	<select id="searchFestivalListAll" resultType="com.fepeo.boot.festival.model.vo.Festival">
 	    SELECT * FROM (

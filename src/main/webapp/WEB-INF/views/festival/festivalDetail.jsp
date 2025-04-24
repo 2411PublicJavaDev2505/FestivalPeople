@@ -2,10 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%
     LocalDate today = LocalDate.now();
     LocalDate tomorrow = today.plusDays(1);
     LocalDate dayAfterTomorrow = today.plusDays(2);
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM월 dd일 (E)");
+    String todayStr = today.format(formatter);
+    String tomorrowStr = tomorrow.format(formatter);
+    String dayAfterTomorrowStr = dayAfterTomorrow.format(formatter);
 %>
 <!DOCTYPE html>
 <html>
@@ -41,13 +47,12 @@
 							<li> 📞 대표 전화:  ${festival.festivalPhone}</li>
 							<li> 🔅 축제기간 일기예보
 								<div class="weather-api">
-									<table>
+									<table border="1" cellpadding="10" style="border-collapse: collapse; text-align: center;">
 										<tr>
-											<th>날짜</th>
-											<th><%= today %></th>
-											<th><%= tomorrow %></th>
-											<th><%= dayAfterTomorrow %></th>
-											 <tr>
+										    <th>날짜</th>
+										    <th><%= todayStr %></th>
+										    <th><%= tomorrowStr %></th>
+										    <th><%= dayAfterTomorrowStr %></th>
 										</tr>
 										<tr>
 										    <th>🌡 기온</th>
@@ -69,16 +74,6 @@
 										</tr>
 
 									</table>
-								<!-- table에 입력해야 하는 값
-								<c:forEach var="entry" items="${weatherMap}">
-									    <h3>${entry.key} 예보</h3>
-									    <ul>
-									        <c:forEach var="weather" items="${entry.value}">
-									            <li>${weather.fcstTime} - ${weather.category}: ${weather.fcstValue}</li> 
-									        </c:forEach>
-									    </ul>
-									</c:forEach>-->
-									
 								</div>
 							</li>
 							<li> 🚩 지도
