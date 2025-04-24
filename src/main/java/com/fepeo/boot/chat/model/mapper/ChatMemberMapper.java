@@ -22,9 +22,6 @@ public interface ChatMemberMapper {
 	// 채팅방 참여 여부 조회
 	ChatMember selectChatMemberList(int chatroomNo, int memberNo);
 
-	// 내가 속한 채팅방의 목록
-	List<ChatMember> selectMyChatRoomList(int memberNo);
-
 	// 가입 멤버 프로필 출력
 	List<MemberProfileList> chatMemberList(int chatroomNo);
 
@@ -34,5 +31,11 @@ public interface ChatMemberMapper {
 	// 멤버 강퇴
 	int blockChatMember(int chatroomNo, int memberNo);
 
+	// 미입장 회원에게 채팅개수 +1
+	int notReadMsgCount(int chatroomNo);
+
+	// 내가 속한 채팅방의 목록
+	List<ChatMember> selectMyChatRoomList(int memberNo);	
+	
 
 }

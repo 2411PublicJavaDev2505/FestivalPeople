@@ -150,4 +150,9 @@ public class ChatServiceLogic implements ChatService {
 		return mMapper.blockChatMember(chatroomNo,memberNo);
 	}
 
+	@Override // 미입장 회원에게 채팅개수 +1
+	public int notReadMsgCount(int chatroomNo) {
+		return mMapper.notReadMsgCount(chatroomNo);
+	}
+
 }

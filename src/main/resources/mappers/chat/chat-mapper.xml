@@ -35,6 +35,28 @@
 	<select id="selectChatRoomList" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		select * from CHATROOM
 	</select>
+	
+	<!-- 내 채팅방 목록 조회 -->
+<!-- 	<select id="selectMyChatRoomList" resultType="com.fepeo.boot.chat.controller.dto.MyChatroom">
+		select 		
+			C.CHATROOM_NO,
+			C.CHATROOM_TITLE,
+			C.TAG1, C.TAG2, C.TAG3,
+			C.CHAT_LIMIT,
+			C.CHAT_MEMBER_COUNT,
+			C.CHAT_IMG_PATH,
+			C.CHAT_IMG_NAME,
+			M.NON_CHECK_MSG
+		from CHATROOM C
+		join CHAT_MEMBER M ON C.CHATROOM_NO = M.CHATROOM_NO
+		WHERE M.MEMBER_NO = #{memberNo} AND M.BLOCK_YN = 'N'
+	</select> -->
+	<select id="selectMyChatRoomList" resultType="com.fepeo.boot.chat.model.vo.ChatMember">
+		select * from CHAT_MEMBER where BLOCK_YN = 'N' AND MEMBER_NO = #{memberNo}
+	</select>
+	
+	
+	
 <!-- 	
 	<select id="selectChatRoomListByNo" resultType="com.fepeo.boot.chat.model.vo.ChatRoom">
 		select * from CHATROOM where MEMBER_NO = #{memberNo} 방장

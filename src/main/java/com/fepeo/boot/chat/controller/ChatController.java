@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fepeo.boot.chat.controller.dto.ChatroomRegisterRequest;
 import com.fepeo.boot.chat.controller.dto.MemberProfileList;
 import com.fepeo.boot.chat.controller.dto.MsgInsertRequest;
+import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.service.ChatService;
 import com.fepeo.boot.chat.model.vo.ChatMember;
 import com.fepeo.boot.chat.model.vo.ChatMsg;
@@ -188,6 +189,10 @@ public class ChatController {
 		model.addAttribute("nickname", member.getNickname());
 		model.addAttribute("profileFilePath", member.getProfileFilePath());
 		
+		// 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0이 되야 함)
+		
+		
+		
 		model.addAttribute("chatroomNo", chatroomNo); // 채팅방 번호 전달
 		
 		return "chat/chatDetail";
@@ -278,8 +283,13 @@ public class ChatController {
 		msg.setUplodeFile(uplodeFile);
 		int result = service.insertChatMsg(msg);
 		
+		// 미입장 회원에게 채팅개수 +1
+		int msgCount = service.notReadMsgCount(chatroomNo);
+		
+		// 메시지 번호 꺼내기
+		int msgNo = msg.getChatMsgNo();
 		// 안 읽은 사람 숫자 출력
-		// int count = msgService.nonReadMemberCount(chatMsgNo);
+		// int count = msgService.nonReadMemberCount(msgNo);
 		
 		// 대화내용(말풍선) 출력
 		List<ChatMsg> msgList = service.selectChatMsgListByNo(chatroomNo);
