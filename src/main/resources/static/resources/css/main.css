@@ -77,11 +77,12 @@
 .slidecontroller-text-main h3 span{
 	display: none;
 	font-size:14px;
+	font-weight: bold;
     position: absolute;
     height:40px;
     left:150px;
     top:10px;
-    background: black;
+    background: #902804;
     color: white;
     border-radius: 30px;
     padding: 12px 12.8px;
@@ -94,7 +95,7 @@
 }
 
 .slidecontroller-text-main h3 span:after{
-	border-top: 10px solid black;
+	border-top: 10px solid #902804;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 0px solid transparent;
