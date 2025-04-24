@@ -159,12 +159,19 @@
 			</where>
 		</select>
 		
-		<!-- 게시판수정 -->
+		<!-- 게시판수정 제목 이름만 -->
+		<!-- 쿼리문바꿔야함! 원래꺼는 주석처리 하고 다시작성!-->
+<!-- 		<update id="reviewUpdate"> -->
+<!-- 			UPDATE REVIEW SET REVIEW_TITLE = #{reviewTitle} ,  -->
+<!-- 			REVIEW_CONTENT = #{reviewContent} -->
+<!-- 			WHERE REVIEW_NO = #{reviewNo} AND MEMBER_NO = #{memberNo} -->
+<!--   		</update> -->
+	
 		<update id="reviewUpdate">
 			UPDATE REVIEW SET REVIEW_TITLE = #{reviewTitle} , 
 			REVIEW_CONTENT = #{reviewContent}
-			
 			WHERE REVIEW_NO = #{reviewNo} AND MEMBER_NO = #{memberNo}
   		</update>
+	
 		
 </mapper>

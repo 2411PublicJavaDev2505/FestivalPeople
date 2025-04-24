@@ -51,4 +51,7 @@ public interface ReviewService {
 	//4/22 10:30 추가!detail에서 왔음!
 	List<Review> selectReviewList();
 
+	//어쩌다가 만듬....4/24 11:31분 이미지수정 코드작업중...
+	int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
+
 }
