@@ -86,25 +86,26 @@
 				    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
 				  });
 				  //여기부터 4/23일20:05분 코드추가
-// 				  const changeFile() = () => {
-// 					  let formData = new FormData();
-// 					  let fileInput = $("#images")[0]);
-// 					  if (fileInput.files.length > 0) {
-// 						  $.ajax({
-// 							  url: "/review/updateimages",
-// 							  data: formData,
-// 							  contentType: false,
-// 					          processData: false,
-// 					          success: function(data) {
-// 					        	  document.querySelector("#review-file").src = data;
-// 					          },
-// 					          error:function() {
-// 					        	  alert("통신오류");
-// 					          }
-// 						  });
+				  const changeFile() = () => {
+					  let formData = new FormData();
+					  let fileInput = $("#images")[0]);
+					  if (fileInput.files.length > 0) {
+						  $.ajax({
+							  url: "/review/updatefile",
+							  data: formData,
+							  type: "POST",
+							  contentType: false,
+					          processData: false,
+					          success: function(data) {
+					        	  document.querySelector("#review-file").src = data;
+					          },
+					          error:function() {
+					        	  alert("통신오류");
+					          }
+						  });
 						  
-// 					  }
-// 				  }
+					  }
+				  }
 			</script>
 		</div>
 	</div>

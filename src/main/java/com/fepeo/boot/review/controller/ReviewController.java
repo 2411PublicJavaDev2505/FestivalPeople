@@ -109,21 +109,36 @@ public class ReviewController {
 		model.addAttribute("review",review); 
 		return "review/update";
 	}
-	//수정 4/23 19:40분 아래 원래 파일!
+	//수정 4/23 20:456분 아래 원래 파일!넣어줬음
 	//@RequestParam(value="images" , required=false) List<MultipartFile> images 
 	
 	@PostMapping("/update")
 	public String reviewUpdate(@ModelAttribute ReviewUpdateRequest review,
+			@RequestParam(value="images" , required=false) List<MultipartFile> images , 
 			@RequestParam("reviewNo") int reviewNo,
 			HttpSession session
 			,Model model ) throws IllegalStateException, IOException {
-		int result = rService.reviewUpdate(review);
+		//4/23 21:03 아래 원래코드에서 추가함!주석처리!
+		//int result = rService.reviewUpdate(review);
+		int result = rService.reviewUpdate(review,images);
 		model.addAttribute("reviewNo",reviewNo);
 		System.out.println("확인");
 		System.out.println(review);
 		//이미지 수정도되면 아래 주석풀어서 확인할것!
 //		return "redirect:/review/detail?/reviewNo="+review.getReviewNo();
 		return "redirect:/review/list";
+	}
+	
+	//4/23 21:00 이미지파일 수정 코드작성!!
+	
+	@PostMapping("/updatefile")
+	public String updateFile(@RequestParam(value="images" , required=false) List<MultipartFile> images
+			) {
+		String filePath = "";
+		if(images != null && !images.isEmpty()) {
+			//
+		}
+		return filePath;
 	}
 	
 	//게시글 삭제
