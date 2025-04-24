@@ -63,13 +63,13 @@
 						<!-- 추천 코스 리스트 출력 -->
 						<div id="recommendation-container">					
 						</div>					
-							<form class="insert-course" action="/course/insert" method="post">
+							<form class="insert-course" action="/course/insert" method="post">								
 								<div class="expect-cost">선택 장소 수 : ??</div>	
 								<input type="text" name="courseName" placeholder="코스명을 입력하세요"> 	
 								<input type="hidden" name="festivalNo" value="${festival.festivalNo }">												
 								<div id="hiddenPlaceInputs">
 						        </div>
-								<input type="submit" value="코스 저장하기">							
+								<input type="submit" value="코스 저장하기">						
 							</form>																			
 						</div>
 						</div>
@@ -150,7 +150,7 @@
 	}
 
 
-	
+	/* 카테고리 Check-Box 선택시 동작하는 이벤트 */
 	$(document).ready(function () {
 		let selectedCategories = [];
 
@@ -204,8 +204,6 @@
 						kakao.maps.event.addListener(marker, 'mouseover', () => infowindow.open(map, marker));
 						kakao.maps.event.addListener(marker, 'mouseout', () => infowindow.close());
 
-						console.log("넌뭐야"+place.x);
-						console.log("되는거야?"+place.y);
 						
 						// 숨겨진 input (폼 전송용)
 						let hiddenInputs = `
@@ -248,6 +246,35 @@
 			});
 		});
 	});
+	
+	
+	document.querySelector("#saveCourseBtn").addEventListener("click", function(e) {
+	    e.preventDefault();
+
+	    const form = document.querySelector("#courseForm");
+	    const formData = new FormData(form);
+
+	    fetch("/insert", {
+	        method: "POST",
+	        body: formData
+	    })
+	    .then(res => res.text())
+	    .then(data => {
+	        if (data === "success") {
+	            alert("코스가 성공적으로 저장되었습니다!");
+	            window.location.href = "/member/memberDetail";
+	        } else {
+	            alert("저장에 실패했습니다. 다시 시도해주세요.");
+	        }
+	    })
+	    .catch(error => {
+	        console.error("에러:", error);
+	        alert("요청 중 오류가 발생했습니다.");
+	    });
+	});	
+	
+	
+	
 </script>
 
 </body>

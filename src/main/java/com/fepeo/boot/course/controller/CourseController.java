@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +27,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.course.model.service.CourseService;
+import com.fepeo.boot.course.model.vo.Course;
 import com.fepeo.boot.course.model.vo.dto.Categories;
-import com.fepeo.boot.course.model.vo.dto.CourseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
 import com.fepeo.boot.festival.model.service.FestivalService;
@@ -183,7 +185,8 @@ public class CourseController {
 	
 
 	@PostMapping("/insert")
-	public String insertCourse(@RequestParam("category_group_code") List<String> category
+	@ResponseBody
+	public ResponseEntity<String> insertCourse(@RequestParam("category_group_code") List<String> category
 			,@RequestParam("place_name") List<String> placeName
 			,@RequestParam("x") List<String> xs
 			,@RequestParam("y") List<String> ys
@@ -192,7 +195,7 @@ public class CourseController {
 			,Model model
 			,HttpSession session) {
 		
-		CourseDto course = new CourseDto();
+		Course course = new Course();
 		Festival festival = fService.selectFestivalByNo(festivalNo);
 
 		Member member = (Member)session.getAttribute("member");
@@ -208,56 +211,43 @@ public class CourseController {
 			if(category.get(i).equals("FD6")) {
 				course.setMatzipCategory(category.get(i));
 				course.setMatzipPlaceName(placeName.get(i));
-				course.setMatzipX(xs.get(i));
-				course.setMatzipY(ys.get(i));			
-			}
-			
-			
-			if(category.get(i).equals("AD5")) {
+				course.setMatzipMAPX(xs.get(i));
+				course.setMatzipMAPY(ys.get(i));			
+			}else if(category.get(i).equals("AD5")) {
 				course.setHotelCategory(category.get(i));
 				course.setHotelPlaceName(placeName.get(i));
-				course.setHotelX(xs.get(i));
-				course.setHotelY(ys.get(i));
-			}
-			
-			
-			if(category.get(i).equals("CE7")) {
+				course.setHotelMAPX(xs.get(i));
+				course.setHotelMAPY(ys.get(i));
+			}else if(category.get(i).equals("CE7")) {
 				course.setCafeCategory(category.get(i));
 				course.setCafePlaceName(placeName.get(i));
-				course.setCafeX(xs.get(i));
-				course.setCafeY(ys.get(i));
-			}
-			
-			
-			if(category.get(i).equals("AT4")) {
+				course.setCafeMAPX(xs.get(i));
+				course.setCafeMAPY(ys.get(i));
+			}else if(category.get(i).equals("AT4")) {
 				course.setTourCategory(category.get(i));
 				course.setTourPlaceName(placeName.get(i));
-				course.setTourX(xs.get(i));
-				course.setTourY(ys.get(i));
-			}
-			
-			
-			if(category.get(i).equals("PK6")) {
+				course.setTourMAPX(xs.get(i));
+				course.setTourMAPY(ys.get(i));
+			}else if(category.get(i).equals("PK6")) {
 				course.setParkingCategory(category.get(i));
 				course.setParkingPlaceName(placeName.get(i));
-				course.setParkingX(xs.get(i));
-				course.setParkingY(ys.get(i));
-			}
-			
-			
-			if(category.get(i).equals("CT1")) {
+				course.setParkingMAPX(xs.get(i));
+				course.setParkingMAPY(ys.get(i));
+			}else if(category.get(i).equals("CT1")) {
 				course.setCultureCategory(category.get(i));
 				course.setCulturePlaceName(placeName.get(i));
-				course.setCultureX(xs.get(i));
-				course.setCultureY(ys.get(i));				
+				course.setCultureMAPX(xs.get(i));
+				course.setCultureMAPY(ys.get(i));				
 			}
-//		int result = cService.insertCourse(courseName, course, festival);
+			
 			
 		}
 
-		System.out.println("내가 갈 곳 어디인가"+course);
-		
-		return "course/list";
+		int result = cService.insertCourse(course);
+		if(result > 0) {
+			return ResponseEntity.ok("success");
+		}
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("fail");
 	}
 	
 
