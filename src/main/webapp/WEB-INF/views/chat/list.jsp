@@ -77,7 +77,7 @@
 			<!--우 전체목록-->
 			<section class="allchat-list-wrap">
 			<c:forEach items="${cRooms }" var="cRoom" varStatus="i">
-				 <p>디버깅: ${cRoom.chatroomNo}</p>
+				 <p>방번호: ${cRoom.chatroomNo}</p>
 				<ul class="chat-list">
 					<li class="chat-list-row">
 						<a href="javascript:void(0);" onclick="checkAndEnter('${cRoom.chatroomNo}');" class="chat-link">

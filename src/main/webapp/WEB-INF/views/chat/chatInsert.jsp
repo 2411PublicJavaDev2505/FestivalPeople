@@ -19,18 +19,18 @@
 		<!--상단 채팅방검색-->
 		<section class="chat-nav">
 			<span>${member.nickname } 참여 채팅 수 : 0</span>memNo.${member.memberNo }
-			<form action="#" class="chat-list-search"  >
+			<form action="/chat/totalSearch" class="chat-list-search"  >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 				<button class="chat-search-btn" >⌕</button>
 			</form>
 		</section>
 		<section class="chat-list-total">
 			<!--좌 소속방목록-->
-			<section class="mychat-list-wrap">
-				<form class="mychat-list-search" action="#" >
+ 			<section class="mychat-list-wrap">
+<!--				<form class="mychat-list-search" action="#" >
 					<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 					<button class="chat-search-btn" type="submit">⌕</button>
-				</form>
+				</form> -->
 				
 				<!-- 참여방 없을 경우 -->
 				<c:if test="${empty myList }">
@@ -39,19 +39,19 @@
 				<!-- 참여방 있을 경우 → 목록 출력--> 
 				<c:if test="${not empty myList }">
 					<c:forEach items="${myList }" var="myList" varStatus="i">
-					<ul class="chat-list">
-						<li class="chat-list-row">
-							<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
-							<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
-							<div class="text-wrap">
-								<div class="chat-title">${myList.chatroomTitle }</div>
-								<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
-								<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
-							</div>
-							<div class="msg-alarm">2</div>
-							</a>
-						</li>
-					</ul> 
+						<ul class="chat-list">
+							<li class="chat-list-row">
+								<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
+								<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
+								<div class="text-wrap">
+									<div class="chat-title">${myList.chatroomTitle }</div>
+									<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
+									<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
+								</div>
+								<div class="msg-alarm">알림</div>
+								</a>
+							</li>
+						</ul> 
 					</c:forEach>
 				</c:if>
 				<form class="chat-room-make" action="/chat/insert">
