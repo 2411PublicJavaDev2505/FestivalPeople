@@ -45,7 +45,7 @@ public class ChatController {
 
 		// 내가 속한 방만 출력
 		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-		List<MyChatroom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
 		// ↑ 내가 속한 채팅방(nonBlock방의 채팅방 정보를 가져오기 위한 과정)		
 		model.addAttribute("myList",myList);
 		
@@ -65,7 +65,7 @@ public class ChatController {
 
 		// 내가 속한 방만 출력
 		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-		List<MyChatroom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
 		model.addAttribute("myList",myList);
 		
 		chatRoom.setImage(image);
@@ -92,7 +92,7 @@ public class ChatController {
 			int memberNo = member.getMemberNo();
 			// 내가 속한 방만 출력
 			List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-			List<MyChatroom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+			List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
 			model.addAttribute("myList",myList);
 			
 //			// 전체 리스트 출력
@@ -169,7 +169,7 @@ public class ChatController {
 
 		// 내가 속한 방만 출력
 		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-		List<MyChatroom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
 		model.addAttribute("myList",myList);
 		
 		// 각 채팅방별 참여인원수 불러오기
@@ -208,7 +208,7 @@ public class ChatController {
 		
 		// 내가 속한 방만 출력
 		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-		List<MyChatroom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
 		model.addAttribute("myList",myList);		
 		
 		List<ChatRoom> rSearchList = service.searchChatRoom(searchKeyword);

@@ -71,12 +71,12 @@ public class ChatServiceLogic implements ChatService {
 
 	@Override // 내가 속한 채팅방의 목록
 	public List<ChatMember> selectMyChatRoomList(int memberNo) {
-		return cMapper.selectMyChatRoomList(memberNo);
+		return mMapper.selectMyChatRoomList(memberNo);
 	}
 
 	@Override // 내가 속한 채팅방의 정보 가져오기
-	public List<MyChatroom> selectMyChatRoomListByChatMember(List<ChatMember> myChatRoomList) {
-		List<MyChatroom> myList  = new ArrayList<>();
+	public List<ChatRoom> selectMyChatRoomListByChatMember(List<ChatMember> myChatRoomList) {
+		List<ChatRoom> myList  = new ArrayList<>();
 		for(int i=0;i<myChatRoomList.size();i++) {
 			myList.add(cMapper.selectMyChatRoomListByChatMember(myChatRoomList.get(i)));
 		}
