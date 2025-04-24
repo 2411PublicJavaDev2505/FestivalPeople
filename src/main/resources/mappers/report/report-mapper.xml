@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fepeo.boot.report.model.mapper.ReportMapper">
+
+    <insert id="insertReport" parameterType="com.fepeo.boot.report.model.vo.dto.ReportDTO">
+        INSERT INTO REPORT (
+            REPORT_NO,
+            MEMBER_NO,
+            REPORT_OBJECT,
+            REPORT_CONTENT,
+            CHAT_ROOM_NO,
+            COMMENT_NO,
+            REVIEW_NO,
+            DETLE_YN
+        ) VALUES (
+            SEQ_REPORT_NO.NEXTVAL,
+            #{memberNo},
+            #{reportObject},
+            #{reportContent},
+            #{chatRoomNo},
+            #{commentNo},
+            #{reviewNo},
+            'N'
+        )
+    </insert>
+	
+</mapper>
