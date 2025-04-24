@@ -53,7 +53,6 @@
             </div>
 
         </div>
-        </div>
     </main>
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     <script>
