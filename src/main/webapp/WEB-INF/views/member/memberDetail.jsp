@@ -51,40 +51,48 @@
 						<button onclick="myChat();">내 채팅방</button>
 						<button onclick="myCourse();">내 코스</button>
 					</div>
-					<div class="my-chat-list">
-						<div class="my-chat">
-							<img alt="채팅방 썸네일" src="">
-							<div class="chat-content">
-								<h3>전주국제영화제 같이 가실분</h3>
-								<div>
-									<span>#전주</span>
-									<span>#영화제</span>
-									<span>#여자만</span>
+					<div class="mypage-right content">
+						<div class="my-chat-list">
+							<div class="my-chat">
+								<img alt="채팅방 썸네일" src="">
+								<div class="chat-content">
+									<h3>전주국제영화제 같이 가실분</h3>
+									<div>
+										<span>#전주</span>
+										<span>#영화제</span>
+										<span>#여자만</span>
+									</div>
+									<div class="chat-count">
+										<span>정원 2/10</span>
+									</div>
 								</div>
-								<div class="chat-count">
-									<span>정원 2/10</span>
+							</div>
+							<div class="my-chat">
+								<img alt="채팅방 썸네일" src="">
+								<div class="chat-content">
+									<h3>전주국제영화제 같이 가실분</h3>
+									<div>
+										<span>#전주</span>
+										<span>#영화제</span>
+										<span>#여자만</span>
+									</div>
+									<div class="chat-count">
+										<span>정원 2/10</span>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="my-chat">
-							<img alt="채팅방 썸네일" src="">
-							<div class="chat-content">
-								<h3>전주국제영화제 같이 가실분</h3>
-								<div>
-									<span>#전주</span>
-									<span>#영화제</span>
-									<span>#여자만</span>
-								</div>
-								<div class="chat-count">
-									<span>정원 2/10</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="my-course-list">
-						<div class="my-course">
+						<div class="my-course-list">
 							<c:forEach items="${courseList }" var="course">
-								${course }
+								<div class="course-content">
+									<div class="course-content-left">
+										<img alt="축제 이미지" src="${course.festivalImg }">
+										<h5>${course.festivalName }</h5>
+									</div>
+									<div class="course-content-right">
+										<span>${course.courseName }</span>
+									</div>
+								</div>
 							</c:forEach>
 						</div>
 					</div>

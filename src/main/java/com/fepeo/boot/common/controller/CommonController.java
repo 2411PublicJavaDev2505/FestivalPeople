@@ -5,8 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,8 +67,6 @@ public class CommonController {
 	    	String[] strList = gWRegions.split(",");
 	    	goodWeatherRegions = Arrays.asList(strList);
 	    }
-	    
-	    
 	    
 		rfestivals = festivalService.selectFestivalListByWeather(goodWeatherRegions); // 비회원일때 불러오는 리스트 
 		model.addAttribute("rfestivals", rfestivals);

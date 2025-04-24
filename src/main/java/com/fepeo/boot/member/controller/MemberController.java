@@ -379,6 +379,10 @@ public class MemberController {
 	@GetMapping("/detail")
 	public String showMemberDetail(HttpSession session, Model model) {
 		Member member = (Member)session.getAttribute("member");
+		
+		if(member == null) {
+			return "redirect:/member/login";
+		}
 		member = mService.selectOneByNo(member.getMemberNo());
 		List<Course> courseList = courseService.selectCourseByNo(member.getMemberNo());
 		model.addAttribute("courseList",courseList);
