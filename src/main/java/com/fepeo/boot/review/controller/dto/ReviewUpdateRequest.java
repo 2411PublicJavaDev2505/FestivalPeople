@@ -13,12 +13,12 @@ import lombok.ToString;
 @ToString
 public class ReviewUpdateRequest {
 	
-	//4/24 14:50 추가! 
+	//4/24 14:50 추가! 4/24 19: 14 //private int reviewYn; 주석!
 	private	int			reviewNo;			
 	private	String		reviewTitle;		
 	private String		reviewContent;
 	private String 		reviewCount;
-	private int			reviewYn;
+	//private int			reviewYn;
 	private int			memberNo;
 	private List<ImgAddRequest> imageList;
 	//일단 밑에 수정작업 추가!!4/24

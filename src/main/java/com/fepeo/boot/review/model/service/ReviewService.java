@@ -51,12 +51,21 @@ public interface ReviewService {
 
 	//4/22 10:30 추가!detail에서 왔음!
 	List<Review> selectReviewList();
-
+	
+	
+	//***과연 2개가 필요한것인가.....
 	//4/24 15:01분 추가!
 	int updateReview(ReviewUpdateRequest review, List<MultipartFile> images)throws IllegalStateException, IOException;
 
-	//4/24 16:08분 다시 추가.....
-	int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
+	//4/24 16:08분 다시 추가..... 04/24 20:31분 원래코드는 주석처리하고 다시작성!
+	//int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
+	int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images) throws IllegalStateException, IOException;
+
+	//여기부분 추가해보고 안되면 원복!!4/24 21:10 *******
+	//Review updateReview(Review review1, List<MultipartFile> images);
+
+
+	//int reviewUpdate(Review review, List<MultipartFile> images);
 
 	//어쩌다가 만듬....4/24 11:31분 이미지수정 코드작업중...
 	//처음부터 작성위해 아래코드 주석처리!1

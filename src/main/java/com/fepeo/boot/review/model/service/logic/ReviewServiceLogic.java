@@ -190,7 +190,9 @@ public class ReviewServiceLogic implements ReviewService {
 
 	@Override
 	public int updateReview(ReviewUpdateRequest review, List<MultipartFile> images) throws IllegalStateException, IOException {
-		int result = mapper.updateReview(review);
+		//04/24 19:43분 맵퍼주소 바꿔줌.원래껀 주석 에러나면 살리고 지울것!
+		//int result = mapper.updateReview(review);
+		int result = mapper.reviewUpdate(review);
 		if(result == 0) return 0;
 		int reviewNo = review.getReviewNo();
 		//4/24 복붙!
@@ -221,14 +223,23 @@ public class ReviewServiceLogic implements ReviewService {
 		return result;
 	}
 
+	//제목,내용수정
 
-	
 	@Override
-	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException{
-		//16:09분 제목내용만 수정코드
+	public int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images)
+			throws IllegalStateException, IOException {
 		int result = mapper.reviewUpdate(review);
 		return result;
 	}
+
+
+	//제목내용만 수정코드!04/24 20:21
+//	@Override
+//	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException{
+//		//16:09분 제목내용만 수정코드
+//		int result = mapper.reviewUpdate(review);
+//		return result;
+//	}
 
 
 
