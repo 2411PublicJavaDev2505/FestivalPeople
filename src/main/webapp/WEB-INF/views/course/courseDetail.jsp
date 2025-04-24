@@ -20,34 +20,37 @@
 		<main>
 			<div class="course-total-container">		
 				<div class="course-recommend-choice">
-					<div>
 					<p class="courseText">코스추천
 						<label>
-							<input type="checkbox" name="category" value="FD6">
-							맛집
+							<input type="checkbox" name="category" value="FD6" class="hidden-image">
+							<span class="matzip-image"></span>				
 						</label>
+						
 						<label>
-							<input type="checkbox" name="category" value="AD5">
-							숙박업소
+							<input type="checkbox" name="category" value="AD5" class="hidden-image">
+							<span class="hotel-image"></span>															
 						</label>
+						
 						<label>
-							<input type="checkbox" name="category" value="CE7">
-							카페
+							<input type="checkbox" name="category" value="CE7" class="hidden-image">
+							<span class="cafe-image"></span>															
 						</label>
+						
 						<label>
-							<input type="checkbox" name="category" value="AT4">
-							관광명소
+							<input type="checkbox" name="category" value="AT4" class="hidden-image">
+							<span class="tour-image"></span>															
 						</label>
+						
 						<label>
-							<input type="checkbox" name="category" value="PK6">
-							주차장
+							<input type="checkbox" name="category" value="PK6" class="hidden-image">
+							<span class="parking-image"></span>															
 						</label>
+						
 						<label>
-							<input type="checkbox" name="category" value="CT1">
-							문화시설
+							<input type="checkbox" name="category" value="CT1" class="hidden-image">
+							<span class="culture-image"></span>															
 						</label>
 						</p>
-					</div>
 				</div>
 
 				<div class="course-recommend-main">			
@@ -99,10 +102,10 @@
 <script>
 	/* 배경화면 설정 */
 	const images = [
-	    "../resources/img/course/bgi1.jpg",
+/* 	    "../resources/img/course/bgi1.jpg", */
 	    "../resources/img/course/bgi2.jpg",
 	    "../resources/img/course/bgi3.jpg",
-	    "../resources/img/course/bgi4.jpg",
+/* 	    "../resources/img/course/bgi4.jpg", */
 	    "../resources/img/course/bgi5.jpg"  
 	  ];
 	

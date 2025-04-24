@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+#container {
+   max-width:1920px;
+   margin: 0 auto;
+}
+
 .background-image {
   position: fixed;
   top: 0;
@@ -9,6 +14,101 @@
   z-index: -1; /* 콘텐츠보다 뒤로 */
   overflow: hidden;
 }
+
+.courseText {
+	display: flex;
+	padding : 10px;
+	width: 700px;
+	justify-content: space-evenly;
+}
+
+.matzip-image {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	background-image: url("../../img/course/icon/matzip.png");
+	background-size: cover;
+	transition: all 0.3s ease;
+}
+.hotel-image {
+	width: 70px;
+	height: 50px;
+	display: inline-block;
+	background-image: url("../../img/course/icon/hotel.png");
+	background-size: cover;
+	transition: all 0.3s ease;
+}
+.cafe-image {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	background-image: url("../../img/course/icon/cafe.png");
+	background-size: cover;
+	transition: all 0.3s ease;
+}
+.tour-image {
+	width: 70px;
+	height: 50px;
+	display: inline-block;
+	background-image: url("../../img/course/icon/tour.png");
+	background-size: cover;
+	transition: all 0.3s ease;
+}
+.parking-image {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	background-image: url("../../img/course/icon/parking.png");
+	background-size: cover;
+	transition: all 0.3s ease;
+}
+.culture-image {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	background-image: url("../../img/course/icon/culture.png");
+	background-size: cover;
+	transition: all 0.3s ease;
+}
+
+.hidden-image:checked + .matzip-image{
+	border: 2px solid #FF6347;
+	box-shadow: 0 0 8px rgba(255, 99, 71, 0.7);
+	transform: scale(1.1);
+}
+.hidden-image:checked + .hotel-image{
+	border: 2px solid #FF6347;
+	box-shadow: 0 0 8px rgba(255, 99, 71, 0.7);
+	transform: scale(1.1);
+}
+.hidden-image:checked + .tour-image{
+	border: 2px solid #FF6347;
+	box-shadow: 0 0 8px rgba(255, 99, 71, 0.7);
+	transform: scale(1.1);
+}
+.hidden-image:checked + .cafe-image{
+	border: 2px solid #FF6347;
+	box-shadow: 0 0 8px rgba(255, 99, 71, 0.7);
+	transform: scale(1.1);
+}
+.hidden-image:checked + .culture-image{
+	border: 2px solid #FF6347;
+	box-shadow: 0 0 8px rgba(255, 99, 71, 0.7);
+	transform: scale(1.1);
+}
+.hidden-image:checked + .parking-image{
+	border: 2px solid #FF6347;
+	box-shadow: 0 0 8px rgba(255, 99, 71, 0.7);
+	transform: scale(1.1);
+}
+
+.hidden-image{
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;	
+}
+
 
 .background-image img {
   width: 100%;
@@ -54,7 +154,7 @@
 .radio-style{
 	font-size: 14px;
 	display: flex;
-	align-items: center;
+	align-items: centergb(0, 128, 255);	
 	justify-content: center;
 	margin: 0px 10px 0px 10px;
 }
@@ -114,7 +214,7 @@
 	height : 100%;
 	overflow-y: scroll;
    -ms-overflow-style: none;
-   border: 1px solid yellow;
+/*    border: 1px solid yellow; */
 }
 
 .course-recommend-img {
@@ -162,6 +262,12 @@ body{
   display:none;
 }
 
+.course-category {
+	display:flex;
+	justify-content: space-around;
+	
+}
+
 .course-matzip {
 	display: flex;
 	gap: 30px;
@@ -170,25 +276,25 @@ body{
 	margin-bottom: 30px;
 }
 
+.place-title{
+	width:200px;
+}
+
 .place-title, .place-name {
 	height : 80px;
-	background-color: white;
+	background-color: #457b9d;
 	border: 0.5px solid black;
-	font-size: 30px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-radius: 20px;
 }
 
 
-
-
-.place-title{
-	width: 200px;
-}
 
 .place-name{
 	width: 600px;
+	font-size : 200px;
 }
 
 
@@ -207,7 +313,7 @@ body{
 
 .course-recommend-right {
 	width : 400px;
-	border: 1px solid yellow;
+/* 	border: 1px solid yellow; */
 }
 
 .course-search {
@@ -237,4 +343,88 @@ body{
 
 
 
+/* GPT가 한것 */
 
+.courseText label {
+  cursor: pointer;
+  border-radius: 15px;
+  padding: 5px;
+  transition: all 0.3s;
+}
+.courseText input[type="checkbox"]:checked + span {
+  box-shadow: 0 0 10px #3fc1c9;
+  transform: scale(1.1);
+}
+.courseText span:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.festival-title p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2b6777;
+  margin: 10px 0;
+}
+
+.course-recommend-img img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+}
+
+.course-recommend-section {
+  background-color: white;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.iframe-description {
+  padding: 10px;
+  background-color: #f1f1f1;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.place-name {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+
+.course-search {
+  background-color: white;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#searchKeyword {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.search-btn {
+  background-color: #3fc1c9;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.search-course-title a {
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s;
+}
+.search-course-title a:hover {
+  background-color: #e0f7fa;
+  font-weight: bold;
+}
