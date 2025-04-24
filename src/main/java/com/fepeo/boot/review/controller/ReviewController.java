@@ -1,5 +1,6 @@
 package com.fepeo.boot.review.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.common.util.PageUtil;
+import com.fepeo.boot.common.util.Util;
 import com.fepeo.boot.notice.model.service.logic.NoticeServiceLogic;
 import com.fepeo.boot.review.controller.dto.CommentAddRequest;
+import com.fepeo.boot.review.controller.dto.ImgAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewAddRequest;
 import com.fepeo.boot.review.controller.dto.ReviewUpdateRequest;
 import com.fepeo.boot.review.model.service.CommentService;
@@ -130,15 +133,44 @@ public class ReviewController {
 	}
 	
 	//4/23 21:00 이미지파일 수정 코드작성!!
+	//4/24 9~부터 작성인데 시작못함..
+	//ReviewAddRequest review, 
+	//images로 하는게 맞는거 같은데 몰라서 일단 notice꺼로 써보기!!안되면 
+	//원복!!?? 오류창보고 그냥 버튼 눌러봄!! 그래서 아래코드 완성....
+//	@PostMapping("/updatefile")
+//	public String updateFile(
+//			List<ImgAddRequest> imageList
+//			) throws IllegalStateException, IOException {
+//		//int reviewNo = review.getReviewNo();
+//		String filePath = "";
+//		if(imageList != null && !imageList.isEmpty()) {
+//			//4/24:09:08분정도 어제하다만 코드작성다시시작!
+//			//ImgAddRequest img = new ImgAddRequest();
+//			//img.setReviewNo(reviewNo);
+//			String fileName = ((MultipartFile) imageList).getOriginalFilename();
+//			String fileRename = Util.fileRename(fileName);
+//			filePath ="/images/review/"+fileRename;
+//			((MultipartFile) imageList).transferTo(new File("C:/uploadImage/review/"+fileRename));
+//		
+//			}
+//		return filePath;
+//	}
+	//다시 아래 작성 4/24 11:16
 	
 	@PostMapping("/updatefile")
-	public String updateFile(@RequestParam(value="images" , required=false) List<MultipartFile> images
-			) {
+	public String updateFile(
+			//ImgAddRequest 에서 가져옴!!
+			MultipartFile imageFile
+			) throws IllegalStateException, IOException {
 		String filePath = "";
-		if(images != null && !images.isEmpty()) {
-			//
-		}
-		return filePath;
+		if(imageFile != null && !imageFile.isEmpty()) {
+			String fileName = imageFile.getOriginalFilename();
+			String fileRename = Util.fileRename(fileName);
+			filePath = "/images/review/"+fileRename;
+			imageFile.transferTo(new File("C:/uploadImage/review/"+fileRename));
+			
+			}
+			return filePath;
 	}
 	
 	//게시글 삭제

@@ -119,10 +119,43 @@ public class ReviewServiceLogic implements ReviewService {
 //		int result = mapper.reviewUpdate(review);
 //		return result;
 		
+	//아래는 4/24 원래코드!! 주석하고 다시작성!안되면 원복!!
+	//주석코드 뭔가 바뀜??!.....
+//	@Override,List<MultipartFile> images
+//	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException {
+//		int result = mapper.reviewUpdate(review);
+//		return result;
+	//콘트롤러랑 다르기때문에 당연히 코드확인필요!!!!!!
+	//다시 지움!!....주석...
+//	@Override
+//	public int reviewUpdate(ReviewUpdateRequest review,List<ImgAddRequest> imageList) throws IllegalStateException, IOException {
+//		//강제로 씀....
+//		
+//		//return = mapper.reviewUpdate(review);;
+//	
+//	}
+	//ReviewUpdateRequest 에 변수확인하기!! 파일수정전용코드?
 	@Override
-	public int reviewUpdate(ReviewUpdateRequest review,List<MultipartFile> images) throws IllegalStateException, IOException {
-		int result = mapper.reviewUpdate(review);
-		return result;
+	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException {
+		if(review.getImageFile() != null && !review.getImageFile().isEmpty()) {
+			MultipartFile imageFile = review.getImageFile();
+			String fileName = imageFile.getOriginalFilename();
+			String fileRename = Util.fileRename(fileName);
+			String filePath = "/images/review/"+fileRename;
+			imageFile.transferTo(new File("C:/uploadImage/review/"+fileRename));
+			review.setReviewFileName(fileName);
+			review.setReviewFileRename(fileRename);
+			review.setReviewFilePath(filePath);
+		}else {
+			Review existing = mapper.selectOneByNo(review.getReviewNo());
+			//일단1개만 해봅시다! 커밋하기전 여기까지 작성..
+			review.setReviewFileName(existing.getReviewFileName1());
+			review.setReviewFileName(existing.getReviewFileRename1());
+			review.setReviewFileName(existing.getReviewFilePath1());
+			
+		}
+		
+		return  mapper.reviewUpdate(review);
 	}
 	
 	//리뷰검색
@@ -150,5 +183,15 @@ public class ReviewServiceLogic implements ReviewService {
 	public List<Review> selectReviewList() {
 		List<Review> rList = mapper.selectReviewList();
 		return rList;
+	}
+
+
+
+	//4/24 이미지 파일 수정 만듬...(제목하고 내용만??)  
+	@Override
+	public int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images)
+			throws IllegalStateException, IOException {
+		int result = mapper.reviewUpdate(review);
+		return result;
 	}
 }
