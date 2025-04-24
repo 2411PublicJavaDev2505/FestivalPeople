@@ -157,7 +157,6 @@ public class CourseController {
 			}	
 			
 			
-		System.out.println(placeList);
 		}
 		System.out.println(placeList);
 		return placeList;
@@ -174,80 +173,70 @@ public class CourseController {
 			,Model model
 			,HttpSession session) {
 		
-		CourseDto matzip = new CourseDto();
-		CourseDto hotel = new CourseDto();
-		CourseDto cafe = new CourseDto();
-		CourseDto tour = new CourseDto();
-		CourseDto parking = new CourseDto();
-		CourseDto culture = new CourseDto();
-		List<CourseDto> course = new ArrayList<CourseDto>();
+		CourseDto course = new CourseDto();
 		Festival festival = fService.selectFestivalByNo(festivalNo);
 
 		Member member = (Member)session.getAttribute("member");
-		
-
-	
+		course.setMemberNo(member.getMemberNo());
+		course.setFestivalNo(festival.getFestivalNo());
+		course.setFestivalName(festival.getFestivalName());
+		course.setFestivalImg(festival.getFestivalFilePath());
+		course.setCourseName(courseName);
 		
 		
 		for(int i = 0; i < category.size(); i++) {
 			
 			if(category.get(i).equals("FD6")) {
-				matzip.setCategoryCode(category.get(i));
-				matzip.setPlaceName(placeName.get(i));
-				matzip.setX(xs.get(i));
-				matzip.setY(ys.get(i));
-				course.add(matzip);
+				course.setMatzipCategory(category.get(i));
+				course.setMatzipPlaceName(placeName.get(i));
+				course.setMatzipX(xs.get(i));
+				course.setMatzipY(ys.get(i));			
 			}
 			
 			
 			if(category.get(i).equals("AD5")) {
-				hotel.setCategoryCode(category.get(i));
-				hotel.setPlaceName(placeName.get(i));
-				hotel.setX(xs.get(i));
-				hotel.setY(ys.get(i));
-				course.add(hotel);
+				course.setHotelCategory(category.get(i));
+				course.setHotelPlaceName(placeName.get(i));
+				course.setHotelX(xs.get(i));
+				course.setHotelY(ys.get(i));
 			}
 			
 			
 			if(category.get(i).equals("CE7")) {
-				cafe.setCategoryCode(category.get(i));
-				cafe.setPlaceName(placeName.get(i));
-				cafe.setX(xs.get(i));
-				cafe.setY(ys.get(i));
-				course.add(cafe);
+				course.setCafeCategory(category.get(i));
+				course.setCafePlaceName(placeName.get(i));
+				course.setCafeX(xs.get(i));
+				course.setCafeY(ys.get(i));
 			}
 			
 			
 			if(category.get(i).equals("AT4")) {
-				tour.setCategoryCode(category.get(i));
-				tour.setPlaceName(placeName.get(i));
-				tour.setX(xs.get(i));
-				tour.setY(ys.get(i));
-				course.add(tour);
+				course.setTourCategory(category.get(i));
+				course.setTourPlaceName(placeName.get(i));
+				course.setTourX(xs.get(i));
+				course.setTourY(ys.get(i));
 			}
 			
 			
 			if(category.get(i).equals("PK6")) {
-				parking.setCategoryCode(category.get(i));
-				parking.setPlaceName(placeName.get(i));
-				parking.setX(xs.get(i));
-				parking.setY(ys.get(i));
-				course.add(parking);
+				course.setParkingCategory(category.get(i));
+				course.setParkingPlaceName(placeName.get(i));
+				course.setParkingX(xs.get(i));
+				course.setParkingY(ys.get(i));
 			}
 			
 			
 			if(category.get(i).equals("CT1")) {
-				culture.setCategoryCode(category.get(i));
-				culture.setPlaceName(placeName.get(i));
-				culture.setX(xs.get(i));
-				culture.setY(ys.get(i));
-				course.add(culture);
+				course.setCultureCategory(category.get(i));
+				course.setCulturePlaceName(placeName.get(i));
+				course.setCultureX(xs.get(i));
+				course.setCultureY(ys.get(i));				
 			}
-			
-		int result = cService.insertCourse(courseName, course, festival);
+//		int result = cService.insertCourse(courseName, course, festival);
 			
 		}
 
+		System.out.println("내가 갈 곳 어디인가"+course);
 		
 		return "course/list";
 	}

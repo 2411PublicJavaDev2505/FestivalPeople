@@ -14,7 +14,38 @@
 	</select>
 
  	<insert id="insertCourse">
-		INSERT INTO COURSE VALUES(SEQ_COURSE_NO.NEXTVAL, )
+		INSERT INTO COURSE VALUES (
+		    SEQ_COURSE_NO.NEXTVAL,
+		    #{festivalNo},
+		    #{memberNo},
+		    #{courseName},
+		    #{festivalName},
+		    #{festivalImg},
+			#{marzipPlaceName},
+		    #{matzipCategory},
+		    #{matzipX},
+		    #{matzipY},
+		    #{hotelPlaceName},
+		    #{hotelCategory},
+		    #{hotelX},
+		    #{hotelY},	
+		    #{cafePlaceName},
+		    #{cafeCategory},
+		    #{cafeX},
+		    #{cafeY},	
+		    #{tourPlaceName},
+		    #{tourCategory},
+		    #{tourX},
+		    #{tourY},	
+		    #{parkingPlaceName},
+		    #{parkingCategory},
+		    #{parkingX},
+		    #{parkingY},	
+		    #{culturePlaceName},
+		    #{cultureCategory},
+		    #{cultureX},
+		    #{cultureY}	
+		)
 	</insert> 
 
 
