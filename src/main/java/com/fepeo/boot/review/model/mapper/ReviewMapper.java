@@ -49,6 +49,8 @@ public interface ReviewMapper {
 	int updateReviewThirdImage(ImgAddRequest img);
 	//내용제목만수정 4/24 16:10추가!
 	int reviewUpdate(ReviewUpdateRequest review);
+	int reviewUpdate(ReviewAddRequest review);
+	
 	
 	
 	

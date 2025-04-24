@@ -120,7 +120,7 @@ public class ReviewController {
 	//수정!!
 	
 	@PostMapping("/update")
-	public String updateReview(@ModelAttribute ReviewUpdateRequest review,
+	public String updateReview(@ModelAttribute ReviewAddRequest review,
 			@RequestParam(value="images",required=false) List<MultipartFile> images,
 			//@RequestParam("reviewNo") int reviewNo,
 			HttpSession session
@@ -140,6 +140,7 @@ public class ReviewController {
 			System.out.println("확인");
 			//추가코드
 			//model.addAttribute("reviewNo",reviewNo);
+			//int result = rService.reviewUpdate(review,images);
 			
 		return "redirect:/review/list";
 		//return "redirect:/review/detail?reviewNo=" + result;
