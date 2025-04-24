@@ -139,4 +139,9 @@ public class ChatServiceLogic implements ChatService {
 	public List<MemberProfileList> chatMemberList(int chatroomNo) {
 		return mMapper.chatMemberList(chatroomNo);
 	}
+
+	@Override // 멤버 강퇴
+	public int blockChatMember(int chatroomNo, int memberNo) {
+		return mMapper.blockChatMember(chatroomNo,memberNo);
+	}
 }
