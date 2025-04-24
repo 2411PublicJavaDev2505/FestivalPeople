@@ -37,10 +37,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/review")
 public class ReviewController {
-
+		
     private final NoticeServiceLogic noticeServiceLogic;
 
-   
+    //파
 	//댓글서비스
 	private final CommentService cService;
 	
@@ -103,34 +103,65 @@ public class ReviewController {
 		model.addAttribute("rList",rList);
 		return"review/detail";
 	}
-	// 수정
+	// 수정 (4/24일 14:23분 코드 다시 작성해주는 작업시작!새로 작성위해 
+	//주석처리함!!
+	
+	// 4/24 14:28분 수정하기 다시작성시작!!\
 	
 	@GetMapping("/update")
-	public String showreviewUpdate(@RequestParam("reviewNo") int reviewNo
-			,Model model) {
+	public String showReviewUpdate(@RequestParam("reviewNo") int reviewNo
+				,Model model) {
+		//출력?
 		Review review = rService.selectOneByNo(reviewNo);
 		model.addAttribute("review",review); 
 		return "review/update";
 	}
-	//수정 4/23 20:456분 아래 원래 파일!넣어줬음
-	//@RequestParam(value="images" , required=false) List<MultipartFile> images 
+	
+	//수정!!
 	
 	@PostMapping("/update")
-	public String reviewUpdate(@ModelAttribute ReviewUpdateRequest review,
-			@RequestParam(value="images" , required=false) List<MultipartFile> images , 
+	public String updateReview(@ModelAttribute ReviewUpdateRequest review,
+			@RequestParam(value="images",required=false) List<MultipartFile> images,
 			@RequestParam("reviewNo") int reviewNo,
 			HttpSession session
-			,Model model ) throws IllegalStateException, IOException {
-		//4/23 21:03 아래 원래코드에서 추가함!주석처리!
-		//int result = rService.reviewUpdate(review);
-		int result = rService.reviewUpdate(review,images);
-		model.addAttribute("reviewNo",reviewNo);
-		System.out.println("확인");
-		System.out.println(review);
-		//이미지 수정도되면 아래 주석풀어서 확인할것!
-//		return "redirect:/review/detail?/reviewNo="+review.getReviewNo();
+			,Model model) throws IllegalStateException, IOException { //강제로 넣기!
+			int result = rService.updateReview(review,images);
+			//제목,내용만수정 ? 
+			result = rService.reviewUpdate(review);
+			//추가코드
+			model.addAttribute("reviewNo",reviewNo);
+			
 		return "redirect:/review/list";
+		//return "redirect:/review/detail?reviewNo=" + result;
 	}
+	
+//	
+//	@GetMapping("/update")
+//	public String showreviewUpdate(@RequestParam("reviewNo") int reviewNo
+//			,Model model) {
+//		Review review = rService.selectOneByNo(reviewNo);
+//		model.addAttribute("review",review); 
+//		return "review/update";
+//	}
+//	//수정 4/23 20:456분 아래 원래 파일!넣어줬음
+//	//@RequestParam(value="images" , required=false) List<MultipartFile> images 
+//	
+//	@PostMapping("/update")
+//	public String reviewUpdate(@ModelAttribute ReviewUpdateRequest review,
+//			@RequestParam(value="images" , required=false) List<MultipartFile> images , 
+//			@RequestParam("reviewNo") int reviewNo,
+//			HttpSession session
+//			,Model model ) throws IllegalStateException, IOException {
+//		//4/23 21:03 아래 원래코드에서 추가함!주석처리!
+//		//int result = rService.reviewUpdate(review);
+//		//int result = rService.reviewUpdate(review,images);
+//		model.addAttribute("reviewNo",reviewNo);
+//		System.out.println("확인");
+//		System.out.println(review);
+//		//이미지 수정도되면 아래 주석풀어서 확인할것!
+//		return "redirect:/review/detail?/reviewNo="+review.getReviewNo();
+//		return "redirect:/review/list";
+//	}
 	
 	//4/23 21:00 이미지파일 수정 코드작성!!
 	//4/24 9~부터 작성인데 시작못함..
@@ -155,23 +186,24 @@ public class ReviewController {
 //			}
 //		return filePath;
 //	}
-	//다시 아래 작성 4/24 11:16
+	//다시 아래 작성 4/24 11:16 // 오전 코드 작성하고 insert처럼 코드 작성위해 아래 코드 주석처리!
 	
-	@PostMapping("/updatefile")
-	public String updateFile(
-			//ImgAddRequest 에서 가져옴!!
-			MultipartFile imageFile
-			) throws IllegalStateException, IOException {
-		String filePath = "";
-		if(imageFile != null && !imageFile.isEmpty()) {
-			String fileName = imageFile.getOriginalFilename();
-			String fileRename = Util.fileRename(fileName);
-			filePath = "/images/review/"+fileRename;
-			imageFile.transferTo(new File("C:/uploadImage/review/"+fileRename));
-			
-			}
-			return filePath;
-	}
+//	@ResponseBody
+//	@PostMapping("/updatefile")
+//	public String updateFile(
+//			//ImgAddRequest 에서 가져옴!!
+//			MultipartFile imageFile
+//			) throws IllegalStateException, IOException {
+//		String filePath = "";
+//		if(imageFile != null && !imageFile.isEmpty()) {
+//			String fileName = imageFile.getOriginalFilename();
+//			String fileRename = Util.fileRename(fileName);
+//			filePath = "/images/review/"+fileRename;
+//			imageFile.transferTo(new File("C:/uploadImage/review/"+fileRename));
+//			
+//			}
+//			return filePath;
+//	}
 	
 	//게시글 삭제
 	
@@ -211,6 +243,8 @@ public class ReviewController {
 			model.addAttribute("rList",rList);
 			return "review/search";
 	}
+	
+	//
 	
 	
 	//댓글 등록 !!4/15 시작!!
