@@ -82,7 +82,11 @@
 						</div>
 					</div>
 					<div class="my-course-list">
-						<div class="my-course"></div>
+						<div class="my-course">
+							<c:forEach items="${courseList }" var="course">
+								${course }
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>

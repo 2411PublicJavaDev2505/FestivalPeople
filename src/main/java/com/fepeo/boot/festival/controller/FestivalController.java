@@ -1,6 +1,7 @@
 package com.fepeo.boot.festival.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,9 +69,7 @@ public class FestivalController {
 	    	session.setAttribute("gWRegions", gWRegions);
 	    }else {
 	    	String[] strList = gWRegions.split(",");
-	    	for(int i=0;i<strList.length;i++) {
-	    		goodWeatherRegions.add(strList[i]);
-	    	}
+	    	goodWeatherRegions = Arrays.asList(strList);
 	    }
 	    
 	    if(member != null) {

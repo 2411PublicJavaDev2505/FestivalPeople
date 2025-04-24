@@ -14,6 +14,8 @@ public interface CourseService {
 	public List<RegionDto> getAllRegions();
 
 	public int insertCourse(Course course);
+
+	public List<Course> selectCourseByNo(int memberNo);
 	
 
 	

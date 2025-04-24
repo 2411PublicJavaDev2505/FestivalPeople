@@ -28,6 +28,9 @@ public class CourseServiceLogic implements CourseService{
 		return mapper.insertCourse(course);
 	}
 
-	
+	@Override
+	public List<Course> selectCourseByNo(int memberNo) {
+		return mapper.selectCourseByNo(memberNo);
+	}
 	
 }
