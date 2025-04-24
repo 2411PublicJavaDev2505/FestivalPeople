@@ -428,3 +428,13 @@ body{
   background-color: #e0f7fa;
   font-weight: bold;
 }
+
+.search-course-list {
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+}
