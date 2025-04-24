@@ -39,7 +39,10 @@ public interface ReviewMapper {
 	int getTotalCountBySearch(Map<String, String> paramMap);
 	//4/22 10:32분 추가 안되면 지울것!!
 	List<Review> selectReviewList();
-	//리뷰 수정1(제목 내용만) 4/23일 19:00
+	
+	//리뷰 수정1(제목 내용만) 4/23일 21:16
+	//이미지 파일 수정 코드 추가하면서 여기는 안건드림...
+	//추가할거있다면 여기 추가하기!???
 	int reviewUpdate(ReviewUpdateRequest review);
 	
 }

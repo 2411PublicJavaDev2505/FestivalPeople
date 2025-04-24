@@ -112,9 +112,15 @@ public class ReviewServiceLogic implements ReviewService {
 
 	
 	//4/23 강제로 throws IllegalStateException, IOException 넣어줌!
-	
+	//4/23 21:07 이미지 수정코드 작성하면서 주석하고 다시 작성!
+//	
+//	@Override
+//	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException {
+//		int result = mapper.reviewUpdate(review);
+//		return result;
+		
 	@Override
-	public int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException {
+	public int reviewUpdate(ReviewUpdateRequest review,List<MultipartFile> images) throws IllegalStateException, IOException {
 		int result = mapper.reviewUpdate(review);
 		return result;
 	}

@@ -36,7 +36,10 @@ public interface ReviewService {
 	//후기 수정 1 ( 4/23일 강제 로 throws IllegalStateException, IOException 넣어줌!
 	// 4/23 14:44분 아래 수정!
 	//int reviewUpdate(ReviewUpdateRequest review) 원래코드!
-	int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
+	//이미지수정추가코드 있어 원래코드는 주석처리하고 다시 작성!
+	//4/23 21:05
+	//int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
+	int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images) throws IllegalStateException, IOException;
 
 	//리뷰검색 4/21 16:05
 	List<Review> searchListByKeyword(Map<String, String> paramMap, int currentPage);
