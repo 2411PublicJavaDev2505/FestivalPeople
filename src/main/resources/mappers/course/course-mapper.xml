@@ -48,7 +48,7 @@
 		)
 	</insert> 
 
-	<select id="selectCourseByNo" resultType="CourseDto">
+	<select id="selectCourseByNo" resultType="Course">
 		SELECT * FROM COURSE WHERE MEMBER_NO =#{memberNo}
 	</select>
 
