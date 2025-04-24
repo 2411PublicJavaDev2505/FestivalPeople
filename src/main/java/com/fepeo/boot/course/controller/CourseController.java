@@ -4,6 +4,7 @@ package com.fepeo.boot.course.controller;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -85,9 +86,7 @@ public class CourseController {
 		    	session.setAttribute("gWRegions", gWRegions);
 		    }else {
 		    	String[] strList = gWRegions.split(",");
-		    	for(int i=0;i<strList.length;i++) {
-		    		goodWeatherRegions.add(strList[i]);
-		    	}
+		    	goodWeatherRegions = Arrays.asList(strList);
 		    }
 //			System.out.println(goodWeather);	
 			//날씨 좋은 지역과 회원 좌표를 가지고 축제 리스트 출력

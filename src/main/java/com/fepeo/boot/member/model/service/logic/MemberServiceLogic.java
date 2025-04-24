@@ -43,7 +43,7 @@ public class MemberServiceLogic implements MemberService{
 
 	@Override
 	public Member memberLogin(MemberLoginRequest login) {
-		return mapper.memberLogin(login);
+		return mapper.memberLoginById(login.getMemberId());
 	}
 
 	@Override

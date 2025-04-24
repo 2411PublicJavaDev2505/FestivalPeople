@@ -3,6 +3,7 @@ package com.fepeo.boot.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
@@ -27,6 +28,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.common.util.Util;
+import com.fepeo.boot.course.model.service.CourseService;
+import com.fepeo.boot.course.model.vo.Course;
 import com.fepeo.boot.member.controller.dto.CustomUserDetail;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
@@ -36,7 +39,7 @@ import com.fepeo.boot.member.controller.dto.MemberUpdateRequest;
 import com.fepeo.boot.member.model.service.MemberService;
 import com.fepeo.boot.member.model.service.logic.MailService;
 import com.fepeo.boot.member.model.vo.Member;
-
+import com.fepeo.boot.notice.model.service.logic.NoticeServiceLogic;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -49,6 +52,7 @@ public class MemberController {
 	private final MemberService mService;
 	private final MailService mailService;
 	private final PasswordEncoder passwordEncoder;
+	private final CourseService courseService;
 
 	@GetMapping("/login")
 	public String showLogin(Model model
@@ -376,6 +380,9 @@ public class MemberController {
 	public String showMemberDetail(HttpSession session, Model model) {
 		Member member = (Member)session.getAttribute("member");
 		member = mService.selectOneByNo(member.getMemberNo());
+		List<CourseDto> courseList = courseService.selectCourseByNo(member.getMemberNo());
+		model.addAttribute("courseList",courseList);
+		System.out.println(courseList);
 		model.addAttribute("member",member);
 		return "member/memberDetail";
 	}
@@ -388,14 +395,12 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/delete")
 	public String deleteMember(MemberLoginRequest login) {
-		login.setMemberPw(passwordEncoder.encode(login.getMemberPw()));
 		Member member = mService.memberLogin(login);
-		
 		JSONObject json = new JSONObject();
-		if(member != null) {
+		if(passwordEncoder.matches(login.getMemberPw(), member.getMemberPw())) {
 			json.put("memberId", member.getMemberId());
+			int result = mService.deleteMember(member.getMemberNo());
 		}
-		int result = mService.deleteMember(member.getMemberNo());
 		
 		return json.toString();
 	}

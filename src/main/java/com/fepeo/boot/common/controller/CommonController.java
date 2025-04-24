@@ -3,6 +3,7 @@ package com.fepeo.boot.common.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -60,9 +61,7 @@ public class CommonController {
 	    	session.setAttribute("gWRegions", gWRegions);
 	    }else {
 	    	String[] strList = gWRegions.split(",");
-	    	for(int i=0;i<strList.length;i++) {
-	    		goodWeatherRegions.add(strList[i]);
-	    	}
+	    	goodWeatherRegions = Arrays.asList(strList);
 	    }
 	    
 	    

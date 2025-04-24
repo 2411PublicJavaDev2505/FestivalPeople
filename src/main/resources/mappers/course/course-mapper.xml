@@ -48,7 +48,9 @@
 		)
 	</insert> 
 
-
+	<select id="selectCourseByNo" resultType="CourseDto">
+		SELECT * FROM COURSE WHERE MEMBER_NO =#{memberNo}
+	</select>
 
 
 </mapper>  
