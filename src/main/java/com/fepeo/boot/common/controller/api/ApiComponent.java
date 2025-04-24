@@ -339,12 +339,18 @@ public class ApiComponent {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(result);
 		JsonNode documents = root.path("documents");
+		System.out.println("너는 누구여"+documents);
 		
 		Map<String, String> mapPoint = new HashMap<>();
 		JsonNode firstDoc = documents.get(0);
+		
+		System.out.println("빠스트독을 찾아라잉"+firstDoc);
+		
 		String x = firstDoc.path("x").asText(); //x 좌표값
+		System.out.println("x의 값이당"+x);
 		String y = firstDoc.path("y").asText(); //y 좌표값
-
+		System.out.println("y의 값이다잉"+y);
+		
 		mapPoint.put("x", x);
 		mapPoint.put("y", y);
 		

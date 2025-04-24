@@ -66,8 +66,12 @@ public class CourseController {
 		}else {
 			// 로그인 회원 정보 출력
 			Member memberInfo = mService.selectOneByNo(member.getMemberNo());
+			System.out.println("고속도로"+memberInfo);
 			// 회원 정보에 저장된 주소지 값으로 위, 경도 좌표 출력
 			String memberAddress = memberInfo.getAddress();
+			System.out.println("대전 고속도로"+memberAddress);
+			String memberName = member.getMemberName();
+			System.out.println("고속도로"+memberName);
 			Map<String, String> mapPoint = api.searchMemberAddress(memberAddress);
 //			System.out.println(mapPoint);
 			// 현재 시간 기준 전국 날씨 추출
@@ -90,43 +94,42 @@ public class CourseController {
 		    	String[] strList = gWRegions.split(",");
 		    	goodWeatherRegions = Arrays.asList(strList);
 		    }
-//			System.out.println(goodWeather);	
+
 			//날씨 좋은 지역과 회원 좌표를 가지고 축제 리스트 출력
 			List<Festival> fList = fService.selectFestivalListByRegion(goodWeatherRegions, mapPoint);
-//			System.out.println(fList);
-//			System.out.println(fList.size());
-			
+		
 			if(fList.size() > 0 && !fList.isEmpty()) {
-				model.addAttribute("fList", fList);				
+				model.addAttribute("fList", fList);			
+				model.addAttribute("message", "회원님께 추천드리는 리스트에요!");
+				model.addAttribute("memberName", memberName);
+				return "course/list";
+			}else {
+				return "common/error";
 			}
-
-			//추후에 빈값 분기처리해서 메세지 넘기기
-//			if(fList.size() == 0 && fList.isEmpty()) {
-//				List<Festival> rList = fService.getrFestivalList();
-//			}
 			
-			return "course/list";
 		}
 	}
 	
-	@PostMapping("/list")
-	public String showSearchCourse(HttpSession session
+	//검색한 추천 리스트 출력
+	@PostMapping("/search")
+	public String showSearchfestival(HttpSession session
 			, Model model
 			,@RequestParam("searchCondition") String searchCondition
-			,@RequestParam("searchKeyword") String searchKeyword) {
+			,@RequestParam("searchKeyword") String searchKeyword) {		
+		// session 멤버 확인
+		Member member = (Member)session.getAttribute("member");
+		String memberName = member.getMemberName();
 		
 		Map<String, String> searchMap = new HashMap<String, String>();
 		searchMap.put("searchKeyword", searchKeyword);
 		searchMap.put("searchCondition", searchCondition);
 		
-		System.out.println(searchKeyword);
-		System.out.println(searchCondition);
-		
 		
 		List<Festival> fList = fService.searchFestivalList(searchMap);
-		System.out.println(fList);
+
 		model.addAttribute("fList", fList);
-		
+		model.addAttribute("message", "회원님이 검색하신 리스트에요!");
+		model.addAttribute("memberName", memberName);
 		return "course/list";
 	}
 	
@@ -237,9 +240,7 @@ public class CourseController {
 				course.setCulturePlaceName(placeName.get(i));
 				course.setCultureMAPX(xs.get(i));
 				course.setCultureMAPY(ys.get(i));				
-			}
-			
-			
+			}		
 		}
 
 		int result = cService.insertCourse(course);
@@ -265,31 +266,12 @@ public class CourseController {
 		Map<String, String> festivalXY = new HashMap<String, String>();
 		festivalXY.put("x", festival.getMapVCode());
 		festivalXY.put("y", festival.getMapHCode());
-		// 축제 좌표값 근처로 가까운 밥집 리스트 15개 출력
-//		List<PlaceDto> matZipList = api.kakaoMatzipApi(festivalXY);
-//		// 축제 좌표값 근처로 가까운 숙박시설 리스트 15개 출력
-//		List<PlaceDto> hotelList =  api.kakaoHotelApi(festivalXY);
-//		
-//			PlaceDto matZipRec = matZipList.get(0);
-//			System.out.println(matZipRec);
-			// 축제 좌표값으로 가까운 숙박시설 한개 선택
-//			PlaceDto hotelRec = hotelList.get(0);
-//			System.out.println(hotelRec);
+
 			// 추천 코스 좌표값 매핑하기
 			Map<String, String> coursePoint = new HashMap<String, String>();
 			coursePoint.put("festivalX", festival.getMapVCode());
 			coursePoint.put("festivalY", festival.getMapHCode());
-//			coursePoint.put("matzipX", matZipRec.getX());
-//			coursePoint.put("matzipY", matZipRec.getY());
-//			coursePoint.put("hotelX", hotelRec.getX());
-//			coursePoint.put("hotelY", hotelRec.getY());
-//		System.out.println(coursePoint);
-			// 이건 추후에 사용할 키 숨김
-//		String kakaoKey = api.getKakaoApiKey();
-			//System.out.println(festival.getFestivalFileName());		
-//		model.addAttribute("kakaoKey", kakaoKey);
-//			model.addAttribute("hotel", hotelRec);
-//			model.addAttribute("matZip", matZipRec);
+			
 			model.addAttribute("festival", festival);
 			model.addAttribute("coursePoint", coursePoint);
 			return "course/courseDetail";

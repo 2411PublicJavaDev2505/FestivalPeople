@@ -87,14 +87,14 @@
 	<select id="searchFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival">
 		SELECT * FROM FESTIVAL
 		<where>
-			<if test="searchCondition != null and searchCondition == name">
-				FESTIVAL_NAME like '%'||#{searchKeyword}||'%'
+			<if test="searchMap.searchCondition != null and searchMap.searchCondition == 'name'">
+				FESTIVAL_NAME like '%'||#{searchMap.searchKeyword}||'%'
 			</if>
-			<if test="searchCondition != null and searchCondition == location">
-				FESTIVAL_ADDRESS like '%'||#{searchKeyword}||'%'
+			<if test="searchMap.searchCondition != null and searchMap.searchCondition == 'location'">
+				FESTIVAL_ADDRESS like '%'||#{searchMap.searchKeyword}||'%'
 			</if>
-			<if test="searchCondition != null and searchCondition == all">
-				FESTIVAl_NAME like '%'||#{searchKeyword}||'%' OR FESTIVAL_ADDRESS like '%'||#{searchKeyword}||'%'
+			<if test="searchMap.searchCondition != null and searchMap.searchCondition == 'all'">
+				FESTIVAl_NAME like '%'||#{searchMap.searchKeyword}||'%' OR FESTIVAL_ADDRESS like '%'||#{searchMap.searchKeyword}||'%'
 			</if>	
 		</where>
 	</select>

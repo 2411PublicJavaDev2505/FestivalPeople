@@ -20,13 +20,14 @@
 			<main>		
 			    <div class="course-slider-container">
 	                <div class="course-search">
-		                <form class="search-form" action="/course/list" method="post">
+		                <form class="search-form" action="/course/search" method="post">
+					    	<div>${memberName}${message }</div>
 		                    <select name="searchCondition">
 		                        <option value="all">전체</option>
 		                        <option value="name">축제명</option>
 		                        <option value="location">지역</option>
 		                    </select>
-		                    <input type="text" placeholder="검색" name="searchKeyword">
+		                    <input type="text" placeholder="검색" name="searchKeyword" value="${param.searchKeyword }">
 		                    <button class="search-btn" type="submit">⌕</button>
 		                </form>
 		            </div>

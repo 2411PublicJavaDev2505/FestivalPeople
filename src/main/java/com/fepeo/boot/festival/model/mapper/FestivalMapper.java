@@ -31,7 +31,9 @@ public interface FestivalMapper {
 	//코스에서 사용하는 메소드
 	List<Festival> selectFestivalListByRegion(@Param("regionNames") List<String> regionNames, Map<String,String> mapPoint);
 	
-	List<Festival> searchFestivalList(Map<String, String> searchMap);
+	List<Festival> selectFestivalListByRegion(Map<String,String> mapPoint);
+
+	List<Festival> searchFestivalList(@Param("searchMap")Map<String, String> searchMap);
 
 
 	

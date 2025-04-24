@@ -63,13 +63,13 @@
 						<!-- 추천 코스 리스트 출력 -->
 						<div id="recommendation-container">					
 						</div>					
-							<form class="insert-course" action="/course/insert" method="post">								
+							<form id="courseForm" class="insert-course">								
 								<div class="expect-cost">선택 장소 수 : ??</div>	
 								<input type="text" name="courseName" placeholder="코스명을 입력하세요"> 	
 								<input type="hidden" name="festivalNo" value="${festival.festivalNo }">												
 								<div id="hiddenPlaceInputs">
 						        </div>
-								<input type="submit" value="코스 저장하기">						
+								<button type="button" id="saveCourseBtn">코스 저장</button>>				
 							</form>																			
 						</div>
 						</div>
@@ -254,7 +254,7 @@
 	    const form = document.querySelector("#courseForm");
 	    const formData = new FormData(form);
 
-	    fetch("/insert", {
+	    fetch("insert", {
 	        method: "POST",
 	        body: formData
 	    })
@@ -262,7 +262,7 @@
 	    .then(data => {
 	        if (data === "success") {
 	            alert("코스가 성공적으로 저장되었습니다!");
-	            window.location.href = "/member/memberDetail";
+	            window.location.href = "/member/detail";
 	        } else {
 	            alert("저장에 실패했습니다. 다시 시도해주세요.");
 	        }
