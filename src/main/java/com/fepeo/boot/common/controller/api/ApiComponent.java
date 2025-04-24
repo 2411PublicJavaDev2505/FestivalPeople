@@ -47,6 +47,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -371,9 +372,9 @@ public class ApiComponent {
 			String response = webClient.get()
 					.uri(uriBuilder -> uriBuilder
 							.queryParam("serviceKey", weatherApiKey)
+							.queryParam("dataType", "json")
 							.queryParam("pageNo", 1)
 							.queryParam("numOfRows", 10)
-							.queryParam("dataType", "JSON")
 							.queryParam("regId", region.getRegionNo())
 							.queryParam("tmFc", nowTime)
 							.build())
