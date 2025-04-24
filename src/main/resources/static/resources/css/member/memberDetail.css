@@ -13,7 +13,7 @@
 
 .mypage-container {
 	margin: 100px auto 100px auto;
-	width: 1000px;
+	width: 1200px;
 	--height: 800px;
 	background-color: rgba(228, 226, 221, 0.9);
 	border-radius: 20px;
@@ -164,9 +164,12 @@
 	background-color: white;
 	margin-bottom: 10px;
 	display: flex;
+	border-radius: 5px;
+	box-shadow: 0px 0px 3px #444;
 }
 
 .course-content-left {
+	padding-top: 10px;
 	text-align: center;
 	width: 200px;
 }
@@ -174,5 +177,29 @@
 .course-content-left img {
 	width: 150px;
 	height: 150px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+
+.course-content-right {
+	padding: 10px;
+}
+.course-content-right h4{
+	margin-bottom: 20px;
+}
+
+.course-detail {
+	display: flex;
+	gap: 15px;
+}
+
+.course-detail.idx {
+	flex-direction: column;
+	text-align: center;
+}
+
+.course-detail.idx  img{
+	border-radius: 5px;
+	margin: 0 auto;
 }
 
