@@ -30,6 +30,7 @@ import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.course.model.service.CourseService;
 import com.fepeo.boot.course.model.vo.Course;
 import com.fepeo.boot.course.model.vo.dto.Categories;
+import com.fepeo.boot.course.model.vo.dto.CourseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
 import com.fepeo.boot.festival.model.service.FestivalService;
@@ -129,6 +130,22 @@ public class CourseController {
 		model.addAttribute("message", "회원님이 검색하신 리스트에요!");
 		model.addAttribute("memberName", memberName);
 		return "course/list";
+	}
+	
+	
+	@GetMapping("/rightSearch")
+	@ResponseBody
+	public List<Festival> ajaxSearchCourse(@RequestParam String searchCondition, @RequestParam String searchKeyword) {
+	    // 조건에 따라 DB 검색 로직 구현 (예: 서비스 호출)
+		Map<String, String> searchMap = new HashMap<String, String>();
+		searchMap.put("searchCondition", searchCondition);
+		searchMap.put("searchKeyword", searchKeyword);
+	    List<Festival> result = fService.searchFestivalList(searchMap);
+	    System.out.println(searchCondition);
+	    System.out.println(searchKeyword);
+	    System.out.println(result);
+	    
+	    return result;
 	}
 	
 	
@@ -275,4 +292,9 @@ public class CourseController {
 			return "course/courseDetail";
 	
 	}
+	
+	
+
+	
+	
 }

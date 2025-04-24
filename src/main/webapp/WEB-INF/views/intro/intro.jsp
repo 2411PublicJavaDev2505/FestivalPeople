@@ -42,8 +42,11 @@
 					<div class="card recommend">
 						<img src="../resources/img/intro/recommend.png">
 						<div class="card__content">
-							<p class="card__title">Festival People 는</p>
-							<p class="card__description">소개내용</p>
+							<p class="card__title">코스 추천 기능은</p>
+							<p class="card__description">회원님의 주소지 주변의 축제리스트를 보여드리고, 선택하신 축제 장소 주변에 있는 <br>
+														맛집, 카페, 숙박시설 등 카테고리별로 가까운 장소를 추천해드리며,
+														해당 코스가 마음에 드실 경우 저장을 통해 마이페이지내에서 확인하실 수 있습니다.
+							</p>
 							<button class="card__button r" onclick="location.href='/course/list';">코스추천 페이지로</button>
 						</div>
 					</div>

@@ -12,14 +12,16 @@
 	<title>코스 추천</title>
 </head>
 <body>
+	<div class="background-image">
+    	 <img src="" alt="바탕화면">
+    	 </div>
 	<div id="container">
 	<jsp:include page="../include/header.jsp"/>
 		<main>
 			<div class="course-total-container">		
 				<div class="course-recommend-choice">
 					<div>
-					<p class="courseText">코스추천</p>
-<!-- 					<form id="sortForm" action="/course/detail" method="get"> -->
+					<p class="courseText">코스추천
 						<label>
 							<input type="checkbox" name="category" value="FD6">
 							맛집
@@ -44,7 +46,7 @@
 							<input type="checkbox" name="category" value="CT1">
 							문화시설
 						</label>
-<!-- 					</form> -->
+						</p>
 					</div>
 				</div>
 
@@ -64,29 +66,25 @@
 						<div id="recommendation-container">					
 						</div>					
 							<form id="courseForm" class="insert-course">								
-								<div class="expect-cost">선택 장소 수 : ??</div>	
+								<div class="expect-cost">선택 장소 수 : 0</div>	
 								<input type="text" name="courseName" placeholder="코스명을 입력하세요"> 	
 								<input type="hidden" name="festivalNo" value="${festival.festivalNo }">												
 								<div id="hiddenPlaceInputs">
 						        </div>
-								<button type="button" id="saveCourseBtn">코스 저장</button>>				
+								<button type="button" id="saveCourseBtn">코스 저장</button>			
 							</form>																			
 						</div>
 						</div>
-						<div class="course-recommend-right">
-			                <div class="course-search">
-				                <form class="search-form" action="course/list" method="get">
+							<div class="course-recommend-right">
+				                <div class="course-search">				             
 				                    <select id="searchCondition">
 				                        <option value="all">전체</option>
 				                        <option value="name">축제명</option>
 				                        <option value="location">지역</option>
 				                    </select>
 				                    <input type="text" placeholder="검색" id="searchKeyword">
-				                    <button class="search-btn">⌕</button>
-				                </form>
-					            <div class="search-course-list">
-				            		<input class ="search-course-title" type="text" name="courseTitle" id="courseNO" placeholder="부산 연등회" readonly>
-			            		</div>
+				                    <button class="search-btn" id="searchBtn">⌕</button>
+					            <div class="search-course-list" id="courseListResult"></div>
 				            </div>
 						</div>			
 					</div>
@@ -99,6 +97,30 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce2765b5c8d1c862f02d7a486094793d"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+	/* 배경화면 설정 */
+	const images = [
+	    "../resources/img/course/bgi1.jpg",
+	    "../resources/img/course/bgi2.jpg",
+	    "../resources/img/course/bgi3.jpg",
+	    "../resources/img/course/bgi4.jpg",
+	    "../resources/img/course/bgi5.jpg"  
+	  ];
+	
+	  let index = 0;
+	  const imgTag = document.querySelector(".background-image img");
+	
+	  // 초기 이미지 설정
+	  window.onload = function () {
+	    imgTag.src = images[0];
+	
+	    // 5초마다 이미지 변경
+	    setInterval(() => {
+	      index = (index + 1) % images.length;
+	      imgTag.src = images[index];
+	    }, 5000);
+	  };	
+
+
 	let festivalNo = $('#festivalNo').val();
 	let festivalY = ${coursePoint.festivalY};
 	let festivalX = ${coursePoint.festivalX};
@@ -247,7 +269,7 @@
 		});
 	});
 	
-	
+	/* 코스 저장시 처리하는 자바스크립트 */
 	document.querySelector("#saveCourseBtn").addEventListener("click", function(e) {
 	    e.preventDefault();
 
@@ -274,6 +296,38 @@
 	});	
 	
 	
+	
+ 	 /* 오른쪽 리스트 div 처리  */
+	document.addEventListener("DOMContentLoaded", function() {
+	    document.getElementById("searchBtn").addEventListener("click", function(e) {
+	        e.preventDefault(); // 기본 form 제출 방지
+
+	        let searchCondition = document.getElementById("searchCondition").value;
+	        let searchKeyword = document.getElementById("searchKeyword").value;
+
+	        fetch("/course/rightSearch?searchCondition=" + searchCondition + "&searchKeyword=" + encodeURIComponent(searchKeyword))
+	            .then(response => response.json())
+	            .then(data => {
+	                let resultDiv = document.getElementById("courseListResult");
+	                resultDiv.innerHTML = ""; // 이전 검색 결과 비우기	               
+
+	                if (data.length === 0) {
+	                    resultDiv.innerHTML = "<p>검색 결과가 없습니다.</p>";
+	                    return;
+	                }
+
+	                data.forEach(course => {
+	                    let div = document.createElement("div");
+	                    div.classList.add("search-course-title");
+	                    div.innerHTML = '<a href="/course/detail?festivalNo=' + course.festivalNo + '">' + course.festivalName + '</a>';
+	                    resultDiv.appendChild(div);
+	                });
+	            })
+	            .catch(error => {
+	                console.error("검색 실패:", error);
+            });
+	    });
+	}); 
 	
 </script>
 
