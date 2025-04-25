@@ -154,6 +154,8 @@ public class ChatController {
 	@GetMapping("/detail/{chatroomNo}")
 	public String showChatMsgList(@PathVariable("chatroomNo") int chatroomNo
 				,HttpSession session, Model model) {
+
+		/** 왼쪽 내 채팅방 리스트 */
 		// 세션에서 memberNo 가져오기
 		Member member = (Member)session.getAttribute("member");
 		int memberNo = member.getMemberNo();	
@@ -162,12 +164,6 @@ public class ChatController {
 		ChatRoom chatRoom = service.selectChatRoomByNo(chatroomNo); 
 		model.addAttribute("chatRoom", chatRoom);
 
-		// 이미 가입한 회원 - 재입장(입장상태 'Y')
-		int yn = service.enterMemberYn(chatroomNo, memberNo);		
-		
-		// 입장상태 나머지방 'N'으로 변경하기
-		int exitRoom = service.exitChatRooms(chatroomNo, memberNo);
-
 		// 내가 속한 방만 출력
 		List<MyChatroom> myList = service.selectMyChatRoomList(memberNo);
 		model.addAttribute("myList",myList);
@@ -175,6 +171,11 @@ public class ChatController {
 		// 각 채팅방별 참여인원수 불러오기
 		List<ChatMember> memberCount = service.selectChatMember();
 		
+		/** 오른쪽 메시지 창 */
+		// 이미 가입한 회원 - 재입장(입장상태 'Y')
+		int yn = service.enterMemberYn(chatroomNo, memberNo);		
+		// 입장상태 나머지방 'N'으로 변경하기
+		int exitRoom = service.exitChatRooms(chatroomNo, memberNo);
 		
 		// 가입 멤버 프로필 출력
 		List<MemberProfileList>  memberList = service.chatMemberList(chatroomNo);
@@ -192,7 +193,6 @@ public class ChatController {
 		
 		// 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0이 되야 함)
 		int zero = service.resetNonCheckMsg(chatroomNo);
-		
 		
 		model.addAttribute("chatroomNo", chatroomNo); // 채팅방 번호 전달
 		
