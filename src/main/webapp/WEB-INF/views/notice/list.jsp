@@ -48,19 +48,37 @@
 	        </tbody>
 	    </table>
 	    <!-- 페이지네이션 -->
-			<div class="pagination">
-				<a href="/festival/list?currentPage=1">◁◁</a>
+<%-- 			<div class="pagination">
+				<a href="/notice/list?currentPage=1">◁◁</a>
 				<c:if test= "${startNavi ne 1}">
-					<a href="/festival/list?currentPage=${startNavi-1}" class="prev">◀</a>
+					<a href="/notice/list?currentPage=${startNavi-1}" class="prev">◀</a>
 				</c:if>	
 				<c:forEach begin="${startNavi}" end="${endNavi}" var="p">
-					<a href="/festival/list?currentPage=${p}">${p}</a>
+					<a href="/notice/list?currentPage=${p}">${p}</a>
 				</c:forEach>					
 				<c:if test="${endNavi ne maxPage}">
-					<a href="/festival/list?currentPage=${endNavi+1}" class="next">▶</a>
+					<a href="/notice/list?currentPage=${endNavi+1}" class="next">▶</a>
 				</c:if>    
-					<a href="/festival/list?currentPage=${maxPage}"> ▷▷ </a>
-			</div>
+					<a href="/notice/list?currentPage=${maxPage}"> ▷▷ </a>
+			</div> --%>
+			
+			<div class="pagination">
+	    	<c:if test="${pageInfo.startNavi ne 1}">
+		        <button class="page-btn" onclick="prev();">&lt;</button>
+	    	</c:if>
+	    	<c:forEach begin="${pageInfo.startNavi }" end="${pageInfo.endNavi }" var="p">
+	    		<c:if test="${p eq currentPage }">
+		        	<span class="page-num active" onclick="move('${p}');">${p }</span>	
+	    		</c:if>
+	    		<c:if test="${p ne currentPage }">
+	    			<span class="page-num" onclick="move('${p}');">${p }</span>
+	    		</c:if>
+	    	</c:forEach>
+	        <c:if test="${pageInfo.endNavi eq maxPage }">
+		        <button class="page-btn" onclick="next();">&gt;</button>
+	        </c:if>
+	    </div>
+			
 	    <c:if test="${member.memberId ne null && member.managerYn eq 'Y'}">
 		    <div class="noticeinsert-btn">
 			    	<button onClick="noticeInsert();" id="noticeinsert-btn">글쓰기</button>

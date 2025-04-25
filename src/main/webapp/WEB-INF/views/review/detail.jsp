@@ -95,8 +95,7 @@
 											작성시간:<span>${comment.commentTime }</span>
 										</p>
 										<div class="comment-btn-area">
-											<button class="replyBtn">답글</button>
-											<button class="modifyBtn">수정</button>
+											<button class="replyBtn">답글(삭제 예정)</button>
 											<button class="deleteBtn">삭제</button>
 											<button onclick="reportComment('${comment.commentNo}');">신고</button>
 										</div>
