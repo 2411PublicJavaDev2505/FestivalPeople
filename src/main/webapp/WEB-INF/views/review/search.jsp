@@ -51,6 +51,7 @@
 			            <tr>
 			                <!-- 4/19 18:34분 수정시작! -->
 			                <!-- 수정했으나 list에 밑줄나오게하는건?? -->
+			                <!-- 4/25 검색하면 작성자 나오게 하는거해야함! -->
 			                <td>${review.reviewNo}</td>
 			                <td>${review.memberName}</td>
 <%-- 			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td> --%>

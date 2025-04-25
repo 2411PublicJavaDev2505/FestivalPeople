@@ -40,8 +40,7 @@ public interface ReviewMapper {
 	//4/22 10:32분 추가 안되면 지울것!!
 	List<Review> selectReviewList();
 	
-	//리뷰수정 4/24 15:05분
-	//int updateReview(ReviewUpdateRequest review);
+	
 	//04/24 20:48 분 아래 1개 코드 추가...소용없어 다시 주석
 	//int insertReviewImageList1(List<ImgAddRequest> imageList);
 	int updateReviewFirstImage(ImgAddRequest img);
