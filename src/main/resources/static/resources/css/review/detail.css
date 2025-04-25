@@ -8,7 +8,7 @@
 	margin: 0 auto;
 	margin-top:150px;
 	width: 1350px;
-	height: 900px;
+	height: 1400px;
 	padding: 30px;
 	box-shadow: 0 2px 10px rgba(1, 0, 0, 0.2);
 	background-color:rgb(60,127,114,0.9);
@@ -56,19 +56,21 @@
 }
 /*4/25추가 밑에꺼는 안먹힌다??*/
 
-.review-all-btn:after{
-	content:"";
-	display: block;
-	border-bottom: 2px solid white;;
-}
+/* .review-update-all-btn:after{ */
+/* 	content:""; */
+/* 	display: block; */
+/* 	border-bottom: 2px solid white;; */
+/* } */
 
-.review-all-btn {
+.review-update-all-btn {
 	display: flex;
     align-items: center;
     justify-content: flex-end; 
     gap: 5px;
     margin-top: 30px;
 }
+
+
 
 .back-list-btn {
  	width: 100px;
@@ -80,8 +82,8 @@
     color: #fff;
     border-radius: 10px;
   }
-  .review-update-btn {
-  	width: 100px;
+.review-update-btn{
+	width: 100px;
     height: 40px;
 	font-size: 16px;
 	font-weight: bold;
@@ -89,7 +91,8 @@
     background: #d97a4a;
     color: #fff;
     border-radius: 10px;
-  }
+}
+  
   .review-delete-btn {
  	width: 100px;
     height: 40px;
@@ -100,6 +103,56 @@
     color: #fff;
     border-radius: 10px;
   }
+ 
+ /*4/25오후에 추가*/
+ .review-all-content {
+	width: 1250px;
+	height: 600px;
+	margin: 0 auto;
+	margin-top: 10px;
+	border: 1px solid white;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.review-content {
+	border: 1px solid white;
+	background-color: white;
+	border-radius: 10px;
+}
+/*댓글영역*/
+
+.comentwrite-p{
+	position: relative;
+	top:30px;
+	color: #f2f2f2;
+	
+	
+}
+.review-comment-write-area {
+	margin:0 auto;
+	margin-left: 30px;
+	
+}
 
 
+
+.comentwrite-p:after{
+	content:"";
+	display: block;
+	border-bottom: 2px solid white;
+	position: relative;
+	bottom: 80px; 
+}
+
+.addComment-btn {
+	margin:0 auto;
+	margin-left: 646px;
+	margin-top:-50px;
+}
+
+.comment-list-area {
+	margin: 0 auto;
+	margin-top: 50px;
+}
 

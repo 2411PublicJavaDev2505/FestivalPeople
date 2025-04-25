@@ -6,12 +6,13 @@
 	<head>
 		<meta charset="UTF-8">
 		<!-- 4/25일 아래코드 추가! -->
-<!-- 			<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<!-- 			<script src="https://cdn.tiny.cloud/1/h2z941nkcufiei057mdhexxykqh6vtiwziq0rhb7ahlx1hua/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> -->
-<!-- 		<title>후기글 상세조회</title> -->
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+		<title>후기글 상세조회</title>
 		<link rel="stylesheet" href="../resources/css/include/header.css">
 		<link rel="stylesheet" href="../resources/css/review/detail.css">
 	</head>
+	<script src="https://cdn.tiny.cloud/1/h2z941nkcufiei057mdhexxykqh6vtiwziq0rhb7ahlx1hua/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 	<body>
 		<main class="main-container">
 		<div id="container">
@@ -42,45 +43,46 @@
 							</div>
 						</div>
 							<!-- 밑에는 내용! -->
-						<div class="review-content">
-							<p><div>${review.reviewContent }</div></p>
+						<div class="review-all-content">
+							<div class="review-content">
+								<p><div>${review.reviewContent }</div></p>
+							</div>
+							<!-- 사진내용 출력?!4/18 12:22뜨는지안뜨는지확인 확인되어서 커밋하고 지우기! -->
+							<div class="review-imagefile">
+								<c:if test="${review.reviewFilePath1 ne null }">
+									<img alt="review-img" src="${review.reviewFilePath1 }">
+								</c:if>
+								<c:if test="${review.reviewFilePath2 ne null }">
+									<img alt="review-img" src="${review.reviewFilePath2 }">
+								</c:if>
+								<c:if test="${review.reviewFilePath3 ne null }">
+									<img alt="review-img" src="${review.reviewFilePath3 }">
+								</c:if>
+							</div> 
 						</div>
-						<!-- 사진내용 출력?!4/18 12:22뜨는지안뜨는지확인 확인되어서 커밋하고 지우기! -->
-						<div class="review-imagefile">
-							<c:if test="${review.reviewFilePath1 ne null }">
-								<img alt="review-img" src="${review.reviewFilePath1 }">
-							</c:if>
-							<c:if test="${review.reviewFilePath2 ne null }">
-								<img alt="review-img" src="${review.reviewFilePath2 }">
-							</c:if>
-							<c:if test="${review.reviewFilePath3 ne null }">
-								<img alt="review-img" src="${review.reviewFilePath3 }">
-							</c:if>
-						</div> 
 						<!-- 4/18 15:05분 수정하기버튼 추가! 요구사항에 작성자가쓴글만 삭제하는 기능은??? -->
 						<!-- 4/18 16:04삭제하기 버튼추가! -->
 						<!-- 4/19 12:05 목록으로 버튼 추가! -->
-						<div class="review-all-btn">
-							<div class="review-update-btn">
+						
+							<div class="review-update-all-btn">
 								<button class="back-list-btn" onclick="location.href='/review/list';">목록으로</button>
 								<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberYn eq 'Y'}" >
 									<button class="review-update-btn" onclick="reviewupdate(${review.reviewNo});" id="review-update-btn">수정하기</button>
 									<button class="review-delete-btn" onclick="reviewDelete();">삭제하기</button> 
 								</c:if>
 							</div>
-						</div>
-						
-					</section>
+						</section>
 					<input type="hidden" value="${review.reviewNo }" id="reviewNo">
 					<input type="hidden" value="${sessionScope.member.memberNo}" id="memberNo">
 					<!-- 댓글 -->
 					<div class="review-comment-list-area">
 						<div class="review-comment-write-area">
 							<div class="comentwrite-p">
+							<!-- 댓글쓰기 text아래로 내리는 방법은?? -->
 								<p>댓글쓰기</p><br>
 							</div>
-							<textarea id="commentContent" placeholder="댓글내용을 입력해주세요"></textarea>
-							<div>
+							<textarea row="4" cols="82" id="commentContent" placeholder="댓글내용을 입력해주세요"></textarea>
+							<div class="addComment-btn">
 								<button id="addComment">댓글등록</button>
 							</div>	
 						</div>
@@ -106,7 +108,7 @@
 		</div>
 	</main>
 		<script>
-			//이것도 안먹힘...4/18 17:48종료!!
+			//리뷰삭제
 			const reviewDelete = () => {
  				if(confirm("정말 삭제하시겠습니까??")) {
  					location.href = "/review/delete?reviewNo=${review.reviewNo}";
@@ -134,11 +136,11 @@
 					cListTag.innerHTML ="";
 					for(let comment of cList) {
 						//li태그
-						const commentRow = document.createElement("li");
-						commentRow.classList.add("reviewcomment-row");
+						const commentRow = document.createElement("li"); //** <li></li> 태그를 만든다!!!
+						commentRow.classList.add("reviewcomment-row"); //**<li class="reviewcomment-row"></li>
 						
 						//p태그(출력할 화면정해야함!) (코드확인필요)
-						const commentPtag = document.createElement("p");
+						const commentPtag = document.createElement("p"); 
 						//comment-writer 인지 어디다 적을지 정해야함(작성자,아이디,닉네임이냐)comment-writer"?
 						commentPtag.classList.add("comment-writer");
 						
