@@ -11,13 +11,56 @@
     flex: 0 0 auto;
 }
 
+
+.course-back-image {
+    position: relative;
+    width: 250px;
+    height: 450px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex: 0 0 auto;
+}
+
+.poster-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 포스터 비율 유지하면서 카드 크기에 맞춤 */
+    display: block;
+    transition: 0.3s ease;
+}
+
+/* 카드 내용 (hover 시 뜨는 정보창) */
+.coursecard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: scale(1);
+    z-index: 1;
+    pointer-events: none;
+    overflow: auto;
+}
+
+.course-back-image:hover .coursecard {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* 변경 전 
 .course-back-image::before {
     content: "";
     position: relative;
     inset: 0;
     width: 100%;
     height: 100%;
-    background-image: url("이미지URL"); /* JS에서 동적으로 넣거나 style 속성에서 설정 가능 */
+    background-image: url("이미지URL"); JS에서 동적으로 넣거나 style 속성에서 설정 가능
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -27,7 +70,7 @@
 
 .course-back-image:hover::before {
     opacity: 0;
-}
+} */
 
 .course-back-image .coursecard {
     position: relative;      
