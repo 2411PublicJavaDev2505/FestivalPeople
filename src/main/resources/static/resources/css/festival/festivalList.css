@@ -86,35 +86,58 @@
 	height:100%; 
 	justify-content:space-around;
 }
-
 .festival-card {
+	position: relative;
     width: 300px;
     margin:0 20px;
     aspect-ratio: 367.25 / 570;        
     box-sizing: border-box;
     margin-bottom: 30px;
 }
-
-.festival-card img {
-    margin-top: 0px;
-    width: 300px;
-    aspect-ratio: 367.25 / 570;           /* px 단위로 고정 */
-    object-fit: cover;
-    border-radius: 20px;
+.festival-image-wrapper {
     position: relative;
-    z-index: 4;
-    
+    overflow: hidden;
+    border-radius: 20px;
 }
 
-.festival-card a img:hover  {
-  /* transition: all 1s;
+.festival-image-wrapper img,.festival-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+/* overlay 텍스트 */
+.overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6); /* 반투명 배경 */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    border-radius: 0 0 20px 20px;
+}
+
+/* 호버 시 글자 보이게 */
+.festival-image-wrapper:hover .overlay-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* .festival-card a img:hover  {
+  transition: all 1s;
   transform: translateY(-50px);
-  color: rgba(0,0,0,1);*/
+  color: rgba(0,0,0,1);
   filter:blur(10px);
     -webkit-filter:blur(5px);
 } 
 
-/*사진 밑에 나오는 축제 이름  */
+/*사진 밑에 나오는 축제 이름 
 .festival-card h4 {
 	color:white;
 	position: relative;
@@ -125,7 +148,7 @@
     font-weight: bold;
     line-height: 19px;
     z-index: 9999;
-} 
+}  */
 
 .moveSlider-prev-button {
     position: absolute;
