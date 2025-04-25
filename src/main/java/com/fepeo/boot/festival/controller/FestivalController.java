@@ -76,6 +76,7 @@ public class FestivalController {
 			//로그인 됬을때 
 			Member memberInfo = memberService.selectOneByNo(member.getMemberNo());
 	    	String memberAddress = memberInfo.getAddress();
+			/* Map<String, String> mapPoint = api.searchMemberAddress(memberAddress); */
 	    	//회원주소에서 지역명 매핑
 	    	String matchedRegion ="";
 	    	for (String region : goodWeatherRegions) {
@@ -87,10 +88,12 @@ public class FestivalController {
 	    	if(!matchedRegion.isEmpty()) {
 	    		//해당 지역 축제만 필터링 하기
 	    		rfestivals =festivalService.selectFestivalListByRegionName(matchedRegion);// 회원일 때 불러오는 리스트 
+	    		System.out.println("???"+rfestivals);
 	    	}
 	    	
 		}else {
-			rfestivals = festivalService.selectFestivalListByWeather(goodWeatherRegions); // 비회원일때 불러오는 리스트 
+			rfestivals = festivalService.selectFestivalListByWeather(goodWeatherRegions); // 비회원일때 불러오는 리스트
+			System.out.println("??"+rfestivals);
 		}
 	    //전체 리스트 출력 
 	    List<Festival> festivals = festivalService.selectFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));

@@ -20,7 +20,7 @@
 	       <main class="festival-main">
 	           <div class="buttons">
 	               <div class="festival-button">
-	                   <button>🔅우리지역 축제</button>
+	                   <button class="active">🔅우리지역 축제</button>
 	                   <button>진행중인 축제</button>
 	               </div>
 	               <div class="festival-search">
@@ -135,12 +135,15 @@
 	    let currentSlide = 0;
 	    let activeTrackId = 'track-recommend';
 	
-	    document.querySelectorAll('.festival-button button')[0].addEventListener('click', () => {
-	        switchTrack('track-recommend');
-	    });
-	
-	    document.querySelectorAll('.festival-button button')[1].addEventListener('click', () => {
-	        switchTrack('track-upcoming');
+	    const buttons = document.querySelectorAll('.festival-button button');
+	    buttons.forEach((btn, idx) => {
+	        btn.addEventListener('click', (event) => {
+	            buttons.forEach(b => b.classList.remove('active'));
+	            event.target.classList.add('active');
+
+	            if (idx === 0) switchTrack('track-recommend');
+	            else switchTrack('track-upcoming');
+	        });
 	    });
 	
 	    function switchTrack(trackId) {
