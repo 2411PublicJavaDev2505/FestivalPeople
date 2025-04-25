@@ -33,9 +33,10 @@
   					ofType="ImgAddRequest"></collection>
   		
   		</resultMap>
-  		
+  		<!-- detail 작성자 조인추가해줌 -->
  		<select id="selectOneByNo" resultMap="reviewResultMap">
- 			SELECT * FROM REVIEW WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N'
+ 			SELECT R.*, M.MEMBER_NAME MEMBER_NAME FROM REVIEW R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO 
+ 			WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N'
  		</select>
 
  			<!-- 아래도 코드작성하면 주석풀기! *-->
@@ -107,9 +108,6 @@
 		<update  id="reviewDelete">
 			UPDATE REVIEW SET REVIEW_YN = 'Y' WHERE REVIEW_NO = #{reviewNo}
 		</update>
-<!-- 			<delete id="reviewDelete"> -->
-<!-- 				DELETE FROM REVIEW WHERE REVIEW_NO = #{reviewNo} -->
-<!-- 			</delete> -->
 		
 		<!-- 조회수 -->
 		<update id="reviewCount">
@@ -161,22 +159,12 @@
 		
 		
 		<!-- 게시판수정 제목 이름만 -->
-		<!-- 쿼리문바꿔야함! 원래꺼는 주석처리 하고 다시작성!-->
 		<update id="reviewUpdate">
 			UPDATE REVIEW SET REVIEW_TITLE = #{reviewTitle} , 
 			REVIEW_CONTENT = #{reviewContent}
 			WHERE REVIEW_NO = #{reviewNo} AND MEMBER_NO = #{memberNo}
   		</update>
-		<!--  게시판 처음부터 작성위해 아래 코드 주석! -->
-<!-- 		<update id="reviewUpdate"> -->
-<!-- 			UPDATE REVIEW SET REVIEW_TITLE = #{reviewTitle} ,  -->
-<!-- 			REVIEW_CONTENT = #{reviewContent}, -->
-<!-- 			REVIEW_FILE_NAME1 = #{reviewFileName1}, -->
-<!-- 			REVIEW_FILE_RENAME1 = #{reviewFileRename1}, -->
-<!-- 			REVIEW_FILE_PATH1 = #{reviewFilePath1}, -->
-<!-- 			WHERE REVIEW_NO = #{reviewNo} AND MEMBER_NO = #{memberNo} -->
-<!--   		</update> -->
-
+		<!-- 게시판 이미지수정 -->
 		<update id="updateReviewFirstImage">
 			UPDATE REVIEW SET REVIEW_FILE_NAME1 = #{reviewFileName},
 			REVIEW_FILE_RENAME1 = #{reviewFileRename},
@@ -195,6 +183,4 @@
 			REVIEW_FILE_PATH3 = #{reviewFilePath} 
 			WHERE REVIEW_NO = #{reviewNo}
 		</update>
-	
-		
 </mapper>

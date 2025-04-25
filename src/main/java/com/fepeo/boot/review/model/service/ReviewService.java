@@ -33,14 +33,6 @@ public interface ReviewService {
 	//리뷰 조회수 추가 4/19
 	int reviewCount(int reviewNo);
 
-	//후기 수정 1 ( 4/23일 강제 로 throws IllegalStateException, IOException 넣어줌!
-	// 4/23 14:44분 아래 수정!
-	//int reviewUpdate(ReviewUpdateRequest review) 원래코드!
-	//이미지수정추가코드 있어 원래코드는 주석처리하고 다시 작성!
-	//4/23 21:05
-	//int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
-	//4/24 14:22분 코드 다시 작성위해 아래 주석처리
-	//int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images) throws IllegalStateException, IOException;
 
 	//리뷰검색 4/21 16:05
 	List<Review> searchListByKeyword(Map<String, String> paramMap, int currentPage);
@@ -54,25 +46,4 @@ public interface ReviewService {
 
 	//수정
 	int reviewUpdate(ReviewAddRequest review, List<MultipartFile> images) throws IllegalStateException, IOException;
-	
-	
-	//***과연 2개가 필요한것인가.....
-	//4/24 15:01분 추가!
-	//int updateReview(ReviewUpdateRequest review, List<MultipartFile> images)throws IllegalStateException, IOException;
-
-	//4/24 16:08분 다시 추가..... 04/24 20:31분 원래코드는 주석처리하고 다시작성!
-	//int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
-	//int reviewUpdate(ReviewUpdateRequest review, List<MultipartFile> images) throws IllegalStateException, IOException;
-
-	//여기부분 추가해보고 안되면 원복!!4/24 21:10 *******
-	//Review updateReview(Review review1, List<MultipartFile> images);
-
-
-	//int reviewUpdate(Review review, List<MultipartFile> images);
-
-	//어쩌다가 만듬....4/24 11:31분 이미지수정 코드작업중...
-	//처음부터 작성위해 아래코드 주석처리!1
-	//4/24 14:18
-	//int reviewUpdate(ReviewUpdateRequest review) throws IllegalStateException, IOException;
-
 }
