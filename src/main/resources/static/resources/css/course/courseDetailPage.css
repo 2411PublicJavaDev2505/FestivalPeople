@@ -360,12 +360,15 @@ body{
 
 .course-recommend-right {
 	width : 400px;
+	height :1000px;
+	display:flex;
 /* 	border: 1px solid yellow; */
 }
 
 .course-search {
 	top: 0;
   	position: sticky;
+  	height: 500px;
 	
 }
 
@@ -482,8 +485,10 @@ body{
   background-color: white;
   border: 1px solid #ccc;
   position: absolute;
-  width: 100%;
+  width: 90%;
   z-index: 100;
+  margin-top : 20px;
+  border-radius : 10px;
 }
 
 

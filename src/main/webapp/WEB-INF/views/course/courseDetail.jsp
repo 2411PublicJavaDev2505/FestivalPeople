@@ -347,7 +347,7 @@
 	                data.forEach(course => {
 	                    let div = document.createElement("div");
 	                    div.classList.add("search-course-title");
-	                    div.innerHTML = '<a href="/course/detail?festivalNo=' + course.festivalNo + '">' + course.festivalName + '</a>';
+	                    div.innerHTML = '<a href="/course/detail?festivalNo=' + course.festivalNo + '">' + course.festivalName + '<br>'+course.festivalStartDate+'~'+course.festivalEndDate+'</a>';
 	                    resultDiv.appendChild(div);
 	                });
 	            })
