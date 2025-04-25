@@ -116,11 +116,20 @@
 
 /*사진 밑에 나오는 축제 이름  */
 .festival-card h4 {
-	color:white;
+	color: white;
+	text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+        -3px  0px 0 #000,
+         3px  0px 0 #000,
+         0px -3px 0 #000,
+         0px  3px 0 #000;
 	position: relative;
 	display: block;
     font-size: 20px;
-    margin-top: -26px;
+    margin-top: -40px;
     margin-left: 10px;
     font-weight: bold;
     line-height: 19px;

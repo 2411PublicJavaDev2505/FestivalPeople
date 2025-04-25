@@ -11,7 +11,7 @@
   
   .notice-write-container {
     width: 1525px;
-    height: 670px;
+    height: 820px;
     margin-top: 70px;
     margin-left: 195px;
     background: #3b7c6e;
@@ -111,4 +111,9 @@
     justify-content: flex-end; 
     gap: 5px;
     margin-top: -30px;
+}
+
+#notice-file {
+	width: 250px;
+	height: 150px;
 }

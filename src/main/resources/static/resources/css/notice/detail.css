@@ -132,6 +132,8 @@
 .form-row-content {
 	width: 1000px;
 	height: 600px;
+	overflow-y: auto;
+	overflow-x: hidden;  
 	margin: 0 auto;
 	margin-top: 10px;
 	padding: 50px 50px;
