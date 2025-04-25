@@ -164,6 +164,8 @@ public class ChatController {
 		ChatRoom chatRoom = service.selectChatRoomByNo(chatroomNo); 
 		model.addAttribute("chatRoom", chatRoom);
 
+		// 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0이 되야 함)
+		int zero = service.resetNonCheckMsg(chatroomNo, memberNo);
 		// 내가 속한 방만 출력
 		List<MyChatroom> myList = service.selectMyChatRoomList(memberNo);
 		model.addAttribute("myList",myList);
@@ -175,7 +177,8 @@ public class ChatController {
 		// 이미 가입한 회원 - 재입장(입장상태 'Y')
 		int yn = service.enterMemberYn(chatroomNo, memberNo);		
 		// 입장상태 나머지방 'N'으로 변경하기
-		int exitRoom = service.exitChatRooms(chatroomNo, memberNo);
+		int exitRoom = service.exitChatRooms(memberNo, chatroomNo);
+		
 		
 		// 가입 멤버 프로필 출력
 		List<MemberProfileList>  memberList = service.chatMemberList(chatroomNo);
@@ -190,9 +193,6 @@ public class ChatController {
 		model.addAttribute("member", member);
 		model.addAttribute("nickname", member.getNickname());
 		model.addAttribute("profileFilePath", member.getProfileFilePath());
-		
-		// 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0이 되야 함)
-		int zero = service.resetNonCheckMsg(chatroomNo);
 		
 		model.addAttribute("chatroomNo", chatroomNo); // 채팅방 번호 전달
 		
