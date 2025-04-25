@@ -5,40 +5,43 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<!-- 4/25일 아래코드 추가! -->
+<!-- 			<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<!-- 			<script src="https://cdn.tiny.cloud/1/h2z941nkcufiei057mdhexxykqh6vtiwziq0rhb7ahlx1hua/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> -->
+<!-- 		<title>후기글 상세조회</title> -->
 		<link rel="stylesheet" href="../resources/css/include/header.css">
 		<link rel="stylesheet" href="../resources/css/review/detail.css">
-		<title>후기글 상세조회</title>
 	</head>
 	<body>
+		<main class="main-container">
 		<div id="container">
 			<jsp:include page="../include/header.jsp"/>
 				<div class="reviewdetail-main">
 					<div class="review-h3">
 						<h3>여행후기</h3>
 					</div>
-					<main>
 					<section>
 							<div class="review-report-btn">
 								<a herf="/report/content"><button>신고하기</button></a>
 							</div>
 						<div class="reviewtitle-h1">
 							<!-- 리뷰제목 -->
+							<!-- 4/25 12:36 review-info-main 여기안에 넣어줬음! -->
 							<h1>${review.reviewTitle }</h1>
 <!-- 							<input type="hidden" id="reviewNo" value="${review.reviewNo }"> -->
+							<div class="review-info-main">
+								<div class="review-info">
+									<p><span>${review.memberName}</span></p>
+								</div>
+								<div class="review-info">
+									<p><span>|</span>${review.reviewWriteTime }</p>	
+								</div>
+								<div class="review-info">
+									<p><span>|조회수</span>${review.reviewCount }</p>	
+								</div>
+							</div>
 						</div>
-						<div class="review-info-main">
-							<!-- 작성자 안나옴...4/22 -->
-							<div class="review-info">
-								<p><span>작성자</span>${review.memberName}</p>
-							</div>
-							<div class="review-info">
-								<p><span>|</span>${review.reviewWriteTime }</p>	
-							</div>
-							<div class="review-info">
-								<p><span>|조회수</span>${review.reviewCount }</p>	
-							</div>
 							<!-- 밑에는 내용! -->
-						</div>
 						<div class="review-content">
 							<p><div>${review.reviewContent }</div></p>
 						</div>
@@ -57,20 +60,14 @@
 						<!-- 4/18 15:05분 수정하기버튼 추가! 요구사항에 작성자가쓴글만 삭제하는 기능은??? -->
 						<!-- 4/18 16:04삭제하기 버튼추가! -->
 						<!-- 4/19 12:05 목록으로 버튼 추가! -->
-						<div class="review-update-btn">
-							<div class="">
+						<div class="review-all-btn">
+							<div class="review-update-btn">
 								<button class="back-list-btn" onclick="location.href='/review/list';">목록으로</button>
+								<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberYn eq 'Y'}" >
+									<button class="review-update-btn" onclick="reviewupdate(${review.reviewNo});" id="review-update-btn">수정하기</button>
+									<button class="review-delete-btn" onclick="reviewDelete();">삭제하기</button> 
+								</c:if>
 							</div>
-							<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne '' }">
-<!-- 								<button onclick="reviewupdate();" id="review-update-btn">수정하기</button> -->
-								<!-- 4/21 코드수정하면서 위에것은주석처리함 -->
-								<button onclick="reviewupdate(${review.reviewNo});" id="review-update-btn">수정하기</button>
-							</c:if>
-						</div>
-						<div class="review-delete-btn">
-							<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo ne '' }">
-								<button onclick="reviewDelete();">삭제하기</button>
-							</c:if>
 						</div>
 						
 					</section>
@@ -105,9 +102,9 @@
 							</ul>
 						</div>
 					</div>
-				</main>
 			</div>
 		</div>
+	</main>
 		<script>
 			//이것도 안먹힘...4/18 17:48종료!!
 			const reviewDelete = () => {
