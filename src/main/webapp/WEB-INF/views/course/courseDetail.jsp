@@ -55,16 +55,13 @@
 
 				<div class="course-recommend-main">			
 					<div class="course-recommend-left">
-						<div  class="course-recommend-map" style="width:100%; height:400px;">	
-								
+						<div  class="course-recommend-map" style="width:100%; height:400px;">								
 								  <!-- 길찾기 버튼 -->
 								  <a class="map_shortcut" 
 								     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHCode},${festival.mapVCode}" 
 								     target="_blank">
 								     📍 길찾기
-								  </a>
-
-												
+								  </a>												
 						</div>
 						<div class="festival-title">
 							<p>${festival.festivalName}</p>

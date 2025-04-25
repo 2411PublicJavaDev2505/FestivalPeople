@@ -374,6 +374,7 @@ public class ApiComponent {
 		List<String> sunnyRegions = new ArrayList<>();
 		for(RegionDto region : regionList) {
 			//지역코드 출력 확인
+			System.out.println("지역번호"+region.getRegionNo());
 			String response = webClient.get()
 					.uri(uriBuilder -> uriBuilder
 							.queryParam("serviceKey", weatherApiKey)
@@ -386,7 +387,7 @@ public class ApiComponent {
 					.retrieve()
 					.bodyToMono(String.class)
 					.block();
-//			System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
+			System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
 			
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode root = mapper.readTree(response);

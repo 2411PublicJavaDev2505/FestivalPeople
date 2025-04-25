@@ -78,7 +78,7 @@
 	width: 50px;
 	height: 50px;
 	display: inline-block;
-	background-image: url("../../img/course/icon/matzip.png");
+	background-image: url("../../img/course/icon/matzip-icon.png");
 	background-size: cover;
 	transition: all 0.3s ease;
 }
@@ -86,7 +86,7 @@
 	width: 70px;
 	height: 50px;
 	display: inline-block;
-	background-image: url("../../img/course/icon/hotel.png");
+	background-image: url("../../img/course/icon/hotel-icon.png");
 	background-size: cover;
 	transition: all 0.3s ease;
 }
@@ -94,7 +94,7 @@
 	width: 50px;
 	height: 50px;
 	display: inline-block;
-	background-image: url("../../img/course/icon/cafe.png");
+	background-image: url("../../img/course/icon/cafe-icon.png");
 	background-size: cover;
 	transition: all 0.3s ease;
 }
@@ -102,7 +102,7 @@
 	width: 70px;
 	height: 50px;
 	display: inline-block;
-	background-image: url("../../img/course/icon/tour.png");
+	background-image: url("../../img/course/icon/tour-icon.png");
 	background-size: cover;
 	transition: all 0.3s ease;
 }
@@ -110,7 +110,7 @@
 	width: 50px;
 	height: 50px;
 	display: inline-block;
-	background-image: url("../../img/course/icon/parking.png");
+	background-image: url("../../img/course/icon/parking-icon.png");
 	background-size: cover;
 	transition: all 0.3s ease;
 }
@@ -118,7 +118,7 @@
 	width: 50px;
 	height: 50px;
 	display: inline-block;
-	background-image: url("../../img/course/icon/culture.png");
+	background-image: url("../../img/course/icon/culture-icon.png");
 	background-size: cover;
 	transition: all 0.3s ease;
 }

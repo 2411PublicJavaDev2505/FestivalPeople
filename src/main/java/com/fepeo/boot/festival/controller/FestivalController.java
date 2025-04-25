@@ -87,6 +87,7 @@ public class FestivalController {
 	    	if(!matchedRegion.isEmpty()) {
 	    		//해당 지역 축제만 필터링 하기
 	    		rfestivals =festivalService.selectFestivalListByRegionName(matchedRegion);// 회원일 때 불러오는 리스트 
+	    		
 	    	}
 	    	
 		}else {
