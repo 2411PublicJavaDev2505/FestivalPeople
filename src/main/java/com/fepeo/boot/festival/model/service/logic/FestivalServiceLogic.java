@@ -109,12 +109,6 @@ public class FestivalServiceLogic implements FestivalService {
 		return festivalMapper.getSearchTotalCount(searchMap);
 	}
 
-		
-	@Override
-	public List<Festival> selectFestivalListByRegionName(String matchedRegion) {
-		return festivalMapper.selectFestivalListByRegionName(matchedRegion);
-	}
-
 	@Override
 	public List<Festival> selectFestivalListByWeather(List<String> goodWeatherRegions) {
 		List<Festival> rfestivals = festivalMapper.selectFestivalListByWeather(goodWeatherRegions);
@@ -132,5 +126,8 @@ public class FestivalServiceLogic implements FestivalService {
 	public List<Festival> selectFestivalListByRegion(List<String> goodWeather, Map<String, String> mapPoint) {		
 		return festivalMapper.selectFestivalListByRegion(goodWeather, mapPoint);
 	}
-}
+
+	
+
+	}
 

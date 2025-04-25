@@ -46,7 +46,7 @@
 	               
 					<!-- 추천 축제용 트랙 -->
 		    <div class="moveSlider-track" id="track-recommend">
-		        <c:forEach var="festival" items="${rfestivals}" varStatus="status">
+		        <c:forEach var="festival" items="${fList}" varStatus="status">
 		            <c:if test="${status.index % 4 == 0}">
 		                <div class="slide-group">
 		            </c:if>
@@ -128,7 +128,7 @@
 		           	<a href="/festival/list?currentPage=${maxPage}"> ▷▷ </a>
 	            </div>
 	       </main>
-	       <jsp:include page="/WEB-INF/views/include/footer.jsp" />A
+	       <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	   </div>
 		
     <script>
