@@ -121,9 +121,9 @@
 	font-weight: bold;
 	font-size: 36px;
 	text-align: center;
-	width: 300px;
+	width: 900px;
 	height: 60px;
-	margin-left: 585px;
+	margin-left: 285px;
 	border: 1px solid #e4e2dd;
 	background-color: #e4e2dd;
 	border-radius: 10px;
@@ -138,6 +138,11 @@
 	border: 1px solid #e4e2dd;
 	background-color: #e4e2dd;
 	border-radius: 10px;
+}
+
+.form-row-content img {
+	width: 250px;
+	height: 150px;
 }
 
 
