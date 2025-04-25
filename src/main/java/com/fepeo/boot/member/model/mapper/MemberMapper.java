@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import com.fepeo.boot.member.controller.dto.MemberCodeInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
@@ -54,6 +55,10 @@ public interface MemberMapper {
 	int updateMemberEmail(MemberUpdateRequest member);
 
 	Member memberLoginById(String username);
+
+	int insertMemberCode(MemberCodeInsertRequest memberCode);
+
+	int checkCode(MemberCodeInsertRequest memberCode);
 
 
 }
