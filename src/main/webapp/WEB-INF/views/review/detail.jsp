@@ -22,7 +22,7 @@
 					</div>
 					<section>
 							<div class="review-report-btn">
-								<a herf="/report/content"><button>신고하기</button></a>
+								<button onclick="reportReview('${review.reviewNo}');">신고하기</button>
 							</div>
 						<div class="reviewtitle-h1">
 							<!-- 리뷰제목 -->
@@ -96,6 +96,7 @@
 											<button class="replyBtn">답글</button>
 											<button class="modifyBtn">수정</button>
 											<button class="deleteBtn">삭제</button>
+											<button onclick="reportComment('${comment.commentNo}');">신고</button>
 										</div>
 									</li>
 								</c:forEach>
@@ -106,6 +107,13 @@
 		</div>
 	</main>
 		<script>
+			const reportReview = (num) => {
+				location.href = '/report/insert?target=rev&num=' + num;
+			}
+			const reportComment = (num) => {
+				location.href = '/report/insert?target=com&num=' + num;
+			}
+		
 			//이것도 안먹힘...4/18 17:48종료!!
 			const reviewDelete = () => {
  				if(confirm("정말 삭제하시겠습니까??")) {

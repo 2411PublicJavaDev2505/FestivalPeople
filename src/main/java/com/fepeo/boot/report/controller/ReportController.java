@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +37,6 @@ public class ReportController {
 	
 	@Autowired
 	private final MemberService memberService;
-	private final ChatService chatService;
-	private final ReviewService reviewService;
-	private final CommentService commentService;
 	private final ReportService reportService;
 	
 	@Autowired
@@ -71,24 +69,36 @@ public class ReportController {
 		return "report/list";
 	}
 	
-	@GetMapping("/content")
-	public String showReportContent(HttpSession session, 
-			Model model) {
-		ChatRoom chatRoomNo =(ChatRoom)session.getAttribute("chatroomNO");
-		Review reviewNo = (Review)session.getAttribute("reportNo");
-		ReviewComment reviewCommentNo =(ReviewComment)session.getAttribute("reviewCommentNo");
-		 
-		
-		return"report/reportContent";
+	@GetMapping("/insert")
+	public String showReportInsert(HttpSession session, 
+			Model model
+			,@RequestParam("num") int num
+			,@RequestParam("target") String target) {
+		// 신고 대상 
+		// chat = 채팅방, rev = 후기글, com = 댓글
+		// num = 번호(채팅방, 후기글, 댓글)
+		model.addAttribute("target", target);
+		model.addAttribute("num", num);
+		return"report/reportInsert";
 	}
 	
-	@PostMapping("/submit")
+	@PostMapping("/insert")
 	@ResponseBody
-	public Map<String, Object> submitReport(@RequestParam ReportDTO dto) {
-	    boolean result = reportService.saveReport(dto);
-	    Map<String, Object> response = new HashMap<>();
-	    response.put("success", result);
-	    return response;
+	public String insertReport(ReportDTO report, HttpSession session) {
+		
+		Member member = (Member)session.getAttribute("member");
+		
+		JSONObject json = new JSONObject();
+		
+		if(member == null) {
+			json.put("check", 0);
+			return json.toString();
+		}else {
+			report.setMemberNo(member.getMemberNo());
+			int result = reportService.insertReport(report);
+			json.put("check", result);
+			return json.toString();
+		}
 	}
 
 	
