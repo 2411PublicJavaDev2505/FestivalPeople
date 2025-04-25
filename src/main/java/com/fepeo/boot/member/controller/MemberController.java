@@ -26,6 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fepeo.boot.chat.controller.dto.MyChatroom;
 import com.fepeo.boot.chat.model.service.ChatService;
 import com.fepeo.boot.chat.model.vo.ChatMember;
 import com.fepeo.boot.chat.model.vo.ChatRoom;
@@ -396,8 +397,8 @@ public class MemberController {
 		member = mService.selectOneByNo(member.getMemberNo());
 		
 		List<Course> courseList = courseService.selectCourseByNo(member.getMemberNo());
-		List<ChatMember> myChatRoomList = chatService.selectMyChatRoomList(member.getMemberNo());
-		List<ChatRoom> myChatList = chatService.selectMyChatRoomListByChatMember(myChatRoomList);
+		
+		List<MyChatroom> myChatList = chatService.selectMyChatRoomList(member.getMemberNo());
 		model.addAttribute("myChatList",myChatList);
 		
 		model.addAttribute("courseList",courseList);
