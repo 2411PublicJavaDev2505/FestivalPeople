@@ -78,7 +78,7 @@
 		    <div class="reviewinsert-btn">
 				<!-- 4/25 맵퍼에 <select id="selectOneByNo" resultMap="reviewResultMap"> 조인으로
 				인해 로그인안한상태에서 글쓰기버튼 보여 코드 수정! eq로만 바꿔줌-->
-				<c:if test="${sessionScope.member.memberNo ne null && sessionScope.member.memberNo eq ''}" >
+				<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberYn eq 'Y'}" >
 			    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
 				</c:if>
 		    </div>

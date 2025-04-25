@@ -54,7 +54,7 @@
 	 position: relative;
 	 bottom:30px;
 }
-/*4/25추가*/
+/*4/25추가 밑에꺼는 안먹힌다??*/
 
 .review-all-btn:after{
 	content:"";
