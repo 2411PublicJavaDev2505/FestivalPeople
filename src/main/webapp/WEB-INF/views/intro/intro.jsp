@@ -33,8 +33,10 @@
 					<div class="card variety">
 						<img src="../resources/img/intro/variety.png">
 						<div class="card__content">
-							<p class="card__title">Festival People 는</p>
-							<p class="card__description">소개내용</p>
+							<p class="card__title">축제 추천 페이지 는</p>
+							<p class="card__description">회원님의 주소지 기반으로 맑은 읽기예보를 나타내는 곳을 기준으로 추천해 드리고, <br>
+														 축제를 선택하시면 해당 축제 장소 일기예보와길찾기 기능을 활용하여 도착 예상 시간까지 확인 하실수 있습니다.
+							</p>
 							<button class="card__button v" onclick="location.href='/festival/list';">축제 페이지로</button>
 						</div>
 					</div>

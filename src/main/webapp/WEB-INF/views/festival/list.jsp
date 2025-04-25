@@ -116,7 +116,7 @@
 		           	<a href="/festival/list?currentPage=${maxPage}"> ▷▷ </a>
 	            </div>
 	       </main>
-	       <jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	       <jsp:include page="/WEB-INF/views/include/footer.jsp" />A
 	   </div>
 		
     <script>

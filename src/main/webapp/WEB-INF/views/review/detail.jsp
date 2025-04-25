@@ -19,7 +19,7 @@
 					<main>
 					<section>
 							<div class="review-report-btn">
-								<button>신고하기</button>
+								<a herf="/report/content"><button>신고하기</button></a>
 							</div>
 						<div class="reviewtitle-h1">
 							<!-- 리뷰제목 -->
