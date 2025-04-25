@@ -21,5 +21,5 @@ public class MyChatroom {
 	private int chatLimit;
 	private int chatMemberCount;
 	private String blockYn;			// CHAT_MEMBER
-	private String nonCheckMsg;		// CHAT_MEMBER
+	private int nonCheckMsg;		// CHAT_MEMBER
 }

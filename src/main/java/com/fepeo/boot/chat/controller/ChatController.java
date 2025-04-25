@@ -44,19 +44,16 @@ public class ChatController {
 		int memberNo = member.getMemberNo();	
 
 		// 내가 속한 방만 출력
-		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
-		// ↑ 내가 속한 채팅방(nonBlock방의 채팅방 정보를 가져오기 위한 과정)		
+		List<MyChatroom> myList = service.selectMyChatRoomList(memberNo);
 		model.addAttribute("myList",myList);
 		
 		// 각 채팅방별 참여인원수 불러오기
 		List<ChatMember> memberList = service.selectChatMember();
-
+		
 		return "chat/chatInsert";
 	}
 	@PostMapping("/insert")
 	public String insertChatRoom(@ModelAttribute ChatroomRegisterRequest chatRoom,
-				@RequestParam("chatroomNo") int chatroomNo,
 				@RequestParam(value="image", required=false) MultipartFile image
 			, HttpSession session, Model model) throws IllegalStateException, IOException {
 		// 세션에서 memberNo 가져오기
@@ -64,20 +61,23 @@ public class ChatController {
 		int memberNo = member.getMemberNo();	
 
 		// 내가 속한 방만 출력
-		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		List<MyChatroom> myList = service.selectMyChatRoomList(memberNo);
 		model.addAttribute("myList",myList);
-		
+				
 		chatRoom.setImage(image);
+		chatRoom.setMemberNo(memberNo);
 		int result = service.insertChatRoom(chatRoom);
 		
 		// 각 채팅방별 참여인원수 불러오기
 		List<ChatMember> memberList = service.selectChatMember();
 		model.addAttribute("memberList", memberList);		
-		// 멤버입장 상태 변경
-		int yn = service.enterMemberYn(chatroomNo, memberNo);
 		
-		return "redirect:/chat/enter/" + chatRoom.getChatroomNo();
+		// 방금만든 chatroomNo 가져오기
+		int newRoomNo = chatRoom.getChatroomNo();
+		// 멤버입장 상태 변경
+		int yn = service.enterMemberYn(newRoomNo, memberNo);
+		
+		return "redirect:/chat/enter/" + newRoomNo;
 	}
 
 	// 채팅방 목록
@@ -91,17 +91,18 @@ public class ChatController {
 	    	// 세션에서 memberNo 가져오기
 			int memberNo = member.getMemberNo();
 			// 내가 속한 방만 출력
-			List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-			List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+			List<MyChatroom> myList = service.selectMyChatRoomList(memberNo);
 			model.addAttribute("myList",myList);
 			
-//			// 전체 리스트 출력
+			// 전체 리스트 출력
 			List<ChatRoom> cRooms = service.selectChatRoomList();
 			model.addAttribute("cRooms", cRooms);
 			
-//			// 각 채팅방별 참여인원수 불러오기
+			// 각 채팅방별 참여인원수 불러오기
 			List<ChatMember> memberList = service.selectChatMember();
 			model.addAttribute("memberList", memberList);
+			
+			
 			return "chat/list";
 		}
 	}
@@ -127,8 +128,8 @@ public class ChatController {
 	
 	// 채팅방 가입(처음 입장)
 	@GetMapping("/enter/{chatroomNo}")
-	public String insertChatRoom(@PathVariable int chatroomNo, 
-			HttpSession session, Model model) {
+	public String insertChatRoom(@PathVariable int chatroomNo
+			,HttpSession session, Model model) {
 		// 회원 로그인 정보 가져오기		
 		Member member =(Member) session.getAttribute("member");
 		int memberNo = member.getMemberNo();
@@ -168,12 +169,12 @@ public class ChatController {
 		int exitRoom = service.exitChatRooms(chatroomNo, memberNo);
 
 		// 내가 속한 방만 출력
-		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		List<MyChatroom> myList = service.selectMyChatRoomList(memberNo);
 		model.addAttribute("myList",myList);
 		
 		// 각 채팅방별 참여인원수 불러오기
 		List<ChatMember> memberCount = service.selectChatMember();
+		
 		
 		// 가입 멤버 프로필 출력
 		List<MemberProfileList>  memberList = service.chatMemberList(chatroomNo);
@@ -190,7 +191,7 @@ public class ChatController {
 		model.addAttribute("profileFilePath", member.getProfileFilePath());
 		
 		// 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0이 되야 함)
-		
+		int zero = service.resetNonCheckMsg(chatroomNo);
 		
 		
 		model.addAttribute("chatroomNo", chatroomNo); // 채팅방 번호 전달
@@ -207,8 +208,7 @@ public class ChatController {
 		int memberNo = member.getMemberNo();			
 		
 		// 내가 속한 방만 출력
-		List<ChatMember> myChatRoomList = service.selectMyChatRoomList(memberNo);
-		List<ChatRoom> myList = service.selectMyChatRoomListByChatMember(myChatRoomList);
+		List<MyChatroom> myList = service.selectMyChatRoomList(memberNo);
 		model.addAttribute("myList",myList);		
 		
 		List<ChatRoom> rSearchList = service.searchChatRoom(searchKeyword);
