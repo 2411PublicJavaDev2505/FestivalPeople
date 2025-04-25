@@ -26,11 +26,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fepeo.boot.chat.model.service.ChatService;
+import com.fepeo.boot.chat.model.vo.ChatMember;
+import com.fepeo.boot.chat.model.vo.ChatRoom;
 import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.common.util.Util;
 import com.fepeo.boot.course.model.service.CourseService;
 import com.fepeo.boot.course.model.vo.Course;
 import com.fepeo.boot.member.controller.dto.CustomUserDetail;
+import com.fepeo.boot.member.controller.dto.MemberCodeInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
@@ -53,6 +57,7 @@ public class MemberController {
 	private final MailService mailService;
 	private final PasswordEncoder passwordEncoder;
 	private final CourseService courseService;
+	private final ChatService chatService;
 
 	@GetMapping("/login")
 	public String showLogin(Model model
@@ -308,20 +313,21 @@ public class MemberController {
 			member.setMemberPw(passwordEncoder.encode(member.getMemberPw()));
 		}
 		
-		int result = mService.insertMember(member);
-		model.addAttribute("memberName",member.getMemberName());
+		int memberNo = mService.insertMember(member);
+		model.addAttribute("memberNo", memberNo);
 		
 		if(member.getSocialYn().equals("Y")) {
 			return "member/socialInsertPopup";
 		}else {
-			return "redirect:/member/insertsuccess?memberName="+member.getMemberName();
+			return "redirect:/member/inssuc?memberNo="+memberNo;
 		}
 	}
 	
-	@GetMapping("/insertsuccess")
-	public String showInsertSuccess(@RequestParam("memberName") String memberName
+	@GetMapping("/inssuc")
+	public String showInsertSuccess(@RequestParam("memberNo") int memberNo
 			,Model model) {
-		model.addAttribute("memberName",memberName);
+		Member member = mService.selectOneByNo(memberNo);
+		model.addAttribute("memberName",member.getMemberName());
 		return "member/insertSucess";
 	}
 	
@@ -388,7 +394,12 @@ public class MemberController {
 			return "redirect:/member/login";
 		}
 		member = mService.selectOneByNo(member.getMemberNo());
+		
 		List<Course> courseList = courseService.selectCourseByNo(member.getMemberNo());
+		List<ChatMember> myChatRoomList = chatService.selectMyChatRoomList(member.getMemberNo());
+		List<ChatRoom> myChatList = chatService.selectMyChatRoomListByChatMember(myChatRoomList);
+		model.addAttribute("myChatList",myChatList);
+		
 		model.addAttribute("courseList",courseList);
 		System.out.println(courseList);
 		model.addAttribute("member",member);
@@ -471,10 +482,22 @@ public class MemberController {
 		for(int i=0;i<6;i++) {
 			code += number.charAt(rand.nextInt(number.length()));
 		}
+		MemberCodeInsertRequest memberCode = new MemberCodeInsertRequest();
+		memberCode.setCode(code);
+		int memberCodeNo = mService.insertMemberCode(memberCode);
 		String text = "인증코드는 "+ code+"입니다.";
 		mailService.sendMail(email, "Festival People 이메일 인증 코드", text);
 		JSONObject json = new JSONObject();
-		json.put("emailCode", code);
+		json.put("memberCodeNo", memberCodeNo);
+		return json.toString();
+	}
+	
+	@ResponseBody
+	@PostMapping("/checkcode")
+	public String checkEmailCode(MemberCodeInsertRequest memberCode) {
+		int result = mService.checkCode(memberCode);
+		JSONObject json = new JSONObject();
+		json.put("result", result);
 		return json.toString();
 	}
 	

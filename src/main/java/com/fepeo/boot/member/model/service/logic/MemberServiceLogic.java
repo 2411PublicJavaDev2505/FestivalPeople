@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fepeo.boot.common.util.Util;
+import com.fepeo.boot.member.controller.dto.MemberCodeInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
@@ -38,7 +39,8 @@ public class MemberServiceLogic implements MemberService{
 			member.setProfileFileRename(fileRename);
 			member.setProfileFilePath(filePath);
 		}
-		return mapper.insertMember(member);
+		int result = mapper.insertMember(member);
+		return member.getMemberNo();
 	}
 
 	@Override
@@ -143,6 +145,18 @@ public class MemberServiceLogic implements MemberService{
 	@Override
 	public int updateMemberEmail(MemberUpdateRequest member) {
 		return mapper.updateMemberEmail(member);
+	}
+
+	@Override
+	public int insertMemberCode(MemberCodeInsertRequest memberCode) {
+		int result = mapper.insertMemberCode(memberCode);
+		int memberCodeNo = memberCode.getMemberCodeNo();
+		return memberCodeNo;
+	}
+
+	@Override
+	public int checkCode(MemberCodeInsertRequest memberCode) {
+		return mapper.checkCode(memberCode);
 	}
 
 }

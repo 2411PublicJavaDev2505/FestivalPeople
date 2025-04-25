@@ -121,19 +121,32 @@
 		let nicknameYn = false;
 		let emailYn = false;
 		let emailCodeYn = false;
-		let emailCode = "";
+		let emailCodeNo;
 		
 		const checkEmailCode = () => {
 			let code = document.querySelector("#input-email-code").value;
-			console.log(code);
-			console.log(emailCode);
-			if(code.trim() == emailCode.trim()){
-				customAlert("이메일 인증이 완료되었습니다.");
-				document.querySelector("#input-email").readOnly = "readonly";
-				emailCodeYn = true;
-			}else{
-				customAlert("이메일 코드가 다릅니다!");
-			}
+			$.ajax({
+				dataType : "json",
+				url : "/member/checkcode",
+				data : {
+					"memberCodeNo" : emailCodeNo,
+					"code" : code,
+				},
+				type: "POST",
+				success : function(data) {
+					if(data.result != 0){
+						customAlert("이메일 인증이 완료되었습니다.");
+						document.querySelector("#input-email").readOnly = "readonly";
+						emailCodeYn = true;
+					}else{
+						customAlert("이메일 코드가 다릅니다!");
+					}
+				},
+				error: function() {
+					customAlert("통신 오류!!");
+				}
+				
+			});
 		}
 		
 		const sendEmail = () => {
@@ -148,7 +161,7 @@
 					},
 					type: "GET",
 					success: function(data) {
-						emailCode = data.emailCode;
+						emailCodeNo = data.memberCodeNo;
 						document.querySelector("#input-email-check").innerHTML = '<input type="text" id="input-email-code"><button type="button" onclick="checkEmailCode();">확인</button>';
 					},
 					error: function() {

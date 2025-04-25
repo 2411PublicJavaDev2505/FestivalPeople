@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class MemberInsertRequest {
 
+	private int memberNo;
 	private String memberId;
 	private String memberPw;
 	private String memberCode;

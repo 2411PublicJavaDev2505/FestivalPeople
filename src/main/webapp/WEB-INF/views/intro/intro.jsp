@@ -25,8 +25,10 @@
 							<p class="card__title">저희 Festival People은 </p>
 							<p class="card__description">회원님들의 지역과, 날짜, 날씨를 기반으로 여행코스를 추천해드리고,<br>
 														같은 축제를 즐기실수 있게 커뮤니티를 만들어 친구들과 같이 여행을 할수 있습니다.</p>
-							<button class="card__button i" onclick="location.href='/member/login';">로그인</button>
-							<button class="card__button secondary" onclick="location.href='/member/insert';">회원가입</button>
+							<c:if test="${sessionScope.member eq null }">
+								<button class="card__button i" onclick="location.href='/member/login';">로그인</button>
+								<button class="card__button secondary" onclick="location.href='/member/insert';">회원가입</button>
+							</c:if>
 						</div>
 					</div>
 					
@@ -47,7 +49,7 @@
 														맛집, 카페, 숙박시설 등 카테고리별로 가까운 장소를 추천해드리며,
 														해당 코스가 마음에 드실 경우 저장을 통해 마이페이지내에서 확인하실 수 있습니다.
 							</p>
-							<button class="card__button r" onclick="location.href='/course/list';">코스추천 페이지로</button>
+							<button class="card__button r" onclick="goCourse();">코스추천 페이지로</button>
 						</div>
 					</div>
 					
@@ -56,7 +58,7 @@
 						<div class="card__content">
 							<p class="card__title">Festival People 는</p>
 							<p class="card__description">소개내용</p>
-							<button class="card__button t" onclick="location.href='/chat/list';">같이 갈래? 페이지로</button>
+							<button class="card__button t" onclick="goChat();">같이 갈래? 페이지로</button>
 						</div>
 					</div>
 					

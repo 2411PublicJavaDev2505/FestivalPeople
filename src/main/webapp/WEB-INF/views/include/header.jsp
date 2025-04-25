@@ -18,7 +18,7 @@
     </div>
     <nav class="main-nav">
         <ul class="group1">
-            <li style="--offset: 0;"><a href="/intro/intro">소개</a></li>
+            <li style="--offset: 0;"><a href="/intro">소개</a></li>
             <li style="--offset: 1;"><a href="/festival/list">축제</a></li>
             <li style="--offset: 2;"><a onclick="goCourse();">코스 추천</a></li>
             <li style="--offset: 3;"><a onclick="goChat();">같이 갈래?</a></li>

@@ -3,6 +3,7 @@ package com.fepeo.boot.member.model.service;
 import java.io.IOException;
 import java.util.List;
 
+import com.fepeo.boot.member.controller.dto.MemberCodeInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
 import com.fepeo.boot.member.controller.dto.MemberInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberLoginRequest;
@@ -47,5 +48,9 @@ public interface MemberService {
 	int updateMemberNickname(MemberUpdateRequest member);
 
 	int updateMemberEmail(MemberUpdateRequest member);
+
+	int insertMemberCode(MemberCodeInsertRequest memberCode);
+
+	int checkCode(MemberCodeInsertRequest memberCode);
 
 }

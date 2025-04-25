@@ -72,5 +72,10 @@ public class CommonController {
 		model.addAttribute("rfestivals", rfestivals);
 	    return "index";
 	}
+	
+	@GetMapping("/intro")
+	public String showIntro() {
+		return "intro/intro";
+	}
 
 }

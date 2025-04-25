@@ -57,44 +57,48 @@
     <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     <script>
     
-    let currentSlide = 0;
-	//메인페이지 사진 및, 제목 정보 받아오기 
-    const slides = [
-        <c:forEach var="festival" items="${rfestivals}" varStatus="loop">
-        {
-            src: "${festival.festivalFilePath}",
-            alt : "${festival.festivalStartDate}",
-            tagline: "${festival.festivalEndDate}",
-            subText: "<이번달 추천 축제>",
-            mainText: "${festival.festivalName}",
-            festivalNo: "${festival.festivalNo}"
-        }<c:if test="${!loop.last}">,</c:if>
-        </c:forEach>
-    ];
-	const totalSlides = slides.length;
-    const slideContainer = document.querySelector('.simple-slide-container');
-    const currentPageElement = document.querySelector('.current-page');
-    const progressBar = document.querySelector('.progress');
-    const taglineElement = document.querySelector('.tagline');
-    const subTextElement = document.querySelector('.sub-text');
-    const mainTextElement = document.querySelector('.main-text');
-    
-    const showDetail = () => {
-		console.log(slides[currentSlide].festivalNo);
-    	location.href = "/festival/detail/" + slides[currentSlide].festivalNo;
-    }
-
-
+	    let currentSlide = 0;
+		//메인페이지 사진 및, 제목 정보 받아오기 
+	    const slides = [
+	        <c:forEach var="festival" items="${rfestivals}" varStatus="loop">
+	        {
+	            src: "${festival.festivalFilePath}",
+	            alt : "${festival.festivalStartDate}",
+	            tagline: "${festival.festivalEndDate}",
+	            subText: "<이번달 추천 축제>",
+	            mainText: "${festival.festivalName}",
+	            festivalNo: "${festival.festivalNo}"
+	        }<c:if test="${!loop.last}">,</c:if>
+	        </c:forEach>
+	    ];
+		const totalSlides = slides.length;
+	    const slideContainer = document.querySelector('.simple-slide-container');
+	    const currentPageElement = document.querySelector('.current-page');
+	    const progressBar = document.querySelector('.progress');
+	    const taglineElement = document.querySelector('.tagline');
+	    const subTextElement = document.querySelector('.sub-text');
+	    const mainTextElement = document.querySelector('.main-text');
+	    
+	    const showDetail = () => {
+			console.log(slides[currentSlide].festivalNo);
+	    	location.href = "/festival/detail/" + slides[currentSlide].festivalNo;
+	    }
+	
+	
         document.querySelector('.prev').addEventListener('click', () => {
+        	clearInterval(timeout);
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
             updateSlide();
             updateProgressBar();
+            timeout = setInterval(changeCurrentSlide, 5000);
         });
 
         document.querySelector('.next').addEventListener('click', () => {
+        	clearInterval(timeout);
             currentSlide = (currentSlide + 1) % slides.length;
             updateSlide();
             updateProgressBar();
+            timeout = setInterval(changeCurrentSlide, 5000);
         });
 
 
@@ -105,6 +109,7 @@
         
         function updateSlide() {
             
+        	
             const slide = slides[currentSlide];
             const nextSlide = slides[(currentSlide + 1) % totalSlides];
             
@@ -122,15 +127,17 @@
             subTextElement.textContent = slide.subText;
             mainTextElement.textContent = slide.mainText;
             $(".slidecontroller-text-main h3 span").show();
+            
         }
-		
-        setInterval(function() {
+        
+        
+        const changeCurrentSlide = () => {
         	currentSlide = (currentSlide + 1) % slides.length;
             updateSlide();
             updateProgressBar();
-	    }, 5000);
-      
-
+        }
+       	timeout = setInterval(changeCurrentSlide, 5000);
+        
         updateSlide();
         updateProgressBar();
 
