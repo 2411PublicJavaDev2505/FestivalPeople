@@ -24,9 +24,6 @@ public interface FestivalService {
 	
 	public int getSearchTotalCount(Map<String, String> searchMap);
 
-	
-	public List<Festival> selectFestivalListByRegionName(String matchedRegion);
-
 	public List<Festival> selectFestivalListByWeather(List<String> goodWeatherRegions);
 	
 	// 날씨가 좋은 지역명으로 축제 검색

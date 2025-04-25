@@ -72,42 +72,42 @@ public class FestivalController {
 	    	goodWeatherRegions = Arrays.asList(strList);
 	    }
 	    
-	    if(member != null) {
-			//로그인 됬을때 
-			Member memberInfo = memberService.selectOneByNo(member.getMemberNo());
-	    	String memberAddress = memberInfo.getAddress();
-			/* Map<String, String> mapPoint = api.searchMemberAddress(memberAddress); */
-	    	//회원주소에서 지역명 매핑
-	    	String matchedRegion ="";
-	    	for (String region : goodWeatherRegions) {
-	            if (memberAddress.contains(region)) {
-	                matchedRegion = region;
-	                break;
-	            }
+	    if (member != null) {
+	        // 로그인 사용자 처리
+	        Member memberInfo = memberService.selectOneByNo(member.getMemberNo());
+	        String memberAddress = memberInfo.getAddress();
+	        Map<String, String> mapPoint = api.searchMemberAddress(memberAddress);
+	        
+	        List<Festival> fList = festivalService.selectFestivalListByRegion(goodWeatherRegions, mapPoint);
+	        
+	        if (fList != null && !fList.isEmpty()) {
+	            model.addAttribute("fList", fList);
+	        } else {
+	            model.addAttribute("fList", null);
 	        }
-	    	if(!matchedRegion.isEmpty()) {
-	    		//해당 지역 축제만 필터링 하기
-	    		rfestivals =festivalService.selectFestivalListByRegionName(matchedRegion);// 회원일 때 불러오는 리스트 
 
-	    		System.out.println("???"+rfestivals);
+	    } else {
+	        // 비회원 추천 리스트
+	        rfestivals = festivalService.selectFestivalListByWeather(goodWeatherRegions);
+	        model.addAttribute("rfestivals", rfestivals);
+	    }
 
-	    	}
-	    	
-		}else {
-			rfestivals = festivalService.selectFestivalListByWeather(goodWeatherRegions); // 비회원일때 불러오는 리스트
-			System.out.println("??"+rfestivals);
-		}
-	    //전체 리스트 출력 
+	    // 전체 리스트는 공통으로 출력
 	    List<Festival> festivals = festivalService.selectFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
+
+	    model.addAttribute("festivals", festivals);
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
 	    model.addAttribute("endNavi", pageInfo.get("endNavi"));
 	    model.addAttribute("currentPage", currentPage);
-	    model.addAttribute("festivals", festivals);
-	    model.addAttribute("rfestivals",rfestivals);
 
 	    return "festival/list";
+
 	}
+	
+	
+	
+	
 	//상세페이지
 	@GetMapping("/detail/{festivalNo}")
 	public String showFestivalDetail(@PathVariable  int festivalNo, Model model) {
