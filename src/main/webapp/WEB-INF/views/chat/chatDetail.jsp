@@ -86,7 +86,7 @@
 							<ul>
 								<li>
 									<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
-											<button><a herf="/report/content">채팅방 신고</a></button>
+											<a herf="/report/content"><button>채팅방 신고</button></a>
 									</c:if>
 								</li>
 								<li>

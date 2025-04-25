@@ -45,7 +45,7 @@
 							<li> 🗓️ 축제 일정: ${festival.festivalStartDate} ~ ${festival.festivalEndDate}</li>
 							<li> 📍 개최 장소: ${festival.festivalAddress} ${festival.festivalDetailAddress}</li>
 							<li> 📞 대표 전화:  ${festival.festivalPhone}</li>
-							<li> 🔅 축제기간 일기예보
+							<li> 🔅 축제지역 일기예보
 								<div class="weather-api">
 									<table border="1" cellpadding="10" style="border-collapse: collapse; text-align: center;">
 										<tr>
