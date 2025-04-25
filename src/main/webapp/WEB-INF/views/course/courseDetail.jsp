@@ -52,7 +52,6 @@
 						</label>
 						</p>
 				</div>
-
 				<div class="course-recommend-main">			
 					<div class="course-recommend-left">
 						<div  class="course-recommend-map" style="width:100%; height:400px;">								

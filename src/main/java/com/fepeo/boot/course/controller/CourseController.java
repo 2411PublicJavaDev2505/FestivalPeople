@@ -193,8 +193,6 @@ public class CourseController {
 				placeList.add(culture);
 				System.out.println(culture);
 			}	
-			
-			
 		}
 		System.out.println(placeList);
 		return placeList;

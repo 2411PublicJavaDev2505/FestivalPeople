@@ -18,7 +18,8 @@
     width: 100%;
     height: 100%;
     background-image: url("이미지URL"); /* JS에서 동적으로 넣거나 style 속성에서 설정 가능 */
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
     transition: opacity 0.5s ease;
     z-index: 0;
