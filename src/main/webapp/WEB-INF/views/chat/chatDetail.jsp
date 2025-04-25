@@ -86,7 +86,7 @@
 							<ul>
 								<li>
 									<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
-											<a herf="/report/content"><button>채팅방 신고</button></a>
+											<button onclick="report('${chatRoom.chatroomNo}');">채팅방 신고</button>
 									</c:if>
 								</li>
 								<li>
@@ -206,6 +206,10 @@
 
 	<script>
 		const chatroomNo = "${chatroomNo}"
+		
+		const report = (num) => {
+			location.href = '/report/insert?target=chat&num='+num;
+		}
 		
 		/* 채팅창 입장 시 팝업 및 가입 */
 		document.querySelector("#addChat").addEventListener("click", function(){

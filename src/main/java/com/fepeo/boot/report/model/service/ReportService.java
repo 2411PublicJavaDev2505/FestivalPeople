@@ -7,6 +7,6 @@ import com.fepeo.boot.report.model.vo.dto.ReportDTO;
 @Service
 public interface ReportService {
 
-	boolean saveReport(ReportDTO dto);
+	int insertReport(ReportDTO report);
 
 }

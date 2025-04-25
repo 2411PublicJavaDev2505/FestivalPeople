@@ -11,6 +11,8 @@ import lombok.ToString;
 @ToString
 public class ReportDTO {
 	 
-	 private List<String> reasons;
-	 private String otherText;
+	private int memberNo;
+	private String reportObject;
+	private String reportContent;
+	private int num;
 }
