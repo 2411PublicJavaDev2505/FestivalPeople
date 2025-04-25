@@ -35,8 +35,14 @@
 	
 	<update id="resetNonCheckMsg"> <!-- 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0) -->
 		update CHAT_MEMBER set NON_CHECK_MSG = 0
-		where CHATROOM_NO = #{chatroomNo} AND MEMBER_NO = #{memberNo} and ENTER_YN = 'N'
+		where CHATROOM_NO = #{chatroomNo} AND MEMBER_NO = #{memberNo} and ENTER_YN = 'Y'
 	</update>
+	
+	<!-- 안 들어온 사람 수 구하기(안 읽은 사람 수 구할 때 필요함) -->
+	<select id="countNonEnterMembers" resultType="_int">
+		select count (*) from CHAT_MEMBER
+		where CHATROOM_NO = #{chatroomNo} and ENTER_YN = 'N'  and  BLOCK_YN = 'N'
+	</select>
 	
 	<!-- 채팅방 가입 여부 조회 -->
 	<select id="selectChatMemberList" resultType="com.fepeo.boot.chat.model.vo.ChatMember">

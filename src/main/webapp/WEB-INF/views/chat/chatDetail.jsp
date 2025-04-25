@@ -158,7 +158,9 @@
 										<div class="msg-balloon-area-l">
 											<p class="msg-balloon-box-l">${msgList.chatMsgContent }</p>
 											<div class="msg-info">
-												<p class="msg-non-read">안읽음</p>
+												<c:if test="${msgList.nonReadMember > 0}">						
+													<span class="msg-non-read">안읽음${msgList.nonReadMember }</span>
+												</c:if>
 												<span class="msg-time">
 													<fmt:formatDate value="${msgList.chatMsgTime}" pattern="a h:mm" />
 												</span>
@@ -171,7 +173,9 @@
 									<li class="msg-balloon-area-my">
 										<div class="msg-balloon-area-r">
 											<div class="msg-info-r">
-												<p class="msg-non-read">안읽음</p>
+												<c:if test="${msgList.nonReadMember > 0}">						
+													<span class="msg-non-read">안읽음${msgList.nonReadMember }</span>
+												</c:if>
 												<span class="msg-time">
 													<fmt:formatDate value="${msgList.chatMsgTime}" pattern="a h:mm" />
 												</span>

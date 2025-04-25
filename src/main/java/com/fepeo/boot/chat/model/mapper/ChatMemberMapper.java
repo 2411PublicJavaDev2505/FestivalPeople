@@ -17,7 +17,7 @@ public interface ChatMemberMapper {
 	int enterMemberYn(int chatroomNo, int memberNo);
 	
 	// 입장 상태 변경(나머지방 'N')
-	int exitChatRooms(int chatroomNo, int memberNo);
+	int exitChatRooms(int memberNo, int chatroomNo);
 
 	// 채팅방 참여 여부 조회
 	ChatMember selectChatMemberList(int chatroomNo, int memberNo);
@@ -35,7 +35,10 @@ public interface ChatMemberMapper {
 	int notReadMsgCount(int chatroomNo);
 	
 	// 입장한 방 메시지 갯수 0개
-	int resetNonCheckMsg(int chatroomNo);
+	int resetNonCheckMsg(int chatroomNo, int memberNo);
+
+	// 안 들어온 사람 수 구하기(안 읽은 사람 수 구할 때 필요함)
+	int countNonEnterMembers(int chatroomNo);
 
 
 }

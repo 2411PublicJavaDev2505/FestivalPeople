@@ -45,11 +45,11 @@ public interface ChatService {
 
 	int blockChatMember(int chatroomNo, int memberNo);
 
-	int exitChatRooms(int chatroomNo, int memberNo);
+	int exitChatRooms(int memberNo,int chatroomNo);
 
 	int notReadMsgCount(int chatroomNo);
 
-	int resetNonCheckMsg(int chatroomNo);
+	int resetNonCheckMsg(int chatroomNo, int memberNo);
 
 	List<MyChatroom> selectMyChatRoomList(int memberNo);
 

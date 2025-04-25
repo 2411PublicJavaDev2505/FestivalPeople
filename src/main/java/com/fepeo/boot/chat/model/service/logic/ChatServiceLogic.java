@@ -87,7 +87,16 @@ public class ChatServiceLogic implements ChatService {
 	/** 메시지(말풍선) */
 	@Override // 메시지 입력
 	public int insertChatMsg(MsgInsertRequest msg) {
-		return msgMapper.insertChatMsg(msg);
+		int result = msgMapper.insertChatMsg(msg);
+		if(result > 0) {
+			// 메시지 번호 가져오기
+			int msgNo = msg.getChatMsgNo();
+			// 안 들어온 사람 수 구하기
+			int nonEnterCount = mMapper.countNonEnterMembers(msg.getChatroomNo());
+			// 안 읽은 사람 수 기록
+			msgMapper.nonReadMemberCount(msgNo, nonEnterCount);
+		}
+		return result;
 	}
 	
 	@Override // 채팅메시지 조회
@@ -127,8 +136,8 @@ public class ChatServiceLogic implements ChatService {
 	}
 	
 	@Override // 입장상태 'N'으로 변경
-	public int exitChatRooms(int chatroomNo, int memberNo) {
-		return mMapper.exitChatRooms(chatroomNo,memberNo);
+	public int exitChatRooms(int memberNo,int chatroomNo) {
+		return mMapper.exitChatRooms(memberNo, chatroomNo);
 	}
 
 	@Override // 가입 멤버 프로필 출력
@@ -147,8 +156,8 @@ public class ChatServiceLogic implements ChatService {
 	}
 
 	@Override // 입장한 방 메시지 갯수 0개
-	public int resetNonCheckMsg(int chatroomNo) {
-		return mMapper.resetNonCheckMsg(chatroomNo);
+	public int resetNonCheckMsg(int chatroomNo, int memberNo) {
+		return mMapper.resetNonCheckMsg(chatroomNo,memberNo);
 	}
 
 }
