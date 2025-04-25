@@ -35,15 +35,17 @@
 				        <button class="slide-btn left" onclick="slideLeft()">&#10094;</button>
 					        <div class="card-slider" id="cardSlider">
 								<c:forEach items="${fList }" var="festival" varStatus="i">
-					                <a href="/course/detail?festivalNo=${festival.festivalNo }">
-					                	<div class="coursecard">
-					                    <img src="${festival.festivalFilePath }" alt="축제이미지" />
-					                    <h3>${festival.festivalName }</h3><br>
-					                    <p>${festival.festivalAddress }</p><br>
-					                    <p>${festival.festivalStartDate} ~ ${festival.festivalEndDate }</p><br>
-					                    <p class="hashtags">${festival.festivalDetailAddress }</p>
-					                	</div>
-					                </a>
+									<div class="course-back-image" style="background-image: url('${festival.festivalFilePath}');">
+						                <a href="/course/detail?festivalNo=${festival.festivalNo }">
+						                	<div class="coursecard">
+							                    <img src="${festival.festivalFilePath }" alt="축제이미지" />
+							                    <h3>${festival.festivalName }</h3><br>
+							                    <p>${festival.festivalAddress }</p><br>
+							                    <p>${festival.festivalStartDate} ~ ${festival.festivalEndDate }</p><br>
+							                    <p class="hashtags">${festival.festivalDetailAddress }</p>
+						                	</div>
+						                </a>
+					                </div>
 					            </c:forEach>
 					        </div>		    
 				        <button class="slide-btn right" onclick="slideRight()">&#10095;</button>

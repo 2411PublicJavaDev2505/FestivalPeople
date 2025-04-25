@@ -1,5 +1,59 @@
 @charset "UTF-8";
 
+/* 카드 디테일 추가 */
+
+.course-back-image {
+    position: relative;
+    width: 250px;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    flex: 0 0 auto;
+}
+
+.course-back-image::before {
+    content: "";
+    position: relative;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("이미지URL"); /* JS에서 동적으로 넣거나 style 속성에서 설정 가능 */
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+}
+
+.course-back-image:hover::before {
+    opacity: 0;
+}
+
+.course-back-image .coursecard {
+    position: relative;      
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: scale(1);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.course-back-image:hover .coursecard {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto; 
+    width: 100%;
+    height: 100%;
+}
+
+
+
 /*   검색창 */
 main {
 	height: 1000px;
@@ -59,26 +113,6 @@ main {
 }
 
 
-/*  이전에 사용하던 것 카드 양옆에 살짝씩 공백 넣어짐
-.course-slider-container {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    overflow: hidden;
-    margin: auto;
-    padding: 0 40px;
-    height : 600px;
-}
-
-.card-slider {
-    display: flex;
-    flex-direction: row;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    gap: 20px;
-    padding: 20px;
-}  */
-
 .course-slider-wrapper {
     position: relative;
     width: fit-content;
@@ -116,6 +150,13 @@ main {
     opacity:0.9;
 }
 
+.coursecard img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
 .slide-btn {
     position: relative;
     background-color: rgba(255,255,255,0.8);
@@ -146,12 +187,7 @@ main {
     right: 10px;
 }
 
-.coursecard img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-}
+
 
 
 a {
@@ -172,3 +208,4 @@ html {
   font-family: sans-serif;
   line-height: 1.6;
 }
+

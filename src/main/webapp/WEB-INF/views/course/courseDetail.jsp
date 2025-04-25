@@ -55,7 +55,16 @@
 
 				<div class="course-recommend-main">			
 					<div class="course-recommend-left">
-						<div  class="course-recommend-map" style="width:100%; height:400px;">							
+						<div  class="course-recommend-map" style="width:100%; height:400px;">	
+								
+								  <!-- 길찾기 버튼 -->
+								  <a class="map_shortcut" 
+								     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHCode},${festival.mapVCode}" 
+								     target="_blank">
+								     📍 길찾기
+								  </a>
+
+												
 						</div>
 						<div class="festival-title">
 							<p>${festival.festivalName}</p>
@@ -145,11 +154,11 @@
 		}
 	];
 
-	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	var festivalimg = "/resources/img/course/festival.png";
 
 	// 기본 마커들 찍기
 	positions.forEach(pos => {
-		let markerImage = new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(24, 35));
+		let markerImage = new kakao.maps.MarkerImage(festivalimg, new kakao.maps.Size(24, 35));
 		let marker = new kakao.maps.Marker({
 			map: map,
 			position: pos.latlng,
@@ -174,7 +183,8 @@
 		dynamicMarkers = [];
 	}
 
-
+	var imagesrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	
 	/* 카테고리 Check-Box 선택시 동작하는 이벤트 */
 	$(document).ready(function () {
 		let selectedCategories = [];
@@ -214,7 +224,7 @@
 					let html = '';
 					data.forEach((place, i) => {
 						const latlng = new kakao.maps.LatLng(Number(place.y), Number(place.x));
-						const markerImage = new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(24, 35));
+						const markerImage = new kakao.maps.MarkerImage(imagesrc, new kakao.maps.Size(24, 35));
 						const marker = new kakao.maps.Marker({
 							map: map,
 							position: latlng,
