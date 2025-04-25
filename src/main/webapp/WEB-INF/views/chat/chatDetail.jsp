@@ -90,10 +90,12 @@
 									</c:if>
 								</li>
 								<li>
-									<form action="/chat/leave" id="leaveForm" method="get">
-										<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
-										<button type="button" onclick="leaveConfirm(${chatRoom.chatroomNo});">채팅방 나가기</button>
-									</form>
+									<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
+										<form action="/chat/leave" id="leaveForm" method="get">
+											<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
+											<button type="button" onclick="leaveConfirm(${chatRoom.chatroomNo});">채팅방 나가기</button>
+										</form>
+									</c:if>
 								</li>
 								<li>
 									<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
@@ -119,7 +121,7 @@
 												<span>⭐</span> 
 											</c:if>	
 										</div>
-										<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
+										<c:if test="${sessionScope.memberNo eq chatRoom.memberNo and mbList.memberNo ne sessionScope.memberNo}">
 										<form action="/chat/block" method="get" id="blockForm${mbList.memberNo }">									
 											<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
 											<input type="hidden" name="blockMemberNo" value="${mbList.memberNo }"> <!-- 블락할 멤버 -->
