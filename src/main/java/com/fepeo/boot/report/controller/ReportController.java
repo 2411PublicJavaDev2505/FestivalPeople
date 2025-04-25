@@ -78,6 +78,7 @@ public class ReportController {
 		Review reviewNo = (Review)session.getAttribute("reportNo");
 		ReviewComment reviewCommentNo =(ReviewComment)session.getAttribute("reviewCommentNo");
 		 
+		
 		return"report/reportContent";
 	}
 	

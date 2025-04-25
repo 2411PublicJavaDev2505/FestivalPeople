@@ -52,9 +52,13 @@
 		            </c:if>
 		            <div class="festival-card">
 		                <a href="/festival/detail/${festival.festivalNo}">
-		                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+		                    <div class="festival-image-wrapper">
+			                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+				                <div class="overlay-text">
+				                	${festival.festivalName}
+				                </div>
+				            </div>
 		                </a>
-		                <h4>${festival.festivalName}</h4>
 		            </div>
 		            <c:if test="${status.index % 4 == 3 || status.last}">
 		                </div>
@@ -70,9 +74,13 @@
 		            </c:if>
 		            <div class="festival-card">
 		                <a href="/festival/detail/${festival.festivalNo}">
-		                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+		                    <div class="festival-image-wrapper">
+			                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+				                <div class="overlay-text">
+				                	${festival.festivalName}
+				                </div>
+				            </div>
 		                </a>
-		                <h4>${festival.festivalName}</h4>
 		            </div>
 		            <c:if test="${status.index % 4 == 3 || status.last}">
 		                </div>
@@ -93,9 +101,13 @@
 					        <c:if test="${not empty festival.festivalFilePath}">
 					            <div class="festival-card">
 					                <a href="/festival/detail/${festival.festivalNo}">
-					                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+					                    <div class="festival-image-wrapper">
+						                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+							                <div class="overlay-text">
+							                	${festival.festivalName}
+							                </div>
+							            </div>
 					                </a>
-					                <h4>${festival.festivalName}</h4>	
 					            </div>
 					        </c:if>
 					    </c:forEach>
