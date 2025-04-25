@@ -43,7 +43,10 @@
     border-radius: 10px;
     cursor: pointer;
 }
-
+.festival-button button.active {
+    background-color: #ff6f61;
+    color: white;
+}
 .search-form {
     display: flex;
     align-items: center;
@@ -130,7 +133,7 @@
     opacity: 1;
     transform: translateY(0);
 }
-/* .festival-card a img:hover  {
+ /*.festival-card a img:hover  {
   transition: all 1s;
   transform: translateY(-50px);
   color: rgba(0,0,0,1);
