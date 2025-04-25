@@ -35,10 +35,6 @@ public interface ChatService {
 
 	int enterMemberYn(int chatroomNo, int memberNo);
 
-	List<ChatMember> selectMyChatRoomList(int memberNo);
-
-	List<ChatRoom> selectMyChatRoomListByChatMember(List<ChatMember> myChatRoomList);
-
 	List<MemberProfileList> chatMemberList(int chatroomNo);
 
 	int leaveChatMember(int chatroomNo, int memberNo);
@@ -52,6 +48,10 @@ public interface ChatService {
 	int exitChatRooms(int chatroomNo, int memberNo);
 
 	int notReadMsgCount(int chatroomNo);
+
+	int resetNonCheckMsg(int chatroomNo);
+
+	List<MyChatroom> selectMyChatRoomList(int memberNo);
 
 //	List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo);
 

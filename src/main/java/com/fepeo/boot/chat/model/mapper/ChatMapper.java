@@ -19,7 +19,7 @@ public interface ChatMapper {
 	List<ChatRoom> selectChatRoomList();
 
 	// 내가 속한 채팅방의 목록
-//	List<ChatMember> selectMyChatRoomList(int memberNo);	
+	List<MyChatroom> selectMyChatRoomList(int memberNo);
 	
 	// 채팅방 참여인원수 출력
 	List<ChatMember> selectChatMember();
@@ -32,9 +32,6 @@ public interface ChatMapper {
 
 	// 참여인원수 증가
 	int updateChatMember(int chatroomNo);
-
-	// 내 채팅방 정보 출력
-	ChatRoom selectMyChatRoomListByChatMember(ChatMember chatMember);
 
 	// 참여인원수 감소
 	int subtractionChatMember(int chatroomNo);

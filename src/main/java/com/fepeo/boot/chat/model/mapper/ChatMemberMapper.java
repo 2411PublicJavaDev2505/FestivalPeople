@@ -33,9 +33,9 @@ public interface ChatMemberMapper {
 
 	// 미입장 회원에게 채팅개수 +1
 	int notReadMsgCount(int chatroomNo);
-
-	// 내가 속한 채팅방의 목록
-	List<ChatMember> selectMyChatRoomList(int memberNo);	
 	
+	// 입장한 방 메시지 갯수 0개
+	int resetNonCheckMsg(int chatroomNo);
+
 
 }

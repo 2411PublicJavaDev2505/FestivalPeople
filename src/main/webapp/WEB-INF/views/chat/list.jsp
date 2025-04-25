@@ -57,13 +57,15 @@
 						<ul class="chat-list">
 							<li class="chat-list-row">
 								<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
-								<img class="chat-image" src="${myList.chatImgPath}" alt="${myList.chatImgName}" >
-								<div class="text-wrap">
-									<div class="chat-title">${myList.chatroomTitle }</div>
-									<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
-									<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
-								</div>
-								<div class="msg-alarm">0</div>
+									<img class="chat-image" src="${myList.chatImgPath}" alt="${myList.chatImgName}" >
+									<div class="text-wrap">
+										<div class="chat-title">${myList.chatroomTitle }</div>
+										<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
+										<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
+									</div>
+									<c:if test="${myList.nonCheckMsg> 0 }" >
+										<div class="msg-alarm">${myList.nonCheckMsg }</div>
+									</c:if>
 								</a>
 							</li>
 						</ul> 
@@ -87,7 +89,6 @@
 							<div class="chat-tag">#${cRoom.tag1 } #${cRoom.tag2 } #${cRoom.tag3 }</div>
 							<div class="chat-mem-count">정원 ${cRoom.chatMemberCount } / ${cRoom.chatLimit }</div>
 						</div>
-						<div class="msg-alarm">4</div>
 						</a>
 					</li>
 				</ul>            

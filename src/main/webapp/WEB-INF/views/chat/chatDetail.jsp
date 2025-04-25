@@ -50,7 +50,9 @@
 								<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
 								<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
 							</div>
-							<div class="msg-alarm">2</div>
+							<c:if test="${myList.nonCheckMsg> 0 }" >
+								<div class="msg-alarm">${myList.nonCheckMsg }</div>
+							</c:if>
 							</a>
 						</li>
 					</ul> 
