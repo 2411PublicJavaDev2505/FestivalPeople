@@ -142,7 +142,7 @@ main {
 .coursecard {
     flex: 0 0 auto;          /* 줄바꿈 방지, 고정폭 유지 */
     width: 250px;
-    height: 450px;
+    height: 100%;
     background: white;
     border-radius: 12px;
     padding: 15px;
@@ -191,8 +191,8 @@ main {
 
 
 a {
-  color: green;
   text-decoration: none;
+  color: green;
 }
 
 a:focus, a:hover {

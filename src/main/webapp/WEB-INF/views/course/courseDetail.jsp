@@ -154,8 +154,9 @@
 		}
 	];
 
-	var festivalimg = "/resources/img/course/festival.png";
+	var festivalimg = "/resources/img/course/icon/festival.png";
 
+	
 	// 기본 마커들 찍기
 	positions.forEach(pos => {
 		let markerImage = new kakao.maps.MarkerImage(festivalimg, new kakao.maps.Size(24, 35));
@@ -183,7 +184,10 @@
 		dynamicMarkers = [];
 	}
 
-	var imagesrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	var imagesrc = "";
+	
+
+	
 	
 	/* 카테고리 Check-Box 선택시 동작하는 이벤트 */
 	$(document).ready(function () {
@@ -224,6 +228,21 @@
 					let html = '';
 					data.forEach((place, i) => {
 						const latlng = new kakao.maps.LatLng(Number(place.y), Number(place.x));
+						
+						if(place.category_group_code === "FD6"){
+							imagesrc = "/resources/img/course/icon/matzip.png";
+						}else if(place.category_group_code === "AD5") {
+							imagesrc = "/resources/img/course/icon/hotel.png";
+						}else if(place.category_group_code === "CE7") {
+							imagesrc = "/resources/img/course/icon/cafe.png";
+						}else if(place.category_group_code === "AT4") {
+							imagesrc = "/resources/img/course/icon/tour.png";
+						}else if(place.category_group_code === "PK6") {
+							imagesrc = "/resources/img/course/icon/parking.png";
+						}else if(place.category_group_code === "CT1") {
+							imagesrc = "/resources/img/course/icon/culture.png";
+						}
+						
 						const markerImage = new kakao.maps.MarkerImage(imagesrc, new kakao.maps.Size(24, 35));
 						const marker = new kakao.maps.Marker({
 							map: map,
