@@ -20,7 +20,12 @@
 	       <main class="festival-main">
 	           <div class="buttons">
 	               <div class="festival-button">
-	                   <button class="active">🔅우리지역 축제</button>
+            			<c:if test="${member.memberId eq null }">
+				            <button class="active">🔅축제 추천</button>
+			            </c:if>
+			            <c:if test="${member.memberId ne null }">
+				            <button class="active">🔅우리지역 축제</button>
+			            </c:if>
 	                   <button>진행중인 축제</button>
 	               </div>
 	               <div class="festival-search">
