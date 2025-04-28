@@ -203,7 +203,12 @@
 								};
 								buttonArea.append(replyBtn, deleteBtn);
 							}else{
-								buttonArea.append(replyBtn);
+								const reportBtn = document.createElement("button");
+								reportBtn.innerText = "신고";
+								reportBtn.onclick = function() {
+									reportComment(comment.commentNo);
+								}
+								buttonArea.append(replyBtn, reportBtn);
 							}
 						}
 					

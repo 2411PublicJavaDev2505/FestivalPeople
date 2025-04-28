@@ -115,10 +115,22 @@ public class ManagerController {
 	@GetMapping("/delre")
 	public String deleteReport(@RequestParam("reportNo") int reportNo) {
 		
-		int result = rService.deleteReport(reportNo);
-		if(result >0) {
-			
+		int result = 0;
+		Report report = rService.selectOneByNo(reportNo);
+		int memberNo = 0;
+		switch(report.getReportObject()) {
+			case "CHATROOM" : 
+				memberNo = cService.selectMemberNoByNo(report.getChatRoomNo());
+				break;
+			case "REPORT" : 
+				memberNo = reService.selectMemberNoByReviewNo(report.getReviewNo());
+				break;
+			case "REPORT_COMMENT" : 
+				memberNo = coService.selectMemberNoByCommentNo(report.getCommentNo());
+				break;
 		}
+		result += mService.substractReportCount(memberNo);
+		result += rService.deleteReport(reportNo);
 		
 		return result + "";
 	}

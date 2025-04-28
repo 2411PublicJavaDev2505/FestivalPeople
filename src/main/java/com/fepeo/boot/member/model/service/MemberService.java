@@ -55,4 +55,6 @@ public interface MemberService {
 
 	int updateReportCount(int memberNo);
 
+	int substractReportCount(int memberNo);
+
 }

@@ -101,6 +101,9 @@
 		SELECT COUNT(*) FROM MEMBER_CODE WHERE MEMBER_CODE_NO = #{memberCodeNo} AND CODE = #{code}
 	</select>
 	<update id="updateReportCount">
-		UPDATE MEMBER SET REPORT_COUNT = MEMBER.REPORT_COUNT+1 WHERE MEMBER_NO = #{memberNo}
+		UPDATE MEMBER SET REPORT_COUNT = REPORT_COUNT+1 WHERE MEMBER_NO = #{memberNo}
+	</update>
+	<update id="substractReportCount">
+		UPDATE MEMBER SET REPORT_COUNT = REPORT_COUNT-1 WHERE MEMBER_NO = #{memberNo}
 	</update>
 </mapper>
