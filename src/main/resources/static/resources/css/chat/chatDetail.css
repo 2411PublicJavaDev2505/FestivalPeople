@@ -233,6 +233,7 @@
 	transform: translateX(100%);  /* 슬라이드 효과 */
 	transition: transform 0.3s ease-in-out;
 	z-index: 12;  
+   	overflow: auto; 
 }
 .menu-wrapper.visible .slide-menu { /* 슬라이드 등장 */
 	transform: translateX(0);
@@ -247,7 +248,6 @@
 
 .slide-menu li{
     list-style-type: none;   
-   	overflow: auto; 
 }
 .menu-top{
 	padding-top: 40px;
