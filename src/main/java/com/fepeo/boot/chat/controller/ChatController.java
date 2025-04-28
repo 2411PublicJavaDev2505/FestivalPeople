@@ -270,7 +270,7 @@ public class ChatController {
 	public int insertChatMsg(@RequestParam("msgContent") String  msgContent,
 				@RequestParam("chatroomNo") int chatroomNo,
 				@RequestParam(value="uplodeFile", required=false) MultipartFile uplodeFile,
-				HttpSession session, Model model) {
+				HttpSession session, Model model) throws IllegalStateException, IOException {
 		// 세션에서 memberNo 가져오기
 		Member member = (Member)session.getAttribute("member");
 		int memberNo = member.getMemberNo();	

@@ -89,9 +89,23 @@ public class ChatServiceLogic implements ChatService {
 		return cMapper.selectChatRoomByNo(chatroomNo);
 	}
 
-	/** 메시지(말풍선) */
+	/** 메시지(말풍선) 
+	 * @throws IOException 
+	 * @throws IllegalStateException */
 	@Override // 메시지 입력
-	public int insertChatMsg(MsgInsertRequest msg) {
+	public int insertChatMsg(MsgInsertRequest msg) throws IllegalStateException, IOException {
+		
+		if(msg.getUplodeFile() != null && !msg.getUplodeFile().isEmpty()) {
+			MultipartFile file = msg.getUplodeFile();
+			String fileName = msg.getChatFileName();
+			String fileRename = Util.fileRename(fileName);
+			String filePath = "/images/chat/" + fileRename;
+			file.transferTo(new File("C:/uploadFile/chat/" + fileRename));
+			msg.setChatFileName(fileName);
+			msg.setChatFileRename(fileRename);
+			msg.setChatFilePath(filePath);
+		}		
+		
 		int result = msgMapper.insertChatMsg(msg);
 		if(result > 0) {
 			// 메시지 번호 가져오기

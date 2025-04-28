@@ -20,7 +20,7 @@
     <main class="chat-main">
 		<!--상단 채팅방검색-->
 		<section class="chat-nav">
-			<span>${member.nickname }참여 채팅 수 : 0</span> memNo.${member.memberNo }
+			<p>${member.nickname }참여 채팅 수 :<span id="chatCount">0</span></p>
 			<form class="chat-list-search" action="#" >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 				<button class="chat-search-btn" >⌕</button>
@@ -184,6 +184,7 @@
 											<fmt:formatDate value="${msgList.chatMsgTime}" pattern="a h:mm" />
 										</span>
 									</div>
+									<div></div>
 									<p class="msg-balloon-box-r">${msgList.chatMsgContent }</p>
 								</div>
 							</li>
@@ -199,6 +200,10 @@
 						<textarea id="msgContent" class="chat-input" maxlength="2000" placeholder="메시지를 입력하세요"></textarea>
 					</div>
 					<button id="addChat" class="chat-btn-submit" type="submit">➤</button>
+					<div id="filePreviewArea" style="display: none;"> <!-- 파일 미리보기 영역 -->
+				       	<img id="imagePreview" src="" alt="Image Preview" style="max-width: 200px; margin-top: 10px;">
+				        <span id="fileName"></span>						
+					</div>
 				</footer>
 			</section>
 		</section>
@@ -245,6 +250,39 @@
 				}
 			});
 		});
+		
+		/* 채팅입력 시 파일첨부 */
+	    const fileInput = document.getElementById("fileUploaderInput");
+	    const filePreviewArea = document.getElementById("filePreviewArea");
+	    const imagePreview = document.getElementById("imagePreview");
+	    const fileName = document.getElementById("fileName");
+	
+	    fileInput.addEventListener("change", function (event) {
+	        const file = event.target.files[0];
+	
+	        // 이미지 파일인 경우 미리보기
+	        if (file) {
+	            const reader = new FileReader();
+	            reader.onload = function (e) {
+	                const fileType = file.type.split("/")[0]; // "image"와 같은 형태로 분리
+	
+	                if (fileType === "image") {
+	                    // 이미지 미리보기
+	                    imagePreview.src = e.target.result;
+	                    imagePreview.style.display = "block";
+	                    fileName.textContent = "";
+	                } else {
+	                    // 이미지가 아닌 경우
+	                    imagePreview.style.display = "none";
+	                    fileName.textContent = file.name; // 파일 이름 표시
+	                }
+	                // 파일 미리보기 영역 표시
+	                filePreviewArea.style.display = "block";
+	            };
+	
+	            reader.readAsDataURL(file); // 파일을 데이터 URL로 읽어들임
+	        }
+	    });		
 		
 		/* 메뉴창 팝업 */
 		const openBtn = document.querySelector('.chat-menu-open');
