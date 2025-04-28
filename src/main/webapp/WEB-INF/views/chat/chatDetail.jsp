@@ -83,7 +83,7 @@
 						<div class="modal-overlay"></div><!-- 반투명 배경 -->
 						<div class="slide-menu">
 							<button class="chat-menu-close">Χ</button>
-							<ul>
+							<ul class="menu-top">
 								<li>
 									<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
 											<button onclick="report('${chatRoom.chatroomNo}');">채팅방 신고</button>
@@ -106,18 +106,20 @@
 									</c:if>
 								</li>	
 							</ul>
-							<ul>
+							<ul class="mem-profile">
 								<c:forEach items="${memberList }" var="mbList" varStatus="i">
 									<li>
-										<c:if test="${sessionScope.memberNo eq mbList.memberNo }">
-											<div>(나)${mbList.nickname }</div>
-										</c:if>
-										<c:if test="${sessionScope.memberNo ne mbList.memberNo }">
-											<div>${mbList.nickname }</div>
-										</c:if>
+										<c:choose>
+											<c:when test="${sessionScope.memberNo eq mbList.memberNo }">
+												<div>(나)${mbList.nickname }</div>
+											</c:when>
+											<c:otherwise>
+												<div>${mbList.nickname }</div>
+											</c:otherwise>	
+										</c:choose>
 										<div>
 											<img src="${mbList.profileFilePath }" width="40" />
-											<c:if test="${mbList.memberNo eq chatRoom.memberNo }">	<!-- 방장표시  -->																			
+											<c:if test="${mbList.memberNo == chatRoom.memberNo }">	<!-- 방장표시  -->																			
 												<span>⭐</span> 
 											</c:if>	
 										</div>
@@ -138,57 +140,55 @@
 				<section class="chat-area">
 					<div>
 					<c:forEach items="${msgList }" var="msgList" varStatus="i">
-						<c:forEach items="${memberList }" var="mb" varStatus="i">
-							<c:if test="${mb.memberNo eq msgList.memberNo}">
-								<ul id="balloonList" class="group_msg_balloon">
-									<!-- 날짜 한번만 출력(중복출력불가) -->
-									<c:set var="preDate" value=""/>
-									<c:set var="currentDate" value="${msgList.chatMsgTime.time }"/>
-									<fmt:formatDate  var="formattedDate" value="${msgList.chatMsgTime}" pattern="yyyy.MM.dd(E)"/>
-									<c:if test="${formattedDate ne prevDate}">
-										<li class="date_check"><span>${formattedDate}</span></li>
-										<c:set var="prevDate" value="${formattedDate}" />
-									</c:if>
-									
-									<!-- 다른사람 채팅은 왼쪽에 -->
-									<c:if test="${sessionScope.memberNo != msgList.memberNo }">
-									<li class="msg-balloon-area">
-										<div class="profile-area">
-											<div class="chat-profile-thumbnail">${mb.profileFilePath }</div>
-											<div class="chat-mem-nickname">${mb.nickname }</div>
-										</div>
-										<div class="msg-balloon-area-l">
-											<p class="msg-balloon-box-l">${msgList.chatMsgContent }</p>
-											<div class="msg-info">
-												<c:if test="${msgList.nonReadMember > 0}">						
-													<span class="msg-non-read">안읽음${msgList.nonReadMember }</span>
-												</c:if>
-												<span class="msg-time">
-													<fmt:formatDate value="${msgList.chatMsgTime}" pattern="a h:mm" />
-												</span>
-											</div>
-										</div>
-									</li>
-									</c:if>
-									<!-- 내 채팅은 오른쪽에 -->
-									<c:if test="${sessionScope.memberNo eq msgList.memberNo }">
-									<li class="msg-balloon-area-my">
-										<div class="msg-balloon-area-r">
-											<div class="msg-info-r">
-												<c:if test="${msgList.nonReadMember > 0}">						
-													<span class="msg-non-read">안읽음${msgList.nonReadMember }</span>
-												</c:if>
-												<span class="msg-time">
-													<fmt:formatDate value="${msgList.chatMsgTime}" pattern="a h:mm" />
-												</span>
-											</div>
-											<p class="msg-balloon-box-r">${msgList.chatMsgContent }</p>
-										</div>
-									</li>
-									</c:if>
-								</ul>
+						<ul id="balloonList" class="group_msg_balloon">
+							<!-- 날짜 한번만 출력(중복출력불가) -->
+							<c:set var="preDate" value=""/>
+							<c:set var="currentDate" value="${msgList.chatMsgTime.time }"/>
+							<fmt:formatDate  var="formattedDate" value="${msgList.chatMsgTime}" pattern="yyyy.MM.dd(E)"/>
+							<c:if test="${formattedDate ne prevDate}">
+								<li class="date_check"><span>${formattedDate}</span></li>
+								<c:set var="prevDate" value="${formattedDate}" />
 							</c:if>
-						</c:forEach>	
+							
+							<!-- 다른사람 채팅은 왼쪽에 -->
+							<c:if test="${sessionScope.memberNo != msgList.memberNo }">
+								<li class="msg-balloon-area">
+									<div class="profile-area">
+									<c:forEach items="${memberList }" var="mb" varStatus="i"></c:forEach>
+										<img class="chat-profile-thumbnail" src="${mb.profileFilePath }" width="40" />
+										<div class="chat-mem-nickname">${mb.nickname }</div>
+									
+									</div>
+									<div class="msg-balloon-area-l">
+										<p class="msg-balloon-box-l">${msgList.chatMsgContent }</p>
+										<div class="msg-info">
+											<c:if test="${msgList.nonReadMember > 0}">						
+												<span class="msg-non-read">안읽음${msgList.nonReadMember }</span>
+											</c:if>
+											<span class="msg-time">
+												<fmt:formatDate value="${msgList.chatMsgTime}" pattern="a h:mm" />
+											</span>
+										</div>
+									</div>
+								</li>	
+							</c:if>
+							<!-- 내 채팅은 오른쪽에 -->
+							<c:if test="${sessionScope.memberNo eq msgList.memberNo }">
+							<li class="msg-balloon-area-my">
+								<div class="msg-balloon-area-r">
+									<div class="msg-info-r">
+										<c:if test="${msgList.nonReadMember > 0}">						
+											<span class="msg-non-read">안읽음${msgList.nonReadMember }</span>
+										</c:if>
+										<span class="msg-time">
+											<fmt:formatDate value="${msgList.chatMsgTime}" pattern="a h:mm" />
+										</span>
+									</div>
+									<p class="msg-balloon-box-r">${msgList.chatMsgContent }</p>
+								</div>
+							</li>
+							</c:if>
+						</ul>
 					</c:forEach>	
 					</div>
 				</section>

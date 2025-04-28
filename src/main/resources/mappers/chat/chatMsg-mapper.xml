@@ -16,6 +16,11 @@
 		update CHAT_MSG set NON_READ_MEMBER = #{nonReadMember}
 		where CHAT_MSG_NO = #{chatMsgNo}
 	</update>
+	
+	<update id="subtractionNonReadMemberCount">
+		update CHAT_MSG set NON_READ_MEMBER = NON_READ_MEMBER -1
+		where CHATROOM_NO = #{chatroomNo} and NON_READ_MEMBER > 0
+	</update>
 
 	<select id="selectChatMsgListByNo" resultType="com.fepeo.boot.chat.model.vo.ChatMsg">
 		select * from CHAT_MSG where CHATROOM_NO = #{chatroomNo}

@@ -247,7 +247,20 @@
 
 .slide-menu li{
     list-style-type: none;   
+   	overflow: auto; 
 }
+.menu-top{
+	padding-top: 40px;
+}
+	.menu-top li{
+		height: auto;
+	}
+	.menu-top button{
+		border: none;
+    	background: none;
+	    cursor: pointer;
+	}
+
 
 /* 메시지 검색시 하이라이트 */
 .txt-hlight {

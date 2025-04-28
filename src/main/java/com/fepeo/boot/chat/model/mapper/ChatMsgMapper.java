@@ -24,6 +24,9 @@ public interface ChatMsgMapper {
 	 * @Param XML 매퍼파일의 #{}과 자바 메서드 파라미터를 매핑
 	 * (SQL에 값을 넘겨줄 때 이름을 지정해주는 역할)
 	 */
+
+	// 회원 입장시 메세지 읽음 처리(non_read_member -1)
+	int subtractionNonReadMemberCount(@Param("chatroomNo") int chatroomNo);
 	
 	
 	
