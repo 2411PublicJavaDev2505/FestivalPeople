@@ -84,27 +84,27 @@
 						<div class="slide-menu">
 							<button class="chat-menu-close">Χ</button>
 							<ul class="menu-top">
-								<li>
-									<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
-											<button onclick="report('${chatRoom.chatroomNo}');">채팅방 신고</button>
-									</c:if>
-								</li>
-								<li>
-									<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
-										<form action="/chat/leave" id="leaveForm" method="get">
+								<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
+									<li>
+										<button onclick="report('${chatRoom.chatroomNo}');">채팅방 신고</button>
+									</li>
+								</c:if>
+								<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
+									<li>
+										<form action="/chat/leave" id="leaveForm" method="get" style="display: none;">
 											<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
 											<button type="button" onclick="leaveConfirm(${chatRoom.chatroomNo});">채팅방 나가기</button>
 										</form>
-									</c:if>
-								</li>
-								<li>
-									<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
-									<form action="/chat/delete" id="deleteForm" method="get">
+									</li>
+								</c:if>
+								<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
+									<li>
+									<form action="/chat/delete" id="deleteForm" method="get" style="display: none;">
 										<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
 										<button type="button" onclick="deleteConfirm(${chatRoom.chatroomNo});">채팅방 삭제</button>
 									</form>
-									</c:if>
-								</li>	
+									</li>	
+								</c:if>
 							</ul>
 							<ul class="mem-profile">
 								<c:forEach items="${memberList }" var="mbList" varStatus="i">

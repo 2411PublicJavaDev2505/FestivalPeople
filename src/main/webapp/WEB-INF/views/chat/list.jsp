@@ -79,10 +79,10 @@
 			<!--우 전체목록-->
 			<section class="allchat-list-wrap">
 			<c:forEach items="${cRooms }" var="cRoom" varStatus="i">
-				 <p>방번호: ${cRoom.chatroomNo}</p>
+				<p>방번호: ${cRoom.chatroomNo}</p>
 				<ul class="chat-list">
 					<li class="chat-list-row">
-						<a href="javascript:void(0);" onclick="checkAndEnter('${cRoom.chatroomNo}');" class="chat-link">
+						<a href="javascript:void(0);" onclick="checkAndEnter('${cRoom.chatroomNo}',${cRoom.chatMemberCount}, ${cRoom.chatLimit});" class="chat-link">
 						<img class="chat-image" alt="${cRoom.chatImgName}" src="${cRoom.chatImgPath}">
 						<div class="text-wrap">
 							<div class="chat-title">${cRoom.chatroomTitle }</div>
@@ -101,7 +101,12 @@
 
 	<script>
 		/* 채팅방 입장 시  */
-		function checkAndEnter(chatroomNo) {
+		function checkAndEnter(chatroomNo, currentCount, limitCount) {
+			if(currentCount >= limitCount){
+				alert("채팅방 정원이 가득 찼습니다.");
+				return; // 만원 시 입장거부
+			}
+			
 			fetch("/chat/check-access?chatroomNo=" + chatroomNo)
 			.then(res => res.json())
 			.then(data => {

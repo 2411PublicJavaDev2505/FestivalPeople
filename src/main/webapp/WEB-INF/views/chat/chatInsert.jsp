@@ -84,6 +84,7 @@
 					<div class="image-group">
 						<button type="button" onclick="imgUp()" id=imgUploadBtn >대표사진 선택</button>
 						<input id="imgInput" accept="image/*" name="image" type="file" onchange="setThumbnail(event);" style="display: none;">
+						<button type="button" id="cancelBtn" onclick="resetImage()" style="display: none;">취소</button>
 					</div>
 					<div class="right-group">
 						<div class ="chat-mem-limit">
@@ -100,10 +101,30 @@
 	</div>
 
 	<script type="text/javascript">
-		<!-- 채팅방 제목 글자 카운트(30자 제한) --> //현재 작동안되고 있는 중 ㅠ
+		/* 채팅방 검색 시 방 생성 계속 진행 여부 */
+		 let isFormChanged = false; // 폼이 변경되었는지 여부
+
+	    // 검색창을 클릭했을 때 변경사항이 있을 경우 확인창을 띄움
+	    document.querySelector('.list-search-input').addEventListener('input', function () {
+	        isFormChanged = true;
+	    });
+	    document.querySelector('.chat-list-search').addEventListener('submit', function (event) {
+	        if (isFormChanged) {
+	            const userConfirm = confirm("채팅방 생성을 취소하시겠습니까?");
+	            if (!userConfirm) {
+	                event.preventDefault(); // 사용자가 취소를 누르면 폼 전송을 막음
+	            }
+	        }
+	    });
+	
+	
+	
 		document.addEventListener("DOMContentLoaded", function () {
+			
+			/* 채팅방 제목 글자 카운트(30자 제한) */
 			const chatRoomTitle = document.getElementById("chatRoomTitle");
 			const maxlength = 30; // 최대 글자수
+			const charCountSpan = document.getElementById("charCount"); // 글자수 표시할 자리 요소
 
 			chatRoomTitle.addEventListener("input", function () {
 				const currentLength = chatRoomTitle.value.length;
@@ -114,21 +135,26 @@
 				}
 
 				// 글자수 업데이트
-				const charCountSpan = document.getElementById("charCount");
 				if (charCountSpan) {
-					charCountSpan.textContent = `${chatRoomTitle.value.length}/${maxlength}`;
+					charCountSpan.textContent = currentLength + "/30";
+				}
+			});
+			/* 정원 제한 */
+			const chatLimitInput = document.querySelector(".room-mem");
+			chatLimitInput.addEventListener("input", function(){
+				this.value = this.value.replace(/[^0-9]/g, '');
+				if(this.value !== '' && parseInt(this.value) > 50) {
+					this.value = 50;
 				}
 			});
 		});
 		
-		
-		
-		<!-- 이미지 삽입 -->
+		/* 이미지 삽입  */
 		function imgUp(){
 			const imgInput = document.getElementById("imgInput");
 			imgInput.click();
 		}
-		<!-- 썸네일 이미지 -->	    
+		/* 썸네일 이미지 */	    
 		function setThumbnail(event){
 			const reader = new FileReader();
 			
@@ -147,10 +173,22 @@
 				img.style.height = "100%"; // 버튼 높이에 맞춤
 				img.style.objectFit = "cover"; // 이미지 비율을 유지하며 버튼 크기에 맞게 자름
 				img.style.borderRadius = "10px"; // 버튼과 동일한 둥근 모서리 적용
+				
+				// 이미지 선택했을 때만 취소 버튼 노출
+				cancelBtn.style.display = "inline-block";
 			};    		
 			reader.readAsDataURL(event.target.files[0]);
 		}
+		// 이미지 취소하기
+		function resetImage() {
+			const imgInput = document.getElementById("imgInput");
+			const imgUploadBtn = document.getElementById("imgUploadBtn");
+			const cancelBtn = document.getElementById("cancelBtn");
 			
+			imgInput.value = ""; // 입력값 초기화
+			imgUploadBtn.innerHTML = "대표사진 선택"; //기존 텍스트 노출
+			cancelBtn.style.display = "none"; // 취소버튼 숨기기
+		}
 		
     </script>
 </body>
