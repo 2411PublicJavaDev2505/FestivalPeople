@@ -100,7 +100,7 @@
 								<c:forEach items="${courseList }" var="course">
 									<div class="course-content">
 										<div class="course-content-left">
-											<img alt="축제 이미지" src="${course.festivalImg }" onclick="enterCourse('${course.festivalNo}');">
+											<img alt="축제 이미지" src="${course.festivalImg }" onclick="enterCourse('${course.courseNo}');">
 											<h5>${course.festivalName }</h5>
 										</div>
 										<div class="course-content-right">
@@ -155,8 +155,8 @@
 	</div>
 	<script type="text/javascript">
 	
-		const enterCourse = (festivalNo) => {
-			location.href="/course/detial"+festivalNo;
+		const enterCourse = (courseNo) => {
+			location.href="/course/myCourse/"+courseNo;
 			
 		}
 	

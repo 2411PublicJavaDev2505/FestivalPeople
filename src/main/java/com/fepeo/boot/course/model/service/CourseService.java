@@ -17,6 +17,7 @@ public interface CourseService {
 
 	public List<Course> selectCourseByNo(int memberNo);
 	
+	public Course selectOneByCourseNo(int courseNo);
 
 	
 	

@@ -58,8 +58,11 @@
 					<div class="card together">
 						<img src="../resources/img/intro/together.png">
 						<div class="card__content">
-							<p class="card__title">Festival People 는</p>
-							<p class="card__description">소개내용</p>
+							<p class="card__title">같이갈래 는</p>
+							<p class="card__description">Festival People 내에 다른 회원님들과 소통할 수 있는 기능으로<br>
+														혼자서 가기 힘들거나 다양한 사람들과 함께 여행하고 싶은 분들을 위한<br>
+														자유로운 커뮤니티 환경입니다. 부담없이 새로운 사람들과 함께 여행하세요!		
+							</p>
 							<button class="card__button t" onclick="goChat();">같이 갈래? 페이지로</button>
 						</div>
 					</div>
@@ -67,8 +70,11 @@
 					<div class="card review">
 						<img src="../resources/img/intro/review.png">
 						<div class="card__content">
-							<p class="card__title">Festival People 는</p>
-							<p class="card__description">소개내용</p>
+							<p class="card__title">여행후기 는</p>
+							<p class="card__description">회원분들의 생동감있는 여행 후기를 제공합니다. 여행 가기전 재밌을지 우려 되시나요?<br>
+														직접 축제를 다녀온 회원님들의 후기를 통해 선택해보세요!
+														다른분들이 회원님의 솔직하고 생생한 후기를 기다리고 있습니다! 
+							</p>
 							<button class="card__button re" onclick="location.href='/review/list';">여행 후기 페이지로</button>
 						</div>
 					</div>

@@ -17,6 +17,8 @@ public interface CourseMapper {
 	int insertCourse(Course course);
 
 	List<Course> selectCourseByNo(int memberNo);
+
+	Course selectOneByCourseNo(int courseNo);
 	
 	
 }

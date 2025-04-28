@@ -52,5 +52,9 @@
 		SELECT * FROM COURSE WHERE MEMBER_NO =#{memberNo}
 	</select>
 
+	<select id="selectOneByCourseNo" resultType="Course"> 
+		SELECT * FROM COURSE WHERE COURSE_NO = #{courseNo}
+	</select>
+
 
 </mapper>  

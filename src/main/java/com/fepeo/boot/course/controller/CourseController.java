@@ -291,6 +291,64 @@ public class CourseController {
 	
 	}
 	
+	@GetMapping("/myCourse/{courseNo}")
+	public String showMyCourseDetail(@PathVariable int courseNo
+			,HttpSession session, Model model) {
+		System.out.println("코스번호"+courseNo);
+		
+		Course course = cService.selectOneByCourseNo(courseNo);
+		System.out.println("코스체크"+course);
+		
+		Festival festival = fService.selectFestivalByNo(course.getFestivalNo());
+		System.out.println("무슨축제임?"+festival);
+		Map<String, String> festivalXY = new HashMap<String, String>();
+		festivalXY.put("X", festival.getMapVCode());
+		festivalXY.put("Y", festival.getMapHCode());
+		
+		List<PlaceDto> placeList = new ArrayList<PlaceDto>(); 
+
+			if(course.getMatzipPlaceName()!= null) {
+				PlaceDto matzip = api.kakaoCourseApi(festivalXY, "FD6");
+				placeList.add(matzip);
+				System.out.println(matzip);
+			}
+			if(course.getHotelPlaceName() != null) {
+				PlaceDto hotel = api.kakaoCourseApi(festivalXY, "AD5");
+				placeList.add(hotel);
+				System.out.println(hotel);
+			}
+			if(course.getCafePlaceName() != null) {
+				PlaceDto cafe = api.kakaoCourseApi(festivalXY, "CE7");
+				placeList.add(cafe);
+				System.out.println(cafe);
+			}
+			if(course.getTourPlaceName() !=  null) {
+				PlaceDto tour = api.kakaoCourseApi(festivalXY, "AT4");
+				placeList.add(tour);
+				System.out.println(tour);
+			}
+			if(course.getParkingPlaceName() != null) {
+				PlaceDto parking = api.kakaoCourseApi(festivalXY, "PK6");
+				placeList.add(parking);
+				System.out.println(parking);
+			}
+			if(course.getCulturePlaceName() != null) {
+				PlaceDto culture = api.kakaoCourseApi(festivalXY, "CT1");
+				placeList.add(culture);
+				System.out.println(culture);
+			}	
+			
+			for(int  i = 0; i<(placeList.size()-1); i++) {
+				System.out.println("잘나오고 있는거 맞니?"+placeList.get(i));
+				System.out.println("이름만"+placeList.get(i).getPlace_name());
+			}
+		
+			
+		model.addAttribute("festival", festival);
+		model.addAttribute("placeList", placeList);
+		model.addAttribute("course", course);
+		return "course/myCourse";
+	}
 	
 
 	
