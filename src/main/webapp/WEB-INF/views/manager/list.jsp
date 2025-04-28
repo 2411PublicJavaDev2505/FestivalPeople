@@ -63,18 +63,18 @@
 										</c:forEach>
 								</table>
 					            <div class="pagination">
-									<a href="/festival/list?currentPage=1">◁◁</a>
-									<c:if test= "${startNavi ne 1}">
-										<a href="/festival/list?currentPage=${startNavi-1}" class="prev">◀</a>
+										<a href="/manager/mypage?currentPage=1"> ◁◁ </a>
+									<c:if test= "${startNavi ne 1 }">
+										<a href="/manager/mypage?currentPage=${startNavi-1 }" class="prev">◀</a>
 									</c:if>	
-									<c:forEach begin="${startNavi}" end="${endNavi}" var="p">
-										<a href="/festival/list?currentPage=${p}">${p}</a>
+									<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
+										<a class="pNum" href="/manager/mypage?currentPage=${p }">${p }</a>
 									</c:forEach>					
-									<c:if test="${endNavi ne maxPage}">
-										<a href="/festival/list?currentPage=${endNavi+1}" class="next">▶</a>
+									<c:if test="${endNavi ne maxPage }">
+										<a href="/manager/mypage?currentPage=${endNavi+1 }" class="next">▶</a>
 									</c:if>    
-						           	<a href="/festival/list?currentPage=${maxPage}"> ▷▷ </a>
-					            </div>
+										<a href="/manager/mypage?currentPage=${maxPage }"> ▷▷ </a>
+								</div>
 							</div>
 					</div>	
 				</main>	

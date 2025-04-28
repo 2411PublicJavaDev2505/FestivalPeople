@@ -58,19 +58,25 @@
 											</tr>
 										</c:forEach>
 								</table>
-					            <div class="pagination">
-									<a href="/festival/list?currentPage=1">◁◁</a>
-									<c:if test= "${startNavi ne 1}">
-										<a href="/festival/list?currentPage=${startNavi-1}" class="prev">◀</a>
-									</c:if>	
-									<c:forEach begin="${startNavi}" end="${endNavi}" var="p">
-										<a href="/festival/list?currentPage=${p}">${p}</a>
-									</c:forEach>					
-									<c:if test="${endNavi ne maxPage}">
-										<a href="/festival/list?currentPage=${endNavi+1}" class="next">▶</a>
-									</c:if>    
-						           	<a href="/festival/list?currentPage=${maxPage}"> ▷▷ </a>
-					            </div>
+								<div class="pagination">
+								    <!-- 맨 처음 페이지로 -->
+								    <a href="/report/list?currentPage=1"> ◁◁ </a>
+								    <!-- 이전 5개 페이지로 -->
+								    <c:if test="${startNavi > 1}">
+								        <a href="/report/list?currentPage=${startNavi-1}" class="prev">◀</a>
+								    </c:if>
+								    <!-- 페이지 숫자 1부터 시작 -->
+								    <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+								        <a href="/report/list?currentPage=${p}" <c:if test="${p == currentPage}">class="active"</c:if>>${p}</a>
+								    </c:forEach>
+								    <!-- 다음 5개 페이지로 -->
+								    <c:if test="${endNavi < totalPage}">
+								        <a href="/report/list?currentPage=${endNavi+1}" class="next">▶</a>
+								    </c:if>
+								    <!-- 맨 마지막 페이지로 -->
+								    <a href="/report/list?currentPage=${totalPage}"> ▷▷ </a>
+								</div>
+
 							</div>
 					</div>	
 				</main>
