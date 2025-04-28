@@ -37,5 +37,10 @@ public class CourseServiceLogic implements CourseService{
 	public Course selectOneByCourseNo(int courseNo) {
 		return mapper.selectOneByCourseNo(courseNo);
 	}
+
+	@Override
+	public int deleteCourse(int memberNo, int courseNo) {
+		return mapper.deleteCourse(memberNo, courseNo);
+	}
 	
 }

@@ -56,5 +56,8 @@
 		SELECT * FROM COURSE WHERE COURSE_NO = #{courseNo}
 	</select>
 
+	<delete id="deleteCourse">
+		DELETE FROM COURSE WHERE MEMBER_NO = #{memberNo} AND COURSE_NO = #{courseNo} 
+	</delete>
 
 </mapper>  

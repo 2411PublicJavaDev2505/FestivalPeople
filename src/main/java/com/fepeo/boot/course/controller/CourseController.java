@@ -66,18 +66,19 @@ public class CourseController {
 		}else {
 			// 로그인 회원 정보 출력
 			Member memberInfo = mService.selectOneByNo(member.getMemberNo());
-			System.out.println("고속도로"+memberInfo);
 			// 회원 정보에 저장된 주소지 값으로 위, 경도 좌표 출력
 			String memberAddress = memberInfo.getAddress();
 
 			String memberName = member.getMemberName();
 			Map<String, String> mapPoint = api.searchMemberAddress(memberAddress);
-//			System.out.println(mapPoint);
+			
 			// 현재 시간 기준 전국 날씨 추출
 			List<RegionDto> regionList = cService.getAllRegions();
 			
+			
 			String gWRegions = (String)session.getAttribute("gWRegions");
 		    List<String> goodWeatherRegions = new ArrayList<>();
+		    // 세션에 저장된 날씨 좋은 지역기반 다시 지역명 세팅하기
 		    if(gWRegions == null) {
 		    	goodWeatherRegions = api.callWeatherApi(regionList);
 		    	gWRegions = "";
@@ -119,11 +120,12 @@ public class CourseController {
 		Member member = (Member)session.getAttribute("member");
 		String memberName = member.getMemberName();
 		
+		// 검색값 저장
 		Map<String, String> searchMap = new HashMap<String, String>();
 		searchMap.put("searchKeyword", searchKeyword);
 		searchMap.put("searchCondition", searchCondition);
 		
-		
+		// DB검색
 		List<Festival> fList = fService.searchFestivalList(searchMap);
 
 		model.addAttribute("fList", fList);
@@ -133,6 +135,7 @@ public class CourseController {
 	}
 	
 	
+	// 디테일페이지 우측에 있는 리스트 검색용
 	@GetMapping("/rightSearch")
 	@ResponseBody
 	public List<Festival> ajaxSearchCourse(@RequestParam String searchCondition, @RequestParam String searchKeyword) {
@@ -140,20 +143,15 @@ public class CourseController {
 		Map<String, String> searchMap = new HashMap<String, String>();
 		searchMap.put("searchCondition", searchCondition);
 		searchMap.put("searchKeyword", searchKeyword);
-	    List<Festival> result = fService.searchFestivalList(searchMap);
-	    System.out.println(searchCondition);
-	    System.out.println(searchKeyword);
-	    System.out.println(result);
-	    
+	    List<Festival> result = fService.searchFestivalList(searchMap);	    
 	    return result;
 	}
 	
 	
+	// JS랑 Ajax를 사용해서 비동기 방식으로 카테고리 클릭시 구동되는 코드
 	@ResponseBody
 	@PostMapping("/filter")
 	public List<PlaceDto> filterByCategory(@RequestBody Categories categories) {
-		System.out.println(categories.getCategories());
-		System.out.println(categories.getFestivalNo());
 		int festivalNo = categories.getFestivalNo();
 		Festival festival = fService.selectFestivalByNo(festivalNo);
 		Map<String, String> festivalXY = new HashMap<String, String>();
@@ -161,44 +159,38 @@ public class CourseController {
 		festivalXY.put("Y", festival.getMapHCode());
 		
 		List<PlaceDto> placeList = new ArrayList<PlaceDto>(); 
-
+		// 카테고리별로 구분해서 축제 주변 가장 가까운 카테고리 장소 넣어주기
 		for(String cate : categories.getCategories()) {
 			if(cate.equals("FD6")) {
 				PlaceDto matzip = api.kakaoCourseApi(festivalXY, cate);
 				placeList.add(matzip);
-				System.out.println(matzip);
 			}
 			if(cate.equals("AD5")) {
 				PlaceDto hotel = api.kakaoCourseApi(festivalXY, cate);
 				placeList.add(hotel);
-				System.out.println(hotel);
 			}
 			if(cate.equals("CE7")) {
 				PlaceDto cafe = api.kakaoCourseApi(festivalXY, cate);
 				placeList.add(cafe);
-				System.out.println(cafe);
 			}
 			if(cate.equals("AT4")) {
 				PlaceDto tour = api.kakaoCourseApi(festivalXY, cate);
 				placeList.add(tour);
-				System.out.println(tour);
 			}
 			if(cate.equals("PK6")) {
 				PlaceDto parking = api.kakaoCourseApi(festivalXY, cate);
 				placeList.add(parking);
-				System.out.println(parking);
 			}
 			if(cate.equals("CT1")) {
 				PlaceDto culture = api.kakaoCourseApi(festivalXY, cate);
 				placeList.add(culture);
-				System.out.println(culture);
 			}	
 		}
-		System.out.println(placeList);
 		return placeList;
 	}
 	
 
+	//코스 저장하기
 	@PostMapping("/insert")
 	@ResponseBody
 	public ResponseEntity<String> insertCourse(@RequestParam("category_group_code") List<String> category
@@ -210,19 +202,20 @@ public class CourseController {
 			,Model model
 			,HttpSession session) {
 		
+		
 		Course course = new Course();
 		Festival festival = fService.selectFestivalByNo(festivalNo);
-
+		
 		Member member = (Member)session.getAttribute("member");
+		// 코스에 기본 정보 등록
 		course.setMemberNo(member.getMemberNo());
 		course.setFestivalNo(festival.getFestivalNo());
 		course.setFestivalName(festival.getFestivalName());
 		course.setFestivalImg(festival.getFestivalFilePath());
 		course.setCourseName(courseName);
 		
-		
-		for(int i = 0; i < category.size(); i++) {
-			
+		// jsp에서 받아온 카테고리 정보로 순환하며 카테고리에 맞는 장소 정보 입력
+		for(int i = 0; i < category.size(); i++) {			
 			if(category.get(i).equals("FD6")) {
 				course.setMatzipCategory(category.get(i));
 				course.setMatzipPlaceName(placeName.get(i));
@@ -265,7 +258,7 @@ public class CourseController {
 	
 
 	
-	
+	// 코스 출력
 	@GetMapping("/detail")
 	public String showCourseDetail(@RequestParam("festivalNo") int festivalNo
 			,Model model
@@ -291,16 +284,16 @@ public class CourseController {
 	
 	}
 	
+
+	// 마이페이지에서 저장한 코스 클릭시 구동하는 코드
 	@GetMapping("/myCourse/{courseNo}")
 	public String showMyCourseDetail(@PathVariable int courseNo
 			,HttpSession session, Model model) {
-		System.out.println("코스번호"+courseNo);
 		
 		Course course = cService.selectOneByCourseNo(courseNo);
-		System.out.println("코스체크"+course);
+
 		
 		Festival festival = fService.selectFestivalByNo(course.getFestivalNo());
-		System.out.println("무슨축제임?"+festival);
 		Map<String, String> festivalXY = new HashMap<String, String>();
 		festivalXY.put("X", festival.getMapVCode());
 		festivalXY.put("Y", festival.getMapHCode());
@@ -310,40 +303,27 @@ public class CourseController {
 			if(course.getMatzipPlaceName()!= null) {
 				PlaceDto matzip = api.kakaoCourseApi(festivalXY, "FD6");
 				placeList.add(matzip);
-				System.out.println(matzip);
 			}
 			if(course.getHotelPlaceName() != null) {
 				PlaceDto hotel = api.kakaoCourseApi(festivalXY, "AD5");
 				placeList.add(hotel);
-				System.out.println(hotel);
 			}
 			if(course.getCafePlaceName() != null) {
 				PlaceDto cafe = api.kakaoCourseApi(festivalXY, "CE7");
 				placeList.add(cafe);
-				System.out.println(cafe);
 			}
 			if(course.getTourPlaceName() !=  null) {
 				PlaceDto tour = api.kakaoCourseApi(festivalXY, "AT4");
 				placeList.add(tour);
-				System.out.println(tour);
 			}
 			if(course.getParkingPlaceName() != null) {
 				PlaceDto parking = api.kakaoCourseApi(festivalXY, "PK6");
 				placeList.add(parking);
-				System.out.println(parking);
 			}
 			if(course.getCulturePlaceName() != null) {
 				PlaceDto culture = api.kakaoCourseApi(festivalXY, "CT1");
 				placeList.add(culture);
-				System.out.println(culture);
 			}	
-			
-			for(int  i = 0; i<(placeList.size()-1); i++) {
-				System.out.println("잘나오고 있는거 맞니?"+placeList.get(i));
-				System.out.println("이름만"+placeList.get(i).getPlace_name());
-			}
-		
-			
 		model.addAttribute("festival", festival);
 		model.addAttribute("placeList", placeList);
 		model.addAttribute("course", course);
@@ -352,5 +332,18 @@ public class CourseController {
 	
 
 	
-	
+	//코스 삭제하기
+	@GetMapping("/delete")
+	public String deleteCourse(@RequestParam("courseNo") int courseNo,
+			HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("member");
+		int memberNo = member.getMemberNo();
+		int result = cService.deleteCourse(memberNo, courseNo);
+		
+		if(result > 0) {
+			return "redirect:/member/detail";
+		}else {
+			return "redirect:/member/detail";
+		}
+	}
 }

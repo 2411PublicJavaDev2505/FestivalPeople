@@ -19,6 +19,8 @@ public interface CourseService {
 	
 	public Course selectOneByCourseNo(int courseNo);
 
+	public int deleteCourse(int memberNo, int courseNo);
+
 	
 	
 }

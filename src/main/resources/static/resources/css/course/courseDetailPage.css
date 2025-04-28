@@ -70,8 +70,16 @@
 .courseText {
 	display: flex;
 	padding : 10px;
-	width: 700px;
+	width: 600px;
 	justify-content: space-evenly;
+	margin: 10px auto 10px auto;
+	border: 1px solid black;
+	text-align: center;
+	padding: 10px;
+	border-radius:20px;
+	background-color:aliceblue;
+	font-size: 2em;
+	color: #2b6777;
 }
 
 .matzip-image {
@@ -261,10 +269,6 @@
 	display: flex;
 }
     
-.courseText {
-	font-size: 2em;
-}
-
 .course-recommend-main {
 	display: flex;
 	gap: 30px;
@@ -422,7 +426,6 @@ body{
     border-radius: 10px;
     border: 1px solid #ccc;
     margin: 10px 20px;
-
 }
 
 
@@ -508,6 +511,8 @@ body{
   padding: 10px;
   border-bottom: 1px solid #eee;
   transition: background-color 0.3s;
+  text-decoration: none;
+  color: #2b6777;
 }
 .search-course-title a:hover {
   background-color: #e0f7fa;
@@ -526,4 +531,22 @@ body{
   border-radius : 10px;
 }
 
+.deleteButton {
+	border: 1px solid black;
+	border-radius : 10px;
+	width: 100px;
+	padding: 10px;
+	background-color : #e0f7fa;
+	color : #2b6777;
+}
 
+.deleteButton:hover {
+	background-color : rgb(255, 185, 185);
+}
+
+.deleteDiv {
+	display:flex;
+	justify-content : center;
+	margin: 10px;
+	font-weight: bold;
+}

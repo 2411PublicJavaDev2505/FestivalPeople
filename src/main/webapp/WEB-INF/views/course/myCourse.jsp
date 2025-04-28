@@ -20,12 +20,8 @@
 		<main>
 			<div class="course-total-container">		
 				<div class="course-recommend-choice">
-					<p class="courseText">
-						나의 코스
-						</p>
+					<p class="courseText">나의 코스</p>
 				</div>
-		
-				
 				<div class="course-recommend-main">			
 					<div class="course-recommend-left">
 						<div  class="course-recommend-map" style="width:100%; height:400px;"></div>
@@ -36,7 +32,7 @@
 									<img src= "${course.festivalImg}" alt="축제이미지">
 								</div>
 							<div id="resultContainer" class="place-result-container">
-								<!-- 추천 코스 리스트 출력 -->
+								<!-- 저장된 코스 리스트 출력 -->
 								<div id="recommendation-container">		
 									<c:forEach items="${placeList}" var="place">
 											<div>
@@ -53,7 +49,13 @@
 												</div>								
 											</div>
 									</c:forEach>			
-								</div>																						
+								</div>	
+								<div class="deleteDiv">	
+									<form action="/course/delete" id="deleteFrom" method="get">
+										<input type="hidden" name="courseNo" value="${course.courseNo }">
+										<button class="deleteButton" type="button" onclick="deleteCourse(${course.courseNo})" >삭제하기</button>
+									</form>				
+								</div>															
 							</div>
 						</div>
 							<div class="course-recommend-right">
@@ -80,11 +82,9 @@
 <script>
 	/* 배경화면 설정 */
 	const images = [
-/* 	    "../resources/img/course/bgi1.jpg", */
-	    "../resources/img/course/bgi2.jpg",
-	    "../resources/img/course/bgi3.jpg",
-/* 	    "../resources/img/course/bgi4.jpg", */
-	    "../resources/img/course/bgi5.jpg"  
+	    "/resources/img/course/bgi2.jpg",
+	    "/resources/img/course/bgi3.jpg",
+	    "/resources/img/course/bgi5.jpg"  
 	  ];
 	
 	  let index = 0;
@@ -102,43 +102,104 @@
 	  };	
 
 
-	let festivalNo = $('#festivalNo').val();
-	let festivalY = ${festival.getMapHCode()};
-	let festivalX = ${festival.getMapVCode()};
+	  let festivalNo = $('#festivalNo').val();
+	  let festivalY = ${festival.mapHCode};
+	  let festivalX = ${festival.mapVCode};
 
-	var kakaoMapContainer = document.querySelector('.course-recommend-map');
-	var mapOptions = {
-		center: new kakao.maps.LatLng(Number(festivalY), Number(festivalX)),
-		level: 3
-	};
-	var map = new kakao.maps.Map(kakaoMapContainer, mapOptions);
-	
-	var positions = [
-		{
-			title: "${festival.festivalName}",
-			latlng: new kakao.maps.LatLng(Number(festivalY), Number(festivalX))
-		}
-	];
+	  var kakaoMapContainer = document.querySelector('.course-recommend-map');
+	  var mapOptions = {
+	      center: new kakao.maps.LatLng(Number(festivalY), Number(festivalX)),
+	      level: 5
+	  };
+	  var map = new kakao.maps.Map(kakaoMapContainer, mapOptions); // 맵 생성
 
-	var festivalimg = "/resources/img/course/icon/festival.png";
-	
-	
-	positions.forEach(pos => {
-		let markerImage = new kakao.maps.MarkerImage(festivalimg, new kakao.maps.Size(24, 35));
-		let marker = new kakao.maps.Marker({
-			map: map,
-			position: pos.latlng,
-			title: pos.title,
-			image: markerImage
-		});
-	
-		let infowindow = new kakao.maps.InfoWindow({
-			content: '<div style="padding:5px;font-size:14px;">' + pos.title + '</div>'
-		});
+	  // 📍 [1] 축제 마커 먼저 찍기
+	  var festivalMarkerImage = new kakao.maps.MarkerImage(
+	      '/resources/img/course/icon/festival.png', // 축제 아이콘 경로
+	      new kakao.maps.Size(24, 35) // 축제 마커 크기 (조금 크게)
+	  );
 
-		kakao.maps.event.addListener(marker, 'mouseover', () => infowindow.open(map, marker));
-		kakao.maps.event.addListener(marker, 'mouseout', () => infowindow.close());
-	});
+	  var festivalMarker = new kakao.maps.Marker({
+	      map: map,
+	      position: new kakao.maps.LatLng(Number(festivalY), Number(festivalX)),
+	      title: "${festival.festivalName}",
+	      image: festivalMarkerImage
+	  });
+
+	  var festivalInfowindow = new kakao.maps.InfoWindow({
+	      content: '<div style="padding:5px; font-size:12px;">${festival.festivalName}</div>'
+	  });
+
+	  kakao.maps.event.addListener(festivalMarker, 'mouseover', function() {
+	      festivalInfowindow.open(map, festivalMarker);
+	  });
+	  kakao.maps.event.addListener(festivalMarker, 'mouseout', function() {
+	      festivalInfowindow.close();
+	  });
+
+	  // 📍 [2] 저장한 코스 장소들 placeList 가져오기
+	  var placeList = [
+	      <c:forEach var="place" items="${placeList}" varStatus="status">
+	          {
+	              name: "${place.place_name}",
+	              x: ${place.x},
+	              y: ${place.y},
+	              category: "${place.category_group_code}"
+	          }<c:if test="${!status.last}">,</c:if>
+	      </c:forEach>
+	  ];
+
+	  //카테고리별 마커 이미지 설정
+	  function getMarkerImage(category) {
+	      var basePath = '/resources/img/course/icon/';
+	      var imgName = 'default.png';
+
+	      switch (category) {
+	          case 'FD6':
+	              imgName = 'matzip.png';
+	              break;
+	          case 'AD5':
+	              imgName = 'hotel.png';
+	              break;
+	          case 'CE7':
+	              imgName = 'cafe.png';
+	              break;
+	          case 'AT4':
+	              imgName = 'tour.png';
+	              break;
+	          case 'PK6':
+	              imgName = 'parking.png';
+	              break;
+	          case 'CT1':
+	              imgName = 'culture.png';
+	              break;
+	      }
+	      return new kakao.maps.MarkerImage(
+	          basePath + imgName,
+	          new kakao.maps.Size(24, 35)
+	      );
+	  }
+
+	  //저장된 장소 placeList 돌면서 마커 찍기
+	  placeList.forEach(function(place) {
+	      var marker = new kakao.maps.Marker({
+	          map: map,
+	          position: new kakao.maps.LatLng(Number(place.y), Number(place.x)),
+	          title: place.name,
+	          image: getMarkerImage(place.category)
+	      });
+
+	      var infowindow = new kakao.maps.InfoWindow({
+	          content: '<div style="padding:5px; font-size:12px;">' + place.name + '</div>'
+	      });
+
+	      kakao.maps.event.addListener(marker, 'mouseover', function() {
+	          infowindow.open(map, marker);
+	      });
+	      kakao.maps.event.addListener(marker, 'mouseout', function() {
+	          infowindow.close();
+	      });
+	  });
 
 	
  	 /* 오른쪽 리스트 div 처리  */
@@ -173,6 +234,18 @@
 	    });
 	}); 
 	
+ 	 
+ 	 /* 코스 삭제하기 */
+ 	 const deleteCourse = (courseNo) => {
+ 		 var result = confirm("정말로 삭제하시겠습니까?");
+ 		 if(result) {
+ 			 document.getElementById('deleteForm').submit();
+ 		 }else {
+ 			 return false;
+ 		 } 		 
+ 		 
+ 		 
+ 	 }
 </script>
 
 </body>

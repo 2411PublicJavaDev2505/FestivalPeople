@@ -19,6 +19,8 @@ public interface CourseMapper {
 	List<Course> selectCourseByNo(int memberNo);
 
 	Course selectOneByCourseNo(int courseNo);
+
+	int deleteCourse(int memberNo, int courseNo);
 	
 	
 }
