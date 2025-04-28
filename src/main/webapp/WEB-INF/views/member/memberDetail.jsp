@@ -69,10 +69,12 @@
 							</c:if>
 							<c:forEach items="${myChatList }" var="room">
 								<div class="my-chat">
-									<img alt="채팅방 썸네일" src="${room.chatImgPath }" onclick="enterChatRoom('${room.chatroomNo}');">
+									<div class="my-chat-img">
+										<img alt="채팅방 썸네일" src="${room.chatImgPath }" onclick="enterChatRoom('${room.chatroomNo}');">
+									</div>
 									<div class="chat-content">
 										<h3 onclick="enterChatRoom('${room.chatroomNo}');">${room.chatroomTitle }</h3>
-										<div>
+										<div class="chat-tag">
 											<c:if test="${room.tag1 ne null }">
 												<span>#${room.tag1 }</span>
 											</c:if>
