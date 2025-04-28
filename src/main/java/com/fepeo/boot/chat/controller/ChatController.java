@@ -163,6 +163,7 @@ public class ChatController {
 		// 채팅방 정보 조회 (제목,태그 등 출력용)
 		ChatRoom chatRoom = service.selectChatRoomByNo(chatroomNo); 
 		model.addAttribute("chatRoom", chatRoom);
+		int bangjangNo = chatRoom.getMemberNo(); // 방장번호
 
 		// 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0이 되야 함)
 		int zero = service.resetNonCheckMsg(chatroomNo, memberNo);
@@ -178,11 +179,13 @@ public class ChatController {
 		int yn = service.enterMemberYn(chatroomNo, memberNo);		
 		// 입장상태 나머지방 'N'으로 변경하기
 		int exitRoom = service.exitChatRooms(memberNo, chatroomNo);
-		
+		// 회원 입장시 메세지 읽음 처리(non_read_member -1)
+		int read = service.subtractionNonReadMemberCount(chatroomNo);
 		
 		// 가입 멤버 프로필 출력
-		List<MemberProfileList>  memberList = service.chatMemberList(chatroomNo);
+		List<MemberProfileList>  memberList = service.chatMemberList(chatroomNo, memberNo, bangjangNo);
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("bangjangNo", bangjangNo); // 방장번호 jsp로 전달
 		
 		// 대화내용(말풍선) 출력
 		List<ChatMsg> msgList = service.selectChatMsgListByNo(chatroomNo);

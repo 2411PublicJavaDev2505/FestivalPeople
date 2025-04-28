@@ -79,6 +79,11 @@ public class ChatServiceLogic implements ChatService {
 		return cMapper.selectChatMember();
 	}
 
+	@Override // 전체 채팅방 검색
+	public List<ChatRoom> searchChatRoom(String searchKeyword) {
+		return cMapper.searchChatRoom(searchKeyword);
+	}
+
 	@Override // 채팅방 정보 가져오기
 	public ChatRoom selectChatRoomByNo(int chatroomNo) {
 		return cMapper.selectChatRoomByNo(chatroomNo);
@@ -104,15 +109,15 @@ public class ChatServiceLogic implements ChatService {
 		return msgMapper.selectChatMsgListByNo(chatroomNo);
 	}
 
-	@Override // 전체 채팅방 검색
-	public List<ChatRoom> searchChatRoom(String searchKeyword) {
-		return cMapper.searchChatRoom(searchKeyword);
-	}
-
 //	@Override // 나의 채팅방 검색
 //	public List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo) {
 //		return cMapper.searchChatRoomByNo(mySearchKeyword, memberNo);
 //	}
+
+	@Override // 회원 입장시 메세지 읽음 처리(non_read_member -1)
+	public int subtractionNonReadMemberCount(int chatroomNo) {
+		return msgMapper.subtractionNonReadMemberCount(chatroomNo);
+	}
 
 	/** 채팅방 유저 */
 	@Override // 신규 입장 등록
@@ -140,9 +145,33 @@ public class ChatServiceLogic implements ChatService {
 		return mMapper.exitChatRooms(memberNo, chatroomNo);
 	}
 
-	@Override // 가입 멤버 프로필 출력
-	public List<MemberProfileList> chatMemberList(int chatroomNo) {
-		return mMapper.chatMemberList(chatroomNo);
+	@Override // 가입 멤버 프로필 출력(나-방장-일반 순으로)
+	public List<MemberProfileList> chatMemberList(int chatroomNo, int memberNo, int bangjangNo) {
+		List<MemberProfileList> memberList = mMapper.chatMemberList(chatroomNo);
+
+		List<MemberProfileList> sortedList = new ArrayList<>(); // 순서로 나눠서 담기
+		
+		// 1st (나)
+		for (MemberProfileList member : memberList) {
+			if(member.getMemberNo() == memberNo){
+				sortedList.add(member);
+				break;
+			}
+		}
+		// 2nd 방장(나와 방장이 다를 때)
+		for (MemberProfileList member : memberList) {
+			if(member.getMemberNo() == bangjangNo && member.getMemberNo() != memberNo){
+				sortedList.add(member);
+				break;
+			}
+		}
+		// 3rd 나머지
+		for (MemberProfileList member : memberList) {
+			if(member.getMemberNo() != bangjangNo && member.getMemberNo() != memberNo){
+				sortedList.add(member);
+			}
+		}
+		return sortedList;
 	}
 
 	@Override // 멤버 강퇴
