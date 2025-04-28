@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>후기 게시판 List 전체</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/review/list.css">
-	<title>후기 게시판 List 전체</title>
 </head>
 <body>
 	<!-- 광고배너 -->
@@ -22,6 +23,7 @@
 	<div class="background-image">
     	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
     </div>
+    
     <!-- 4/28일 09:24분 css 작업 notice랑 맞추기 작업-->
     <!-- 헤더 -->
      	<jsp:include page="../include/header.jsp"/>
@@ -68,7 +70,7 @@
 			                <!-- 수정했으나 list에 밑줄나오게하는건?? -->
 			                <td>${review.reviewNo}</td>
 			                <td>${review.memberName}</td>
-			                 <td id="review-title" onclick="reviewDetail('${review.reviewNo}');"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
+			                <td id="review-title" onclick="reviewDetail('${review.reviewNo}');"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
 			                <td>${review.reviewWriteTime }</td>
 			                <td>${review.reviewCount }</td>
 			            </tr>
