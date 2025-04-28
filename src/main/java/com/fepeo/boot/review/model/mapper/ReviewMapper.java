@@ -51,6 +51,9 @@ public interface ReviewMapper {
 	int reviewUpdate(ReviewUpdateRequest review);
 	int reviewUpdate(ReviewAddRequest review);
 	
+	int selectMemberNoByReviewNo(int num);
+	int selectMemberNoByCommentNo(int num);
+	
 	
 	
 	

@@ -35,39 +35,11 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/report")
 public class ReportController {
 	
-	@Autowired
 	private final MemberService memberService;
 	private final ReportService reportService;
-	
-	@Autowired
-	private PageUtil pageutil;
-	
-	@GetMapping("/list")
-	public String showReportList(HttpSession session,
-			@RequestParam(value="currrentPage", defaultValue="1") int currentPage,
-			Model model) {
-		
-		Member member =(Member) session.getAttribute("member");
-		ChatRoom chatRoom=(ChatRoom)session.getAttribute("chatroom");
-		Review review=(Review)session.getAttribute("review");
-		ReviewComment reviewComment=(ReviewComment)session.getAttribute("reviewCommment");
-		
-		int totalCount = memberService.getMemberTotalCount();
-		//System.out.println(totalCount);
-		Map<String, Integer> pageInfo = pageutil.generatePageInfo(totalCount, currentPage);
-		//System.out.println(pageInfo);
-		List<Member> mList = memberService.selectMemberList(currentPage);
-		
-		
-		model.addAttribute("mList", mList);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("pageInfo", pageInfo);
-		int maxPage = 0;
-		pageInfo.get(maxPage);
-		//System.out.println(maxPage);
-		
-		return "report/list";
-	}
+	private final ChatService chatService;
+	private final ReviewService reviewService;
+	private final CommentService commentService;
 	
 	@GetMapping("/insert")
 	public String showReportInsert(HttpSession session, 
@@ -96,6 +68,21 @@ public class ReportController {
 		}else {
 			report.setMemberNo(member.getMemberNo());
 			int result = reportService.insertReport(report);
+			int memberNo = 0;
+			switch(report.getReportObject()) {
+				case "chat" : 
+					memberNo = chatService.selectMemberNoByNo(report.getNum());
+					break;
+				case "rev" : 
+					memberNo = reviewService.selectMemberNoByReviewNo(report.getNum());
+					break;
+				case "com" : 
+					memberNo = commentService.selectMemberNoByCommentNo(report.getNum());
+					break;
+			}
+			result += memberService.updateReportCount(memberNo);
+			
+			
 			json.put("check", result);
 			return json.toString();
 		}

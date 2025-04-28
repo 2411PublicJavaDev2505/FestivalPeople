@@ -94,4 +94,8 @@
 		ORDER BY CHATROOM_TITLE asc
 	</select> -->
 	
+	<select id="selectMemberNoByNo" resultType="_int">
+		SELECT MEMBER_NO FROM CHATROOM WHERE CHATROOM_NO = #{num}
+	</select>
+	
 </mapper>  

@@ -159,4 +159,9 @@ public class MemberServiceLogic implements MemberService{
 		return mapper.checkCode(memberCode);
 	}
 
+	@Override
+	public int updateReportCount(int memberNo) {
+		return mapper.updateReportCount(memberNo);
+	}
+
 }

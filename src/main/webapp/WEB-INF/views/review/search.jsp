@@ -53,7 +53,7 @@
 			                <!-- 수정했으나 list에 밑줄나오게하는건?? -->
 			                <!-- 4/25 검색하면 작성자 나오게 하는거해야함! -->
 			                <td>${review.reviewNo}</td>
-			                <td>${review.memberName}</td>
+			                <td>${review.nickname}</td>
 <%-- 			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td> --%>
 			                 <td id="review-title"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
 			                <td>${review.reviewWriteTime }</td>
@@ -68,7 +68,7 @@
 			    	<a href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=${startNavi-1 }">&lt;</a>
 			    </c:if>
 			    <c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-			    	<a href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}$page=${p }">${p }</a>
+			    	<a href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=${p }">${p }</a>
 			    </c:forEach>
 			    <c:if test="${endNavi ne maxPage }">
 			    	<a href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=${endNavi+1 }">&gt;</a>

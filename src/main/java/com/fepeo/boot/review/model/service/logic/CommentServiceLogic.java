@@ -36,9 +36,15 @@ public class CommentServiceLogic implements CommentService{
 
 
 	@Override
-	public int CommentDelete(int commentNo) {
-		int result = mapper.CommentDelete(commentNo);
+	public int commentDelete(int commentNo) {
+		int result = mapper.commentDelete(commentNo);
 		return result;
+	}
+
+
+	@Override
+	public int selectMemberNoByCommentNo(int num) {
+		return mapper.selectMemberNoByCommentNo(num);
 	}
 	
 	

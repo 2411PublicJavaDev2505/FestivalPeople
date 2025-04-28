@@ -35,4 +35,5 @@ public class Review {
 	private List<ImgAddRequest> imgList;
 	//04/18 19:55  멤버변수 추가!! 
 	private String memberName;
+	private String nickname;
 }

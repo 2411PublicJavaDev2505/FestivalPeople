@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -47,36 +48,37 @@
 										<th class="report-target">신고대상</th>
 										<th class="reporter">신고자</th>
 									</tr>
-										<c:forEach items="${mList }" var="member" varStatus="i">
-											<tr class ="report-Information">
-												<td class="report-no">${member.memberNo}</td>
-												<td class="report-division">${member.memberId }</td>
-												<td class="report-content">${member.memberId }</td>
-												<td class="report-target">${member.memberId }</td>
-												<td class="reporter">${member.memberId }</td>
-
-											</tr>
-										</c:forEach>
+									<c:forEach items="${rList }" var="report" varStatus="i">
+										<tr class ="report-Information">
+											<td class="report-no">${report.reportNo}</td>
+											<c:if test="${report.reportObject eq 'CHATROOM' }">
+												<td class="report-division">채팅방</td>
+											</c:if>
+											<c:if test="${report.reportObject eq 'REPORT' }">
+												<td class="report-division">후기</td>
+											</c:if>
+											<c:if test="${report.reportObject eq 'REPORT_COMMENT' }">
+												<td class="report-division">댓글</td>
+											</c:if>
+											<td class="report-content">${report.reportContent }</td>
+											<td class="report-target">신고대상?</td>
+											<td class="reporter">${report.memberNo }</td>
+										</tr>
+									</c:forEach>
 								</table>
-								<div class="pagination">
-								    <!-- 맨 처음 페이지로 -->
-								    <a href="/report/list?currentPage=1"> ◁◁ </a>
-								    <!-- 이전 5개 페이지로 -->
-								    <c:if test="${startNavi > 1}">
-								        <a href="/report/list?currentPage=${startNavi-1}" class="prev">◀</a>
-								    </c:if>
-								    <!-- 페이지 숫자 1부터 시작 -->
-								    <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
-								        <a href="/report/list?currentPage=${p}" <c:if test="${p == currentPage}">class="active"</c:if>>${p}</a>
-								    </c:forEach>
-								    <!-- 다음 5개 페이지로 -->
-								    <c:if test="${endNavi < totalPage}">
-								        <a href="/report/list?currentPage=${endNavi+1}" class="next">▶</a>
-								    </c:if>
-								    <!-- 맨 마지막 페이지로 -->
-								    <a href="/report/list?currentPage=${totalPage}"> ▷▷ </a>
-								</div>
-
+					            <div class="pagination">
+									<a href="/manager/report?currentPage=1">◁◁</a>
+									<c:if test= "${pageInfo.startNavi ne 1}">
+										<a href="/manager/report?currentPage=${pageInfo.startNavi-1}" class="prev">◀</a>
+									</c:if>	
+									<c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
+										<a href="/manager/report?currentPage=${p}">${p}</a>
+									</c:forEach>					
+									<c:if test="${pageInfo.endNavi ne pageInfo.maxPage}">
+										<a href="/manager/report?currentPage=${pageInfo.endNavi+1}" class="next">▶</a>
+									</c:if>    
+						           	<a href="/manager/report?currentPage=${pageInfo.maxPage}"> ▷▷ </a>
+					            </div>
 							</div>
 					</div>	
 				</main>

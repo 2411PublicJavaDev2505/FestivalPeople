@@ -6,11 +6,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<!-- 4/25일 아래코드 추가! -->
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 		<title>후기글 상세조회</title>
 		<link rel="stylesheet" href="../resources/css/include/header.css">
 		<link rel="stylesheet" href="../resources/css/review/detail.css">
+		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
 	<script src="https://cdn.tiny.cloud/1/h2z941nkcufiei057mdhexxykqh6vtiwziq0rhb7ahlx1hua/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 	<body>
@@ -66,7 +67,7 @@
 						
 							<div class="review-update-all-btn">
 								<button class="back-list-btn" onclick="location.href='/review/list';">목록으로</button>
-								<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberYn eq 'Y'}" >
+								<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberNo eq review.memberNo}" >
 									<button class="review-update-btn" onclick="reviewupdate(${review.reviewNo});" id="review-update-btn">수정하기</button>
 									<button class="review-delete-btn" onclick="reviewDelete();">삭제하기</button> 
 								</c:if>
@@ -139,15 +140,32 @@
 			const reviewupdate = (reviewNo) => {
 				location.href ="/review/update?reviewNo="+reviewNo;
 			}
+			
+			const deleteComment = (commentNo) => {
+				$.ajax({
+					url: "/review/comment/delete",
+					data: {
+						"commentNo" : commentNo,
+					},
+					type: "GET",
+					success : function(data) {
+						if(data != '0')
+							alert("댓글 삭제 성공!");
+						getCommentList();
+					},
+					fail : function() {
+						alert("통신 오류!!");
+					}
+				});
+			}
 		
 			
 			const reviewNo = "${review.reviewNo}";
 		
 			function getCommentList() {
-				fetch("/review/comment/list?reviewNo="+reviewNo)
+				fetch("/review/comment/list?reviewNo=${review.reviewNo}")
 				.then(response => response.json())
 				.then(cList => {
-					
 					const cListTag = document.querySelector("#commentList");
 					cListTag.innerHTML ="";
 					for(let comment of cList) {
@@ -161,31 +179,38 @@
 						
 						
 						const nickNameTag = document.createElement("span");
-						nickNameTag.innerText = "닉네임";
+						nickNameTag.innerText = comment.nickname;
 						
 						
 						const writeDateTag = document.createElement("span");
-						writeDateTag.innerText = comment.commentCreateDate;
+						writeDateTag.innerText = comment.commentTime;
 						
 						
 						const contentTag = document.createElement("p");
-						contentTag.innerText = document.commentContent;
+						contentTag.innerText = comment.commentContent;
 						
-					
 						const buttonArea = document.createElement("div");
-						buttonArea.classList.add("comment-btn-area");
-						const replyBtn = document.createElement("button");
-						replyBtn.innerText ="답글";
-						const modifyBtn = document.createElement("button");
-						modifyBtn.innerText = "수정";
-						const deleteBtn = document.createElement("button");
-						deleteBtn.innerText = "삭제";
-						buttonArea.append(replyBtn, modifyBtn, deleteBtn);
+						
+						if( '${sessionScope.member.memberNo}'.trim() != ''){
+							buttonArea.classList.add("comment-btn-area");
+							const replyBtn = document.createElement("button");
+							replyBtn.innerText ="답글";
+							if(comment.memberNo == '${sessionScope.member.memberNo}'){
+								const deleteBtn = document.createElement("button");
+								deleteBtn.innerText = "삭제";
+								deleteBtn.onclick= function() {
+									deleteComment(comment.commentNo);
+								};
+								buttonArea.append(replyBtn, deleteBtn);
+							}else{
+								buttonArea.append(replyBtn);
+							}
+						}
 					
 						commentPtag.append(nickNameTag,writeDateTag);
 						commentRow.append(commentPtag,contentTag,buttonArea);
 						
-						cmListTag.append(commentRow);
+						cListTag.append(commentRow);
 					}
 				})
 				.catch(error => alert("Error :"  +error))
@@ -193,6 +218,15 @@
 		
 			
 			document.querySelector("#addComment").addEventListener("click", function() {
+				
+				if('${sessionScope.member.memberNo}'.trim() == ''){
+					alert("로그인 해주세요!");
+					return 0;
+				}else if(document.querySelector("#commentContent").value.trim() == ''){
+					alert("내용을 입력해주세요!");
+					return 0;
+				}
+				
 				const commentContent = document.querySelector("#commentContent").value;
 				const reviewNo = document.querySelector("#reviewNo").value;
 				const memberNo = document.querySelector("#memberNo").value;
@@ -207,13 +241,15 @@
 				.then(result => {
 					if(result > 0 ){
 						alert("댓글이 등록되었습니다");
-							getCommentList();
+						getCommentList();
 					}else {
-						alert("댓글 등록이 완료되지 않았습니다");
+						alert("댓글이 등록되지 않았습니다.");
+						getCommentList();
 					}
 				})
 				.catch(error => alert("Error :" , error));
 				});
+			getCommentList();
 		</script>
 	</body>
 </html>

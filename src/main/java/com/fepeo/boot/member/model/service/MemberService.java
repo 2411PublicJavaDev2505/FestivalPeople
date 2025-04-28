@@ -53,4 +53,6 @@ public interface MemberService {
 
 	int checkCode(MemberCodeInsertRequest memberCode);
 
+	int updateReportCount(int memberNo);
+
 }
