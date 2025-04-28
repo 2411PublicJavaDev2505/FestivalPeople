@@ -91,7 +91,7 @@
 								</c:if>
 								<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
 									<li>
-										<form action="/chat/leave" id="leaveForm" method="get" style="display: none;">
+										<form action="/chat/leave" id="leaveForm" method="get">
 											<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
 											<button type="button" onclick="leaveConfirm(${chatRoom.chatroomNo});">채팅방 나가기</button>
 										</form>
@@ -99,7 +99,7 @@
 								</c:if>
 								<c:if test="${sessionScope.memberNo eq chatRoom.memberNo}">
 									<li>
-									<form action="/chat/delete" id="deleteForm" method="get" style="display: none;">
+									<form action="/chat/delete" id="deleteForm" method="get" >
 										<input type="hidden" name="chatroomNo" value="${chatRoom.chatroomNo }">
 										<button type="button" onclick="deleteConfirm(${chatRoom.chatroomNo});">채팅방 삭제</button>
 									</form>
@@ -157,10 +157,20 @@
 									<c:forEach items="${memberList }" var="mb" varStatus="i"></c:forEach>
 										<img class="chat-profile-thumbnail" src="${mb.profileFilePath }" width="40" />
 										<div class="chat-mem-nickname">${mb.nickname }</div>
-									
 									</div>
 									<div class="msg-balloon-area-l">
 										<p class="msg-balloon-box-l">${msgList.chatMsgContent }</p>
+										<!-- 파일 첨부 시 -->
+										<c:if test="${not empty msgList.chatFilePath}"><!-- 이미지는 미리보기 파일은 이름만 -->
+											<c:choose>
+												<c:when test="${msgList.chatFilePath.endsWith('.jpg') || msgList.chatFilePath.endsWith('.jpeg') || msgList.chatFilePath.endsWith('.png') || msgList.chatFilePath.endsWith('.gif') || msgList.chatFilePath.endsWith('.bmp') || msgList.chatFilePath.endsWith('.webp') || msgList.chatFilePath.endsWith('.svg')|| msgList.chatFilePath.endsWith('.jfif')}">
+													<img src="${msgList.chatFilePath }" class="chat-file-img"/>
+												</c:when>
+												<c:otherwise>
+													<a href="${msgList.chatFilePath }" download="${msgList.chatFileName }">${msgList.chatFileName }</a>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
 										<div class="msg-info">
 											<c:if test="${msgList.nonReadMember > 0}">						
 												<span class="msg-non-read">안읽음${msgList.nonReadMember }</span>
@@ -184,8 +194,18 @@
 											<fmt:formatDate value="${msgList.chatMsgTime}" pattern="a h:mm" />
 										</span>
 									</div>
-									<div></div>
 									<p class="msg-balloon-box-r">${msgList.chatMsgContent }</p>
+									<!-- 파일 첨부 시 -->
+									<c:if test="${not empty msgList.chatFilePath}"><!-- 이미지는 미리보기 파일은 이름만 -->
+										<c:choose>
+											<c:when test="${msgList.chatFilePath.endsWith('.jpg') || msgList.chatFilePath.endsWith('.jpeg') || msgList.chatFilePath.endsWith('.png') || msgList.chatFilePath.endsWith('.gif') || msgList.chatFilePath.endsWith('.bmp') || msgList.chatFilePath.endsWith('.webp') || msgList.chatFilePath.endsWith('.svg')|| msgList.chatFilePath.endsWith('.jfif')}">
+												<img src="${msgList.chatFilePath }" class="chat-file-img"/>
+											</c:when>
+											<c:otherwise>
+												<a href="${msgList.chatFilePath }" download="${msgList.chatFileName }">${msgList.chatFileName }</a>
+											</c:otherwise>
+										</c:choose>
+									</c:if>									
 								</div>
 							</li>
 							</c:if>
@@ -194,16 +214,17 @@
 					</div>
 				</section>
 				<footer class="chat-write">
+					<input type="hidden" name="chatroomNo" value="${chatroomNo}" />
 					<label id="fileUploadBtn" class="upload-btn" for="fileUploaderInput">🔗</label>
-					<input id="fileUploaderInput" name="files[]" type="file">
-					<div class="chat-input-area">
-						<textarea id="msgContent" class="chat-input" maxlength="2000" placeholder="메시지를 입력하세요"></textarea>
-					</div>
-					<button id="addChat" class="chat-btn-submit" type="submit">➤</button>
+					<input id="fileUploaderInput" name="uplodeFile" type="file" style="display:none;">
 					<div id="filePreviewArea" style="display: none;"> <!-- 파일 미리보기 영역 -->
 				       	<img id="imagePreview" src="" alt="Image Preview" style="max-width: 200px; margin-top: 10px;">
 				        <span id="fileName"></span>						
 					</div>
+					<div class="chat-input-area">
+						<textarea id="msgContent" name="msgContent" class="chat-input" maxlength="2000" placeholder="메시지를 입력하세요"></textarea>
+					</div>
+					<button id="addChat" class="chat-btn-submit" type="submit">➤</button>
 				</footer>
 			</section>
 		</section>
@@ -218,7 +239,7 @@
 			location.href = '/report/insert?target=chat&num='+num;
 		}
 		
-		/* 채팅창 입장 시 팝업 및 가입 */
+		/* 메시지 입력 */
 		document.querySelector("#addChat").addEventListener("click", function(){
 			
 			console.log("댓글 버튼 눌림")
@@ -241,17 +262,20 @@
 			
 			fetch("/chat/msgInsert",{
 				method:"POST",
-				body: formData })
-			.then(response => response.text())
+				body: formData
+			})
+			.then(response => response.json())
 			.then(result => {
 				if(result >0){
 					// 성공 시 메시지 목록 다시 불러오기 또는 화면에 추가
 					location.reload(); 
+				} else{
+					alert("메시지 전송에 실패했습니다.");
 				}
 			});
 		});
 		
-		/* 채팅입력 시 파일첨부 */
+		/* 파일첨부 시 미리보기 */
 	    const fileInput = document.getElementById("fileUploaderInput");
 	    const filePreviewArea = document.getElementById("filePreviewArea");
 	    const imagePreview = document.getElementById("imagePreview");
@@ -282,7 +306,7 @@
 	
 	            reader.readAsDataURL(file); // 파일을 데이터 URL로 읽어들임
 	        }
-	    });		
+	    });				
 		
 		/* 메뉴창 팝업 */
 		const openBtn = document.querySelector('.chat-menu-open');
