@@ -12,5 +12,11 @@
   		<select id="selectCommentList" resultType="ReviewComment">
   			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
   		</select>
+  		
+  		<!-- 4월27일 댓글 삭제  -->
+  		
+  		<update id="CommentDelete">
+  			UPDATE REVIEW_COMMENT SET DELETE_YN = 'Y' WHERE COMMENT_NO = #{commentNo}
+  		</update>
 		
 </mapper>

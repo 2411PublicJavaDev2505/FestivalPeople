@@ -33,8 +33,9 @@ public interface ReviewMapper {
 	//리뷰 조회수 추가 4/19
 	int reviewCount(int reviewNo);
 	
-	//검색!4/21 16:12
+	//검색!4/21 16:12 // 4/26 일 코드수정해야해서 원래 코드는 주석 안되면 다시 원복하기!
 	List<Review> searchListByKeyword(RowBounds rowBounds, Map<String, String> paramMap);
+	//List<Review> searchListByKeyword(RowBounds rowBounds, Map<String, String> paramMap,int reviewNo );
 	//검색 2 카운트 (추가할거 있음 할것!)(아래는 지워야하나??)
 	int getTotalCountBySearch(Map<String, String> paramMap);
 	//4/22 10:32분 추가 안되면 지울것!!

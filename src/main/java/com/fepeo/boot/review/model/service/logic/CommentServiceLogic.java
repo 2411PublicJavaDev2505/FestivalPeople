@@ -33,6 +33,13 @@ public class CommentServiceLogic implements CommentService{
 	public List<ReviewComment> selectCommentList(int reviewNo) {
 		return mapper.selectCommentList(reviewNo);
 	}
+
+
+	@Override
+	public int CommentDelete(int commentNo) {
+		int result = mapper.CommentDelete(commentNo);
+		return result;
+	}
 	
 	
 }

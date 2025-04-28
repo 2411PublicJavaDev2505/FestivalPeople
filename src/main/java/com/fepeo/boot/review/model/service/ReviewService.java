@@ -18,7 +18,11 @@ public interface ReviewService {
 
 	
 	//여긴 detail만들때 메소드만들어줌!
+	//4/46검색 작성자 코드 작성하면서 여기코드 바뀜!
+	//원복할때 확인해야함****
+	//int selectOneByNo(int reviewNo);
 	Review selectOneByNo(int reviewNo);
+
 	
 	
 	//리뷰 전체 리스트(커렌트 4/17 09:13원복중!)
@@ -34,8 +38,9 @@ public interface ReviewService {
 	int reviewCount(int reviewNo);
 
 
-	//리뷰검색 4/21 16:05
+	//리뷰검색 4/21 16:05 //여기도 4/26일 원래코드는 주석처리 안되면 원복!!
 	List<Review> searchListByKeyword(Map<String, String> paramMap, int currentPage);
+	//List<Review> searchListByKeyword(Map<String, String> paramMap, int currentPage,int reviewNo);
 
 
 	//리뷰검색 2  4/21 18:54 
