@@ -24,7 +24,7 @@
 					</div>
 					<section>
 							<div class="review-report-btn">
-								<button onclick="reportReview('${review.reviewNo}');">신고하기</button>
+								🚨<button class="report-btn" onclick="reportReview('${review.reviewNo}');">신고하기</button>
 							</div>
 						<div class="reviewtitle-h1">
 							<!-- 리뷰제목 -->
