@@ -13,12 +13,16 @@
 
 .mypage-container {
 	margin: 100px auto 100px auto;
-	width: 1200px;
+	width: 1300px;
 	--height: 800px;
 	background-color: rgba(228, 226, 221, 0.9);
 	border-radius: 20px;
 	box-shadow: 0px 0px 3px #444;
 	display: flex;
+}
+
+.mypage-right::-webkit-scrollbar {
+	display:none;
 }
 
 .mypage-left {
@@ -142,7 +146,7 @@
 	transition-duration: 0.5s;
 	background-color: white;
 	margin-bottom: 20px;
-	background-color: #eec4ae;
+	background-color: rgb(245, 221, 207);
 	border-radius: 5px;
 	box-shadow: 0px 0px 3px #444;
 	display: flex;

@@ -20,7 +20,8 @@
 		<main>
 			<div class="course-total-container">		
 				<div class="course-recommend-choice">
-					<p class="courseText">코스추천
+					<p class="courseText">
+						코스추천
 						<label>
 							<input type="checkbox" name="category" value="FD6" class="hidden-image">
 							<span class="matzip-image"></span>				
@@ -75,7 +76,7 @@
 						</div>					
 							<form id="courseForm" class="insert-course">								
 								<div class="expect-cost">선택 장소 수 : 0</div>	
-								<input type="text" name="courseName" placeholder="코스명을 입력하세요"> 	
+								<input type="text"  class="courseName" name="courseName" placeholder="코스명을 입력하세요"> 	
 								<input type="hidden" name="festivalNo" value="${festival.festivalNo }">												
 								<div id="hiddenPlaceInputs">
 						        </div>

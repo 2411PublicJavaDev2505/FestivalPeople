@@ -186,6 +186,14 @@
     border: 1px solid #ccc;
 }
 
+#searchCondition{
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+	
+}
+
 .search-btn {
     padding: 10px 16px;
     font-size: 16px;
@@ -246,6 +254,7 @@
 	height : 100%;
     background-color: rgb(250, 249, 248, 0.5);
     margin : 40px 50px;
+    border-radius: 20px;
 }
 
 .course-recommend-choice{
@@ -280,19 +289,24 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	margin: 20px 0 10px 0;
+	margin: 20px 10px 10px 10px;
+	border-radius: 20px;
+	
 }
 
 .course-recommend-img img {
 	width: 90%;
+	margin: 10px;
 }
 
 .festival-title {
-	width: 90%;
+	width: 60%;
 	margin: 10px auto 10px auto;
 	border: 1px solid black;
 	text-align: center;
 	padding: 10px;
+	border-radius:20px;
+	background-color:aliceblue;
 }
 
 
@@ -329,27 +343,47 @@ body{
 
 .place-title, .place-name {
 	height : 80px;
-	background-color: #457b9d;
+	background-color: aliceblue;
 	border: 0.5px solid black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 20px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #2b6777;
+	margin: 10px 0;
 }
 
 
 
 .place-name{
 	width: 600px;
-	font-size : 200px;
+	font-size: 24px;
+	font-weight: bold;
 }
 
 
 .insert-course {
 	border : 1px solid grey;
 	text-align : center;
-	width : 40%;
+	width : 55%;
 	margin : 10px auto 10px auto;
+	border-radius:20px;
+	background-color:aliceblue;
+	display:flex;
+}
+
+.courseName {
+	border-radius:10px;
+	padding : 10px;
+	margin: 5px;
+}
+
+#saveCourseBtn {
+	margin: 2px;
+	padding: 10px;
+	border-radius: 15px;
 }
 
 .expect-cost, .expect-time {
@@ -400,6 +434,7 @@ body{
   border-radius: 15px;
   padding: 5px;
   transition: all 0.3s;
+  
 }
 .courseText input[type="checkbox"]:checked + span {
   box-shadow: 0 0 10px #3fc1c9;
