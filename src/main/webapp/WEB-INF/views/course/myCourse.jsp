@@ -51,7 +51,7 @@
 									</c:forEach>			
 								</div>	
 								<div class="deleteDiv">	
-									<form action="/course/delete" id="deleteFrom" method="get">
+									<form action="/course/delete" id="deleteForm" method="get">
 										<input type="hidden" name="courseNo" value="${course.courseNo }">
 										<button class="deleteButton" type="button" onclick="deleteCourse(${course.courseNo})" >삭제하기</button>
 									</form>				
@@ -238,7 +238,7 @@
  	 /* 코스 삭제하기 */
  	 const deleteCourse = (courseNo) => {
  		 var result = confirm("정말로 삭제하시겠습니까?");
- 		 if(result) {
+ 		 if(result === true) {
  			 document.getElementById('deleteForm').submit();
  		 }else {
  			 return false;

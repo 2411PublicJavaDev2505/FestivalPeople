@@ -38,6 +38,7 @@
 	        WHERE ROWNUM &lt;= #{endRow}
 	    )
 	    WHERE rnum &gt;= #{startRow}
+	    ORDER BY FESTIVAL_END_DATE
 	</select>
 
 	<select id="selectFestivalByNo" resultType="com.fepeo.boot.festival.model.vo.Festival">
@@ -83,6 +84,7 @@
 	        ORDER BY distance
 	    ) 
 	    WHERE ROWNUM &lt;= 20
+	    ORDER BY FESTIVAL_END_DATE DESC
 	</select>
 	
 	<select id="searchFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival">
@@ -98,6 +100,7 @@
 				FESTIVAl_NAME like '%'||#{searchMap.searchKeyword}||'%' OR FESTIVAL_ADDRESS like '%'||#{searchMap.searchKeyword}||'%'
 			</if>	
 		</where>
+		ORDER BY FESTIVAL_END_DATE DESC
 	</select>
 	
 	 <!-- 축제 리스트 검색 기능 -->

@@ -30,10 +30,15 @@
 	justify-content :space-between; 	
 }
 
+.total-table{
+	border : 0.5px solid white;
+}
+
 .member-manage-table {
-	width : 80%;
+	width : 90%;
 	margin : 0 auto;
 	margin-left: 170px;	
+	text-align: center;
 }
 
 .table-title {
@@ -74,7 +79,18 @@
 }
 
 
+.deleteButton {
+	border: none;
+	border-radius: 5px;
+	width:50px;
+	background-color : rgb(255, 51, 51);
+	color : white;
+	margin: 2px;
+}
 
+.deleteButton:hover{
+	background-color:red;
+}
 
 
 

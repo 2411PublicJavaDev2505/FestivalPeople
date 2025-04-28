@@ -35,7 +35,7 @@
 								<button id="refreshFestivalBtn">축제 최신화</button>
 							</div>
 							<div class="right-search-area">
-				                <form class="search-form">
+<!-- 				                <form class="search-form">
 				                    <select>
 				                        <option value="all">전체</option>
 				                        <option value="memberId">회원아이디</option>
@@ -46,7 +46,7 @@
 				                    </select>
 				                    <input type="text" placeholder="검색" id="">
 				                    <button class="search-btn">⌕</button>
-				                </form>
+				                </form> -->
 							</div>
 						</div>
 							<div class="member-manage-table">
@@ -65,7 +65,7 @@
 												<td class="member-Nickname">${member.nickname }</td>
 												<td class="member-Email">${member.email }</td>
 												<td class="member-Report">${member.reportCount }
-													<button onclick="deleteMember('${member.memberNo}','${member.socialYn }','${member.memberName }')">탈퇴</button>
+													<button class="deleteButton" onclick="deleteMember('${member.memberNo}','${member.socialYn }','${member.memberName }')">탈퇴</button>
 												</td>
 
 											</tr>

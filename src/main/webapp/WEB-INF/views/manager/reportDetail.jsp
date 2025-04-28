@@ -8,38 +8,48 @@
 	<title>신고 상세</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/include/footer.css">
+	<link rel="stylesheet" href="../resources/css/report/detail.css">
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
-	<div id="container">
-		<jsp:include page="/WEB-INF/views/include/header.jsp" />
-		<main>
-			<div class="report-detail-top">
-				<button onclick="location.href='/manager/mypage';">회원관리</button>
-				<button onclick="location.href='/manager/report';">신고관리</button>
-			</div>
-			<div class="report-detail-btn">
-				<button onclick="deleteReport();">반려</button>
-				<button onclick="reportAccept();">삭제</button>
-			</div>
-			<div class="report-detail-content">
-				신고 대상 : 
-					<c:if test="${report.reportObject eq 'CHATROOM' }">
-						채팅방 번호 : ${report.chatRoomNo } 
-					</c:if> 
-					<c:if test="${report.reportObject eq 'REPORT' }">
-						후기글 번호 : ${report.reviewNo } 
-					</c:if> 
-					<c:if test="${report.reportObject eq 'REPORT_COMMENT' }">
-						댓글 번호 : ${report.commentNo } 
-					</c:if>
-				<br>
-				${report.reportObjectTitle } <br>
-				신고 사유 : ${report.reportContent }<br>
-			</div>
-		</main>
-		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-	</div>
+	<div class="background-image">
+		<img src="../resources/img/manager/manager-background.jpg" alt="바탕화면">
+    </div>
+		<div id="container">
+			<jsp:include page="/WEB-INF/views/include/header.jsp" />
+			<main>
+				<div class="manager-total-container">
+					<div class="maneger-select-search">
+						<div class="left-select-area">
+							<button onclick="location.href='/manager/mypage';">회원관리</button>
+							<button onclick="location.href='/manager/report';">신고관리</button>
+						</div>
+
+						<div class="report-detail-content">
+							신고 대상 : ${report.memberNo }<br><br>
+								<c:if test="${report.reportObject eq 'CHATROOM' }">
+									채팅방 번호 : ${report.chatRoomNo } 
+								</c:if> 
+								<c:if test="${report.reportObject eq 'REPORT' }">
+									후기글 번호 : ${report.reviewNo } 
+								</c:if> 
+								<c:if test="${report.reportObject eq 'REPORT_COMMENT' }">
+									댓글 번호 : ${report.commentNo } 
+								</c:if>
+							<br>
+							${report.reportObjectTitle } <br>
+							
+							신고 사유 : ${report.reportContent }<br>
+						</div>
+						<div class="report-detail-btn">
+							<button class="rejectBtn" onclick="deleteReport();">반려</button>
+							<button class="acceptBtn" onclick="reportAccept();">삭제</button>
+						</div>
+					</div>
+				</div>
+			</main>
+			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+		</div>
 	<script type="text/javascript">
 		const deleteReport = () => {
 			if(confirm("신고를 반려하시겠습니까?")){

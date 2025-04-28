@@ -15,10 +15,14 @@
     z-index: -1;
 }
 
+main {
+	padding-left: 500px;
+	padding-top : 100px;
+}
+
 /* 관리자 전체 화면임 */
 .manager-total-container {
-	margin: 100px auto 100px auto;
-	width: 1200px;
+	width: 900px;
 	height: 700px;
 	background-color : #3B7C70;	
 	border-radius: 20px;
@@ -47,33 +51,15 @@
 
 }
 
-td:hover {
-	background-color: rgb(0,64,0);
+.report-detail-content {
+	width: 700px;
+	height: 300px;
+	background-color : aliceblue;
+	margin: 0 auto;
+	border-radius: 20px;
+	margin-top : 80px;
 }
 
-.report-Information td {
-	text-align: center;
-	padding: 10px;
-	color: white;
-}
-
-.total-table {
-
-	border: 1px solid white;	
-
-}
-.table-title th {
-	color: white;
-	padding: 10px;
-	font-weight: bold;
-}
-
-
-.table-title th {
-	color: white;
-	padding: 10px;
-	font-weight: bold;
-}
 
 .left-select-area button {
 	background-color: #FFD700;
@@ -89,34 +75,34 @@ td:hover {
 	background-color: #FFA500;
 }
 
+.report-detail-btn {
+	text-align: center;
 
-
-
-
-
-/*   검색창 */
-.search-form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content:flex-end;
- 	margin:  10px 10px;  
+	}
+	
+	
+.rejectBtn {
+	width:70px;
+	background-color: #FFA500;
+	border-radius: 5px;
+	padding: 10px;	
 }
 
-.search-form select, .search-form input {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+.acceptBtn{
+	width:70px;
+	background-color: red;
+	border-radius: 5px;	
+	padding: 10px;	
 }
 
-.search-btn {
-    padding: 10px 16px;
-    font-size: 16px;
-    background: #ff6f61;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+.rejectBtn:hover {
+	background-color: #FFD700;
 }
+
+.acceptBtn:hover {
+	background-color: rgb(255,151,151);
+}
+
+
+
 
