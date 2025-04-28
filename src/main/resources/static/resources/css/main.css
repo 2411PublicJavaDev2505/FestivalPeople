@@ -113,6 +113,10 @@
     text-decoration: none;
 }
 
+#detailLink {
+	cursor: pointer;
+}
+
 .slidecontroller-pagination {
     display: flex;
     align-items: center;
