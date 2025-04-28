@@ -53,13 +53,15 @@
 					<ul class="chat-list">
 						<li class="chat-list-row">
 							<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
-							<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
-							<div class="text-wrap">
-								<div class="chat-title">${myList.chatroomTitle }</div>
-								<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
-								<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
-							</div>
-							<div class="msg-alarm">0</div>
+								<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
+								<div class="text-wrap">
+									<div class="chat-title">${myList.chatroomTitle }</div>
+									<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
+									<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
+								</div>
+								<c:if test="${myList.nonCheckMsg> 0 }" >
+									<div class="msg-alarm">${myList.nonCheckMsg }</div>
+								</c:if>
 							</a>
 						</li>
 					</ul> 
@@ -76,14 +78,13 @@
 				<c:forEach items="${rSearchList }" var="cRoom" varStatus="i">
 					<ul class="chat-list">
 						<li class="chat-list-row">
-							<a href="javascript:void(0);" onclick="checkAndEnter(${cRoom.chatroomNo});" class="chat-link">
+							<a href="javascript:void(0);" onclick="checkAndEnter('${cRoom.chatroomNo}',${cRoom.chatMemberCount}, ${cRoom.chatLimit});" class="chat-link">
 							<img class="chat-image" alt="${cRoom.chatImgName}" src="${cRoom.chatImgPath}">
 							<div class="text-wrap">
 								<div class="chat-title">${cRoom.chatroomTitle }</div>
 								<div class="chat-tag">#${cRoom.tag1 } #${cRoom.tag2 } #${cRoom.tag3 }</div>
 								<div class="chat-mem-count">정원 ${cRoom.chatMemberCount } / ${cRoom.chatLimit }</div>
 							</div>
-							<div class="msg-alarm">0</div>
 							</a>
 						</li>
 					</ul>            
@@ -95,28 +96,32 @@
     </div>
     
 	<script>
-		/* 채팅방 입장 시  */
-		function checkAndEnter(chatroomNo) {
-			fetch("/chat/check-access?chatroomNo=" + chatroomNo)
-			.then(res => res.json())
-			.then(data => {
-				if (data.status === "joined") {
-					// 가입자: 바로 입장
-					location.href = "/chat/enter/" + chatroomNo;
-				} else if (data.status === "notJoined") {
-					// 미가입자: 팝업으로 물어봄
-					const ok = confirm("첫입장을 환영합니다! 가입 후 입장하시겠습니까?");
-					if (ok) {
-						location.href = "/chat/enter/" + chatroomNo;
-					}
-				}
-			})
-			.catch(err => {
-				alert("서버 오류 발생: " + err);
-			});
+	/* 채팅방 입장 시  */
+	function checkAndEnter(chatroomNo, currentCount, limitCount) {
+		if(currentCount >= limitCount){
+			alert("채팅방 정원이 가득 찼습니다.");
+			return; // 만원 시 입장거부
 		}
+		
+		fetch("/chat/check-access?chatroomNo=" + chatroomNo)
+		.then(res => res.json())
+		.then(data => {
+			if (data.status === "joined") {
+				// 가입자: 바로 입장
+				location.href = "/chat/enter/" + chatroomNo;
+			} else if (data.status === "notJoined") {
+				// 미가입자: 팝업으로 물어봄
+				const ok = confirm("첫입장을 환영합니다! 가입 후 입장하시겠습니까?");
+				if (ok) {
+					location.href = "/chat/enter/" + chatroomNo;
+				}
+			}
+		})
+		.catch(err => {
+			alert("서버 오류 발생: " + err);
+		});
+	}
 
 	</script>	
-	
 </body>
 </html>

@@ -21,7 +21,7 @@ public interface ChatService {
 	
 	List<ChatMsg> selectChatMsgListByNo(int chatroomNo);
 
-	int insertChatMsg(MsgInsertRequest msg);
+	int insertChatMsg(MsgInsertRequest msg) throws IllegalStateException, IOException;
 
 	int deleteCahtRoom(int chatroomNom);
 

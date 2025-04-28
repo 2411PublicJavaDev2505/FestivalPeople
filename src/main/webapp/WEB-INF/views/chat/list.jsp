@@ -9,11 +9,7 @@
 	<title>같이갈래-목록</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
-	<link rel="stylesheet" href="../resources/css/chat/list.css">
-	
- <!-- <script type="text/javascript" src="script.js"></script>   
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   -->   
-	
+	<link rel="stylesheet" href="../resources/css/chat/list.css">	
 </head>
 <body>
 	<!-- 광고 배너 -->
@@ -79,7 +75,6 @@
 			<!--우 전체목록-->
 			<section class="allchat-list-wrap">
 			<c:forEach items="${cRooms }" var="cRoom" varStatus="i">
-				<p>방번호: ${cRoom.chatroomNo}</p>
 				<ul class="chat-list">
 					<li class="chat-list-row">
 						<a href="javascript:void(0);" onclick="checkAndEnter('${cRoom.chatroomNo}',${cRoom.chatMemberCount}, ${cRoom.chatLimit});" class="chat-link">
@@ -126,8 +121,6 @@
 			});
 		}
 		
- 		/* 좌측 나의 채팅방 검색 */
-
 	</script>
 </body>
 </html>
