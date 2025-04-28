@@ -6,9 +6,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<!-- 4/25일 아래코드 추가! -->
+		<!-- 이건 망치면 원복할 용도이니 무시할것!!!4/27 21:19************************************ -->
+		<!-- 헷갈리니 2 로 바꿔줌!   -->
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-		<title>후기글 상세조회</title>
+		<title>후기글 상세조회2</title>
 		<link rel="stylesheet" href="../resources/css/include/header.css">
 		<link rel="stylesheet" href="../resources/css/review/detail.css">
 	</head>
@@ -19,7 +21,7 @@
 			<jsp:include page="../include/header.jsp"/>
 				<div class="reviewdetail-main">
 					<div class="review-h3">
-						<h3>여행후기</h3>
+						<h3>여행후기2</h3>
 					</div>
 					<section>
 							<div class="review-report-btn">
@@ -66,6 +68,7 @@
 						
 							<div class="review-update-all-btn">
 								<button class="back-list-btn" onclick="location.href='/review/list';">목록으로</button>
+								<!-- 글쓴이만 글수정하기? 추가해야함! -->
 								<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberYn eq 'Y'}" >
 									<button class="review-update-btn" onclick="reviewupdate(${review.reviewNo});" id="review-update-btn">수정하기</button>
 									<button class="review-delete-btn" onclick="reviewDelete();">삭제하기</button> 
@@ -83,24 +86,20 @@
 							</div>
 							<textarea row="4" cols="82" id="commentContent" placeholder="댓글내용을 입력해주세요"></textarea>
 							<div class="addComment-btn">
-								<!-- ***여기 id값 건들지말것!**** -->
 								<button id="addComment">댓글등록</button>
 							</div>	
 						</div>
-						<!--  댓글 목록!내가 가지고 있는것으로 일단수정! -->
 						<div class="comment-list-area">
-							<ul id="commentList">
+							<ul id="reviewcommentlist">
 								<c:forEach items="${review.commentList }" var="comment">
-									<li class="comment-row">
+									<li class="reviewcomment-row">
 										<p>
-											<span>닉네임</span>
-											작성시간 : <span>${comment.commentTime }</span>
+											내용:<span>${comment.commentContent }</span>
+											작성시간:<span>${comment.commentTime }</span>
 										</p>
-											내용: <p>${comment.commentContent }</p>
-											
-											<div class="comment-btn-area">
+										<div class="comment-btn-area">
 											<button class="replyBtn">답글(삭제 예정)</button>
-											<button class="deleteBtn" onclick="CommentDelete();">삭제</button>
+											<button class="deleteBtn">삭제</button>
 											<button onclick="reportComment('${comment.commentNo}');">신고</button>
 										</div>
 									</li>
@@ -112,14 +111,6 @@
 		</div>
 	</main>
 		<script>
-			//리뷰삭제!!!4/27일 지울것!!
-			
-			const CommentDelete = () => {
-				if(confirm("정말 삭제 하시겠습니까???")) {
-					location.href ="/review/comment/delete?commentNo=${comment.commentNo}";
-				}
-			}
-		
 			//리뷰삭제
 			const reportReview = (num) => {
 				location.href = '/report/insert?target=rev&num=' + num;
@@ -128,14 +119,18 @@
 				location.href = '/report/insert?target=com&num=' + num;
 			}
 		
-			
+			//이것도 안먹힘...4/18 17:48종료!!
 			const reviewDelete = () => {
  				if(confirm("정말 삭제하시겠습니까??")) {
  					location.href = "/review/delete?reviewNo=${review.reviewNo}";
  				}
  			}
 		
-		
+			
+			//4/21 코드수정함!
+// 			const reviewupdate = () => {
+// 				location.href ="/review/update";
+// 			}
 			const reviewupdate = (reviewNo) => {
 				location.href ="/review/update?reviewNo="+reviewNo;
 			}
@@ -147,31 +142,32 @@
 				fetch("/review/comment/list?reviewNo="+reviewNo)
 				.then(response => response.json())
 				.then(cList => {
-					
+					//#commentList 확인필요!
 					const cListTag = document.querySelector("#commentList");
 					cListTag.innerHTML ="";
 					for(let comment of cList) {
-						
+						//li태그
 						const commentRow = document.createElement("li"); //** <li></li> 태그를 만든다!!!
-						commentRow.classList.add("comment-row"); //**<li class="reviewcomment-row"></li>
+						commentRow.classList.add("reviewcomment-row"); //**<li class="reviewcomment-row"></li>
 						
-						
+						//p태그(출력할 화면정해야함!) (코드확인필요)
 						const commentPtag = document.createElement("p"); 
+						//comment-writer 인지 어디다 적을지 정해야함(작성자,아이디,닉네임이냐)comment-writer"?
 						commentPtag.classList.add("comment-writer");
 						
+						//작성자,아이디,닉네임(코드확인필요)
+						const memberIdTag = document.createElement("span");
+						memberIdTag.innerText ="아이디";
 						
-						const nickNameTag = document.createElement("span");
-						nickNameTag.innerText = "닉네임";
+						//작성일(코드확인필요)
+						const commentTimeTag = document.createElement("span");
+						commentTimeTag.innerText = comment.commentCreateDate;
 						
-						
-						const writeDateTag = document.createElement("span");
-						writeDateTag.innerText = comment.commentCreateDate;
-						
-						
+						//내용 
 						const contentTag = document.createElement("p");
 						contentTag.innerText = document.commentContent;
 						
-					
+						//버튼영역
 						const buttonArea = document.createElement("div");
 						buttonArea.classList.add("comment-btn-area");
 						const replyBtn = document.createElement("button");
@@ -181,11 +177,11 @@
 						const deleteBtn = document.createElement("button");
 						deleteBtn.innerText = "삭제";
 						buttonArea.append(replyBtn, modifyBtn, deleteBtn);
-					
-						commentPtag.append(nickNameTag,writeDateTag);
+						//list 붙여넣기
+						commentPtag.append(memberIdTag,commentTimeTag);
 						commentRow.append(commentPtag,contentTag,buttonArea);
-						
-						cmListTag.append(commentRow);
+						// 댓글 목록(ul) 에 댓글(li) 추가?!
+						cListTag.append(reviewcomment-row);
 					}
 				})
 				.catch(error => alert("Error :"  +error))

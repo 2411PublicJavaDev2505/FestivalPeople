@@ -8,7 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
-	<link rel="stylesheet" href="../resources/css/review/insert.css">
+	<link rel="stylesheet" href="../resources/css/review/update.css">
+	<!-- 위에 업데이트 css로 변경.원래는 insert로 되어있었음..4/26 -->
 	<title>후기게시판 수정</title>
 </head>
 	<!-- 4/23 두번째 추가! -->
@@ -46,9 +47,12 @@
 					
 <!--  						<input type="file" name ="images"> <br>  -->
 					</div>
-					<div class="reviewinsert-btn">
+					<!-- 4/26 20:58분 reviewinsert-btn에서 수정! -->
+					<div class="reviewupdate-btn">
 						<!-- type이러던지 id값 변경해줘야함4/21 -->
-						<button type="submit" class=submitbtn">수정</button>
+						<!-- 4/26 21:02분 수정버튼 css때문에 id값 추가하고 class는 지움!
+						class=submitbtn" -->
+						<button type="submit"  id="submitbtn">수정</button>
 						<button type="submit" id="submitbtn-c">목록으로</button> 
 					</div>
 		 		</form> 

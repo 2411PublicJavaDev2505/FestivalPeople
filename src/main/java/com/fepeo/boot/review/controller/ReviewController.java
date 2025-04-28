@@ -278,6 +278,16 @@ public class ReviewController {
 		return cService.selectCommentList(reviewNo);
 	}
 	
+	//4/27 댓글 삭제 코드 작성!삭제 안됨...지울것!
+	
+	@GetMapping("/comment/delete")
+	public String CommentDelete(@RequestParam("commentNo") int commentNo
+			,Model model) {
+		int result = cService.CommentDelete(commentNo);
+		System.out.println("확인");
+		return "redirect:/review/list";
+	}
+	
 }
 
 
