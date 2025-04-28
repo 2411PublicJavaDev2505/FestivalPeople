@@ -36,4 +36,29 @@ public class ReportServiceLogic implements ReportService{
 		return reportMapper.selectReportList(rowBounds);
 	}
 
+	@Override
+	public Report selectOneByNo(int reportNo) {
+		return reportMapper.selectOneByNo(reportNo);
+	}
+
+	@Override
+	public int deleteReport(int reportNo) {
+		return reportMapper.deleteReport(reportNo);
+	}
+
+	@Override
+	public int deleteChatroomReport(int chatRoomNo) {
+		return reportMapper.deleteChatroomReport(chatRoomNo);
+	}
+
+	@Override
+	public int deleteReviewReport(int reviewNo) {
+		return reportMapper.deleteReviewReport(reviewNo);
+	}
+
+	@Override
+	public int deleteCommentReport(int commentNo) {
+		return reportMapper.deleteCommentReport(commentNo);
+	}
+
 }

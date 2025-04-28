@@ -16,4 +16,14 @@ public interface ReportService {
 
 	List<Report> selectReportList(int currentPage);
 
+	Report selectOneByNo(int reportNo);
+
+	int deleteReport(int reportNo);
+
+	int deleteChatroomReport(int chatRoomNo);
+
+	int deleteReviewReport(int reviewNo);
+
+	int deleteCommentReport(int commentNo);
+
 }

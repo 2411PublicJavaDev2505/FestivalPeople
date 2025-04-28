@@ -18,4 +18,6 @@ public interface CommentMapper {
 	
 	int selectMemberNoByCommentNo(int num);
 	
+	ReviewComment selectOneByNo(int commentNo);
+	
 }
