@@ -94,6 +94,15 @@ public class ManagerController {
 		return "manager/reportList";
 	}
 	
+	@GetMapping("/rdetail")
+	public String showReportDetail(@RequestParam("reportNo") int reportNo
+			,Model model) {
+		Report report = rService.selectOneByNo(reportNo);
+		model.addAttribute("report",report);
+		return "manager/reportDetail";
+	}
+	
+	
 	@ResponseBody
 	@PostMapping("delmem")
 	public String deleteMember(MemberDeleteRequest member) {
