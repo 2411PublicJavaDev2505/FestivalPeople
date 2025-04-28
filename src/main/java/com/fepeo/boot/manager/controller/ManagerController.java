@@ -109,28 +109,7 @@ public class ManagerController {
 		return result+"";
 	}
 	
-	@GetMapping("/rdetail")
-	public String showReportDetail(@RequestParam("reportNo") int reportNo
-			,Model model) {
-		Report report = rService.selectOneByNo(reportNo);
-		switch(report.getReportObject()) {
-			case "CHATROOM" :
-				ChatRoom chatRoom = cService.selectChatRoomByNo(report.getChatRoomNo());
-				report.setReportObjectTitle(chatRoom.getChatroomTitle());
-				break;
-			case "REPORT" : 
-				Review review = reService.selectOneByNo(report.getReviewNo());
-				report.setReportObjectTitle(review.getReviewTitle());
-				break;
-			case "REPORT_COMMENT" :
-				ReviewComment comment = coService.selectOneByNo(report.getCommentNo());
-				report.setReportObjectTitle(comment.getCommentContent());
-				break;
-		}
-		model.addAttribute("report",report);
-		
-		return "manager/reportDetail";
-	}
+
 	
 	@ResponseBody
 	@GetMapping("/delre")

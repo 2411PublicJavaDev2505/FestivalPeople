@@ -44,7 +44,7 @@
 										            <p>${festival.festivalAddress }</p><br>										            
 										            <p>${festival.festivalStartDate} ~ ${festival.festivalEndDate }</p><br>
 										            <p class="hashtags">${festival.festivalDetailAddress }</p>
-										            <br><br><br>
+										            <br><br><br><br><br><br>
 										        </div>
 										    </a>
 										</div>
