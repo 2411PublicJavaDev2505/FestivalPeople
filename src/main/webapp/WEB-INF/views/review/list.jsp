@@ -54,9 +54,9 @@
 			                <!-- 4/19 18:34분 수정시작! -->
 			                <!-- 수정했으나 list에 밑줄나오게하는건?? -->
 			                <td>${review.reviewNo}</td>
-			                <td>${review.memberName}</td>
+			                <td>${review.nickname}</td>
 <%-- 			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td> --%>
-			                 <td id="review-title" onclick="reviewDetail('${review.reviewNo}');"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
+			                <td id="review-title" onclick="reviewDetail('${review.reviewNo}');"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
 			                <td>${review.reviewWriteTime }</td>
 			                <td>${review.reviewCount }</td>
 			            </tr>

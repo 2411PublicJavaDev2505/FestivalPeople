@@ -16,4 +16,5 @@ public class ReviewComment {
 	private int			reviewNo;
 	private int			memberNo;
 	private String		deleteYn;
+	private String 		nickname;
 }

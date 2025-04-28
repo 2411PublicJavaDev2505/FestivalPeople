@@ -10,12 +10,13 @@
                 DEFAULT ,#{reviewNo}, #{memberNo}, DEFAULT)
   		</insert>
   		<select id="selectCommentList" resultType="ReviewComment">
-  			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
+  			SELECT RC.*, M.NICKNAME FROM REVIEW_COMMENT RC JOIN MEMBER M ON RC.MEMBER_NO = M.MEMBER_NO 
+			WHERE REVIEW_NO = #{reviewNo} AND DELETE_YN='N' ORDER BY COMMENT_NO DESC
   		</select>
   		
   		<!-- 4월27일 댓글 삭제  -->
   		
-  		<update id="CommentDelete">
+  		<update id="commentDelete">
   			UPDATE REVIEW_COMMENT SET DELETE_YN = 'Y' WHERE COMMENT_NO = #{commentNo}
   		</update>
 		
