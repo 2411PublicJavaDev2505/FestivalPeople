@@ -62,5 +62,7 @@ public interface MemberMapper {
 
 	int updateReportCount(int memberNo);
 
+	int substractReportCount(int memberNo);
+
 
 }

@@ -164,4 +164,9 @@ public class MemberServiceLogic implements MemberService{
 		return mapper.updateReportCount(memberNo);
 	}
 
+	@Override
+	public int substractReportCount(int memberNo) {
+		return mapper.substractReportCount(memberNo);
+	}
+
 }
