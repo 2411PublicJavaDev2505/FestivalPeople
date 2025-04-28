@@ -46,6 +46,12 @@ public class CommentServiceLogic implements CommentService{
 	public int selectMemberNoByCommentNo(int num) {
 		return mapper.selectMemberNoByCommentNo(num);
 	}
+
+
+	@Override
+	public ReviewComment selectOneByNo(int commentNo) {
+		return mapper.selectOneByNo(commentNo);
+	}
 	
 	
 }

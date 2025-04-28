@@ -24,4 +24,7 @@
 			SELECT MEMBER_NO FROM REVIEW_COMMENT WHERE COMMENT_NO = #{num}
 		</select>
 		
+		<select id="selectOneByNo" resultType="ReviewComment">
+			SELECT * FROM REVIEW_COMMENT WHERE COMMENT_NO = #{commentNo}
+		</select>
 </mapper>

@@ -17,4 +17,14 @@ public interface ReportMapper {
 
 	List<Report> selectReportList(RowBounds rowBounds);
 
+	Report selectOneByNo(int reportNo);
+
+	int deleteReport(int reportNo);
+
+	int deleteChatroomReport(int chatRoomNo);
+
+	int deleteReviewReport(int reviewNo);
+
+	int deleteCommentReport(int commentNo);
+
 }

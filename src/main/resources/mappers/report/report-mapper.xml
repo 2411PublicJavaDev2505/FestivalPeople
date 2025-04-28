@@ -27,4 +27,22 @@
 		SELECT * FROM REPORT ORDER BY 1 DESC
 	</select>
 	
+	<select id="selectOneByNo" resultType="Report">
+		SELECT * FROM REPORT WHERE REPORT_NO = #{reportNo}
+	</select>
+	
+	<delete id="deleteReport">
+		DELETE FROM REPORT WHERE REPORT_NO = #{reportNo}
+	</delete>
+	
+	<delete id="deleteChatroomReport">
+		DELETE FROM REPORT WHERE CHATROOM_NO = #{chatRoomNo}
+	</delete>
+	<delete id="deleteReviewReport">
+		DELETE FROM REPORT WHERE REVIEW_NO = #{reviewNo}
+	</delete>
+	<delete id="deleteCommentReport">
+		DELETE FROM REPORT WHERE COMMENT_NO = #{commentNo}
+	</delete>
+	
 </mapper>

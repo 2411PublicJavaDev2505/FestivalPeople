@@ -16,5 +16,6 @@ public interface CommentService {
 	
 	int selectMemberNoByCommentNo(int num);
 	
+	ReviewComment selectOneByNo(int commentNo);
 
 }

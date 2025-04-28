@@ -17,5 +17,6 @@ public class Report {
 	private int commentNo;
 	private int reviewNo;
 	private String detleYn;
+	private String reportObjectTitle;
 
 }
