@@ -40,6 +40,12 @@ public class CommentServiceLogic implements CommentService{
 		int result = mapper.commentDelete(commentNo);
 		return result;
 	}
+
+
+	@Override
+	public int selectMemberNoByCommentNo(int num) {
+		return mapper.selectMemberNoByCommentNo(num);
+	}
 	
 	
 }

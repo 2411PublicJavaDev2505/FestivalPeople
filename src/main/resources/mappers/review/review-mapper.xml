@@ -185,4 +185,8 @@
 			REVIEW_FILE_PATH3 = #{reviewFilePath} 
 			WHERE REVIEW_NO = #{reviewNo}
 		</update>
+		
+		<select id="selectMemberNoByReviewNo" resultType="_int">
+			SELECT MEMBER_NO FROM REVIEW WHERE REVIEW_NO = #{num}
+		</select>
 </mapper>

@@ -51,4 +51,8 @@ public interface ReviewService {
 
 	//수정
 	int reviewUpdate(ReviewAddRequest review, List<MultipartFile> images) throws IllegalStateException, IOException;
+
+
+	int selectMemberNoByReviewNo(int num);
+
 }

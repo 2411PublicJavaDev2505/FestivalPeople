@@ -18,5 +18,13 @@
         	,#{memberNo},'REPORT_COMMENT',#{reportContent},NULL,#{num},NULL,DEFAULT)
     	</if>
     </insert>
+    
+    <select id="getTotalCount">
+    	SELECT COUNT(*) FROM REPORT
+    </select>
+	
+	<select id="selectReportList" resultType="Report">
+		SELECT * FROM REPORT ORDER BY 1 DESC
+	</select>
 	
 </mapper>

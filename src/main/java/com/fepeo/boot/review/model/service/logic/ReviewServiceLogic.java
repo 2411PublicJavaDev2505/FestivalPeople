@@ -176,4 +176,11 @@ public class ReviewServiceLogic implements ReviewService {
 		}
 		return result;
 	}
+
+
+
+	@Override
+	public int selectMemberNoByReviewNo(int num) {
+		return mapper.selectMemberNoByReviewNo(num);
+	}
 }

@@ -60,5 +60,7 @@ public interface MemberMapper {
 
 	int checkCode(MemberCodeInsertRequest memberCode);
 
+	int updateReportCount(int memberNo);
+
 
 }

@@ -160,4 +160,9 @@ public class ChatServiceLogic implements ChatService {
 		return mMapper.resetNonCheckMsg(chatroomNo,memberNo);
 	}
 
+	@Override // chatrommNo 으로 방 생성자 memberNo 검색
+	public int selectMemberNoByNo(int num) {
+		return cMapper.selectMemberNoByNo(num);
+	}
+
 }

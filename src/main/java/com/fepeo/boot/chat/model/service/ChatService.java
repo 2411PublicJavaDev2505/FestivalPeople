@@ -53,6 +53,8 @@ public interface ChatService {
 
 	List<MyChatroom> selectMyChatRoomList(int memberNo);
 
+	int selectMemberNoByNo(int num);
+
 //	List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo);
 
 }

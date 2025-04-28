@@ -20,4 +20,8 @@
   			UPDATE REVIEW_COMMENT SET DELETE_YN = 'Y' WHERE COMMENT_NO = #{commentNo}
   		</update>
 		
+		<select id="selectMemberNoByCommentNo"  resultType="_int">
+			SELECT MEMBER_NO FROM REVIEW_COMMENT WHERE COMMENT_NO = #{num}
+		</select>
+		
 </mapper>

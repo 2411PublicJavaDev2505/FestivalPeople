@@ -16,4 +16,6 @@ public interface CommentMapper {
 	//4/27 댓글삭제! 안되면 지우기!
 	int commentDelete(int commentNo);
 	
+	int selectMemberNoByCommentNo(int num);
+	
 }
