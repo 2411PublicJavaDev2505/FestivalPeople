@@ -5,7 +5,6 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<!-- 4/25일 아래코드 추가! -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 		<title>후기글 상세조회</title>
@@ -33,11 +32,12 @@
 									<p><span>${review.memberName} |</span></p>
 								</div>
 								<div class="review-info">
-									<p><span> </span>${review.reviewWriteTime } |</p>	
+									<p><span> &ensp;</span>${review.reviewWriteTime } |</p>	
 								</div>
 								<div class="review-info">
-									<p><span>조회수</span>${review.reviewCount }</p>	
+									<p><span>&ensp;조회수</span>${review.reviewCount }</p>	
 								</div>
+								<!-- &ensp; 공백처리코드!! -->
 							</div>
 						</div>
 							<!-- 밑에는 내용! -->
@@ -72,14 +72,16 @@
 						<div class="review-comment-write-area">
 							<div class="comentwrite-p">
 							<!-- 댓글쓰기 text아래로 내리는 방법은?? -->
+							<!--  -->
 								<p>댓글쓰기</p><br>
 							</div>
+							<!-- 4/29text상자 초기화해야하나 몰라 클릭하면 사라지는구현만... -->
 							<div class="textarea">
-								<textarea rows="2" cols="82" id="commentContent" placeholder="댓글내용을 입력해주세요"></textarea>
+								<textarea rows="2" cols="82" id="commentContent" onclick=this.value=""; placeholder="댓글내용을 입력해주세요"></textarea>
 							</div>
 							<!-- 댓글내용작성후 초기화하는 코드 작성... 안되면 삭제! -->
 							<div class="addComment-btn">
-								<button id="addComment">댓글등록</button>
+								<button id="addComment" >댓글등록</button>
 							</div>	
 						</div>
 						<!-- 댓글 영역! -->
@@ -107,19 +109,17 @@
 		</div>
 	</main>
 		<script>
-// 			function clearTextarea() {
-// 				document.getElementById("addComment").value="";
-// 			}
-		//document.getElementById("commentContent").value="";
-		//리뷰삭제!!!4/27일 지울것!!
-			
+			//textarea 클릭시 초기화...	
+			document.getElementById("commentContent").value='';
+		
+			//댓글삭제	?? 
 			const CommentDelete = () => {
 				if(confirm("정말 삭제 하시겠습니까???")) {
 					location.href ="/review/comment/delete?commentNo=${comment.commentNo}";
 				}
 			}
 		
-			//리뷰삭제
+			//리뷰삭제(신고)
 			const reportReview = (num) => {
 				location.href = '/report/insert?target=rev&num=' + num;
 			}
@@ -127,18 +127,18 @@
 				location.href = '/report/insert?target=com&num=' + num;
 			}
 		
-			
+			//게시글삭제
 			const reviewDelete = () => {
  				if(confirm("정말 삭제하시겠습니까??")) {
  					location.href = "/review/delete?reviewNo=${review.reviewNo}";
  				}
  			}
 		
-		
+			//게시글수정
 			const reviewupdate = (reviewNo) => {
 				location.href ="/review/update?reviewNo="+reviewNo;
 			}
-			
+			//댓글삭제
 			const deleteComment = (commentNo) => {
 				$.ajax({
 					url: "/review/comment/delete",
@@ -157,7 +157,7 @@
 				});
 			}
 		
-			
+			//댓글 리스트
 			const reviewNo = "${review.reviewNo}";
 		
 			function getCommentList() {
@@ -235,7 +235,6 @@
 				const memberNo = document.querySelector("#memberNo").value;
 				
 				const data = {"reviewNo" : reviewNo, "commentContent": commentContent, "memberNo" : memberNo};
-				//console.log(data)
 				fetch("/review/comment/insert", {
 					method:"POST"
 					,headers: {"Content-type": "application/json"}
