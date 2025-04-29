@@ -80,15 +80,30 @@
 	#imgUploadBtn{
 	    border: none;
 	    border-radius:10px;    
-	    background-color: #F5F5F5;	
 	    height:150px;
 	    width: 150px;		
 	    cursor:pointer;
-	    color: #A6A4A2;	
 	    display: flex;
 	    justify-content: center;
 	    align-items: center;
-	    overflow: hidden; /* 버튼 크기를 넘는 이미지가 잘리도록 설정 */	    
+	    overflow: hidden; /* 버튼 크기를 넘는 이미지가 잘리도록 설정 */
+	}
+	#imgUploadBtn img{
+		object-fit: cover;
+	    filter: blur(2px);
+	    z-index: 1;	
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;	    
+	}
+	#imgUploadBtn span{
+	    position: absolute;
+	    color: white;
+	    font-weight: bold;
+	    font-size: 18px;
+	    z-index: 2;
+	    text-shadow: 0 0 5px black; /* 글자 가독성 높이기 */
+	    pointer-events: none;	
 	}
 .right-group{
 	display:flex;

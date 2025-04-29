@@ -44,7 +44,12 @@
 					<ul class="chat-list">
 						<li class="chat-list-row">
 							<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
-							<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
+								<c:if test="${myList.chatImgPath eq null }">          
+									<img class="chat-image" src="../resources/img/member/profile.png" alt="" >
+								</c:if>
+								<c:if test="${myList.chatImgPath ne null }">          
+									<img class="chat-image" src="${myList.chatImgPath}" alt="${myList.chatImgName}" >
+								</c:if>
 							<div class="text-wrap">
 								<div class="chat-title">${myList.chatroomTitle }</div>
 								<div class="chat-tag">
@@ -117,18 +122,24 @@
 								</c:if>
 							</ul>
 							<ul class="mem-profile">
+								<span class="mem-count">우리방 인원 : ${chatRoom.chatMemberCount }</span>
 								<c:forEach items="${memberList }" var="mbList" varStatus="i">
-									<li>
-										<c:choose>
-											<c:when test="${sessionScope.memberNo eq mbList.memberNo }">
-												<div>(나)${mbList.nickname }</div>
-											</c:when>
-											<c:otherwise>
-												<div>${mbList.nickname }</div>
-											</c:otherwise>	
-										</c:choose>
-										<div>
-											<img src="${mbList.profileFilePath }" width="40" />
+									<li class="memlist-area">
+										<div class="memlist-area">
+											<c:if test="${mbList.profileFilePath eq null }">										
+												<img src="../resources/img/member/profile.png" width="40" />
+											</c:if>	
+											<c:if test="${mbList.profileFilePath ne null }">										
+												<img src="${mbList.profileFilePath }" width="40" />
+											</c:if>	
+											<c:choose>
+												<c:when test="${sessionScope.memberNo eq mbList.memberNo }">
+													<div>(나)${mbList.nickname }</div>
+												</c:when>
+												<c:otherwise>
+													<div>${mbList.nickname }</div>
+												</c:otherwise>	
+											</c:choose>
 											<c:if test="${mbList.memberNo == chatRoom.memberNo }">	<!-- 방장표시  -->																			
 												<span>⭐</span> 
 											</c:if>	
@@ -165,22 +176,29 @@
 								<li class="msg-balloon-area">
 									<div class="profile-area">
 									<c:forEach items="${memberList }" var="mb" varStatus="i"></c:forEach>
-										<img class="chat-profile-thumbnail" src="${mb.profileFilePath }" width="40" />
+										<c:if test="${mb.profileFilePath eq null }">
+											<img class="chat-profile-thumbnail" src="../resources/img/member/profile.png" width="40" />
+										</c:if>
+										<c:if test="${mb.profileFilePath ne null }">
+											<img class="chat-profile-thumbnail" src="${mb.profileFilePath }"  alt="${myList.profileFilePath}" width="40" />
+										</c:if>
 										<div class="chat-mem-nickname">${mb.nickname }</div>
 									</div>
 									<div class="msg-balloon-area-l">
-										<p class="msg-balloon-box-l">${msgList.chatMsgContent }</p>
-										<!-- 파일 첨부 시 -->
-										<c:if test="${not empty msgList.chatFilePath}"><!-- 이미지는 미리보기 파일은 이름만 -->
-											<c:choose>
-												<c:when test="${msgList.chatFilePath.endsWith('.jpg') || msgList.chatFilePath.endsWith('.jpeg') || msgList.chatFilePath.endsWith('.png') || msgList.chatFilePath.endsWith('.gif') || msgList.chatFilePath.endsWith('.bmp') || msgList.chatFilePath.endsWith('.webp') || msgList.chatFilePath.endsWith('.svg')|| msgList.chatFilePath.endsWith('.jfif')}">
-													<img src="${msgList.chatFilePath }" class="chat-file-img"/>
-												</c:when>
-												<c:otherwise>
-													<a href="${msgList.chatFilePath }" download="${msgList.chatFileName }">${msgList.chatFileName }</a>
-												</c:otherwise>
-											</c:choose>
-										</c:if>
+										<div class="msg-contents">
+											<!-- 파일 첨부 시 -->
+											<c:if test="${not empty msgList.chatFilePath}"><!-- 이미지는 미리보기 파일은 이름만 -->
+												<c:choose>
+													<c:when test="${msgList.chatFilePath.endsWith('.jpg') || msgList.chatFilePath.endsWith('.jpeg') || msgList.chatFilePath.endsWith('.png') || msgList.chatFilePath.endsWith('.gif') || msgList.chatFilePath.endsWith('.bmp') || msgList.chatFilePath.endsWith('.webp') || msgList.chatFilePath.endsWith('.svg')|| msgList.chatFilePath.endsWith('.jfif')}">
+														<img src="${msgList.chatFilePath }" class="chat-file-img"/>
+													</c:when>
+													<c:otherwise>
+														<a href="${msgList.chatFilePath }" download="${msgList.chatFileName }">${msgList.chatFileName }</a>
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+											<p class="msg-balloon-box-l">${msgList.chatMsgContent }</p>
+										</div>
 										<div class="msg-info">
 											<c:if test="${msgList.nonReadMember > 0}">						
 												<span class="msg-non-read">안읽음${msgList.nonReadMember }</span>
@@ -204,18 +222,20 @@
 											<fmt:formatDate value="${msgList.chatMsgTime}" pattern="a h:mm" />
 										</span>
 									</div>
-									<p class="msg-balloon-box-r">${msgList.chatMsgContent }</p>
-									<!-- 파일 첨부 시 -->
-									<c:if test="${not empty msgList.chatFilePath}"><!-- 이미지는 미리보기 파일은 이름만 -->
-										<c:choose>
-											<c:when test="${msgList.chatFilePath.endsWith('.jpg') || msgList.chatFilePath.endsWith('.jpeg') || msgList.chatFilePath.endsWith('.png') || msgList.chatFilePath.endsWith('.gif') || msgList.chatFilePath.endsWith('.bmp') || msgList.chatFilePath.endsWith('.webp') || msgList.chatFilePath.endsWith('.svg')|| msgList.chatFilePath.endsWith('.jfif')}">
-												<img src="${msgList.chatFilePath }" class="chat-file-img"/>
-											</c:when>
-											<c:otherwise>
-												<a href="${msgList.chatFilePath }" download="${msgList.chatFileName }">${msgList.chatFileName }</a>
-											</c:otherwise>
-										</c:choose>
-									</c:if>									
+									<div class="msg-contents">
+										<!-- 파일 첨부 시 -->
+										<c:if test="${not empty msgList.chatFilePath}"><!-- 이미지는 미리보기 파일은 이름만 -->
+											<c:choose>
+												<c:when test="${msgList.chatFilePath.endsWith('.jpg') || msgList.chatFilePath.endsWith('.jpeg') || msgList.chatFilePath.endsWith('.png') || msgList.chatFilePath.endsWith('.gif') || msgList.chatFilePath.endsWith('.bmp') || msgList.chatFilePath.endsWith('.webp') || msgList.chatFilePath.endsWith('.svg')|| msgList.chatFilePath.endsWith('.jfif')}">
+													<img src="${msgList.chatFilePath }" class="chat-file-img"/>
+												</c:when>
+												<c:otherwise>
+													<a href="${msgList.chatFilePath }" download="${msgList.chatFileName }">${msgList.chatFileName }</a>
+												</c:otherwise>
+											</c:choose>
+										</c:if>									
+										<p class="msg-balloon-box-r">${msgList.chatMsgContent }</p>
+									</div>
 								</div>
 							</li>
 							</c:if>
