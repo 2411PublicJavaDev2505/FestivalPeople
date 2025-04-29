@@ -38,6 +38,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 
+
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/review")
@@ -275,6 +277,8 @@ public class ReviewController {
 			model.addAttribute("seachList", searchList);
 			model.addAttribute("searchCondition",searchCondition);
 			model.addAttribute("searchKeyword",searchKeyword);
+			//4/29 15:47추가
+			model.addAttribute("pageInfo",pageInfo);
 			//4/22 11:27분 추가! 에러나면 지울것!!
 			List<Review> rList = rService.selectReviewList(currentPage);
 			model.addAttribute("rList",rList);
