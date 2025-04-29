@@ -291,8 +291,6 @@ public class ChatController {
 		
 		// 메시지 번호 꺼내기
 		int msgNo = msg.getChatMsgNo();
-		// 안 읽은 사람 숫자 출력
-		// int count = msgService.nonReadMemberCount(msgNo);
 		
 		// 대화내용(말풍선) 출력
 		List<ChatMsg> msgList = service.selectChatMsgListByNo(chatroomNo);

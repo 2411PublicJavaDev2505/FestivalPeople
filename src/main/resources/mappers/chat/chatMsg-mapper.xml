@@ -8,7 +8,10 @@
 		<selectKey keyProperty="chatMsgNo" resultType="int" order="BEFORE">
 			select SEQ_CHAT_MSG_NO.nextval from DUAL
 		</selectKey>
-		insert into CHAT_MSG values (#{chatMsgNo}, #{chatMsgContent}, default, #{chatFileName},
+		insert into CHAT_MSG 
+		(CHAT_MSG_NO, CHAT_MSG_CONTENT, CHAT_MSG_TIME, CHAT_FILE_NAME, 
+  	 	  CHAT_FILE_RENAME, CHAT_FILE_PATH, NON_READ_MEMBER, MEMBER_NO, CHATROOM_NO)
+		values (#{chatMsgNo}, #{chatMsgContent}, default, #{chatFileName},
 		#{chatFileRename}, #{chatFilePath}, #{nonReadMember}, #{memberNo}, #{chatroomNo})
 	</insert>
 	
