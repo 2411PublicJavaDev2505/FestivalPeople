@@ -4,11 +4,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 1920px;
-    height: 900px;
+    width: 100vw;
+    height: 100vh;
     background-size: cover;
     background-position: center;
     z-index: -1;
+    overflow: hidden;
 }
 
 #container{

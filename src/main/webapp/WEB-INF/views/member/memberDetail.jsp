@@ -70,7 +70,12 @@
 							<c:forEach items="${myChatList }" var="room">
 								<div class="my-chat">
 									<div class="my-chat-img">
-										<img alt="채팅방 썸네일" src="${room.chatImgPath }" onclick="enterChatRoom('${room.chatroomNo}');">
+										<c:if test="${room.chatImgPath eq null }">          
+											<img class="chat-image" src="../resources/img/member/profile.png" alt="채팅방 썸네일" onclick="enterChatRoom('${room.chatroomNo}');" >
+										</c:if>
+										<c:if test="${room.chatImgPath ne null }">          
+											<img class="chat-image" src="${room.chatImgPath}" alt="${room.chatImgName}"  onclick="enterChatRoom('${room.chatroomNo}');">
+										</c:if>						
 									</div>
 									<div class="chat-content">
 										<h3 onclick="enterChatRoom('${room.chatroomNo}');">${room.chatroomTitle }</h3>

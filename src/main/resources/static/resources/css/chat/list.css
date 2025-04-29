@@ -4,11 +4,11 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 1920px;
-    height: 900px;
-    background-size: cover;
-    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    background-attachment: fixed;
     z-index: -1;
+    overflow: hidden;
 }
 
 #container{
@@ -30,9 +30,10 @@
 
 /* 우측 전체목록 */
 .allchat-list-wrap{
-    width: 70%;
+    width: 100%;
+    max-width:700px;
     background-color: #d26f534f;
-    margin: 5px;
+    margin: 5px auto;
     padding:8px;
     height: 600px;    
 	overflow: auto;    
