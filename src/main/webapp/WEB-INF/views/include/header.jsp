@@ -79,7 +79,7 @@
     		let chatroomNo = '';
     		let memberNo = '${member.memberNo}';
     		chatroomNo = '${chatroomNo}';
-    		if(memberNo != null && chatroomNo.trim() == ''){
+    		if(memberNo.trim() != '' && chatroomNo.trim() == ''){
 	    		$.ajax({
 	    			url : "/chat/exit",
 	    			data : {
