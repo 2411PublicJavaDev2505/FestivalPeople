@@ -75,5 +75,28 @@
     		}
     	}
     	
+    	const resetChatEnter = () => {
+    		let chatroomNo = '';
+    		let memberNo = '${member.memberNo}';
+    		chatroomNo = '${chatroomNo}';
+    		if(memberNo != null && chatroomNo.trim() == ''){
+	    		$.ajax({
+	    			url : "/chat/exit",
+	    			data : {
+	    				"memberNo" : memberNo,
+	    			},
+	    			type: "GET",
+	    			success : function (data) {
+	    				console.log("채팅방 나감");
+	    			},
+	    			error : function () {
+	    				console.log("오류!");
+	    			},
+	    		});
+    		}
+    	}
+    	
+    	setInterval(resetChatEnter, 3000);
+    	
     </script>
 </header>

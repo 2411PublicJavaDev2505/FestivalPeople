@@ -40,5 +40,7 @@ public interface ChatMemberMapper {
 	// 안 들어온 사람 수 구하기(안 읽은 사람 수 구할 때 필요함)
 	int countNonEnterMembers(int chatroomNo);
 
+	int exitAllChatrooms(int memberNo);
+
 
 }

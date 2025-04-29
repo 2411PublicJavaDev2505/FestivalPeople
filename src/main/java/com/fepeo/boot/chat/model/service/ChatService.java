@@ -57,6 +57,8 @@ public interface ChatService {
 
 	int subtractionNonReadMemberCount(int chatroomNo);
 
+	int exitAllChatrooms(int memberNo);
+
 //	List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo);
 
 }

@@ -26,7 +26,9 @@
 	</update>
 
 	<select id="selectChatMsgListByNo" resultType="com.fepeo.boot.chat.model.vo.ChatMsg">
-		select * from CHAT_MSG where CHATROOM_NO = #{chatroomNo}
+		select CM.*, M.NICKNAME from CHAT_MSG CM 
+		JOIN MEMBER M ON CM.MEMBER_NO = M.MEMBER_NO
+		where CHATROOM_NO = #{chatroomNo}
 		order by CHAT_MSG_TIME asc
 	</select>
 	
