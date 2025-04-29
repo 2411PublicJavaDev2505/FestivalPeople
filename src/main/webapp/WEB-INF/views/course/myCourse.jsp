@@ -33,13 +33,21 @@
 								</div>
 							<div id="resultContainer" class="place-result-container">
 								<!-- 저장된 코스 리스트 출력 -->
-								<div id="recommendation-container">		
+								<div id="recommendation-container">									
 									<c:forEach items="${placeList}" var="place">
-									<p>${place.place_name} / ${place.category_group_code}</p>
-										<c:if test="${place.category_group_code} == 'FD6'">
 											<div>
 												<div class="course-category">
-													<div class="place-title">추천 맛집</div>
+													<div class="place-title">
+										                <c:choose>
+										                    <c:when test="${place.category_group_code eq 'FD6'}">추천 맛집</c:when>
+										                    <c:when test="${place.category_group_code eq 'CE7'}">추천 카페</c:when>
+										                    <c:when test="${place.category_group_code eq 'AD5'}">추천 숙박업소</c:when>
+										                    <c:when test="${place.category_group_code eq 'AT4'}">추천 관광지</c:when>
+										                    <c:when test="${place.category_group_code eq 'PK6'}">추천 주차장</c:when>
+										                    <c:when test="${place.category_group_code eq 'CT1'}">추천 문화시설</c:when>
+										                    <c:otherwise>추천 장소</c:otherwise>
+									              		</c:choose>									
+													</div>
 													<div class="place-name">${place.place_name} </div>
 												</div>
 				 								<div class="course-recommend-section">
@@ -50,82 +58,6 @@
 													</div>
 												</div>								
 											</div>
-										</c:if>	
-										<c:if test="${place.category_group_code} == 'AD5'">
-											<div>
-												<div class="course-category">
-													<div class="place-title">추천 호텔</div>
-													<div class="place-name">${place.place_name} </div>
-												</div>
-				 								<div class="course-recommend-section">
-													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
-													<div class="iframe-description">
-														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
-													</div>
-												</div>								
-											</div>
-										</c:if>	
-										<c:if test="${place.category_group_code} == 'CE7'">
-											<div>
-												<div class="course-category">
-													<div class="place-title">추천 카페</div>
-													<div class="place-name">${place.place_name} </div>
-												</div>
-				 								<div class="course-recommend-section">
-													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
-													<div class="iframe-description">
-														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
-													</div>
-												</div>								
-											</div>
-										</c:if>	
-										<c:if test="${place.category_group_code} == 'AT4'">
-											<div>
-												<div class="course-category">
-													<div class="place-title">추천 관광지</div>
-													<div class="place-name">${place.place_name} </div>
-												</div>
-				 								<div class="course-recommend-section">
-													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
-													<div class="iframe-description">
-														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
-													</div>
-												</div>								
-											</div>
-										</c:if>	
-										<c:if test="${place.category_group_code} == 'PK6'">
-											<div>
-												<div class="course-category">
-													<div class="place-title">추천 주차장</div>
-													<div class="place-name">${place.place_name} </div>
-												</div>
-				 								<div class="course-recommend-section">
-													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
-													<div class="iframe-description">
-														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
-													</div>
-												</div>								
-											</div>
-										</c:if>	
-										<c:if test="${place.category_group_code} == 'CT1'">
-											<div>
-												<div class="course-category">
-													<div class="place-title">추천 문화시설</div>
-													<div class="place-name">${place.place_name} </div>
-												</div>
-				 								<div class="course-recommend-section">
-													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
-													<div class="iframe-description">
-														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
-														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
-													</div>
-												</div>								
-											</div>
-										</c:if>	
 									</c:forEach>			
 								</div>	
 								<div class="deleteDiv">	
