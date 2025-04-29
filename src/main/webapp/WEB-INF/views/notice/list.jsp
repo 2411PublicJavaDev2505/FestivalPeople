@@ -74,7 +74,7 @@
 	    			<span class="page-num" onclick="move('${p}');">${p }</span>
 	    		</c:if>
 	    	</c:forEach>
-	        <c:if test="${pageInfo.endNavi eq maxPage }">
+	        <c:if test="${pageInfo.endNavi ne pageInfo.maxPage }">
 		        <button class="page-btn" onclick="next();">&gt;</button>
 	        </c:if>
 	    </div>
@@ -94,13 +94,13 @@
 			location.href = "/notice/insert";
 		}
 		const prev = () => {
-			location.href="/notice/list?currentPage=" + ("${pageInfo.startNavi}" - 1);
+			location.href="/notice/list?currentPage=" + (parseInt("${pageInfo.startNavi}") - 1);
 		}
 		const move = (p) => {
 			location.href = "/notice/list?currentPage=" + p;
 		}
 		const next = () => {
-			location.href="/notice/list?currentPage=" + ("${pageInfo.endNavi}" + 1);
+			location.href="/notice/list?currentPage=" + (parseInt("${pageInfo.endNavi}") + 1);
 		}
 	</script>
 </body>

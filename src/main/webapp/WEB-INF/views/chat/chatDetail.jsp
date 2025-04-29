@@ -310,11 +310,11 @@
 					        html += '<img class="chat-profile-thumbnail" src="' + msg.profileFilePath + '" width="40" />';
 					        html += '<div class="chat-mem-nickname">' + msg.nickname + '</div>';
 					        html += '</div>';
-					        html += '<div class="msg-balloon-area-l">';
+					        html += '<div class="msg-balloon-area-l"><div class="msg-contents">';
 					        html += '<p class="msg-balloon-box-l">' + msg.chatMsgContent + '</p>';
 
 					        if (msg.chatFilePath != null) {
-				                html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
+				                html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/></div>';
 					        }
 					        
 					        html += '<div class="msg-info">';
@@ -333,21 +333,39 @@
 					            html += '<span class="msg-non-read">안읽음' + msg.nonReadMember + '</span>';
 					        }
 					        html += '<span class="msg-time">' + formatTime(msg.chatMsgTime) + '</span>';
-					        html += '</div>';
+					        html += '</div><div class="msg-contents">';
 					        html += '<p class="msg-balloon-box-r">' + msg.chatMsgContent + '</p>';
 
 					        if (msg.chatFilePath != null) {
 					        	html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
 					        }
 
-					        html += '</div></li>';
+					        html += '</div></div></li>';
 					    }
 					    
 					    html += '</ul>';
 					});
 
 					document.querySelector("#chat-msg-area").innerHTML = html;
-					if(chatMsgSize != prevChatMsgSize){
+					if(document.querySelector("#msgSearch").value.trim() != ''){
+						// 채팅리스트 다시 출력후 검색어 있으면 하이라이트
+						var keyword = $('#msgSearch').val().trim();
+						
+						matchedElements = [];
+						
+						if (keyword !== "") {
+					        var regex = new RegExp("(" + keyword + ")", "gi");
+					
+					        $('.msg-balloon-box-l, .msg-balloon-box-r').each(function () {
+					            var originalText = $(this).text();
+					            if (regex.test(originalText)) {
+					                var highlighted = originalText.replace(regex, "<span class='txt-hlight'>$1</span>");
+					                $(this).html(highlighted);
+					                matchedElements.push(this);
+					            }
+					        });
+					    }
+					}else if(chatMsgSize != prevChatMsgSize){
 						let chatArea = document.querySelector(".chat-area");
 						chatArea.scrollTop = chatArea.scrollHeight;
 						prevChatMsgSize = chatMsgSize;
@@ -359,7 +377,7 @@
 				}
 			}); 
 		}
-		setInterval(loadChat, 1000);
+// 		setInterval(loadChat, 1000);
 		
 		/* 메시지 입력 */
 		document.querySelector("#addChat").addEventListener("click", function(){
@@ -391,6 +409,7 @@
 				if(result >0){
 					// 성공 시 메시지 목록 다시 불러오기 또는 화면에 추가
 					loadChat();
+					document.querySelector('#msgContent').value = '';
 				} else{
 					alert("메시지 전송에 실패했습니다.");
 				}
@@ -475,9 +494,8 @@
 		var matchedElements = [];
 		var highlightIndex = 0;
 		
-		// 검색어 입력 시 하이라이트
-		$('#msgSearch').on('input', function () {
-		    var keyword = $(this).val().trim();
+		function searchKeword () {
+			var keyword = $('#msgSearch').val().trim();
 		    matchedElements = [];
 		    highlightIndex = 0;
 		
@@ -500,10 +518,41 @@
 		        // 역순으로 이동 시작
 		        highlightIndex = matchedElements.length - 1; 
 		    }
+		}
+		
+		// 검색어 입력 시 하이라이트
+		$('#msgSearch').on('input', function() {
+			searchKeword();
 		});
+// 		$('#msgSearch').on('input', function () {
+// 		    var keyword = $(this).val().trim();
+// 		    matchedElements = [];
+// 		    highlightIndex = 0;
+		
+// 		    // 기존 하이라이트 제거
+// 		    $('.msg-balloon-box-l, .msg-balloon-box-r').each(function () {
+// 		        $(this).html($(this).text());
+// 		    });
+		
+// 		    if (keyword !== "") {
+// 		        var regex = new RegExp("(" + keyword + ")", "gi");
+		
+// 		        $('.msg-balloon-box-l, .msg-balloon-box-r').each(function () {
+// 		            var originalText = $(this).text();
+// 		            if (regex.test(originalText)) {
+// 		                var highlighted = originalText.replace(regex, "<span class='txt-hlight'>$1</span>");
+// 		                $(this).html(highlighted);
+// 		                matchedElements.push(this);
+// 		            }
+// 		        });
+// 		        // 역순으로 이동 시작
+// 		        highlightIndex = matchedElements.length - 1; 
+// 		    }
+// 		});
 		
 		// 버튼 클릭 시 역순으로 이동
 		$('#searchMoveBtn').on('click', function () {
+			console.log(highlightIndex);
 		    if (matchedElements.length > 0 && highlightIndex >= 0) {
 		        matchedElements[highlightIndex].scrollIntoView({ behavior: "smooth", block: "center" });
 		        highlightIndex--; //위로이동

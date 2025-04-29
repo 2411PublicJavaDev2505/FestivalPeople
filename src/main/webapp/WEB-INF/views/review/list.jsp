@@ -77,7 +77,7 @@
 					<c:if test="${pageInfo.startNavi ne 1 }">
 						<button class="page-btn" onclick="prev();">&lt;</button>
 					</c:if>
-					<c:forEach begin="${pageInfo.startNavi }" end="${endNavi }" var="p">
+					<c:forEach begin="${pageInfo.startNavi }" end="${pageInfo.endNavi }" var="p">
 						<c:if test="${p eq currentPage }">
 							<span class="page-num active" onclick="move('${p}');">${p }</span>
 						</c:if>
@@ -85,7 +85,7 @@
 							<span class="page-num" onclick="move('${p}');">${p }</span>
 						</c:if>
 					</c:forEach>
-					<c:if test="${pageInfo.endNavi ne maxPage }">
+					<c:if test="${pageInfo.endNavi ne pageInfo.maxPage }">
 						<button class="page-btn" onclick="next();">&gt;</button>
 					</c:if>
 					<!-- 여기까지 페이지 네이션 -->
@@ -125,13 +125,13 @@
 		//아래3개코드 페이징! notice랑 맞추기 04/29 11:28
 		
 		const prev = () => {
-			location.href="/review/list?page=" +("${pageInfo.startNavi}" -1);
+			location.href="/review/list?page=" +(parseInt("${pageInfo.startNavi}") -1);
 		}
 		const move = (p) => {
 			location.href ="/review/list?page=" + p;
 		}
 		const next = () => {
-			location.href="/review/list?page=" + ("${pageInfo.endNavi}" +1);
+			location.href="/review/list?page=" + (parseInt("${pageInfo.endNavi}") + 1);
 		}
 	</script>
 </body>
