@@ -102,7 +102,6 @@ public class ChatController {
 			List<ChatMember> memberList = service.selectChatMember();
 			model.addAttribute("memberList", memberList);
 			
-			
 			return "chat/list";
 		}
 	}
@@ -224,27 +223,6 @@ public class ChatController {
 		return "chat/chatSearch";
 	}
 	
-	// 나의 채팅방 검색
-//	@GetMapping("/mySearch")
-//	@ResponseBody
-//	public List<ChatRoom> searchChatRoomByNo(HttpSession session,Model model
-//			,@RequestParam("mySearchKeyword") String mySearchKeyword) {
-//	
-//		// 세션에서 memberNo 가져오기
-//		Member member = (Member)session.getAttribute("member");
-//		int memberNo = member.getMemberNo();			
-//		
-//		// 각 채팅방별 참여인원수 불러오기
-//		List<ChatMember> memberList = service.selectChatMember();
-//		model.addAttribute("memberList", memberList);		
-//		
-//		// 검색
-//		List<ChatRoom> mySearchList = service.searchChatRoomByNo(mySearchKeyword, memberNo);
-//		
-//		return mySearchList;
-//	}
-//	
-
 	// 채팅방 퇴장(탈퇴)
 	@GetMapping("/leave")
 	public String leaveChatroom(@RequestParam("chatroomNo")int chatroomNo,HttpSession session) {
@@ -255,7 +233,6 @@ public class ChatController {
 		int count = service.subtractionChatMember(chatroomNo); // CHATROOM > chat_member_count -1		
 		return "redirect:/chat/list";
 	}
-	
 	
 	// 채팅방 삭제
 	@GetMapping("/delete")
@@ -313,7 +290,6 @@ public class ChatController {
 		
 		return "redirect:/chat/detail/" + chatroomNo;
 	}
-	
 	
 	// 채팅리스트 출력
 	@ResponseBody
