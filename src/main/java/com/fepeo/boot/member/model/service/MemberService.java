@@ -2,6 +2,7 @@ package com.fepeo.boot.member.model.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import com.fepeo.boot.member.controller.dto.MemberCodeInsertRequest;
 import com.fepeo.boot.member.controller.dto.MemberFindIdRequest;
@@ -56,5 +57,9 @@ public interface MemberService {
 	int updateReportCount(int memberNo);
 
 	int substractReportCount(int memberNo);
+
+	List<Member> searchMemberList(Map<String, String> searchMap, int currentPage);
+
+	int getSearchTotalCount(Map<String, String> searchMap);
 
 }

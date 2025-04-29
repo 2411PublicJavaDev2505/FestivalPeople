@@ -1,6 +1,7 @@
 package com.fepeo.boot.member.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
@@ -63,6 +64,10 @@ public interface MemberMapper {
 	int updateReportCount(int memberNo);
 
 	int substractReportCount(int memberNo);
+
+	List<Member> searchMemberList(Map<String, String> searchMap, RowBounds rowBounds);
+
+	int getSearchTotalCount(Map<String, String> searchMap);
 
 
 }

@@ -22,20 +22,19 @@
 					<div class="manager-select-search">
 						<div class="left-select-area">
 							<a href="/manager/mypage"><button>회원관리</button></a>
-							<button>신고관리</button>
+							<a href="/manager/report"><button>신고관리</button></a>
+							<button id="refreshFestivalBtn">축제 최신화</button>
 						</div>
 						<div class="right-search-area">
-			                <form class="search-form">
-			                    <select>
+			                <form class="search-form" action="/manager/rSearch" method="get">
+			                    <select name="searchCondition">
 			                        <option value="all">전체</option>
-			                        <option value="memberId">회원아이디</option>
-			                        <option value="name">회원이름</option>
-			                        <option value="nickName">닉네임</option>
-			                        <option value="email">이메일</option>
-			                        <option value="reportSort">신고누적순</option>
+			                        <option value="chatroom">채팅방</option>
+			                        <option value="review">후기</option>
+			                        <option value="comment">댓글</option>
 			                    </select>
-			                    <input type="text" placeholder="검색" id="">
-			                    <button class="search-btn">⌕</button>
+			                    <input type="text" placeholder="신고 내용으로 검색" name="searchKeyword" value="${param.searchKeyword }">
+			                    <button class="search-btn" type="submit">⌕</button>
 			                </form>
 						</div>
 					</div>
@@ -96,6 +95,23 @@
 			function reportDetail(reportNo) {
 				location.href="/manager/rdetail?reportNo="+reportNo;
 			}
+			
+			
+			
+			document.getElementById("refreshFestivalBtn").addEventListener("click",function(){
+				fetch("/festival/insert",{
+					method: "GET"
+				})
+				.then(response => response.text())
+				.then(data =>{
+					customAlert("축제 정보 최신화가 되었습니다");
+				})
+				.catch(error=>{
+					customAlert("최신화 중 오류가 발생 했습니다");
+					console.error(error);
+				});
+			});
+			
 		</script>	
 	</body>
 </html>

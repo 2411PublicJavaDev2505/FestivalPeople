@@ -3,6 +3,7 @@ package com.fepeo.boot.member.model.service.logic;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
@@ -167,6 +168,19 @@ public class MemberServiceLogic implements MemberService{
 	@Override
 	public int substractReportCount(int memberNo) {
 		return mapper.substractReportCount(memberNo);
+	}
+
+	@Override
+	public List<Member> searchMemberList(Map<String, String> searchMap, int currentPage) {
+		int limit = 10;
+		int offset = (currentPage-1)* limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return mapper.searchMemberList(searchMap, rowBounds);
+	}
+
+	@Override
+	public int getSearchTotalCount(Map<String, String> searchMap) {
+		return mapper.getSearchTotalCount(searchMap);
 	}
 
 }

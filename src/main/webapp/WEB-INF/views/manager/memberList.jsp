@@ -30,23 +30,21 @@
 					<div class="manager-total-container">
 						<div class="manager-select-search">
 							<div class="left-select-area">
-								<button>회원관리</button>
+								<a href="/manager/mypage"><button>회원관리</button></a>
 								<a href="/manager/report"><button>신고관리</button></a>
 								<button id="refreshFestivalBtn">축제 최신화</button>
 							</div>
 							<div class="right-search-area">
-<!-- 				                <form class="search-form">
-				                    <select>
-				                        <option value="all">전체</option>
-				                        <option value="memberId">회원아이디</option>
-				                        <option value="name">회원이름</option>
-				                        <option value="nickName">닉네임</option>
-				                        <option value="email">이메일</option>
-				                        <option value="reportSort">신고누적순</option>
+				                <form class="search-form" action="/manager/search" method="get">
+				                    <select name="searchCondition">
+				                        <option value="all" ${param.searchContidion == 'all' ? 'selected' : '' }>전체</option>
+				                        <option value="memberId" ${param.searchContidion == 'memberId' ? 'selected' : '' }>회원아이디</option>
+				                        <option value="name" ${param.searchContidion == 'name' ? 'selected' : '' }>회원이름</option>
+				                        <option value="nickName" ${param.searchContidion == 'nickName' ? 'selected' : '' }>닉네임</option>
 				                    </select>
-				                    <input type="text" placeholder="검색" id="">
-				                    <button class="search-btn">⌕</button>
-				                </form> -->
+				                    <input type="text" placeholder="검색" name="searchKeyword" value="${param.searchKeyword}" >
+				                    <button class="search-btn" type="submit">⌕</button>
+				                </form>
 							</div>
 						</div>
 							<div class="member-manage-table">
@@ -71,19 +69,36 @@
 											</tr>
 										</c:forEach>
 								</table>
-					            <div class="pagination">
-									<a href="/manager/mypage?currentPage=1">◁◁</a>
-									<c:if test= "${pageInfo.startNavi ne 1}">
-										<a href="/manager/mypage?currentPage=${pageInfo.startNavi-1}" class="prev">◀</a>
-									</c:if>	
-									<c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
-										<a href="/manager/mypage?currentPage=${p}">${p}</a>
-									</c:forEach>					
-									<c:if test="${pageInfo.endNavi ne pageInfo.maxPage}">
-										<a href="/manager/mypage?currentPage=${pageInfo.endNavi+1}" class="next">▶</a>
-									</c:if>    
-						           	<a href="/manager/mypage?currentPage=${pageInfo.maxPage}"> ▷▷ </a>
-					            </div>
+									<div class="pagination">
+									    <c:choose>
+									        <c:when test="${not empty param.searchCondition and not empty param.searchKeyword}">
+									            <a href="/manager/search?currentPage=1&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}">◁◁</a>
+									            <c:if test="${pageInfo.startNavi ne 1}">
+									                <a href="/manager/search?currentPage=${pageInfo.startNavi - 1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}" class="prev">◀</a>
+									            </c:if>
+									            <c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
+									                <a href="/manager/search?currentPage=${p}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}">${p}</a>
+									            </c:forEach>
+									            <c:if test="${pageInfo.endNavi ne pageInfo.maxPage}">
+									                <a href="/manager/search?currentPage=${pageInfo.endNavi + 1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}" class="next">▶</a>
+									            </c:if>
+									            <a href="/manager/search?currentPage=${pageInfo.maxPage}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}">▷▷</a>
+									        </c:when>
+									        <c:otherwise>
+									            <a href="/manager/mypage?currentPage=1">◁◁</a>
+									            <c:if test="${pageInfo.startNavi ne 1}">
+									                <a href="/manager/mypage?currentPage=${pageInfo.startNavi - 1}" class="prev">◀</a>
+									            </c:if>
+									            <c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
+									                <a href="/manager/mypage?currentPage=${p}">${p}</a>
+									            </c:forEach>
+									            <c:if test="${pageInfo.endNavi ne pageInfo.maxPage}">
+									                <a href="/manager/mypage?currentPage=${pageInfo.endNavi + 1}" class="next">▶</a>
+									            </c:if>
+									            <a href="/manager/mypage?currentPage=${pageInfo.maxPage}">▷▷</a>
+									        </c:otherwise>
+									    </c:choose>
+									</div>
 							</div>
 					</div>	
 				</main>	

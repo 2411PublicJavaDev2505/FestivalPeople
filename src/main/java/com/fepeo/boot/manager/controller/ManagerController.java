@@ -1,5 +1,6 @@
 package com.fepeo.boot.manager.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,57 @@ public class ManagerController {
 	private final ReviewService reService;
 	private final CommentService coService;
 	private final PageUtil pageutil;
+	
+	@GetMapping("/rSearch")
+	public String searchReportList(HttpSession session
+			,Model model
+			,@RequestParam("searchCondition") String searchCondition
+			,@RequestParam("searchKeyword") String  searchKeyword
+			,@RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+		
+		
+		Map<String, String> searchMap = new HashMap<String, String>();
+		
+		searchMap.put("searchKeyword", searchKeyword);
+		searchMap.put("searchCondition", searchCondition);
+		
+		
+		
+		
+		
+		return "";
+	}
+	
+	
+	// 회원 검색 기능
+	@GetMapping("/search")
+	public String searchMemberList(HttpSession session
+			,Model model
+			,@RequestParam("searchCondition") String searchCondition
+			,@RequestParam("searchKeyword") String searchKeyword
+			,@RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+		
+		// 검색조건 가져오기(값 확인했음)
+		Map<String, String> searchMap = new HashMap<String, String>();
+		
+		// 검색값 넣어주고
+		searchMap.put("searchKeyword", searchKeyword);
+		searchMap.put("searchCondition", searchCondition);
+		
+		// 검색 수 가져오고
+		int totalCount = mService.getSearchTotalCount(searchMap);
+		Map<String, Integer> pageInfo = pageutil.generatePageInfo(totalCount, currentPage);
+		List<Member> mList = mService.searchMemberList(searchMap, currentPage);
+		
+		if(mList.size() > 0) {
+			model.addAttribute("mList",mList);
+			model.addAttribute("currentPage",currentPage);
+			model.addAttribute("pageInfo", pageInfo);
+			return "manager/memberList";
+		}else {
+			return "common/error";
+		}						
+	}
 	
 	@GetMapping("/mypage")
 	public String showMemberList(HttpSession session, 
@@ -98,8 +150,33 @@ public class ManagerController {
 	public String showReportDetail(@RequestParam("reportNo") int reportNo
 			,Model model) {
 		Report report = rService.selectOneByNo(reportNo);
-		model.addAttribute("report",report);
-		return "manager/reportDetail";
+		
+		int chatRoomNo = report.getChatRoomNo();
+		int commentNo = report.getCommentNo();
+		int reviewNo = report.getReviewNo();
+		
+		int memberNo = report.getMemberNo();
+		Member member = mService.selectOneByNo(memberNo);
+		model.addAttribute("member",member);
+		
+		if(chatRoomNo > 0) {
+			ChatRoom cRoom = cService.selectChatRoomByNo(chatRoomNo);
+			model.addAttribute("report",report);
+			model.addAttribute("cRoom",cRoom);
+			return "manager/reportDetail";
+		}else if(commentNo > 0) {
+			ReviewComment comment = coService.selectOneByNo(commentNo);
+			model.addAttribute("report",report);
+			model.addAttribute("comment",comment);
+			return "manager/reportDetail";
+		}else if(reviewNo > 0) {
+			Review review = reService.selectOneByNo(reviewNo);
+			model.addAttribute("report",report);
+			model.addAttribute("review",review);
+			return "manager/reportDetail";
+		}else {
+			return "common/error";
+		}
 	}
 	
 	

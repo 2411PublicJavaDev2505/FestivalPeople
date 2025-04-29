@@ -14,6 +14,50 @@
 		,DEFAULT)
 	</insert>
 	
+	
+	
+	<select id="searchMemberList" resultType="Member">
+		SELECT * FROM MEMBER
+		<where>
+			<if test="searchCondition != null and searchCondition == 'all'">
+				MEMBER_ID LIKE '%'||#{searchKeyword}||'%' OR MEMBER_NAME LIKE '%'||#{searchKeyword}||'%' OR NICKNAME LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition != null and searchCondition == 'memberId'">
+				MEMBER_ID LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition != null and searchCondition == 'name'">
+				MEMBER_NAME LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition != null and searchCondition == 'nickName'">
+				NICKNAME LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			AND MEMBER_YN = 'Y'
+		</where>
+	</select>
+	
+	
+<select id="getSearchTotalCount" resultType="_int">
+    SELECT COUNT(*) FROM MEMBER
+    <where>
+        <if test="searchCondition != null and searchCondition == 'all'">
+            MEMBER_ID LIKE '%'||#{searchKeyword}||'%' 
+            OR MEMBER_NAME LIKE '%'||#{searchKeyword}||'%' 
+            OR NICKNAME LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        <if test="searchCondition != null and searchCondition == 'memberId'">
+            MEMBER_ID LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        <if test="searchCondition != null and searchCondition == 'name'">
+            MEMBER_NAME LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        <if test="searchCondition != null and searchCondition == 'nickName'">
+            NICKNAME LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        AND MEMBER_YN = 'Y'
+    </where>
+</select>
+
+	
 	<select id="memberLoginById" resultType="Member">
 		SELECT * FROM MEMBER 
 		WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'

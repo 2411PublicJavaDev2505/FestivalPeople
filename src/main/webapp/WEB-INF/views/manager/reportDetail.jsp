@@ -26,15 +26,18 @@
 						</div>
 
 						<div class="report-detail-content">
-							신고 대상 : ${report.memberNo }<br><br>
+							신고 대상 : ${member.memberId }<br><br>
 								<c:if test="${report.reportObject eq 'CHATROOM' }">
-									채팅방 번호 : ${report.chatRoomNo } 
+									채팅방 번호 : ${report.chatRoomNo }<br><br>
+									채팅방 제목 : ${cRoom.charroomTitle } 
 								</c:if> 
 								<c:if test="${report.reportObject eq 'REPORT' }">
-									후기글 번호 : ${report.reviewNo } 
+									후기글 번호 : ${report.reviewNo }<br><br>
+									후기 내용 : ${review.reviewContent }
 								</c:if> 
 								<c:if test="${report.reportObject eq 'REPORT_COMMENT' }">
-									댓글 번호 : ${report.commentNo } 
+									댓글 번호 : ${report.commentNo }<br><br>
+									댓글 내용 : ${comment.commentContent }
 								</c:if>
 							<br>
 							${report.reportObjectTitle } <br>
