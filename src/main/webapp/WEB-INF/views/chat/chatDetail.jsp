@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/header.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chatDetail.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chatLeftSide.css">
-	
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
     <div id="container">
@@ -159,7 +159,7 @@
 				</header>
 				
 				<section class="chat-area">
-					<div>
+					<div id="chat-msg-area">
 					<c:forEach items="${msgList }" var="msgList" varStatus="i">
 						<ul id="balloonList" class="group_msg_balloon">
 							<!-- 날짜 한번만 출력(중복출력불가) -->
@@ -263,11 +263,103 @@
 	</div>
 
 	<script>
+		let prevChatMsgSize = 0;
 		const chatroomNo = "${chatroomNo}"
-		
+		const memberNo = "${sessionScope.member.memberNo}";
 		const report = (num) => {
 			location.href = '/report/insert?target=chat&num='+num;
 		}
+		
+		function formatTime(dateString) {
+		    const date = new Date(dateString);
+		    let hours = date.getHours();
+		    const minutes = date.getMinutes().toString().padStart(2, '0');
+		    const ampm = hours >= 12 ? '오후' : '오전';
+		    hours = hours % 12 || 12;
+		    return ampm+' '+hours+':'+minutes;
+		}
+		
+		const loadChat = () => {
+			$.ajax({
+				url : "/chat/load",
+				data : {
+					"chatroomNo" : chatroomNo,
+				},
+				type : "GET",
+				success : function(data) {
+					let chatMsgSize = data.length;
+					let html = "";
+					let prevDate = "";
+					
+
+					data.forEach(function(msg) {
+						const date = new Date(msg.chatMsgTime); // msg.chatMsgTime이 ISO String이면 바로 new Date() 가능
+						const formattedDate = date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit'});
+					    html += '<ul id="balloonList" class="group_msg_balloon">';
+					    console.log()
+					    // 날짜 출력 예시
+					    if (formattedDate !== prevDate) {
+					        html += '<li class="date_check"><span>' + formattedDate + '</span></li>';
+					        prevDate = formattedDate;
+					    }
+					    
+					    if (memberNo != msg.memberNo) {
+					        // 다른 사람 채팅 (왼쪽)
+					        html += '<li class="msg-balloon-area">';
+					        html += '<div class="profile-area">';
+					        html += '<img class="chat-profile-thumbnail" src="' + msg.profileFilePath + '" width="40" />';
+					        html += '<div class="chat-mem-nickname">' + msg.nickname + '</div>';
+					        html += '</div>';
+					        html += '<div class="msg-balloon-area-l">';
+					        html += '<p class="msg-balloon-box-l">' + msg.chatMsgContent + '</p>';
+
+					        if (msg.chatFilePath != null) {
+				                html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
+					        }
+					        
+					        html += '<div class="msg-info">';
+					        if (msg.nonReadMember > 0) {
+					            html += '<span class="msg-non-read">안읽음' + msg.nonReadMember + '</span>';
+					        }
+					        html += '<span class="msg-time">' + formatTime(msg.chatMsgTime) + '</span>';
+					        html += '</div></div></li>';
+					        
+					    } else {
+					        // 내 채팅 (오른쪽)
+					        html += '<li class="msg-balloon-area-my">';
+					        html += '<div class="msg-balloon-area-r">';
+					        html += '<div class="msg-info-r">';
+					        if (msg.nonReadMember > 0) {
+					            html += '<span class="msg-non-read">안읽음' + msg.nonReadMember + '</span>';
+					        }
+					        html += '<span class="msg-time">' + formatTime(msg.chatMsgTime) + '</span>';
+					        html += '</div>';
+					        html += '<p class="msg-balloon-box-r">' + msg.chatMsgContent + '</p>';
+
+					        if (msg.chatFilePath != null) {
+					        	html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
+					        }
+
+					        html += '</div></li>';
+					    }
+					    
+					    html += '</ul>';
+					});
+
+					document.querySelector("#chat-msg-area").innerHTML = html;
+					if(chatMsgSize != prevChatMsgSize){
+						let chatArea = document.querySelector(".chat-area");
+						chatArea.scrollTop = chatArea.scrollHeight;
+						prevChatMsgSize = chatMsgSize;
+					}
+					
+				},
+				error  : function() {
+					console.log("통신오류!");
+				}
+			}); 
+		}
+		setInterval(loadChat, 1000);
 		
 		/* 메시지 입력 */
 		document.querySelector("#addChat").addEventListener("click", function(){
@@ -298,7 +390,7 @@
 			.then(result => {
 				if(result >0){
 					// 성공 시 메시지 목록 다시 불러오기 또는 화면에 추가
-					location.reload(); 
+					loadChat();
 				} else{
 					alert("메시지 전송에 실패했습니다.");
 				}

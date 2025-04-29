@@ -211,4 +211,9 @@ public class ChatServiceLogic implements ChatService {
 		return cMapper.selectMemberNoByNo(num);
 	}
 
+	@Override
+	public int exitAllChatrooms(int memberNo) {
+		return mMapper.exitAllChatrooms(memberNo);
+	}
+
 }

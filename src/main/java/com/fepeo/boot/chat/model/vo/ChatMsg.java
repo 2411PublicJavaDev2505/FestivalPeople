@@ -18,4 +18,5 @@ public class ChatMsg {
 	private int nonReadMember;
 	private int memberNo;
 	private int chatroomNo;
+	private String nickname;
 }

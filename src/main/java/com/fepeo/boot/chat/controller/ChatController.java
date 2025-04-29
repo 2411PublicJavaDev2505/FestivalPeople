@@ -314,4 +314,44 @@ public class ChatController {
 		return "redirect:/chat/detail/" + chatroomNo;
 	}
 	
+	
+	// 채팅리스트 출력
+	@ResponseBody
+	@GetMapping("/load")
+	public List<ChatMsg> loadChatMsg(@RequestParam("chatroomNo") int chatroomNo
+				,HttpSession session, Model model) {
+		/** 왼쪽 내 채팅방 리스트 */
+		// 세션에서 memberNo 가져오기
+		Member member = (Member)session.getAttribute("member");
+		int memberNo = member.getMemberNo();	
+
+		// 채팅방 정보 조회 (제목,태그 등 출력용)
+		ChatRoom chatRoom = service.selectChatRoomByNo(chatroomNo); 
+		int bangjangNo = chatRoom.getMemberNo(); // 방장번호
+
+		// 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0이 되야 함)
+		int zero = service.resetNonCheckMsg(chatroomNo, memberNo);
+		
+		/** 오른쪽 메시지 창 */
+		// 이미 가입한 회원 - 재입장(입장상태 'Y')
+		int yn = service.enterMemberYn(chatroomNo, memberNo);		
+		// 입장상태 나머지방 'N'으로 변경하기
+		int exitRoom = service.exitChatRooms(memberNo, chatroomNo);
+		// 회원 입장시 메세지 읽음 처리(non_read_member -1)
+		int read = service.subtractionNonReadMemberCount(chatroomNo);
+		
+		// 대화내용(말풍선) 출력
+		List<ChatMsg> msgList = service.selectChatMsgListByNo(chatroomNo);
+		
+		return msgList;
+	}
+	
+	// 채팅방 나가기(실시간)
+	@ResponseBody
+	@GetMapping("/exit")
+	public String exitChatRoom(@RequestParam("memberNo") int memberNo) {
+		int result = service.exitAllChatrooms(memberNo);
+		return result + "";
+	}
+	
 }

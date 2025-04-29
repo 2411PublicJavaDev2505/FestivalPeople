@@ -279,6 +279,9 @@ public class MemberController {
 	public String memberLogout(HttpSession session) {
 		
 		Member member = (Member)session.getAttribute("member");
+		
+		int result = chatService.exitAllChatrooms(member.getMemberNo());
+		
 		String accessToken = (String)session.getAttribute("accessToken");
 		
 		if(accessToken != null && member.getMemberId().split("_")[0].equals("kakao")) {
