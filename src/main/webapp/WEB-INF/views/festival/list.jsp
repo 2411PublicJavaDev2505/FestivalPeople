@@ -47,11 +47,11 @@
 	   
 	           <!-- 슬라이드 -->
 	           <div class="moveSlider">
-	               <div class ="moveSlider-prev-button">
-	                   <button class="slider-btn-prev" onclick="moveSlide(-1)">
-	                       <img class="on" src="../resources/img/festival/pre_off_btn_2.png"alt="이전 버튼">
-	                   </button>
-	               </div>
+	               <div class="moveSlider-prev-button">
+					  <button class="slider-btn-prev" onmouseover="hoverPrev(this)" onmouseout="unhoverPrev(this)">
+					    <img src="../resources/img/festival/pre_off_btn_2.png" alt="이전 버튼">
+					  </button>
+					</div>
 	               
 					<!-- 추천 축제용 트랙 -->
 		    <div class="moveSlider-track" id="track-recommend">
@@ -98,8 +98,8 @@
 		    </div>
 	               
 	               <div class ="moveSlider-next-button">
-	                   <button class="slider-btn-next" onclick="moveSlide(1)">
-	                       <img class="on" src="../resources/img/festival/next_off_btn_2.png" alt="다음 버튼" >
+	                   <button class="slider-btn-next" onmouseover="hoverNext(this)" onmouseout="unhoverNext(this)"onclick="moveSlide(1)">
+	                   		<img src="../resources/img/festival/next_off_btn_2.png" alt="이전 버튼">
 	                   </button>
 	               </div>
 	           </div>
@@ -196,6 +196,18 @@
 	        const track = document.getElementById(activeTrackId);
 	        const groupWidth = track.offsetWidth;
 	        track.style.transform = 'translateX(-' + currentSlide * groupWidth + 'px)';
+	    }
+	    function hoverPrev(btn) {
+	        btn.querySelector('img').src = '../resources/img/festival/pre_on_btn.png';
+	    }
+	    function unhoverPrev(btn) {
+	        btn.querySelector('img').src = '../resources/img/festival/pre_off_btn_2.png';
+	    }
+	    function hoverNext(btn) {
+	        btn.querySelector('img').src = '../resources/img/festival/next_on_btn.png';
+	    }
+	    function unhoverNext(btn) {
+	        btn.querySelector('img').src = '../resources/img/festival/next_off_btn_2.png';
 	    }
         
     </script>

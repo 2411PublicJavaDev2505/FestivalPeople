@@ -88,7 +88,15 @@
 								  </a>
 								  </div>
 								</div>
-							</li>		
+							</li>
+							<li>추천 여행 코스 정보, 어때요?
+								<div class="course-recommend-link" >
+									<a href="/course/detail?festivalNo=${festival.festivalNo}">
+									<img src="${pageContext.request.contextPath}/resources/img/course/icon/matzip-icon.png" alt="추천코스로 이동">
+									</a>
+								</div>
+							</li>
+									
 						</ul>
 					</section>
 				</div>
