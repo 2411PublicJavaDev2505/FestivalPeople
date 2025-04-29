@@ -16,7 +16,7 @@
     </div>
     <!-- 헤더 -->
 	<jsp:include page="../include/header.jsp"/>
-	<div class="notice-board">
+	<div class="notice-board" id="wrapper">
 	    <div class="notice-title">
 	        <span>공지사항</span>
 	    </div>
@@ -85,6 +85,7 @@
 			</div>
 		</c:if>
 	</div>
+	
 	<!-- 자바스크립트 -->
 	<script type="text/javascript">
 		const showDetail = (noticeNo) => {
