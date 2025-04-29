@@ -40,7 +40,7 @@ public class ChatServiceLogic implements ChatService {
 			String imgName = image.getOriginalFilename();
 			String imgRename = Util.fileRename(imgName);
 			String imgPath = "/images/chat/" + imgRename;
-			image.transferTo(new File("C:/uploadFile/chat/" + imgRename));
+			image.transferTo(new File("C:/uploadImage/chat/" + imgRename));
 			chatRoom.setChatImgName(imgName);
 			chatRoom.setChatImgRename(imgRename);
 			chatRoom.setChatImgPath(imgPath);
@@ -100,7 +100,7 @@ public class ChatServiceLogic implements ChatService {
 			String fileName = file.getOriginalFilename();
 			String fileRename = Util.fileRename(fileName);
 			String filePath = "/images/chat/" + fileRename;
-			file.transferTo(new File("C:/uploadFile/chat/" + fileRename));
+			file.transferTo(new File("C:/uploadImage/chat/" + fileRename));
 			msg.setChatFileName(fileName);
 			msg.setChatFileRename(fileRename);
 			msg.setChatFilePath(filePath);

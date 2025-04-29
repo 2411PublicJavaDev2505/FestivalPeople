@@ -319,11 +319,18 @@
 						        html += '<div class="chat-mem-nickname">' + msg.nickname + '</div>';
 						        html += '</div>';
 						        html += '<div class="msg-balloon-area-l"><div class="msg-contents">';
-						        html += '<p class="msg-balloon-box-l">' + msg.chatMsgContent + '</p>';
 	
 						        if (msg.chatFilePath != null) {
-					                html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/></div>';
+						            if (/\.(jpg|jpeg|png|gif|bmp|webp|svg|jfif)$/i.test(msg.chatFilePath)) {
+						                html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
+						            } else {
+						                html += '<a href="' + msg.chatFilePath + '" download="' + msg.chatFileName + '">' + msg.chatFileName + '</a>';
+						            }
 						        }
+// 						        if (msg.chatFilePath != null) {
+// 					                html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
+// 						        }
+						        html += '<p class="msg-balloon-box-l">' + msg.chatMsgContent + '</p></div>';
 						        
 						        html += '<div class="msg-info">';
 						        if (msg.nonReadMember > 0) {
@@ -337,16 +344,25 @@
 						        html += '<li class="msg-balloon-area-my">';
 						        html += '<div class="msg-balloon-area-r">';
 						        html += '<div class="msg-info-r">';
+						        
 						        if (msg.nonReadMember > 0) {
 						            html += '<span class="msg-non-read">안읽음' + msg.nonReadMember + '</span>';
 						        }
+						        
 						        html += '<span class="msg-time">' + formatTime(msg.chatMsgTime) + '</span>';
 						        html += '</div><div class="msg-contents">';
 						        html += '<p class="msg-balloon-box-r">' + msg.chatMsgContent + '</p>';
 	
 						        if (msg.chatFilePath != null) {
-						        	html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
+						            if (/\.(jpg|jpeg|png|gif|bmp|webp|svg|jfif)$/i.test(msg.chatFilePath)) {
+						                html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
+						            } else {
+						                html += '<a href="' + msg.chatFilePath + '" download="' + msg.chatFileName + '">' + msg.chatFileName + '</a>';
+						            }
 						        }
+// 						        if (msg.chatFilePath != null) {
+// 						        	html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
+// 						        }
 	
 						        html += '</div></div></li>';
 						    }
@@ -355,6 +371,7 @@
 	
 						document.querySelector("#chat-msg-area").innerHTML = html;
 						if(document.querySelector("#msgSearch").value.trim() != ''){
+							console.log("뭐야")
 							// 채팅리스트 다시 출력후 검색어 있으면 하이라이트
 							var keyword = $('#msgSearch').val().trim();
 							
@@ -374,9 +391,11 @@
 						    }
 						}else{
 							let chatArea = document.querySelector(".chat-area");
-							chatArea.scrollTop = chatArea.scrollHeight;
-							prevChatMsgSize = chatMsgSize;
+							setTimeout(() => {
+							    chatArea.scrollTop = chatArea.scrollHeight;
+							}, 0);
 						}
+						prevChatMsgSize = chatMsgSize;
 					}
 
 					
@@ -387,7 +406,7 @@
 			}); 
 		}
 
-		 setInterval(loadChat, 1000);
+		setInterval(loadChat, 1000);
 		
 		/* 메시지 입력 */
 		document.querySelector("#addChat").addEventListener("click", function(){
@@ -420,6 +439,7 @@
 					// 성공 시 메시지 목록 다시 불러오기 또는 화면에 추가
 					loadChat();
 					document.querySelector('#msgContent').value = '';
+					document.querySelector("#filePreviewArea").style.display = "none";
 				} else{
 					alert("메시지 전송에 실패했습니다.");
 				}
@@ -580,7 +600,6 @@
 		
 		// 버튼 클릭 시 역순으로 이동
 		$('#searchMoveBtn').on('click', function () {
-			console.log(highlightIndex);
 		    if (matchedElements.length > 0 && highlightIndex >= 0) {
 		        matchedElements[highlightIndex].scrollIntoView({ behavior: "smooth", block: "center" });
 		        highlightIndex--; //위로이동
