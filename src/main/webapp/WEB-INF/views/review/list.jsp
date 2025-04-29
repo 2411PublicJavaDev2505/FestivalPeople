@@ -23,19 +23,14 @@
 	<div class="background-image">
     	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
     </div>
-    
-    <!-- 4/28일 09:24분 css 작업 notice랑 맞추기 작업-->
-    <!-- 헤더 -->
+    <!-- 오른쪽배너 왼쪽으로 옮기는코드 몰라 못옯김...혹시몰라
+    div 아래꺼 추가하고 css에 맨위에 추가해도 안옴....내일다시 지우기!4/28일 21:10 -->
+    <div id="container">
      	<jsp:include page="../include/header.jsp"/>
-    <!-- 아래 div는 지워야할듯.확인해볼것!이름만 맞추기! -->
-    <!-- 그아래 div  reviewlist-main 지움!-->
     	<div class="review-all">
 			    <div class="reviewlist-h3">
-			    <!-- h3 span태그로 바꿔줌! -->
 				    <span>여행후기</span>
 			    </div>
-			    <!-- notice에서는 main태그없어서 지움! -->
-			<!-- 후기게시판 검색창 -->
 		    <div class="reviewsearch">
 		        <form action="/review/search" method="get" >
 			        <select class="review-searchbar" name="searchCondition">
@@ -47,13 +42,8 @@
 			        <button  type="submit" class="search-btn">⌕</button>
 		        </form>
 		    </div>
-		    
-		    <!-- 후기게시판  -->
-		    <!-- divdiv class="reviewlist" 지움! -->
 		        <table class="reviewlist-table">
-		        <!--thead 추가!  -->
 		        <thead>
-		            <!-- tr의 class="reviewlist-top~지움!  -->
 		            <tr>
 		                <td>후기번호</td>
 		                <td>작성자</td>
@@ -62,17 +52,12 @@
 		                <td>조회수</td>
 		            </tr>
 		        </thead>
-		        <!-- tbody아래 추가! -->
 		        <tbody>
 		            <c:forEach var="review" items="${rList }">
 			            <tr>
-			                <!-- 4/19 18:34분 수정시작! -->
-			                <!-- 수정했으나 list에 밑줄나오게하는건?? -->
 			                <td>${review.reviewNo}</td>
 			                <td>${review.nickname}</td>
-<%-- 			                <td><a href="/review/${review.reviewNo}">${review.reviewTitle }</td> --%>
-
-			                <td id="review-title" onclick="reviewDetail('${review.reviewNo}');"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
+							<td id="review-title" onclick="reviewDetail('${review.reviewNo}');"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
 			                <td>${review.reviewWriteTime }</td>
 			                <td>${review.reviewCount }</td>
 			            </tr>
@@ -123,6 +108,7 @@
 			    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
 			    </div>
 				</c:if>
+			</div>
 			</div>
 			<!-- 정리되면 전체 주석처리 지울것! -->
 	<script type="text/javascript">

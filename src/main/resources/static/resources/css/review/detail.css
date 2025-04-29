@@ -129,6 +129,9 @@
 	border: 1px solid white;
 	background-color: white;
 	border-radius: 10px;
+	overflow-y: auto;
+	overflow-x: hidden; 
+	padding: 50px 50px; 
 }
 
 .review-content {
@@ -141,11 +144,12 @@
 .comentwrite-p{
 /* 	position: relative; */
 /*같은현상으로 4/26일 위에 코드 주석처리*/
-	top:30px;
+	margin-top:30px;
 	color: #f2f2f2;
 	
 	
 }
+
 .review-comment-write-area {
 	margin:0 auto;
 	margin-left: 30px;
@@ -153,7 +157,7 @@
 }
 
 
-
+/*실선*/
 .comentwrite-p:after{
 	content:"";
 	display: block;
@@ -173,5 +177,35 @@
 	margin-top: 50px;
 }
 
-/*신고하기 버튼*/
+
+.review-imagefile img {
+	width: 250px;
+	height: 150px;
+}
+
+/*댓글버튼*/
+.addComment-btn{
+	margin-top: -55px;
+}
+
+#addComment{
+	width: 100px;
+    height: 48px;
+	font-size: 18px;
+	font-weight: bold;
+	border: none;
+    background: #c2beba;
+    color: #fff;
+    border-radius: 5px;
+}
+/*실선댓글쓰기 아래*/
+.textarea:after{
+	content:"";
+	display: block;
+	border-bottom: 2px solid white;
+	 position: relative;
+	 bottom:800px;
+	 top:30px;
+}
+/*댓글 답글이랑 삭제버튼*/
 

@@ -1,5 +1,10 @@
 @charset "UTF-8";
-
+/*밑에부분 지울것! 4/28일 21:20*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 .background-image {
     position: absolute;
@@ -159,6 +164,7 @@
 }
 
 /*검색css*/
+
 .reviewsearch {
     display: flex;
     justify-content: center;

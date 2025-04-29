@@ -27,19 +27,16 @@
 								🚨<button class="report-btn" onclick="reportReview('${review.reviewNo}');">신고하기</button>
 							</div>
 						<div class="reviewtitle-h1">
-							<!-- 리뷰제목 -->
-							<!-- 4/25 12:36 review-info-main 여기안에 넣어줬음! -->
 							<h1>${review.reviewTitle }</h1>
-<!-- 							<input type="hidden" id="reviewNo" value="${review.reviewNo }"> -->
 							<div class="review-info-main">
 								<div class="review-info">
-									<p><span>${review.memberName}</span></p>
+									<p><span>${review.memberName} |</span></p>
 								</div>
 								<div class="review-info">
-									<p><span>|</span>${review.reviewWriteTime }</p>	
+									<p><span> </span>${review.reviewWriteTime } |</p>	
 								</div>
 								<div class="review-info">
-									<p><span>|조회수</span>${review.reviewCount }</p>	
+									<p><span>조회수</span>${review.reviewCount }</p>	
 								</div>
 							</div>
 						</div>
@@ -48,7 +45,6 @@
 							<div class="review-content">
 								<p><div>${review.reviewContent }</div></p>
 							</div>
-							<!-- 사진내용 출력?!4/18 12:22뜨는지안뜨는지확인 확인되어서 커밋하고 지우기! -->
 							<div class="review-imagefile">
 								<c:if test="${review.reviewFilePath1 ne null }">
 									<img alt="review-img" src="${review.reviewFilePath1 }">
@@ -61,10 +57,6 @@
 								</c:if>
 							</div> 
 						</div>
-						<!-- 4/18 15:05분 수정하기버튼 추가! 요구사항에 작성자가쓴글만 삭제하는 기능은??? -->
-						<!-- 4/18 16:04삭제하기 버튼추가! -->
-						<!-- 4/19 12:05 목록으로 버튼 추가! -->
-						
 							<div class="review-update-all-btn">
 								<button class="back-list-btn" onclick="location.href='/review/list';">목록으로</button>
 								<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberNo eq review.memberNo}" >
@@ -82,13 +74,15 @@
 							<!-- 댓글쓰기 text아래로 내리는 방법은?? -->
 								<p>댓글쓰기</p><br>
 							</div>
-							<textarea row="4" cols="82" id="commentContent" placeholder="댓글내용을 입력해주세요"></textarea>
+							<div class="textarea">
+								<textarea rows="2" cols="82" id="commentContent" placeholder="댓글내용을 입력해주세요"></textarea>
+							</div>
+							<!-- 댓글내용작성후 초기화하는 코드 작성... 안되면 삭제! -->
 							<div class="addComment-btn">
-								<!-- ***여기 id값 건들지말것!**** -->
 								<button id="addComment">댓글등록</button>
 							</div>	
 						</div>
-						<!--  댓글 목록!내가 가지고 있는것으로 일단수정! -->
+						<!-- 댓글 영역! -->
 						<div class="comment-list-area">
 							<ul id="commentList">
 								<c:forEach items="${review.commentList }" var="comment">
@@ -113,7 +107,11 @@
 		</div>
 	</main>
 		<script>
-			//리뷰삭제!!!4/27일 지울것!!
+// 			function clearTextarea() {
+// 				document.getElementById("addComment").value="";
+// 			}
+		//document.getElementById("commentContent").value="";
+		//리뷰삭제!!!4/27일 지울것!!
 			
 			const CommentDelete = () => {
 				if(confirm("정말 삭제 하시겠습니까???")) {
