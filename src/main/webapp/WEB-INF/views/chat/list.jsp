@@ -8,17 +8,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>같이갈래-목록</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
+	<link rel="stylesheet" href="../resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
 	<link rel="stylesheet" href="../resources/css/chat/list.css">	
 </head>
 <body>
-	<!-- 광고 배너 -->
-	<div class="side-banner left-banner">
-        <a href="http://localhost:8888/festival/detail/287"><img src="../resources/img/review/banner-poster.jpg" alt="왼쪽 광고" /></a>
-    </div>
-    <div class="side-banner right-banner">
-        <a href="http://localhost:8888/festival/detail/288"><img src="../resources/img/review/banner-posterR.jpg" alt="오른쪽 광고" /></a>
-    </div>
     <!-- 바탕화면 -->
 	<div class="background-image">
 		<img src="../resources/img/chat/chat-background.jpg" alt="바탕화면">
@@ -88,22 +82,27 @@
 				<ul class="chat-list">
 					<li class="chat-list-row">
 						<a href="javascript:void(0);" onclick="checkAndEnter('${cRoom.chatroomNo}',${cRoom.chatMemberCount}, ${cRoom.chatLimit});" class="chat-link">
-						<img class="chat-image" alt="${cRoom.chatImgName}" src="${cRoom.chatImgPath}">
-						<div class="text-wrap">
-							<div class="chat-title">${cRoom.chatroomTitle }</div>
-							<div class="chat-tag">
-								<c:if test="${cRoom.tag1 ne null }">
-									<span>#${cRoom.tag1 }</span>
-								</c:if>
-								<c:if test="${cRoom.tag2 ne null }">
-									<span>#${cRoom.tag2 }</span>
-								</c:if>
-								<c:if test="${cRoom.tag3 ne null }">
-									<span>#${cRoom.tag3 }</span>
-								</c:if>								
+							<c:if test="${cRoom.chatImgPath eq null }">          
+								<img class="chat-image" src="../resources/img/member/profile.png" alt="" >
+							</c:if>
+							<c:if test="${cRoom.chatImgPath ne null }">          
+								<img class="chat-image" src="${cRoom.chatImgPath}" alt="${cRoom.chatImgName}" >
+							</c:if>						
+							<div class="text-wrap">
+								<div class="chat-title">${cRoom.chatroomTitle }</div>
+								<div class="chat-tag">
+									<c:if test="${cRoom.tag1 ne null }">
+										<span>#${cRoom.tag1 }</span>
+									</c:if>
+									<c:if test="${cRoom.tag2 ne null }">
+										<span>#${cRoom.tag2 }</span>
+									</c:if>
+									<c:if test="${cRoom.tag3 ne null }">
+										<span>#${cRoom.tag3 }</span>
+									</c:if>								
+								</div>
+								<div class="chat-mem-count">정원 ${cRoom.chatMemberCount } / ${cRoom.chatLimit }</div>
 							</div>
-							<div class="chat-mem-count">정원 ${cRoom.chatMemberCount } / ${cRoom.chatLimit }</div>
-						</div>
 						</a>
 					</li>
 				</ul>            
@@ -112,6 +111,7 @@
 		</section>
     </main>
     <!-- 푸터 -->
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     </div>
 
 	<script>

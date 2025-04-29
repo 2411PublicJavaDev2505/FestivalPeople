@@ -37,6 +37,9 @@
     height: 600px;    
 	overflow: auto;    
 }
+.chat-prev-list a{
+	text-decoration: none;
+}
 
 .side-banner {
     position: fixed;
