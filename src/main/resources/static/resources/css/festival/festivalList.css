@@ -46,6 +46,10 @@
     background-color: #ff6f61;
     color: white;
 }
+.festival-button button:hover {
+    background-color:#FFAF00;
+    color: white;
+}
 /* 전체 축제리스트 버튼   */
 .festival-list-button button{
     margin: 0 10px;
@@ -55,6 +59,10 @@
     border: 2px solid #ddd;
     border-radius: 10px;
     cursor: pointer;
+}
+.festival-list-button button:hover{
+    background-color: #ff6f61;
+    color: white;
 }
 
 /* 검색기능 */

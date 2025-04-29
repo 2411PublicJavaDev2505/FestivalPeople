@@ -168,14 +168,10 @@
 	            else switchTrack('track-upcoming');
 	        });
 	    });
-	    /* document.getElementById("showFestivalListBtn").addEventListener("click", function() {
-	        var festivalListTrack = document.getElementById("festivalListTrack");
-	        if (festivalListTrack.style.display === "none") {
-	            festivalListTrack.style.display = "block"; // Show the festival list
-	        } else {
-	            festivalListTrack.style.display = "none"; // Hide the festival list
-	        }
-	    }); */
+	    document.getElementById("showFestivalListBtn").addEventListener("click", function () {
+	        const festivalListTrack = document.getElementById("festivalListTrack");
+	        festivalListTrack.scrollIntoView({ behavior: "smooth" }); // 부드럽게 스크롤 이동
+	    });
 	    function switchTrack(trackId) {
 	        document.getElementById(activeTrackId).style.display = 'none';
 	        document.getElementById(trackId).style.display = 'flex';
