@@ -11,14 +11,14 @@
 	<link rel="stylesheet" href="../resources/css/review/list.css">
 </head>
 <body>
-	<!-- 광고배너 -->
+	<!-- 광고배너 
 	<div class="side-banner left-banner">
 		<a href="/festival/detail/${festival1.festivalNo }"><img src="${festival1.festivalFilePath }" alt="왼쪽 광고" /></a>
 	</div>
 	<div class="side-banner right-banner">
 		<a href="/festival/detail/${festival2.festivalNo }"><img src="${festival2.festivalFilePath }" alt="오른쪽 광고" /></a>
 	</div>
-
+	-->
     <!-- 바탕화면 -->
 	<div class="background-image">
     	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">

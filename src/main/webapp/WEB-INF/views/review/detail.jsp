@@ -14,6 +14,10 @@
 	</head>
 	<script src="https://cdn.tiny.cloud/1/h2z941nkcufiei057mdhexxykqh6vtiwziq0rhb7ahlx1hua/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 	<body>
+	 <!-- 바탕화면 -->
+	<div class="background-image">
+    	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
+    </div>
 		<main class="main-container">
 		<div id="container">
 			<jsp:include page="../include/header.jsp"/>

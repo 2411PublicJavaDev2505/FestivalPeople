@@ -10,14 +10,16 @@
     <link rel="stylesheet" href="../resources/css/include/header.css">
     <link rel="stylesheet" href="../resources/css/notice/detail.css">
 </head>
+    <!-- 에디터 API -->
 	<script src="https://cdn.tiny.cloud/1/h2z941nkcufiei057mdhexxykqh6vtiwziq0rhb7ahlx1hua/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <body>
+	<!-- 바탕화면 -->
     <div class="background-image">
     	<img src="../resources/img/notice/background.jpg" alt="바탕화면">
     </div>
-
+	<!-- 헤더 -->
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
-
+	<!-- 메인 컨테이너 -->
     <main class="main-container">
         <div class="notice-write-container">
             <div class="write-title-bar">
@@ -39,6 +41,7 @@
               </div>
    		</div>
     </main>
+    <!-- 스크립트 -->
     <script>
     	const deleteNotice = () => {
     		if(confirm("정말 삭제하시겠습니까?")){
