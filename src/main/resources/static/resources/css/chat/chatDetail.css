@@ -1,4 +1,15 @@
 @charset "UTF-8";
+/* 바탕화면 */
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 900px;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
 
 #container{
   	width: 100%;

@@ -8,17 +8,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>같이갈래-채팅방생성</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
+	<link rel="stylesheet" href="../resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatInsert.css">
 </head>
 <body>
+    <!-- 바탕화면 -->
+	<div class="background-image">
+		<img src="../resources/img/chat/chat-background.jpg" alt="바탕화면">
+    </div>
     <div id="container">
     <!-- 헤더 -->
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
     <main class="chat-main">
 		<!--상단 채팅방검색-->
 		<section class="chat-nav">
-			<span>${member.nickname }님 접속중</span>memNo.${member.memberNo }
+			<span>${member.nickname }님 접속중</span>
 			<form action="/chat/totalSearch" class="chat-list-search"  >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 				<button class="chat-search-btn" >⌕</button>
@@ -27,11 +32,6 @@
 		<section class="chat-list-total">
 			<!--좌 소속방목록-->
  			<section class="mychat-list-wrap">
-<!--				<form class="mychat-list-search" action="#" >
-					<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
-					<button class="chat-search-btn" type="submit">⌕</button>
-				</form> -->
-				
 				<!-- 참여방 없을 경우 -->
 				<c:if test="${empty myList }">
 					<span class="chat-notice">참여중인 채팅방이 없습니다</span>
@@ -78,7 +78,6 @@
 			<!--우 채팅방 만들기 상세 -->
 			<section class="chat-room-insert">
 			<form action="/chat/insert" method="post" enctype="multipart/form-data">
-			${member.nickname }님 안녕!
 				<input type="hidden" name="memberNo"  value="${member.memberNo }">
 				<div class = "room-header">
 					<div class="chat-prev-list"><a href="/chat/list">←</a></div>
@@ -99,7 +98,7 @@
 					<div class="image-group">
 						<button type="button" onclick="imgUp()" id=imgUploadBtn >
 							<img alt="" src="../resources/img/member/profile.png" id="profile-img">
-							<span>대표사진 선택</span>
+							<span id="uploadText">대표사진 선택</span>
 						</button>
 						<input id="imgInput" accept="image/*" name="image" type="file" onchange="setThumbnail(event);" style="display: none;">
 						<button type="button" id="cancelBtn" onclick="resetImage()" style="display: none;">취소</button>
@@ -116,6 +115,7 @@
 		</section>
 	</main>
 	<!-- 푸터 -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 
 	<script type="text/javascript">
@@ -178,19 +178,12 @@
 			
 			// 파일 읽는 것을 성공했을 때 실행
 			reader.onload = function(event){
-				const img = document.createElement("img");
-				img.setAttribute("src", event.target.result);
-				
-				// 기존 이미지를 제거하고 새 이미지를 추가
-				const imgUploadBtn = document.querySelector("#imgUploadBtn");
-				imgUploadBtn.innerHTML = ""; // 기존 내용을 비움
-				imgUploadBtn.appendChild(img);
-
-				// 이미지 스타일 설정
-				img.style.width = "100%"; // 버튼 너비에 맞춤
-				img.style.height = "100%"; // 버튼 높이에 맞춤
-				img.style.objectFit = "cover"; // 이미지 비율을 유지하며 버튼 크기에 맞게 자름
-				img.style.borderRadius = "10px"; // 버튼과 동일한 둥근 모서리 적용
+				const img = document.getElementById("profile-img");
+				const uploadText = document.getElementById("uploadText");
+				const cancelBtn = document.getElementById("cancelBtn");
+				img.src = event.target.result; // 기존 이미지 태그의 src 변경
+				img.style.filter = "none"; // 업로드 후 블러 제거
+				uploadText.style.display = "none"; // 글씨 숨기기
 				
 				// 이미지 선택했을 때만 취소 버튼 노출
 				cancelBtn.style.display = "inline-block";
@@ -200,12 +193,14 @@
 		// 이미지 취소하기
 		function resetImage() {
 			const imgInput = document.getElementById("imgInput");
-			const imgUploadBtn = document.getElementById("imgUploadBtn");
 			const cancelBtn = document.getElementById("cancelBtn");
-			
-			imgInput.value = ""; // 입력값 초기화
-			imgUploadBtn.innerHTML = "대표사진 선택"; //기존 텍스트 노출
+			const img = document.getElementById("profile-img");
+			const uploadText = document.getElementById("uploadText");
+			img.src = "../resources/img/member/profile.png"; // 기본 이미지로 복구
+			img.style.filter = "blur(2px)"; //블러 초기화
+			uploadText.style.display = "inline"; // 글씨 다시 보이게
 			cancelBtn.style.display = "none"; // 취소버튼 숨기기
+			imgInput.value = ""; // 입력값 초기화
 		}
 		
     </script>

@@ -9,11 +9,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>같이갈래-목록</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/header.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/footer.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chatDetail.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat/chatLeftSide.css">
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
+    <!-- 바탕화면 -->
+	<div class="background-image">
+		<img src="${pageContext.request.contextPath}/resources/img/chat/chat-background.jpg" alt="바탕화면">
+    </div>
     <div id="container">
     <!-- 헤더 -->
     <jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -260,6 +265,7 @@
 		</section>
 	</main>
 	<!-- 푸터 -->
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 
 	<script>
