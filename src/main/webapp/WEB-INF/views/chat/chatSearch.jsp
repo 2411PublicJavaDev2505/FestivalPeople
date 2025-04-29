@@ -29,7 +29,7 @@
     <!--상단 채팅방검색-->
     <main class="chat-main">
 		<section class="chat-nav">
-			<span>${member.nickname }님의 참여 채팅 수 : 0</span>
+			<span>${member.nickname }님 접속중</span>
 			<form class="chat-list-search" action="chat/totalSearch"  >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword" value="${searchKeyword }">
 				<button class="chat-search-btn" >⌕</button>
@@ -84,7 +84,7 @@
 			
 			<!--우 전체목록-->
 			<section class="allchat-list-wrap">
-				<div class="chat-prev-list"><a href="/chat/totalSearch">←</a></div>
+				<div class="chat-prev-list"><a href="/chat/list">←</a></div>
 				<c:forEach items="${rSearchList }" var="cRoom" varStatus="i">
 					<ul class="chat-list">
 						<li class="chat-list-row">

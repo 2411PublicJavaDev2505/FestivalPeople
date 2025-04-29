@@ -161,7 +161,7 @@
 		}
 	
 		const enterChatRoom = (chatroomNo) => {
-			location.href="/chat/enter/"+chatroomNo;
+			location.href="/chat/detail/"+chatroomNo;
 		}
 		const myChat = () => {
 			document.querySelector(".my-chat-list").style.display = "block";

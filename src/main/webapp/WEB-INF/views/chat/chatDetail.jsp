@@ -20,8 +20,8 @@
     <main class="chat-main">
 		<!--상단 채팅방검색-->
 		<section class="chat-nav">
-			<p>${member.nickname }참여 채팅 수 :<span id="chatCount">0</span></p>
-			<form class="chat-list-search" action="#" >
+			<p>${member.nickname }님 접속중</p>
+			<form class="chat-list-search" action="/chat/totalSearch" >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 				<button class="chat-search-btn" >⌕</button>
 			</form>
@@ -29,11 +29,6 @@
 		<section class="chat-list-total">
 			<!--좌 소속방목록-->
 			<section class="mychat-list-wrap">
-<!-- 				<form class="mychat-list-search" action="#" >
-					<input type="text" class="list-search-input" placeholder="검색" name="mySearchKeyword">
-					<button class="chat-search-btn" type="submit">⌕</button>
-				</form> -->
-				
 				<!-- 참여방 없을 경우 -->
 				<c:if test="${empty myList }">
 					<span class="chat-notice">참여중인 채팅방이 없습니다</span>
@@ -99,6 +94,7 @@
 						<div class="slide-menu">
 							<button class="chat-menu-close">Χ</button>
 							<ul class="menu-top">
+								<div class="menu-button-area">
 								<c:if test="${sessionScope.memberNo ne chatRoom.memberNo}">
 									<li>
 										<button onclick="report('${chatRoom.chatroomNo}');">채팅방 신고</button>
@@ -120,6 +116,7 @@
 									</form>
 									</li>	
 								</c:if>
+								</div>
 							</ul>
 							<ul class="mem-profile">
 								<span class="mem-count">우리방 인원 : ${chatRoom.chatMemberCount }</span>
@@ -245,16 +242,19 @@
 				</section>
 				<footer class="chat-write">
 					<input type="hidden" name="chatroomNo" value="${chatroomNo}" />
-					<label id="fileUploadBtn" class="upload-btn" for="fileUploaderInput">🔗</label>
-					<input id="fileUploaderInput" name="uplodeFile" type="file" style="display:none;">
 					<div id="filePreviewArea" style="display: none;"> <!-- 파일 미리보기 영역 -->
 				       	<img id="imagePreview" src="" alt="Image Preview" style="max-width: 200px; margin-top: 10px;">
-				        <span id="fileName"></span>						
+				        <span id="fileName"></span>		
+				        <button type="button" id="cancelBtn" onclick="resetfile()">취소</button>				
 					</div>
-					<div class="chat-input-area">
-						<textarea id="msgContent" name="msgContent" class="chat-input" maxlength="2000" placeholder="메시지를 입력하세요"></textarea>
+					<div class="wrtiteArea">
+						<label id="fileUploadBtn" class="upload-btn" for="fileUploaderInput">🔗</label>
+						<input id="fileUploaderInput" name="uplodeFile" type="file" style="display:none;">
+						<div class="chat-input-area">
+							<textarea id="msgContent" name="msgContent" class="chat-input" maxlength="2000" placeholder="메시지를 입력하세요"></textarea>
+						</div>
+						<button id="addChat" class="chat-btn-submit" type="submit">➤</button>
 					</div>
-					<button id="addChat" class="chat-btn-submit" type="submit">➤</button>
 				</footer>
 			</section>
 		</section>
@@ -263,6 +263,7 @@
 	</div>
 
 	<script>
+		/* 신고 */
 		let prevChatMsgSize = 0;
 		const chatroomNo = "${chatroomNo}"
 		const memberNo = "${sessionScope.member.memberNo}";
@@ -270,7 +271,8 @@
 			location.href = '/report/insert?target=chat&num='+num;
 		}
 		
-		function formatTime(dateString) {
+		/* 채팅방 실시간 새로고침 */
+		function formatTime(dateString) { // 시간표기
 		    const date = new Date(dateString);
 		    let hours = date.getHours();
 		    const minutes = date.getMinutes().toString().padStart(2, '0');
@@ -290,7 +292,6 @@
 					let chatMsgSize = data.length;
 					let html = "";
 					let prevDate = "";
-					
 
 					data.forEach(function(msg) {
 						const date = new Date(msg.chatMsgTime); // msg.chatMsgTime이 ISO String이면 바로 new Date() 가능
@@ -342,7 +343,6 @@
 
 					        html += '</div></div></li>';
 					    }
-					    
 					    html += '</ul>';
 					});
 
@@ -377,7 +377,8 @@
 				}
 			}); 
 		}
-// 		setInterval(loadChat, 1000);
+
+		 setInterval(loadChat, 1000);
 		
 		/* 메시지 입력 */
 		document.querySelector("#addChat").addEventListener("click", function(){
@@ -421,6 +422,7 @@
 	    const filePreviewArea = document.getElementById("filePreviewArea");
 	    const imagePreview = document.getElementById("imagePreview");
 	    const fileName = document.getElementById("fileName");
+	    const cancelBtn = document.getElementById("cancelBtn");
 	
 	    fileInput.addEventListener("change", function (event) {
 	        const file = event.target.files[0];
@@ -443,11 +445,28 @@
 	                }
 	                // 파일 미리보기 영역 표시
 	                filePreviewArea.style.display = "block";
+                    cancelBtn.style.display = "inline"; // 취소버튼 표시
 	            };
 	
 	            reader.readAsDataURL(file); // 파일을 데이터 URL로 읽어들임
 	        }
-	    });				
+	    });
+	 	// 파일첨부 취소하기
+		function resetfile() {
+			const filePreviewArea = document.getElementById("filePreviewArea");
+			const fileInput = document.getElementById("fileUploaderInput");
+			const fileUploadBtn = document.getElementById("fileUploadBtn");
+			const fileName = document.getElementById("fileName");
+			const imagePreview = document.getElementById("imagePreview");
+			const cancelBtn = document.getElementById("cancelBtn");
+			
+			fileInput.value = ""; // 입력값 초기화
+			fileUploadBtn.innerHTML = "🔗"; //기존 텍스트 노출
+			cancelBtn.style.display = "none"; // 취소버튼 숨기기
+			filePreviewArea.style.display = "none"; // 미리보기 전체 숨기기
+			imagePreview.scr = ""; //이미지 초기화
+			fileName.textContent = ""; // 파일명 초기화
+		}
 		
 		/* 메뉴창 팝업 */
 		const openBtn = document.querySelector('.chat-menu-open');

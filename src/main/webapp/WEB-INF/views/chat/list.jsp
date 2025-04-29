@@ -29,7 +29,7 @@
     <!--상단 채팅방검색-->
     <main class="chat-main">
 		<section class="chat-nav">
-			<span>${member.nickname }님의 참여 채팅 수 : 0</span>
+			<span>${member.nickname }님 접속중</span>
 			<form class="chat-list-search" action="/chat/totalSearch" >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword">
 				<button class="chat-search-btn" >⌕</button>
@@ -117,11 +117,7 @@
 	<script>
 		/* 채팅방 입장 시  */
 		function checkAndEnter(chatroomNo, currentCount, limitCount) {
-			if(currentCount >= limitCount){
-				alert("채팅방 정원이 가득 찼습니다.");
-				return; // 만원 시 입장거부
-			}
-			
+
 			fetch("/chat/check-access?chatroomNo=" + chatroomNo)
 			.then(res => res.json())
 			.then(data => {
@@ -129,6 +125,11 @@
 					// 가입자: 바로 입장
 					location.href = "/chat/enter/" + chatroomNo;
 				} else if (data.status === "notJoined") {
+					if(currentCount >= limitCount){
+						alert("채팅방 정원이 가득 찼습니다.");
+						return; // 만원 시 입장거부
+					}
+					
 					// 미가입자: 팝업으로 물어봄
 					const ok = confirm("첫입장을 환영합니다! 가입 후 입장하시겠습니까?");
 					if (ok) {
