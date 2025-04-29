@@ -2,6 +2,8 @@ package com.fepeo.boot.review.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.common.util.PageUtil;
 import com.fepeo.boot.common.util.Util;
+import com.fepeo.boot.festival.model.service.FestivalService;
+import com.fepeo.boot.festival.model.vo.Festival;
 import com.fepeo.boot.notice.model.service.logic.NoticeServiceLogic;
 import com.fepeo.boot.review.controller.dto.CommentAddRequest;
 import com.fepeo.boot.review.controller.dto.ImgAddRequest;
@@ -38,15 +43,12 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/review")
 public class ReviewController {
 		
-    private final NoticeServiceLogic noticeServiceLogic;
-
-    
 	//댓글서비스
 	private final CommentService cService;
-	
+	private final FestivalService festivalService;
 	private final ReviewService rService;
 	
-	
+	private final ApiComponent api;
 	private final PageUtil pageUtil;
 
 
@@ -66,6 +68,28 @@ public class ReviewController {
 			model.addAttribute("endNavi", pageInfo.get("endNavi"));
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("rList",rList);
+			
+			String gWRegions = (String)session.getAttribute("gWRegions");
+			if(gWRegions != null) {
+				List<Festival> rfestivals = null;
+				String[] strList = gWRegions.split(",");
+				List<String> goodWeatherRegions = new ArrayList<>();
+				goodWeatherRegions = Arrays.asList(strList);
+				rfestivals = festivalService.selectFestivalListByWeather(goodWeatherRegions);
+				int num1 = (int)(Math.random()*(rfestivals.size()-1));
+				int num2 = (int)(Math.random()*(rfestivals.size()-1));
+				while(num1 == num2) {
+					num2 = (int)(Math.random()*(rfestivals.size()-1));
+				}
+				Festival festival1 = rfestivals.get(num1);
+				Festival festival2 = rfestivals.get(num2);
+				model.addAttribute("festival1",festival1);
+				model.addAttribute("festival2",festival2);
+			}else {
+				model.addAttribute("festival1",null);
+				model.addAttribute("festival2",null);
+			}
+	    	
 			return "review/list";
 }
 
