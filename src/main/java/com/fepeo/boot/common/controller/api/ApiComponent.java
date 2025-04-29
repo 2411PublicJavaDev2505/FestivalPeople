@@ -372,7 +372,8 @@ public class ApiComponent {
 			nowTime = new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()) + "0600";
 		}
 		List<String> sunnyRegions = new ArrayList<>();
-		for(RegionDto region : regionList) {
+		for(int i = 0; i< regionList.size();i++) {
+			RegionDto region = regionList.get(i);
 			//지역코드 출력 확인
 //			System.out.println("지역번호"+region.getRegionNo());
 			String response = webClient.get()
@@ -389,29 +390,35 @@ public class ApiComponent {
 					.block();
 //			System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
 			
-			ObjectMapper mapper = new ObjectMapper();
-			JsonNode root = mapper.readTree(response);
-			
-			JsonNode items = root.path("response").path("body").path("items").path("item");	
-			if(items.isArray() && items.size() > 0) {
-				JsonNode item = items.get(0);
-				// 확인할 키 목록
-				//"wf4Am","wf4Pm","wf5Am", "wf5Pm","wf6Am","wf6Pm", "wf7Am", "wf7Pm"
-				String[] weatherKeys = {"wf4Am","wf4Pm","wf5Am", "wf5Pm","wf6Am","wf6Pm", "wf7Am", "wf7Pm"};				
-				boolean isValid = false;
-				for(String key : weatherKeys) {
-					String forecast = item.path(key).asText();
-					if(forecast.equals("맑음")) {
-						isValid = true;
-						break;
-					}	
+			try {
+				ObjectMapper mapper = new ObjectMapper();
+				JsonNode root = mapper.readTree(response);
+				JsonNode items = root.path("response").path("body").path("items").path("item");	
+				if(items.isArray() && items.size() > 0) {
+					JsonNode item = items.get(0);
+					// 확인할 키 목록
+					//"wf4Am","wf4Pm","wf5Am", "wf5Pm","wf6Am","wf6Pm", "wf7Am", "wf7Pm"
+					String[] weatherKeys = {"wf4Am","wf4Pm","wf5Am", "wf5Pm","wf6Am","wf6Pm", "wf7Am", "wf7Pm"};				
+					boolean isValid = false;
+					for(String key : weatherKeys) {
+						String forecast = item.path(key).asText();
+						if(forecast.equals("맑음")) {
+							isValid = true;
+							break;
+						}	
+					}
+					if(isValid == true) {
+						sunnyRegions.add(region.getRegionName());
+					}
 				}
-				if(isValid == true) {
-				    sunnyRegions.add(region.getRegionName());
-				}
+			} catch (Exception e) {
+				System.out.println("날씨 api 오류");
+				i--;
+				continue;
 			}
+			
 		} 
-			return sunnyRegions;
+		return sunnyRegions;
 	}
 	
 	

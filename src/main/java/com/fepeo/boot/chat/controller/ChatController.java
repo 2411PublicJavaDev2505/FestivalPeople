@@ -332,14 +332,6 @@ public class ChatController {
 		// 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0이 되야 함)
 		int zero = service.resetNonCheckMsg(chatroomNo, memberNo);
 		
-		/** 오른쪽 메시지 창 */
-		// 이미 가입한 회원 - 재입장(입장상태 'Y')
-		int yn = service.enterMemberYn(chatroomNo, memberNo);		
-		// 입장상태 나머지방 'N'으로 변경하기
-		int exitRoom = service.exitChatRooms(memberNo, chatroomNo);
-		// 회원 입장시 메세지 읽음 처리(non_read_member -1)
-		int read = service.subtractionNonReadMemberCount(chatroomNo);
-		
 		// 대화내용(말풍선) 출력
 		List<ChatMsg> msgList = service.selectChatMsgListByNo(chatroomNo);
 		
