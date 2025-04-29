@@ -193,7 +193,18 @@
     cursor: pointer;
     pointer-events: auto;
 }
-.slider-btn-prev, .slider-btn-next {
+.slider-btn-prev {
+    position: absolute;
+    transform: translateY(-50%);
+	background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.slider-btn-next {
     position: absolute;
     transform: translateY(-50%);
     background: none;
@@ -203,8 +214,6 @@
     border-radius: 100%;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-
-
 .festival-list-track {
     display: flex;
     flex-wrap: wrap;

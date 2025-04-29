@@ -123,7 +123,6 @@ public class FestivalController {
 	@GetMapping("/detail/{festivalNo}")
 	public String showFestivalDetail(@PathVariable  int festivalNo, Model model) {
 		Festival festival = festivalService.selectFestivalByNo(festivalNo);
-
 	    // 위도 경도 가져오기
 	    double lat = Double.parseDouble(festival.getMapHCode()); 
 	    double lon = Double.parseDouble(festival.getMapVCode()); 

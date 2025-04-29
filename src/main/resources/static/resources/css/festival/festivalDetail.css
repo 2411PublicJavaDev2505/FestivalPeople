@@ -78,6 +78,62 @@
 	padding-left:15%;
 	list-style-type: none;
 }
+
+/* 일기예보 */
+
+.weather-api{
+	background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 900px;
+    margin: 20px 100px; 
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.weather-api table {
+    width: 800px;
+    border-collapse: collapse;
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.weather-api th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+}
+
+.weather-api td {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+}
+
+.weather-api tr:nth-child(1) th {
+    background-color: #f1f5f9;
+    font-size: 15px;
+    color: #111;
+}
+
+.weather-api tr td {
+    background-color: #ffffff;
+}
+
+.weather-api th:first-child {
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
+}
+
+.weather-api td, .weather-api th {
+    text-align: center;
+    vertical-align: middle;
+}
 /* 길찾기 */
 .map-api {
     background: white;
@@ -128,58 +184,30 @@
 .map_shortcut:hover {
   background-color: #FFC107;
 }
-
-/* 일기예보 */
-
-.weather-api{
-	background: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 900px;
+/* 코스 추천  */
+.course-recommend-link{
+	background:white;
+	border-radius: 20px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  	z-index:1;
+	/* opacity: 0.3; */
+    width: 150px;
     margin: 20px 100px; 
     display: flex;
     justify-content: center;
     padding: 20px;
-}
-  
-.weather-api table {
-    width: 800px;
-    border-collapse: collapse;
-    font-family: "Pretendard", "Noto Sans KR", sans-serif;
-    font-size: 14px;
-    color: #333;
-    margin-top: 20px;
-}
+} 
 
-.weather-api th {
-    background-color: #f9fafb;
-    font-weight: 600;
-    border: 1px solid #e0e0e0;
-    padding: 12px;
-}
+.course-recommend-link a{
+	opacity: 1.3;
+	text-decoration:none;
+	color: #333;
+	font-size:20px;
+	font-weight:bold;
+} 
 
-.weather-api td {
-    border: 1px solid #e0e0e0;
-    padding: 12px;
-}
-
-.weather-api tr:nth-child(1) th {
-    background-color: #f1f5f9;
-    font-size: 15px;
-    color: #111;
-}
-
-.weather-api tr td {
-    background-color: #ffffff;
-}
-
-.weather-api th:first-child {
-    text-align: left;
-    white-space: nowrap;
-    width: 100px;
-}
-
-.weather-api td, .weather-api th {
-    text-align: center;
-    vertical-align: middle;
+.course-recommend-link a img{
+	width:80px;
+	height:80px;
+	 border-radius: 20px;
 }
