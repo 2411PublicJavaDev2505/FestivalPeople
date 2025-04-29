@@ -25,12 +25,12 @@
 					<div class="review-h3">
 						<h3>여행후기</h3>
 					</div>
-					<section>
+						<section>
 							<div class="review-report-btn">
 								🚨<button class="report-btn" onclick="reportReview('${review.reviewNo}');">신고하기</button>
 							</div>
-						<div class="reviewtitle-h1">
-							<h1>${review.reviewTitle }</h1>
+							<div class="reviewtitle-h1">
+								<h1>${review.reviewTitle }</h1>
 							<div class="review-info-main">
 								<div class="review-info">
 									<p><span>${review.memberName} |</span></p>
@@ -41,10 +41,8 @@
 								<div class="review-info">
 									<p><span>&ensp;조회수</span>${review.reviewCount }</p>	
 								</div>
-								<!-- &ensp; 공백처리코드!! -->
 							</div>
 						</div>
-							<!-- 밑에는 내용! -->
 						<div class="review-all-content">
 							<div class="review-content">
 								<p><div>${review.reviewContent }</div></p>
@@ -75,48 +73,43 @@
 					<div class="review-comment-list-area">
 						<div class="review-comment-write-area">
 							<div class="comentwrite-p">
-							<!-- 댓글쓰기 text아래로 내리는 방법은?? -->
-							<!--  -->
 								<p>댓글쓰기</p><br>
 							</div>
-							<!-- 4/29text상자 초기화해야하나 몰라 클릭하면 사라지는구현만... -->
 							<div class="textarea">
 								<textarea rows="2" cols="82" id="commentContent" onclick=this.value=""; placeholder="댓글내용을 입력해주세요"></textarea>
 							</div>
-							<!-- 댓글내용작성후 초기화하는 코드 작성... 안되면 삭제! -->
 							<div class="addComment-btn">
 								<button id="addComment" >댓글등록</button>
 							</div>	
 						</div>
 						<!-- 댓글 영역! -->
-						<div class="comment-list-area">
-							<ul id="commentList">
-								<c:forEach items="${review.commentList }" var="comment">
-									<li class="comment-row">
-										<p>
-											<span>닉네임</span>
-											작성시간 : <span>${comment.commentTime }</span>
-										</p>
+							<div class="comment-list-area">
+								<ul id="commentList">
+									<c:forEach items="${review.commentList }" var="comment">
+										<li class="comment-row">
+											<p>
+												<span>닉네임</span>
+												작성시간 : <span>${comment.commentTime }</span>
+											</p>
 											내용: <p>${comment.commentContent }</p>
-											
 											<div class="comment-btn-area">
-											<button class="replyBtn">답글(삭제 예정)</button>
-											<button class="deleteBtn" onclick="CommentDelete();">삭제</button>
-											<button onclick="reportComment('${comment.commentNo}');">신고</button>
-										</div>
-									</li>
-								</c:forEach>
-							</ul>
+												<button class="replyBtn">답글(삭제 예정)</button>
+												<button class="deleteBtn" onclick="CommentDelete();">삭제</button>
+												<button onclick="reportComment('${comment.commentNo}');">신고</button>
+											</div>
+										</li>
+									</c:forEach>
+								</ul>
+							</div>
 						</div>
 					</div>
-			</div>
-		</div>
-	</main>
+				</div>
+			</main>
 		<script>
-			//textarea 클릭시 초기화...	
+			//textarea 클릭시 초기화
 			document.getElementById("commentContent").value='';
 		
-			//댓글삭제	?? 
+			//댓글삭제
 			const CommentDelete = () => {
 				if(confirm("정말 삭제 하시겠습니까???")) {
 					location.href ="/review/comment/delete?commentNo=${comment.commentNo}";
@@ -172,8 +165,8 @@
 					cListTag.innerHTML ="";
 					for(let comment of cList) {
 						
-						const commentRow = document.createElement("li"); //** <li></li> 태그를 만든다!!!
-						commentRow.classList.add("comment-row"); //**<li class="reviewcomment-row"></li>
+						const commentRow = document.createElement("li");
+						commentRow.classList.add("comment-row"); 
 						
 						
 						const commentPtag = document.createElement("p"); 

@@ -9,7 +9,6 @@ import lombok.ToString;
 @ToString
 public class ReviewComment {
 	
-	//detail 댓글 작업시작하면서 주석풀어줌!4/15 10:15
 	private int			commentNo;
 	private String		commentContent;
 	private Timestamp	commentTime;

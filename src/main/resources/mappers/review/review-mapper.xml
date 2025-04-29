@@ -22,34 +22,26 @@
   		<result property="nickname" column="NICKNAME"/>
   		<result property="memberName" column="MEMBER_NAME"/>
   		
-  		<!-- 아래코드 코드작성되면 주석풀기 -->
   		<collection property="commentList" 
   		 			select="selectCommentList" column="REVIEW_NO"
   		 									javaType="java.util.List"
   		 									ofType="ReviewComment"></collection>
-  		<!-- 이미지 다중으로 다이렉트로 왔긴했지만 코드 작성해줌 4/18 09:22 -->
-  		<!-- 조회코드 첫번째 작성하고 아래작성하기!! 작성법은 본실습계정 내용보고 참고!적고 다시 밑에 ~ -->
   		<collection property="imgList"
   					select="selectReviewImgByNo" column="REVIEW_NO"
   					javaType="java.util.List"
   					ofType="ImgAddRequest"></collection>
   		
   		</resultMap>
-  		<!-- detail 작성자 조인추가해줌 -->
+ 		
  		<select id="selectOneByNo" resultMap="reviewResultMap">
  			SELECT R.*, M.MEMBER_NAME MEMBER_NAME FROM REVIEW R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO 
  			WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N'
  		</select>
 
- 			<!-- 아래도 코드작성하면 주석풀기! *-->
  			<!-- 댓글 목록 -->
  		<select id="selectCommentList" resultType="ReviewComment">
  			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
  		</select>
- 		
-<!--  		<select id="selectReviewList" resultMap="reviewResultMap"> -->
-<!--  			SELECT * FROM REVIEW ORDER BY REVIEW_NO DESC -->
-<!--  		</select> -->
 			<!-- 리뷰게시판리스트 -->
 			<select id="selectReviewList" resultMap="reviewResultMap">
 				SELECT A.REVIEW_NO,
@@ -75,14 +67,10 @@
   				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
   		</insert>
   		
-  		<!-- 페이징 4/29일 코드바꿈! -->
-  		<!-- 에러나서 다시 원복! -->
-  		<!-- 다시수정! -->
   		<select id="getTotalCount" resultType="int">
 			SELECT COUNT(*) FROM REVIEW
 		</select>
 		
-		<!-- 이미지 업로드 조회 쿼리 작성먼저함4/1810:02 에러나면 바꿔줄것! 그리고 COLLECTION태그 적어줌!-->
 		<select id="selectReviewImgByNo" resultType="ImgAddRequest">
 			SELECT * FROM REVIEW WHERE REVIEW_NO = #{reviewNo}
 		</select>
@@ -119,7 +107,6 @@
 		</update>
 		
 		<!-- 검색 -->
-		
 		<select id="searchListByKeyword" resultMap="reviewResultMap">
 			SELECT R.*, M.NICKNAME FROM REVIEW R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO 
 			<where>	

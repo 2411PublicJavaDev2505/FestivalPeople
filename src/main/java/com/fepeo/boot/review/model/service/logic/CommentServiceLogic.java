@@ -34,7 +34,7 @@ public class CommentServiceLogic implements CommentService{
 		return mapper.selectCommentList(reviewNo);
 	}
 
-
+	//댓글삭제
 	@Override
 	public int commentDelete(int commentNo) {
 		int result = mapper.commentDelete(commentNo);

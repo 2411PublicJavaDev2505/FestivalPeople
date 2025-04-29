@@ -13,18 +13,10 @@ import lombok.ToString;
 @ToString
 public class ReviewUpdateRequest {
 	
-	//4/24 14:50 추가! 4/24 19: 14 //private int reviewYn; 주석!
 	private	int			reviewNo;			
 	private	String		reviewTitle;		
 	private String		reviewContent;
 	private String 		reviewCount;
-	//private int			reviewYn;
 	private int			memberNo;
 	private List<ImgAddRequest> imageList;
-	//일단 밑에 수정작업 추가!!4/24
-	//private MultipartFile imageFile;
-	//한번더 수정코드 작업 추가!!
-	//private String		reviewFileName;	//리뷰이름1
-	//private String		reviewFileRename;	//리뷰파일변경이름1
-	//private String		reviewFilePath;	//리뷰파일경로1
 }
