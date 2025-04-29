@@ -52,7 +52,7 @@ public class ReviewController {
 	private final PageUtil pageUtil;
 
 
-    //후기 게시판 페이지시작
+    //후기 게시판 페이지시작 안되면 value값 notice랑 맞추기!
 	
 	@GetMapping("/list")
 	public String showReviewList(@RequestParam(value="page",defaultValue="1") int currentPage
@@ -67,6 +67,8 @@ public class ReviewController {
 			model.addAttribute("startNavi" ,pageInfo.get("startNavi"));
 			model.addAttribute("endNavi", pageInfo.get("endNavi"));
 			model.addAttribute("currentPage", currentPage);
+			//4/29 페이징 notice꺼 보고 일단 적어봄.. 지울것!아래 1개코드!
+			model.addAttribute("pageInfo",pageInfo);
 			model.addAttribute("rList",rList);
 			
 			String gWRegions = (String)session.getAttribute("gWRegions");
