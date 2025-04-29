@@ -42,10 +42,25 @@
 						<ul class="chat-list">
 							<li class="chat-list-row">
 								<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
-								<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
+									<c:if test="${myList.chatImgPath eq null }">          
+										<img class="chat-image" src="../resources/img/member/profile.png" alt="" >
+									</c:if>
+									<c:if test="${myList.chatImgPath ne null }">          
+										<img class="chat-image" src="${myList.chatImgPath}" alt="${myList.chatImgName}" >
+									</c:if>
 								<div class="text-wrap">
 									<div class="chat-title">${myList.chatroomTitle }</div>
-									<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
+									<div class="chat-tag">
+										<c:if test="${myList.tag1 ne null }">
+											<span>#${myList.tag1 }</span>
+										</c:if>
+										<c:if test="${myList.tag2 ne null }">
+											<span>#${myList.tag2 }</span>
+										</c:if>
+										<c:if test="${myList.tag3 ne null }">
+											<span>#${myList.tag3 }</span>
+										</c:if>										
+									</div>
 									<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
 								</div>
 								<c:if test="${myList.nonCheckMsg> 0 }" >
@@ -82,7 +97,10 @@
 				</div>
 				<div class ="chat-room-bottom">
 					<div class="image-group">
-						<button type="button" onclick="imgUp()" id=imgUploadBtn >대표사진 선택</button>
+						<button type="button" onclick="imgUp()" id=imgUploadBtn >
+							<img alt="" src="../resources/img/member/profile.png" id="profile-img">
+							<span>대표사진 선택</span>
+						</button>
 						<input id="imgInput" accept="image/*" name="image" type="file" onchange="setThumbnail(event);" style="display: none;">
 						<button type="button" id="cancelBtn" onclick="resetImage()" style="display: none;">취소</button>
 					</div>
