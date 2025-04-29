@@ -23,8 +23,6 @@
 	<div class="background-image">
     	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
     </div>
-    <!-- 오른쪽배너 왼쪽으로 옮기는코드 몰라 못옯김...혹시몰라
-    div 아래꺼 추가하고 css에 맨위에 추가해도 안옴....내일다시 지우기!4/28일 21:10 -->
     <div id="container">
      	<jsp:include page="../include/header.jsp"/>
     	<div class="review-all">
@@ -64,17 +62,8 @@
 		            </c:forEach>
 		        </tbody>
 			</table>
-		    
-		    <!-- 페이지 네이션! 이름값 notice랑 맞춰줌! -->
-		    <!-- notice에는 버튼으로 있어서 바꿔줌! -->
-		    <!-- notice랑 맞춰주기위해 기존것은 주석처리하고 새로작성! -->
-		    <!-- 잘 바꿔주면 지워주기! -->
-		    <!-- 난page로 했어서 안되면 currentPage를 page로 바꿔주기*********  -->
-		    <!-- pageinfo를 추가? -->
-		    <!-- 4/29일 pageinfo 추가 -->
-		    <!-- 다시 원복! -->
-		    <div class="rivew-pagination">
-					<c:if test="${pageInfo.startNavi ne 1 }">
+				<div class="rivew-pagination">
+					<c:if test="${pageInfo.startNavi ne 1}">
 						<button class="page-btn" onclick="prev();">&lt;</button>
 					</c:if>
 					<c:forEach begin="${pageInfo.startNavi }" end="${pageInfo.endNavi }" var="p">
@@ -88,31 +77,14 @@
 					<c:if test="${pageInfo.endNavi ne pageInfo.maxPage }">
 						<button class="page-btn" onclick="next();">&gt;</button>
 					</c:if>
-					<!-- 여기까지 페이지 네이션 -->
-	
-<%-- 			    <c:if test="${startNavi ne 1 }"> --%>
-<!-- 			    	수정했음! -->
-<%-- 			    	<a href="/review/list?page=${startNavi-1 }">&lt;</a> --%>
-<%-- 			    </c:if> --%>
-<%-- 			    <c:forEach begin="${startNavi }" end="${endNavi }" var="p"> --%>
-<%-- 			    	<a href="/review/list?page=${p }">${p }</a> --%>
-<%-- 			    </c:forEach> --%>
-<%-- 			    <c:if test="${endNavi ne maxPage }"> --%>
-<%-- 			    	<a href="/review/list?page=${endNavi+1 }">&gt;</a> --%>
-<%-- 			    </c:if> --%>
-		    </div>
-		    <!-- 글쓰기버튼! -->
-		    <!-- notice에선 div 가 버튼에있어 수정! -->
-				<!-- 4/25 맵퍼에 <select id="selectOneByNo" resultMap="reviewResultMap"> 조인으로
-				인해 로그인안한상태에서 글쓰기버튼 보여 코드 수정! eq로만 바꿔줌-->
+				</div>
 				<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberYn eq 'Y'}" >
 			    <div class="reviewinsert-btn">
 			    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
 			    </div>
 				</c:if>
 			</div>
-			</div>
-			<!-- 정리되면 전체 주석처리 지울것! -->
+		</div>
 	<script type="text/javascript">
 		const reviewDetail = (reviewNo) => {
 			location.href ="/review/detail?reviewNo=" + reviewNo;
@@ -128,7 +100,7 @@
 			location.href="/review/list?page=" +(parseInt("${pageInfo.startNavi}") -1);
 		}
 		const move = (p) => {
-			location.href ="/review/list?page=" + p;
+			location.href ="/review/list?page="+p;
 		}
 		const next = () => {
 			location.href="/review/list?page=" + (parseInt("${pageInfo.endNavi}") + 1);
