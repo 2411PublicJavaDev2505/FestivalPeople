@@ -47,7 +47,17 @@
 							<img class="chat-image" alt="${myList.chatImgName}" src="${myList.chatImgPath}">
 							<div class="text-wrap">
 								<div class="chat-title">${myList.chatroomTitle }</div>
-								<div class="chat-tag">#${myList.tag1 } #${myList.tag2 } #${myList.tag3 }</div>
+								<div class="chat-tag">
+									<c:if test="${myList.tag1 ne null }">
+										<span>#${myList.tag1 }</span>
+									</c:if>
+									<c:if test="${myList.tag2 ne null }">
+										<span>#${myList.tag2 }</span>
+									</c:if>
+									<c:if test="${myList.tag3 ne null }">
+										<span>#${myList.tag3 }</span>
+									</c:if>								
+								</div>
 								<div class="chat-mem-count">정원 ${myList.chatMemberCount } / ${myList.chatLimit }</div>
 							</div>
 							<c:if test="${myList.nonCheckMsg> 0 }" >
