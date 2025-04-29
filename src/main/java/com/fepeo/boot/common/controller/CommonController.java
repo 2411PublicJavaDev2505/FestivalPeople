@@ -77,5 +77,15 @@ public class CommonController {
 	public String showIntro() {
 		return "intro/intro";
 	}
+	
+	@GetMapping("/include/terms")
+	public String showTerms() {
+		return "include/terms";
+	}
+	
+	@GetMapping("/include/info")
+	public String showPersnalInfo() {
+		return "include/persnalInfo";
+	}
 
 }

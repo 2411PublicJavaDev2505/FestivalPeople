@@ -9,8 +9,8 @@
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-left">
-                <a href="/terms">이용약관</a>
-                <a href="/privacy">개인정보 처리방침</a>
+                <a href="/include/terms">이용약관</a>
+                <a href="/include/info">개인정보 처리방침</a>
             </div>
             <div class="logo-container">
                 <a href="/"><img src="${pageContext.request.contextPath}/resources/img/footerlogo.png" alt="Festival People"></a>
