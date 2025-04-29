@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/resources/css/include/header.css">
 	<link rel="stylesheet" href="/resources/css/course/courseDetailPage.css">
-
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/footer.css">
 	
 	<title>코스 추천</title>
 </head>
@@ -35,19 +35,97 @@
 								<!-- 저장된 코스 리스트 출력 -->
 								<div id="recommendation-container">		
 									<c:forEach items="${placeList}" var="place">
+									<p>${place.place_name} / ${place.category_group_code}</p>
+										<c:if test="${place.category_group_code} == 'FD6'">
 											<div>
 												<div class="course-category">
 													<div class="place-title">추천 맛집</div>
 													<div class="place-name">${place.place_name} </div>
 												</div>
 				 								<div class="course-recommend-section">
-													<iframe src="${place.place_url} " width="100%" height="600px"></iframe><br>
+													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
 													<div class="iframe-description">
 														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
 														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
 													</div>
 												</div>								
 											</div>
+										</c:if>	
+										<c:if test="${place.category_group_code} == 'AD5'">
+											<div>
+												<div class="course-category">
+													<div class="place-title">추천 호텔</div>
+													<div class="place-name">${place.place_name} </div>
+												</div>
+				 								<div class="course-recommend-section">
+													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
+													<div class="iframe-description">
+														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
+														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+													</div>
+												</div>								
+											</div>
+										</c:if>	
+										<c:if test="${place.category_group_code} == 'CE7'">
+											<div>
+												<div class="course-category">
+													<div class="place-title">추천 카페</div>
+													<div class="place-name">${place.place_name} </div>
+												</div>
+				 								<div class="course-recommend-section">
+													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
+													<div class="iframe-description">
+														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
+														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+													</div>
+												</div>								
+											</div>
+										</c:if>	
+										<c:if test="${place.category_group_code} == 'AT4'">
+											<div>
+												<div class="course-category">
+													<div class="place-title">추천 관광지</div>
+													<div class="place-name">${place.place_name} </div>
+												</div>
+				 								<div class="course-recommend-section">
+													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
+													<div class="iframe-description">
+														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
+														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+													</div>
+												</div>								
+											</div>
+										</c:if>	
+										<c:if test="${place.category_group_code} == 'PK6'">
+											<div>
+												<div class="course-category">
+													<div class="place-title">추천 주차장</div>
+													<div class="place-name">${place.place_name} </div>
+												</div>
+				 								<div class="course-recommend-section">
+													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
+													<div class="iframe-description">
+														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
+														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+													</div>
+												</div>								
+											</div>
+										</c:if>	
+										<c:if test="${place.category_group_code} == 'CT1'">
+											<div>
+												<div class="course-category">
+													<div class="place-title">추천 문화시설</div>
+													<div class="place-name">${place.place_name} </div>
+												</div>
+				 								<div class="course-recommend-section">
+													<iframe src="${place.place_url}" width="100%" height="600px"></iframe><br>
+													<div class="iframe-description">
+														<p>자세한 정보는 아래 링크에서 확인하세요 👇</p>
+														<a href="${place.place_url}" target="_blank">${place.place_url}</a>
+													</div>
+												</div>								
+											</div>
+										</c:if>	
 									</c:forEach>			
 								</div>	
 								<div class="deleteDiv">	
@@ -74,10 +152,11 @@
 				</div>	
 			</div>	
 		</main>	
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 <input type="hidden" id="festivalNo" value="${festival.festivalNo}">
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce2765b5c8d1c862f02d7a486094793d"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJavaScriptKey }"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	/* 배경화면 설정 */

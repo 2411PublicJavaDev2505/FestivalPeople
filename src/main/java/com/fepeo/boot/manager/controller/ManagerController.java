@@ -58,11 +58,17 @@ public class ManagerController {
 		searchMap.put("searchKeyword", searchKeyword);
 		searchMap.put("searchCondition", searchCondition);
 		
-		
-		
-		
-		
-		return "";
+		int totalCount = rService.getSearchTotalCount(searchMap);
+		Map<String, Integer> pageInfo = pageutil.generatePageInfo(totalCount, currentPage);
+		List<Report> rList = rService.searchReportList(searchMap, currentPage);
+		if(rList.size() > 0) {
+			model.addAttribute("rList", rList);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("pageInfo", pageInfo);
+			return "manager/reportList";
+		} else {
+			return "common/error";
+		}
 	}
 	
 	

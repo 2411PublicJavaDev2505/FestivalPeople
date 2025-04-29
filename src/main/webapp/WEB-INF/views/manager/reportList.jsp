@@ -73,19 +73,36 @@
 								</tr>
 							</c:forEach>
 						</table>
-			            <div class="pagination">
-							<a href="/manager/report?currentPage=1">◁◁</a>
-							<c:if test= "${pageInfo.startNavi ne 1}">
-								<a href="/manager/report?currentPage=${pageInfo.startNavi-1}" class="prev">◀</a>
-							</c:if>	
-							<c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
-								<a href="/manager/report?currentPage=${p}">${p}</a>
-							</c:forEach>					
-							<c:if test="${pageInfo.endNavi ne pageInfo.maxPage}">
-								<a href="/manager/report?currentPage=${pageInfo.endNavi+1}" class="next">▶</a>
-							</c:if>    
-				           	<a href="/manager/report?currentPage=${pageInfo.maxPage}"> ▷▷ </a>
-			            </div>
+							<div class="pagination">
+							    <c:choose>
+							        <c:when test="${not empty param.searchCondition and not empty param.searchKeyword}">
+							            <a href="/manager/rSearch?currentPage=1&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}">◁◁</a>
+							            <c:if test="${pageInfo.startNavi ne 1}">
+							                <a href="/manager/rSearch?currentPage=${pageInfo.startNavi - 1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}" class="prev">◀</a>
+							            </c:if>
+							            <c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
+							                <a href="/manager/rSearch?currentPage=${p}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}">${p}</a>
+							            </c:forEach>
+							            <c:if test="${pageInfo.endNavi ne pageInfo.maxPage}">
+							                <a href="/manager/rSearch?currentPage=${pageInfo.endNavi + 1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}" class="next">▶</a>
+							            </c:if>
+							            <a href="/manager/rSearch?currentPage=${pageInfo.maxPage}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}">▷▷</a>
+							        </c:when>
+							        <c:otherwise>
+							            <a href="/manager/report?currentPage=1">◁◁</a>
+							            <c:if test="${pageInfo.startNavi ne 1}">
+							                <a href="/manager/report?currentPage=${pageInfo.startNavi - 1}" class="prev">◀</a>
+							            </c:if>
+							            <c:forEach begin="${pageInfo.startNavi}" end="${pageInfo.endNavi}" var="p">
+							                <a href="/manager/report?currentPage=${p}">${p}</a>
+							            </c:forEach>
+							            <c:if test="${pageInfo.endNavi ne pageInfo.maxPage}">
+							                <a href="/manager/report?currentPage=${pageInfo.endNavi + 1}" class="next">▶</a>
+							            </c:if>
+							            <a href="/manager/report?currentPage=${pageInfo.maxPage}">▷▷</a>
+							        </c:otherwise>
+							    </c:choose>
+							</div>
 					</div>
 				</div>	
 			</main>

@@ -52,9 +52,10 @@ main {
 }
 
 .report-detail-content {
+	text-align : center;
 	width: 700px;
 	height: 300px;
-	background-color : aliceblue;
+	background-color : #e4e2dd;
 	margin: 0 auto;
 	border-radius: 20px;
 	margin-top : 80px;
@@ -77,7 +78,7 @@ main {
 
 .report-detail-btn {
 	text-align: center;
-
+	margin-top : 20px;
 	}
 	
 	
@@ -87,6 +88,11 @@ main {
 	border-radius: 5px;
 	padding: 10px;	
 }
+
+.report-content {
+	width : 600px;
+}
+
 
 .acceptBtn{
 	width:70px;

@@ -1,6 +1,7 @@
 package com.fepeo.boot.report.model.service.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,19 @@ public class ReportServiceLogic implements ReportService{
 	@Override
 	public int deleteCommentReport(int commentNo) {
 		return reportMapper.deleteCommentReport(commentNo);
+	}
+
+	@Override
+	public int getSearchTotalCount(Map<String, String> searchMap) {
+		return reportMapper.getSearchTotalCount(searchMap);
+	}
+
+	@Override
+	public List<Report> searchReportList(Map<String, String> searchMap, int currentPage) {
+		int limit = 10;
+		int offset = (currentPage-1)* limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return reportMapper.searchReportList(searchMap, rowBounds);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.fepeo.boot.report.model.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
@@ -26,5 +27,9 @@ public interface ReportMapper {
 	int deleteReviewReport(int reviewNo);
 
 	int deleteCommentReport(int commentNo);
+
+	int getSearchTotalCount(Map<String, String> searchMap);
+
+	List<Report> searchReportList(Map<String, String> searchMap, RowBounds rowBounds);
 
 }

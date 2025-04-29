@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/course/courseDetailPage.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/footer.css">
 
 	
 	<title>코스 추천</title>
@@ -100,10 +101,11 @@
 				</div>	
 			</div>	
 		</main>	
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 <input type="hidden" id="festivalNo" value="${festival.festivalNo}">
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce2765b5c8d1c862f02d7a486094793d"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJavaScriptKey }"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	/* 배경화면 설정 */
@@ -139,7 +141,7 @@
 	var kakaoMapContainer = document.querySelector('.course-recommend-map');
 	var mapOptions = {
 		center: new kakao.maps.LatLng(Number(festivalY), Number(festivalX)),
-		level: 3
+		level: 5
 	};
 	var map = new kakao.maps.Map(kakaoMapContainer, mapOptions);
 

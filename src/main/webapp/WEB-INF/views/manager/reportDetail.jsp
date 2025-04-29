@@ -29,7 +29,7 @@
 							신고 대상 : ${member.memberId }<br><br>
 								<c:if test="${report.reportObject eq 'CHATROOM' }">
 									채팅방 번호 : ${report.chatRoomNo }<br><br>
-									채팅방 제목 : ${cRoom.charroomTitle } 
+									채팅방 제목 : ${cRoom.chatroomTitle } 
 								</c:if> 
 								<c:if test="${report.reportObject eq 'REPORT' }">
 									후기글 번호 : ${report.reviewNo }<br><br>

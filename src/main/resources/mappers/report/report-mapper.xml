@@ -19,6 +19,45 @@
     	</if>
     </insert>
     
+    <select id="searchReportList" resultType="Report">
+    	SELECT * FROM REPORT
+    	<where>
+    		<if test="searchCondition != null and searchCondition == 'all'">
+    			REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='chatroom'">
+    			REPORT_OBJECT = 'CHATROOM' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='REPORT'">
+    			REPORT_OBJECT = 'REPORT' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='REPORT_COMMENT'">
+    			REPORT_OBJECT = 'REPORT_COMMENT' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		AND DELETE_YN = 'N'
+    	</where>
+    </select>
+    
+    <select id="getSearchTotalCount" resultType="_int">
+    	SELECT COUNT(*) FROM REPORT
+    	<where>
+    		<if test="searchCondition != null and searchCondition == 'all'">
+    			REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='chatroom'">
+    			REPORT_OBJECT = 'CHATROOM' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='REPORT'">
+    			REPORT_OBJECT = 'REPORT' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='REPORT_COMMENT'">
+    			REPORT_OBJECT = 'REPORT_COMMENT' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		AND DELETE_YN = 'N'
+    	</where>
+
+    </select>
+    
     <select id="getTotalCount">
     	SELECT COUNT(*) FROM REPORT
     </select>

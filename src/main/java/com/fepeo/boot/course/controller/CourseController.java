@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -52,7 +53,8 @@ public class CourseController {
 	private final FestivalService fService;
 	private final ApiComponent api;
 	
-	
+	@Value("${kakaoJavaScriptKey}")
+	private String kakaoJavaScriptKey;
 	
 	// 비회원은 확인 불가능한 회원 위치기반 전용 코스 추천 리스트 출력
 	@GetMapping("/list")
@@ -131,6 +133,7 @@ public class CourseController {
 		model.addAttribute("fList", fList);
 		model.addAttribute("message", "회원님이 검색하신 리스트에요!");
 		model.addAttribute("memberName", memberName);
+		model.addAttribute("kakaoJavaScriptKey",kakaoJavaScriptKey);
 		return "course/list";
 	}
 	
@@ -280,6 +283,7 @@ public class CourseController {
 			
 			model.addAttribute("festival", festival);
 			model.addAttribute("coursePoint", coursePoint);
+			model.addAttribute("kakaoJavaScriptKey",kakaoJavaScriptKey);
 			return "course/courseDetail";
 	
 	}
@@ -324,9 +328,11 @@ public class CourseController {
 				PlaceDto culture = api.kakaoCourseApi(festivalXY, "CT1");
 				placeList.add(culture);
 			}	
+			
 		model.addAttribute("festival", festival);
 		model.addAttribute("placeList", placeList);
 		model.addAttribute("course", course);
+		model.addAttribute("kakaoJavaScriptKey",kakaoJavaScriptKey);
 		return "course/myCourse";
 	}
 	

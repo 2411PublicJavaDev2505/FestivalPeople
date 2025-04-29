@@ -31,8 +31,9 @@
 }
 
 .report-list-table {
-	width : 1000px;
+	width : 90%;
 	margin : 0 auto;	
+	margin-left: 250px;	
 	text-align : center;
 }
 
@@ -41,10 +42,16 @@
 	background-color : #678E79; 
 }
 
-.report-Infomation {
+.report-Information {
 	border : 0.5px solid white;
 	background-color : #678E79; 
 
+}
+
+.report-Infomation td {
+	text-align: center;
+	padding: 10px;
+	color: white;
 }
 
 td:hover {
@@ -58,10 +65,16 @@ td:hover {
 }
 
 .total-table {
-
+	width : 700px;
 	border: 1px solid white;	
 
 }
+
+.table-title {
+	border : 0.5px solid white;
+	background-color : #678E79; 	
+}
+
 .table-title th {
 	color: white;
 	padding: 10px;
@@ -120,3 +133,26 @@ td:hover {
     cursor: pointer;
 }
 
+.pagination{
+	display:flex;
+	padding-left:0;
+	list-style:none;
+	justify-content:center;
+	margin-left: -400px;
+	margin-top: 10px;
+}
+
+.pagination a{
+	color: white;
+	text-decoration-line:none;
+	text-align:center;
+	letter-spacing:12px;
+	font-size: 16px;
+	font-weight:bold;
+	word-spacing:30px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+   	padding-left:10px;
+   	background-color:#678e79;
+}
