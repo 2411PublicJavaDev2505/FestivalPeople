@@ -75,9 +75,11 @@
   				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
   		</insert>
   		
-  		<!-- 페이징 -->
-  		<select id="getTotalCount" resultType="_int">
-			SELECT COUNT(*) FROM REVIEW WHERE REVIEW_YN = 'N' 
+  		<!-- 페이징 4/29일 코드바꿈! -->
+  		<!-- 에러나서 다시 원복! -->
+  		<!-- 다시수정! -->
+  		<select id="getTotalCount" resultType="int">
+			SELECT COUNT(*) FROM REVIEW
 		</select>
 		
 		<!-- 이미지 업로드 조회 쿼리 작성먼저함4/1810:02 에러나면 바꿔줄것! 그리고 COLLECTION태그 적어줌!-->
