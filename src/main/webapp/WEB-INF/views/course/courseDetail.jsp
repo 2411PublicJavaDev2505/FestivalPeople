@@ -24,32 +24,32 @@
 						코스추천
 						<label>
 							<input type="checkbox" name="category" value="FD6" class="hidden-image">
-							<span class="matzip-image"></span>				
+							<span class="matzip-image category-icon"  data-category="FD6"></span>				
 						</label>
 						
 						<label>
 							<input type="checkbox" name="category" value="AD5" class="hidden-image">
-							<span class="hotel-image"></span>															
+							<span class="hotel-image category-icon" data-category="AD5"></span>															
 						</label>
 						
 						<label>
 							<input type="checkbox" name="category" value="CE7" class="hidden-image">
-							<span class="cafe-image"></span>															
+							<span class="cafe-image category-icon" data-category="CE7"></span>															
 						</label>
 						
 						<label>
 							<input type="checkbox" name="category" value="AT4" class="hidden-image">
-							<span class="tour-image"></span>															
+							<span class="tour-image category-icon" data-category="AT4"></span>															
 						</label>
 						
 						<label>
 							<input type="checkbox" name="category" value="PK6" class="hidden-image">
-							<span class="parking-image"></span>															
+							<span class="parking-image category-icon" data-category="PK6"></span>															
 						</label>
 						
 						<label>
 							<input type="checkbox" name="category" value="CT1" class="hidden-image">
-							<span class="culture-image"></span>															
+							<span class="culture-image category-icon" data-category="CT1"></span>															
 						</label>
 						</p>
 				</div>
@@ -69,6 +69,7 @@
 						<div class="course-recommend-img">
 							<img src= "${festival.festivalFilePath}" alt="부산">
 						</div>
+						<div id="category-text-container"></div>
 						<div id="resultContainer" class="place-result-container">
 						
 						<!-- 추천 코스 리스트 출력 -->
@@ -172,7 +173,7 @@
 		kakao.maps.event.addListener(marker, 'mouseout', () => infowindow.close());
 	});
 
-	// 동적으로 추가될 마커들
+	// 동적으로 추가될 마커들	
 	let dynamicMarkers = [];
 
 	// 동적 마커 제거 함수
@@ -188,28 +189,37 @@
 	
 	/* 카테고리 Check-Box 선택시 동작하는 이벤트 */
 	$(document).ready(function () {
-		let selectedCategories = [];
-
-		$('input[type=checkbox]').change(function () {
-			const value = $(this).val();
-			console.log("선택된 카테고리:", value);
-
-			// 기존 추천 섹션 초기화
-			$('#recommendation-container').html('');
-
-			if ($(this).is(':checked')) {
-				if (!selectedCategories.includes(value)) {
-					selectedCategories.push(value);
-				}
-			} else {
-				selectedCategories = selectedCategories.filter(item => item !== value);
-			}
+	    let selectedCategories = [];
+	
+	    // 각 체크박스 변경 시 동작
+	    $('input[type=checkbox]').change(function () {
+	        const value = $(this).val(); // 체크박스 값
+	        const categoryTextMap = {
+	            "FD6": "맛집이 선택되었습니다.",
+	            "AD5": "숙소가 선택되었습니다.",
+	            "CE7": "카페가 선택되었습니다.",
+	            "AT4": "관광지가 선택되었습니다.",
+	            "PK6": "주차장이 선택되었습니다.",
+	            "CT1": "문화시설이 선택되었습니다."
+	        };
+	        console.log($('#recommendation-container').length);
+	        // 기존 추천 섹션 초기화
+	        if ($(this).is(':checked')) {
+	            // 선택된 카테고리 추가
+	            if (!selectedCategories.includes(value)) {
+	                selectedCategories.push(value);
+	            }
+	
+	        } else {
+	            // 선택 취소된 카테고리 제거
+	            selectedCategories = selectedCategories.filter(item => item !== value);
+	        }
 
 			const obj = {
 				"categories": selectedCategories,
 				"festivalNo": festivalNo
 			};
-
+	   
 			$.ajax({
 				url: '/course/filter',
 				type: 'POST',
@@ -297,6 +307,44 @@
 			});
 		});
 	});
+	const categoryTextMap = {
+		    "FD6": "맛집이 선택되었습니다.",
+		    "AD5": "숙소가 선택되었습니다.",
+		    "CE7": "카페가 선택되었습니다.",
+		    "AT4": "관광지가 선택되었습니다.",
+		    "PK6": "주차장이 선택되었습니다.",
+		    "CT1": "문화시설이 선택되었습니다."
+		};
+
+		document.addEventListener("DOMContentLoaded", function() {
+		    const icons = document.querySelectorAll('.category-icon');
+		    
+		    icons.forEach(icon => {
+		        icon.addEventListener('mouseover', function(e) {
+		            const category = this.dataset.category;
+		            const text = categoryTextMap[category];
+
+		            // Tooltip div 생성
+		            const tooltip = document.createElement('div');
+		            tooltip.className = 'category-tooltip';
+		            tooltip.innerText = text;
+		            document.body.appendChild(tooltip);
+
+		            // 마우스 위치 기준으로 위치 지정
+		            const rect = this.getBoundingClientRect();
+		            tooltip.style.top = (rect.top - 30) + 'px';
+		            tooltip.style.left = (rect.left + 10) + 'px';
+		        });
+
+		        icon.addEventListener('mouseout', function() {
+		            const tooltip = document.querySelector('.category-tooltip');
+		            if (tooltip) {
+		                tooltip.remove();
+		            }
+		        });
+		    });
+		});
+	
 	
 	/* 코스 저장시 처리하는 자바스크립트 */
 	document.querySelector("#saveCourseBtn").addEventListener("click", function(e) {
