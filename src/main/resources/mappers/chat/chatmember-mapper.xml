@@ -62,5 +62,10 @@
 	<update id="exitAllChatrooms">
 		UPDATE CHAT_MEMBER SET ENTER_YN = 'N' WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<select id="checkBlackList" resultType="ChatMember">
+		SELECT * FROM CHAT_MEMBER WHERE CHATROOM_NO = #{chatroomNo} 
+		AND MEMBER_NO = #{memberNo} AND BLOCK_YN = 'Y'
+	</select>
 
 </mapper>  

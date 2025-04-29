@@ -59,6 +59,8 @@ public interface ChatService {
 
 	int exitAllChatrooms(int memberNo);
 
+	ChatMember checkBlackList(int chatroomNo, int memberNo);
+
 //	List<ChatRoom> searchChatRoomByNo(String mySearchKeyword, int memberNo);
 
 }

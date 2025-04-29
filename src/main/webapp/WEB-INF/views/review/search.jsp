@@ -112,13 +112,13 @@
 			location.href = "/review/insert";
 		}
 		const prev = () => {
-			location.href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=" +("${startNavi}" -1);
+			location.href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=" +(parseInt("${startNavi}") -1);
 		}
 		const move =(p) => {
 			location.href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=" +p;
 		}
 		const next = () => {
-			location.href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=" +("${endNavi}"+1);
+			location.href="/review/search?searchCondition=${searchCondition }&searchKeyword=${searchKeyword}&page=" +(parseInt("${endNavi}")+1);
 		}
 	</script>
 </body>

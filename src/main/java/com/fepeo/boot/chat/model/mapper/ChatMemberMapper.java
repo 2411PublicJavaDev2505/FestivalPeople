@@ -42,5 +42,7 @@ public interface ChatMemberMapper {
 
 	int exitAllChatrooms(int memberNo);
 
+	ChatMember checkBlackList(int chatroomNo, int memberNo);
+
 
 }

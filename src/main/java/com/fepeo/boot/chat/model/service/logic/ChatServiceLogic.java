@@ -216,4 +216,9 @@ public class ChatServiceLogic implements ChatService {
 		return mMapper.exitAllChatrooms(memberNo);
 	}
 
+	@Override
+	public ChatMember checkBlackList(int chatroomNo, int memberNo) {
+		return mMapper.checkBlackList(chatroomNo,memberNo);
+	}
+
 }

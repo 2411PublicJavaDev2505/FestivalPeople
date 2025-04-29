@@ -11,6 +11,15 @@
 	<link rel="stylesheet" href="../resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/chat/chatLeftSide.css">
 	<link rel="stylesheet" href="../resources/css/chat/list.css">	
+	<link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+         crossorigin="anonymous"
+    />
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
     <!-- 바탕화면 -->
@@ -115,6 +124,20 @@
     </div>
 
 	<script>
+	
+		function customAlert(message) {
+		    Swal.fire({
+		      icon: 'warning',
+		      title: message,
+		      text: "",
+		    });
+		  }
+		
+		let alertMsg = "${alertMsg}";
+		if(alertMsg.trim() != ''){
+			customAlert('블랙당하셨습니다!');
+		}
+	
 		/* 채팅방 입장 시  */
 		function checkAndEnter(chatroomNo, currentCount, limitCount) {
 
@@ -126,19 +149,31 @@
 					location.href = "/chat/enter/" + chatroomNo;
 				} else if (data.status === "notJoined") {
 					if(currentCount >= limitCount){
-						alert("채팅방 정원이 가득 찼습니다.");
+						customAlert("채팅방 정원이 가득 찼습니다.");
 						return; // 만원 시 입장거부
 					}
 					
 					// 미가입자: 팝업으로 물어봄
-					const ok = confirm("첫입장을 환영합니다! 가입 후 입장하시겠습니까?");
-					if (ok) {
-						location.href = "/chat/enter/" + chatroomNo;
-					}
+					Swal.fire({
+			          title: '첫입장을 환영합니다!',
+			          text: "가입 후 입장하시겠습니까?",
+			          icon: 'question',
+			          showCancelButton: true,
+			          confirmButtonColor: '#3085d6',
+			          cancelButtonColor: '#d33',
+			          confirmButtonText: '입장',
+			          cancelButtonText: '취소',
+			          reverseButtons: false, // 버튼 순서 거꾸로
+			          
+			        }).then((result) => {
+			          if (result.isConfirmed) {
+			        	  location.href = "/chat/enter/" + chatroomNo;
+			          }
+			        })
 				}
 			})
 			.catch(err => {
-				alert("서버 오류 발생: " + err);
+				customAlert("서버 오류 발생: " + err);
 			});
 		}
 		

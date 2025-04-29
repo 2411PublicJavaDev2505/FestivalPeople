@@ -82,7 +82,8 @@ public class ChatController {
 
 	// 채팅방 목록
 	@GetMapping("/list")
-	public String showChatRoomList(HttpSession session, Model model) {
+	public String showChatRoomList(HttpSession session, Model model
+			,@RequestParam(value="alertMsg", defaultValue = "") String alertMsg) {
 		// 미로그인 시 로그인 페이지로
 		Member member = (Member)session.getAttribute("member");
 		if (member == null) {
@@ -101,6 +102,12 @@ public class ChatController {
 			// 각 채팅방별 참여인원수 불러오기
 			List<ChatMember> memberList = service.selectChatMember();
 			model.addAttribute("memberList", memberList);
+			
+			// 블랙리스트일 경우 메세지 출력
+			if(alertMsg != null && alertMsg.length() >0) {
+				System.out.println(alertMsg);
+				model.addAttribute("alertMsg",alertMsg);
+			}
 			
 			return "chat/list";
 		}
@@ -136,8 +143,17 @@ public class ChatController {
 		ChatRoom chatRoom = service.selectChatRoomByNo(chatroomNo); 
 		model.addAttribute("chatRoom", chatRoom);
 		
+		// 블랙여부 확인***
+		ChatMember cMember = service.checkBlackList(chatroomNo, memberNo);
+		if(cMember != null) {
+			System.out.println("블랙");
+			String alertMsg = "black";
+//			return "redirect:/chat/list?alertMsg="+alertMsg;
+			return "redirect:/chat/list?alertMsg="+alertMsg;
+		}
+		
 		// 가입여부 확인***
-		ChatMember cMember = service.selectChatMember(chatroomNo, memberNo);
+		cMember = service.selectChatMember(chatroomNo, memberNo);
 		
 		if(cMember == null) { // 처음 입장한 사람은 가입 처리
 			int result = service.insertChatRoom(chatroomNo, memberNo); // CHAT_MEMBER 인서트

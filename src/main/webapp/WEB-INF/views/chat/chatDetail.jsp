@@ -298,84 +298,87 @@
 					let chatMsgSize = data.length;
 					let html = "";
 					let prevDate = "";
-
-					data.forEach(function(msg) {
-						const date = new Date(msg.chatMsgTime); // msg.chatMsgTime이 ISO String이면 바로 new Date() 가능
-						const formattedDate = date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit'});
-					    html += '<ul id="balloonList" class="group_msg_balloon">';
-					    console.log()
-					    // 날짜 출력 예시
-					    if (formattedDate !== prevDate) {
-					        html += '<li class="date_check"><span>' + formattedDate + '</span></li>';
-					        prevDate = formattedDate;
-					    }
-					    
-					    if (memberNo != msg.memberNo) {
-					        // 다른 사람 채팅 (왼쪽)
-					        html += '<li class="msg-balloon-area">';
-					        html += '<div class="profile-area">';
-					        html += '<img class="chat-profile-thumbnail" src="' + msg.profileFilePath + '" width="40" />';
-					        html += '<div class="chat-mem-nickname">' + msg.nickname + '</div>';
-					        html += '</div>';
-					        html += '<div class="msg-balloon-area-l"><div class="msg-contents">';
-					        html += '<p class="msg-balloon-box-l">' + msg.chatMsgContent + '</p>';
-
-					        if (msg.chatFilePath != null) {
-				                html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/></div>';
-					        }
-					        
-					        html += '<div class="msg-info">';
-					        if (msg.nonReadMember > 0) {
-					            html += '<span class="msg-non-read">안읽음' + msg.nonReadMember + '</span>';
-					        }
-					        html += '<span class="msg-time">' + formatTime(msg.chatMsgTime) + '</span>';
-					        html += '</div></div></li>';
-					        
-					    } else {
-					        // 내 채팅 (오른쪽)
-					        html += '<li class="msg-balloon-area-my">';
-					        html += '<div class="msg-balloon-area-r">';
-					        html += '<div class="msg-info-r">';
-					        if (msg.nonReadMember > 0) {
-					            html += '<span class="msg-non-read">안읽음' + msg.nonReadMember + '</span>';
-					        }
-					        html += '<span class="msg-time">' + formatTime(msg.chatMsgTime) + '</span>';
-					        html += '</div><div class="msg-contents">';
-					        html += '<p class="msg-balloon-box-r">' + msg.chatMsgContent + '</p>';
-
-					        if (msg.chatFilePath != null) {
-					        	html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
-					        }
-
-					        html += '</div></div></li>';
-					    }
-					    html += '</ul>';
-					});
-
-					document.querySelector("#chat-msg-area").innerHTML = html;
-					if(document.querySelector("#msgSearch").value.trim() != ''){
-						// 채팅리스트 다시 출력후 검색어 있으면 하이라이트
-						var keyword = $('#msgSearch').val().trim();
-						
-						matchedElements = [];
-						
-						if (keyword !== "") {
-					        var regex = new RegExp("(" + keyword + ")", "gi");
 					
-					        $('.msg-balloon-box-l, .msg-balloon-box-r').each(function () {
-					            var originalText = $(this).text();
-					            if (regex.test(originalText)) {
-					                var highlighted = originalText.replace(regex, "<span class='txt-hlight'>$1</span>");
-					                $(this).html(highlighted);
-					                matchedElements.push(this);
-					            }
-					        });
-					    }
-					}else if(chatMsgSize != prevChatMsgSize){
-						let chatArea = document.querySelector(".chat-area");
-						chatArea.scrollTop = chatArea.scrollHeight;
-						prevChatMsgSize = chatMsgSize;
+					if(chatMsgSize != prevChatMsgSize){
+						data.forEach(function(msg) {
+							const date = new Date(msg.chatMsgTime); // msg.chatMsgTime이 ISO String이면 바로 new Date() 가능
+							const formattedDate = date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit'});
+						    html += '<ul id="balloonList" class="group_msg_balloon">';
+						    console.log()
+						    // 날짜 출력 예시
+						    if (formattedDate !== prevDate) {
+						        html += '<li class="date_check"><span>' + formattedDate + '</span></li>';
+						        prevDate = formattedDate;
+						    }
+						    
+						    if (memberNo != msg.memberNo) {
+						        // 다른 사람 채팅 (왼쪽)
+						        html += '<li class="msg-balloon-area">';
+						        html += '<div class="profile-area">';
+						        html += '<img class="chat-profile-thumbnail" src="' + msg.profileFilePath + '" width="40" />';
+						        html += '<div class="chat-mem-nickname">' + msg.nickname + '</div>';
+						        html += '</div>';
+						        html += '<div class="msg-balloon-area-l"><div class="msg-contents">';
+						        html += '<p class="msg-balloon-box-l">' + msg.chatMsgContent + '</p>';
+	
+						        if (msg.chatFilePath != null) {
+					                html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/></div>';
+						        }
+						        
+						        html += '<div class="msg-info">';
+						        if (msg.nonReadMember > 0) {
+						            html += '<span class="msg-non-read">안읽음' + msg.nonReadMember + '</span>';
+						        }
+						        html += '<span class="msg-time">' + formatTime(msg.chatMsgTime) + '</span>';
+						        html += '</div></div></li>';
+						        
+						    } else {
+						        // 내 채팅 (오른쪽)
+						        html += '<li class="msg-balloon-area-my">';
+						        html += '<div class="msg-balloon-area-r">';
+						        html += '<div class="msg-info-r">';
+						        if (msg.nonReadMember > 0) {
+						            html += '<span class="msg-non-read">안읽음' + msg.nonReadMember + '</span>';
+						        }
+						        html += '<span class="msg-time">' + formatTime(msg.chatMsgTime) + '</span>';
+						        html += '</div><div class="msg-contents">';
+						        html += '<p class="msg-balloon-box-r">' + msg.chatMsgContent + '</p>';
+	
+						        if (msg.chatFilePath != null) {
+						        	html += '<img src="' + msg.chatFilePath + '" class="chat-file-img"/>';
+						        }
+	
+						        html += '</div></div></li>';
+						    }
+						    html += '</ul>';
+						});
+	
+						document.querySelector("#chat-msg-area").innerHTML = html;
+						if(document.querySelector("#msgSearch").value.trim() != ''){
+							// 채팅리스트 다시 출력후 검색어 있으면 하이라이트
+							var keyword = $('#msgSearch').val().trim();
+							
+							matchedElements = [];
+							
+							if (keyword !== "") {
+						        var regex = new RegExp("(" + keyword + ")", "gi");
+						
+						        $('.msg-balloon-box-l, .msg-balloon-box-r').each(function () {
+						            var originalText = $(this).text();
+						            if (regex.test(originalText)) {
+						                var highlighted = originalText.replace(regex, "<span class='txt-hlight'>$1</span>");
+						                $(this).html(highlighted);
+						                matchedElements.push(this);
+						            }
+						        });
+						    }
+						}else{
+							let chatArea = document.querySelector(".chat-area");
+							chatArea.scrollTop = chatArea.scrollHeight;
+							prevChatMsgSize = chatMsgSize;
+						}
 					}
+
 					
 				},
 				error  : function() {
