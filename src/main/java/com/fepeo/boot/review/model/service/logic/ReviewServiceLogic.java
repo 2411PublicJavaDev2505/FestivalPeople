@@ -95,7 +95,6 @@ public class ReviewServiceLogic implements ReviewService {
 	@Override
 	public int reviewDelete(int reviewNo) {
 		int result = mapper.reviewDelete(reviewNo);
-		System.out.println("확인");
 		return reviewNo;
 	}
 	

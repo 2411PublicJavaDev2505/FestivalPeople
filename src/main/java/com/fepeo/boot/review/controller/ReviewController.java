@@ -170,7 +170,6 @@ public class ReviewController {
 			List<Review> searchList = rService.searchListByKeyword(paramMap,currentPage);
 			int totalCount = rService.getTotalCount(paramMap);
 			Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage);
-			System.out.println(searchList);
 			model.addAttribute("maxPage",pageInfo.get("maxPage"));
 			model.addAttribute("startNavi",pageInfo.get("startNavi"));
 			model.addAttribute("endNavi",pageInfo.get("endNavi"));
