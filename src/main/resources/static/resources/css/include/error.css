@@ -1,0 +1,22 @@
+#error-container {
+	margin: 0 auto;
+	background-color : aliceblue;
+	margin-top: 150px;
+	height : 200px;
+	border: 1px solid black;
+	border-radius: 20px;
+	text-align: center;
+	padding : 20px;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
