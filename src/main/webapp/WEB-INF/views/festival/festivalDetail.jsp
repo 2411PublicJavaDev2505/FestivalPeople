@@ -81,22 +81,18 @@
 								  <!-- Kakao Map Container -->
 								  <div class="map-api" style="width:100%;height:350px;">								
 								  <!-- 길찾기 버튼 -->
-								  <a class="map_shortcut" 
-								     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHCode},${festival.mapVCode}" 
-								     target="_blank">
-								     📍 길찾기
-								  </a>
+									  <a class="map_shortcut" 
+									     href="https://map.kakao.com/link/to/${festival.festivalName},${festival.mapHCode},${festival.mapVCode}" 
+									     target="_blank">
+									     📍 길찾기
+									  </a>
+									  <a class= "course_recommend" 
+									  	href="/course/detail?festivalNo=${festival.festivalNo}">
+										추천코스
+										</a>
 								  </div>
 								</div>
 							</li>
-							<li>추천 여행 코스 정보, 어때요?
-								<div class="course-recommend-link" >
-									<a href="/course/detail?festivalNo=${festival.festivalNo}">
-									<img src="${pageContext.request.contextPath}/resources/img/course/icon/matzip-icon.png" alt="추천코스로 이동">
-									</a>
-								</div>
-							</li>
-									
 						</ul>
 					</section>
 				</div>
