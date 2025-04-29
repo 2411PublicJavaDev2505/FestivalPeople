@@ -104,10 +104,10 @@
 	               </div>
 	           </div>
 				<div class ="festival-list-button">
-	                   <button>전국 축제 리스트</button>
+	                   <button id="showFestivalListBtn">전국 축제 리스트</button>
 	               </div>
 	           <div class="festival-list">
-	               <div class="festival-list-track">
+	               <div id="festivalListTrack" class="festival-list-track" >
 					    <c:forEach var="festival" items="${festivals}">
 					        <c:if test="${not empty festival.festivalFilePath}">
 					            <div class="festival-card">
@@ -168,7 +168,14 @@
 	            else switchTrack('track-upcoming');
 	        });
 	    });
-	
+	    /* document.getElementById("showFestivalListBtn").addEventListener("click", function() {
+	        var festivalListTrack = document.getElementById("festivalListTrack");
+	        if (festivalListTrack.style.display === "none") {
+	            festivalListTrack.style.display = "block"; // Show the festival list
+	        } else {
+	            festivalListTrack.style.display = "none"; // Hide the festival list
+	        }
+	    }); */
 	    function switchTrack(trackId) {
 	        document.getElementById(activeTrackId).style.display = 'none';
 	        document.getElementById(trackId).style.display = 'flex';
