@@ -104,7 +104,7 @@
 			</c:if>
 			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		</div>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce2765b5c8d1c862f02d7a486094793d"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoJavaScriptKey }"></script>
 		<script>
 			var kakaoMapContainer = document.querySelector('.map-api')
 			var mapOptions = {

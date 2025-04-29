@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,9 @@ public class FestivalController {
 	private final CourseService courseService;
 	private final ApiComponent api;
 
+	@Value("${kakaoJavaScriptKey}")
+	private String kakaoJavaScriptKey;
+	
 	
 	@GetMapping("/list")
 	public String showFestivalList(
@@ -154,6 +158,7 @@ public class FestivalController {
 	    model.addAttribute("days", next3Days);
 	    model.addAttribute("weatherSummary", threeDaySummary);
 	    model.addAttribute("festival", festival);
+	    model.addAttribute("kakaoJavaScriptKey", kakaoJavaScriptKey);
 	    return "festival/festivalDetail";
 	}
 	
