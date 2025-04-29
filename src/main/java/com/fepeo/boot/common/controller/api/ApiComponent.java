@@ -338,17 +338,17 @@ public class ApiComponent {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(result);
 		JsonNode documents = root.path("documents");
-		System.out.println("너는 누구여"+documents);
+//		System.out.println("너는 누구여"+documents);
 		
 		Map<String, String> mapPoint = new HashMap<>();
 		JsonNode firstDoc = documents.get(0);
 		
-		System.out.println("빠스트독을 찾아라잉"+firstDoc);
+//		System.out.println("빠스트독을 찾아라잉"+firstDoc);
 		
 		String x = firstDoc.path("x").asText(); //x 좌표값
-		System.out.println("x의 값이당"+x);
+//		System.out.println("x의 값이당"+x);
 		String y = firstDoc.path("y").asText(); //y 좌표값
-		System.out.println("y의 값이다잉"+y);
+//		System.out.println("y의 값이다잉"+y);
 		
 		mapPoint.put("x", x);
 		mapPoint.put("y", y);
@@ -374,7 +374,7 @@ public class ApiComponent {
 		List<String> sunnyRegions = new ArrayList<>();
 		for(RegionDto region : regionList) {
 			//지역코드 출력 확인
-			System.out.println("지역번호"+region.getRegionNo());
+//			System.out.println("지역번호"+region.getRegionNo());
 			String response = webClient.get()
 					.uri(uriBuilder -> uriBuilder
 							.queryParam("serviceKey", weatherApiKey)
@@ -387,7 +387,7 @@ public class ApiComponent {
 					.retrieve()
 					.bodyToMono(String.class)
 					.block();
-			System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
+//			System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
 			
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode root = mapper.readTree(response);

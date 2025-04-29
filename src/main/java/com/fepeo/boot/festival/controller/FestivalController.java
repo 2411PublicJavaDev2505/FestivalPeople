@@ -52,6 +52,7 @@ public class FestivalController {
 	    int totalCount = festivalService.getTotalCount();
 	    int itemsPerPage = 8;
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
+	    currentPage = pageInfo.get("currentPage");
 	    List<Festival> rfestivals = null;
 	    List<RegionDto> regionList = courseService.getAllRegions();
 	    String gWRegions = (String)session.getAttribute("gWRegions");
@@ -94,13 +95,23 @@ public class FestivalController {
 
 	    // 전체 리스트는 공통으로 출력
 	    List<Festival> festivals = festivalService.selectFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
+	 // 만약 festivals가 비어있고, currentPage > 1 이라면 페이지를 줄여야 함
+	    if (festivals.isEmpty() && currentPage > 1) {
+	        // currentPage를 maxPage로 줄이기
+	        currentPage = pageInfo.get("maxPage");
 
+	        // 다시 pageInfo를 계산하고
+	        pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
+
+	        // 다시 festivals를 조회
+	        festivals = festivalService.selectFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
+	    }
 	    model.addAttribute("festivals", festivals);
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
 	    model.addAttribute("endNavi", pageInfo.get("endNavi"));
 	    model.addAttribute("currentPage", currentPage);
-
+//	    System.out.println(festivals.size());
 	    return "festival/list";
 
 	}
@@ -169,16 +180,17 @@ public class FestivalController {
 		int totalCount = festivalService.getSearchTotalCount(searchMap);
 	    int itemsPerPage = 8;
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
+	    currentPage = pageInfo.get("currentPage");
 	    List<Festival> festivals = festivalService.searchFestivalListAll(pageInfo.get("startRow"), pageInfo.get("endRow"),searchMap);
 //	    System.out.println("검색된 축제 수 : " + festivals.size());
 	    for (Festival f : festivals) {
 //	        System.out.println("축제명: " + f.getFestivalName());
 	    }
+	    model.addAttribute("festivals",festivals);
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
 	    model.addAttribute("endNavi", pageInfo.get("endNavi"));
 	    model.addAttribute("currentPage", currentPage);
-	    model.addAttribute("festivals",festivals);
 	    
 	    return "festival/festivalSearch";
 	}

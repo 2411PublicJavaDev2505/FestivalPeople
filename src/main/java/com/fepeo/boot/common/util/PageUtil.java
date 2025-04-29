@@ -32,22 +32,47 @@ public class PageUtil {
 	}
 	
 	public Map<String, Integer> generatePageInfo(int totalCount, int currentPage, int itemsPerPage) {
-	    int maxPage = (int) Math.ceil((double) totalCount / itemsPerPage);
-	    int startNavi = ((currentPage - 1) / 5) * 5 + 1;
-	    int endNavi = Math.min(startNavi + 4, maxPage);
+        Map<String, Integer> map = new HashMap<>();
 
-	    int startRow = (currentPage - 1) * itemsPerPage + 1;
-	    int endRow = currentPage * itemsPerPage;
+        // 기본값 세팅
+        if (itemsPerPage <= 0) {
+            itemsPerPage = 8; 
+        }
 
-	    Map<String, Integer> map = new HashMap<>();
-	    map.put("startNavi", startNavi);
-	    map.put("endNavi", endNavi);
-	    map.put("maxPage", maxPage);
-	    map.put("startRow", startRow);
-	    map.put("endRow", endRow);
-	    return map;
-	}
-	
-	
+        int maxPage = (int) Math.ceil((double) totalCount / itemsPerPage);
+
+        // maxPage가 0이면 currentPage를 1로 고정
+        if (maxPage == 0) {
+            currentPage = 1;
+        } else {
+            if (currentPage > maxPage) {
+                currentPage = maxPage;
+            }
+            if (currentPage < 1) {
+                currentPage = 1;
+            }
+        }
+
+        // 네비게이션 범위 설정 (5개 단위)
+        int naviSize = 5;
+        int startNavi = ((currentPage - 1) / naviSize) * naviSize + 1;
+        int endNavi = Math.min(startNavi + naviSize - 1, maxPage);
+
+        // 시작, 끝 Row 계산 (DB용)
+        int startRow = (currentPage - 1) * itemsPerPage + 1;
+        int endRow = currentPage * itemsPerPage;
+
+        // Map에 담아서 리턴
+        map.put("startNavi", startNavi);
+        map.put("endNavi", endNavi);
+        map.put("maxPage", maxPage);
+        map.put("startRow", startRow);
+        map.put("endRow", endRow);
+        map.put("currentPage", currentPage); // 최종 currentPage
+
+        return map;
+    }
+
+
 	
 }

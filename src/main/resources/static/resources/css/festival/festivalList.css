@@ -12,14 +12,13 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 1920px;
-  height: 1282px;
+  width: 100%;
+  height: 100%;
   z-index: -1; 
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #000;
-}
+  }
 
 #container {
    max-width:1920px;
@@ -27,14 +26,14 @@
     text-align: center;
 }
 
-.buttons {
+.buttons ,.festival-list-button{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.festival-button button {
+.festival-button button{
     margin: 0 10px;
     padding: 10px 20px;
     font-size: 16px;
@@ -47,6 +46,18 @@
     background-color: #ff6f61;
     color: white;
 }
+/* 전체 축제리스트 버튼   */
+.festival-list-button button{
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* 검색기능 */
 .search-form {
     display: flex;
     align-items: center;
@@ -69,7 +80,7 @@
     border-radius: 10px;
     cursor: pointer;
 }
-
+/* 추천리스트 목록   */
 .moveSlider {
     position: relative;
     overflow: hidden;
@@ -89,6 +100,22 @@
 	height:100%; 
 	justify-content:space-around;
 }
+.festival-card-recommend{
+	position: relative;
+    width: 300px;
+    margin:0 20px;
+   /*  aspect-ratio: 367.25 / 570;    */     
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+.festival-card-recommend img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+/* 전체리스트 */
 .festival-card {
 	position: relative;
     width: 300px;
@@ -97,15 +124,15 @@
     box-sizing: border-box;
     margin-bottom: 30px;
 }
+
 .festival-image-wrapper {
     position: relative;
     overflow: hidden;
     border-radius: 20px;
 }
-
-.festival-image-wrapper img,.festival-card img {
+.festival-card img{
     width: 100%;
-    height: 100%;
+    height: 500px;
     object-fit: cover;
     border-radius: 20px;
     display: block;
@@ -133,41 +160,13 @@
     opacity: 1;
     transform: translateY(0);
 }
- /*.festival-card a img:hover  {
-  transition: all 1s;
-  transform: translateY(-50px);
-  color: rgba(0,0,0,1);
-  filter:blur(10px);
-    -webkit-filter:blur(5px);
-} 
 
-/*사진 밑에 나오는 축제 이름 
-.festival-card h4 {
-	color: white;
-	text-shadow:
-        -2px -2px 0 #000,
-         2px -2px 0 #000,
-        -2px  2px 0 #000,
-         2px  2px 0 #000,
-        -3px  0px 0 #000,
-         3px  0px 0 #000,
-         0px -3px 0 #000,
-         0px  3px 0 #000;
-	position: relative;
-	display: block;
-    font-size: 20px;
-    margin-top: -40px;
-    margin-left: 10px;
-    font-weight: bold;
-    line-height: 19px;
-    z-index: 9999;
-}  */
 
 .moveSlider-prev-button {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 10px;
-    transform: translateY(-50%);
+    transform: translateY(-80%);
     z-index: 10;
     cursor: pointer;
     pointer-events: auto;
@@ -179,9 +178,9 @@
 }
 .moveSlider-next-button{
     position: absolute;
-    top: 50%;
+    top: 40%;
     right: 60px;
-    transform: translateY(-50%);
+    transform: translateY(-80%);
     z-index: 10;
     cursor: pointer;
     pointer-events: auto;

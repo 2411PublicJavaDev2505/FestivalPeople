@@ -32,7 +32,6 @@
 						</form>
 	               </div>
 	           </div>
-	   
 	           
 	           <div class="festival-list">
 	               <div class="festival-list-track">
@@ -40,9 +39,13 @@
 					        <c:if test="${not empty festival.festivalFilePath}">
 					            <div class="festival-card">
 					                <a href="/festival/detail/${festival.festivalNo}">
-					                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+					                    <div class="festival-image-wrapper">
+						                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
+							                <div class="overlay-text">
+							                	${festival.festivalName}
+							                </div>
+							            </div>
 					                </a>
-					                <h4>${festival.festivalName}</h4>
 					            </div>
 					        </c:if>
 					    </c:forEach>
@@ -55,7 +58,14 @@
 						<a href="/festival/search?searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}&currentPage=${startNavi-1 }" class="prev">◀</a>
 					</c:if>	
 					<c:forEach begin="${startNavi }" end="${endNavi }" var="p">
-						<a href="/festival/search?searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}&currentPage=${p}">${p}</a>
+						<c:choose>
+						        <c:when test="${p eq currentPage}">
+									<a href="/festival/search?searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}&currentPage=${p}" style="font-weight:bold; color:black;">${p}</a>
+						        </c:when>
+						        <c:otherwise>
+						            <a href="/festival/search?searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}&currentPage=${p}" >${p}</a>
+						        </c:otherwise>
+						    </c:choose>
 					</c:forEach>					
 					<c:if test="${endNavi ne maxPage }">
 						<a href="/festival/search?searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}&currentPage=${endNavi+1}" class="next">▶</a>

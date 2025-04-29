@@ -10,9 +10,9 @@ import com.fepeo.boot.festival.model.vo.Festival;
 
 @Service
 public interface FestivalService {
-	
+	//축제 최신화 버튼
 	public void insertFestivalList();
-
+	//축제 전체 리스트 
 	public List<Festival> selectFestivalList(int startRow, int endRow);
 
 	public Festival selectFestivalByNo(int festivalNo);

@@ -32,7 +32,7 @@
 	        SELECT f.*, ROWNUM AS rnum
 	        FROM (
 	            SELECT *
-	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL AND FESTIVAL_END_DATE >=SYSDATE
+	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL AND FESTIVAL_START_DATE >=SYSDATE
 	            ORDER BY FESTIVAL_END_DATE
 	        ) f
 	        WHERE ROWNUM &lt;= #{endRow}
@@ -41,12 +41,16 @@
 	    ORDER BY FESTIVAL_END_DATE
 	</select>
 
-	<select id="selectFestivalByNo" resultType="com.fepeo.boot.festival.model.vo.Festival">
-		SELECT * FROM FESTIVAL WHERE FESTIVAL_NO = #{festivalNo}
-	</select>
 	
 	<select id="getTotalCount" resultType="int">
-	    SELECT COUNT(*) FROM FESTIVAL
+	    SELECT COUNT(*) FROM (
+	            SELECT *
+	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL AND FESTIVAL_START_DATE >=SYSDATE
+	            ORDER BY FESTIVAL_END_DATE
+	    )	    
+	    ORDER BY FESTIVAL_END_DATE
+	    
+	  
 	</select>
 	
 	<!--비회원 축제 추천 리스트   -->
@@ -69,6 +73,7 @@
 	    WHERE ROWNUM &lt;= 10
 
 	  </select>
+
 	
 
 	<select id="selectFestivalListByRegion" resultType="com.fepeo.boot.festival.model.vo.Festival">
@@ -85,6 +90,11 @@
 	    ) 
 	    WHERE ROWNUM &lt;= 20
 	    ORDER BY FESTIVAL_END_DATE DESC
+	</select>
+	
+	<!--상세페이지  -->
+	<select id="selectFestivalByNo" resultType="com.fepeo.boot.festival.model.vo.Festival">
+		SELECT * FROM FESTIVAL WHERE FESTIVAL_NO = #{festivalNo}
 	</select>
 	
 	<select id="searchFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival">

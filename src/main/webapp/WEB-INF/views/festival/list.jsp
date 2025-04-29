@@ -21,12 +21,16 @@
 	           <div class="buttons">
 	               <div class="festival-button">
             			<c:if test="${member.memberId eq null }">
-				            <button class="active">🔅축제 추천</button>
+				            
 			            </c:if>
 			            <c:if test="${member.memberId ne null }">
 				            <button class="active">🔅우리지역 축제</button>
 			            </c:if>
-	                   <button>진행중인 축제</button>
+			            
+			            <c:if test="${member.memberId ne null }">
+				            <button>진행중인 축제</button>
+			            </c:if>
+	                   
 	               </div>
 	               <div class="festival-search">
 	                   <form class="search-form" method="get" action="/festival/search">
@@ -55,7 +59,7 @@
 		            <c:if test="${status.index % 4 == 0}">
 		                <div class="slide-group">
 		            </c:if>
-		            <div class="festival-card">
+		            <div class="festival-card-recommend">
 		                <a href="/festival/detail/${festival.festivalNo}">
 		                    <div class="festival-image-wrapper">
 			                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
@@ -77,7 +81,7 @@
 		            <c:if test="${status.index % 4 == 0}">
 		                <div class="slide-group">
 		            </c:if>
-		            <div class="festival-card">
+		            <div class="festival-card-recommend">
 		                <a href="/festival/detail/${festival.festivalNo}">
 		                    <div class="festival-image-wrapper">
 			                    <img src="${festival.festivalFilePath}" alt="${festival.festivalName}" />
@@ -99,9 +103,11 @@
 	                   </button>
 	               </div>
 	           </div>
-	
+				<div class ="festival-list-button">
+	                   <button id="showFestivalListBtn">전국 축제 리스트</button>
+	               </div>
 	           <div class="festival-list">
-	               <div class="festival-list-track">
+	               <div id="festivalListTrack" class="festival-list-track" >
 					    <c:forEach var="festival" items="${festivals}">
 					        <c:if test="${not empty festival.festivalFilePath}">
 					            <div class="festival-card">
@@ -118,20 +124,32 @@
 					    </c:forEach>
 					</div>
                </div>
-	               
 			   <div class="pagination">
-					<a href="/festival/list?currentPage=1">◁◁</a>
-					<c:if test= "${startNavi ne 1}">
-						<a href="/festival/list?currentPage=${startNavi-1}" class="prev">◀</a>
-					</c:if>	
-					<c:forEach begin="${startNavi}" end="${endNavi}" var="p">
-						<a href="/festival/list?currentPage=${p}">${p}</a>
-					</c:forEach>					
-					<c:if test="${endNavi ne maxPage}">
-						<a href="/festival/list?currentPage=${endNavi+1}" class="next">▶</a>
-					</c:if>    
-		           	<a href="/festival/list?currentPage=${maxPage}"> ▷▷ </a>
-	            </div>
+				    <a href="/festival/list?currentPage=1">◁◁</a>
+				    
+				    <c:if test="${startNavi gt 1}">
+				        <a href="/festival/list?currentPage=${startNavi-1}" class="prev">◀</a>
+				    </c:if>  
+				    
+				    <c:forEach begin="${startNavi}" end="${endNavi}" var="p">
+				        <c:if test="${p <= maxPage}">
+					        <c:choose>
+						        <c:when test="${p eq currentPage}">
+						            <a href="/festival/list?currentPage=${p}" style="font-weight:bold; color:black;">${p}</a>
+						        </c:when>
+						        <c:otherwise>
+						            <a href="/festival/list?currentPage=${p}">${p}</a>
+						        </c:otherwise>
+						    </c:choose>
+				        </c:if>
+				        
+				    </c:forEach>          
+				    
+				    <c:if test="${endNavi lt maxPage}">
+				        <a href="/festival/list?currentPage=${endNavi+1}" class="next">▶</a>
+				    </c:if>    
+				    <a href="/festival/list?currentPage=${maxPage}">▷▷</a>
+				</div>
 	       </main>
 	       <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	   </div>
@@ -150,7 +168,14 @@
 	            else switchTrack('track-upcoming');
 	        });
 	    });
-	
+	    /* document.getElementById("showFestivalListBtn").addEventListener("click", function() {
+	        var festivalListTrack = document.getElementById("festivalListTrack");
+	        if (festivalListTrack.style.display === "none") {
+	            festivalListTrack.style.display = "block"; // Show the festival list
+	        } else {
+	            festivalListTrack.style.display = "none"; // Hide the festival list
+	        }
+	    }); */
 	    function switchTrack(trackId) {
 	        document.getElementById(activeTrackId).style.display = 'none';
 	        document.getElementById(trackId).style.display = 'flex';
