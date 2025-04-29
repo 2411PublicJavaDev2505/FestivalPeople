@@ -138,8 +138,8 @@
 	height: 600px;
 	margin: 0 auto;
 	margin-top: 10px;
-	border: 1px solid white;
-	background-color: white;
+	border: 1px solid #e4e2dd;
+	background-color: #e4e2dd;
 	border-radius: 10px;
 	overflow-y: auto;
 	overflow-x: hidden; 
@@ -147,8 +147,8 @@
 }
 
 .review-content {
-	border: 1px solid white;
-	background-color: white;
+	border: 1px solid #e4e2dd;
+	background-color: #e4e2dd;
 	border-radius: 10px;
 }
 /*댓글영역*/
@@ -193,7 +193,7 @@
 	overflow-x: hidden; 
 	padding: 50px 50px;
 	border: 1px solid #e4e2dd;
-	background-color: white;
+	background-color: #e4e2dd;
 	border-radius: 10px; 
 }
 
