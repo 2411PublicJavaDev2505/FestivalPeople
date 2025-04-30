@@ -220,12 +220,13 @@ a {
   color: green;
 }
 
-a:focus, a:hover {
+content:focus, content:hover {
   display: inline-block;
   color: lightgreen;
   text-decoration-color: green;
   transform: translateY(-2px);
   transition: 1s;
+  -webkit-text-stroke: 1px #11862b;
 }
 
 html {

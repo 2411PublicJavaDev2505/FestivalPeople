@@ -36,7 +36,7 @@
 					        <div class="card-slider" id="cardSlider">
 								<c:forEach items="${fList }" var="festival" varStatus="i">
 										<div class="course-back-image">
-										    <a href="/course/detail?festivalNo=${festival.festivalNo }">
+										    <a id="content" href="/course/detail?festivalNo=${festival.festivalNo }">
 										    <img class="poster-img" src="${festival.festivalFilePath}" alt="포스터이미지">
 										        <div class="coursecard">
 													<img src="${festival.festivalFilePath }" alt="축제이미지" />
