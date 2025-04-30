@@ -7,17 +7,17 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <header class="main-header">
-    <div class="logo-container">
+    <div class="logo-container-header">
         <a href="/"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Festival People"></a>
     </div>
-    <nav class="main-nav">
-        <ul class="group1">
+    <nav class="main-nav-header">
+        <ul class="group1-header">
             <li style="--offset: 0;"><a href="/intro">소개</a></li>
             <li style="--offset: 1;"><a href="/festival/list">축제</a></li>
             <li style="--offset: 2;"><a onclick="goCourse();">코스 추천</a></li>
             <li style="--offset: 3;"><a onclick="goChat();">같이 갈래?</a></li>
         </ul> 
-        <ul  class="group2">
+        <ul  class="group2-header">
             <li style="--offset: 4;"><a href="/review/list">여행 후기</a></li>
             <li style="--offset: 5;"><a href="/notice/list">공지사항</a></li>
             <c:if test="${sessionScope.member.memberId eq null }">

@@ -33,6 +33,7 @@
 			</if>
 			AND MEMBER_YN = 'Y'
 		</where>
+		ORDER BY REPORT_COUNT DESC
 	</select>
 	
 	
@@ -64,11 +65,11 @@
 	</select>
 	
 	<select id="memberLogin" resultType="Member">
-		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN FROM MEMBER 
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN, MEMBER_YN FROM MEMBER 
 		WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw} AND MEMBER_YN = 'Y'
 	</select>
 	<select id="memberSocialLogin" resultType="Member">
-		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN FROM MEMBER 
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN, MEMBER_YN FROM MEMBER 
 		WHERE MEMBER_ID = #{id} AND MEMBER_YN = 'Y'
 	</select>
 
@@ -77,11 +78,11 @@
 	</select>
 	
 	<select id="selectMemberList" resultType="Member">
-		SELECT * FROM MEMBER WHERE MEMBER_YN = 'Y'
+		SELECT * FROM MEMBER WHERE MEMBER_YN = 'Y' ORDER BY REPORT_COUNT DESC
 	</select>
 	
 	<select id="getMemberTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_YN = 'Y'
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_YN = 'Y' 
 	</select>
 	
 	<select id="selectOneByEmail">

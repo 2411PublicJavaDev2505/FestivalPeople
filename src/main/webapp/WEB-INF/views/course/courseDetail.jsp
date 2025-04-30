@@ -9,8 +9,6 @@
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/course/courseDetailPage.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/footer.css">
-
-	
 	<title>코스 추천</title>
 </head>
 <body>
