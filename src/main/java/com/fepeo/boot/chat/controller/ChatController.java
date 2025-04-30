@@ -105,7 +105,6 @@ public class ChatController {
 			
 			// 블랙리스트일 경우 메세지 출력
 			if(alertMsg != null && alertMsg.length() >0) {
-				System.out.println(alertMsg);
 				model.addAttribute("alertMsg",alertMsg);
 			}
 			
@@ -143,12 +142,10 @@ public class ChatController {
 		ChatRoom chatRoom = service.selectChatRoomByNo(chatroomNo); 
 		model.addAttribute("chatRoom", chatRoom);
 		
-		// 블랙여부 확인***
+		// 블락여부 확인***
 		ChatMember cMember = service.checkBlackList(chatroomNo, memberNo);
 		if(cMember != null) {
-			System.out.println("블랙");
 			String alertMsg = "black";
-//			return "redirect:/chat/list?alertMsg="+alertMsg;
 			return "redirect:/chat/list?alertMsg="+alertMsg;
 		}
 		
