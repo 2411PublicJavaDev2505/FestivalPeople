@@ -31,7 +31,7 @@
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             	<input type="hidden" value="${notice.noticeNo }" name="noticeNo">
 	            <div class="form-row">
-	            	<input type="text" id="title" name="noticeTitle" class="write-input" placeholder="제목" value="${notice.noticeTitle }" />
+	            	<input type="text" id="title" maxlength="30" name="noticeTitle" class="write-input" placeholder="제목" value="${notice.noticeTitle }" />
 	            </div>
 	            <div class="form-row">
 	            	<img alt="공지사항 파일" src="${notice.noticeFilePath }" id="notice-file">

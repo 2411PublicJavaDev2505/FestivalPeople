@@ -30,7 +30,7 @@
 		 			<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo }"> 
 		 			<input type="hidden" name="reviewNo" value="${review.reviewNo }">
 		 			<div class="review-title">
-						<input type="text" name="reviewTitle" value="${review.reviewTitle }" size="80">
+						<input type="text" name="reviewTitle" maxlength="30" value="${review.reviewTitle }" size="80">
 					</div>
 					<div class="review-content">
 						<textarea rows="5" cols="82" name="reviewContent">${review.reviewContent }</textarea>

@@ -31,7 +31,7 @@
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
               <div class="form-row">
               <!-- 제목 INPUT -->
-                <input type="text" id="title" name="noticeTitle" class="write-input" placeholder="제목" />
+                <input type="text" id="title" maxlength="30" name="noticeTitle" class="write-input" placeholder="제목" />
               </div>
               <div class="form-row">
               	<!-- 내용 textarea API -->

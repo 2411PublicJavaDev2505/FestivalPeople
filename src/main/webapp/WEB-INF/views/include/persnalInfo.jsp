@@ -11,12 +11,12 @@
     <link rel="stylesheet" href="../resources/css/include/terms.css">
 </head>
 <body>
+    <!-- 헤더 -->
+	<jsp:include page="../include/header.jsp"/>
 	<!-- 바탕화면 -->
 	<div class="background-image">
 		<img src="../resources/img/notice/background.jpg" alt="바탕화면">
     </div>
-    <!-- 헤더 -->
-	<jsp:include page="../include/header.jsp"/>
 	<div class="container">
 	    <div class="terms-title">
 	        <h2>개인정보 처리방침</h2>

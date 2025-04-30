@@ -28,6 +28,8 @@
 }
 
 .total-table{
+	margin-top: 30px;
+	margin-left: 60px;
 	border : 0.5px solid white;
 }
 
@@ -119,10 +121,9 @@
 
 .pagination{
 	display:flex;
-	padding-left:0;
 	list-style:none;
 	justify-content:center;
-	margin-left: -150px;
+	margin-left:-200px;
 	margin-top: 10px;
 }
 

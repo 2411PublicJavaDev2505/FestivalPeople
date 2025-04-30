@@ -30,7 +30,7 @@
 			 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			 			<input type="hidden" name="memberNo"  value="${sessionScope.member.memberNo }"> 
 						<div class="form-row">
-							<input type="text" id="title" name="reviewTitle" class="write-input" placeholder="제목" />
+							<input type="text" id="title" maxlength="30" name="reviewTitle" class="write-input" placeholder="제목" />
 						</div>
 						<div class="form-row">
 							<textarea id="tiny" name="reviewContent" class="write-textarea" placeholder="내용"></textarea>
