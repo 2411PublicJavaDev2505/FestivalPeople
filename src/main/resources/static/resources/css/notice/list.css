@@ -36,6 +36,12 @@
     padding: 8px 0;
 }
 
+.notice-title b{
+	text-overflow: ellipsis;
+	overflow: hidden;
+  	white-space: nowrap;
+  	width:100px;
+}
 
 
 .notice-table {

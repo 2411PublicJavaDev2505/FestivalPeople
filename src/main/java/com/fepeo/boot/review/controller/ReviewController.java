@@ -107,6 +107,10 @@ public class ReviewController {
 			@RequestParam(value="images",required=false) List<MultipartFile> images,
 			HttpSession session
 			,Model model) throws IllegalStateException, IOException {
+		System.out.println(review.getReviewContent());
+		if(review.getReviewContent() == null || review.getReviewContent().trim().equals("")) {
+			return "redirect:/review/list";
+		}
 		int result = rService.insertReview(review,images);
 		return "redirect:/review/list";
 	}

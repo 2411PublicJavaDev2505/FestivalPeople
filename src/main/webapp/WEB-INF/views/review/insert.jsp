@@ -55,12 +55,8 @@
 				})
 				document.querySelector("#submitbtn").addEventListener("click",function() {
 					let title = document.querySelector(".write-input").value;
-					let content = document.querySelector(".write-textarea").value;
 					if(title.trim() == ''){
 						alert("제목을 입력해주세요!");
-						event.preventDefault();
-					}else if(content.trim() == ''){
-						alert("내용을 입력해주세요!");
 						event.preventDefault();
 					}
 				})

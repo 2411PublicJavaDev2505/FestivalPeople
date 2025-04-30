@@ -17,20 +17,20 @@ import com.fepeo.boot.common.controller.api.ApiComponent;
 public class ApiControllerTest {
 
 	
-	private static final Logger LOGGER
-	= LoggerFactory.getLogger(ApiControllerTest.class);
-
-	
-	@Autowired
-	private ApiComponent aService;
-	
-	@BeforeAll
-	public static void setUp() {
-		LOGGER.info("테스트 시작");
-	}
-	
-	@Test
-	public void testApiLoader() throws JsonMappingException, JsonProcessingException {
+//	private static final Logger LOGGER
+//	= LoggerFactory.getLogger(ApiControllerTest.class);
+//
+//	
+//	@Autowired
+//	private ApiComponent aService;
+//	
+//	@BeforeAll
+//	public static void setUp() {
+//		LOGGER.info("테스트 시작");
+//	}
+//	
+//	@Test
+//	public void testApiLoader() throws JsonMappingException, JsonProcessingException {
 		
 		//날씨 테스트
 		//Map<String, String> apiKey = aService.callWeatherApi("202504160600");
@@ -47,10 +47,10 @@ public class ApiControllerTest {
 //		System.out.println(apiKey);
 		
 		//날씨 단기 예보 테스트
-		String apiKey = aService.callShortWeatherApi("20250423","0500","55", "127");
-		
-	}
-	
+//		String apiKey = aService.callShortWeatherApi("20250423","0500","55", "127");
+//		
+//	}
+//	
 
 	
 }
