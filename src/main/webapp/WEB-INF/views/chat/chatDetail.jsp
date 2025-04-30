@@ -45,7 +45,7 @@
 						<li class="chat-list-row">
 							<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
 								<c:if test="${myList.chatImgPath eq null }">          
-									<img class="chat-image" src="../resources/img/member/profile.png" alt="" >
+									<img class="chat-image" src="../resources/img/member/profile.png" alt="채팅방 이미지" >
 								</c:if>
 								<c:if test="${myList.chatImgPath ne null }">          
 									<img class="chat-image" src="${myList.chatImgPath}" alt="${myList.chatImgName}" >
