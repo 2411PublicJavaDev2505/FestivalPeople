@@ -38,3 +38,7 @@ mvnw
 mvnw.cmd
 .mvn/wrapper
 apikey.txt
+app-info.properties
+log4jdbc.log4j2.properties
+logback-spring.xml
+/FestivalPeople/log/
