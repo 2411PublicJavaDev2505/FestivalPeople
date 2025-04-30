@@ -20,7 +20,7 @@
 	margin: 0 auto;
 	margin-top:100px;
 	width: 1350px;
-	height: 1400px;
+	height: 1600px;
 	padding: 30px;
 	box-shadow: 0 2px 10px rgba(1, 0, 0, 0.2);
 	background-color:rgb(60,127,114,0.9);
@@ -206,8 +206,8 @@
 
 /*댓글버튼*/
 .addComment-btn{
-	margin-top: -56px;
-	margin-left: 680px;
+	margin-top: -60px;
+	margin-left: 870px;
 }
 
 #addComment{
