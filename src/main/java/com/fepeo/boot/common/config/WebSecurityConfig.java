@@ -32,10 +32,7 @@ public class WebSecurityConfig {
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/member/loginsuccess", true)
                         .failureUrl("/member/login?fail=1")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/"));
+                        .permitAll());
 		return http.build();
 	}
 	

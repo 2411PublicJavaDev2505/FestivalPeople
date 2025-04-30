@@ -8,6 +8,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../resources/css/root.css">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/member/memberUpdate.css">
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -103,6 +104,7 @@
 				</div>
 			</div>
 		</main>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 	<script type="text/javascript">
 		let nicknameYn = false;

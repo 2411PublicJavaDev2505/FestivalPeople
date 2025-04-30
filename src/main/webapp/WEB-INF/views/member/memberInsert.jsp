@@ -10,6 +10,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../resources/css/root.css">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/member/memberInsert.css">
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -104,6 +105,7 @@
 				</form>
 			</div>
 		</main>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 	<script type="text/javascript">
 		let memberId = document.querySelector("#input-id").value;

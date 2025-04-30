@@ -8,13 +8,8 @@
 	<link rel="stylesheet" href="../resources/css/root.css">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
 	<link rel="stylesheet" href="../resources/css/member/memberDelete.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/include/footer.css">
 	<title>FePeo-회원탈퇴</title>
-	<link
-         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-         rel="stylesheet"
-         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-         crossorigin="anonymous"
-    />
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -42,6 +37,7 @@
 				</div>
 			</div>
 		</main>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 	<script type="text/javascript">
 		function customConfirm(url) {

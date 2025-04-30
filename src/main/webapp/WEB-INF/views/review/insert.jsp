@@ -42,7 +42,7 @@
 						</div>
 						<div class="reviewinsert-btn">
 							<button type="submit" id="submitbtn">등록</button>
-							<button type="submit" id="submitbtn-c">작성취소</button> 
+							<button type="button" id="submitbtn-c">작성취소</button> 
 						</div>
 		 			</form> 
 				</div>
@@ -50,24 +50,38 @@
 			<!-- 푸터 -->
 			<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 			<script>
-			tinymce.init({
-			  selector: 'textarea',
-			  plugins: [
-			    // Core editing features
-			    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-			    // Your account includes a free trial of TinyMCE premium features
-			    // Try the most popular premium features until May 1, 2025:
-			    'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
-			  ],
-			  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-			  tinycomments_mode: 'embedded',
-			  tinycomments_author: 'Author name',
-			  mergetags_list: [
-			    { value: 'First.Name', title: 'First Name' },
-			    { value: 'Email', title: 'Email' },
-			  ],
-			  ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-			});
+				document.querySelector("#submitbtn-c").addEventListener("click",function() {
+					location.href="/review/list";
+				})
+				document.querySelector("#submitbtn").addEventListener("click",function() {
+					let title = document.querySelector(".write-input").value;
+					let content = document.querySelector(".write-textarea").value;
+					if(title.trim() == ''){
+						alert("제목을 입력해주세요!");
+						event.preventDefault();
+					}else if(content.trim() == ''){
+						alert("내용을 입력해주세요!");
+						event.preventDefault();
+					}
+				})
+				tinymce.init({
+				  selector: 'textarea',
+				  plugins: [
+				    // Core editing features
+				    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+				    // Your account includes a free trial of TinyMCE premium features
+				    // Try the most popular premium features until May 1, 2025:
+				    'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+				  ],
+				  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+				  tinycomments_mode: 'embedded',
+				  tinycomments_author: 'Author name',
+				  mergetags_list: [
+				    { value: 'First.Name', title: 'First Name' },
+				    { value: 'Email', title: 'Email' },
+				  ],
+				  ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+				});
 		</script>
 	</body>
 </html>

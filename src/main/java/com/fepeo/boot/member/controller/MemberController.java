@@ -311,7 +311,7 @@ public class MemberController {
 			session.invalidate();
 		}
 		
-		return "redirect:/logout";
+		return "redirect:/";
 	}
 	
 	// 회원가입 페이지

@@ -51,10 +51,16 @@
     align-items: center;
 	padding: 5px;	    
 }
-	.chat-prev-list a{
-  		text-decoration: none;		
-  		padding-right: 6px;
-	}
+.chat-header-title{
+	text-overflow: ellipsis;
+	overflow: hidden;
+  	white-space: nowrap;
+  	width:250px;
+}
+.chat-prev-list a{
+	text-decoration: none;		
+	padding-right: 6px;
+}
 .chat-header-right {
 	display: flex;
     flex-direction: row;
