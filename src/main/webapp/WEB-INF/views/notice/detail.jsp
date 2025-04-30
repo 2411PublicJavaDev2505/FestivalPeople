@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <title>공지사항 - 상세</title>
     <link rel="stylesheet" href="../resources/css/include/header.css">
+    <link rel="stylesheet" href="../resources/css/include/footer.css">
     <link rel="stylesheet" href="../resources/css/notice/detail.css">
 </head>
     <!-- 에디터 API -->
@@ -41,6 +42,8 @@
               </div>
    		</div>
     </main>
+     <!-- 푸터 -->
+    	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
     <!-- 스크립트 -->
     <script>
     	const deleteNotice = () => {

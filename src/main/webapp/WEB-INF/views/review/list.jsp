@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>후기 게시판 List 전체</title>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
+	<link rel="stylesheet" href="../resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/review/list.css">
 </head>
 <body>
@@ -78,6 +79,8 @@
 				</c:if>
 			</div>
 		</div>
+		<!-- 푸터 -->
+    		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<script type="text/javascript">
 			const reviewDetail = (reviewNo) => {
 				location.href ="/review/detail?reviewNo=" + reviewNo;

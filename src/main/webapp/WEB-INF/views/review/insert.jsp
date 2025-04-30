@@ -8,6 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="../resources/css/include/header.css">
+		<link rel="stylesheet" href="../resources/css/include/footer.css">
 		<link rel="stylesheet" href="../resources/css/review/insert.css">
 		<title>후기게시판 등록</title>
 	</head>
@@ -44,6 +45,8 @@
 				 			</form> 
 						</div>
 					</main>
+					<!-- 푸터 -->
+    				<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 			<script>
 			tinymce.init({
 			  selector: 'textarea',

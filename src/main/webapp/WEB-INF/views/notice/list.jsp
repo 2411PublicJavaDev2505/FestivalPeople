@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Festival People</title>
     <link rel="stylesheet" href="../resources/css/include/header.css">
+    <link rel="stylesheet" href="../resources/css/include/footer.css">
     <link rel="stylesheet" href="../resources/css/notice/list.css">
 </head>
 <body>
@@ -85,7 +86,8 @@
 			</div>
 		</c:if>
 	</div>
-	
+	<!-- 푸터 -->
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<!-- 자바스크립트 -->
 	<script type="text/javascript">
 		const showDetail = (noticeNo) => {

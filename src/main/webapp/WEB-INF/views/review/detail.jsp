@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 		<title>후기글 상세조회</title>
 		<link rel="stylesheet" href="../resources/css/include/header.css">
+		<link rel="stylesheet" href="../resources/css/include/footer.css">
 		<link rel="stylesheet" href="../resources/css/review/detail.css">
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
@@ -105,6 +106,8 @@
 					</div>
 				</div>
 			</main>
+			<!-- 푸터 -->
+    		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<script>
 			//textarea 클릭시 초기화
 			document.getElementById("commentContent").value='';

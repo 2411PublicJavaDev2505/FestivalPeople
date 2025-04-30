@@ -18,13 +18,14 @@
 
 .reviewdetail-main {
 	margin: 0 auto;
-	margin-top:150px;
+	margin-top:100px;
 	width: 1350px;
 	height: 1400px;
 	padding: 30px;
 	box-shadow: 0 2px 10px rgba(1, 0, 0, 0.2);
 	background-color:rgb(60,127,114,0.9);
 	border-radius: 10px;
+	margin-bottom: 50px;
 	/*04/25추가*/
 	
 	

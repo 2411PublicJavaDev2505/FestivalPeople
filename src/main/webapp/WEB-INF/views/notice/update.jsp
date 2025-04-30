@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../resources/css/include/header.css">
+    <link rel="stylesheet" href="../resources/css/include/footer.css">
     <link rel="stylesheet" href="../resources/css/notice/update.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>Festival People</title>
@@ -46,6 +47,8 @@
           	</form>
    		</div>
     </main>
+    <!-- 푸터 -->
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     <!-- 스크립트 -->
 	<script>
 		tinymce.init({

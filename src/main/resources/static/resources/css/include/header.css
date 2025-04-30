@@ -1,9 +1,15 @@
 /* 초기화 */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html, body {
+  font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 .main-header {

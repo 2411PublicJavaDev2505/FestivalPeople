@@ -19,6 +19,7 @@
     box-shadow: 0 4px 16px rgba(0,0,0,0.13);
     padding: 40px 30px 30px 30px;
     position: relative;
+    margin-bottom: 50px;
   }
   
   .write-title-bar {

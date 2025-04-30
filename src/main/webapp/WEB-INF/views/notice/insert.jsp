@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <title>Festival People</title>
     <link rel="stylesheet" href="../resources/css/include/header.css">
+    <link rel="stylesheet" href="../resources/css/include/footer.css">
     <link rel="stylesheet" href="../resources/css/notice/insert.css">
 </head>
 	<!-- 에디터 API -->
@@ -44,6 +45,8 @@
           	</form>
    		</div>
     </main>
+    <!-- 푸터 -->
+    <jsp:include page="/WEB-INF/views/include/footer.jsp" />
     <!-- 에디터 API 스크립트 -->
     <script>
 	  tinymce.init({
