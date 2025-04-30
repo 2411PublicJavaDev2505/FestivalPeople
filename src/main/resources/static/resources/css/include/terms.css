@@ -13,7 +13,7 @@
 
 .container {
     width: 1525px;
-    height: 880px; 
+    min-height: 880px; 
     margin-top: 50px;
     margin-left: 195px;
     background: rgba(60, 120, 100, 0.85);

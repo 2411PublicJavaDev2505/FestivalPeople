@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
+	<link rel="stylesheet" href="../resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/intro/intro.css">
 	<title>사이트 소개</title>
 </head>
@@ -79,5 +80,7 @@
 						</div>
 					</div>
 			</main>
+			<!-- 푸터 -->
+    		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>
 </html>
