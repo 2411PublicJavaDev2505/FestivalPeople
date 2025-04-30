@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+<%@ include file="/WEB-INF/views/common/csrf.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,6 +79,7 @@
 			<!--우 채팅방 만들기 상세 -->
 			<section class="chat-room-insert">
 			<form action="/chat/insert" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input type="hidden" name="memberNo"  value="${member.memberNo }">
 				<div class = "room-header">
 					<div class="chat-prev-list"><a href="/chat/list">←</a></div>

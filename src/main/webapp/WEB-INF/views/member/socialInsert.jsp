@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/csrf.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +36,7 @@
 			<p>${nickname }님 반갑습니다!</p>
 		</div>
 		<form action="/member/insert" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="hidden" name="memberId" value="${id }">
 			<input type="hidden" name="memberCode" value="${id }">
 			<input type="hidden" name="nickname" value="${nickname }">

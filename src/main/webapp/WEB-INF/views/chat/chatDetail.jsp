@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ include file="/WEB-INF/views/common/csrf.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
 						<li class="chat-list-row">
 							<a href="/chat/detail/${myList.chatroomNo }" class="chat-link">	            
 								<c:if test="${myList.chatImgPath eq null }">          
-									<img class="chat-image" src="../resources/img/member/profile.png" alt="채팅방 이미지" >
+									<img class="chat-image" src="../../resources/img/member/profile.png" alt="채팅방 이미지" >
 								</c:if>
 								<c:if test="${myList.chatImgPath ne null }">          
 									<img class="chat-image" src="${myList.chatImgPath}" alt="${myList.chatImgName}" >

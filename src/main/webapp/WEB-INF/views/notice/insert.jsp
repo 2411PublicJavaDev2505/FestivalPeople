@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/csrf.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,6 +27,7 @@
               <span>공지사항 작성</span>
             </div>
             <form class="write-form" enctype="multipart/form-data" action="/notice/insert" method="post">
+            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
               <div class="form-row">
               <!-- 제목 INPUT -->
                 <input type="text" id="title" name="noticeTitle" class="write-input" placeholder="제목" />
