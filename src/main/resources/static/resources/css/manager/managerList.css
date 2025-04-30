@@ -1,8 +1,5 @@
 @charset "UTF-8";
 
-main *{
-	font-size: 20px;
-}
 /* 바탕화면 */
 .background-image {
     position: absolute;

@@ -6,10 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../resources/css/include/header.css">
+	<link rel="stylesheet" href="../resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/root.css">
     <link rel="stylesheet" href="../resources/css/main.css">
-	<link rel="stylesheet" href="../resources/css/include/footer.css">
-    <link rel="stylesheet" href="../resources/css/include/header.css">
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     <title>Festival People</title>
 </head>
