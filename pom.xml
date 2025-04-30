@@ -163,6 +163,12 @@
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-taglibs</artifactId>
 		</dependency>
+		<!-- war 배포시 사용 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		      <artifactId>spring-boot-starter-tomcat</artifactId>
+		      <scope>provided</scope> <!-- 안되어 있는 경우 변경! -->
+		</dependency>
 	</dependencies>
 
 	<build>

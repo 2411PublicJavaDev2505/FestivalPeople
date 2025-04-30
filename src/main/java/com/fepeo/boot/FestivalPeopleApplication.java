@@ -10,9 +10,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 public class FestivalPeopleApplication extends SpringBootServletInitializer{
 
+
+	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(FestivalPeopleApplication.class);
-	};
+	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(FestivalPeopleApplication.class, args);
