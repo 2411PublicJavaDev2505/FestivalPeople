@@ -60,6 +60,7 @@ public class MemberController {
 	private final CourseService courseService;
 	private final ChatService chatService;
 
+	// 로그인 화면 이동 메소드
 	@GetMapping("/login")
 	public String showLogin(Model model
 			,@RequestParam(value="fail", defaultValue = "0") int fail) throws IOException {
@@ -73,7 +74,7 @@ public class MemberController {
 		return "member/login";
 	}
 	
-
+	// 아이디, 비밀번호 확인 메소드
 	@ResponseBody
 	@PostMapping("/login")
 	public String memberLogin(@ModelAttribute MemberLoginRequest login) {
@@ -95,6 +96,7 @@ public class MemberController {
 		return json.toString();
 	}
 	
+	// 로그인 성공 메소드 
 	@GetMapping("/loginsuccess")
 	public String loginSuccess(@AuthenticationPrincipal CustomUserDetail customUserDetails
 			,HttpSession session) {
@@ -103,6 +105,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 카카오 로그인
 	@GetMapping("/kakao")
 	public String kakaoLogin(@RequestParam("code") String code
 			,Model model
@@ -138,6 +141,7 @@ public class MemberController {
 		
 	}
 	
+	// 네이버 로그인 
 	@GetMapping("/naver")
 	public String naverLogin(@RequestParam("code") String code,
 	                         @RequestParam("state") String state,
@@ -172,6 +176,7 @@ public class MemberController {
 		}
 	}
 	
+	// 구글 로그인
 	@GetMapping("/google")
 	public String googleLogin(@RequestParam("code") String code, Model model
 			,HttpSession session) throws JsonMappingException, JsonProcessingException {
@@ -202,11 +207,13 @@ public class MemberController {
 		
 	}
 	
+	// 아이디 찾기 팝업창 메소드
 	@GetMapping("/findid")
 	public String showFindId() {
 		return "member/findId";
 	}
 	
+	// 아이디 찾기(이메일 전송)
 	@ResponseBody
 	@PostMapping("/findid")
 	public String findId(MemberFindIdRequest member) {
@@ -226,17 +233,20 @@ public class MemberController {
 		}
 	}
 	
+	// 팝업창 닫는 메소드 
 	@GetMapping("/closefindid")
 	public String showCloseFindId(Model model) {
 		model.addAttribute("msg","아이디");
 		return "member/closeFindId";
 	}
 	
+	// 비밀번호 찾기 팝업 메소드
 	@GetMapping("/findpw")
 	public String showFindPw() {
 		return "member/findPw";
 	}
 	
+	// 비밀번호 찾기(이메일 전송)
 	@ResponseBody
 	@PostMapping("/findpw")
 	public String findPw(@RequestParam("memberId") String memberId) {
@@ -268,6 +278,7 @@ public class MemberController {
 		return json.toString();
 	}
 	
+	// 팝업창 닫는 메소드
 	@GetMapping("/closefindpw")
 	public String showCloseFindPw(Model model) {
 		model.addAttribute("msg","비밀번호");
@@ -275,6 +286,7 @@ public class MemberController {
 	}
 	
 	
+	// 로그아웃 동작 메소드
 	@GetMapping("/logout")
 	public String memberLogout(HttpSession session) {
 		
@@ -302,11 +314,13 @@ public class MemberController {
 		return "redirect:/logout";
 	}
 	
+	// 회원가입 페이지
 	@GetMapping("/insert")
 	public String showMemberInsert() {
 		return "member/memberInsert";
 	}
 	
+	// 회원가입
 	@PostMapping("/insert")
 	public String insertMember(@ModelAttribute MemberInsertRequest member
 			,@RequestParam(required=false) MultipartFile profile
@@ -327,6 +341,7 @@ public class MemberController {
 		}
 	}
 	
+	// 회원가입 성공시 동작
 	@GetMapping("/inssuc")
 	public String showInsertSuccess(@RequestParam("memberNo") int memberNo
 			,Model model) {
@@ -335,6 +350,7 @@ public class MemberController {
 		return "member/insertSucess";
 	}
 	
+	// 회원정보 수정 페이지
 	@GetMapping("/update")
 	public String showMemberUpdate(HttpSession session
 			,Model model) {
@@ -344,6 +360,7 @@ public class MemberController {
 		return "member/memberUpdate";
 	}
 	
+	// 프로필 수정
 	@ResponseBody
 	@PostMapping("/updateprofile")
 	public String updateMemberProfile(@RequestParam(required=false) MultipartFile profile
@@ -361,6 +378,7 @@ public class MemberController {
 		return json.toString();
 	}
 	
+	// 비밀번호 수정
 	@ResponseBody
 	@PostMapping("/updatepw")
 	public String updateMemberPw(MemberUpdatePwRequest member) {
@@ -369,6 +387,7 @@ public class MemberController {
 		return "비밀번호가 변경되었습니다.";
 	}
 	
+	// 주소 수정
 	@ResponseBody
 	@PostMapping("/updateaddress")
 	public String updateMemberAddress(MemberUpdateRequest member) {
@@ -376,6 +395,7 @@ public class MemberController {
 		return member.getAddress();
 	}
 	
+	// 닉네임 수정
 	@ResponseBody
 	@PostMapping("/updatenickname")
 	public String updateMemberNickname(MemberUpdateRequest member) {
@@ -383,6 +403,7 @@ public class MemberController {
 		return member.getNickname();
 	}
 	
+	// 이메일 수정
 	@ResponseBody
 	@PostMapping("/updateemail")
 	public String updateMemberEmail(MemberUpdateRequest member) {
@@ -390,6 +411,7 @@ public class MemberController {
 		return member.getEmail();
 	}
 	
+	// 마이페이지 화면
 	@GetMapping("/detail")
 	public String showMemberDetail(HttpSession session, Model model) {
 		Member member = (Member)session.getAttribute("member");
@@ -410,11 +432,13 @@ public class MemberController {
 		return "member/memberDetail";
 	}
 	
+	// 회원탈퇴 페이지(기본 회원)
 	@GetMapping("/delete")
 	public String showMemberDelete() {
 		return "member/memberDelete";
 	}
 	
+	// 회원탈퇴 
 	@ResponseBody
 	@PostMapping("/delete")
 	public String deleteMember(MemberLoginRequest login) {
@@ -428,6 +452,7 @@ public class MemberController {
 		return json.toString();
 	}
 	
+	// 소셜 회원 탈퇴
 	@GetMapping("/socialdelete")
 	public String deleteSocialMember(HttpSession session) {
 		Member member = (Member)session.getAttribute("member");
@@ -437,6 +462,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 아이디 확인(중복 검사)
 	@ResponseBody
 	@GetMapping("/checkid")
 	public String checkMemberId(String memberId) {
@@ -446,6 +472,7 @@ public class MemberController {
 		return json.toString();
 	}
 	
+	// 닉네임 확인(중복 검사)
 	@ResponseBody
 	@GetMapping("/checknickname")
 	public String checkMemberNickname(String nickname) {
@@ -455,6 +482,7 @@ public class MemberController {
 		return json.toString();
 	}
 	
+	// 이메일 확인(중복 검사)
 	@ResponseBody
 	@GetMapping("/checkemail")
 	public String checkMemberEmail(String email) {
@@ -464,6 +492,7 @@ public class MemberController {
 		return json.toString();
 	}
 	
+	// 프로필 수정 
 	@ResponseBody
 	@PostMapping("/changeprofile")
 	public String changeProfile(@RequestParam(required=false) MultipartFile profile) throws IllegalStateException, IOException {
@@ -477,6 +506,7 @@ public class MemberController {
 		return filePath;
 	}
 	
+	// 회원가입시 이메일 인증
 	@ResponseBody
 	@GetMapping("/sendcode")
 	public String sendEmailCode(String email) {
@@ -496,6 +526,7 @@ public class MemberController {
 		return json.toString();
 	}
 	
+	// 이메일 인증 코드 체크
 	@ResponseBody
 	@PostMapping("/checkcode")
 	public String checkEmailCode(MemberCodeInsertRequest memberCode) {
