@@ -94,7 +94,6 @@ public class ChatServiceLogic implements ChatService {
 	 * @throws IllegalStateException */
 	@Override // 메시지 입력
 	public int insertChatMsg(MsgInsertRequest msg) throws IllegalStateException, IOException {
-		System.out.println(msg.getUplodeFile());
 		if(msg.getUplodeFile() != null && !msg.getUplodeFile().isEmpty()) {
 			MultipartFile file = msg.getUplodeFile();
 			String fileName = file.getOriginalFilename();
@@ -104,8 +103,6 @@ public class ChatServiceLogic implements ChatService {
 			msg.setChatFileName(fileName);
 			msg.setChatFileRename(fileRename);
 			msg.setChatFilePath(filePath);
-
-			System.out.println(filePath);
 		}		
 		
 		int result = msgMapper.insertChatMsg(msg);

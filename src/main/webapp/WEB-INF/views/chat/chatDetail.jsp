@@ -182,7 +182,7 @@
 											<img class="chat-profile-thumbnail" src="../resources/img/member/profile.png" width="40" />
 										</c:if>
 										<c:if test="${mb.profileFilePath ne null }">
-											<img class="chat-profile-thumbnail" src="${mb.profileFilePath }"  alt="${myList.profileFilePath}" width="40" />
+											<img class="chat-profile-thumbnail" src="${mb.profileFilePath }"  alt="${mb.profileFilePath}" width="40" />
 										</c:if>
 										<div class="chat-mem-nickname">${mb.nickname }</div>
 									</div>
