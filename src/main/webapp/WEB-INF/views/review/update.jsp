@@ -8,11 +8,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="../resources/css/include/header.css">
+	<link rel="stylesheet" href="../resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/review/update.css">
 	<title>후기게시판 수정</title>
 </head>
 	<script src="https://cdn.tiny.cloud/1/h2z941nkcufiei057mdhexxykqh6vtiwziq0rhb7ahlx1hua/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <body>
+	<!-- 바탕화면 -->
+	<div class="background-image">
+		<img src="../resources/img/review/review-insert-background.jpg" alt="바탕화면">
+   	</div>
 	<div id="container">
 	<jsp:include page="../include/header.jsp"/>
 		<div class="reviewinsert-main">
@@ -41,6 +46,7 @@
 					</div>
 		 		</form> 
 			</main>
+			
 				<script>
 					  tinymce.init({
 					    selector: 'textarea',
@@ -63,5 +69,7 @@
 				</script>
 			</div>
 		</div>
+		<!-- 푸터 -->
+    		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</body>
 </html>

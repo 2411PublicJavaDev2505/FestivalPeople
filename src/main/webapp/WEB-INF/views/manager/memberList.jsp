@@ -7,6 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="../resources/css/include/header.css">
+		<link rel="stylesheet" href="../resources/css/include/footer.css">
 		<link rel="stylesheet" href="../resources/css/manager/managerList.css">
 		<link rel="stylesheet" href="../resources/css/include/footer.css">	
 		<link
@@ -25,9 +26,9 @@
 		<div class="background-image">
 			<img src="../resources/img/manager/manager-background.jpg" alt="바탕화면">
 	    </div>
-		<div id="container">
 			<jsp:include page="/WEB-INF/views/include/header.jsp" />
 				<main>
+				<div id="container">
 					<div class="manager-total-container">
 						<div class="manager-select-search">
 							<div class="left-select-area">
@@ -102,9 +103,10 @@
 									</div>
 							</div>
 					</div>	
-				</main>	
-				<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-		</div>
+				</div>
+			</main>	
+		<!-- 푸터 -->
+    	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<script>
 			function customAlert(message) {
 			    Swal.fire({

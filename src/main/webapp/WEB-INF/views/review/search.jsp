@@ -8,17 +8,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../resources/css/include/header.css">
+	<link rel="stylesheet" href="../resources/css/include/footer.css">
 	<link rel="stylesheet" href="../resources/css/review/search.css">
 	<title>후기 게시판 List 검색</title>
 </head>
 <body>
-	<!-- 광고배너 -->
-	<div class="side-banner left-banner">
-        <a href="http://localhost:8888/festival/detail/287"><img src="../resources/img/review/banner-poster.jpg" alt="왼쪽 광고" /></a>
-    </div>
-    <div class="side-banner right-banner">
-        <a href="http://localhost:8888/festival/detail/288"><img src="../resources/img/review/banner-posterR.jpg" alt="오른쪽 광고" /></a>
-    </div>
 	<!-- 바탕화면 -->
 	<div class="background-image">
     	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
@@ -84,6 +78,8 @@
 				</c:if>
 		    </div>
 	    </div>
+	    <!-- 푸터 -->
+    	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<script type="text/javascript">
 			const reviewDetail = (reviewNo) => {
 				location.href ="/review/detail?reviewNo=" + reviewNo;

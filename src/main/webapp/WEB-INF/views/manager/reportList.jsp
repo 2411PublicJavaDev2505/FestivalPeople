@@ -8,16 +8,16 @@
 		<meta charset="UTF-8">
 		<title>신고 내역 확인 페이지 입니다</title>
 		<link rel="stylesheet" href="../resources/css/include/header.css">
+		<link rel="stylesheet" href="../resources/css/include/footer.css">
 		<link rel="stylesheet" href="../resources/css/report/list.css">
-		<link rel="stylesheet" href="../resources/css/include/footer.css">	
 	</head>
 	<body>
 		<!-- 바탕화면 -->
 		<div class="background-image">
 			<img src="../resources/img/manager/manager-background.jpg" alt="바탕화면">
 	    </div>
-		<div id="container">
 			<jsp:include page="/WEB-INF/views/include/header.jsp" />
+		<div id="container">
 			<main>
 				<div class="manager-total-container">
 					<div class="manager-select-search">
