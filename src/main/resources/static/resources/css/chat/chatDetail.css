@@ -55,7 +55,7 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
   	white-space: nowrap;
-  	width:250px;
+  	width:200px;
 }
 .chat-prev-list a{
 	text-decoration: none;		
@@ -79,6 +79,7 @@
 	    background-color: rgb(230, 230, 230);
 	    margin-left: 5px;
 	    padding-left: 5px;
+	    width: 160px;
 	}
 	.chat-search-btn{
 	    border: none;
