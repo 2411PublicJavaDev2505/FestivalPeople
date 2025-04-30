@@ -166,7 +166,6 @@
 .review-comment-write-area {
 	margin:0 auto;
 	margin-left: 30px;
-	
 }
 
 
@@ -179,11 +178,6 @@
 	bottom: 80px; 
 }
 
-.addComment-btn {
-	margin:0 auto;
-	margin-left: 646px;
-	margin-top:-50px;
-}
 /*댓글 종료 4/25 17:45*/
 .comment-list-area {
 	width: 1250px;
@@ -204,8 +198,25 @@
 	height: 150px;
 }
 
+#commentList {
+	list-style: none;
+}
+
+.comment-row {
+	border-bottom: 1px solid #222;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+.comment-row .commentContent{
+	width: 500px;
+	float: left;
+}
+
 /*댓글버튼*/
 .addComment-btn{
+	margin:0 auto;
+	margin-left: 646px;
+	margin-top:-50px;
 	margin-top: -60px;
 	margin-left: 870px;
 }
@@ -229,5 +240,21 @@
 	 bottom:800px;
 	 top:30px;
 }
+
+.comment-btn-area {
+	width: 100%;
+	text-align: right;
+}
+
 /*댓글 답글이랑 삭제버튼*/
+.replyBtn {
+	width: 100px;
+    height: 48px;
+	font-size: 18px;
+	font-weight: bold;
+	border: none;
+    background: #c2beba;
+    color: #fff;
+    border-radius: 5px;
+}
 

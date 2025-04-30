@@ -36,13 +36,15 @@
 						<textarea rows="5" cols="82" name="reviewContent">${review.reviewContent }</textarea>
 					</div>
 					<div class="review-attach">
-						<input type="file"  id="images" name ="images" onchange="changeFile();"> <br> 
-						<input type="file"  id="images" name ="images" onchange="changeFile();"> <br> 
-						<input type="file"  id="images" name ="images" onchange="changeFile();"> <br> 
-					</div>
-					<div class="reviewupdate-btn">
-						<button type="submit"  id="submitbtn">수정</button>
-						<button type="submit" id="submitbtn-c">목록으로</button> 
+						<div class="review-file-input">
+							<input type="file"  id="images" name ="images" onchange="changeFile();"> <br> 
+							<input type="file"  id="images" name ="images" onchange="changeFile();"> <br> 
+							<input type="file"  id="images" name ="images" onchange="changeFile();"> <br> 
+						</div>
+						<div class="reviewupdate-btn">
+							<button type="submit"  id="submitbtn">수정</button>
+							<button type="submit" id="submitbtn-c">목록으로</button> 
+						</div>
 					</div>
 		 		</form> 
 			</main>

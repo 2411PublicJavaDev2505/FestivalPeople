@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/views/common/csrf.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -50,7 +51,7 @@
 							<td>${review.reviewNo}</td>
 							<td>${review.nickname}</td>
 							<td id="review-title"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
-							<td>${review.reviewWriteTime }</td>
+							<td><fmt:formatDate value="${review.reviewWriteTime }" pattern="yyyy.MM.dd HH:mm"/></td>
 							<td>${review.reviewCount }</td>
 						</tr>
 					</c:forEach>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/views/common/csrf.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -44,7 +45,7 @@
 		                <td>${(currentPage-1)*10 + i.index + 1}</td>
 		                <td id="notice-title" onclick="showDetail('${notice.noticeNo}');"><b>${notice.noticeTitle }</b></td>
 		                <td>${notice.noticeCount }</td>
-		                <td>${notice.noticeWriteDate }</td>
+		                <td><fmt:formatDate value="${notice.noticeWriteDate }" pattern="yyyy-MM-dd" /></td>
 		            </tr>
 	        	</c:forEach>
 	        </tbody>

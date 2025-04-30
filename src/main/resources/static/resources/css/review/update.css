@@ -56,7 +56,11 @@
 /* 	position: relative; */
   	left: 38px;
   	top:5px;
-	
+  	width: 100%;
+}
+
+.review-file-input {
+  	float: left;
 }
 
 #submitbtn {
@@ -81,11 +85,9 @@
 }
 
 .reviewupdate-btn {
-	display: flex;
-    align-items: center;
-    justify-content: flex-end; 
-    gap: 5px;
-    margin-top: 40px;
+    width: 100%;
+    text-align: right;
+    margin-top: 410px;
 }
 
 .tox.tox-tinymce {

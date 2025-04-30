@@ -185,7 +185,7 @@
 										<c:if test="${mb.profileFilePath ne null }">
 											<img class="chat-profile-thumbnail" src="${mb.profileFilePath }"  alt="${mb.profileFilePath}" width="40" />
 										</c:if>
-										<div class="chat-mem-nickname">${mb.nickname }</div>
+										<div class="chat-mem-nickname">${msgList.nickname }</div>
 									</div>
 									<div class="msg-balloon-area-l">
 										<div class="msg-contents">
@@ -303,9 +303,9 @@
 					if(chatMsgSize != prevChatMsgSize){
 						data.forEach(function(msg) {
 							const date = new Date(msg.chatMsgTime); // msg.chatMsgTime이 ISO String이면 바로 new Date() 가능
-							const formattedDate = date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit'});
+							const formattedDate = date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short'});
 						    html += '<ul id="balloonList" class="group_msg_balloon">';
-						    console.log()
+						    console.log(formattedDate)
 						    // 날짜 출력 예시
 						    if (formattedDate !== prevDate) {
 						        html += '<li class="date_check"><span>' + formattedDate + '</span></li>';

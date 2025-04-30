@@ -25,7 +25,7 @@
     <main class="chat-main">
 		<section class="chat-nav">
 			<span>${member.nickname }님 접속중</span>
-			<form class="chat-list-search" action="chat/totalSearch"  >
+			<form class="chat-list-search" action="/chat/totalSearch" >
 				<input type="text" class="list-search-input" placeholder="검색" name="searchKeyword" value="${searchKeyword }">
 				<button class="chat-search-btn" >⌕</button>
 			</form>
@@ -80,35 +80,42 @@
 			<!--우 전체목록-->
 			<section class="allchat-list-wrap">
 				<div class="chat-prev-list"><a href="/chat/list">←</a></div>
-				<c:forEach items="${rSearchList }" var="cRoom" varStatus="i">
+				<c:if test="${empty rSearchList }">
 					<ul class="chat-list">
-						<li class="chat-list-row">
-							<a href="javascript:void(0);" onclick="checkAndEnter('${cRoom.chatroomNo}',${cRoom.chatMemberCount}, ${cRoom.chatLimit});" class="chat-link">
-								<c:if test="${cRoom.chatImgPath eq null }">          
-									<img class="chat-image" src="../resources/img/member/profile.png" alt="" >
-								</c:if>
-								<c:if test="${cRoom.chatImgPath ne null }">          
-									<img class="chat-image" src="${cRoom.chatImgPath}" alt="${cRoom.chatImgName}" >
-								</c:if>								
-								<div class="text-wrap">
-									<div class="chat-title">${cRoom.chatroomTitle }</div>
-									<div class="chat-tag">
-										<c:if test="${cRoom.tag1 ne null }">
-											<span>#${cRoom.tag1 }</span>
-										</c:if>
-										<c:if test="${cRoom.tag2 ne null }">
-											<span>#${cRoom.tag2 }</span>
-										</c:if>
-										<c:if test="${cRoom.tag3 ne null }">
-											<span>#${cRoom.tag3 }</span>
-										</c:if>								
+						<li><span class="chat-notice">검색결과가 없습니다</span></li>
+					</ul>
+				</c:if>
+				<c:if test="${not empty rSearchList }">
+					<c:forEach items="${rSearchList }" var="cRoom" varStatus="i">
+						<ul class="chat-list">
+							<li class="chat-list-row">
+								<a href="javascript:void(0);" onclick="checkAndEnter('${cRoom.chatroomNo}',${cRoom.chatMemberCount}, ${cRoom.chatLimit});" class="chat-link">
+									<c:if test="${cRoom.chatImgPath eq null }">          
+										<img class="chat-image" src="../resources/img/member/profile.png" alt="" >
+									</c:if>
+									<c:if test="${cRoom.chatImgPath ne null }">          
+										<img class="chat-image" src="${cRoom.chatImgPath}" alt="${cRoom.chatImgName}" >
+									</c:if>								
+									<div class="text-wrap">
+										<div class="chat-title">${cRoom.chatroomTitle }</div>
+										<div class="chat-tag">
+											<c:if test="${cRoom.tag1 ne null }">
+												<span>#${cRoom.tag1 }</span>
+											</c:if>
+											<c:if test="${cRoom.tag2 ne null }">
+												<span>#${cRoom.tag2 }</span>
+											</c:if>
+											<c:if test="${cRoom.tag3 ne null }">
+												<span>#${cRoom.tag3 }</span>
+											</c:if>								
+										</div>
+										<div class="chat-mem-count">정원 ${cRoom.chatMemberCount } / ${cRoom.chatLimit }</div>
 									</div>
-									<div class="chat-mem-count">정원 ${cRoom.chatMemberCount } / ${cRoom.chatLimit }</div>
-								</div>
-							</a>
-						</li>
-					</ul>            
-				</c:forEach>
+								</a>
+							</li>
+						</ul>            
+					</c:forEach>
+				</c:if>
 			</section>
 		</section>
     </main>

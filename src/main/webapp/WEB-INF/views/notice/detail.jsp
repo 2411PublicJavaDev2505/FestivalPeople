@@ -31,7 +31,9 @@
                 ${notice.noticeTitle }
               </div>
               <div class="form-row-content">
-              	<img alt="공지사항 사진" src="${notice.noticeFilePath}"> <br>
+             	<c:if test="${notice.noticeFilePath ne null }">
+	              	<img alt="공지사항 사진" src="${notice.noticeFilePath}"> <br>
+             	</c:if>
                 <div class="content-text">${notice.noticeContent }</div>
               </div>
               <div class="form-row-btn">

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/common/csrf.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -182,32 +183,33 @@
 						
 						
 						const writeDateTag = document.createElement("span");
-						writeDateTag.innerText = comment.commentTime;
+						writeDateTag.innerText = comment.commentTime.substring(0,10);
 						
 						
 						const contentTag = document.createElement("p");
 						contentTag.innerText = comment.commentContent;
+						contentTag.className = "commentContent";
 						
 						const buttonArea = document.createElement("div");
 						
 						if( '${sessionScope.member.memberNo}'.trim() != ''){
 							buttonArea.classList.add("comment-btn-area");
-							const replyBtn = document.createElement("button");
-							replyBtn.innerText ="답글";
 							if(comment.memberNo == '${sessionScope.member.memberNo}'){
 								const deleteBtn = document.createElement("button");
 								deleteBtn.innerText = "삭제";
 								deleteBtn.onclick= function() {
 									deleteComment(comment.commentNo);
 								};
-								buttonArea.append(replyBtn, deleteBtn);
+								deleteBtn.className = "replyBtn";
+								buttonArea.append(deleteBtn);
 							}else{
 								const reportBtn = document.createElement("button");
 								reportBtn.innerText = "신고";
 								reportBtn.onclick = function() {
 									reportComment(comment.commentNo);
 								}
-								buttonArea.append(replyBtn, reportBtn);
+								reportBtn.className = "replyBtn";
+								buttonArea.append(reportBtn);
 							}
 						}
 					

@@ -51,7 +51,7 @@
 			                <td>${review.reviewNo}</td>
 			                <td>${review.nickname}</td>
 							<td id="review-title" onclick="reviewDetail('${review.reviewNo}');"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
-			                <td><fmt:formatDate value="${review.reviewWriteTime }" pattern="yyyy.MM.dd.HH:mm:ss"/></td>
+			                <td><fmt:formatDate value="${review.reviewWriteTime }" pattern="yyyy.MM.dd HH:mm"/></td>
 			                <td>${review.reviewCount }</td>
 			            </tr>
 		            </c:forEach>
