@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
-
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -21,19 +20,19 @@
         <ul  class="group2">
             <li style="--offset: 4;"><a href="/review/list">여행 후기</a></li>
             <li style="--offset: 5;"><a href="/notice/list">공지사항</a></li>
-            <c:if test="${member.memberId eq null }">
+            <c:if test="${sessionScope.member.memberId eq null }">
 	            <li style="--offset: 6;"><a href="/member/login">로그인</a></li>
             </c:if>
-            <c:if test="${member.memberId ne null }">
+            <c:if test="${sessionScope.member.memberId ne null }">
 	            <li style="--offset: 6;"><a href="/member/logout">로그아웃</a></li>
             </c:if>
-            <c:if test="${member.memberId eq null }">
+            <c:if test="${sessionScope.member.memberId eq null }">
 	            <li style="--offset: 7;"><a href="/member/insert">회원가입</a></li>
             </c:if>
-            <c:if test="${member.memberId ne null && member.managerYn eq 'N'}">
+            <c:if test="${sessionScope.member.memberId ne null && sessionScope.member.managerYn eq 'N'}">
 	            <li style="--offset: 7;"><a href="/member/detail">마이페이지</a></li>
             </c:if>
-            <c:if test="${member.memberId ne null && member.managerYn eq 'Y'}">
+            <c:if test="${sessionScope.member.memberId ne null && sessionScope.member.managerYn eq 'Y'}">
 	            <li style="--offset: 7;"><a href="/manager/mypage">관리자페이지</a></li>
             </c:if>
         </ul>

@@ -13,6 +13,7 @@
     String tomorrowStr = tomorrow.format(formatter);
     String dayAfterTomorrowStr = dayAfterTomorrow.format(formatter);
 %>
+<%@ include file="/WEB-INF/views/common/csrf.jsp" %>
 <!DOCTYPE html>
 <html>
 	<head>

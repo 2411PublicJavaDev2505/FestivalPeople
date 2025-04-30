@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ include file="/WEB-INF/views/common/csrf.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,8 +74,9 @@
 									<button type="button" onclick="findAddress();">검색</button>
 								</li>
 								<li class="register-notbtn">
-									<input type="text" placeholder="이름" name="memberName" id="input-name">
+									<input type="text" placeholder="이름" name="memberName" id="input-name" onchange="checkName();">
 								</li>
+								<li class="check name"></li>
 								<ul class="register-radio-group">
 									<li class="register-radio">
 	  									<label for="male">
@@ -196,50 +198,68 @@
 		
 		function checkId() {
 			memberId = document.querySelector("#input-id").value;
-			$.ajax({
-				dataType: "json",
-				url: "/member/checkid",
-				data : {
-					"memberId" : memberId
-				},
-				type : "GET",
-				success : function(data) {
-					if(data.check == 0){
-						document.querySelector(".check.id").innerText = "* 가능한 아이디입니다";
-						idYn = true;
-					}else{
-						document.querySelector(".check.id").innerText = "* 이미 존재하는 아이디입니다";
-						idYn = false;
+			
+			if(!/^[a-z][a-z0-9_-]{5,20}$/g.test(memberId.trim())){
+				document.querySelector(".check.id").innerText = "*  5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+			}else{
+				$.ajax({
+					dataType: "json",
+					url: "/member/checkid",
+					data : {
+						"memberId" : memberId
+					},
+					type : "GET",
+					success : function(data) {
+						if(data.check == 0){
+							document.querySelector(".check.id").innerText = "* 가능한 아이디입니다";
+							idYn = true;
+						}else{
+							document.querySelector(".check.id").innerText = "* 이미 존재하는 아이디입니다";
+							idYn = false;
+						}
+					},
+					error : function() {
+						customAlert("통신 오류!");
 					}
-				},
-				error : function() {
-					customAlert("통신 오류!");
-				}
-			});
+				});
+			}
 		}
+		
+		const checkName = () => {
+			name = document.querySelector("#input-name").value;
+			if(!/^[a-zA-Z가-힣]{1,}$/g.test(name)){
+				document.querySelector(".check.name").innerText = "* 한글, 영문 대/소문자를 사용해 주세요. (특수기호, 공백 사용 불가)";
+			}
+		}
+		
 		const checkNickname = () => {
 			nickname = document.querySelector("#input-nickname").value;
-			$.ajax({
-				dataType: "json",
-				url: "/member/checknickname",
-				data: {
-					"nickname" : nickname
-				},
-				type: "GET",
-				success: function(data) {
-					if(data.check == 0){
-						document.querySelector(".check.nickname").innerText = "* 가능한 닉네임입니다";
-						nicknameYn = true;
-					}else{
-						document.querySelector(".check.nickname").innerText = "* 이미 존재하는 닉네임입니다";
-						nicknameYn = false;
+			if(!/^[a-zA-Z가-힣]{1,}$/g.test(name)){
+				document.querySelector(".check.nickname").innerText = "* 한글, 영문 대/소문자를 사용해 주세요. (특수기호, 공백 사용 불가)";
+			}else {
+				$.ajax({
+					dataType: "json",
+					url: "/member/checknickname",
+					data: {
+						"nickname" : nickname
+					},
+					type: "GET",
+					success: function(data) {
+						if(data.check == 0){
+							document.querySelector(".check.nickname").innerText = "* 가능한 닉네임입니다";
+							nicknameYn = true;
+						}else{
+							document.querySelector(".check.nickname").innerText = "* 이미 존재하는 닉네임입니다";
+							nicknameYn = false;
+						}
+					},
+					error: function() {
+						customAlert("통신 오류!");
 					}
-				},
-				error: function() {
-					customAlert("통신 오류!");
-				}
-			});
+				});
+			}
 		}
+		
 		const checkEmail = () => {
 			email = document.querySelector("#input-email").value;
 			$.ajax({

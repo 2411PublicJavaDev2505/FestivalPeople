@@ -23,7 +23,7 @@ public class WebSecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
+		http.authorizeHttpRequests(auth -> auth
         				.requestMatchers("/manager/**").hasRole("Y")
         				.anyRequest().permitAll())
                 .formLogin(form -> form.loginPage("/member/login")
@@ -53,4 +53,6 @@ public class WebSecurityConfig {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	
 }

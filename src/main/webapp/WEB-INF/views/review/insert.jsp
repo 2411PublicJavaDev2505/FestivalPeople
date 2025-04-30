@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/WEB-INF/views/common/csrf.jsp" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,25 +26,26 @@
 						<span>여행후기 등록</span>
 					</div>
 				 		<form action="/review/insert" method="post" enctype="multipart/form-data" class="review-insert-form">
+				 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				 			<input type="hidden" name="memberNo"  value="${sessionScope.member.memberNo }"> 
-								<div class="form-row">
-									<input type="text" id="title" name="reviewTitle" class="write-input" placeholder="제목" />
-								</div>
-								<div class="form-row">
-									<textarea id="tiny" name="reviewContent" class="write-textarea" placeholder="내용"></textarea>
-								</div>
-								<div class="review-attach">
-			 						<input type="file" name ="images"> <br>  
-			 						<input type="file" name ="images"> <br>  
-			  						<input type="file" name ="images"> <br>  
-								</div>
-								<div class="reviewinsert-btn">
-									<button type="submit" id="submitbtn">등록</button>
-									<button type="submit" id="submitbtn-c">작성취소</button> 
-								</div>
-				 			</form> 
-						</div>
-					</main>
+							<div class="form-row">
+								<input type="text" id="title" name="reviewTitle" class="write-input" placeholder="제목" />
+							</div>
+							<div class="form-row">
+								<textarea id="tiny" name="reviewContent" class="write-textarea" placeholder="내용"></textarea>
+							</div>
+							<div class="review-attach">
+		 						<input type="file" name ="images"> <br>  
+		 						<input type="file" name ="images"> <br>  
+		  						<input type="file" name ="images"> <br>  
+							</div>
+							<div class="reviewinsert-btn">
+								<button type="submit" id="submitbtn">등록</button>
+								<button type="submit" id="submitbtn-c">작성취소</button> 
+							</div>
+			 			</form> 
+					</div>
+				</main>
 			<script>
 			tinymce.init({
 			  selector: 'textarea',

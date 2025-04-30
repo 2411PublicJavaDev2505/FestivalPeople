@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="/WEB-INF/views/common/csrf.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,7 @@
 			    <div class="course-slider-container">
 	                <div class="course-search">
 		                <form class="search-form" action="/course/search" method="post">
+		                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					    	<div class="message-box">${memberName}${message }</div>
 		                    <select name="searchCondition">
 		                        <option value="all">전체</option>
