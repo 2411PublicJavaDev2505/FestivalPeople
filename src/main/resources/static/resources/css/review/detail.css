@@ -206,7 +206,8 @@
 
 /*댓글버튼*/
 .addComment-btn{
-	margin-top: -55px;
+	margin-top: -56px;
+	margin-left: 680px;
 }
 
 #addComment{
