@@ -8,6 +8,7 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="../resources/css/include/header.css">
 		<link rel="stylesheet" href="../resources/css/manager/managerList.css">
+		<link rel="stylesheet" href="../resources/css/include/footer.css">	
 		<link
 	         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	         rel="stylesheet"
@@ -17,7 +18,7 @@
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-		<title>Insert title here</title>
+		<title>회원 목록</title>
 	</head>
 	<body>
 		<!-- 바탕화면 -->
@@ -102,6 +103,7 @@
 							</div>
 					</div>	
 				</main>	
+				<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		</div>
 		<script>
 			function customAlert(message) {
