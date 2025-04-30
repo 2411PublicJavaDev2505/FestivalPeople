@@ -9,7 +9,6 @@ import lombok.ToString;
 @ToString
 public class CommentAddRequest {
 	
-	//4개인데 확인필요!!!(4/15 15:37)
 	private String	commentContent;
 	private int		reviewNo;
 	private int		memberNo;

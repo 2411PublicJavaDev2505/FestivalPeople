@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -11,17 +12,9 @@
 	<link rel="stylesheet" href="../resources/css/review/list.css">
 </head>
 <body>
-	<!-- 광고배너 
-	<div class="side-banner left-banner">
-		<a href="/festival/detail/${festival1.festivalNo }"><img src="${festival1.festivalFilePath }" alt="왼쪽 광고" /></a>
-	</div>
-	<div class="side-banner right-banner">
-		<a href="/festival/detail/${festival2.festivalNo }"><img src="${festival2.festivalFilePath }" alt="오른쪽 광고" /></a>
-	</div>
-	-->
     <!-- 바탕화면 -->
 	<div class="background-image">
-    	 <img src="../resources/img/review/review-background.jpg" alt="바탕화면">
+		<img src="../resources/img/review/review-background.jpg" alt="바탕화면">
     </div>
     <div id="container">
      	<jsp:include page="../include/header.jsp"/>
@@ -56,7 +49,7 @@
 			                <td>${review.reviewNo}</td>
 			                <td>${review.nickname}</td>
 							<td id="review-title" onclick="reviewDetail('${review.reviewNo}');"><a onclick="reviewDetail('${review.reviewNo}');">${review.reviewTitle }</a></td>
-			                <td>${review.reviewWriteTime }</td>
+			                <td><fmt:formatDate value="${review.reviewWriteTime }" pattern="yyyy.MM.dd.HH:mm:ss"/></td>
 			                <td>${review.reviewCount }</td>
 			            </tr>
 		            </c:forEach>
@@ -66,45 +59,43 @@
 					<c:if test="${pageInfo.startNavi ne 1}">
 						<button class="page-btn" onclick="prev();">&lt;</button>
 					</c:if>
-					<c:forEach begin="${pageInfo.startNavi }" end="${pageInfo.endNavi }" var="p">
-						<c:if test="${p eq currentPage }">
-							<span class="page-num active" onclick="move('${p}');">${p }</span>
-						</c:if>
-						<c:if test="${p ne currentPage }">
-							<span class="page-num" onclick="move('${p}');">${p }</span>
-						</c:if>
-					</c:forEach>
+						<c:forEach begin="${pageInfo.startNavi }" end="${pageInfo.endNavi }" var="p">
+							<c:if test="${p eq currentPage }">
+								<span class="page-num active" onclick="move('${p}');">${p }</span>
+							</c:if>
+							<c:if test="${p ne currentPage }">
+								<span class="page-num" onclick="move('${p}');">${p }</span>
+							</c:if>
+						</c:forEach>
 					<c:if test="${pageInfo.endNavi ne pageInfo.maxPage }">
 						<button class="page-btn" onclick="next();">&gt;</button>
 					</c:if>
 				</div>
 				<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberYn eq 'Y'}" >
-			    <div class="reviewinsert-btn">
-			    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
-			    </div>
+				    <div class="reviewinsert-btn">
+				    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
+				    </div>
 				</c:if>
 			</div>
 		</div>
-	<script type="text/javascript">
-		const reviewDetail = (reviewNo) => {
-			location.href ="/review/detail?reviewNo=" + reviewNo;
-		}
-	
-		const reviewinsert = () => {
-			location.href = "/review/insert";
-		}
+		<script type="text/javascript">
+			const reviewDetail = (reviewNo) => {
+				location.href ="/review/detail?reviewNo=" + reviewNo;
+			}
 		
-		//아래3개코드 페이징! notice랑 맞추기 04/29 11:28
-		
-		const prev = () => {
-			location.href="/review/list?page=" +(parseInt("${pageInfo.startNavi}") -1);
-		}
-		const move = (p) => {
-			location.href ="/review/list?page="+p;
-		}
-		const next = () => {
-			location.href="/review/list?page=" + (parseInt("${pageInfo.endNavi}") + 1);
-		}
-	</script>
-</body>
+			const reviewinsert = () => {
+				location.href = "/review/insert";
+			}
+			
+			const prev = () => {
+				location.href="/review/list?page=" +(parseInt("${pageInfo.startNavi}") -1);
+			}
+			const move = (p) => {
+				location.href ="/review/list?page="+p;
+			}
+			const next = () => {
+				location.href="/review/list?page=" + (parseInt("${pageInfo.endNavi}") + 1);
+			}
+		</script>
+	</body>
 </html>
