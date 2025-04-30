@@ -49,7 +49,7 @@
 	           <!-- 슬라이드 -->
 	           <div class="moveSlider">
 	               <div class="moveSlider-prev-button">
-					  <button class="slider-btn-prev" onmouseover="hoverPrev(this)" onmouseout="unhoverPrev(this)">
+					  <button class="slider-btn-prev" onmouseover="hoverPrev(this)" onmouseout="unhoverPrev(this)" onclick="moveSlide(-1)">
 					    <img src="../resources/img/festival/pre_off_btn_2.png" alt="이전 버튼">
 					  </button>
 					</div>

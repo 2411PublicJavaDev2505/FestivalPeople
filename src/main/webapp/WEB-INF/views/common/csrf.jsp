@@ -18,6 +18,21 @@
                 xhr.setRequestHeader(header, token);
             });
         });
+        (function() {
+        	  const originalFetch = window.fetch;
+        	  const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        	  const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+        	  window.fetch = function(url, options = {}) {
+        	    options.headers = options.headers || {};
+
+        	    if (typeof options.headers.append !== 'function') {
+        	      options.headers[csrfHeader] = csrfToken;
+        	    }
+
+        	    return originalFetch(url, options);
+        	  };
+        	})();
     </script>
 </body>
 </html>

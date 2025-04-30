@@ -73,7 +73,7 @@
 						<button class="page-btn" onclick="next();">&gt;</button>
 					</c:if>
 				</div>
-				<c:if test="${sessionScope.member.memberYn ne null && sessionScope.member.memberYn eq 'Y'}" >
+				<c:if test="${sessionScope.member.memberId ne null && sessionScope.member.memberYn eq 'Y'}" >
 				    <div class="reviewinsert-btn">
 				    	<button onClick="reviewinsert();" id="reviewinsert-btn">글쓰기</button>
 				    </div>

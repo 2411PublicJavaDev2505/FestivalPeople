@@ -22,21 +22,21 @@ html, body {
     align-items: center;
 }
 
-.main-nav {
+.main-nav-header {
 	align-items: center;
 }
 
-.logo-container {
+.logo-container-header {
     flex-shrink: 0;
     width: 200px;
     text-align: center;
 }
 
-.logo-container img {
+.logo-container-header img {
     width: 250px;
 }
 
-.group1 {
+.group1-header {
     display: flex;
     left: 400px;
     list-style-type: none;
@@ -44,12 +44,12 @@ html, body {
     top: 10px;
 }
 
-.group1 li {
+.group1-header li {
     position: relative;
     margin-top: calc(var(--offset) * 30px); 
 }
 
-.group2 {
+.group2-header {
     display: flex;
     left: 1050px;
     list-style-type: none;
@@ -57,13 +57,13 @@ html, body {
     top: -110px;
 }
 
-.group2 li {
+.group2-header li {
     position: relative;
     margin-top: calc(var(--offset) * 30px); 
 }
 
 
-.main-nav ul li a {
+.main-nav-header ul li a {
     display: flex;
     padding: 5px 50px;
     font-weight: bold;
@@ -77,16 +77,16 @@ html, body {
 }
 
 
-.main-nav ul li:nth-child(1) a { background-color: #3B7C70;}
-.main-nav ul li:nth-child(2) a { background-color: #902804; } /* 축제 - 갈색 */
-.main-nav ul li:nth-child(3) a { background-color: #D34A24; } /* 코스 추천 - 주황색 */
-.main-nav ul li:nth-child(4) a { background-color: #FFAF00; } /* 같이 갈래? - 노란색 */
-.main-nav ul li:nth-child(5) a { background-color: #3B7C70; } /* 여행 후기 - 짙은 초록색 */
-.main-nav ul li:nth-child(6) a { background-color: #902804; } /* 공지사항 - 빨간색 */
-.main-nav ul li:nth-child(7) a { background-color: #D34A24; } /* 로그인 - 파란색 */
-.main-nav ul li:nth-child(8) a { background-color: #FFAF00; } /* 회원가입 - 금색 */
+.main-nav-header ul li:nth-child(1) a { background-color: #3B7C70;}
+.main-nav-header ul li:nth-child(2) a { background-color: #902804; } /* 축제 - 갈색 */
+.main-nav-header ul li:nth-child(3) a { background-color: #D34A24; } /* 코스 추천 - 주황색 */
+.main-nav-header ul li:nth-child(4) a { background-color: #FFAF00; } /* 같이 갈래? - 노란색 */
+.main-nav-header ul li:nth-child(5) a { background-color: #3B7C70; } /* 여행 후기 - 짙은 초록색 */
+.main-nav-header ul li:nth-child(6) a { background-color: #902804; } /* 공지사항 - 빨간색 */
+.main-nav-header ul li:nth-child(7) a { background-color: #D34A24; } /* 로그인 - 파란색 */
+.main-nav-header ul li:nth-child(8) a { background-color: #FFAF00; } /* 회원가입 - 금색 */
 
-.main-nav ul li a:hover {
+.main-nav-header ul li a:hover {
     box-shadow: rgb(59,124,112) 0px 0px 0px 3px, 
     			rgb(144,40,4) 0px 0px 0px 6px, 
     			rgb(211,74,36) 0px 0px 0px 9px, 
