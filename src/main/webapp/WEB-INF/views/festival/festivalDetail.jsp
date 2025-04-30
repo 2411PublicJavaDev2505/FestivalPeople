@@ -86,10 +86,12 @@
 									     target="_blank">
 									     📍 길찾기
 									  </a>
-									  <a class= "course_recommend" 
-									  	href="/course/detail?festivalNo=${festival.festivalNo}">
-										추천코스
-										</a>
+									  <c:if test="${member.memberId ne null }">
+										  <a class= "course_recommend" 
+										  	href="/course/detail?festivalNo=${festival.festivalNo}">
+											추천코스
+											</a>
+			            			  </c:if>
 								  </div>
 								</div>
 							</li>
