@@ -9,6 +9,7 @@
     <title>Festival People</title>
     <link rel="stylesheet" href="../resources/css/include/header.css">
     <link rel="stylesheet" href="../resources/css/include/terms.css">
+    <link rel="stylesheet" href="../resources/css/include/footer.css">
 </head>
 <body>
 	<!-- 바탕화면 -->
@@ -214,5 +215,6 @@
 				<p>본 약관은 2018년 9월 4일부터 적용됩니다.</p>
 		    </div>
 		</div>
+	<jsp:include page="/WEB-INF/views/include/footer.jsp" />	
 </body>
 </html>
