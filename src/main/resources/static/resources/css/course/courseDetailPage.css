@@ -285,10 +285,11 @@
 }
 
 .course-recommend-img {
-	width: 100%;
+	width: 60%;
 	display: flex;
 	justify-content: center;
-	margin: 20px 0 10px 0;
+	margin: 20px 0 10px 200px;
+	height : 800px;
 }
 
 .course-recommend-map {
