@@ -130,7 +130,7 @@
 									<li class="memlist-area">
 										<div class="memlist-area">
 											<c:if test="${mbList.profileFilePath eq null }">										
-												<img src="../resources/img/member/profile.png" width="40" />
+												<img src="../../resources/img/member/profile.png" width="40" />
 											</c:if>	
 											<c:if test="${mbList.profileFilePath ne null }">										
 												<img src="${mbList.profileFilePath }" width="40" />
