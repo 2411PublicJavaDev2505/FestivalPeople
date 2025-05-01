@@ -267,13 +267,14 @@ public class MemberController {
 			memberPw += alphabet.charAt(rand.nextInt(alphabet.length()));
 		}
 		MemberUpdatePwRequest member = new MemberUpdatePwRequest();
-		member.setMemberId(memberId);
-		member.setMemberPw(memberPw);
-		int result = mService.updateMemberPw(member);
 		
 		String text = "비밀번호는 "+ memberPw+"입니다 \n 로그인 후 비밀번호를 변경해주세요.";
 	    mailService.sendMail(findMember.getEmail(), "Festival People 비밀번호 찾기", text);
 	    
+	    memberPw = passwordEncoder.encode(memberPw);
+	    member.setMemberId(memberId);
+	    member.setMemberPw(memberPw);
+	    int result = mService.updateMemberPw(member);
 	    json.put("check", 1);
 		return json.toString();
 	}
