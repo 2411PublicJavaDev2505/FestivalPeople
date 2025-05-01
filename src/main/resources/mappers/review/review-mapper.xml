@@ -42,18 +42,18 @@
  		<select id="selectCommentList" resultType="ReviewComment">
  			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
  		</select>
-			<!-- 리뷰게시판리스트 -->
-			<select id="selectReviewList" resultMap="reviewResultMap">
-				SELECT A.REVIEW_NO,
-					A.REVIEW_TITLE,
-					A.REVIEW_WRITE_TIME,
-					A.REVIEW_COUNT,
-					B.NICKNAME
-					FROM REVIEW A 
-					LEFT OUTER JOIN MEMBER B
-					ON A.MEMBER_NO = B.MEMBER_NO 
-					WHERE REVIEW_YN='N' ORDER BY 1 DESC
-			</select>
+		<!-- 리뷰게시판리스트 -->
+		<select id="selectReviewList" resultMap="reviewResultMap">
+			SELECT A.REVIEW_NO,
+				A.REVIEW_TITLE,
+				A.REVIEW_WRITE_TIME,
+				A.REVIEW_COUNT,
+				B.NICKNAME
+				FROM REVIEW A 
+				LEFT OUTER JOIN MEMBER B
+				ON A.MEMBER_NO = B.MEMBER_NO 
+				WHERE REVIEW_YN='N' ORDER BY 1 DESC
+		</select>
  		
  		
  		<insert id="insertReview" useGeneratedKeys="true">
@@ -112,16 +112,16 @@
 			<where>	
 				<!-- 제목검색 -->
 				<if test="searchCondition == 'review_title'" >
-					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%'
+					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%' 
 				</if>
 				<!-- 내용검색 -->
 				<if test="searchCondition == 'review_content'">
-					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%'
+					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%' 
 				</if>
 				<!-- 전체검색 -->
 				<if test="searchCondition == 'all'">
-					REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR
-					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%'
+					(REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR
+					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%')  
 				</if>
 				AND REVIEW_YN = 'N'
 			</where>

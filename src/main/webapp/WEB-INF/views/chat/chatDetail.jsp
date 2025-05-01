@@ -180,7 +180,7 @@
 									<div class="profile-area">
 									<c:forEach items="${memberList }" var="mb" varStatus="i"></c:forEach>
 										<c:if test="${mb.profileFilePath eq null }">
-											<img class="chat-profile-thumbnail" src="../resources/img/member/profile.png" width="40" />
+											<img class="chat-profile-thumbnail" src="../../resources/img/member/profile.png" width="40" />
 										</c:if>
 										<c:if test="${mb.profileFilePath ne null }">
 											<img class="chat-profile-thumbnail" src="${mb.profileFilePath }"  alt="${mb.profileFilePath}" width="40" />
@@ -316,7 +316,11 @@
 						        // 다른 사람 채팅 (왼쪽)
 						        html += '<li class="msg-balloon-area">';
 						        html += '<div class="profile-area">';
-						        html += '<img class="chat-profile-thumbnail" src="' + msg.profileFilePath + '" width="40" />';
+						        if(msg.profileFilePath != null){
+							        html += '<img class="chat-profile-thumbnail" src="' + msg.profileFilePath + '" width="40" />';
+						        }else {
+							        html += '<img class="chat-profile-thumbnail" src="../../resources/img/member/profile.png" width="40" />';
+						        }
 						        html += '<div class="chat-mem-nickname">' + msg.nickname + '</div>';
 						        html += '</div>';
 						        html += '<div class="msg-balloon-area-l"><div class="msg-contents">';
