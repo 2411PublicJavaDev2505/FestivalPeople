@@ -68,7 +68,7 @@
   		</insert>
   		
   		<select id="getTotalCount" resultType="int">
-			SELECT COUNT(*) FROM REVIEW
+			SELECT COUNT(*) FROM REVIEW WHERE REVIEW_YN = 'N'
 		</select>
 		
 		<select id="selectReviewImgByNo" resultType="ImgAddRequest">
