@@ -113,11 +113,16 @@ public class CourseController {
 	}
 	
 	//검색한 추천 리스트 출력
-	@PostMapping("/search")
+	@GetMapping("/search")
 	public String showSearchfestival(HttpSession session
 			, Model model
 			,@RequestParam("searchCondition") String searchCondition
-			,@RequestParam("searchKeyword") String searchKeyword) {		
+			,@RequestParam("searchKeyword") String searchKeyword) {
+		System.out.println(searchKeyword);
+		if(searchCondition.trim().equals("") || searchKeyword.trim().equals("")) {
+			return "redirect:/course/list";
+		}
+		
 		// session 멤버 확인
 		Member member = (Member)session.getAttribute("member");
 		String memberName = member.getMemberName();

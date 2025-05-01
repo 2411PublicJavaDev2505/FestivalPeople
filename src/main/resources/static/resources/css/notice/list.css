@@ -11,6 +11,11 @@
     z-index: -1;
 }
 
+main {
+	font-family: 'BMJUA';
+	font-size: 20px;
+}
+
 .notice-board {
     width: 1525px;
     height: 800px; 

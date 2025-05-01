@@ -21,7 +21,7 @@
 			<main>		
 			    <div class="course-slider-container">
 	                <div class="course-search">
-		                <form class="search-form" action="/course/list" method="post">
+		                <form class="search-form" action="/course/search" method="get">
 		                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		                    <select name="searchCondition">
 		                        <option value="all">전체</option>

@@ -12,6 +12,11 @@
     z-index: -1;
 }
 
+main {
+	font-family: 'BMJUA';
+	font-size: 20px;
+}
+
 .reviewinsert-main{
 	width: 1525px;
     height: 750px;
