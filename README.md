@@ -6,6 +6,7 @@
 ## 팀 소개
 
 <img src="./docimg/팀명.png">
+Recheck
 
 ## 팀원 소개
 
