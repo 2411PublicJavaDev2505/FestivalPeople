@@ -11,6 +11,11 @@
     z-index: -1;
 }
 
+body {
+	font-family: 'BMJUA';
+	font-size: 20px;
+}
+
 .review-all {
     width: 1525px;
     height: 850px; 

@@ -16,6 +16,11 @@
     z-index: -1;
 }
 
+main {
+	font-family: 'BMJUA';
+	font-size: 20px;
+}
+
 .reviewdetail-main {
 	margin: 0 auto;
 	margin-top:100px;

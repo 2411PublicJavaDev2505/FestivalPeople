@@ -21,7 +21,7 @@
 			<main>		
 			    <div class="course-slider-container">
 	                <div class="course-search">
-		                <form class="search-form" action="/course/search" method="post">
+		                <form class="search-form" action="/course/search" method="get">
 		                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					    	<div class="message-box">${memberName}${message }</div>
 		                    <select name="searchCondition">
