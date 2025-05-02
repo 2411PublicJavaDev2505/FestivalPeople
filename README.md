@@ -1,6 +1,6 @@
 
 <img src="./docimg/main_logo.png">
-
+![main.jsp](https://github.com/user-attachments/assets/4bd7fb25-805f-404e-9522-f7532a6ba7db)
 # Festival People(축제, 코스 추천 사이트)
 
 ## 팀 소개
