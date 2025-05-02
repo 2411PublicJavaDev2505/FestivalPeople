@@ -168,7 +168,7 @@
 							<!-- 날짜 한번만 출력(중복출력불가) -->
 							<c:set var="preDate" value=""/>
 							<c:set var="currentDate" value="${msgList.chatMsgTime.time }"/>
-							<fmt:formatDate  var="formattedDate" value="${msgList.chatMsgTime}" pattern="yyyy.MM.dd(E)"/>
+							<fmt:formatDate  var="formattedDate" value="${msgList.chatMsgTime}" pattern="yyyy. MM. dd. (E)"/>
 							<c:if test="${formattedDate ne prevDate}">
 								<li class="date_check"><span>${formattedDate}</span></li>
 								<c:set var="prevDate" value="${formattedDate}" />
