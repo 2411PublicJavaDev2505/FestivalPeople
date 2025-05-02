@@ -48,7 +48,6 @@ main {
 .report-Infomation {
 	border : 0.5px solid white;
 	background-color : #678E79; 
-
 }
 
 .report-detail-content {
@@ -59,6 +58,8 @@ main {
 	margin: 0 auto;
 	border-radius: 20px;
 	margin-top : 80px;
+	overflow-y: auto;
+	overflow-x: hidden; 
 }
 
 

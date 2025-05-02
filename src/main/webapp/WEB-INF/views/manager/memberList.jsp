@@ -9,7 +9,6 @@
 		<link rel="stylesheet" href="../resources/css/include/header.css">
 		<link rel="stylesheet" href="../resources/css/include/footer.css">
 		<link rel="stylesheet" href="../resources/css/manager/managerList.css">
-		<link rel="stylesheet" href="../resources/css/include/footer.css">	
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
