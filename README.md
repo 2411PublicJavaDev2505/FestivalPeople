@@ -108,17 +108,17 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 |기능명|상세|
 |--|--|
-|지도 기능|사용자는 지도에서 마커를 확인할 수 있습니다. 사용자는 지도에 적절한 조작을 가해 지도의 뷰를 변경할 수 있습니다. 지도는 권역별(주문진권, 시내권, 경포권, 대관령권, 정동진옥계권) 으로 나뉘어서 보여집니다. 그리고 마커도 카테고리에 맞는 이미지로 보입니다.|
-|여행지 개요 조회|사용자는 지도에서 마커를 클릭하면 여행지 개요(간단한 정보, 별점) 을 확인할 수 있습니다. 여기에서 간단한 정보는 [여행지 이름, 여행지 소개] 등으로 한정합니다.|
-|마커 추가 요청|사용자는 마커 생성 요청을 할 수 있습니다. 마커 생성을 요청할 때 여행지 세부 정보에 들어갈 만한 내용들 입력 받도록 합니다. 관리자는 생성 요청을 받은 데이터를 확인해 이 데이터를 추가할지 아니면 거절할 지 선택할 수 있습니다. 블랙리스트 같은 경우 마커 추가 요청을 할 수 없습니다.|
-|여행지 필터 기능|여행지에 대한 필터 기능을 제공합니다. 지도 페이지에서 카테고리(산·트래킹, 바다·해안, 호수·공원, 전시, 역사·유적, 레저·체험) 필터를 선택하면 선택한 필터를 제외한 나머지 마커들은 지도에서 보이지 않게 합니다.|
+|축제 추천|로그인한 회원정보의 주소지를 기준으로 전국적으로 날씨가 좋은 지역만 추려 저장된 주소지와 가장 가까운 지역의 축제들을 추천합니다.|
+|축제 정보 출력|추천되는 축제들의 카드에 마우스를 올릴 경우 해당 축제의 간략한 정보가 노출되며 선택이 가능합니다.|
+|슬라이드|축제의 종료일자가 넉넉한 순으로 순차적으로 축제 추천리스트를 넘기며 확인이 가능합니다.|
+|축제 검색|추천되는 축제리스트 외에도 지역, 축제명을 키워드로 검색하여 해당 정보가 담긴 축제들을 추가로 검색하여 리스트 확인이 가능합니다.|
 
 ### 코스 추천 디테일 페이지
 
 |기능명|상세|
 |--|--|
-|여행지 목록 조회|사용자가 여행지를 목록으로 조회할 수 있는 기능으로, 현재 등록되어 있는 강릉시의 전체 관광지를 썸네일로 살펴 볼 수 있습니다.|
-|여행지 검색 기능|리스트의 오른쪽 상단에 있는 검색창을 통해 사용자는 여행지 이름을 입력하는 방식으로 원하는 여행지를 찾을 수 있습니다.|
+|코스 선택|축제 카드를 클릭하여 상세페이지로 이동시 지도에 축제 주소지 마커와 축제의 포스터가 기본으로 생성 되어있으며, 상단에 식당, 숙박업소, 카페, 주변관광지, 주차장, 문화시설 등 카테고리를 선택할 수 있도록 되어있습니다.|
+|카테고리 선택|6개의 카테고리 중 원하는 카테고리를 선택시 축제 주소지 기준 주변 가장 가까운 장소가 선택되며 지도에 마커가 표시되며 하단에 해당 장소의 이름과 iframe을 통해 정보를 확인하며 디테일한 사항은 url을 통해 자동 해당 장소의 페이지로 이동이 가능합니다.|
 |여행지 필터 기능|검색창의 우측에는 필터 아이콘이 있고 클릭 시 강릉시의 세부지도와 카테고리를 선택할 수 있는 팝업창이 뜹니다. 사용자는 권역별(주문진권, 시내권, 경포권, 대관령권, 정동진 옥계권) 또는 카테고리(산·트래킹, 바다·해안, 호수·공원, 전시, 역사·유적, 레저·체험)를 선택(복수 선택 가능)하여 원하는 정보를 찾을 수 있습니다.|
 |여행지 즐겨찾기 기능|썸네일 오른쪽 상단에 있는 별표 이모티콘을 통해 즐겨찾기로 설정하거나 해제할 수 있습니다. 여행지 세부 정보 조회 페이지에서도 즐겨찾기를 설정하거나 해제할 수 있습니다.|
 
@@ -298,15 +298,15 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ## 프로젝트 산출 문서
 
-- [기획보고서](https://drive.google.com/file/d/1xKrU_t2bgH5kuLAPBtYMu1aJZBpiE3gd/view?usp=drive_link)
-- [요구사항기술서](https://docs.google.com/document/d/1LqVcKy8FHG2ugpnxaTy_QwyCWoX31h1mcSsShtPUOB4/edit?usp=drive_link)
-- [유스케이스](https://drive.google.com/file/d/1WB3xDanCUE0NQFH3LHTC2ihIcdZfGzNw/view?usp=drive_link)
-- [플로우차트](https://drive.google.com/file/d/1hYaTB7DO7Z1tuPH41Wwg9M8V-NbyJLdf/view?usp=drive_link)
-- [와이어프레임](https://drive.google.com/file/d/1P0DsMKzsjJVSnkOympN18StspgC6Ms2x/view?usp=drive_link)
-- [DB설계](https://drive.google.com/file/d/1UZWH7P_JEf8C3pm4v6jnvyxpJ8qOUPNi/view?usp=drive_link)
-- [테이블정의서](https://docs.google.com/spreadsheets/d/1elBWKfCcjNKvqUCYvIl5JVw6l8x-WuQF/edit?usp=drive_link&ouid=116644278771318603851&rtpof=true&sd=true)
-- [클래스다이어그램](https://drive.google.com/file/d/1bQzmqw-LqOEKO0bWhPJpuFwQkBkj5k0R/view?usp=drive_link)
-- [시퀀스다이어그램](https://drive.google.com/file/d/1zjxBG0hJ0Key97xxHZz29U9rmtLG6t6n/view?usp=drive_link)
-- [최종보고서](https://drive.google.com/file/d/1yWmMtOqoFn7DF0qPl9h6ayW_AUK1gQFf/view?usp=drive_link)
-- [프로젝트 소스 DB](https://drive.google.com/file/d/1QAztOddYWz0mndtvfkSmkG8T9M61E56T/view?usp=drive_link)
-- [시연영상](https://drive.google.com/file/d/1JID-QHkuA2Ul_8XNnFRgQY_ERgKv5f03/view?usp=drive_link)
+- [기획보고서](https://drive.google.com/file/d/1ltvFKnuD1gAR6US39YeLW7jEI-hMBCnL/view?usp=drive_link)
+- [요구사항정의서](https://drive.google.com/file/d/1vFH9YCcl468mdgflVMh_qCXK8N68QdZp/view?usp=drive_link)
+- [요구사항리스트](https://drive.google.com/file/d/1zDGUGrokr3Ntgolve290yi5lr2ccQJq3/view?usp=drive_link)
+- [유스케이스](https://drive.google.com/file/d/1hiMstXuWGUq9g14KPNzWbRBlne-c9O6q/view?usp=drive_link)
+- [와이어프레임](https://drive.google.com/file/d/18z6TiflEoz91TQPa4FWGR5vzI49Z9Ebz/view?usp=drive_link)
+- [플로우차트](https://drive.google.com/file/d/1quhEmZmJgwPu98i8Gt9S0eODS2_QfCtl/view?usp=drive_link)
+- [테이블기술서](https://drive.google.com/file/d/1Nnu-Li1BpEexkyX_a8wbCslvIOKFuJyq/view?usp=drive_link)
+- [클래스다이어그램](https://drive.google.com/file/d/15p-RLd3rk5NjtUMeXWzwkmFfGB7Q47Om/view?usp=drive_link)
+- [시퀀스다이어그램](https://drive.google.com/file/d/1j7qOpOli1FfBvnvB41z6eTDLKdOwwHZb/view?usp=drive_link)
+- [최종보고서](https://drive.google.com/file/d/1jobr3X8Ah79irlrzBp222f8n_KkpdP0S/view?usp=drive_link)
+- [프로젝트 소스 DB](https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive_link)
+- [시연영상](https://drive.google.com/file/d/1OGNE0T1OtswRPe7KI7tTiSmNbNgXAwn8/view?usp=drive_link)
