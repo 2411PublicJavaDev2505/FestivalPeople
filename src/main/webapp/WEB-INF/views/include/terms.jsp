@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Festival People</title>
     <link rel="stylesheet" href="../resources/css/include/header.css">
-    <link rel="stylesheet" href="../resources/css/include/terms.css">
     <link rel="stylesheet" href="../resources/css/include/footer.css">
+    <link rel="stylesheet" href="../resources/css/include/terms.css">
 </head>
 <body>
 	<!-- 바탕화면 -->

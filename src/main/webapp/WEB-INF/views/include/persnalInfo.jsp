@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Festival People</title>
     <link rel="stylesheet" href="../resources/css/include/header.css">
+    <link rel="stylesheet" href="../resources/css/include/footer.css">
     <link rel="stylesheet" href="../resources/css/include/terms.css">
     <link rel="stylesheet" href="../resources/css/include/footer.css">
 </head>
@@ -22,7 +23,7 @@
 	    <div class="terms-title">
 	        <h2>개인정보 처리방침</h2>
 	    </div>
-	    <div class="terms-board">
+	    s<div class="terms-board">
 	    	<div class="agree">
                 <p>
                     (주)○○○ 개인정보처리방침<br/>
@@ -46,5 +47,6 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+
 </body>
 </html>
