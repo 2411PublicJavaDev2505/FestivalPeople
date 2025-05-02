@@ -376,7 +376,6 @@
 	
 						document.querySelector("#chat-msg-area").innerHTML = html;
 						if(document.querySelector("#msgSearch").value.trim() != ''){
-							console.log("뭐야")
 							// 채팅리스트 다시 출력후 검색어 있으면 하이라이트
 							var keyword = $('#msgSearch').val().trim();
 							
@@ -445,6 +444,7 @@
 					loadChat();
 					document.querySelector('#msgContent').value = '';
 					document.querySelector("#filePreviewArea").style.display = "none";
+					fileInput.value = null;
 				} else{
 					alert("메시지 전송에 실패했습니다.");
 				}
