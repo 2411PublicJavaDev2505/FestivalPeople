@@ -1,4 +1,4 @@
-![main.jsp](https://github.com/user-attachments/assets/4bd7fb25-805f-404e-9522-f7532a6ba7db)
+
 <img src="./docimg/main_logo.png">
 
 # Festival People(축제, 코스 추천 사이트)
@@ -197,7 +197,7 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 
 ### 1. 메인
 
-![](./docimg/화면_메인.png)
+![main.jsp](https://github.com/user-attachments/assets/4bd7fb25-805f-404e-9522-f7532a6ba7db)
 
 ### 2. 소개 페이지
 
