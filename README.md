@@ -196,98 +196,82 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 
 ### 2. 소개 페이지
 
-![](./docimg/화면_마커추가요청.png)
+![Image](https://github.com/user-attachments/assets/988e28f4-fac5-4eb0-96d2-846e1127171b)
 
 ### 3. 로그인
 
-![](./docimg/화면_로그인.png)
+
 
 ### 4. 회원 가입
 
-![](./docimg/화면_회원가입.png)
-![](./docimg/화면_이메일인증.PNG)
+
 
 ### 5. 아이디 찾기
 
-![](./docimg/화면_아이디찾기.png)
+
 
 ### 6. 비밀번호 찾기
 
-![](./docimg/화면_비밀번호찾기.png)
-![](./docimg/화면_임시비밀번호이메일.PNG)
+
 
 ### 7. 축제 리스트
 
-![](./docimg/화면_여행지리스트.png)
-![](./docimg/화면_여행지필터.png)
+![Image](https://github.com/user-attachments/assets/7d263dd8-3158-4b15-b3f1-d8e26f98de0b)
+![Image](https://github.com/user-attachments/assets/5a9368fa-c1bf-40c6-80b6-c182aacbceb1)
+
 
 ### 8. 축제 디테일 
 
-![](./docimg/화면_여행지상세정보-정보.png)
+![Image](https://github.com/user-attachments/assets/bdf77206-e9bf-4a78-ab24-5da20d091441)
+![Image](https://github.com/user-attachments/assets/6e527bcc-63e2-4a20-b975-736ae8bce6bb)
 
 ### 9. 코스 리스트
 
-![](./docimg/화면_여행지상세정보-리뷰.png)
+![Image](https://github.com/user-attachments/assets/31c74b4b-122a-484b-8af1-f6918af7b783)
 
 ### 10. 코스 디테일
 
-![](./docimg/화면_리뷰팝업창.png)
+![Image](https://github.com/user-attachments/assets/baaec055-f22c-416c-aef0-3c8f7e466927)
+![Image](https://github.com/user-attachments/assets/229796df-1b85-4f3f-80f6-d4a74ea13d05)
 
 ### 11. 같이갈래?
 
-![](./docimg/화면_여행지리뷰신고.png)
+![Image](https://github.com/user-attachments/assets/9b6c2bce-9dd5-4139-9cd9-ad2a9fb3a5a4)
 
 ### 12. 같이갈래 디테일
 
-![](./docimg/즐겨찾기%20리스트%20최신순.png)
+![Image](https://github.com/user-attachments/assets/23c7222e-f6de-4cf5-b253-a6e518860aba)
 
 ### 13. 여행 후기
 
-![](./docimg/나의%20리뷰.png)
-
+![Image](https://github.com/user-attachments/assets/766b2984-556f-43b3-8909-bc9bdd8d2d8b)
 ### 14. 여행 후기 디테일
 
-![](./docimg/나의%20여행일기%20리스트%20데아터%20있을때.png)
+![Image](https://github.com/user-attachments/assets/c2f2d122-62a4-411e-b6a0-de2dd77d6ab7)
 
 ### 15. 공지사항
 
-![](./docimg/나의%20여행일기%20상세조회.png)
+![Image](https://github.com/user-attachments/assets/3202a62d-57d4-4920-a77e-49a7221c6a3e)
 
 ### 16. 공지사항 디테일
 
-![](./docimg/나의%20여행일기%20등록.png)
-![](./docimg/나의%20여행일기%20수정.png)
-### 17. 공지사항 리스트 조회
-![](./docimg/화면_사용자공지사항리스트.png)
+![Image](https://github.com/user-attachments/assets/bc14e810-e865-4885-b9b6-227628d6cc2d)
 
+![Image](https://github.com/user-attachments/assets/bbc4d442-9b9d-4e3f-99ab-d56ec117fa86)
 
 ### 18. 마이페이지
+![Image](https://github.com/user-attachments/assets/600b144b-bb1d-44b3-9c11-5c83b3c1a423)
+![Image](https://github.com/user-attachments/assets/d43cb760-8754-4da7-bc16-dff341d0f325)
 
 ### 19. 관리자 페이지
+![Image](https://github.com/user-attachments/assets/c78712f3-7669-4bd6-8929-c430085f1713)
+![Image](https://github.com/user-attachments/assets/8d0a60e9-9c21-4404-bade-7cbc95a06ea2)
 
-
-### 20. QnA 작성
-![](./docimg/화면_사용자문의작성.png)
-
-
-![](./docimg/화면_관리자로그인.png)
-![](./docimg/화면_관리자블랙리스트.png)
-![](./docimg/화면_관리자회원상태변경.png)
-![](./docimg/화면_관리자신고리스트.png)
-![](./docimg/화면_관리자마커승인요청리스트.png)
-![](./docimg/화면_관리자마커승인요청상세.png)
-![](./docimg/화면_관리자공지사항리스트.png)
-![](./docimg/화면_관리자공지사항작성.png)
-![](./docimg/화면_관리자QnA답변리스트.png)
-![](./docimg/화면_관리자QnA답변등록페이지.png)
-![](./docimg/화면_관리자여행지리스트.png)
-![](./docimg/화면_관리자여행상세.png)
 
 ## 프로젝트 아키텍처
 ### 사용자 흐름도
-![](./docimg/강릉여지도사용자흐름도.png)
+
 ### 서버 흐름도
-![](./docimg/강릉여지도서버흐름도.png)
 
 화살표 방향은 의존 관계를 의미합니다. 컨트롤러는 서비스에 의존하지만 서비스는 컨트롤러에 의존하지 않습니다. 서비스는 Mapper 에 의존하지만 Mapper 는 서비스에 의존하지 않습니다. 컨트롤러, 서비스, Mapper 는 모두 ExceptionHandler 에 의존하며 ExceptionHandler 는 컨트롤러, 서비스, Mapper 에서 발생하는 Exception 들을 처리합니다.
 
