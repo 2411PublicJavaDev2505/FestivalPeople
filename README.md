@@ -5,57 +5,44 @@
 
 ## 팀 소개
 
-<img src="./docimg/팀명.png">
-Rechec
+![Image](https://github.com/user-attachments/assets/cdd0ba1e-1bc6-41ee-953b-326f17f1a7d9)
 
 ## 팀원 소개
 
-<img src="./docimg/팀원소개.png">
+[<img src="./docimg/팀명.png">](https://github.com/2411PublicJavaDev2505/FestivalPeople/issues/10#issue-3038425036)
 
 ## 기획의도
 
-<img src="./docimg/기획의도.png">
+![Image](https://github.com/user-attachments/assets/34ddb25f-e0fa-4c22-804b-aa90e56a0fde)
 
 ## 차별성
-
-<img src="./docimg/차별성.png">
+![Image](https://github.com/user-attachments/assets/dd0ed4ff-217e-4b3b-948d-2287fc67d48d)
+![Image](https://github.com/user-attachments/assets/bbcd78ec-5169-44d3-95ab-52efbd92694f)
 
 ## 개발일정
 
-<img src="./docimg/개발일정.png">
+![Image](https://github.com/user-attachments/assets/fb1fe340-5ed2-4aee-bcfd-864b385fe30e)
 
 ## 프로젝트 개발환경
 
 - DB는 오라클 11g XE 버전을 이용하였습니다.
-- 프론트엔드 & 백엔드 개발은 Intellij IDEA Ultimate 버전을 이용하여 개발하였습니다.
+- 프론트엔드 & 백엔드 개발은 주로 Spring Boot 와 Visual Studio Code를 이용하여 개발하였습니다.
 
 ## 프로젝트 실행 방법
 
-1. 오라클 11g를 설치한 후에 application.yml 에 있는
+1. 오라클 11g를 설치한 후에 application.properties 에
 
-```
+# Oracle Connection Setting
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
 spring.datasource.username
-```
-```
 spring.datasource.password
-```
 
-를 참고해서 계정을 만듭니다. 
-이때
-```
-spring.datasource.url
-```
-을 확인해서 spring.datasource.url 을 변경한 후에 거기에 계정을 만드는 걸로 합니다.
-2. 그 계정에 RESOURCE, CONNECT 권한을 부여합니다. 
-3. [CREATE SQL](./GNTOUR_CREATE.sql) 를 참고해서 테이블을 구성합니다.
-4. [INSERT SQL](./INSERT_TRAVEL_INFO.sql) 를 참고해서 데이터를 구성합니다.
-5. 환경변수를 다음과 같이 설정합니다.
-```
-GANGNEUNG_UPLOAD_FOLDER_PATH: [업로드할 폴더 경로] +"/"
-EMAIL_APP_ID: [GMAIL 계정]
-EMAIL_APP_PW: [GMAIL APP PASSWORD]
-```
-6. 그런다음 Intellij 에서 실행을 합니다.
+를 참고하여 로컬에 db 계정 생성 계정 생성 후 권한 부여 및 테이블 생성 테이블, 시퀀스 생성 및 데이터 삽입 스크립트
+
+[ADD] db 스크립트 추가
+
+SQL문 첨부 
 
 ## 기술 스택
 
@@ -74,7 +61,16 @@ EMAIL_APP_PW: [GMAIL APP PASSWORD]
 ![Canvas](https://img.shields.io/badge/canvas-E72429?style=for-the-badge&logo=canvas&logoColor=white)
 
 
+# 브랜치 전략
+## Git Flow 방식
+- 팀원 각자의 브랜치를 만들어 개발 진행
+- 기능 구현이 완료되면 Main 브랜치에 병합
+  ![git_flow](https://github.com/2405PublicJavaDev/sulgilddara/blob/main/img/github_flow.png?raw=true)
+
+
 ## 주요기능
+
+
 ### 회원가입 
 
 |기능명|상세|
