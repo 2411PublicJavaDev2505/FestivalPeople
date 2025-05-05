@@ -31,16 +31,20 @@
 ## 프로젝트 실행 방법
 
 1. 오라클 11g를 설치한 후에 application.properties 에
-
+```properties
 # Oracle Connection Setting
 spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
 spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
 spring.datasource.username
 spring.datasource.password
+```
 
 를 참고하여 로컬에 db 계정 생성 계정 생성 후 권한 부여 및 테이블 생성 테이블, 시퀀스 생성 및 데이터 삽입 스크립트
 
 [ADD] db 스크립트 추가
+[Uploading SQL 쿼리문.HEXAGON.sql…]()
+
+
 
 SQL문 첨부 
 
