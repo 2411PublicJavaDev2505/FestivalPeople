@@ -9,7 +9,7 @@
 
 ## 팀원 소개
 
-[<img src="./docimg/팀명.png">](https://github.com/2411PublicJavaDev2505/FestivalPeople/issues/10#issue-3038425036)
+![Image](https://github.com/user-attachments/assets/20bb75a3-1d0b-4969-b1ef-eef7a5df7496)
 
 ## 기획의도
 
