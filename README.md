@@ -133,7 +133,7 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 |채팅방 알림|좌측 내가 속한 리스트에서는 현재 입장하지 않은 방의 안읽은 메시지 숫자를 확인할 수 있습니다.|
 
 
-### 여행후기 페이지(박재일)
+### 여행후기 페이지
 
 |기능명|상세|
 |--|--|
