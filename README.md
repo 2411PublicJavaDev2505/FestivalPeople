@@ -174,82 +174,147 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 |개인정보 수정|회원가입시 저장된 주소, 이메일, 프로필 사진 등록 및 수정(gif 가능), 닉네임 등 자유롭게 정보를 수정할 수 있습니다. |
 |나의 채팅방 확인하기|현재 사용자가 참여하고있는 채팅방 리스트가 노출되며 클릭시 해당 채팅방으로 이동하여 자유롭게 채팅에 참여할 수 있습니다.|
 |나의 코스 확인하기|사용자가 저장해놓은 코스의 해당되는 축제 포스터와 함께 축제명, 사용자가 선택한 카테고리별 장소명과 마커가 노출되며 클릭시 해당 코스의 상세 페이지로 이동하며 하단의 삭제하기 버튼을 통해 저장 코스를 삭제 할 수 있습니다.|
-|신고 누적 횟면">
+|신고 누적 횟수 확인|사용자가 생성한 채팅방, 여행후기글, 후기 댓글 등 신고를 당한 게시물이 있을 경우 해당 게시물의 숫자가 나타나며 관리자가 부적절한 신고로 정상 참작될 경우 해당 숫자는 게시글 수 만큼 차감됩니다.|
+|회원탈퇴|비밀번호를 확인한 후, 회원탈퇴를 진행할 수 있습니다.|
+
+### 관리자 페이지
+
+|기능명|상세|
+|--|--|
+|회원 목록 조회|관리자는 관리자 페이지 내에서 모든 회원의 아이디, 이름, 닉네임, 이메일 주소, 신고누적횟수를 확인할 수 있습니다.|
+|회원 검색|관리자는 회원의 아이디, 이름, 닉네임을 검색해서 조회할 수 있습니다.|
+|회원 탈퇴|신고가 누적되거나 부적절한 활동 이력이 있는 회원은 임의로 강제 탈퇴 시킬수 있습니다.|
+|신고 조회|현재 접수된 신고의 리스트를 조회 할 수 있습니다.|
+|신고 상세 조회|신고를 클릭 시 상세 내용이 보이며, 신고사유와 피신고자, 신고내용 정보가 조회됩니다.|
+|신고 삭제|채팅, 후기 게시글, 후기 댓글 등 신고 받은 게시물을 확인하고 삭제할 수 있습니다.|
+|신고 반려|관리자가 문제 없다고 판단한 내용은 반려처리로 현상태 유지시킬 수 있습니다.|
+
+## 화면 구현
+
+
+<details>
+<summary>
+1. 메인화면
+</summary>
+<img src="https://github.com/user-attachments/assets/4bd7fb25-805f-404e-9522-f7532a6ba7db" alt="메인 화면">
 </details>
 
-### 2. 소개 페이지
+<details>
+<summary>
+2. 소개 페이지
+</summary>
+<img src="https://github.com/user-attachments/assets/988e28f4-fac5-4eb0-96d2-846e1127171b" alt="소개 페이지">
+</details>
 
-![Image](https://github.com/user-attachments/assets/988e28f4-fac5-4eb0-96d2-846e1127171b)
+<details>
+<summary>
+3. 로그인
+</summary>
 
-### 3. 로그인
-
-
-
-### 4. 회원 가입
-
-
-
-### 5. 아이디 찾기
-
-
-
-### 6. 비밀번호 찾기
+</details>
 
 
-
-### 7. 축제 리스트
-
-![Image](https://github.com/user-attachments/assets/7d263dd8-3158-4b15-b3f1-d8e26f98de0b)
-![Image](https://github.com/user-attachments/assets/5a9368fa-c1bf-40c6-80b6-c182aacbceb1)
+4. 회원 가입
 
 
-### 8. 축제 디테일 
 
-![Image](https://github.com/user-attachments/assets/bdf77206-e9bf-4a78-ab24-5da20d091441)
-![Image](https://github.com/user-attachments/assets/6e527bcc-63e2-4a20-b975-736ae8bce6bb)
+5. 아이디 찾기
 
-### 9. 코스 리스트
 
-![Image](https://github.com/user-attachments/assets/31c74b4b-122a-484b-8af1-f6918af7b783)
 
-### 10. 코스 디테일
+6. 비밀번호 찾기
 
-![Image](https://github.com/user-attachments/assets/baaec055-f22c-416c-aef0-3c8f7e466927)
-![Image](https://github.com/user-attachments/assets/229796df-1b85-4f3f-80f6-d4a74ea13d05)
 
-### 11. 같이갈래?
 
-![Image](https://github.com/user-attachments/assets/9b6c2bce-9dd5-4139-9cd9-ad2a9fb3a5a4)
+<details>
+<summary>
+7. 축제 리스트
+</summary>
+<img src="https://github.com/user-attachments/assets/7d263dd8-3158-4b15-b3f1-d8e26f98de0b" alt="축제리스트 비회원">
+<img src="https://github.com/user-attachments/assets/5a9368fa-c1bf-40c6-80b6-c182aacbceb1" alt="축제리스트 회원">
+</details>
 
-### 12. 같이갈래 디테일
+<details>
+<summary>
+8. 축제 디테일 
+</summary>
+<img src="https://github.com/user-attachments/assets/bdf77206-e9bf-4a78-ab24-5da20d091441" alt="축제 상세 화면 첫번째">
+<img src="https://github.com/user-attachments/assets/6e527bcc-63e2-4a20-b975-736ae8bce6bb" alt="축제 상세 화면 두번째">
+</details>
 
-![Image](https://github.com/user-attachments/assets/23c7222e-f6de-4cf5-b253-a6e518860aba)
+<details>
+<summary>
+9. 코스 리스트
+</summary>
+<img src="https://github.com/user-attachments/assets/31c74b4b-122a-484b-8af1-f6918af7b783" alt="코스 전체리스트">
+</details>
 
-### 13. 여행 후기
+<details>
+<summary>
+10. 코스 디테일
+</summary>
+<img src="https://github.com/user-attachments/assets/baaec055-f22c-416c-aef0-3c8f7e466927" alt="코스 상세 이미지 첫번째">
+<img src="https://github.com/user-attachments/assets/229796df-1b85-4f3f-80f6-d4a74ea13d05" alt="코스 상세 이미지 두번째">
+</details>
 
-![Image](https://github.com/user-attachments/assets/766b2984-556f-43b3-8909-bc9bdd8d2d8b)
-### 14. 여행 후기 디테일
+<details>
+<summary>
+11. 같이갈래?
+</summary>
+<img src="https://github.com/user-attachments/assets/9b6c2bce-9dd5-4139-9cd9-ad2a9fb3a5a4" alt="같이갈래 메인페이지">
+</details>
 
-![Image](https://github.com/user-attachments/assets/c2f2d122-62a4-411e-b6a0-de2dd77d6ab7)
+<details>
+<summary>
+12. 같이갈래 디테일
+</summary>
+<img src="7https://github.com/user-attachments/assets/23c7222e-f6de-4cf5-b253-a6e518860aba" alt="같이갈래 상세페이지">
+</details>
 
-### 15. 공지사항
+<details>
+<summary>
+13. 여행 후기
+</summary> 
+<img src="https://github.com/user-attachments/assets/766b2984-556f-43b3-8909-bc9bdd8d2d8b" alt="여행 후기 메인페이지">
+</details>
 
-![Image](https://github.com/user-attachments/assets/3202a62d-57d4-4920-a77e-49a7221c6a3e)
+<details>
+<summary>
+14. 여행 후기 디테일
+</summary>
+<img src="https://github.com/user-attachments/assets/c2f2d122-62a4-411e-b6a0-de2dd77d6ab7" alt="여행후기 상세페이지">
+</details>
 
-### 16. 공지사항 디테일
+<details>
+<summary>
+15. 공지사항
+</summary>
+<img src="https://github.com/user-attachments/assets/3202a62d-57d4-4920-a77e-49a7221c6a3e" alt="공지사항 메인페이지">
+</details>
 
-![Image](https://github.com/user-attachments/assets/bc14e810-e865-4885-b9b6-227628d6cc2d)
+<details>
+<summary>
+16. 공지사항 디테일
+</summary>
+<img src="https://github.com/user-attachments/assets/bc14e810-e865-4885-b9b6-227628d6cc2d" alt="공지사항 상세페이지">
+<img src="https://github.com/user-attachments/assets/bbc4d442-9b9d-4e3f-99ab-d56ec117fa86" alt="공지사항 상세페이지 두번째">
+</details>
 
-![Image](https://github.com/user-attachments/assets/bbc4d442-9b9d-4e3f-99ab-d56ec117fa86)
+<details>
+<summary>
+18. 마이페이지
+</summary>
+<img src="https://github.com/user-attachments/assets/600b144b-bb1d-44b3-9c11-5c83b3c1a423" alt="마이페이지 첫번째">
+<img src="https://github.com/user-attachments/assets/d43cb760-8754-4da7-bc16-dff341d0f325" alt="마이페이지 두번째">
+</details>
 
-### 18. 마이페이지
-![Image](https://github.com/user-attachments/assets/600b144b-bb1d-44b3-9c11-5c83b3c1a423)
-![Image](https://github.com/user-attachments/assets/d43cb760-8754-4da7-bc16-dff341d0f325)
-
-### 19. 관리자 페이지
-![Image](https://github.com/user-attachments/assets/c78712f3-7669-4bd6-8929-c430085f1713)
-![Image](https://github.com/user-attachments/assets/8d0a60e9-9c21-4404-bade-7cbc95a06ea2)
-
+<details>
+<summary>
+19. 관리자 페이지
+</summary>
+<img src="https://github.com/user-attachments/assets/c78712f3-7669-4bd6-8929-c430085f1713" alt="관리자 페이지 첫번째">
+<img src="https://github.com/user-attachments/assets/8d0a60e9-9c21-4404-bade-7cbc95a06ea2" alt="관리자 페이지 두번째">
+</details>
 
 ## 프로젝트 아키텍처
 ### 사용자 흐름도
