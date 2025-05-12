@@ -11,7 +11,7 @@
 <summary>
 ## 팀원 소개
 </summary>
-![Image](https://github.com/user-attachments/assets/20bb75a3-1d0b-4969-b1ef-eef7a5df7496)
+<img src="https://github.com/user-attachments/assets/20bb75a3-1d0b-4969-b1ef-eef7a5df7496" alt="팀원소개">
 </details>
 
 ## 기획의도
@@ -22,9 +22,12 @@
 ![Image](https://github.com/user-attachments/assets/dd0ed4ff-217e-4b3b-948d-2287fc67d48d)
 ![Image](https://github.com/user-attachments/assets/bbcd78ec-5169-44d3-95ab-52efbd92694f)
 
+<details>
+<summary>
 ## 개발일정
-
-![Image](https://github.com/user-attachments/assets/fb1fe340-5ed2-4aee-bcfd-864b385fe30e)
+</summary>
+<img src="https://github.com/user-attachments/assets/fb1fe340-5ed2-4aee-bcfd-864b385fe30e" alt="개발일정">
+</details>
 
 ## 프로젝트 개발환경
 
@@ -319,12 +322,25 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 <img src="https://github.com/user-attachments/assets/8d0a60e9-9c21-4404-bade-7cbc95a06ea2" alt="관리자 페이지 두번째">
 </details>
 
-## 프로젝트 아키텍처
-### 사용자 흐름도
+## 프로젝트 아키텍쳐-3계층 구조(Three-Tier Architecture) 
+## MVC패턴(Model-View-Controller)
 
-### 서버 흐름도
+## 해당 구조 선택 이유
+각 계층의 상호 의존성은 줄여 확장성에 대한 자유도에 기여하며 대용량 데이터의 경우 Controller내에서 즉각적인 처리를 통해 DB 용량 과부하를 줄이기 위해 해당 패턴을 선택하였습니다.
 
-화살표 방향은 의존 관계를 의미합니다. 컨트롤러는 서비스에 의존하지만 서비스는 컨트롤러에 의존하지 않습니다. 서비스는 Mapper 에 의존하지만 Mapper 는 서비스에 의존하지 않습니다. 컨트롤러, 서비스, Mapper 는 모두 ExceptionHandler 에 의존하며 ExceptionHandler 는 컨트롤러, 서비스, Mapper 에서 발생하는 Exception 들을 처리합니다.
+## 계층별 특징
+컨트롤러는 서비스에 의존하지만 서비스는 컨트롤러에 의존하지 않습니다. 서비스는 Mapper 에 의존하지만 Mapper 는 서비스에 의존하지 않습니다. 컨트롤러, 서비스, Mapper 는 모두 ExceptionHandler 에 의존하며 ExceptionHandler 는 컨트롤러, 서비스, Mapper 에서 발생하는 Exception 들을 처리합니다.
+
+## 프로젝트와 해당 계층의 장점
+1. 개인별 담당 파트가 상이하기에 각 계층의 독립적 존재로 인해 확장성이 용이합니다.
+2. 실시간 정보(날씨API, 지도API)를 DB에 매번 저장하여 관리하지 않고 Controller단계에서 직접 실시간 데이터 전달을 통해 DB의 부하를 줄일 수 있습니다.
+
+## 프로젝트와 해당 계층의 장점
+1. 실시간 API 호출의 경우 간혹 API 호출 데이터에 오류가 발생할 가능성을 염두해두어야 합니다.
+    - 해결 방안으로는 DB내에 일정기간을 두어 오류가 발생하였을때 서브데이터를 DB에 저장후 출력하여 정상적인 작동이 확인될 경우 DB내용을 삭제하여 데이터 공간을 확보함과 동시에 이용에 문제가 없도록 할 수 있습니다.
+
+2. 복잡성 : 사전에 협의되지 않은 무분별한 확장의 경우 상호간 혼란을 야기할수 있음으로 주의하여야 합니다.
+    - 해결 방안으로는 코드내에 주석 혹은 사전 협의를 통해 혼란을 최소한으로 방지할 수 있습니다.
 
 ## 프로젝트 산출 문서
 
