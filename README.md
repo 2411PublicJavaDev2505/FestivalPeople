@@ -225,22 +225,20 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 
 <details>
 <summary>
-3. 로그인
+3. 로그인(소셜 로그인 Oauth 구현)
 </summary>
-
+<img src="https://github.com/user-attachments/assets/6446804e-e49c-4bdc-b7d4-1876bb52585f" alt="메인 로그인">
+<img src="https://github.com/user-attachments/assets/75625f63-cdef-49e0-bb2a-773a467fc24b" alt="카카오 로그인">
+<img src="https://github.com/user-attachments/assets/d1b75f30-27f3-43d6-b47a-f7b4925df568" alt="구글 로그인">
 </details>
 
 
+<details>
+<summary>
 4. 회원 가입
-
-
-
-5. 아이디 찾기
-
-
-
-6. 비밀번호 찾기
-
+</summary>
+<img src="https://github.com/user-attachments/assets/07a75703-7bf6-429b-8bbe-d64d83f88bed" alt="회원가입 페이지">
+</details>
 
 
 <details>
