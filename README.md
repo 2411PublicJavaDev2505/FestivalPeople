@@ -50,6 +50,13 @@ spring.datasource.password
 [ADD] db 스크립트 추가
 https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive_link
 
+
+## AWS 배포 환경
+- 서버 : AWS t2.micro 인스턴스를 사용하였습니다.
+- DB : AWS 인스턴스내에 Mysql(8.0.42.ver) RDS를 추가 연동하여 구현하였습니다.
+- ip(15.164.94.92) : WAS 인스턴스와 DB 인스턴스(RDS)를 구별하여 단일 인스턴스내에 부하를 줄이고 원활한 제공이 가능하도록 구현하였습니다.
+[ADD] MySql 스크립트 추가
+
 ## 기술 스택
 
 ![HTML](https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
@@ -65,6 +72,10 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 ![Oracle](https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white)
 ![Java](https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white)
 ![Canvas](https://img.shields.io/badge/canvas-E72429?style=for-the-badge&logo=canvas&logoColor=white)
+<img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white"/>
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
+
+
 
 
 # 브랜치 전략
