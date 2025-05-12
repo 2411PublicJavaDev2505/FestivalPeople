@@ -7,9 +7,12 @@
 
 ![Image](https://github.com/user-attachments/assets/cdd0ba1e-1bc6-41ee-953b-326f17f1a7d9)
 
+<details>
+<summary>
 ## 팀원 소개
-
+</summary>
 ![Image](https://github.com/user-attachments/assets/20bb75a3-1d0b-4969-b1ef-eef7a5df7496)
+</details>
 
 ## 기획의도
 
