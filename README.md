@@ -191,9 +191,13 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 
 ## 화면 구현
 
-### 1. 메인
 
+<details>
+<summary>
+### 1. 메인화면
+</summary>
 ![main.jsp](https://github.com/user-attachments/assets/4bd7fb25-805f-404e-9522-f7532a6ba7db)
+</details>
 
 ### 2. 소개 페이지
 
