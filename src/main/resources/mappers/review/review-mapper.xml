@@ -55,28 +55,37 @@
 				WHERE REVIEW_YN='N' ORDER BY 1 DESC
 		</select>
  		
+<!-- 		<insert id="insertReview" useGeneratedKeys="true">-->
+<!--	  		<selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">-->
+<!--	  			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL-->
+<!--	  		</selectKey>-->
+<!--  			INSERT INTO REVIEW VALUES(#{reviewNo},-->
+<!--  			#{reviewTitle},-->
+<!--  			#{reviewContent},-->
+<!--  			 DEFAULT,DEFAULT,DEFAULT,-->
+<!--  				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})-->
+<!--  		</insert>-->
+      <insert id="insertReview" useGeneratedKeys="true" keyProperty="reviewNo">
+         INSERT INTO REVIEW(REVIEW_TITLE, REVIEW_CONTENT
+         ,REVIEW_WRITE_TIME
+         ,REVIEW_COUNT
+         ,REVIEW_YN
+         ,REVIEW_FILE_NAME1
+         ,REVIEW_FILE_RENAME1
+         ,REVIEW_FILE_PATH1
+         ,REVIEW_FILE_NAME2
+         ,REVIEW_FILE_RENAME2
+         ,REVIEW_FILE_PATH2
+         ,REVIEW_FILE_NAME3
+         ,REVIEW_FILE_RENAME3
+         ,REVIEW_FILE_PATH3
+         ,MEMBER_NO) VALUES(
+         #{reviewTitle},
+         #{reviewContent},
+             DEFAULT,DEFAULT,DEFAULT,
+               NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
+        </insert>
 
-  		
-		<insert id="insertReview" useGeneratedKeys="true" keyProperty="reviewNo">
-			INSERT INTO REVIEW(REVIEW_TITLE, REVIEW_CONTENT
-			,REVIEW_WRITE_TIME
-			,REVIEW_COUNT
-			,REVIEW_YN
-			,REVIEW_FILE_NAME1
-			,REVIEW_FILE_RENAME1
-			,REVIEW_FILE_PATH1
-			,REVIEW_FILE_NAME2
-			,REVIEW_FILE_RENAME2
-			,REVIEW_FILE_PATH2
-			,REVIEW_FILE_NAME3
-			,REVIEW_FILE_RENAME3
-			,REVIEW_FILE_PATH3
-			,MEMBER_NO) VALUES(
-			#{reviewTitle},
-			#{reviewContent},
-			 	DEFAULT,DEFAULT,DEFAULT,
-					NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
-  		</insert>
   		
   		<select id="getTotalCount" resultType="int">
 			SELECT COUNT(*) FROM REVIEW WHERE REVIEW_YN = 'N'
@@ -117,28 +126,28 @@
 			UPDATE REVIEW SET REVIEW_COUNT = REVIEW_COUNT+1 WHERE REVIEW_NO=#{reviewNo}
 		</update>
 		
-		<!-- 검색 -->
-		<select id="searchListByKeyword" resultMap="reviewResultMap">
-			SELECT R.*, M.NICKNAME FROM REVIEW R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO 
-			<where>	
-				<!-- 제목검색 -->
-				<if test="searchCondition == 'review_title'" >
-					REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%') 
-				</if>
-				<!-- 내용검색 -->
-				<if test="searchCondition == 'review_content'">
-					REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%') 
-				</if>
-				<!-- 전체검색 -->
-				<if test="searchCondition == 'all'">
-					(REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%') OR
-					REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%'))  
-				</if>
-				AND REVIEW_YN = 'N'
-			</where>
-			ORDER BY REVIEW_NO DESC
-		</select>
-		
+<!--		 검색 -->
+<!--		<select id="searchListByKeyword" resultMap="reviewResultMap">-->
+<!--			SELECT R.*, M.NICKNAME FROM REVIEW R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO -->
+<!--			<where>	-->
+<!--				 제목검색 -->
+<!--				<if test="searchCondition == 'review_title'" >-->
+<!--					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%' -->
+<!--				</if>-->
+<!--				 내용검색 -->
+<!--				<if test="searchCondition == 'review_content'">-->
+<!--					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%' -->
+<!--				</if>-->
+<!--				 전체검색 -->
+<!--				<if test="searchCondition == 'all'">-->
+<!--					(REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR-->
+<!--					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%')  -->
+<!--				</if>-->
+<!--				AND REVIEW_YN = 'N'-->
+<!--			</where>-->
+<!--			ORDER BY REVIEW_NO DESC-->
+<!--		</select>-->
+
 		<select id="getTotalCountBySearch" resultType="_int">
 			SELECT COUNT(*) FROM REVIEW 
 			<where>
@@ -159,6 +168,66 @@
 			</where>
 		</select>
 		
+<!--		<select id="getTotalCountBySearch" resultType="_int">-->
+<!--			SELECT COUNT(*) FROM REVIEW -->
+<!--			<where>-->
+<!--				 제목검색 -->
+<!--				<if test="searchCondition == 'review_title'" >-->
+<!--					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%'-->
+<!--				</if>-->
+<!--				 내용검색 -->
+<!--				<if test="searchCondition == 'review_content'">-->
+<!--					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%'-->
+<!--				</if>-->
+<!--				 전체검색 -->
+<!--				<if test="searchCondition == 'all'">-->
+<!--					REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR-->
+<!--					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%'-->
+<!--				</if>-->
+<!--				AND REVIEW_YN = 'N'-->
+<!--			</where>-->
+<!--		</select>-->
+      <!-- 검색 -->
+      <select id="searchListByKeyword" resultMap="reviewResultMap">
+         SELECT R.*, M.NICKNAME FROM REVIEW R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO 
+         <where>   
+            <!-- 제목검색 -->
+            <if test="searchCondition == 'review_title'" >
+               REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%') 
+            </if>
+            <!-- 내용검색 -->
+            <if test="searchCondition == 'review_content'">
+               REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%') 
+            </if>
+            <!-- 전체검색 -->
+            <if test="searchCondition == 'all'">
+               (REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%') OR
+               REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%'))  
+            </if>
+            AND REVIEW_YN = 'N'
+         </where>
+         ORDER BY REVIEW_NO DESC
+      </select>
+      
+      <select id="getTotalCountBySearch" resultType="_int">
+         SELECT COUNT(*) FROM REVIEW 
+         <where>
+            <!-- 제목검색 -->
+            <if test="searchCondition == 'review_title'" >
+               REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%')
+            </if>
+            <!-- 내용검색 -->
+            <if test="searchCondition == 'review_content'">
+               REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%')
+            </if>
+            <!-- 전체검색 -->
+            <if test="searchCondition == 'all'">
+               REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%') OR
+               REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%')
+            </if>
+            AND REVIEW_YN = 'N'
+         </where>
+      </select>
 		
 		<!-- 게시판수정 제목 이름만 -->
 		<update id="reviewUpdate">

@@ -98,8 +98,6 @@ public class FestivalController {
 	    }
 
 	    // 전체 리스트는 공통으로 출력
-	    System.out.println(pageInfo.get("startRow"));
-	    System.out.println(pageInfo.get("endRow"));
 	    List<Festival> festivals = festivalService.selectFestivalList(pageInfo.get("startRow"), pageInfo.get("endRow"));
 	 // 만약 festivals가 비어있고, currentPage > 1 이라면 페이지를 줄여야 함
 	    if (festivals.isEmpty() && currentPage > 1) {

@@ -101,6 +101,7 @@ public class MemberController {
 	public String loginSuccess(@AuthenticationPrincipal CustomUserDetail customUserDetails
 			,HttpSession session) {
 		Member member = customUserDetails.getMember();
+		System.out.println(member);
 		session.setAttribute("member", member);
 		return "redirect:/";
 	}
@@ -468,6 +469,7 @@ public class MemberController {
 	@GetMapping("/checkid")
 	public String checkMemberId(String memberId) {
 		int check = mService.checkMemberById(memberId);
+		System.out.println(check);
 		JSONObject json = new JSONObject();
 		json.put("check", check);
 		return json.toString();

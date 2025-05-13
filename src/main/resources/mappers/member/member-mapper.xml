@@ -3,33 +3,47 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fepeo.boot.member.model.mapper.MemberMapper">
-	<insert id="insertMember" useGeneratedKeys="true">
-		<selectKey order="BEFORE" resultType="_int" keyProperty="memberNo">
-			SELECT SEQ_MEMBER_NO.NEXTVAL FROM DUAL
-		</selectKey>
-		INSERT INTO MEMBER VALUES(#{memberNo}
-		,#{memberId}, #{memberPw}, #{memberCode}, #{memberName}
-		,#{nickname}, #{email}, #{address}, #{gender}
-		,#{profileFileName}, #{profileFileRename}, #{profileFilePath}, #{profileUrl}, #{socialYn}, DEFAULT, DEFAULT
-		,DEFAULT)
+<!--	<insert id="insertMember" useGeneratedKeys="true">-->
+<!--		<selectKey order="BEFORE" resultType="_int" keyProperty="memberNo">-->
+<!--			SELECT SEQ_MEMBER_NO.NEXTVAL FROM DUAL-->
+<!--		</selectKey>-->
+<!--		INSERT INTO MEMBER VALUES(#{memberNo}-->
+<!--		,#{memberId}, #{memberPw}, #{memberCode}, #{memberName}-->
+<!--		,#{nickname}, #{email}, #{address}, #{gender}-->
+<!--		,#{profileFileName}, #{profileFileRename}, #{profileFilePath}, #{profileUrl}, #{socialYn}, DEFAULT, DEFAULT-->
+<!--		,DEFAULT)-->
+<!--	</insert>-->
+	
+	<insert id="insertMember" useGeneratedKeys="true" keyProperty="memberNo">
+	   INSERT INTO MEMBER (
+	      MEMBER_ID, MEMBER_PW, MEMBER_CODE, MEMBER_NAME,
+	      NICKNAME, email, address, gender,
+	      PROFILE_FILE_NAME, PROFILE_FILE_RENAME, PROFILE_FILE_PATH, PROFILE_URL,
+	      SOCIAL_YN, MEMBER_YN, MANAGER_YN, REPORT_COUNT
+	   )
+	   VALUES (
+	      #{memberId}, #{memberPw}, #{memberCode}, #{memberName},
+	      #{nickname}, #{email}, #{address}, #{gender},
+	      #{profileFileName}, #{profileFileRename}, #{profileFilePath}, #{profileUrl},
+	      #{socialYn}, DEFAULT, DEFAULT, DEFAULT
+	   )
 	</insert>
-	
-	
 	
 	<select id="searchMemberList" resultType="Member">
 		SELECT * FROM MEMBER
 		<where>
 			<if test="searchCondition != null and searchCondition == 'all'">
-				MEMBER_ID LIKE '%'||#{searchKeyword}||'%' OR MEMBER_NAME LIKE '%'||#{searchKeyword}||'%' OR NICKNAME LIKE '%'||#{searchKeyword}||'%'
+				MEMBER_ID LIKE concat('%',#{searchKeyword},'%') OR MEMBER_NAME LIKE concat('%',#{searchKeyword},'%') 
+				OR NICKNAME LIKE concat('%',#{searchKeyword},'%')
 			</if>
 			<if test="searchCondition != null and searchCondition == 'memberId'">
-				MEMBER_ID LIKE '%'||#{searchKeyword}||'%'
+				MEMBER_ID LIKE concat('%',#{searchKeyword},'%')
 			</if>
 			<if test="searchCondition != null and searchCondition == 'name'">
-				MEMBER_NAME LIKE '%'||#{searchKeyword}||'%'
+				MEMBER_NAME LIKE concat('%',#{searchKeyword},'%')
 			</if>
 			<if test="searchCondition != null and searchCondition == 'nickName'">
-				NICKNAME LIKE '%'||#{searchKeyword}||'%'
+				NICKNAME LIKE concat('%',#{searchKeyword},'%')
 			</if>
 			AND MEMBER_YN = 'Y'
 		</where>
@@ -37,31 +51,31 @@
 	</select>
 	
 	
-<select id="getSearchTotalCount" resultType="_int">
-    SELECT COUNT(*) FROM MEMBER
-    <where>
-        <if test="searchCondition != null and searchCondition == 'all'">
-            MEMBER_ID LIKE '%'||#{searchKeyword}||'%' 
-            OR MEMBER_NAME LIKE '%'||#{searchKeyword}||'%' 
-            OR NICKNAME LIKE '%'||#{searchKeyword}||'%'
-        </if>
-        <if test="searchCondition != null and searchCondition == 'memberId'">
-            MEMBER_ID LIKE '%'||#{searchKeyword}||'%'
-        </if>
-        <if test="searchCondition != null and searchCondition == 'name'">
-            MEMBER_NAME LIKE '%'||#{searchKeyword}||'%'
-        </if>
-        <if test="searchCondition != null and searchCondition == 'nickName'">
-            NICKNAME LIKE '%'||#{searchKeyword}||'%'
-        </if>
-        AND MEMBER_YN = 'Y'
-    </where>
-</select>
+	<select id="getSearchTotalCount" resultType="_int">
+	    SELECT COUNT(*) FROM MEMBER
+	    <where>
+	        <if test="searchCondition != null and searchCondition == 'all'">
+	            MEMBER_ID LIKE concat('%',#{searchKeyword},'%')
+	            OR MEMBER_NAME LIKE concat('%',#{searchKeyword},'%')
+	            OR NICKNAME LIKE concat('%',#{searchKeyword},'%')
+	        </if>
+	        <if test="searchCondition != null and searchCondition == 'memberId'">
+	            MEMBER_ID LIKE concat('%',#{searchKeyword},'%')
+	        </if>
+	        <if test="searchCondition != null and searchCondition == 'name'">
+	            MEMBER_NAME LIKE concat('%',#{searchKeyword},'%')
+	        </if>
+	        <if test="searchCondition != null and searchCondition == 'nickName'">
+	            NICKNAME LIKE concat('%',#{searchKeyword},'%')
+	        </if>
+	        AND MEMBER_YN = 'Y'
+	    </where>
+	</select>
 
 	
 	<select id="memberLoginById" resultType="Member">
 		SELECT * FROM MEMBER 
-		WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
+		WHERE MEMBER_ID = #{username} AND MEMBER_YN = 'Y'
 	</select>
 	
 	<select id="memberLogin" resultType="Member">
@@ -136,12 +150,20 @@
 	<select id="checkMemberEmail" resultType="_int">
 		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE EMAIL = #{email} AND SOCIAL_YN = 'N' AND MEMBER_YN = 'Y'
 	</select>
-	<insert id="insertMemberCode" useGeneratedKeys="true">
-		<selectKey order="BEFORE" resultType="_int" keyProperty="memberCodeNo">
-			SELECT SEQ_MEMBER_CODE.NEXTVAL FROM DUAL
-		</selectKey>
-		INSERT INTO MEMBER_CODE VALUES(#{memberCodeNo},#{code})
+	
+<!--	<insert id="insertMemberCode" useGeneratedKeys="true">-->
+<!--		<selectKey order="BEFORE" resultType="_int" keyProperty="memberCodeNo">-->
+<!--			SELECT SEQ_MEMBER_CODE.NEXTVAL FROM DUAL-->
+<!--		</selectKey>-->
+<!--		INSERT INTO MEMBER_CODE VALUES(#{memberCodeNo},#{code})-->
+<!--	</insert>-->
+	
+	<insert id="insertMemberCode" useGeneratedKeys="true" keyProperty="memberCodeNo" parameterType="MemberCodeInsertRequest">
+	    INSERT INTO MEMBER_CODE (code)
+	    VALUES (#{code})
 	</insert>
+	
+	
 	<select id="checkCode" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER_CODE WHERE MEMBER_CODE_NO = #{memberCodeNo} AND CODE = #{code}
 	</select>
