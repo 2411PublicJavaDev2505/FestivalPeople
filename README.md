@@ -84,9 +84,53 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 - 기능 구현이 완료되면 Main 브랜치에 병합
   ![git_flow](https://github.com/2405PublicJavaDev/sulgilddara/blob/main/img/github_flow.png?raw=true)
 
+# 프로젝트 아키텍쳐-3계층 구조(Three-Tier Architecture) 
+## MVC패턴(Model-View-Controller)
 
-## 주요기능
+## 해당 구조 선택 이유
+각 계층의 상호 의존성은 줄여 확장성에 대한 자유도에 기여하며 대용량 데이터의 경우 Controller내에서 즉각적인 처리를 통해 DB 용량 과부하를 줄이기 위해 해당 패턴을 선택하였습니다.
 
+## 계층별 특징
+컨트롤러는 서비스에 의존하지만 서비스는 컨트롤러에 의존하지 않습니다. 서비스는 Mapper 에 의존하지만 Mapper 는 서비스에 의존하지 않습니다. 컨트롤러, 서비스, Mapper 는 모두 ExceptionHandler 에 의존하며 ExceptionHandler 는 컨트롤러, 서비스, Mapper 에서 발생하는 Exception 들을 처리합니다.
+
+## 프로젝트와 해당 계층의 장점
+1. 개인별 담당 파트가 상이하기에 각 계층의 독립적 존재로 인해 확장성이 용이합니다.
+2. 실시간 정보(날씨API, 지도API)를 DB에 매번 저장하여 관리하지 않고 Controller단계에서 직접 실시간 데이터 전달을 통해 DB의 부하를 줄일 수 있습니다.
+
+## 프로젝트와 해당 계층의 단점
+1. 실시간 API 호출의 경우 간혹 API 호출 데이터에 오류가 발생할 가능성을 염두해두어야 합니다.
+    - 해결 방안으로는 DB내에 일정기간을 두어 오류가 발생하였을때 서브데이터를 DB에 저장후 출력하여 정상적인 작동이 확인될 경우 DB내용을 삭제하여 데이터 공간을 확보함과 동시에 이용에 문제가 없도록 할 수 있습니다.
+
+2. 복잡성 : 사전에 협의되지 않은 무분별한 확장의 경우 상호간 혼란을 야기할수 있음으로 주의하여야 합니다.
+    - 해결 방안으로는 코드내에 주석 혹은 사전 협의를 통해 혼란을 최소한으로 방지할 수 있습니다.
+
+# 소셜로그인(OAuth)
+본 프로젝트에서는 사용자의 편리한 인증을 위해 소셜 로그인 기능(OAuth 2.0)을 적용했습니다.
+OAuth 2.0은 다른 사이트의 서비스(Google, Naver, Kakao)를 통해 사용자가 간편하게 인증할 수 있도록 도와주는 표준 프로토콜입니다.
+OAuth 2.0를 통해 비밀번호 직접 입력 없이 안전하게 인증할 수 있으며, 별도의 회원가입 절차를 최소화하여 사용자 경험(UX)을 향상시킵니다.
+## OAuth 2.0 인증 흐름 (Authorization Code Grant)
+1. 사용자가 소셜 로그인 버튼 클릭
+2. 해당 소셜 서비스의 로그인 페이지로 리다이렉트
+3. 사용자 인증 후, Authorization Code 발급
+4. 서버에서 Authorization Code를 사용해 Access Token 요청
+5. Access Token으로 사용자 정보 조회
+6. 조회한 정보를 통해 자체 서비스의 로그인 처리 및 사용자 등록
+
+# Spring Security
+본 프로젝트에서는 Spring Security 을 사용하여 전반적인 인증 및 권한 관리를 구현하였습니다.
+## 적용 목적
+ - 사용자 인증 및 인가(Authorization)
+ - 사용자 비밀번호 암호화
+ - CSRF(Cross-Site Request Forgery) 방지
+## 적용 내용
+ - 일반 로그인 인증 처리
+ - 사용자 비밀번호 암호화
+ - 권한(Role) 기반 페이지 접근 제어
+ - POST 요청 시 CSRF 자동 적용 (헤더 세팅)
+### SecurityFilterChain 설정코드
+![securityFilterChain](https://github.com/user-attachments/assets/328754f8-5b86-43c0-9559-7519bc6409ca)
+
+# 주요기능
 
 ### 회원가입 
 
@@ -339,25 +383,6 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 <img src="https://github.com/user-attachments/assets/8d0a60e9-9c21-4404-bade-7cbc95a06ea2" alt="관리자 페이지 두번째">
 </details>
 
-## 프로젝트 아키텍쳐-3계층 구조(Three-Tier Architecture) 
-## MVC패턴(Model-View-Controller)
-
-## 해당 구조 선택 이유
-각 계층의 상호 의존성은 줄여 확장성에 대한 자유도에 기여하며 대용량 데이터의 경우 Controller내에서 즉각적인 처리를 통해 DB 용량 과부하를 줄이기 위해 해당 패턴을 선택하였습니다.
-
-## 계층별 특징
-컨트롤러는 서비스에 의존하지만 서비스는 컨트롤러에 의존하지 않습니다. 서비스는 Mapper 에 의존하지만 Mapper 는 서비스에 의존하지 않습니다. 컨트롤러, 서비스, Mapper 는 모두 ExceptionHandler 에 의존하며 ExceptionHandler 는 컨트롤러, 서비스, Mapper 에서 발생하는 Exception 들을 처리합니다.
-
-## 프로젝트와 해당 계층의 장점
-1. 개인별 담당 파트가 상이하기에 각 계층의 독립적 존재로 인해 확장성이 용이합니다.
-2. 실시간 정보(날씨API, 지도API)를 DB에 매번 저장하여 관리하지 않고 Controller단계에서 직접 실시간 데이터 전달을 통해 DB의 부하를 줄일 수 있습니다.
-
-## 프로젝트와 해당 계층의 단점
-1. 실시간 API 호출의 경우 간혹 API 호출 데이터에 오류가 발생할 가능성을 염두해두어야 합니다.
-    - 해결 방안으로는 DB내에 일정기간을 두어 오류가 발생하였을때 서브데이터를 DB에 저장후 출력하여 정상적인 작동이 확인될 경우 DB내용을 삭제하여 데이터 공간을 확보함과 동시에 이용에 문제가 없도록 할 수 있습니다.
-
-2. 복잡성 : 사전에 협의되지 않은 무분별한 확장의 경우 상호간 혼란을 야기할수 있음으로 주의하여야 합니다.
-    - 해결 방안으로는 코드내에 주석 혹은 사전 협의를 통해 혼란을 최소한으로 방지할 수 있습니다.
 
 ## 프로젝트 산출 문서
 
