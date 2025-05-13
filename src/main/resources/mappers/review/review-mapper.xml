@@ -148,26 +148,6 @@
 <!--			ORDER BY REVIEW_NO DESC-->
 <!--		</select>-->
 
-		<select id="getTotalCountBySearch" resultType="_int">
-			SELECT COUNT(*) FROM REVIEW 
-			<where>
-				<!-- 제목검색 -->
-				<if test="searchCondition == 'review_title'" >
-					REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%')
-				</if>
-				<!-- 내용검색 -->
-				<if test="searchCondition == 'review_content'">
-					REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%')
-				</if>
-				<!-- 전체검색 -->
-				<if test="searchCondition == 'all'">
-					REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%') OR
-					REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%')
-				</if>
-				AND REVIEW_YN = 'N'
-			</where>
-		</select>
-		
 <!--		<select id="getTotalCountBySearch" resultType="_int">-->
 <!--			SELECT COUNT(*) FROM REVIEW -->
 <!--			<where>-->
