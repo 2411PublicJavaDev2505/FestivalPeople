@@ -230,14 +230,20 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 <img src="https://github.com/user-attachments/assets/6446804e-e49c-4bdc-b7d4-1876bb52585f" alt="메인 로그인">
 <img src="https://github.com/user-attachments/assets/75625f63-cdef-49e0-bb2a-773a467fc24b" alt="카카오 로그인">
 <img src="https://github.com/user-attachments/assets/d1b75f30-27f3-43d6-b47a-f7b4925df568" alt="구글 로그인">
-<img src="https://github.com/user-attachments/assets/6806a0b2-06d6-4fc7-af54-6f27021b5ef5" alt="네이버 로그인">
-
+<img src="https://github.com/user-attachments/assets/6806a0b2-06d6-4fc7-af54-6f27021b5ef5" alt="네이버 로그인"
 </details>
-
 
 <details>
 <summary>
-4. 회원 가입
+4. 아이디, 비밀번호 찾기
+</summary>
+<img src="https://github.com/user-attachments/assets/70c31fd2-2151-4da7-ad3b-f2f1945158df" alt="아이디 찾기">
+<img src="https://github.com/user-attachments/assets/9372a7a5-7ab3-4d39-a4ac-8749c7252aeb" alt="비밀번호 찾기">
+</details>
+
+<details>
+<summary>
+5. 회원 가입
 </summary>
 <img src="https://github.com/user-attachments/assets/07a75703-7bf6-429b-8bbe-d64d83f88bed" alt="회원가입 페이지">
 </details>
@@ -245,7 +251,7 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 
 <details>
 <summary>
-7. 축제 리스트
+6. 축제 리스트
 </summary>
 <img src="https://github.com/user-attachments/assets/7d263dd8-3158-4b15-b3f1-d8e26f98de0b" alt="축제리스트 비회원">
 <img src="https://github.com/user-attachments/assets/5a9368fa-c1bf-40c6-80b6-c182aacbceb1" alt="축제리스트 회원">
@@ -253,7 +259,7 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 
 <details>
 <summary>
-8. 축제 디테일 
+7. 축제 디테일 
 </summary>
 <img src="https://github.com/user-attachments/assets/bdf77206-e9bf-4a78-ab24-5da20d091441" alt="축제 상세 화면 첫번째">
 <img src="https://github.com/user-attachments/assets/6e527bcc-63e2-4a20-b975-736ae8bce6bb" alt="축제 상세 화면 두번째">
@@ -261,14 +267,14 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 
 <details>
 <summary>
-9. 코스 리스트
+8. 코스 리스트
 </summary>
 <img src="https://github.com/user-attachments/assets/31c74b4b-122a-484b-8af1-f6918af7b783" alt="코스 전체리스트">
 </details>
 
 <details>
 <summary>
-10. 코스 디테일
+9. 코스 디테일
 </summary>
 <img src="https://github.com/user-attachments/assets/baaec055-f22c-416c-aef0-3c8f7e466927" alt="코스 상세 이미지 첫번째">
 <img src="https://github.com/user-attachments/assets/229796df-1b85-4f3f-80f6-d4a74ea13d05" alt="코스 상세 이미지 두번째">
@@ -276,42 +282,42 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 
 <details>
 <summary>
-11. 같이갈래?
+10. 같이갈래?
 </summary>
 <img src="https://github.com/user-attachments/assets/9b6c2bce-9dd5-4139-9cd9-ad2a9fb3a5a4" alt="같이갈래 메인페이지">
 </details>
 
 <details>
 <summary>
-12. 같이갈래 디테일
+11. 같이갈래 디테일
 </summary>
 <img src="7https://github.com/user-attachments/assets/23c7222e-f6de-4cf5-b253-a6e518860aba" alt="같이갈래 상세페이지">
 </details>
 
 <details>
 <summary>
-13. 여행 후기
+12. 여행 후기
 </summary> 
 <img src="https://github.com/user-attachments/assets/766b2984-556f-43b3-8909-bc9bdd8d2d8b" alt="여행 후기 메인페이지">
 </details>
 
 <details>
 <summary>
-14. 여행 후기 디테일
+13. 여행 후기 디테일
 </summary>
 <img src="https://github.com/user-attachments/assets/c2f2d122-62a4-411e-b6a0-de2dd77d6ab7" alt="여행후기 상세페이지">
 </details>
 
 <details>
 <summary>
-15. 공지사항
+14. 공지사항
 </summary>
 <img src="https://github.com/user-attachments/assets/3202a62d-57d4-4920-a77e-49a7221c6a3e" alt="공지사항 메인페이지">
 </details>
 
 <details>
 <summary>
-16. 공지사항 디테일
+15. 공지사항 디테일
 </summary>
 <img src="https://github.com/user-attachments/assets/bc14e810-e865-4885-b9b6-227628d6cc2d" alt="공지사항 상세페이지">
 <img src="https://github.com/user-attachments/assets/bbc4d442-9b9d-4e3f-99ab-d56ec117fa86" alt="공지사항 상세페이지 두번째">
@@ -319,7 +325,7 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 
 <details>
 <summary>
-18. 마이페이지
+16. 마이페이지
 </summary>
 <img src="https://github.com/user-attachments/assets/600b144b-bb1d-44b3-9c11-5c83b3c1a423" alt="마이페이지 첫번째">
 <img src="https://github.com/user-attachments/assets/d43cb760-8754-4da7-bc16-dff341d0f325" alt="마이페이지 두번째">
@@ -327,7 +333,7 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 
 <details>
 <summary>
-19. 관리자 페이지
+17. 관리자 페이지
 </summary>
 <img src="https://github.com/user-attachments/assets/c78712f3-7669-4bd6-8929-c430085f1713" alt="관리자 페이지 첫번째">
 <img src="https://github.com/user-attachments/assets/8d0a60e9-9c21-4404-bade-7cbc95a06ea2" alt="관리자 페이지 두번째">
