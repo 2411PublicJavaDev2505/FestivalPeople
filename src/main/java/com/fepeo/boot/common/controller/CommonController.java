@@ -49,6 +49,7 @@ public class CommonController {
 		//전체 리스트 출력시 페이지 네이션 코드 
 	    List<Festival> rfestivals = null;
 	    List<RegionDto> regionList = courseService.getAllRegions();
+
 	    
 	    String gWRegions = (String)session.getAttribute("gWRegions");
 	    List<String> goodWeatherRegions = new ArrayList<>();
