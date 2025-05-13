@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+.festival-list{
+	position:sticky;
+}
+#container {
+   max-width:1920px;
+   margin: 0 auto;
+}
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/*main클래스*/
+.festival-list{
+	padding:80px;
+}
+
+/*상세내역 전체 */
+.festival-detail{
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+/* 상세내역 제목 */
+.festival-name{
+	padding-left:10%;
+}
+/* 상세내역 제목-날짜 */
+.festival-name #festival-date{
+	padding-top: 20px;
+	padding-left: 10px;
+}
+
+
+/*상세내역 사진 영역  */
+.festival-detail-card{
+    display: flex;
+    padding-top: 100px;
+    justify-content:space-evenly;
+    transition: transform 0.5s ease;
+    will-change: transform ;
+}
+
+/* 상세내역 사진 */
+.festival-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 270px;
+    flex-shrink: 0;
+    margin-right: 10px;
+    
+}
+
+
+.festival-card img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* 상세내역 자세한내용 */
+.festival-detail-items{
+	padding-top : 100px;
+}
+
+.festival-detail-items ul li{
+	margin-top:30px;
+	padding-left:15%;
+	list-style-type: none;
+}
+
+/* 일기예보 */
+
+.weather-api{
+	background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 900px;
+    margin: 20px 100px; 
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.weather-api table {
+    width: 800px;
+    border-collapse: collapse;
+    font-family: "Pretendard", "Noto Sans KR", sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.weather-api th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+}
+
+.weather-api td {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+}
+
+.weather-api tr:nth-child(1) th {
+    background-color: #f1f5f9;
+    font-size: 15px;
+    color: #111;
+}
+
+.weather-api tr td {
+    background-color: #ffffff;
+}
+
+.weather-api th:first-child {
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
+}
+
+.weather-api td, .weather-api th {
+    text-align: center;
+    vertical-align: middle;
+}
+/* 길찾기 */
+.map-api {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* 전체 너비 */
+    max-width: 1000px; /* 최대 너비 제한 */
+    margin: 20px 100px; 
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.map-api img {
+    width: 100%; /* 꽉 차게 */
+    height: auto;
+    border-radius: 20px;
+    object-fit: contain;
+}
+.map-wrapper {
+  position: relative; /* 기준 요소 설정 */
+}
+
+.map-api {
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index:1;
+}
+
+/* 길찾기 버튼 위치 및 스타일 */
+.map_shortcut {
+  position: absolute;
+  top: 50px;
+  right: 40px;
+  z-index: 999; /* 지도 위로 올리기 */
+  background-color: #FFEB3B;
+  color: #000;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+  transition: 0.2s ease-in-out;
+}
+.map_shortcut:hover {
+  background-color: #FFC107;
+}
+.course_recommend{
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  z-index: 999; /* 지도 위로 올리기 */
+  background-color: #ff8040;
+  color: #000;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+  transition: 0.2s ease-in-out;
+}
+.course_recommend:hover{
+	background-color: #FFC104;
+}
+
+/* 코스 추천  */
+
+.course-recommend-link a{
+	opacity: 1.3;
+	text-decoration:none;
+	color: #333;
+	font-size:20px;
+	font-weight:bold;
+} 

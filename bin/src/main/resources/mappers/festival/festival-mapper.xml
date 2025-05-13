@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fepeo.boot.festival.model.mapper.FestivalMapper">
+	
+	<insert id="insertFestival" parameterType="Festival">
+        INSERT INTO FESTIVAL (FESTIVAL_NO,FESTIVAL_NAME,FESTIVAL_START_DATE,FESTIVAL_END_DATE,FESTIVAL_FILE_PATH,
+        FESTIVAL_PHONE,FESTIVAL_ADDRESS,FESTIVAL_DETAIL_ADDRESS,MAP_V_CODE,MAP_H_CODE)
+        VALUES (
+            SEQ_FESTIVAL_NO.NEXTVAL,
+            #{festivalName},
+            #{festivalStartDate},
+            #{festivalEndDate},
+            #{festivalFilePath},
+            #{festivalPhone},
+            #{festivalAddress},
+            #{festivalDetailAddress},
+            #{mapVCode},
+            #{mapHCode}
+        )
+    </insert>
+	<select id="isDuplicateFestival" parameterType="Festival" resultType="boolean">
+		 SELECT COUNT(*)
+		 FROM FESTIVAL
+		 WHERE FESTIVAL_NAME = #{festivalName}
+		  AND FESTIVAL_START_DATE = #{festivalStartDate}
+	</select>
+	
+    <select id="selectFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival" parameterType="map">
+	    SELECT * FROM (
+	        SELECT f.*, ROWNUM AS rnum
+	        FROM (
+	            SELECT *
+	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL AND FESTIVAL_START_DATE >=SYSDATE
+	            ORDER BY FESTIVAL_END_DATE
+	        ) f
+	    )
+	    WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	    ORDER BY FESTIVAL_END_DATE
+	</select>
+
+	
+	<select id="getTotalCount" resultType="int">
+	    SELECT COUNT(*) FROM (
+	            SELECT *
+	            FROM FESTIVAL WHERE FESTIVAL_FILE_PATH IS NOT NULL AND FESTIVAL_START_DATE >=SYSDATE
+	            ORDER BY FESTIVAL_END_DATE
+	    )	    
+	    ORDER BY FESTIVAL_END_DATE
+	</select>
+	
+	<!--비회원 축제 추천 리스트   -->
+	<select id="selectFestivalListByWeather" resultType="Festival">
+	    SELECT * FROM(
+	    SELECT * FROM FESTIVAL
+	        <where>
+	        	FESTIVAL_END_DATE >= SYSDATE
+        	    <if test="list != null and list.size() > 0">
+		        	AND (
+		            <foreach collection="list" item="region" separator="OR" open="" close="">
+		                FESTIVAL_ADDRESS LIKE '%' || #{region} || '%'
+		            </foreach>
+		        	)
+       	      	</if>
+	        </where>
+	  		ORDER BY DBMS_RANDOM.RANDOM 
+	    )
+
+	    WHERE ROWNUM &lt;= 10
+
+	  </select>
+
+	
+
+	<select id="selectFestivalListByRegion" resultType="com.fepeo.boot.festival.model.vo.Festival">
+	    SELECT * FROM (
+	        SELECT f.*, 
+	               POWER(f.MAP_V_CODE - #{mapPoint.x}, 2) + POWER(f.MAP_H_CODE - #{mapPoint.y}, 2) AS distance
+	        FROM FESTIVAL f
+	        <where>
+	            <foreach collection="regionNames" item="region" open="(" separator="OR" close=")">
+	                f.FESTIVAL_ADDRESS LIKE '%' || #{region} || '%'
+	            </foreach>
+	        </where>
+	        ORDER BY distance
+	    ) 
+	    WHERE ROWNUM &lt;= 20
+	    ORDER BY FESTIVAL_END_DATE DESC
+	</select>
+	
+	<!--상세페이지  -->
+	<select id="selectFestivalByNo" resultType="com.fepeo.boot.festival.model.vo.Festival">
+		SELECT * FROM FESTIVAL WHERE FESTIVAL_NO = #{festivalNo}
+	</select>
+	
+	<select id="searchFestivalList" resultType="com.fepeo.boot.festival.model.vo.Festival">
+		SELECT * FROM FESTIVAL
+		<where>
+			<if test="searchMap.searchCondition != null and searchMap.searchCondition == 'name'">
+				FESTIVAL_NAME like '%'||#{searchMap.searchKeyword}||'%'
+			</if>
+			<if test="searchMap.searchCondition != null and searchMap.searchCondition == 'location'">
+				FESTIVAL_ADDRESS like '%'||#{searchMap.searchKeyword}||'%'
+			</if>
+			<if test="searchMap.searchCondition != null and searchMap.searchCondition == 'all'">
+				FESTIVAl_NAME like '%'||#{searchMap.searchKeyword}||'%' OR FESTIVAL_ADDRESS like '%'||#{searchMap.searchKeyword}||'%'
+			</if>	
+		</where>
+		ORDER BY FESTIVAL_END_DATE DESC
+	</select>
+	
+	 <!-- 축제 리스트 검색 기능 -->
+	<select id="searchFestivalListAll" resultType="com.fepeo.boot.festival.model.vo.Festival">
+	    SELECT * FROM (
+	        SELECT f.*, ROWNUM AS rnum
+	        FROM (
+	            SELECT *
+	            FROM FESTIVAL
+	            <where>
+	                FESTIVAL_FILE_PATH IS NOT NULL
+	                AND FESTIVAL_END_DATE >= SYSDATE
+	                <if test="searchMap.searchCondition != null and searchMap.searchCondition == 'name'">
+	                    AND FESTIVAL_NAME LIKE '%' || #{searchMap.searchKeyword} || '%'
+	                </if>
+	                <if test="searchMap.searchCondition != null and searchMap.searchCondition == 'location'">
+	                    AND FESTIVAL_ADDRESS LIKE '%' || #{searchMap.searchKeyword} || '%'
+	                </if>
+	                <if test="searchMap.searchCondition != null and searchMap.searchCondition == 'all'">
+	                    AND (
+	                        FESTIVAL_NAME LIKE '%' || #{searchMap.searchKeyword} || '%'
+	                        OR FESTIVAL_ADDRESS LIKE '%' || #{searchMap.searchKeyword} || '%'
+	                    )
+	                </if>
+	            </where>
+	            ORDER BY FESTIVAL_END_DATE
+	        ) f
+	    )
+	    WHERE rnum BETWEEN #{params.startRow} AND #{params.endRow}
+	</select>
+	
+	<select id="getSearchTotalCount" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM FESTIVAL
+	    <where>
+	        FESTIVAL_FILE_PATH IS NOT NULL
+	        AND FESTIVAL_END_DATE >= SYSDATE
+	        <if test="searchMap.searchCondition == 'name'">
+	            AND FESTIVAL_NAME LIKE '%' || #{searchMap.searchKeyword} || '%'
+	        </if>
+	        <if test="searchMap.searchCondition == 'location'">
+	            AND FESTIVAL_ADDRESS LIKE '%' || #{searchMap.searchKeyword} || '%'
+	        </if>
+	        <if test="searchMap.searchCondition == 'all'">
+	            AND (FESTIVAL_NAME LIKE '%' || #{searchMap.searchKeyword} || '%'
+	            OR FESTIVAL_ADDRESS LIKE '%' || #{searchMap.searchKeyword} || '%')
+	        </if>
+	    </where>
+	</select>
+	
+
+
+</mapper>

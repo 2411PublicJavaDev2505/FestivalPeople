@@ -55,16 +55,27 @@
 				WHERE REVIEW_YN='N' ORDER BY 1 DESC
 		</select>
  		
- 		
- 		<insert id="insertReview" useGeneratedKeys="true">
-	  		<selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">
-	  			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL
-	  		</selectKey>
-  			INSERT INTO REVIEW VALUES(#{reviewNo},
-  			#{reviewTitle},
-  			#{reviewContent},
-  			 DEFAULT,DEFAULT,DEFAULT,
-  				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
+
+  		
+		<insert id="insertReview" useGeneratedKeys="true" keyProperty="reviewNo">
+			INSERT INTO REVIEW(REVIEW_TITLE, REVIEW_CONTENT
+			,REVIEW_WRITE_TIME
+			,REVIEW_COUNT
+			,REVIEW_YN
+			,REVIEW_FILE_NAME1
+			,REVIEW_FILE_RENAME1
+			,REVIEW_FILE_PATH1
+			,REVIEW_FILE_NAME2
+			,REVIEW_FILE_RENAME2
+			,REVIEW_FILE_PATH2
+			,REVIEW_FILE_NAME3
+			,REVIEW_FILE_RENAME3
+			,REVIEW_FILE_PATH3
+			,MEMBER_NO) VALUES(
+			#{reviewTitle},
+			#{reviewContent},
+			 	DEFAULT,DEFAULT,DEFAULT,
+					NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
   		</insert>
   		
   		<select id="getTotalCount" resultType="int">
@@ -112,16 +123,16 @@
 			<where>	
 				<!-- 제목검색 -->
 				<if test="searchCondition == 'review_title'" >
-					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%' 
+					REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%') 
 				</if>
 				<!-- 내용검색 -->
 				<if test="searchCondition == 'review_content'">
-					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%' 
+					REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%') 
 				</if>
 				<!-- 전체검색 -->
 				<if test="searchCondition == 'all'">
-					(REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR
-					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%')  
+					(REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%') OR
+					REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%'))  
 				</if>
 				AND REVIEW_YN = 'N'
 			</where>
@@ -133,16 +144,16 @@
 			<where>
 				<!-- 제목검색 -->
 				<if test="searchCondition == 'review_title'" >
-					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%'
+					REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%')
 				</if>
 				<!-- 내용검색 -->
 				<if test="searchCondition == 'review_content'">
-					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%'
+					REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%')
 				</if>
 				<!-- 전체검색 -->
 				<if test="searchCondition == 'all'">
-					REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR
-					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%'
+					REVIEW_TITLE LIKE concat('%',#{searchKeyword},'%') OR
+					REVIEW_CONTENT LIKE concat('%',#{searchKeyword},'%')
 				</if>
 				AND REVIEW_YN = 'N'
 			</where>

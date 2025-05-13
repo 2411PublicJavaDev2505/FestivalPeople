@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 900px;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+main {
+	font-family: 'BMJUA';
+	font-size: 20px;
+}
+
+.reviewinsert-main{
+	width: 1525px;
+    height: 750px;
+    margin-top: 50px;
+    margin-left: 195px;
+    background: #3b7c6e;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    padding: 40px 30px 30px 30px;
+    position: relative;
+}
+.reviewinsert-h3 {
+    width: 320px;
+    margin: 0 auto 30px auto;
+    background: #5e9c8c;
+    font-weight: bold;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px 0;
+    opacity: 0.7;
+}
+
+  .write-input {
+    flex: 1;
+    width: 1475px;
+    height: 32px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 0 8px;
+    margin-bottom: 5px;
+  }
+
+.review-content div{
+	float: left;
+	margin-right: 5px;
+}
+
+.review-attach{
+/* 	position: relative; */
+  	left: 38px;
+  	top:5px;
+  	width: 100%;
+}
+
+.review-file-input {
+  	float: left;
+}
+
+#submitbtn {
+  	width: 100px;
+    height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+    background: #d97a4a;
+    color: #fff;
+    border-radius: 10px;
+}
+#submitbtn-c{
+	width: 100px;
+    height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+    background: #e82734;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.reviewupdate-btn {
+    width: 100%;
+    text-align: right;
+    margin-top: 410px;
+}
+
+.tox.tox-tinymce {
+    width: 1475px;
+}

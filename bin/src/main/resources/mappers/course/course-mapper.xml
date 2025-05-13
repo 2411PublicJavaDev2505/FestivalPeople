@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fepeo.boot.course.model.mapper.CourseMapper">
+
+	<resultMap type="RegionDTO" id="regionResultMap">
+		<result property="regionNo"  column="REGION_NO"/>
+		<result property="regionName"  column="REGION_NAME"/>
+	</resultMap>	
+
+	<select id="selectRegionList" resultMap="regionResultMap">
+		SELECT * FROM REGION_CODE
+	</select>
+
+ 	<insert id="insertCourse">
+		INSERT INTO COURSE VALUES (
+		    SEQ_COURSE_NO.NEXTVAL,
+		    #{festivalNo},
+		    #{memberNo},
+		    #{courseName},
+		    #{festivalName},
+		    #{festivalImg},
+			#{matzipPlaceName},
+		    #{matzipCategory},
+		    #{matzipMAPX},
+		    #{matzipMAPY},
+		    #{hotelPlaceName},
+		    #{hotelCategory},
+		    #{hotelMAPX},
+		    #{hotelMAPY},	
+		    #{cafePlaceName},
+		    #{cafeCategory},
+		    #{cafeMAPX},
+		    #{cafeMAPY},	
+		    #{tourPlaceName},
+		    #{tourCategory},
+		    #{tourMAPX},
+		    #{tourMAPY},	
+		    #{parkingPlaceName},
+		    #{parkingCategory},
+		    #{parkingMAPX},
+		    #{parkingMAPY},	
+		    #{culturePlaceName},
+		    #{cultureCategory},
+		    #{cultureMAPX},
+		    #{cultureMAPY}	
+		)
+	</insert> 
+
+	<select id="selectCourseByNo" resultType="Course">
+		SELECT * FROM COURSE WHERE MEMBER_NO =#{memberNo}
+	</select>
+
+	<select id="selectOneByCourseNo" resultType="Course"> 
+		SELECT * FROM COURSE WHERE COURSE_NO = #{courseNo}
+	</select>
+
+	<delete id="deleteCourse">
+		DELETE FROM COURSE WHERE MEMBER_NO = #{memberNo} AND COURSE_NO = #{courseNo} 
+	</delete>
+
+</mapper>  

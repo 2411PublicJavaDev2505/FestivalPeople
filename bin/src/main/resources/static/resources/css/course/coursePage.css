@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+/* 카드 디테일 추가 */
+
+.course-back-image {
+    position: relative;
+    width: 250px;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    flex: 0 0 auto;
+}
+
+/* 포스터 이미지 */
+.poster-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* 카드 내용 */
+.coursecard {
+    position: absolute;
+/*     top: 0;
+    left: 0; */
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding: 15px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 2;
+    overflow: auto;
+    pointer-events: none;
+}
+
+/* hover 시 이미지 사라지고 카드 내용 등장 */
+.course-back-image:hover .poster-img {
+    opacity: 0;
+}
+
+.course-back-image:hover  {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.course-back-image .coursecard {
+    position: relative;      
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: scale(1);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.course-back-image:hover .coursecard {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto; 
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/*   검색창 */
+main {
+	height: 1000px;
+	margin: 0 auto;
+}
+
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* 콘텐츠보다 뒤로 */
+  overflow: hidden;
+}
+
+.background-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8; /* 배경 느낌을 위해 살짝 투명하게  */
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content:flex-end;
+ 	margin:  10px 10px;  
+}
+
+.message-box {
+	padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.search-form select, .search-form input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.search-btn {
+    padding: 10px 16px;
+    font-size: 16px;
+    background: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.course-slider-wrapper {
+    position: relative;
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.course-slider-container {
+    position: relative;
+    width: 1250px; /* 250*4 + 20*3 */
+    margin: auto;
+    overflow: hidden;
+    height: 600px;
+}
+
+.card-slider {
+    display: flex;
+    gap: 20px;
+    overflow: hidden; /* auto → hidden으로 변경 */
+    width: 1060px;     /* 카드 4개 × 250px + gap 3개 × 20px = 1060px */
+    margin: 0 auto;    /* 가운데 정렬 */
+    scroll-behavior: smooth;
+}
+
+
+.coursecard {
+    flex: 0 0 auto;          /* 줄바꿈 방지, 고정폭 유지 */
+    width: 250px;
+    height: 450px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    opacity:0.9;
+}
+
+.coursecard img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.slide-btn {
+    position: relative;
+    background-color: rgba(255,255,255,0.8);
+    border: none;
+    font-size: 18px; /* 기존보다 작게 */
+    cursor: pointer;
+    z-index: 10;
+    padding: 8px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+}
+
+.slide-btn:hover {
+    background-color: rgba(255,255,255,1);
+    transition: background-color 0.3s;
+}
+
+.slide-btn.left {
+    left: 10px;
+}
+
+.slide-btn.right {
+    right: 10px;
+}
+
+
+
+
+a {
+  text-decoration: none;
+  color: green;
+}
+
+content:focus, content:hover {
+  display: inline-block;
+  color: lightgreen;
+  text-decoration-color: green;
+  transform: translateY(-2px);
+  transition: 1s;
+  -webkit-text-stroke: 1px #11862b;
+}
+
+html {
+  color: hsl(210, 9%, 31%);
+  font-family: sans-serif;
+  line-height: 1.6;
+}
+

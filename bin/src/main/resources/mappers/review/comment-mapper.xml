@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     <mapper namespace="com.fepeo.boot.review.model.mapper.CommentMapper" > 
+  		<insert id="insertComment">
+  			 INSERT INTO REVIEW_COMMENT
+        	VALUES(SEQ_COMMENT_NO.NEXTVAL,
+                #{commentContent}, 
+                DEFAULT ,#{reviewNo}, #{memberNo}, DEFAULT)
+  		</insert>
+  		<select id="selectCommentList" resultType="ReviewComment">
+  			SELECT RC.*, M.NICKNAME FROM REVIEW_COMMENT RC JOIN MEMBER M ON RC.MEMBER_NO = M.MEMBER_NO 
+			WHERE REVIEW_NO = #{reviewNo} AND DELETE_YN='N' ORDER BY COMMENT_NO DESC
+  		</select>
+  		
+  		<update id="commentDelete">
+  			UPDATE REVIEW_COMMENT SET DELETE_YN = 'Y' WHERE COMMENT_NO = #{commentNo}
+  		</update>
+		
+		<select id="selectMemberNoByCommentNo"  resultType="_int">
+			SELECT MEMBER_NO FROM REVIEW_COMMENT WHERE COMMENT_NO = #{num}
+		</select>
+		
+		<select id="selectOneByNo" resultType="ReviewComment">
+			SELECT * FROM REVIEW_COMMENT WHERE COMMENT_NO = #{commentNo}
+		</select>
+</mapper>

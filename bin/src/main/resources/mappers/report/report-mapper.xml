@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fepeo.boot.report.model.mapper.ReportMapper">
+
+    <insert id="insertReport">
+    	<if test=" reportObject == 'chat' ">
+    		INSERT INTO REPORT VALUES(SEQ_REPORT_NO.NEXTVAL
+        	,#{memberNo},'CHATROOM',#{reportContent},#{num},NULL,NULL,DEFAULT)
+    	</if>
+    	<if test=" reportObject == 'rev' ">
+    		INSERT INTO REPORT VALUES(SEQ_REPORT_NO.NEXTVAL
+        	,#{memberNo},'REPORT',#{reportContent},NULL,NULL,#{num},DEFAULT)
+    	</if>
+    	<if test=" reportObject == 'com' ">
+    		INSERT INTO REPORT VALUES(SEQ_REPORT_NO.NEXTVAL
+        	,#{memberNo},'REPORT_COMMENT',#{reportContent},NULL,#{num},NULL,DEFAULT)
+    	</if>
+    </insert>
+    
+    <select id="searchReportList" resultType="Report">
+    	SELECT * FROM REPORT
+    	<where>
+    		<if test="searchCondition != null and searchCondition == 'all'">
+    			REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='chatroom'">
+    			REPORT_OBJECT = 'CHATROOM' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='REPORT'">
+    			REPORT_OBJECT = 'REPORT' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='REPORT_COMMENT'">
+    			REPORT_OBJECT = 'REPORT_COMMENT' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		AND DELETE_YN = 'N'
+    	</where>
+    </select>
+    
+    <select id="getSearchTotalCount" resultType="_int">
+    	SELECT COUNT(*) FROM REPORT
+    	<where>
+    		<if test="searchCondition != null and searchCondition == 'all'">
+    			REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='chatroom'">
+    			REPORT_OBJECT = 'CHATROOM' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='REPORT'">
+    			REPORT_OBJECT = 'REPORT' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		<if test="searchCondition != null and searchCondition =='REPORT_COMMENT'">
+    			REPORT_OBJECT = 'REPORT_COMMENT' AND REPORT_CONTENT LIKE '%'||#{searchKeyword}||'%'
+    		</if>
+    		AND DELETE_YN = 'N'
+    	</where>
+
+    </select>
+    
+    <select id="getTotalCount">
+    	SELECT COUNT(*) FROM REPORT
+    </select>
+	
+	<select id="selectReportList" resultType="Report">
+		SELECT * FROM REPORT ORDER BY 1 DESC
+	</select>
+	
+	<select id="selectOneByNo" resultType="Report">
+		SELECT * FROM REPORT WHERE REPORT_NO = #{reportNo}
+	</select>
+	
+	<delete id="deleteReport">
+		DELETE FROM REPORT WHERE REPORT_NO = #{reportNo}
+	</delete>
+	
+	<delete id="deleteChatroomReport">
+		DELETE FROM REPORT WHERE CHATROOM_NO = #{chatRoomNo}
+	</delete>
+	<delete id="deleteReviewReport">
+		DELETE FROM REPORT WHERE REVIEW_NO = #{reviewNo}
+	</delete>
+	<delete id="deleteCommentReport">
+		DELETE FROM REPORT WHERE COMMENT_NO = #{commentNo}
+	</delete>
+	
+</mapper>
