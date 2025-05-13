@@ -1,0 +1,201 @@
+@charset "UTF-8";
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.register-container {
+	margin: 100px auto 100px auto;
+	width: 850px;
+	--height: 800px;
+	background-color: rgba(228, 226, 221, 0.9);
+	border-radius: 20px;
+	box-shadow: 0px 0px 3px #444
+}
+
+.register-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.register-header span{
+	margin: 30px;
+	width: 120px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color:#FFAF00;
+	font-size: 25px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 3px #444
+}
+
+.register-header span:hover {
+	cursor: default;
+}
+
+.register-main {
+	display: flex;
+	justify-content: center;
+}
+
+.register-left {
+	width: 25%;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.register-left label div{
+	background-color: #FFAF00;
+	margin-left: 40px;
+	text-align: center;
+	border-radius: 10px;
+	width:100px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition-duration: 0.5s;
+}
+
+.register-left label div:hover{
+	background-color: #d58f00;
+	cursor: pointer;
+}
+
+#input-profile{
+	width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.profile-img {
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	background-color: white;
+	margin-bottom: 10px;
+	box-shadow: 0px 0px 2px #444;
+	margin-left: 40px;
+}
+
+.profile-img img{
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+}
+
+
+.register-right {
+	width: 70%;
+}
+
+.check {
+	color: red;
+	margin-top: 3px;
+}
+
+.register-right ul li{
+	list-style: none;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.register-right input:focus {
+	outline: 2px solid gray;
+}
+
+.register-btn {
+	display: flex;
+	align-items: center;
+}
+
+.register-btn input{
+	width: 70%;
+	height: 50px;
+	padding-left: 5px;
+	margin-right: 10px;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0px 0px 2px #444;
+}
+
+.register-btn button{
+	width: 100px;
+	height: 50px;
+	background-color:#FFAF00;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0px 0px 2px #444;
+	transition-duration: 0.5s;
+}
+
+.register-notbtn input{
+	width: 90%;
+	height: 50px;
+	padding-left: 5px;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0px 0px 2px #444;
+}
+
+.register-last-btn button{
+	font-size: 24px;
+	font-weight: bold;
+	width: 528px;
+	height: 50px;
+	background-color: #FFAF00;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0px 0px 2px #444;
+	margin-bottom: 30px;
+	transition-duration: 1s;
+}
+
+.register-last-btn button:hover {
+	background-color: #d58f00;
+	cursor: pointer;
+}
+
+.register-btn button:hover {
+	background-color: #d58f00;
+	cursor: pointer;
+}
+
+
+.register-radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.register-radio {
+  display: flex;
+  align-items: center;
+}
+
+.register-radio input[type="radio"] {
+  margin-right: 10px;
+}
+
+.register-radio img {
+  width: 40px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.register-radio input[type="radio"]:checked + img {
+  border: 2px solid #007bff;
+  border-radius: 50%;
+}

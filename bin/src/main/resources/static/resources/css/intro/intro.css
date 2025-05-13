@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 900px;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+main {
+	font-family: 'BMJUA';
+	font-size: 20px;
+}
+
+  .container {
+    width: 1525px;
+    height: 600px;
+    margin-top: 100px;
+    margin-left: 195px;
+    position: relative;
+  }
+  
+.card {
+    position: relative;
+    width: 500px;
+    height: 170px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 0 0 5px #ffffff80;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 100px;
+    margin-left: 350px;
+  }
+  
+  .intro {
+    position: relative;
+    margin-top: -30px;
+    margin-left: 480px;
+  }
+  
+  .variety {
+    position: relative;
+    margin-top: 30px;
+    margin-left: 150px;
+  }
+  
+  .recommend {
+    position: relative;
+    margin-top: -170px;
+    margin-left: 800px;
+  }
+  
+  .together {
+    position: relative;
+    margin-top: 30px;
+    margin-left: 150px;
+  }
+  
+  .review {
+    position: relative;
+    margin-top: -170px;
+    margin-left: 800px;
+  }  
+
+  
+  .card img {
+    width: 500px;
+    height: 170px;
+    background-size: cover;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+  }
+  
+  .card__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 170px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+    transform: rotateX(-90deg);
+    transform-origin: bottom;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .card:hover .card__content {
+    transform: rotateX(0deg);
+  }
+  
+  .card__title {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+    font-weight: 700;
+  }
+  
+  .card:hover svg {
+    scale: 0;
+  }
+  
+  .card__description {
+    margin: 10px 0 10px;
+    font-size: 12px;
+    color: #777;
+    line-height: 1.4;
+  }
+  
+  .card__button {
+    padding: 10px;
+    border-radius: 8px;
+    background: #777;
+    border: none;
+    color: white;
+    margin-left: 160px;
+  }
+  
+  .v {
+  	background: #992800;
+  	color: #e4e2dd;
+  }
+  
+  .r {
+  	background: #cd4823;
+  	color: #e4e2dd;
+  }
+  
+  .t {
+  	background: #ffaf00;
+  	color: #e4e2dd;
+  }
+  
+  .re {
+  	background: #3b7c70;
+  	color: #e4e2dd;
+  }
+  
+  .i {
+  	background: #cd4823;
+  	color: #e4e2dd;
+  }
+  
+  .secondary {
+  	margin-left: 0px;
+  }
+  

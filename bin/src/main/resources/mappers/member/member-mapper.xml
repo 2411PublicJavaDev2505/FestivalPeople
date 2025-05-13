@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fepeo.boot.member.model.mapper.MemberMapper">
+	<insert id="insertMember" useGeneratedKeys="true">
+		<selectKey order="BEFORE" resultType="_int" keyProperty="memberNo">
+			SELECT SEQ_MEMBER_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO MEMBER VALUES(#{memberNo}
+		,#{memberId}, #{memberPw}, #{memberCode}, #{memberName}
+		,#{nickname}, #{email}, #{address}, #{gender}
+		,#{profileFileName}, #{profileFileRename}, #{profileFilePath}, #{profileUrl}, #{socialYn}, DEFAULT, DEFAULT
+		,DEFAULT)
+	</insert>
+	
+	
+	
+	<select id="searchMemberList" resultType="Member">
+		SELECT * FROM MEMBER
+		<where>
+			<if test="searchCondition != null and searchCondition == 'all'">
+				MEMBER_ID LIKE '%'||#{searchKeyword}||'%' OR MEMBER_NAME LIKE '%'||#{searchKeyword}||'%' OR NICKNAME LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition != null and searchCondition == 'memberId'">
+				MEMBER_ID LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition != null and searchCondition == 'name'">
+				MEMBER_NAME LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition != null and searchCondition == 'nickName'">
+				NICKNAME LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			AND MEMBER_YN = 'Y'
+		</where>
+		ORDER BY REPORT_COUNT DESC
+	</select>
+	
+	
+<select id="getSearchTotalCount" resultType="_int">
+    SELECT COUNT(*) FROM MEMBER
+    <where>
+        <if test="searchCondition != null and searchCondition == 'all'">
+            MEMBER_ID LIKE '%'||#{searchKeyword}||'%' 
+            OR MEMBER_NAME LIKE '%'||#{searchKeyword}||'%' 
+            OR NICKNAME LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        <if test="searchCondition != null and searchCondition == 'memberId'">
+            MEMBER_ID LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        <if test="searchCondition != null and searchCondition == 'name'">
+            MEMBER_NAME LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        <if test="searchCondition != null and searchCondition == 'nickName'">
+            NICKNAME LIKE '%'||#{searchKeyword}||'%'
+        </if>
+        AND MEMBER_YN = 'Y'
+    </where>
+</select>
+
+	
+	<select id="memberLoginById" resultType="Member">
+		SELECT * FROM MEMBER 
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
+	</select>
+	
+	<select id="memberLogin" resultType="Member">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN, MEMBER_YN FROM MEMBER 
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_PW = #{memberPw} AND MEMBER_YN = 'Y'
+	</select>
+	<select id="memberSocialLogin" resultType="Member">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, NICKNAME, EMAIL, MANAGER_YN, SOCIAL_YN, MEMBER_YN FROM MEMBER 
+		WHERE MEMBER_ID = #{id} AND MEMBER_YN = 'Y'
+	</select>
+
+	<select id="selectOneByNo" resultType="Member">
+		SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo} AND MEMBER_YN = 'Y'
+	</select>
+	
+	<select id="selectMemberList" resultType="Member">
+		SELECT * FROM MEMBER WHERE MEMBER_YN = 'Y' ORDER BY REPORT_COUNT DESC
+	</select>
+	
+	<select id="getMemberTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_YN = 'Y' 
+	</select>
+	
+	<select id="selectOneByEmail">
+		SELECT * FROM MEMBER WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email} AND SOCIAL_YN='N' AND MEMBER_YN = 'Y'
+	</select>
+	
+	<update id="updateMemberProfile">
+		UPDATE MEMBER SET PROFILE_FILE_NAME = #{profileFileName},
+		PROFILE_FILE_RENAME = #{profileFileRename}, PROFILE_FILE_PATH = #{profileFilePath} 
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="updateSocialMember">
+		UPDATE MEMBER SET ADDRESS=#{address} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="deleteMember">
+		UPDATE MEMBER SET MEMBER_YN='N' WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<delete id="deleteSocialMember">
+		DELETE FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+	</delete>
+	
+	<update id="updateMemberPw">
+		UPDATE MEMBER SET MEMBER_PW = #{memberPw} WHERE MEMBER_ID=#{memberId}
+	</update>
+	
+	<update id="updateMemberAddress">
+		UPDATE MEMBER SET ADDRESS = #{address} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="updateMemberNickname">
+		UPDATE MEMBER SET NICKNAME = #{nickname} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="updateMemberEmail">
+		UPDATE MEMBER SET EMAIL = #{email} WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<select id="selectOneById" resultType="Member">
+		SELECT * FROM MEMBER WHERE MEMBER_ID=#{memberId} AND MEMBER_YN = 'Y'
+	</select>
+	
+	<select id="checkMemberById" resultType="_int">
+		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE MEMBER_ID = #{memberId} AND MEMBER_YN = 'Y'
+	</select>
+	<select id="checkMemberByNickname" resultType="_int">
+		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE NICKNAME = #{nickname} AND MEMBER_YN = 'Y'
+	</select>
+	<select id="checkMemberEmail" resultType="_int">
+		SELECT COUNT(MEMBER_NO) FROM MEMBER WHERE EMAIL = #{email} AND SOCIAL_YN = 'N' AND MEMBER_YN = 'Y'
+	</select>
+	<insert id="insertMemberCode" useGeneratedKeys="true">
+		<selectKey order="BEFORE" resultType="_int" keyProperty="memberCodeNo">
+			SELECT SEQ_MEMBER_CODE.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO MEMBER_CODE VALUES(#{memberCodeNo},#{code})
+	</insert>
+	<select id="checkCode" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_CODE WHERE MEMBER_CODE_NO = #{memberCodeNo} AND CODE = #{code}
+	</select>
+	<update id="updateReportCount">
+		UPDATE MEMBER SET REPORT_COUNT = REPORT_COUNT+1 WHERE MEMBER_NO = #{memberNo}
+	</update>
+	<update id="substractReportCount">
+		UPDATE MEMBER SET REPORT_COUNT = REPORT_COUNT-1 WHERE MEMBER_NO = #{memberNo}
+	</update>
+</mapper>

@@ -1,0 +1,191 @@
+/* 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@keyframes wave-shake {
+  0%   { transform: rotate(0deg); }
+  10%  { transform: rotate(-10deg); }
+  20%  { transform: rotate(12deg); }
+  30%  { transform: rotate(-10deg); }
+  40%  { transform: rotate(9deg); }
+  50%  { transform: rotate(-6deg); }
+  60%  { transform: rotate(6deg); }
+  70%  { transform: rotate(-3deg); }
+  80%  { transform: rotate(2deg); }
+  90%  { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.main-container {
+    position: relative;
+    width: 1920px;
+    height: 100%;
+}
+
+.slidecontroller {
+    position: relative;
+    width: 400px;
+    padding: 20px;
+    margin-top: 230px;
+    left: 150px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.slidecontroller-text {
+    margin-bottom: 10px;
+}
+
+.slidecontroller-text-first {
+	margin-bottom: 20px;
+}
+.slidecontroller-text-first h3 {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+}
+
+.slidecontroller-text-main h1 {
+	padding-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.5;
+}
+
+.slidecontroller-text-main h1 span {
+    display: block;
+}
+.slidecontroller-text-main h3 span{
+	display: none;
+	font-size:14px;
+	font-weight: bold;
+    position: absolute;
+    height:40px;
+    left:150px;
+    top:10px;
+    background: #902804;
+    color: white;
+    border-radius: 30px;
+    padding: 12px 12.8px;
+    z-index:999;	
+}
+
+.slidecontroller-text-main h3 span.wave {
+  display: inline-block;
+  animation: wave-shake 1s cubic-bezier(.36,.07,.19,.97) infinite;
+}
+
+.slidecontroller-text-main h3 span:after{
+	border-top: 10px solid #902804;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 0px solid transparent;
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 20px;
+}
+
+.slidecontroller-detail a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+}
+
+#detailLink {
+	cursor: pointer;
+}
+
+.slidecontroller-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.my-progress-bar {
+    position: relative;
+    flex-grow: 1;
+    height: 4px;
+    background-color: #ccc;
+}
+
+.my-progress-bar .progress {
+	display: block;
+    position: absolute;
+    height: 100%;
+    width: 30%;
+    background-color: #000;
+    transition: width 0.3s linear;
+}
+
+
+
+.page-number .current-page {
+    font-weight: bold;
+}
+
+.page-number .total-pages {
+    color: #777;
+}
+
+
+.navigation-buttons button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.navigation-buttons button:hover {
+    color: #000;
+}
+
+.simple-slide-container {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    left: 200px;
+    height: 520px;
+    width: 820px;
+    margin: -380px auto;
+}
+
+.simple-slide img{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 800px;
+    height: 500px;
+    transition: transform 2s ease-in-out;
+}
+
+
+
+.simple-slide .active {
+    transform: translateX(0);
+}
+
+.simple-slide .next {
+    transform: translateX(100%);
+    opacity: 0.5;
+}

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     <mapper namespace="com.fepeo.boot.review.model.mapper.ReviewMapper" > 
+  		<resultMap type="Review" id="reviewResultMap">
+  		<id property="reviewNo" column="REVIEW_NO"/>
+  		<result property="reviewTitle" column="REVIEW_TITLE"/>
+  		<result property="reviewContent" column="REVIEW_CONTENT"/>
+  		<result property="reviewWriteTime" column="REVIEW_WRITE_TIME"/>
+  		<result property="reviewCount" column="REVIEW_COUNT"/>
+  		<result property="reviewYn" column="REVIEW_YN"/>
+  		<result property="reviewFileName1" column="REVIEW_FILE_NAME1"/>
+  		<result property="reviewFileRename1" column="REVIEW_FILE_RENAME1"/>
+  		<result property="reviewFilePath1" column="REVIEW_FILE_PATH1"/>
+  		<result property="reviewFileName2" column="REVIEW_FILE_NAME2"/>
+  		<result property="reviewFileRename2" column="REVIEW_FILE_RENAME2"/>
+  		<result property="reviewFilePath2" column="REVIEW_FILE_PATH2"/>
+  		<result property="reviewFileName3" column="REVIEW_FILE_NAME3"/>
+  		<result property="reviewFileRename3" column="REVIEW_FILE_RENAME3"/>
+  		<result property="reviewFilePath3" column="REVIEW_FILE_PATH3"/>
+  		<result property="nickname" column="NICKNAME"/>
+  		<result property="memberName" column="MEMBER_NAME"/>
+  		
+  		<collection property="commentList" 
+  		 			select="selectCommentList" column="REVIEW_NO"
+  		 									javaType="java.util.List"
+  		 									ofType="ReviewComment"></collection>
+  		<collection property="imgList"
+  					select="selectReviewImgByNo" column="REVIEW_NO"
+  					javaType="java.util.List"
+  					ofType="ImgAddRequest"></collection>
+  		
+  		</resultMap>
+ 		
+ 		<select id="selectOneByNo" resultMap="reviewResultMap">
+ 			SELECT R.*, M.MEMBER_NAME MEMBER_NAME FROM REVIEW R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO 
+ 			WHERE REVIEW_NO = #{reviewNo} AND REVIEW_YN = 'N'
+ 		</select>
+
+ 			<!-- 댓글 목록 -->
+ 		<select id="selectCommentList" resultType="ReviewComment">
+ 			SELECT * FROM REVIEW_COMMENT WHERE REVIEW_NO = #{reviewNo} ORDER BY COMMENT_NO DESC
+ 		</select>
+		<!-- 리뷰게시판리스트 -->
+		<select id="selectReviewList" resultMap="reviewResultMap">
+			SELECT A.REVIEW_NO,
+				A.REVIEW_TITLE,
+				A.REVIEW_WRITE_TIME,
+				A.REVIEW_COUNT,
+				B.NICKNAME
+				FROM REVIEW A 
+				LEFT OUTER JOIN MEMBER B
+				ON A.MEMBER_NO = B.MEMBER_NO 
+				WHERE REVIEW_YN='N' ORDER BY 1 DESC
+		</select>
+ 		
+ 		
+ 		<insert id="insertReview" useGeneratedKeys="true">
+	  		<selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">
+	  			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL
+	  		</selectKey>
+  			INSERT INTO REVIEW VALUES(#{reviewNo},
+  			#{reviewTitle},
+  			#{reviewContent},
+  			 DEFAULT,DEFAULT,DEFAULT,
+  				NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,#{memberNo})
+  		</insert>
+  		
+  		<select id="getTotalCount" resultType="int">
+			SELECT COUNT(*) FROM REVIEW WHERE REVIEW_YN = 'N'
+		</select>
+		
+		<select id="selectReviewImgByNo" resultType="ImgAddRequest">
+			SELECT * FROM REVIEW WHERE REVIEW_NO = #{reviewNo}
+		</select>
+		
+		<!-- 이미지등록 -->
+		<update id="insertReviewFirstImage">
+			UPDATE REVIEW SET REVIEW_FILE_NAME1 = #{reviewFileName},
+			REVIEW_FILE_RENAME1 = #{reviewFileRename},
+			REVIEW_FILE_PATH1 = #{reviewFilePath} 
+			WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		<update id="insertReviewSecondImage">
+			UPDATE REVIEW SET REVIEW_FILE_NAME2 = #{reviewFileName},
+			REVIEW_FILE_RENAME2 = #{reviewFileRename},
+			REVIEW_FILE_PATH2 = #{reviewFilePath} 
+			WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		<update id="insertReviewThirdImage">
+			UPDATE REVIEW SET REVIEW_FILE_NAME3 = #{reviewFileName},
+			REVIEW_FILE_RENAME3 = #{reviewFileRename},
+			REVIEW_FILE_PATH3 = #{reviewFilePath} 
+			WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		
+		
+		<!-- 리뷰삭제 -->
+		<update  id="reviewDelete">
+			UPDATE REVIEW SET REVIEW_YN = 'Y' WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		
+		<!-- 조회수 -->
+		<update id="reviewCount">
+			UPDATE REVIEW SET REVIEW_COUNT = REVIEW_COUNT+1 WHERE REVIEW_NO=#{reviewNo}
+		</update>
+		
+		<!-- 검색 -->
+		<select id="searchListByKeyword" resultMap="reviewResultMap">
+			SELECT R.*, M.NICKNAME FROM REVIEW R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO 
+			<where>	
+				<!-- 제목검색 -->
+				<if test="searchCondition == 'review_title'" >
+					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%' 
+				</if>
+				<!-- 내용검색 -->
+				<if test="searchCondition == 'review_content'">
+					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%' 
+				</if>
+				<!-- 전체검색 -->
+				<if test="searchCondition == 'all'">
+					(REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR
+					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%')  
+				</if>
+				AND REVIEW_YN = 'N'
+			</where>
+			ORDER BY REVIEW_NO DESC
+		</select>
+		
+		<select id="getTotalCountBySearch" resultType="_int">
+			SELECT COUNT(*) FROM REVIEW 
+			<where>
+				<!-- 제목검색 -->
+				<if test="searchCondition == 'review_title'" >
+					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%'
+				</if>
+				<!-- 내용검색 -->
+				<if test="searchCondition == 'review_content'">
+					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%'
+				</if>
+				<!-- 전체검색 -->
+				<if test="searchCondition == 'all'">
+					REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR
+					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%'
+				</if>
+				AND REVIEW_YN = 'N'
+			</where>
+		</select>
+		
+		
+		<!-- 게시판수정 제목 이름만 -->
+		<update id="reviewUpdate">
+			UPDATE REVIEW SET REVIEW_TITLE = #{reviewTitle} , 
+			REVIEW_CONTENT = #{reviewContent}
+			WHERE REVIEW_NO = #{reviewNo} AND MEMBER_NO = #{memberNo}
+  		</update>
+		<!-- 게시판 이미지수정 -->
+		<update id="updateReviewFirstImage">
+			UPDATE REVIEW SET REVIEW_FILE_NAME1 = #{reviewFileName},
+			REVIEW_FILE_RENAME1 = #{reviewFileRename},
+			REVIEW_FILE_PATH1 = #{reviewFilePath} 
+			WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		<update id="updateReviewSecondImage">
+			UPDATE REVIEW SET REVIEW_FILE_NAME2 = #{reviewFileName},
+			REVIEW_FILE_RENAME2 = #{reviewFileRename},
+			REVIEW_FILE_PATH2 = #{reviewFilePath} 
+			WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		<update id="updateReviewThirdImage">
+			UPDATE REVIEW SET REVIEW_FILE_NAME3 = #{reviewFileName},
+			REVIEW_FILE_RENAME3 = #{reviewFileRename},
+			REVIEW_FILE_PATH3 = #{reviewFilePath} 
+			WHERE REVIEW_NO = #{reviewNo}
+		</update>
+		
+		<select id="selectMemberNoByReviewNo" resultType="_int">
+			SELECT MEMBER_NO FROM REVIEW WHERE REVIEW_NO = #{num}
+		</select>
+</mapper>

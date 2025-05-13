@@ -55,7 +55,6 @@
 				WHERE REVIEW_YN='N' ORDER BY 1 DESC
 		</select>
  		
- 		
 <!-- 		<insert id="insertReview" useGeneratedKeys="true">-->
 <!--	  		<selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">-->
 <!--	  			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL-->
@@ -148,8 +147,7 @@
 <!--			</where>-->
 <!--			ORDER BY REVIEW_NO DESC-->
 <!--		</select>-->
-		
-		
+
 <!--		<select id="getTotalCountBySearch" resultType="_int">-->
 <!--			SELECT COUNT(*) FROM REVIEW -->
 <!--			<where>-->

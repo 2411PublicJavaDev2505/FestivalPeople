@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fepeo.boot.chat.model.mapper.ChatMemberMapper">
+
+	<insert id="insertChatRoom"> <!-- 채팅방 가입 -->
+		insert into CHAT_MEMBER values (#{chatroomNo}, #{memberNo},
+		default, default, default) 
+	</insert>
+	
+	<delete id="leaveChatMember"> <!-- 채팅방 탈퇴 -->
+		delete from CHAT_MEMBER where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}
+	</delete>
+	
+	<update id="blockChatMember"> <!-- 멤버 강퇴 -->
+		update CHAT_MEMBER set BLOCK_YN = 'Y'
+		where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}
+	</update>
+
+	<update id="enterMemberYn"> <!-- 입장 상태 변경 (가입상태아님 주의) -->
+		update CHAT_MEMBER set ENTER_YN = 'Y'
+		where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="exitChatRooms"> <!-- 입장 상태 변경 'N'으로 -->
+		update CHAT_MEMBER set ENTER_YN = 'N'
+		where MEMBER_NO = #{memberNo} and CHATROOM_NO != #{chatroomNo} 
+	</update>
+	
+	<update id="notReadMsgCount"> <!-- 미입장 회원에게 채팅개수 +1 -->
+		update CHAT_MEMBER set NON_CHECK_MSG = NON_CHECK_MSG +1
+		where CHATROOM_NO = #{chatroomNo} and ENTER_YN = 'N'
+	</update>
+	
+	<update id="resetNonCheckMsg"> <!-- 채팅메시지 읽기(입장한 방의 미확인 채팅 개수가 0) -->
+		update CHAT_MEMBER set NON_CHECK_MSG = 0
+		where CHATROOM_NO = #{chatroomNo} AND MEMBER_NO = #{memberNo} and ENTER_YN = 'Y'
+	</update>
+	
+	<!-- 안 들어온 사람 수 구하기(안 읽은 사람 수 구할 때 필요함) -->
+	<select id="countNonEnterMembers" resultType="_int">
+		select count (*) from CHAT_MEMBER
+		where CHATROOM_NO = #{chatroomNo} and ENTER_YN = 'N'  and  BLOCK_YN = 'N'
+	</select>
+	
+	<!-- 채팅방 가입 여부 조회 -->
+	<select id="selectChatMemberList" resultType="com.fepeo.boot.chat.model.vo.ChatMember">
+		select * from CHAT_MEMBER
+		where CHATROOM_NO = #{chatroomNo} and MEMBER_NO = #{memberNo}  and  BLOCK_YN = 'N'
+	</select>
+		
+	<!-- 채팅방 가입자 정보 출력 -->
+	<select id="chatMemberList" resultType="com.fepeo.boot.chat.controller.dto.MemberProfileList">
+		select  C.CHATROOM_NO, C.MEMBER_NO, M.NICKNAME, M.PROFILE_FILE_PATH, M.MEMBER_YN, C.BLOCK_YN
+		from CHAT_MEMBER C
+		join member M on C.MEMBER_NO = M.MEMBER_NO
+		where C.CHATROOM_NO = #{chatroomNo}
+			and M.MEMBER_YN = 'Y' and C.BLOCK_YN = 'N'
+	</select>
+	
+	<update id="exitAllChatrooms">
+		UPDATE CHAT_MEMBER SET ENTER_YN = 'N' WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<select id="checkBlackList" resultType="ChatMember">
+		SELECT * FROM CHAT_MEMBER WHERE CHATROOM_NO = #{chatroomNo} 
+		AND MEMBER_NO = #{memberNo} AND BLOCK_YN = 'Y'
+	</select>
+
+</mapper>  
