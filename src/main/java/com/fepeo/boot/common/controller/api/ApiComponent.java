@@ -364,7 +364,9 @@ public class ApiComponent {
 		// API 호출
 		int morning = 6;	
 		Calendar calendar = Calendar.getInstance();
-		if((calendar.HOUR-1)<morning) {
+		int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+		
+		if(currentHour<morning) {
 			calendar.add(Calendar.DATE, -1);
 			nowTime = new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()) + "1800";
 		}else {			

@@ -125,28 +125,6 @@
 		<update id="reviewCount">
 			UPDATE REVIEW SET REVIEW_COUNT = REVIEW_COUNT+1 WHERE REVIEW_NO=#{reviewNo}
 		</update>
-		
-<!--		 검색 -->
-<!--		<select id="searchListByKeyword" resultMap="reviewResultMap">-->
-<!--			SELECT R.*, M.NICKNAME FROM REVIEW R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO -->
-<!--			<where>	-->
-<!--				 제목검색 -->
-<!--				<if test="searchCondition == 'review_title'" >-->
-<!--					REVIEW_TITLE LIKE '%' ||#{searchKeyword}||'%' -->
-<!--				</if>-->
-<!--				 내용검색 -->
-<!--				<if test="searchCondition == 'review_content'">-->
-<!--					REVIEW_CONTENT LIKE '%' ||#{searchKeyword}||'%' -->
-<!--				</if>-->
-<!--				 전체검색 -->
-<!--				<if test="searchCondition == 'all'">-->
-<!--					(REVIEW_TITLE LIKE '%'||#{searchKeyword}||'%' OR-->
-<!--					REVIEW_CONTENT LIKE '%'||#{searchKeyword}||'%')  -->
-<!--				</if>-->
-<!--				AND REVIEW_YN = 'N'-->
-<!--			</where>-->
-<!--			ORDER BY REVIEW_NO DESC-->
-<!--		</select>-->
 
 <!--		<select id="getTotalCountBySearch" resultType="_int">-->
 <!--			SELECT COUNT(*) FROM REVIEW -->
