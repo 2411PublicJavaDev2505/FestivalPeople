@@ -9,7 +9,7 @@ public class ReviewFileConfig implements WebMvcConfigurer{
 	
 	private final String WEB_PATH ="/images/review/**";
 	
-	private final String REAL_PATH = "file:///C:/uploadImage/review/";
+	private final String REAL_PATH = "file:///home/ubuntu/util/uploadImage/";
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

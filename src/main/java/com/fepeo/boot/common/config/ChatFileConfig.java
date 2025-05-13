@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class ChatFileConfig implements WebMvcConfigurer {
 
 	private String WEB_PATH = "/images/chat/**"; // 브라우저를 통해 저장되는 url
-	private String REAL_PATH = "file:///c:/uploadImage/chat/"; // 실제 서버 안에 저장되는 폴더 url
+	private String REAL_PATH = "file:///home/ubuntu/util/uploadImage/"; // 실제 서버 안에 저장되는 폴더 url
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

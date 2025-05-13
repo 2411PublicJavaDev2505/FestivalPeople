@@ -84,7 +84,7 @@ public class ApiComponent {
 	            .body(BodyInserters.fromFormData("code", code)
 	                    .with("client_id", "242617315070-ldaq9mj659bp7t82r97ae0gcp2uinugc.apps.googleusercontent.com")
 	                    .with("client_secret", "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")
-	                    .with("redirect_uri", "http://localhost:80/member/google")
+	                    .with("redirect_uri", "http://festivalpeople.shop/member/google")
 	                    .with("grant_type", "authorization_code"))
 	            .retrieve()
 	            .bodyToMono(String.class)
@@ -151,7 +151,7 @@ public class ApiComponent {
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.body(BodyInserters.fromFormData("grant_type", "authorization_code")
 						.with("client_id", "05ae1e70e0b04614496a16fb554e7110")
-						.with("redirect_uri", "http://localhost:80/member/kakao")
+						.with("redirect_uri", "http://festivalpeople.shop/member/kakao")
 						.with("code", code)).retrieve()
 				.bodyToMono(String.class).block();
 		

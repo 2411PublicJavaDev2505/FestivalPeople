@@ -11,7 +11,7 @@ public class MemberFileConfig implements WebMvcConfigurer{
 	// images/ 이하의 모든 경로 처리
 	private final String WEB_PATH = "/images/member/**";
 	// 실제 경로 입력 
-	private final String REAL_PATH = "file:///c:/uploadImage/member/";
+	private final String REAL_PATH = "file:///home/ubuntu/util/uploadImage/";
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
