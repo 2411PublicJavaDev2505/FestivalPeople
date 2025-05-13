@@ -115,7 +115,6 @@ public class FestivalController {
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));
 	    model.addAttribute("endNavi", pageInfo.get("endNavi"));
 	    model.addAttribute("currentPage", currentPage);
-//	    System.out.println(festivals.size());
 	    return "festival/list";
 
 	}
@@ -131,16 +130,11 @@ public class FestivalController {
 	    double lat = Double.parseDouble(festival.getMapHCode()); 
 	    double lon = Double.parseDouble(festival.getMapVCode()); 
 	    
-//	    System.out.println("lat: " + festival.getMapVCode() + ", lon: " + festival.getMapHCode());
 
 	    // 위경도 → 격자 좌표 변환
 	    int[] grid = GridConverter.convertToGrid(lat, lon);
 	    String nx = String.valueOf(grid[0]);
 	    String ny = String.valueOf(grid[1]);
-
-	    // 디버깅용 로그
-//	    System.out.println("lat: " + lat + ", lon: " + lon);
-//	    System.out.println("nx: " + nx + ", ny: " + ny);
 
 	    // 날짜 및 시간 생성
 	    Map<String, String> dateTimeMap = WeatherUtils.getWeatherBaseDateTime("0500");
@@ -150,7 +144,6 @@ public class FestivalController {
 	    // 날씨 API 호출 및 파싱
 	    String json = api.callShortWeatherApi(baseDate, baseTime, nx, ny);
 	    Map<String, Map<String, String>> threeDaySummary = api.parseThreeDayWeather(json);
-//	    System.out.println(json);
 	    //3일치 날씨 리스트 출력
 	    List<String> next3Days = WeatherUtils.getNext3Days();
 	    
@@ -180,16 +173,11 @@ public class FestivalController {
 		Map<String, String> searchMap = new HashMap <String, String>();
 		searchMap.put("searchKeyword", searchKeyword);
 		searchMap.put("searchCondition", searchCondition);
-//		System.out.println(searchCondition);
 		int totalCount = festivalService.getSearchTotalCount(searchMap);
 	    int itemsPerPage = 8;
 	    Map<String, Integer> pageInfo = pageUtil.generatePageInfo(totalCount, currentPage, itemsPerPage);
 	    currentPage = pageInfo.get("currentPage");
 	    List<Festival> festivals = festivalService.searchFestivalListAll(pageInfo.get("startRow"), pageInfo.get("endRow"),searchMap);
-//	    System.out.println("검색된 축제 수 : " + festivals.size());
-	    for (Festival f : festivals) {
-//	        System.out.println("축제명: " + f.getFestivalName());
-	    }
 	    model.addAttribute("festivals",festivals);
 	    model.addAttribute("maxPage", pageInfo.get("maxPage"));
 	    model.addAttribute("startNavi", pageInfo.get("startNavi"));

@@ -1,53 +1,25 @@
 package com.fepeo.boot.common.controller.api;
 
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -57,11 +29,8 @@ import com.fepeo.boot.common.util.WeatherUtils;
 import com.fepeo.boot.course.model.vo.dto.KakaoPlaceResponseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
-import com.fepeo.boot.festival.model.vo.dto.WeatherApiResponse;
-import com.fepeo.boot.festival.model.vo.dto.WeatherItem;
 import com.fepeo.boot.report.controller.ReportController;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 
 @Getter
@@ -115,7 +84,7 @@ public class ApiComponent {
 	            .body(BodyInserters.fromFormData("code", code)
 	                    .with("client_id", "242617315070-ldaq9mj659bp7t82r97ae0gcp2uinugc.apps.googleusercontent.com")
 	                    .with("client_secret", "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")
-	                    .with("redirect_uri", "http://localhost:8888/member/google")
+	                    .with("redirect_uri", "http://localhost:80/member/google")
 	                    .with("grant_type", "authorization_code"))
 	            .retrieve()
 	            .bodyToMono(String.class)
@@ -182,7 +151,7 @@ public class ApiComponent {
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.body(BodyInserters.fromFormData("grant_type", "authorization_code")
 						.with("client_id", "05ae1e70e0b04614496a16fb554e7110")
-						.with("redirect_uri", "http://localhost:8888/member/kakao")
+						.with("redirect_uri", "http://localhost:80/member/kakao")
 						.with("code", code)).retrieve()
 				.bodyToMono(String.class).block();
 		
@@ -254,12 +223,10 @@ public class ApiComponent {
 	            .block();
 	
 	    List<PlaceDto> tt = res.getDocuments();
-//	    System.out.println(tt);
 	    // 랜덤으로 필터링하는건 다음에 사용
 //	    Random random = new Random();
 //	    int size = tt.size();
 	    PlaceDto pd = tt.get(0);
-	    //System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
 	    return tt;	
 	}
 	
@@ -283,11 +250,9 @@ public class ApiComponent {
 	            .block();
 	
 	    List<PlaceDto> tt = res.getDocuments();
-//	    System.out.println(tt);
 	    Random random = new Random();
 	    int size = tt.size();
 	    PlaceDto pd = tt.get(0);
-	    //System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
 	    return tt;	
 	}
 	
@@ -311,11 +276,9 @@ public class ApiComponent {
 				.block();
 		
 		List<PlaceDto> tt = res.getDocuments();
-//	    System.out.println(tt);
 		Random random = new Random();
 		int size = tt.size();
 		PlaceDto pd = tt.get(0);
-		//System.out.println(pd.getPlace_name() + pd.getRoad_address_name());	
 		return pd;	
 	}
 
@@ -338,17 +301,13 @@ public class ApiComponent {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode root = mapper.readTree(result);
 		JsonNode documents = root.path("documents");
-//		System.out.println("너는 누구여"+documents);
 		
 		Map<String, String> mapPoint = new HashMap<>();
 		JsonNode firstDoc = documents.get(0);
 		
-//		System.out.println("빠스트독을 찾아라잉"+firstDoc);
 		
 		String x = firstDoc.path("x").asText(); //x 좌표값
-//		System.out.println("x의 값이당"+x);
 		String y = firstDoc.path("y").asText(); //y 좌표값
-//		System.out.println("y의 값이다잉"+y);
 		
 		mapPoint.put("x", x);
 		mapPoint.put("y", y);
@@ -377,7 +336,6 @@ public class ApiComponent {
 		for(int i = 0; i< regionList.size();i++) {
 			RegionDto region = regionList.get(i);
 			//지역코드 출력 확인
-//			System.out.println("지역번호"+region.getRegionNo());
 			String response = webClient.get()
 					.uri(uriBuilder -> uriBuilder
 							.queryParam("serviceKey", weatherApiKey)
@@ -390,7 +348,6 @@ public class ApiComponent {
 					.retrieve()
 					.bodyToMono(String.class)
 					.block();
-//			System.out.println("[" + region.getRegionName() + "] 응답 결과: " + response);
 			
 			try {
 				ObjectMapper mapper = new ObjectMapper();

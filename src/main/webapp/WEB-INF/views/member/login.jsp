@@ -147,13 +147,13 @@
 			window.open(loc,title,option);
 		}
 		const findId = () => {
-			let loc = "http://localhost:8888/member/findid";
+			let loc = "http://localhost:80/member/findid";
 			let title = "아이디 찾기";
 			let option = "width = 550, height = 510, top = 100, left = 200, location = no";
 			window.open(loc,title,option);
 		}
 		const findPw = () => {
-			let loc = "http://localhost:8888/member/findpw";
+			let loc = "http://localhost:80/member/findpw";
 			let title = "비밀번호 찾기";
 			let option = "width = 600, height = 520, top = 100, left = 200, location = no";
 			window.open(loc,title,option);

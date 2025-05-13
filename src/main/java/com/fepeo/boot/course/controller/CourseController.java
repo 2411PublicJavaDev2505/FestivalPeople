@@ -1,11 +1,8 @@
 package com.fepeo.boot.course.controller;
 
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,14 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -31,7 +26,6 @@ import com.fepeo.boot.common.controller.api.ApiComponent;
 import com.fepeo.boot.course.model.service.CourseService;
 import com.fepeo.boot.course.model.vo.Course;
 import com.fepeo.boot.course.model.vo.dto.Categories;
-import com.fepeo.boot.course.model.vo.dto.CourseDto;
 import com.fepeo.boot.course.model.vo.dto.PlaceDto;
 import com.fepeo.boot.course.model.vo.dto.RegionDto;
 import com.fepeo.boot.festival.model.service.FestivalService;
@@ -39,7 +33,6 @@ import com.fepeo.boot.festival.model.vo.Festival;
 import com.fepeo.boot.member.model.service.MemberService;
 import com.fepeo.boot.member.model.vo.Member;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -118,7 +111,6 @@ public class CourseController {
 			, Model model
 			,@RequestParam("searchCondition") String searchCondition
 			,@RequestParam("searchKeyword") String searchKeyword) {
-		System.out.println(searchKeyword);
 		if(searchCondition.trim().equals("") || searchKeyword.trim().equals("")) {
 			return "redirect:/course/list";
 		}
