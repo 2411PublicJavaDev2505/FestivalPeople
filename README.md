@@ -51,7 +51,7 @@ spring.datasource.password
 https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive_link
 
 
-## AWS 배포 환경
+## AWS 배포 환경 (url = http://festivalpeople.shop )
 - 서버 : AWS t2.micro 인스턴스를 사용하였습니다.
 - DB : AWS 인스턴스내에 Mysql(8.0.42.ver) RDS를 추가 연동하여 구현하였습니다.
 - ip(15.164.94.92) : WAS 인스턴스와 DB 인스턴스(RDS)를 구별하여 단일 인스턴스내에 부하를 줄이고 원활한 제공이 가능하도록 구현하였습니다.
