@@ -230,6 +230,9 @@ https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive
 <img src="https://github.com/user-attachments/assets/6446804e-e49c-4bdc-b7d4-1876bb52585f" alt="메인 로그인">
 <img src="https://github.com/user-attachments/assets/75625f63-cdef-49e0-bb2a-773a467fc24b" alt="카카오 로그인">
 <img src="https://github.com/user-attachments/assets/d1b75f30-27f3-43d6-b47a-f7b4925df568" alt="구글 로그인">
+<img src="https://github.com/user-attachments/assets/d1b75f30-27f3-43d6-b47a-f7b4925df568" alt="구글 로그인">
+![네이버 로그인](https://github.com/user-attachments/assets/6806a0b2-06d6-4fc7-af54-6f27021b5ef5)
+
 </details>
 
 
