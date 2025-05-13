@@ -4,14 +4,22 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fepeo.boot.chat.model.mapper.ChatMsgMapper">
 
-	<insert id="insertChatMsg" parameterType="MsgInsertRequest">
-		<selectKey keyProperty="chatMsgNo" resultType="int" order="BEFORE">
-			select SEQ_CHAT_MSG_NO.nextval from DUAL
-		</selectKey>
+<!--	<insert id="insertChatMsg" parameterType="MsgInsertRequest">-->
+<!--		<selectKey keyProperty="chatMsgNo" resultType="int" order="BEFORE">-->
+<!--			select SEQ_CHAT_MSG_NO.nextval from DUAL-->
+<!--		</selectKey>-->
+<!--		insert into CHAT_MSG -->
+<!--		(CHAT_MSG_NO, CHAT_MSG_CONTENT, CHAT_MSG_TIME, CHAT_FILE_NAME, -->
+<!--  	 	  CHAT_FILE_RENAME, CHAT_FILE_PATH, NON_READ_MEMBER, MEMBER_NO, CHATROOM_NO)-->
+<!--		values (#{chatMsgNo}, #{chatMsgContent}, default, #{chatFileName},-->
+<!--		#{chatFileRename}, #{chatFilePath}, #{nonReadMember}, #{memberNo}, #{chatroomNo})-->
+<!--	</insert>-->
+	
+	<insert id="insertChatMsg" parameterType="MsgInsertRequest" useGeneratedKeys="true" keyProperty="chatMsgNo">
 		insert into CHAT_MSG 
-		(CHAT_MSG_NO, CHAT_MSG_CONTENT, CHAT_MSG_TIME, CHAT_FILE_NAME, 
+		(CHAT_MSG_CONTENT, CHAT_MSG_TIME, CHAT_FILE_NAME, 
   	 	  CHAT_FILE_RENAME, CHAT_FILE_PATH, NON_READ_MEMBER, MEMBER_NO, CHATROOM_NO)
-		values (#{chatMsgNo}, #{chatMsgContent}, default, #{chatFileName},
+		values (#{chatMsgContent}, default, #{chatFileName},
 		#{chatFileRename}, #{chatFilePath}, #{nonReadMember}, #{memberNo}, #{chatroomNo})
 	</insert>
 	

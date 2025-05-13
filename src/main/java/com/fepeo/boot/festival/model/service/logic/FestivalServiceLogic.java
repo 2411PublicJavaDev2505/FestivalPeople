@@ -79,8 +79,7 @@ public class FestivalServiceLogic implements FestivalService {
     @Override
     public List<Festival> selectFestivalList(int startRow, int endRow) {
         Map<String, Integer> params = new HashMap<>();
-        params.put("startRow", startRow);
-        params.put("endRow", endRow);
+        params.put("startRow", startRow-1);
         return festivalMapper.selectFestivalList(params);
     }
 
@@ -100,7 +99,7 @@ public class FestivalServiceLogic implements FestivalService {
 	@Override
 	public List<Festival> searchFestivalListAll(int startRow, int endRow, Map<String, String> searchMap) {
 		Map<String, Integer> params = new HashMap<>();
-		params.put("startRow", startRow);
+		params.put("startRow", startRow-1);
 		params.put("endRow", endRow);
 		return festivalMapper.searchFestivalListAll(params,searchMap);
 	}
