@@ -48,10 +48,9 @@ public class CommonController {
 	
 		//전체 리스트 출력시 페이지 네이션 코드 
 	    List<Festival> rfestivals = null;
-	    List<RegionDto> regionList = courseService.getAllRegions();
-
-	    
+	    List<RegionDto> regionList = courseService.getAllRegions();	    
 	    String gWRegions = (String)session.getAttribute("gWRegions");
+
 	    List<String> goodWeatherRegions = new ArrayList<>();
 	    if(gWRegions == null) {
 	    	goodWeatherRegions = api.callWeatherApi(regionList);
@@ -68,7 +67,6 @@ public class CommonController {
 	    	String[] strList = gWRegions.split(",");
 	    	goodWeatherRegions = Arrays.asList(strList);
 	    }
-	    
 		rfestivals = festivalService.selectFestivalListByWeather(goodWeatherRegions); // 비회원일때 불러오는 리스트 
 		model.addAttribute("rfestivals", rfestivals);
 	    return "index";
