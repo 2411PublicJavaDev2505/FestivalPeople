@@ -7,9 +7,12 @@
 
 ![Image](https://github.com/user-attachments/assets/cdd0ba1e-1bc6-41ee-953b-326f17f1a7d9)
 
+<details>
+<summary>
 ## 팀원 소개
-
-![Image](https://github.com/user-attachments/assets/20bb75a3-1d0b-4969-b1ef-eef7a5df7496)
+</summary>
+<img src="https://github.com/user-attachments/assets/20bb75a3-1d0b-4969-b1ef-eef7a5df7496" alt="팀원소개">
+</details>
 
 ## 기획의도
 
@@ -19,14 +22,17 @@
 ![Image](https://github.com/user-attachments/assets/dd0ed4ff-217e-4b3b-948d-2287fc67d48d)
 ![Image](https://github.com/user-attachments/assets/bbcd78ec-5169-44d3-95ab-52efbd92694f)
 
+<details>
+<summary>
 ## 개발일정
-
-![Image](https://github.com/user-attachments/assets/fb1fe340-5ed2-4aee-bcfd-864b385fe30e)
+</summary>
+<img src="https://github.com/user-attachments/assets/fb1fe340-5ed2-4aee-bcfd-864b385fe30e" alt="개발일정">
+</details>
 
 ## 프로젝트 개발환경
 
 - DB는 오라클 11g XE 버전을 이용하였습니다.
-- 프론트엔드 & 백엔드 개발은 주로 Spring Boot 와 Visual Studio Code를 이용하여 개발하였습니다.
+- 프론트엔드 & 백엔드 개발은 주로 Spring Boot를 이용하여 개발하였습니다.
 
 ## 프로젝트 실행 방법
 
@@ -44,6 +50,13 @@ spring.datasource.password
 [ADD] db 스크립트 추가
 https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive_link
 
+
+## AWS 배포 환경
+- 서버 : AWS t2.micro 인스턴스를 사용하였습니다.
+- DB : AWS 인스턴스내에 Mysql(8.0.42.ver) RDS를 추가 연동하여 구현하였습니다.
+- ip(15.164.94.92) : WAS 인스턴스와 DB 인스턴스(RDS)를 구별하여 단일 인스턴스내에 부하를 줄이고 원활한 제공이 가능하도록 구현하였습니다.
+- [ADD] MySql 스크립트 추가
+https://drive.google.com/file/d/1CdZMT916SETSZ0ZyUdgdh9xu_O2SiSyI/view?usp=drive_link
 ## 기술 스택
 
 ![HTML](https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
@@ -59,6 +72,10 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 ![Oracle](https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white)
 ![Java](https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white)
 ![Canvas](https://img.shields.io/badge/canvas-E72429?style=for-the-badge&logo=canvas&logoColor=white)
+<img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white"/>
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
+
+
 
 
 # 브랜치 전략
@@ -133,7 +150,7 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 |채팅방 알림|좌측 내가 속한 리스트에서는 현재 입장하지 않은 방의 안읽은 메시지 숫자를 확인할 수 있습니다.|
 
 
-### 여행후기 페이지(박재일)
+### 여행후기 페이지
 
 |기능명|상세|
 |--|--|
@@ -191,90 +208,148 @@ https://drive.google.com/file/d/1ME8JtDfx5IYlz4VJehkPRpjciZLFvmYB/view?usp=drive
 
 ## 화면 구현
 
-### 1. 메인
 
-![main.jsp](https://github.com/user-attachments/assets/4bd7fb25-805f-404e-9522-f7532a6ba7db)
+<details>
+<summary>
+1. 메인화면
+</summary>
+<img src="https://github.com/user-attachments/assets/4bd7fb25-805f-404e-9522-f7532a6ba7db" alt="메인 화면">
+</details>
 
-### 2. 소개 페이지
+<details>
+<summary>
+2. 소개 페이지
+</summary>
+<img src="https://github.com/user-attachments/assets/988e28f4-fac5-4eb0-96d2-846e1127171b" alt="소개 페이지">
+</details>
 
-![Image](https://github.com/user-attachments/assets/988e28f4-fac5-4eb0-96d2-846e1127171b)
-
-### 3. 로그인
-
-
-
-### 4. 회원 가입
-
-
-
-### 5. 아이디 찾기
-
-
-
-### 6. 비밀번호 찾기
-
-
-
-### 7. 축제 리스트
-
-![Image](https://github.com/user-attachments/assets/7d263dd8-3158-4b15-b3f1-d8e26f98de0b)
-![Image](https://github.com/user-attachments/assets/5a9368fa-c1bf-40c6-80b6-c182aacbceb1)
+<details>
+<summary>
+3. 로그인(소셜 로그인 Oauth 구현)
+</summary>
+<img src="https://github.com/user-attachments/assets/6446804e-e49c-4bdc-b7d4-1876bb52585f" alt="메인 로그인">
+<img src="https://github.com/user-attachments/assets/75625f63-cdef-49e0-bb2a-773a467fc24b" alt="카카오 로그인">
+<img src="https://github.com/user-attachments/assets/d1b75f30-27f3-43d6-b47a-f7b4925df568" alt="구글 로그인">
+</details>
 
 
-### 8. 축제 디테일 
-
-![Image](https://github.com/user-attachments/assets/bdf77206-e9bf-4a78-ab24-5da20d091441)
-![Image](https://github.com/user-attachments/assets/6e527bcc-63e2-4a20-b975-736ae8bce6bb)
-
-### 9. 코스 리스트
-
-![Image](https://github.com/user-attachments/assets/31c74b4b-122a-484b-8af1-f6918af7b783)
-
-### 10. 코스 디테일
-
-![Image](https://github.com/user-attachments/assets/baaec055-f22c-416c-aef0-3c8f7e466927)
-![Image](https://github.com/user-attachments/assets/229796df-1b85-4f3f-80f6-d4a74ea13d05)
-
-### 11. 같이갈래?
-
-![Image](https://github.com/user-attachments/assets/9b6c2bce-9dd5-4139-9cd9-ad2a9fb3a5a4)
-
-### 12. 같이갈래 디테일
-
-![Image](https://github.com/user-attachments/assets/23c7222e-f6de-4cf5-b253-a6e518860aba)
-
-### 13. 여행 후기
-
-![Image](https://github.com/user-attachments/assets/766b2984-556f-43b3-8909-bc9bdd8d2d8b)
-### 14. 여행 후기 디테일
-
-![Image](https://github.com/user-attachments/assets/c2f2d122-62a4-411e-b6a0-de2dd77d6ab7)
-
-### 15. 공지사항
-
-![Image](https://github.com/user-attachments/assets/3202a62d-57d4-4920-a77e-49a7221c6a3e)
-
-### 16. 공지사항 디테일
-
-![Image](https://github.com/user-attachments/assets/bc14e810-e865-4885-b9b6-227628d6cc2d)
-
-![Image](https://github.com/user-attachments/assets/bbc4d442-9b9d-4e3f-99ab-d56ec117fa86)
-
-### 18. 마이페이지
-![Image](https://github.com/user-attachments/assets/600b144b-bb1d-44b3-9c11-5c83b3c1a423)
-![Image](https://github.com/user-attachments/assets/d43cb760-8754-4da7-bc16-dff341d0f325)
-
-### 19. 관리자 페이지
-![Image](https://github.com/user-attachments/assets/c78712f3-7669-4bd6-8929-c430085f1713)
-![Image](https://github.com/user-attachments/assets/8d0a60e9-9c21-4404-bade-7cbc95a06ea2)
+<details>
+<summary>
+4. 회원 가입
+</summary>
+<img src="https://github.com/user-attachments/assets/07a75703-7bf6-429b-8bbe-d64d83f88bed" alt="회원가입 페이지">
+</details>
 
 
-## 프로젝트 아키텍처
-### 사용자 흐름도
+<details>
+<summary>
+7. 축제 리스트
+</summary>
+<img src="https://github.com/user-attachments/assets/7d263dd8-3158-4b15-b3f1-d8e26f98de0b" alt="축제리스트 비회원">
+<img src="https://github.com/user-attachments/assets/5a9368fa-c1bf-40c6-80b6-c182aacbceb1" alt="축제리스트 회원">
+</details>
 
-### 서버 흐름도
+<details>
+<summary>
+8. 축제 디테일 
+</summary>
+<img src="https://github.com/user-attachments/assets/bdf77206-e9bf-4a78-ab24-5da20d091441" alt="축제 상세 화면 첫번째">
+<img src="https://github.com/user-attachments/assets/6e527bcc-63e2-4a20-b975-736ae8bce6bb" alt="축제 상세 화면 두번째">
+</details>
 
-화살표 방향은 의존 관계를 의미합니다. 컨트롤러는 서비스에 의존하지만 서비스는 컨트롤러에 의존하지 않습니다. 서비스는 Mapper 에 의존하지만 Mapper 는 서비스에 의존하지 않습니다. 컨트롤러, 서비스, Mapper 는 모두 ExceptionHandler 에 의존하며 ExceptionHandler 는 컨트롤러, 서비스, Mapper 에서 발생하는 Exception 들을 처리합니다.
+<details>
+<summary>
+9. 코스 리스트
+</summary>
+<img src="https://github.com/user-attachments/assets/31c74b4b-122a-484b-8af1-f6918af7b783" alt="코스 전체리스트">
+</details>
+
+<details>
+<summary>
+10. 코스 디테일
+</summary>
+<img src="https://github.com/user-attachments/assets/baaec055-f22c-416c-aef0-3c8f7e466927" alt="코스 상세 이미지 첫번째">
+<img src="https://github.com/user-attachments/assets/229796df-1b85-4f3f-80f6-d4a74ea13d05" alt="코스 상세 이미지 두번째">
+</details>
+
+<details>
+<summary>
+11. 같이갈래?
+</summary>
+<img src="https://github.com/user-attachments/assets/9b6c2bce-9dd5-4139-9cd9-ad2a9fb3a5a4" alt="같이갈래 메인페이지">
+</details>
+
+<details>
+<summary>
+12. 같이갈래 디테일
+</summary>
+<img src="7https://github.com/user-attachments/assets/23c7222e-f6de-4cf5-b253-a6e518860aba" alt="같이갈래 상세페이지">
+</details>
+
+<details>
+<summary>
+13. 여행 후기
+</summary> 
+<img src="https://github.com/user-attachments/assets/766b2984-556f-43b3-8909-bc9bdd8d2d8b" alt="여행 후기 메인페이지">
+</details>
+
+<details>
+<summary>
+14. 여행 후기 디테일
+</summary>
+<img src="https://github.com/user-attachments/assets/c2f2d122-62a4-411e-b6a0-de2dd77d6ab7" alt="여행후기 상세페이지">
+</details>
+
+<details>
+<summary>
+15. 공지사항
+</summary>
+<img src="https://github.com/user-attachments/assets/3202a62d-57d4-4920-a77e-49a7221c6a3e" alt="공지사항 메인페이지">
+</details>
+
+<details>
+<summary>
+16. 공지사항 디테일
+</summary>
+<img src="https://github.com/user-attachments/assets/bc14e810-e865-4885-b9b6-227628d6cc2d" alt="공지사항 상세페이지">
+<img src="https://github.com/user-attachments/assets/bbc4d442-9b9d-4e3f-99ab-d56ec117fa86" alt="공지사항 상세페이지 두번째">
+</details>
+
+<details>
+<summary>
+18. 마이페이지
+</summary>
+<img src="https://github.com/user-attachments/assets/600b144b-bb1d-44b3-9c11-5c83b3c1a423" alt="마이페이지 첫번째">
+<img src="https://github.com/user-attachments/assets/d43cb760-8754-4da7-bc16-dff341d0f325" alt="마이페이지 두번째">
+</details>
+
+<details>
+<summary>
+19. 관리자 페이지
+</summary>
+<img src="https://github.com/user-attachments/assets/c78712f3-7669-4bd6-8929-c430085f1713" alt="관리자 페이지 첫번째">
+<img src="https://github.com/user-attachments/assets/8d0a60e9-9c21-4404-bade-7cbc95a06ea2" alt="관리자 페이지 두번째">
+</details>
+
+## 프로젝트 아키텍쳐-3계층 구조(Three-Tier Architecture) 
+## MVC패턴(Model-View-Controller)
+
+## 해당 구조 선택 이유
+각 계층의 상호 의존성은 줄여 확장성에 대한 자유도에 기여하며 대용량 데이터의 경우 Controller내에서 즉각적인 처리를 통해 DB 용량 과부하를 줄이기 위해 해당 패턴을 선택하였습니다.
+
+## 계층별 특징
+컨트롤러는 서비스에 의존하지만 서비스는 컨트롤러에 의존하지 않습니다. 서비스는 Mapper 에 의존하지만 Mapper 는 서비스에 의존하지 않습니다. 컨트롤러, 서비스, Mapper 는 모두 ExceptionHandler 에 의존하며 ExceptionHandler 는 컨트롤러, 서비스, Mapper 에서 발생하는 Exception 들을 처리합니다.
+
+## 프로젝트와 해당 계층의 장점
+1. 개인별 담당 파트가 상이하기에 각 계층의 독립적 존재로 인해 확장성이 용이합니다.
+2. 실시간 정보(날씨API, 지도API)를 DB에 매번 저장하여 관리하지 않고 Controller단계에서 직접 실시간 데이터 전달을 통해 DB의 부하를 줄일 수 있습니다.
+
+## 프로젝트와 해당 계층의 장점
+1. 실시간 API 호출의 경우 간혹 API 호출 데이터에 오류가 발생할 가능성을 염두해두어야 합니다.
+    - 해결 방안으로는 DB내에 일정기간을 두어 오류가 발생하였을때 서브데이터를 DB에 저장후 출력하여 정상적인 작동이 확인될 경우 DB내용을 삭제하여 데이터 공간을 확보함과 동시에 이용에 문제가 없도록 할 수 있습니다.
+
+2. 복잡성 : 사전에 협의되지 않은 무분별한 확장의 경우 상호간 혼란을 야기할수 있음으로 주의하여야 합니다.
+    - 해결 방안으로는 코드내에 주석 혹은 사전 협의를 통해 혼란을 최소한으로 방지할 수 있습니다.
 
 ## 프로젝트 산출 문서
 
