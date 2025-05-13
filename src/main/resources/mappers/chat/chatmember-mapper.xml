@@ -40,7 +40,7 @@
 	
 	<!-- 안 들어온 사람 수 구하기(안 읽은 사람 수 구할 때 필요함) -->
 	<select id="countNonEnterMembers" resultType="_int">
-		select count (*) from CHAT_MEMBER
+		select count(*) from CHAT_MEMBER
 		where CHATROOM_NO = #{chatroomNo} and ENTER_YN = 'N'  and  BLOCK_YN = 'N'
 	</select>
 	
@@ -54,7 +54,7 @@
 	<select id="chatMemberList" resultType="com.fepeo.boot.chat.controller.dto.MemberProfileList">
 		select  C.CHATROOM_NO, C.MEMBER_NO, M.NICKNAME, M.PROFILE_FILE_PATH, M.MEMBER_YN, C.BLOCK_YN
 		from CHAT_MEMBER C
-		join member M on C.MEMBER_NO = M.MEMBER_NO
+		join MEMBER M on C.MEMBER_NO = M.MEMBER_NO
 		where C.CHATROOM_NO = #{chatroomNo}
 			and M.MEMBER_YN = 'Y' and C.BLOCK_YN = 'N'
 	</select>

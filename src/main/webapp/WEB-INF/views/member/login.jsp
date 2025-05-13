@@ -128,20 +128,20 @@
 		}
 	
 		const kakao = () => {
-			let loc = "https://kauth.kakao.com/oauth/authorize?client_id=${kakao}&redirect_uri=http://localhost:8888/member/kakao&response_type=code";
+			let loc = "https://kauth.kakao.com/oauth/authorize?client_id=${kakao}&redirect_uri=http://localhost:80/member/kakao&response_type=code";
 			let title = "Festival People - 카카오 로그인";
 			let option = "width = 1000, height = 700, top = 100, left = 200, location = no";
 			window.open(loc,title,option);
 		}
 		const naver = () => {
 			const state = crypto.randomUUID();
-			let loc = "https://nid.naver.com/oauth2.0/authorize?client_id=${naver}&response_type=code&redirect_uri=http://localhost:8888/member/naver&state="+state;
+			let loc = "https://nid.naver.com/oauth2.0/authorize?client_id=${naver}&response_type=code&redirect_uri=http://localhost:80/member/naver&state="+state;
 			let title = "Festival People - 네이버 로그인";
 			let option = "width = 1000, height = 700, top = 100, left = 200, location = no";
 			window.open(loc,title,option);
 		}
 		const google = () => {
-			let loc = "https://accounts.google.com/o/oauth2/v2/auth?client_id=${google}&redirect_uri=http://localhost:8888/member/google&response_type=code&scope=email%20profile&access_type=offline&prompt=consent";
+			let loc = "https://accounts.google.com/o/oauth2/v2/auth?client_id=${google}&redirect_uri=http://localhost:80/member/google&response_type=code&scope=email%20profile&access_type=offline&prompt=consent";
 			let title = "Festival People - 구글 로그인";
 			let option = "width = 1000, height = 700, top = 100, left = 200, location = no";
 			window.open(loc,title,option);
